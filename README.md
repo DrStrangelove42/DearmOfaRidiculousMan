@@ -1,2 +1,2 @@
-# DearmOfaRidiculousMan
+# DreamOfaRidiculousMan
 Rogue-like game
