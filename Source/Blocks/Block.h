@@ -1,4 +1,4 @@
-class block
+class Block
 {
  protected:
   //Position of the block
