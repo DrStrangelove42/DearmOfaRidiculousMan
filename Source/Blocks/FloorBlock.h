@@ -1,5 +1,5 @@
 class FloorBlock : public Block
 {
  public:
-	 FloorBlock(int x, int y, int player_x, int player_y);
+	 FloorBlock(int x, int y, Player* player);
 }
