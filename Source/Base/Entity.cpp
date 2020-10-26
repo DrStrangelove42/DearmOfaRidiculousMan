@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void Entity::render()
+void Entity::render(SDL_Renderer renderer)
 {
   
 }

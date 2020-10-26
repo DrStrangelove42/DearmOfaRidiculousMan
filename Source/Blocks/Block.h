@@ -1,6 +1,8 @@
 #ifndef BLOCK_H
 #define BLOCK_H
 
+#include "../Base/Entity.h"
+
 class Block : public Entity
 {
 protected:
@@ -8,7 +10,7 @@ protected:
 	 int abs, ord;
 	 //Player
 	 Player* player;
-	 //File where the block's texture can be found
+	 //The texture
 	 string texture;
 public:
 	 Block(int x, int y, Player* player, string text);

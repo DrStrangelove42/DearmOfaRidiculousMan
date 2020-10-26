@@ -7,9 +7,12 @@ class Room : public Entity
 {
 protected:
 	Block ** blocks;
-
+	int w;
+	int h;
+	Map container;
 public:
-	Room(int width, int height);
+	Room(int width, int height, Map map);
+	~Room();
 	void render(SDL_Renderer renderer)
 };
 

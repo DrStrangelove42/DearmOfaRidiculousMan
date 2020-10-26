@@ -1,16 +1,21 @@
 #include "Block.h"
 
-Block(int x, int y, Player* player, string text)
+Block::Block(int x, int y, Player* player, string text)
 {
 
 }
 
-int getX()
+int Block::getX()
 {
 
 }
 
-int getY() 
+int Block::getY()
+{
+
+}
+
+int Block::render(SDL_Renderer renderer)
 {
 
 }

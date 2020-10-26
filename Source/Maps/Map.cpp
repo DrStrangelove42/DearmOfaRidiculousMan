@@ -6,6 +6,11 @@ Map::Map()
 
 }
 
+Map::~Map()
+{
+	/*Free memory*/
+}
+
 Map::Map(string file)
 {
 
@@ -13,16 +18,10 @@ Map::Map(string file)
 
 void render(SDL_Renderer renderer)
 {
-	for (Room r : rooms)
-	{
-		r.render(renderer)
-	}
+	rooms[currentRoom].render(renderer);
 }
 
 void tick(int time)
 {
-	for (Room r : rooms)
-	{
-		r.tick(time)
-	}
+	rooms[currentRoom].tick(time);
 }

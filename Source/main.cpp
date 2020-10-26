@@ -11,7 +11,6 @@
 #include "Base/config.h"
 #include "Maps/Map.h"
 
-
 using namespace std;
 
 int main(int argc, char** argv)
@@ -28,6 +27,10 @@ int main(int argc, char** argv)
 		&window,
 		&renderer);
 
+	/*POC starts here*/
+	currentMap = DummyMap();
+	/*POC ends here*/
+
 	playDoarm(window, renderer);
 
 	/*Free the memory*/
@@ -43,12 +46,13 @@ int playDoarm(SDL_Window* window, SDL_Renderer* renderer)
 	Map currentMap;
 	bool quit = false;
 
-
 	while (!quit)
 	{
 		SDL_RenderClear(renderer);
 		
 		manageEvents();
+
+		currentMap.render(renderer);
 
 		SDL_RenderCopy(renderer, texturePerso, NULL, &persoPos);
 		SDL_RenderPresent(renderer);
@@ -67,7 +71,7 @@ void manageEvents()
 		switch (event.type)
 		{
 		case SDL_KEYDOWN:
-			Event_KeyDown()
+			Event_KeyDown(event);
 
 			break;
 		case SDL_WINDOWEVENT:
@@ -80,7 +84,7 @@ void manageEvents()
 	}
 }
 
-void Event_KeyDown()
+void Event_KeyDown(SDL_Event event)
 {
 	switch (event.key.keysym.sym)
 	{
