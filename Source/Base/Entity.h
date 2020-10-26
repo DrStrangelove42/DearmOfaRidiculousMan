@@ -1,6 +1,6 @@
 class Entity
 {
 public:
-     void render();
-     void tick(int time);
+	 void render();
+	 void tick(int time);
 };
