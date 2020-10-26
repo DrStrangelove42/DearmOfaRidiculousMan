@@ -2,15 +2,15 @@
 #define ROOM_H
 
 #include <string>
-
-class Room
+#include "../Base/Entity.h"
+class Room : public Entity
 {
 protected:
 	Block ** blocks;
 
 public:
 	Room(int width, int height);
-	render()
+	void render(SDL_Renderer renderer)
 };
 
 
