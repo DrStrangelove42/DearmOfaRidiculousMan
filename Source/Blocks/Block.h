@@ -14,4 +14,4 @@ class Block
   int get_player_abs();
   int get_player_ord();
   string get_texture();
-}
+};
