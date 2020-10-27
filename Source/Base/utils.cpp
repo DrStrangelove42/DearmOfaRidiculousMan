@@ -43,8 +43,11 @@ void FreeTextures()
 
 void DrawImage(SDL_Renderer r, SDL_Texture* t, int x, int y, int w, int h)
 {
-	SDL_Rect dst = { x, y, w, h };
-	SDL_RenderCopy(r, t, NULL, &dst);
+	if (NULL != t) 
+	{
+		SDL_Rect dst = { x, y, w, h };
+		SDL_RenderCopy(r, t, NULL, &dst);
+	}
 }
 
 void DumpError(string err)

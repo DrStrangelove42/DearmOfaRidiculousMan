@@ -7,13 +7,14 @@ class Block : public Entity
 {
 protected:
 	 //Position of the block
-	 int abs, ord;
+	 int x, y;
 	 //Player
 	 Player* player;
 	 //The texture
 	 string texture;
+
 public:
-	 Block(int x, int y, Player* player, string text);
+	 Block(int posx, int posy, Player* player, string text);
 	 int getX();
 	 int getY();
 };

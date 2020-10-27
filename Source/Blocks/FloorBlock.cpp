@@ -1,6 +1,6 @@
 #include "FloorBlock.h"
 
-FloorBlock(int x, int y, Player* player)
+FloorBlock::FloorBlock(int posx, int posy, Player* player) : Block(posx, posy, player, "floor")
 {
 
 }
