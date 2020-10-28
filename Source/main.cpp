@@ -25,6 +25,7 @@ int main(int argc, char** argv)
 	status = playDoarm(window, renderer);
 
 	/*Free the memory*/
+	FreeTextures();
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();

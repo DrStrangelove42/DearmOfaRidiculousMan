@@ -38,7 +38,6 @@ SDL_Texture* LoadTexture(string id, SDL_Renderer* renderer)
 		if (NULL == tx)
 			DumpError("Unable to create texture #" + id);
 
-		
 		textures[id] = tx;
 	}
 
@@ -48,12 +47,15 @@ SDL_Texture* LoadTexture(string id, SDL_Renderer* renderer)
 void FreeTextures()
 {
 	for (auto& entry : textures)
+	{
+		cout << "Freeing " << entry.first << endl;
 		SDL_DestroyTexture(entry.second);
+	}
 }
 
-void DrawImage(SDL_Renderer *r, SDL_Texture* t, int x, int y, int w, int h)
+void DrawImage(SDL_Renderer* r, SDL_Texture* t, int x, int y, int w, int h)
 {
-	if (NULL != t) 
+	if (NULL != t)
 	{
 		SDL_Rect dst = { x, y, w, h };
 		SDL_RenderCopy(r, t, NULL, &dst);

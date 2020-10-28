@@ -12,7 +12,7 @@ DummyRoom::DummyRoom(Player p, SDL_Renderer *renderer) : Room(20, 30, p, rendere
 	{
 		for (int y = 2; y < 20; y += 10)
 		{
-			blocks[x][y] = WallBlock(x, y, player, renderer);
+			//blocks[x][y] = WallBlock(x, y, player, renderer);
 		}
 	}
 }
