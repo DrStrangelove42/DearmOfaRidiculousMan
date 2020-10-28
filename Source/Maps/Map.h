@@ -2,22 +2,24 @@
 #define MAP_H
 
 #include <string>
-
+#include "Room.h"
 #include "../Base/Entity.h"
+#include "../Characters/Player.h"
+#include <SDL2/SDL.h>
 
 class Map : public Entity
 {
 protected:
 	Room * rooms;
+	Player player;
 	int roomCount;
 	int currentRoom;
-	Player* player;
 
 public:
-	Map(Player* p);
-	Map(Player* p, string file);
+	Map(Player p, int roomCount);
+	Map(Player p, string file);
 	~Map();
-	void render(SDL_Renderer renderer);
+	void render(SDL_Renderer *  renderer);
 	void tick(int time);
 };
 

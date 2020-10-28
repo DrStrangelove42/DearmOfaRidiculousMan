@@ -1,23 +1,32 @@
 #include "utils.h"
 
+using namespace std;
+
 /*
 This file is for helpers functions. All functions in this file (and only these
 ones) begin with a capital letter.
 */
 
+int InitGame()
+{
+	textures = unordered_map<string, SDL_Texture*>();
+}
+
 /*
 Loads the texture with the specified identifier.
 */
-SDL_Texture* LoadTexture(string id)
+SDL_Texture* LoadTexture(string id, SDL_Renderer* renderer)
 {
 	SDL_Texture* tx = NULL;
 	SDL_Surface* bmp = NULL;
 
 	if (textures.find(id) != textures.end())
+	{
 		tx = textures[id];
+	}
 	else
 	{
-		bmp = SDL_LoadBMP((id + ".bmp").c_str());
+		bmp = SDL_LoadBMP(("Res/" + id + ".bmp").c_str());
 		SDL_SetColorKey(bmp, SDL_TRUE, SDL_MapRGB(bmp->format, 0xff, 0, 0xff));
 
 		if (NULL == bmp)
@@ -29,6 +38,7 @@ SDL_Texture* LoadTexture(string id)
 		if (NULL == tx)
 			DumpError("Unable to create texture #" + id);
 
+		
 		textures[id] = tx;
 	}
 
@@ -38,10 +48,10 @@ SDL_Texture* LoadTexture(string id)
 void FreeTextures()
 {
 	for (auto& entry : textures)
-		SDL_DestroyTexture(entry);
+		SDL_DestroyTexture(entry.second);
 }
 
-void DrawImage(SDL_Renderer r, SDL_Texture* t, int x, int y, int w, int h)
+void DrawImage(SDL_Renderer *r, SDL_Texture* t, int x, int y, int w, int h)
 {
 	if (NULL != t) 
 	{
@@ -50,7 +60,8 @@ void DrawImage(SDL_Renderer r, SDL_Texture* t, int x, int y, int w, int h)
 	}
 }
 
-void DumpError(string err)
+int DumpError(string err)
 {
-	std::cout << "Error : " << err << "\nInternal error: " << SDL_GetError() << endl;
+	cout << "Error : " << err << "\nInternal error: " << SDL_GetError() << endl;
+	return EXIT_FAILURE;
 }

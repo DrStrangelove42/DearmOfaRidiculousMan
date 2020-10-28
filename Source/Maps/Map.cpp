@@ -1,7 +1,7 @@
 #include "Map.h"
-#include <SDL2/SDL.h>
 
-Map::Map()
+
+Map::Map(Player p, int roomCount) : player(p), roomCount(roomCount), currentRoom(0)
 {
 
 }
@@ -11,17 +11,17 @@ Map::~Map()
 	/*Free memory*/
 }
 
-Map::Map(string file)
+Map::Map(Player p, string file) : player(p)
 {
 
 }
 
-void render(SDL_Renderer renderer)
+void Map::render(SDL_Renderer* renderer)
 {
 	rooms[currentRoom].render(renderer);
 }
 
-void tick(int time)
+void Map::tick(int time)
 {
 	rooms[currentRoom].tick(time);
 }

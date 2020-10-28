@@ -1,6 +1,19 @@
 #include "Block.h"
 
-Block::Block(int posx, int posy, Player* player, string tx) : x(posx), y(posy), player(player), texture(tx)
+
+Block::Block() {}
+
+Block::Block(int posx, int posy, Player p, string tx, SDL_Renderer* renderer) : x(posx), y(posy), player(p), texture(tx)
+{
+	loadedTx = LoadTexture(tx, renderer);
+}
+
+Block::Block(Player p) : player(p)
+{
+
+}
+
+Block::~Block()
 {
 	
 }
@@ -15,7 +28,12 @@ int Block::getY()
 	return y;
 }
 
-int Block::render(SDL_Renderer renderer)
+void Block::move(int px, int py)
 {
-	DrawImage(renderer, texture, x * SZ_BLOCKSIZE, y * SZ_BLOCKSIZE, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
+	x = px; y = py;
+}
+
+void Block::render(SDL_Renderer* renderer)
+{
+	DrawImage(renderer, loadedTx, x * SZ_BLOCKSIZE, y * SZ_BLOCKSIZE, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
 }

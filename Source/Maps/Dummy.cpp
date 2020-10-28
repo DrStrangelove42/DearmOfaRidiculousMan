@@ -1,22 +1,18 @@
 /*This map is a fixed-size map with only one room.*/
 #include "Dummy.h"
 
-DummyMap::DummyMap()
+DummyMap::DummyMap(Player p, SDL_Renderer* renderer) : Map(p, 1)
 {
-	rooms = new Room[1];
-	rooms[0] = Room();
-	currentRoom = 0;
+	rooms = new Room[1]{ DummyRoom(p, renderer) };
 }
 
-DummyRoom::DummyRoom()
+DummyRoom::DummyRoom(Player p, SDL_Renderer *renderer) : Room(20, 30, p, renderer)
 {
-	blocks = new Block[20][30];
-
 	for (int x = 4; x < 15; x++)
 	{
 		for (int y = 2; y < 20; y += 10)
 		{
-			blocks[x][y] = WallBlock(x, y, map.player);
+			blocks[x][y] = WallBlock(x, y, player, renderer);
 		}
 	}
 }

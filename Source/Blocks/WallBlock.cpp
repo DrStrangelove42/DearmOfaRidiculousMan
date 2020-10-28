@@ -1,11 +1,6 @@
 #include "WallBlock.h"
 
-WallBlock::WallBlock(int posx, int posy, Player* player) : Block(posx, posy, player, "floor")
-{
-
-}
-
-WallBlock::render(SDL_Renderer renderer)
+WallBlock::WallBlock(int posx, int posy, Player player, SDL_Renderer* renderer) : Block(posx, posy, player, "wall", renderer)
 {
 
 }

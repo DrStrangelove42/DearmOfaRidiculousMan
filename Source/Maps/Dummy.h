@@ -2,15 +2,18 @@
 #define DUMMY
 
 #include "Map.h"
-
+#include "../Characters/Player.h"
+#include "../Blocks/WallBlock.h"
 class DummyMap : public Map
 {
-	DummyMap();
+public:
+	DummyMap(Player p, SDL_Renderer* renderer);
 };
 
 class DummyRoom : public Room
 {
-	DummyRoom();
+public:
+	DummyRoom(Player p, SDL_Renderer* renderer);
 };
 
 #endif

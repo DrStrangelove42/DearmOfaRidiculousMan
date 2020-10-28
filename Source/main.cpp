@@ -1,68 +1,61 @@
 /* Entry point */
 
 #include "main.h"
-#include <iostream>
-#include <string>
-#include <SDL2/SDL.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdlib.h> 
-#include <time.h>
-#include "Base/config.h"
-#include "Maps/Map.h"
 
 using namespace std;
 
 int main(int argc, char** argv)
 {
-	SDL_Window* window = NULL;
+	int status = 0;
 	SDL_Renderer* renderer = NULL;
 
-	SDL_Init(SDL_INIT_VIDEO);
+	if (SDL_Init(SDL_INIT_VIDEO) != 0)
+		return DumpError("Init error.");
 
-	SDL_CreateWindowAndRenderer(
+	if (SDL_CreateWindowAndRenderer(
 		SZ_SCREENWIDTH,
 		SZ_SCREENHEIGHT,
 		SDL_WINDOW_SHOWN,
 		&window,
-		&renderer);
+		&renderer) != 0)
+		return DumpError("Window error.");
 
-	/*POC starts here*/
-	currentMap = DummyMap();
-	/*POC ends here*/
+	InitGame();
 
-	playDoarm(window, renderer);
+	status = playDoarm(window, renderer);
 
 	/*Free the memory*/
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
-	return EXIT_SUCCESS;
+	return status;
 }
 
 /*Main loop*/
 int playDoarm(SDL_Window* window, SDL_Renderer* renderer)
 {
-	Map currentMap;
+	Player me(renderer);
+	Map currentMap = DummyMap(me, renderer); //POC
 	bool quit = false;
 
 	while (!quit)
 	{
 		SDL_RenderClear(renderer);
 		
-		manageEvents();
+		manageEvents(&quit);
 
 		currentMap.render(renderer);
 
-		SDL_RenderCopy(renderer, texturePerso, NULL, &persoPos);
+		//Perso render
 		SDL_RenderPresent(renderer);
 
 		SDL_Delay(50);
 	}
 
+	return EXIT_SUCCESS;
 }
 
-void manageEvents()
+void manageEvents(bool * quit)
 {
 	SDL_Event event;
 
@@ -71,20 +64,26 @@ void manageEvents()
 		switch (event.type)
 		{
 		case SDL_KEYDOWN:
-			Event_KeyDown(event);
+			onKeyDown(event);
+			break;
 
-			break;
 		case SDL_WINDOWEVENT:
-			if (event.window.event == SDL_WINDOWEVENT_CLOSE)
-				quit = true;
+			onWindowEvent(event, quit);
 			break;
+
 		default:
 			break;
 		}
 	}
 }
 
-void Event_KeyDown(SDL_Event event)
+void onWindowEvent(SDL_Event event, bool * quit)
+{
+	if (event.window.event == SDL_WINDOWEVENT_CLOSE)
+		*quit = true;
+}
+
+void onKeyDown(SDL_Event event)
 {
 	switch (event.key.keysym.sym)
 	{

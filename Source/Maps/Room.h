@@ -3,17 +3,22 @@
 
 #include <string>
 #include "../Base/Entity.h"
+#include "../Blocks/FloorBlock.h"
+#include "../Blocks/Block.h"
+#include <SDL2/SDL.h>
+
 class Room : public Entity
 {
 protected:
 	Block ** blocks;
 	int w;
 	int h;
-	Map container;
+	Player player;
+
 public:
-	Room(int width, int height, Map map);
+	Room(int width, int height, Player p, SDL_Renderer *renderer);
 	~Room();
-	void render(SDL_Renderer renderer)
+	void render(SDL_Renderer * renderer);
 };
 
 

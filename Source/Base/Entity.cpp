@@ -2,7 +2,12 @@
 
 using namespace std;
 
-void Entity::render(SDL_Renderer renderer)
+Entity::Entity()
+{
+
+}
+
+void Entity::render(SDL_Renderer* renderer)
 {
   
 }
