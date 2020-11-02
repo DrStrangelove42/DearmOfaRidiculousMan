@@ -14,13 +14,12 @@ OBJ = $(SRC:.cpp=.o)
 
 all: doarm
 
-doarm: $(OBJ) 
+doarm: $(OBJ)
 	$(CC) $(LDFLAGS)  $^ -o $@ $(LIBS)
 
 %.o: %.cpp %.h
 	$(CC) -o $@ -c $< $(CFLAGS)
 
 clean:
-	rm -rf *.o
-	rm -rf *~
-	rm -rf doarm
+	rm -f $(OBJ)
+	rm -f doarm
