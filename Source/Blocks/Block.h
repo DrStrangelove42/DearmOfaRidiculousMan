@@ -18,9 +18,9 @@ protected:
 
 public:
 	Block();
+	~Block();
 	Block(Player player);
 	Block(int posx, int posy, Player player, string tx, SDL_Renderer* renderer);
-	~Block();
 	int getX();
 	int getY();
 	void move(int px, int py);

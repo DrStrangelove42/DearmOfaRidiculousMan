@@ -10,6 +10,8 @@ ones) begin with a capital letter.
 int InitGame()
 {
 	textures = unordered_map<string, SDL_Texture*>();
+
+	return 0;
 }
 
 /*

@@ -3,12 +3,12 @@
 
 Map::Map(Player p, int roomCount) : player(p), roomCount(roomCount), currentRoom(0)
 {
-
+	rooms = new Room[roomCount];
 }
 
 Map::~Map()
 {
-	/*Free memory*/
+	delete[] rooms;
 }
 
 Map::Map(Player p, string file) : player(p)
@@ -25,3 +25,4 @@ void Map::tick(int time)
 {
 	rooms[currentRoom].tick(time);
 }
+

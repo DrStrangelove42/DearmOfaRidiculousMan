@@ -2,7 +2,7 @@
 
 Player::Player() {}
 
-Player::Player(SDL_Renderer * renderer)
+Player::Player(SDL_Renderer* renderer) : x(0), y(0)
 {
 	texture = LoadTexture("mario", renderer);
 }
@@ -20,7 +20,13 @@ bool Player::isAlive()
 	return health > 0;
 }
 
-void Player::render(SDL_Renderer *renderer)
+void Player::teleport(int nx, int ny)
+{
+	x = nx;
+	y = ny;
+}
+
+void Player::render(SDL_Renderer* renderer)
 {
 	DrawImage(renderer, texture, x * SZ_BLOCKSIZE, y * SZ_BLOCKSIZE, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
 }
@@ -32,7 +38,7 @@ void Player::kill()
 {
 	if (lives == 0)
 	{
-		
+
 	}
 	else
 	{

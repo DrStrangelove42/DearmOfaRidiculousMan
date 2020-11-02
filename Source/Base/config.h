@@ -3,10 +3,10 @@
 
 #include <SDL2/SDL.h>
 
-static int SZ_BLOCKSIZE = 20;
-static int SZ_SCREENWIDTH = 1000;
-static int SZ_SCREENHEIGHT = 800;
+extern int SZ_BLOCKSIZE;
+extern int SZ_SCREENWIDTH;
+extern int SZ_SCREENHEIGHT;
 
-static SDL_Window* window;
+extern SDL_Window* window;
 
 #endif

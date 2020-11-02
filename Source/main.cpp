@@ -37,7 +37,7 @@ int playDoarm(SDL_Window* window, SDL_Renderer* renderer)
 {
 	Player me(renderer);
 	Map currentMap = DummyMap(me, renderer); //POC
-	bool quit = false;
+	bool quit = false; 
 
 	while (!quit)
 	{
@@ -47,7 +47,8 @@ int playDoarm(SDL_Window* window, SDL_Renderer* renderer)
 
 		currentMap.render(renderer);
 
-		//Perso render
+		me.render(renderer);
+
 		SDL_RenderPresent(renderer);
 
 		SDL_Delay(50);

@@ -21,6 +21,22 @@ public:
 	~Map();
 	void render(SDL_Renderer *  renderer);
 	void tick(int time);
+
+	Map& operator=(const Map& that)
+	{
+		if (this != &that)
+		{
+			rooms = new Room[roomCount];
+			for (int i = 0; i < roomCount; i++)
+			{
+				rooms[i] = that.rooms[i];
+			}
+			roomCount = that.roomCount;
+			currentRoom = that.currentRoom;
+			player = that.player;
+		}
+		return *this;
+	}
 };
 
 #endif

@@ -10,15 +10,41 @@
 class Room : public Entity
 {
 protected:
-	Block ** blocks;
+	Block** blocks;
 	int w;
 	int h;
 	Player player;
 
 public:
+	
+	Room();
 	Room(int width, int height, Player p, SDL_Renderer *renderer);
 	~Room();
 	void render(SDL_Renderer * renderer);
+
+	Room& operator=(const Room& that)
+	{
+		if (this != &that)
+		{
+			w = that.w;
+			h = that.h;
+			player = that.player;
+			if (w > 0 && h > 0)
+			{
+				blocks = new Block * [w];
+				for (int i = 0; i < w; i++)
+				{
+					blocks[i] = new Block[h];
+
+					for (int j = 0; j < h; j++)
+					{
+						blocks[i][j] = that.blocks[i][j];
+					}
+				}
+			}
+		}
+		return *this;
+	}
 };
 
 

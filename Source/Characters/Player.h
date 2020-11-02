@@ -23,6 +23,7 @@ public:
 	bool isAlive();
 	void kill();
 	void render(SDL_Renderer* renderer);
+	void teleport(int x, int y);
 };
 
 #endif
