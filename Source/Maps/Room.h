@@ -10,11 +10,12 @@
 class Room : public Entity
 {
 protected:
-	Block** blocks;
+
 	int w;
 	int h;
 	Player player;
-
+	Block** blocks;
+	
 public:
 	
 	Room();
@@ -45,6 +46,9 @@ public:
 		}
 		return *this;
 	}
+
+	int getW();
+	int getH();
 };
 
 

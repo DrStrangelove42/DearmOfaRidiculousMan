@@ -19,7 +19,7 @@ int main(int argc, char** argv)
 		&window,
 		&renderer) != 0)
 		return DumpError("Window error.");
-
+	
 	InitGame();
 
 	status = playDoarm(window, renderer);
@@ -36,7 +36,7 @@ int main(int argc, char** argv)
 int playDoarm(SDL_Window* window, SDL_Renderer* renderer)
 {
 	Player me(renderer);
-	Map currentMap = DummyMap(me, renderer); //POC
+	DummyMap currentMap(me, renderer); //POC
 	bool quit = false; 
 
 	while (!quit)

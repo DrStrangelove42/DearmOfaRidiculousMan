@@ -26,3 +26,12 @@ void Map::tick(int time)
 	rooms[currentRoom].tick(time);
 }
 
+int Map::getRoomCount()
+{
+	return roomCount;
+}
+
+Room* Map::getRooms()
+{
+  return rooms;
+}

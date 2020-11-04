@@ -37,6 +37,9 @@ public:
 		}
 		return *this;
 	}
+	
+	int getRoomCount();
+	Room* getRooms();
 };
 
 #endif

@@ -6,14 +6,14 @@ Room::Room(int width, int height, Player p, SDL_Renderer* renderer) : w(width), 
 {
 	if (w > 0 && h > 0)
 	{
-		blocks = new Block * [w];
+	  blocks = new Block* [width];
 
 		for (int i = 0; i < w; i++)
 		{
-			blocks[i] = new Block[h];
+		  blocks[i] = new Block[h];
 			for (int j = 0; j < h; j++)
 			{
-				blocks[i][j] = Block(i, j, player, "bush", renderer);
+			  blocks[i][j] = Block(i, j, player, "bush", renderer);
 			}
 		}
 	}
@@ -21,10 +21,10 @@ Room::Room(int width, int height, Player p, SDL_Renderer* renderer) : w(width), 
 
 Room::~Room()
 {
-	for (int i = 0; i < w; i++)
-		delete[] blocks[i];
-	if (w > 0)
-		delete blocks;
+  for (int i = 0; i < w; i++)
+    {delete[] blocks[i];}
+    if (w > 0)
+      {delete[] blocks;}
 }
 
 void Room::render(SDL_Renderer* renderer)
@@ -38,3 +38,12 @@ void Room::render(SDL_Renderer* renderer)
 	}
 }
 
+int Room::getW()
+{
+  return w;
+}
+
+int Room::getH()
+{
+  return h;
+}
