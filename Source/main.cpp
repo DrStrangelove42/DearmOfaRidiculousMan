@@ -36,7 +36,7 @@ int main(int argc, char** argv)
 int playDoarm(SDL_Window* window, SDL_Renderer* renderer)
 {
 	Player me(renderer);
-	DummyMap currentMap(me, renderer); //POC
+	Map *currentMap = new DummyMap(me, renderer); //POC
 	bool quit = false; 
 
 	while (!quit)
@@ -45,7 +45,7 @@ int playDoarm(SDL_Window* window, SDL_Renderer* renderer)
 		
 		manageEvents(&quit);
 
-		currentMap.render(renderer);
+		currentMap->render(renderer);
 
 		me.render(renderer);
 
@@ -53,6 +53,8 @@ int playDoarm(SDL_Window* window, SDL_Renderer* renderer)
 
 		SDL_Delay(50);
 	}
+
+	delete currentMap;
 
 	return EXIT_SUCCESS;
 }

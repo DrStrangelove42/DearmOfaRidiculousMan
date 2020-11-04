@@ -20,7 +20,7 @@ public:
 	Map(Player p, string file);
 	~Map();
 	void render(SDL_Renderer *  renderer);
-	void tick(int time);
+	virtual void tick(int time);
 
 	Map& operator=(const Map& that)
 	{
