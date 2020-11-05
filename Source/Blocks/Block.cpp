@@ -1,13 +1,11 @@
 #include "Block.h"
 
-Block::Block() {}
-
-Block::Block(int posx, int posy, Player p, string tx, SDL_Renderer* renderer) : x(posx), y(posy), player(p), texture(tx)
+Block::Block(int posx, int posy, Player& p, string tx, SDL_Renderer* renderer) : x(posx), y(posy), player(p), texture(tx)
 {
 	loadedTx = LoadTexture(tx, renderer);
 }
 
-Block::Block(Player p) : player(p)
+Block::Block(Player& p) : player(p)
 {
 
 }

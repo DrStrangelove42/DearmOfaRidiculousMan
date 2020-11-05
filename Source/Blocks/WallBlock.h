@@ -6,7 +6,7 @@
 class WallBlock : public Block
 {
  public:
-	 WallBlock(int x, int y, Player player, SDL_Renderer* renderer);
+	 WallBlock(int x, int y, Player& player, SDL_Renderer* renderer);
 };
 
 #endif

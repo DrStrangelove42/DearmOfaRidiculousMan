@@ -3,7 +3,7 @@
 
 DummyMap::DummyMap(Player p, SDL_Renderer* renderer) : Map(p, 1)
 {
-	rooms[0] = DummyRoom(p, renderer);
+	rooms[0] = new DummyRoom(p, renderer);
 	p.teleport(2, 2);
 } 
 
@@ -13,7 +13,7 @@ DummyRoom::DummyRoom(Player p, SDL_Renderer* renderer) : Room(4, 5, p, renderer)
 	{
 		for (int y = 2; y < 5; y += 10)
 		{
-			blocks[x][y] = WallBlock(x, y, player, renderer);
+			blocks[x][y] = new WallBlock(x, y, player, renderer);
 		}
 	}
 }

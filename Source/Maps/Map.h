@@ -15,14 +15,15 @@ The initial room is always the first room in the (non empty) array 'rooms'.
 class Map : public Entity
 {
 protected:
-	Room * rooms;
-	Player player;
+	/* Array of pointers to rooms */
+	Room ** rooms;
+	Player &player;
 	int roomCount;
 	int currentRoom;
 
 public:
-	Map(Player p, int roomCount);
-	Map(Player p, string file);
+	Map(Player& p, int roomCount);
+	Map(Player& p, string file);
 	virtual ~Map();
 	virtual void render(SDL_Renderer * renderer);
 	virtual void tick(int time);
@@ -31,7 +32,7 @@ public:
 	{
 		if (this != &that)
 		{
-			rooms = new Room[roomCount];
+			rooms = new Room*[roomCount];
 			for (int i = 0; i < roomCount; i++)
 			{
 				rooms[i] = that.rooms[i];
@@ -44,7 +45,7 @@ public:
 	}
 	
 	int getRoomCount();
-	Room* getRooms();
+	Room** getRooms();
 };
 
 #endif

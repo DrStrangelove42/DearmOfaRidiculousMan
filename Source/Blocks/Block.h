@@ -11,16 +11,15 @@ protected:
 	//Position of the block
 	int x, y;
 	//Player
-	Player player;
+	Player& player;
 	//The texture
 	string texture;
 	SDL_Texture* loadedTx;
 
 public:
-	Block();
 	~Block();
-	Block(Player player);
-	Block(int posx, int posy, Player player, string tx, SDL_Renderer* renderer);
+	Block(Player& player);
+	Block(int posx, int posy, Player& player, string tx, SDL_Renderer* renderer);
 	int getX();
 	int getY();
 	void move(int px, int py);

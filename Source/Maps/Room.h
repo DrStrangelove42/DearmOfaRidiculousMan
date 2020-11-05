@@ -11,10 +11,13 @@ class Room : public Entity
 {
 protected:
 
+	/* Dimensions of the room, in blocks */
 	int w;
 	int h;
-	Player player;
-	Block** blocks;
+	/* The player currently in the room */
+	Player &player;
+	/* The blocks are the basic compound of a room */
+	Block *** blocks;
 	
 public:
 	
@@ -33,10 +36,10 @@ public:
 			player = that.player;
 			if (w > 0 && h > 0)
 			{
-				blocks = new Block * [w];
+				blocks = new Block ** [w];
 				for (int i = 0; i < w; i++)
 				{
-					blocks[i] = new Block[h];
+					blocks[i] = new Block*[h];
 
 					for (int j = 0; j < h; j++)
 					{
