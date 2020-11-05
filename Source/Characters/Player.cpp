@@ -46,3 +46,8 @@ void Player::kill()
 		health = maxHealth;
 	}
 }
+
+void Player::tick(int time)
+{
+
+}

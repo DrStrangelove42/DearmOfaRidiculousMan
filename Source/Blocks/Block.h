@@ -25,6 +25,7 @@ public:
 	int getY();
 	void move(int px, int py);
 	void render(SDL_Renderer* renderer);
+	virtual void tick(int time);
 };
 
 #endif

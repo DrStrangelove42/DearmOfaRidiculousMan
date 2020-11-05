@@ -92,6 +92,7 @@ void onKeyDown(SDL_Event event)
 	switch (event.key.keysym.sym)
 	{
 	case SDLK_DOWN:
+		VIEW_OFFSET_X+=SZ_BLOCKSIZE;
 		break;
 	case SDLK_UP:
 		break;

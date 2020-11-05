@@ -7,6 +7,11 @@
 #include "../Characters/Player.h"
 #include <SDL2/SDL.h>
 
+/*
+A map represents a set of rooms displayed one at a time (or one centered
+in the view and the others black or greyed).
+The initial room is always the first room in the (non empty) array 'rooms'.
+*/
 class Map : public Entity
 {
 protected:
@@ -18,8 +23,8 @@ protected:
 public:
 	Map(Player p, int roomCount);
 	Map(Player p, string file);
-	~Map();
-	void render(SDL_Renderer *  renderer);
+	virtual ~Map();
+	virtual void render(SDL_Renderer * renderer);
 	virtual void tick(int time);
 
 	Map& operator=(const Map& that)

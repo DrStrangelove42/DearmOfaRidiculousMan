@@ -3,12 +3,16 @@
 
 #include <SDL2/SDL.h>
 
+/*
+Every visible object in the window is an Entity.
+*/
 class Entity
 {
 public:
-	Entity();
-	void render(SDL_Renderer* renderer);
-	void tick(int time);
+	virtual ~Entity() {}
+	virtual void render(SDL_Renderer* renderer) = 0;
+	virtual void tick(int time) = 0;
+
 };
 
 #endif

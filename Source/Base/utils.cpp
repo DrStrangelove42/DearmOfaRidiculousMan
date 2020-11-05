@@ -59,7 +59,7 @@ void DrawImage(SDL_Renderer* r, SDL_Texture* t, int x, int y, int w, int h)
 {
 	if (NULL != t)
 	{
-		SDL_Rect dst = { x, y, w, h };
+		SDL_Rect dst = { x + VIEW_OFFSET_X, y + VIEW_OFFSET_Y, w, h };
 		SDL_RenderCopy(r, t, NULL, &dst);
 	}
 }

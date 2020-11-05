@@ -24,6 +24,7 @@ public:
 	void kill();
 	void render(SDL_Renderer* renderer);
 	void teleport(int x, int y);
+	virtual void tick(int time);
 };
 
 #endif

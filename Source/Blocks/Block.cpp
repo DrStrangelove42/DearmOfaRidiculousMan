@@ -37,3 +37,8 @@ void Block::render(SDL_Renderer* renderer)
   //printf("render block(%d,%d)\n", x, y);
 	DrawImage(renderer, loadedTx, x * SZ_BLOCKSIZE, y * SZ_BLOCKSIZE, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
 }
+
+void Block::tick(int time)
+{
+
+}
