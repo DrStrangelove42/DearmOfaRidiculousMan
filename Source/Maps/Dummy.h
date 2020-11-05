@@ -14,7 +14,7 @@ public:
 class DummyRoom : public Room
 {
 public:
-	DummyRoom(Player& p, Map& m, SDL_Renderer* renderer);
+	DummyRoom(Player& p, SDL_Renderer* renderer);
 };
 
 #endif
