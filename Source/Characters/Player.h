@@ -6,15 +6,15 @@
 #include "../Base/Entity.h"
 #include "../Base/utils.h"
 #include "../Base/config.h"
+#include "MovingEntity.h"
 
-class Player : public Entity
+class Player : public MovingEntity
 {
 protected:
 	int health;
 	int maxHealth;
 	int lives;
-	int x;
-	int y;
+	
 	SDL_Texture* texture;
 public:
 	Player();
@@ -23,7 +23,7 @@ public:
 	bool isAlive();
 	void kill();
 	void render(SDL_Renderer* renderer);
-	void teleport(int x, int y);
+	
 	virtual void tick(int time);
 };
 

@@ -22,7 +22,7 @@ protected:
 public:
 	
 	Room();
-	Room(int width, int height, Player p, SDL_Renderer *renderer);
+	Room(int width, int height, Player& p, SDL_Renderer *renderer);
 	virtual ~Room();
 	virtual void render(SDL_Renderer * renderer);
 	virtual void tick(int time);

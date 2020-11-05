@@ -36,7 +36,13 @@ void Block::render(SDL_Renderer* renderer)
 	DrawImage(renderer, loadedTx, x * SZ_BLOCKSIZE, y * SZ_BLOCKSIZE, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
 }
 
+void Block::teleportOn(MovingEntity& m)
+{
+	m.teleport(x, y);
+}
+
 void Block::tick(int time)
 {
 
 }
+

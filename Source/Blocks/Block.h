@@ -4,7 +4,6 @@
 #include "../Base/Entity.h"
 #include "../Base/utils.h"
 #include "../Characters/Player.h"
-
 class Block : public Entity
 {
 protected:
@@ -24,6 +23,7 @@ public:
 	int getY();
 	void move(int px, int py);
 	void render(SDL_Renderer* renderer);
+	void teleportOn(MovingEntity& m);
 	virtual void tick(int time);
 };
 

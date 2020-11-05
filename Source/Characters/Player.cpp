@@ -2,7 +2,7 @@
 
 Player::Player() {}
 
-Player::Player(SDL_Renderer* renderer) : x(0), y(0)
+Player::Player(SDL_Renderer* renderer)
 {
 	texture = LoadTexture("mario", renderer);
 }
@@ -18,12 +18,6 @@ void Player::damage(int dmg)
 bool Player::isAlive()
 {
 	return health > 0;
-}
-
-void Player::teleport(int nx, int ny)
-{
-	x = nx;
-	y = ny;
 }
 
 void Player::render(SDL_Renderer* renderer)

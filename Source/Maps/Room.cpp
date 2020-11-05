@@ -1,6 +1,6 @@
 #include "Room.h"
 
-Room::Room(int width, int height, Player p, SDL_Renderer* renderer) : w(width), h(height), player(p)
+Room::Room(int width, int height, Player& p, SDL_Renderer* renderer) : w(width), h(height), player(p)
 {
 	if (w > 0 && h > 0)
 	{
