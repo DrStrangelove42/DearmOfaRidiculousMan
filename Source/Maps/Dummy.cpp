@@ -13,7 +13,7 @@ DummyRoom::DummyRoom(Player& p, Map& m, SDL_Renderer* renderer) : Room(4, 5, p, 
 	{
 		for (int y = 2; y < 5; y += 10)
 		{
-			blocks[x][y] = new WallBlock(x, y, player, renderer);
+			blocks[x][y] = new WallBlock(x, y, player, m, renderer);
 		}
 	}
 }
