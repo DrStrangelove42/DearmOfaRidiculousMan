@@ -14,10 +14,8 @@ protected:
 	int health;
 	int maxHealth;
 	int lives;
-	
 	SDL_Texture* texture;
 public:
-	Player();
 	Player(SDL_Renderer* renderer);
 	void damage(int dmg);
 	bool isAlive();

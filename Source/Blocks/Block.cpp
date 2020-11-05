@@ -1,14 +1,9 @@
 #include "Block.h"
 
-Block::Block(int posx, int posy, Player& p, string tx, SDL_Renderer* renderer) : x(posx), y(posy), player(p), texture(tx)
+Block::Block(int posx, int posy, Player& p, Room& room, string tx, SDL_Renderer* renderer) : x(posx), y(posy), player(p), texture(tx), container(room)
 {
 	loadedTx = LoadTexture(tx, renderer);
-}
-
-Block::Block(Player& p) : player(p)
-{
-
-}
+} 
 
 Block::~Block()
 {
@@ -45,4 +40,3 @@ void Block::tick(int time)
 {
 
 }
-

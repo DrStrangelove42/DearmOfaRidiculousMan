@@ -2,11 +2,12 @@
 #define WALLBLOCK_H
 
 #include "Block.h"
+#include "../Maps/Room.h"
 
 class WallBlock : public Block
 {
  public:
-	 WallBlock(int x, int y, Player& player, SDL_Renderer* renderer);
+	 WallBlock(int x, int y, Player& player, Room& room, SDL_Renderer* renderer);
 };
 
 #endif

@@ -5,12 +5,12 @@
 #include "../Base/Entity.h"
 #include "../Blocks/FloorBlock.h"
 #include "../Blocks/Block.h"
+#include "Map.h"
 #include <SDL2/SDL.h>
 
 class Room : public Entity
 {
 protected:
-
 	/* Dimensions of the room, in blocks */
 	int w;
 	int h;
@@ -19,10 +19,11 @@ protected:
 	/* The blocks are the basic compound of a room */
 	Block *** blocks;
 	
+	/* The map containing this room */
+	Map& map;
+
 public:
-	
-	Room();
-	Room(int width, int height, Player& p, SDL_Renderer *renderer);
+	Room(int width, int height, Player& p, Map& m, SDL_Renderer *renderer);
 	virtual ~Room();
 	virtual void render(SDL_Renderer * renderer);
 	virtual void tick(int time);
@@ -34,6 +35,8 @@ public:
 			w = that.w;
 			h = that.h;
 			player = that.player;
+			map = that.map;
+
 			if (w > 0 && h > 0)
 			{
 				blocks = new Block ** [w];
