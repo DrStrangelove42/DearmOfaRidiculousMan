@@ -3,10 +3,14 @@
 
 #include <SDL2/SDL.h>
 
-extern int SZ_BLOCKSIZE;
-extern int SZ_SCREENWIDTH;
-extern int SZ_SCREENHEIGHT;
+/*Size constants*/
+extern int SZ_BLOCKSIZE;	/* The size of a block, in pixels */
+extern int SZ_SCREENWIDTH;	/* Width of the window, in pixels */
+extern int SZ_SCREENHEIGHT;	/* Height of the window, in pixels */
 
+/*Current viewport*/
+/*The two following variables are only used in low level
+fonctions located in the <utils> module.*/
 extern int VIEW_OFFSET_X;
 extern int VIEW_OFFSET_Y;
 

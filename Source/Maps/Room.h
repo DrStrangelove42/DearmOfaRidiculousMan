@@ -20,11 +20,16 @@ protected:
 	
 
 public:
+	/* Creates a new Room object */
 	Room(int width, int height, Player& p, SDL_Renderer *renderer);
+	/* Standard destructor */
 	virtual ~Room();
+	/* Rendering method */
 	virtual void render(SDL_Renderer * renderer);
+	/* Time management */
 	virtual void tick(int time);
 
+	/* In case of copy-assignment use */
 	Room& operator=(const Room& that)
 	{
 		if (this != &that)
@@ -50,6 +55,7 @@ public:
 		return *this;
 	}
 
+	/* Accessors */
 	int getW();
 	int getH();
 };

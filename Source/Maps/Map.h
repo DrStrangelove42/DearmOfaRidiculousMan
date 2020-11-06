@@ -17,17 +17,27 @@ class Map : public Entity
 protected:
 	/* Array of pointers to rooms */
 	Room ** rooms;
+	/* Reference to the player */
 	Player &player;
+	/* Number of rooms in the map */
 	int roomCount;
+	/* Index of the room that is currently displayed (in which the player is) */
 	int currentRoom;
 
 public:
+	/* Creates a new empty map with a pre-allocated array for rooms. */
 	Map(Player& p, int roomCount);
+	/* Creates a Map object from a map file */
 	Map(Player& p, string file);
+
+	/* Std destructor */
 	virtual ~Map();
+	/* Rendering of the map */
 	virtual void render(SDL_Renderer * renderer);
+	/* Time management */
 	virtual void tick(int time);
 
+	/* Copy-assignment operator */
 	Map& operator=(const Map& that)
 	{
 		if (this != &that)
@@ -44,6 +54,7 @@ public:
 		return *this;
 	}
 	
+	/* Accessors */
 	int getRoomCount();
 	Room** getRooms();
 };

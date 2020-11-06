@@ -9,12 +9,14 @@ Objects in the game that can be moved.
 class MovingEntity : public Entity
 {
 protected:
+	/* Coordinates of the entity */
 	int x;
 	int y;
 
 public:
-	//virtual MovingEntity() = 0;
+	/* Moves the entity to (x, y) */
 	void teleport(int x, int y);
+	/* Accessors */
 	int getX();
 	int getY();
 };

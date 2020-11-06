@@ -5,6 +5,8 @@
 #include "../Characters/Player.h"
 #include "../Blocks/WallBlock.h"
 #include "Room.h"
+
+/* This is a demo of a map, for human testing purposes */
 class DummyMap : public Map
 {
 public:

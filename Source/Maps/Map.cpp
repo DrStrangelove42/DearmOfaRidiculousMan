@@ -1,9 +1,8 @@
 #include "Map.h"
 
-
 Map::Map(Player& p, int roomCount) : player(p), roomCount(roomCount), currentRoom(0)
 {
-	rooms = new Room*[roomCount];
+	rooms = new Room * [roomCount];
 }
 
 Map::~Map()
@@ -37,5 +36,5 @@ int Map::getRoomCount()
 
 Room** Map::getRooms()
 {
-  return rooms;
+	return rooms;
 }

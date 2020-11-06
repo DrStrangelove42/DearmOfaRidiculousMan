@@ -15,7 +15,10 @@
 #include "Maps/Map.h"
 #include "Characters/Player.h"
 
+/* Go to the main rendering loop of the game */
 int playDoarm(SDL_Window* window, SDL_Renderer* renderer);
+
+/* Events */
 void manageEvents(bool* quit);
 void onKeyDown(SDL_Event event);
 void onWindowEvent(SDL_Event event, bool* quit);
