@@ -9,13 +9,13 @@ Texture::Texture(RenderContext& context, string id)
 	SDL_SetColorKey(bmp, SDL_TRUE, SDL_MapRGB(bmp->format, 0xff, 0, 0xff));
 
 	if (NULL == bmp)
-		throw runtime_error("Unable to load texture #" + id);
+		throw runtime_error("Unable to load texture #" + id + " : " + string(SDL_GetError()));
 
 	tx = context.fromSurface(bmp);
 	SDL_FreeSurface(bmp);
 
 	if (NULL == tx)
-		throw runtime_error("Unable to create texture #" + id);
+		throw runtime_error("Unable to create texture #" + id + " : " + string(SDL_GetError()));
 
 	texture = tx;
 }

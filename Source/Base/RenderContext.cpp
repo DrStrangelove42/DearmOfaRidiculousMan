@@ -4,8 +4,6 @@ using namespace std;
 
 RenderContext::RenderContext(SDL_Window* window)
 {
-	SDL_Renderer* renderer = NULL;
-
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
 	if (NULL == renderer)
