@@ -26,20 +26,20 @@ int main(int argc, char** argv)
 
 	/*Free the memory*/
 	FreeTextures();
-	SDL_DestroyRenderer(renderer);
+	
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 	return status;
 }
 
 /*Main loop*/
-int playDoarm(SDL_Window* window, SDL_Renderer* renderer)
+int playDoarm(GAME* game)
 {
 	Player me(renderer);
-	Map *currentMap = new DummyMap(me, renderer); //POC
-	bool quit = false; 
+	Map* currentMap = new DummyMap(me, renderer); //POC
 
-	while (!quit)
+
+	while (!(game->quit))
 	{
 		SDL_RenderClear(renderer);
 		
@@ -54,7 +54,7 @@ int playDoarm(SDL_Window* window, SDL_Renderer* renderer)
 		SDL_Delay(50);
 	}
 
-	delete currentMap;
+	
 
 	return EXIT_SUCCESS;
 }
@@ -102,4 +102,16 @@ void onKeyDown(SDL_Event event)
 	default:
 		break;
 	}
+}
+
+GAME* initGame()
+{
+	InitUtils();
+
+	GAME* game = new GAME();
+}
+
+void quitGame(GAME* game)
+{
+	delete game->currentMap;
 }

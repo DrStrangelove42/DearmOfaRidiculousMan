@@ -10,5 +10,3 @@ int SZ_SCREENHEIGHT = 800;
 fonctions located in the <utils> module.*/
 int VIEW_OFFSET_X = 0;
 int VIEW_OFFSET_Y = 0;
-
-SDL_Window* window;

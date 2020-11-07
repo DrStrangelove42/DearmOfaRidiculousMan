@@ -14,6 +14,4 @@ fonctions located in the <utils> module.*/
 extern int VIEW_OFFSET_X;
 extern int VIEW_OFFSET_Y;
 
-extern SDL_Window* window;
-
 #endif

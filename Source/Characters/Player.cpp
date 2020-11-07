@@ -2,7 +2,7 @@
 
 
 
-Player::Player(SDL_Renderer* renderer)
+Player::Player(RenderContext& renderer)
 {
 	texture = LoadTexture("mario", renderer);
 }
@@ -20,7 +20,7 @@ bool Player::isAlive()
 	return health > 0;
 }
 
-void Player::render(SDL_Renderer* renderer)
+void Player::render(RenderContext& renderer)
 {
 	DrawImage(renderer, texture, x * SZ_BLOCKSIZE, y * SZ_BLOCKSIZE, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
 }

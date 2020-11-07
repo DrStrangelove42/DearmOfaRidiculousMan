@@ -22,4 +22,14 @@ int playDoarm(SDL_Window* window, SDL_Renderer* renderer);
 void manageEvents(bool* quit);
 void onKeyDown(SDL_Event event);
 void onWindowEvent(SDL_Event event, bool* quit);
+GAME* initGame();
+
+typedef struct
+{
+	SDL_Window* window;
+	SDL_Renderer* renderer;
+	Map* currentMap;
+	bool quit;
+} GAME;
+
 #endif
