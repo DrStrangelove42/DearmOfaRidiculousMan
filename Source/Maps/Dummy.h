@@ -10,13 +10,13 @@
 class DummyMap : public Map
 {
 public:
-	DummyMap(Player& p, SDL_Renderer* renderer);
+	DummyMap(Player& p, RenderContext& renderer);
 };
 
 class DummyRoom : public Room
 {
 public:
-	DummyRoom(Player& p, SDL_Renderer* renderer);
+	DummyRoom(Player& p, RenderContext& renderer);
 };
 
 #endif

@@ -22,7 +22,7 @@ public:
 	~Block();
 
 	/* Initialises a new Block object with the specified informations. */
-	Block(int posx, int posy, Player& player, string tx, RenderContext renderer);
+	Block(int posx, int posy, Player& player, string tx, RenderContext& renderer);
 
 	int getX();
 	int getY();
@@ -31,7 +31,7 @@ public:
 	void move(int px, int py);
 
 	/* Rendering method. */
-	void render(RenderContext renderer);
+	virtual void render(RenderContext& renderer);
 
 	/* Places the moving entity on this block. */
 	void teleportOn(MovingEntity& m);

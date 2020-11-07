@@ -19,7 +19,7 @@ Map::Map(Player& p, string file) : player(p)
 	//TODO : decode a map file.
 }
 
-void Map::render(SDL_Renderer* renderer)
+void Map::render(RenderContext& renderer)
 {
 	rooms[currentRoom]->render(renderer);
 }

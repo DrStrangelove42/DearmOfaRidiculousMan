@@ -9,7 +9,7 @@ ones) begin with a capital letter.
 
 int InitUtils()
 {
-	textures = unordered_map<string, SDL_Texture*>();
+	textures = unordered_map<string, Texture*>();
 
 	return 0;
 }
@@ -17,16 +17,16 @@ int InitUtils()
 /*
 Loads the texture with the specified identifier.
 */
-Texture& LoadTexture(string id, RenderContext renderer)
+Texture* LoadTexture(string id, RenderContext& renderer)
 {
 
 	if (textures.find(id) != textures.end())
 	{
-		return *(textures[id]);
+		return textures[id];
 	}
 	else
 	{
-		return Texture()
+		return new Texture(renderer, id);
 	}
 }
 
@@ -39,13 +39,8 @@ void FreeTextures()
 	}
 }
 
-void DrawImage(RenderContext& r, Texture& t, int x, int y)
-{
-	t.render(r, x, y);
-}
-
 int DumpError(string err)
 {
-	cout << "Error : " << err << "\nInternal error: " << SDL_GetError() << endl;
+	cout << "Error : " << err << "\nInternal error: " << renderErrorDetails() << endl;
 	return EXIT_FAILURE;
 }

@@ -9,13 +9,13 @@ Texture::Texture(RenderContext& context, string id)
 	SDL_SetColorKey(bmp, SDL_TRUE, SDL_MapRGB(bmp->format, 0xff, 0, 0xff));
 
 	if (NULL == bmp)
-		DumpError("Unable to load texture #" + id);
+		throw runtime_error("Unable to load texture #" + id);
 
-	tx = SDL_CreateTextureFromSurface(renderer, bmp);
+	tx = context.fromSurface(bmp);
 	SDL_FreeSurface(bmp);
 
 	if (NULL == tx)
-		DumpError("Unable to create texture #" + id);
+		throw runtime_error("Unable to create texture #" + id);
 
 	texture = tx;
 }
@@ -25,9 +25,9 @@ Texture::~Texture()
 	SDL_DestroyTexture(texture);
 }
 
-Texture::render(RenderContext& context, int x, int y, double angle, SDL_Point* center, SDL_RendererFlip flip)
+void Texture::renderUnscaled(RenderContext& context, int x, int y, double angle, SDL_Point* center, SDL_RendererFlip flip)
 {
-	if (NULL != t)
+	if (NULL != texture)
 	{
 		SDL_Rect dst = { x + VIEW_OFFSET_X, y + VIEW_OFFSET_Y, w, h };
 
@@ -38,6 +38,19 @@ Texture::render(RenderContext& context, int x, int y, double angle, SDL_Point* c
 			renderQuad.h = clip->h;
 		}*/
 
-		context.doRender(t, NULL, &dst, angle, center, flip);
+		context.doRender(texture, NULL, &dst, angle, center, flip);
 	}
 }
+
+void Texture::render(RenderContext& context, int x, int y, int width, int height, double angle, SDL_Point* center, SDL_RendererFlip flip)
+{
+	if (NULL != texture)
+	{
+		SDL_Rect dst = { x + VIEW_OFFSET_X, y + VIEW_OFFSET_Y, width, height };
+
+		context.doRender(texture, NULL, &dst, angle, center, flip);
+	}
+}
+
+int Texture::getWidth() { return w; }
+int Texture::getHeight() { return h; }

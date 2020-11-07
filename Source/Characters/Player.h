@@ -25,7 +25,7 @@ protected:
 	int lives;
 
 	/* The texture used for the player. */
-	Texture& texture;
+	Texture* texture;
 public:
 	/* Creates the player */
 	Player(RenderContext& renderer);
@@ -36,7 +36,7 @@ public:
 	/* Instantly kills the player. */
 	void kill();
 	/* Rendering management */
-	void render(RenderContext& renderer);
+	virtual void render(RenderContext& renderer);
 	
 	/* Time management */
 	virtual void tick(int time);

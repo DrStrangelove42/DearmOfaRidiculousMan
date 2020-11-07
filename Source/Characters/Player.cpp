@@ -1,7 +1,5 @@
 #include "Player.h"
 
-
-
 Player::Player(RenderContext& renderer)
 {
 	texture = LoadTexture("mario", renderer);
@@ -22,7 +20,7 @@ bool Player::isAlive()
 
 void Player::render(RenderContext& renderer)
 {
-	DrawImage(renderer, texture, x * SZ_BLOCKSIZE, y * SZ_BLOCKSIZE, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
+	texture->render(renderer, x * SZ_BLOCKSIZE, y * SZ_BLOCKSIZE, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
 }
 
 /*

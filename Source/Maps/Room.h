@@ -14,23 +14,23 @@ protected:
 	int w;
 	int h;
 	/* The player currently in the room */
-	Player &player;
+	Player& player;
 	/* The blocks are the basic compound of a room */
-	Block *** blocks;
-	
+	Block*** blocks;
+
 
 public:
 	/* Creates a new Room object */
-	Room(int width, int height, Player& p, SDL_Renderer *renderer);
+	Room(int width, int height, Player& p, RenderContext& renderer);
 	/* Standard destructor */
 	virtual ~Room();
 	/* Rendering method */
-	virtual void render(SDL_Renderer * renderer);
+	virtual void render(RenderContext& renderer);
 	/* Time management */
 	virtual void tick(int time);
 
 	/* In case of copy-assignment use */
-	Room& operator=(const Room& that)
+	/*Room& operator=(const Room& that)
 	{
 		if (this != &that)
 		{
@@ -53,7 +53,7 @@ public:
 			}
 		}
 		return *this;
-	}
+	}*/
 
 	/* Accessors */
 	int getW();

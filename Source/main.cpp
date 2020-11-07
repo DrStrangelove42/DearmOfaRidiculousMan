@@ -7,59 +7,79 @@ using namespace std;
 int main(int argc, char** argv)
 {
 	int status = 0;
-	SDL_Renderer* renderer = NULL;
 
-	if (SDL_Init(SDL_INIT_VIDEO) != 0)
+	if (!renderInit())
 		return DumpError("Init error.");
-
-	if (SDL_CreateWindowAndRenderer(
-		SZ_SCREENWIDTH,
-		SZ_SCREENHEIGHT,
-		SDL_WINDOW_SHOWN,
-		&window,
-		&renderer) != 0)
-		return DumpError("Window error.");
 	
-	InitGame();
+	GAME* game = initGame();
 
-	status = playDoarm(window, renderer);
+	if (NULL == game)
+		return EXIT_FAILURE;
+
+	status = playDoarm(game);
 
 	/*Free the memory*/
 	FreeTextures();
 	
-	SDL_DestroyWindow(window);
-	SDL_Quit();
+	quitGame(game);
 	return status;
 }
 
 /*Main loop*/
 int playDoarm(GAME* game)
 {
+	RenderContext& renderer = *(game->renderer);
 	Player me(renderer);
-	Map* currentMap = new DummyMap(me, renderer); //POC
 
+	game->currentMap = new DummyMap(me, renderer); //POC
 
 	while (!(game->quit))
 	{
-		SDL_RenderClear(renderer);
+		game->renderer->clear();
 		
-		manageEvents(&quit);
+		manageEvents(game);
 
-		currentMap->render(renderer);
+		game->currentMap->render(renderer);
 
 		me.render(renderer);
 
-		SDL_RenderPresent(renderer);
+		game->renderer->update();
 
-		SDL_Delay(50);
+		renderSleep(50);
 	}
-
-	
 
 	return EXIT_SUCCESS;
 }
 
-void manageEvents(bool * quit)
+GAME* initGame()
+{
+	InitUtils();
+
+	GAME* game = new GAME();
+
+	game->quit = false;
+	game->window = renderCreateWindow();
+
+	if (NULL == game->window)
+	{
+		DumpError("Window error.");
+		return NULL;
+	}
+
+	game->renderer = new RenderContext(game->window);
+
+	return game;
+}
+
+void quitGame(GAME* game)
+{
+	delete game->currentMap;
+	delete game->renderer;
+
+	SDL_DestroyWindow(game->window);
+}
+
+void manageEvents(GAME * game)
 {
 	SDL_Event event;
 
@@ -72,7 +92,7 @@ void manageEvents(bool * quit)
 			break;
 
 		case SDL_WINDOWEVENT:
-			onWindowEvent(event, quit);
+			onWindowEvent(event, game);
 			break;
 
 		default:
@@ -81,10 +101,10 @@ void manageEvents(bool * quit)
 	}
 }
 
-void onWindowEvent(SDL_Event event, bool * quit)
+void onWindowEvent(SDL_Event event, GAME * game)
 {
 	if (event.window.event == SDL_WINDOWEVENT_CLOSE)
-		*quit = true;
+		game->quit = true;
 }
 
 void onKeyDown(SDL_Event event)
@@ -104,14 +124,3 @@ void onKeyDown(SDL_Event event)
 	}
 }
 
-GAME* initGame()
-{
-	InitUtils();
-
-	GAME* game = new GAME();
-}
-
-void quitGame(GAME* game)
-{
-	delete game->currentMap;
-}

@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-#include <SDL2/SDL.h>
+#include "Base/rendering.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdlib.h> 
@@ -15,21 +15,24 @@
 #include "Maps/Map.h"
 #include "Characters/Player.h"
 
-/* Go to the main rendering loop of the game */
-int playDoarm(SDL_Window* window, SDL_Renderer* renderer);
-
-/* Events */
-void manageEvents(bool* quit);
-void onKeyDown(SDL_Event event);
-void onWindowEvent(SDL_Event event, bool* quit);
-GAME* initGame();
-
 typedef struct
 {
 	SDL_Window* window;
-	SDL_Renderer* renderer;
+	RenderContext* renderer;
 	Map* currentMap;
 	bool quit;
 } GAME;
+
+/* Go to the main rendering loop of the game */
+int playDoarm(GAME* game);
+
+/* Events */
+void manageEvents(GAME* game);
+void onKeyDown(SDL_Event event);
+void onWindowEvent(SDL_Event, GAME*);
+GAME* initGame();
+void quitGame(GAME* game);
+
+
 
 #endif

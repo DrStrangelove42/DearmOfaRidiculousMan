@@ -1,22 +1,46 @@
 #include "RenderContext.h"
 
-RenderContext::RenderContext()
-{
+using namespace std;
 
+RenderContext::RenderContext(SDL_Window* window)
+{
+	SDL_Renderer* renderer = NULL;
+
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+
+	if (NULL == renderer)
+	{
+		throw runtime_error(SDL_GetError());
+	}
 }
 
 RenderContext::~RenderContext()
 {
-    SDL_DestroyRenderer(renderer);
+	if (NULL != renderer)
+		SDL_DestroyRenderer(renderer);
 }
 
-RenderContext::doRender(SDL_Texture * t, 
-    SDL_Texture* texture,
-    const SDL_Rect* srcrect,
-    const SDL_Rect* dstrect,
-    const double           angle,
-    const SDL_Point* center,
-    const SDL_RendererFlip flip)
+int RenderContext::clear()
+{
+	SDL_RenderClear(renderer);
+}
+
+int RenderContext::doRender(SDL_Texture* t,
+	const SDL_Rect* srcrect,
+	const SDL_Rect* dstrect,
+	const double           angle,
+	const SDL_Point* center,
+	const SDL_RendererFlip flip)
 {
 	SDL_RenderCopyEx(renderer, t, srcrect, dstrect, angle, center, flip);
+}
+
+void RenderContext::update()
+{
+	SDL_RenderPresent(renderer);
+}
+
+SDL_Texture* RenderContext::fromSurface(SDL_Surface* s)
+{
+	return SDL_CreateTextureFromSurface(renderer, s);
 }

@@ -33,12 +33,12 @@ public:
 	/* Std destructor */
 	virtual ~Map();
 	/* Rendering of the map */
-	virtual void render(SDL_Renderer * renderer);
+	virtual void render(RenderContext& renderer);
 	/* Time management */
 	virtual void tick(int time);
 
 	/* Copy-assignment operator */
-	Map& operator=(const Map& that)
+	/*Map& operator=(const Map& that)
 	{
 		if (this != &that)
 		{
@@ -52,7 +52,7 @@ public:
 			player = that.player;
 		}
 		return *this;
-	}
+	}*/
 	
 	/* Accessors */
 	int getRoomCount();
