@@ -32,8 +32,10 @@ public:
 
 	/* Std destructor */
 	virtual ~Map();
-	/* Rendering of the map */
-	virtual void render(RenderContext& renderer);
+
+	/* Rendering method, enabling the renderer to take the offset (in blocks) into account. */
+	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
+
 	/* Time management */
 	virtual void tick(int time);
 

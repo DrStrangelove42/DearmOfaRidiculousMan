@@ -30,14 +30,19 @@ public:
 	/* Change the block position. */
 	void move(int px, int py);
 
-	/* Rendering method. */
-	virtual void render(RenderContext& renderer);
+	/* Rendering method, enabling the renderer to take the offset (in blocks) into account. */
+	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
 
 	/* Places the moving entity on this block. */
 	void teleportOn(MovingEntity& m);
 
 	/* Time management */
 	virtual void tick(int time);
+
+	/* Forces the object to reload the texture corresponding to the current ID in <texture>.
+	Note that there is no function to change the texture from the outside of the object, because we
+	don't want to, for now.*/
+	virtual void updateTexture(RenderContext& renderer);
 };
 
 #endif

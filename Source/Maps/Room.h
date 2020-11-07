@@ -13,19 +13,28 @@ protected:
 	/* Dimensions of the room, in blocks */
 	int w;
 	int h;
+	/* Absolute location of the first block (top-left corner, blocks[0][0])
+	   of this room in the map, in blocks unit */
+	int x;
+	int y;
+
 	/* The player currently in the room */
 	Player& player;
 	/* The blocks are the basic compound of a room */
 	Block*** blocks;
-
+	/* If the room has already been visited */
+	bool discovered;
 
 public:
 	/* Creates a new Room object */
 	Room(int width, int height, Player& p, RenderContext& renderer);
+
 	/* Standard destructor */
 	virtual ~Room();
-	/* Rendering method */
-	virtual void render(RenderContext& renderer);
+
+	/* Rendering method, enabling the renderer to take the offset (in blocks) into account. */
+	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
+
 	/* Time management */
 	virtual void tick(int time);
 
@@ -58,6 +67,8 @@ public:
 	/* Accessors */
 	int getW();
 	int getH();
+	int getX();
+	int getY();
 };
 
 

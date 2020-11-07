@@ -3,7 +3,7 @@
 
 #include "Map.h"
 #include "../Characters/Player.h"
-#include "../Blocks/WallBlock.h"
+#include "../Blocks/StoneWallBlock.h"
 #include "Room.h"
 
 /* This is a demo of a map, for human testing purposes */
@@ -16,7 +16,7 @@ public:
 class DummyRoom : public Room
 {
 public:
-	DummyRoom(Player& p, RenderContext& renderer);
+	DummyRoom(Player& p, RenderContext& renderer, int locX = 0, int locY = 0);
 };
 
 #endif

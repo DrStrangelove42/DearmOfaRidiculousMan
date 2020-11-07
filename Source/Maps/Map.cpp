@@ -19,9 +19,20 @@ Map::Map(Player& p, string file) : player(p)
 	//TODO : decode a map file.
 }
 
-void Map::render(RenderContext& renderer)
+void Map::render(RenderContext& renderer, int offsetX, int offsetY)
 {
-	rooms[currentRoom]->render(renderer);
+	rooms[currentRoom]->render(renderer, offsetX, offsetY);
+
+	int offX = offsetX - rooms[currentRoom]->getX();
+	int offY = offsetY - rooms[currentRoom]->getY();
+
+	for (int i = 0; i < roomCount; i++)
+	{
+		if (i != currentRoom)
+		{
+			rooms[i]->render(renderer, offX, offY);
+		}
+	}
 }
 
 void Map::tick(int time)

@@ -1,6 +1,6 @@
 #include "Room.h"
 
-Room::Room(int width, int height, Player& p, RenderContext& renderer) : w(width), h(height), player(p)
+Room::Room(int width, int height, Player& p, RenderContext& renderer) : w(width), h(height), player(p), discovered(false)
 {
 	if (w > 0 && h > 0)
 	{
@@ -34,13 +34,13 @@ Room::~Room()
 	}
 }
 
-void Room::render(RenderContext& renderer)
+void Room::render(RenderContext& renderer, int offsetX, int offsetY)
 {
 	for (int i = 0; i < w; i++)
 	{
 		for (int j = 0; j < h; j++)
 		{
-			blocks[i][j]->render(renderer);
+			blocks[i][j]->render(renderer, offsetX + x, offsetY + y);
 		}
 	}
 }
@@ -53,6 +53,16 @@ int Room::getW()
 int Room::getH()
 {
 	return h;
+}
+
+int Room::getX()
+{
+	return x;
+}
+
+int Room::getY()
+{
+	return y;
 }
 
 void Room::tick(int time)

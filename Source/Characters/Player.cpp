@@ -18,9 +18,9 @@ bool Player::isAlive()
 	return health > 0;
 }
 
-void Player::render(RenderContext& renderer)
+void Player::render(RenderContext& renderer, int offsetX, int offsetY)
 {
-	texture->render(renderer, x * SZ_BLOCKSIZE, y * SZ_BLOCKSIZE, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
+	texture->render(renderer, (x + offsetX) * SZ_BLOCKSIZE, (y + offsetY) * SZ_BLOCKSIZE, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
 }
 
 /*

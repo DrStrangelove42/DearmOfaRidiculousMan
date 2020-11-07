@@ -36,7 +36,7 @@ public:
 	/* Instantly kills the player. */
 	void kill();
 	/* Rendering management */
-	virtual void render(RenderContext& renderer);
+	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
 	
 	/* Time management */
 	virtual void tick(int time);
