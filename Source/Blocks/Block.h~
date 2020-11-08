@@ -21,7 +21,7 @@ public:
 	/* Destructor. */
 	~Block();
 
-	/* Initialises a new Block with the specified informations. */
+	/* Initialises a new Block object with the specified informations. */
 	Block(int posx, int posy, Player& player, string tx, RenderContext& renderer);
 
 	int getX();
