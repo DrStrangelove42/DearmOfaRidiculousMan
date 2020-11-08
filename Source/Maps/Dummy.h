@@ -16,7 +16,7 @@ public:
 class DummyRoom : public Room
 {
 public:
-	DummyRoom(Player& p, RenderContext& renderer, int locX = 0, int locY = 0);
+	DummyRoom(Player& p, RenderContext& renderer, int wd, int ht, int locX = 0, int locY = 0);
 };
 
 #endif

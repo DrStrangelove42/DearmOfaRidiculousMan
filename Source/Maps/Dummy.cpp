@@ -3,29 +3,32 @@
 
 DummyMap::DummyMap(Player& p, RenderContext& renderer) : Map(p, 3)
 {
-	rooms[0] = new DummyRoom(p, renderer);
-	rooms[1] = new DummyRoom(p, renderer, 5, 0);
-	rooms[2] = new DummyRoom(p, renderer, 3, 6);
+	rooms[0] = new DummyRoom(p, renderer, 10, 6);
+	rooms[1] = new DummyRoom(p, renderer, 10, 3, 7, 6);
+	rooms[2] = new DummyRoom(p, renderer, 4, 15, 3, 6);
 	p.teleport(2, 2);
-} 
+}
 
-DummyRoom::DummyRoom(Player& p, RenderContext& renderer, int locX, int locY) : Room(5, 6, p, renderer)
+DummyRoom::DummyRoom(Player& p, RenderContext& renderer, int wd, int ht, int locX, int locY) : Room(wd, ht, p, renderer)
 {
-	for (int x = 2; x < 4; x++)
+	for (int i = 2; i < w; i++)
 	{
-		for (int y = 2; y < 5; y += 10)
+		for (int j = 2; j < h; j += 10)
 		{
-			blocks[x][y] = new WallBlock(x, y, player, renderer);
+			replaceBlock(new WallBlock(i, j, player, renderer));
 		}
 	}
 
-	for (int x = 0; x < w; x++)
+	for (int i = 0; i < w; i++)
 	{
-		if (x % w == 0)
+		replaceBlock(new StoneWallBlock(i, 0, player, renderer));
+		replaceBlock(new StoneWallBlock(i, h - 1, player, renderer));
+ 
+		if (i == 0 || i == w - 1)
 		{
-			for (int x = 0; x < h; x++)
+			for (int j = 0; j < h; j++)
 			{
-				blocks[x][y] = new StoneWallBlock(x, y, player, renderer);
+				replaceBlock(new StoneWallBlock(i, j, player, renderer));
 			}
 		}
 	}

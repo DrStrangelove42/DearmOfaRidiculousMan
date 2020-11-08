@@ -9,6 +9,9 @@ extern int SZ_SCREENWIDTH;	/* Width of the window, in pixels */
 extern int SZ_SCREENHEIGHT;	/* Height of the window, in pixels */
 
 /*Current viewport*/
+extern int BLOCKS_W;	/* Max width of blocks on the screen */
+extern int BLOCKS_H;	/* Max height of blocks on the screen */
+
 /*The two following variables are only used in low level
 fonctions located in the <utils> module.*/
 extern int VIEW_OFFSET_X;

@@ -21,10 +21,12 @@ Map::Map(Player& p, string file) : player(p)
 
 void Map::render(RenderContext& renderer, int offsetX, int offsetY)
 {
-	rooms[currentRoom]->render(renderer, offsetX, offsetY);
+	Room* cur = rooms[currentRoom];
 
-	int offX = offsetX - rooms[currentRoom]->getX();
-	int offY = offsetY - rooms[currentRoom]->getY();
+	int offX = offsetX - cur->getX() + (BLOCKS_W - cur->getW()) / 2;
+	int offY = offsetY - cur->getY() + (BLOCKS_H - cur->getH()) / 2;
+
+	cur->render(renderer, offX, offY);
 
 	for (int i = 0; i < roomCount; i++)
 	{
@@ -33,6 +35,8 @@ void Map::render(RenderContext& renderer, int offsetX, int offsetY)
 			rooms[i]->render(renderer, offX, offY);
 		}
 	}
+
+	player.render(renderer, offX, offY);
 }
 
 void Map::tick(int time)

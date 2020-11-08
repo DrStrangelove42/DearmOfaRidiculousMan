@@ -41,8 +41,6 @@ int playDoarm(GAME* game)
 
 		game->currentMap->render(renderer);
 
-		me.render(renderer);
-
 		game->renderer->update();
 
 		renderSleep(50);

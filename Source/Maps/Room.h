@@ -38,6 +38,9 @@ public:
 	/* Time management */
 	virtual void tick(int time);
 
+	/* Changes a block in the room, according to its location */
+	void replaceBlock(Block* newBlock);
+
 	/* In case of copy-assignment use */
 	/*Room& operator=(const Room& that)
 	{

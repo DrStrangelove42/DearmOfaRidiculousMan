@@ -4,6 +4,7 @@
 #include <string>
 #include "Room.h"
 #include "../Base/Entity.h"
+#include "../Base/config.h"
 #include "../Characters/Player.h"
 #include <SDL2/SDL.h>
 
