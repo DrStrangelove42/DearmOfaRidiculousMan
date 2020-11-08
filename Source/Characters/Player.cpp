@@ -30,7 +30,7 @@ void Player::kill()
 {
 	if (lives == 0)
 	{
-
+		// TODO gameover ?
 	}
 	else
 	{

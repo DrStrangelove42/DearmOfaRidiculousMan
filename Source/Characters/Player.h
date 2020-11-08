@@ -24,6 +24,8 @@ protected:
 	/* Number of lives until game over. */
 	int lives;
 
+	/* TODO : player's items */
+
 	/* The texture used for the player. */
 	Texture* texture;
 public:

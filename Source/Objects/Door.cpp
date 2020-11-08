@@ -7,5 +7,5 @@ Door::Door(char identifier, int posx, int posy, Player& p, RenderContext& render
 
 char Door::getId()
 {
-  return id;
+	return id;
 }

@@ -82,3 +82,39 @@ void Room::replaceBlock(Block* newBlock)
 		blocks[i][j] = newBlock;
 	}
 }
+
+Block* Room::getCurrentBlock()
+{
+	return blocks[player.getX()][player.getY()];
+}
+
+void Room::onKeyDown(EVENT_ARGS* ea)
+{
+	int curX = player.getX();
+	int curY = player.getY();
+	/*
+	We transfert the event to the destination block. It decides if the
+	player moves by itself.
+	*/
+	switch (ea->key)
+	{
+	case Up:
+		if (curY > 0)
+			blocks[curX][curY - 1]->onEnter(ea);
+		break;
+	case Left:
+		if (curX > 0)
+			blocks[curX - 1][curY]->onEnter(ea);
+		break;
+	case Right:
+		if (curX < w - 1)
+			blocks[curX + 1][curY]->onEnter(ea);
+		break;
+	case Down:
+		if (curY < h - 1)
+			blocks[curX][curY + 1]->onEnter(ea);
+		break;
+	default:
+		break;
+	}
+}

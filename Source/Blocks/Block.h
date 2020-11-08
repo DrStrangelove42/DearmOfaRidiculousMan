@@ -21,7 +21,7 @@ public:
 	/* Destructor. */
 	~Block();
 
-	/* Initialises a new Block with the specified informations. */
+	/* Initialises a new Block object with the specified informations. */
 	Block(int posx, int posy, Player& player, string tx, RenderContext& renderer);
 
 	int getX();
@@ -35,6 +35,9 @@ public:
 
 	/* Places the moving entity on this block. */
 	void teleportOn(MovingEntity& m);
+
+	/* This method is called when the player enters the block. */
+	virtual void onEnter(EVENT_ARGS* ea);
 
 	/* Time management */
 	virtual void tick(int time);

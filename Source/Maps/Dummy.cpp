@@ -11,25 +11,35 @@ DummyMap::DummyMap(Player& p, RenderContext& renderer) : Map(p, 3)
 
 DummyRoom::DummyRoom(Player& p, RenderContext& renderer, int wd, int ht, int locX, int locY) : Room(wd, ht, p, renderer)
 {
-	for (int i = 2; i < w; i++)
-	{
-		for (int j = 2; j < h; j += 10)
-		{
-			replaceBlock(new WallBlock(i, j, player, renderer));
-		}
-	}
+
 
 	for (int i = 0; i < w; i++)
 	{
 		replaceBlock(new StoneWallBlock(i, 0, player, renderer));
 		replaceBlock(new StoneWallBlock(i, h - 1, player, renderer));
- 
+
 		if (i == 0 || i == w - 1)
 		{
 			for (int j = 0; j < h; j++)
 			{
 				replaceBlock(new StoneWallBlock(i, j, player, renderer));
 			}
+		}
+		else
+		{
+			for (int j = 0; j < h; j++)
+			{
+				replaceBlock(new FloorBlock(i, j, player, renderer));
+			}
+
+		}
+	}
+
+	for (int i = 2; i < w; i++)
+	{
+		for (int j = 2; j < h; j += 10)
+		{
+			replaceBlock(new WallBlock(i, j, player, renderer));
 		}
 	}
 

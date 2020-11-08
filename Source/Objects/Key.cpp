@@ -7,5 +7,5 @@ Key::Key(char identifier, int posx, int posy, Player& p, RenderContext& renderer
 
 char Key::getId()
 {
-  return id;
+	return id;
 }

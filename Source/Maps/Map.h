@@ -40,6 +40,9 @@ public:
 	/* Time management */
 	virtual void tick(int time);
 
+	/* Event system */
+	virtual void onKeyDown(EVENT_ARGS* ea);
+
 	/* Copy-assignment operator */
 	/*Map& operator=(const Map& that)
 	{

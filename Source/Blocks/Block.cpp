@@ -44,3 +44,8 @@ void Block::tick(int time)
 {
 
 }
+
+void Block::onEnter(EVENT_ARGS* ea)
+{
+	/* Just ignores the move, because we are an empty block. (?Todo) */
+}

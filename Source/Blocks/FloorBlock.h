@@ -8,6 +8,7 @@ class FloorBlock : public Block
 {
 public:
 	FloorBlock(int posx, int posy, Player& player, RenderContext& renderer);
+	virtual void onEnter(EVENT_ARGS* ea);
 };
 
 #endif

@@ -41,6 +41,11 @@ public:
 	/* Changes a block in the room, according to its location */
 	void replaceBlock(Block* newBlock);
 
+	/* Event system */
+	virtual void onKeyDown(EVENT_ARGS *ea);
+
+	Block* getCurrentBlock();
+
 	/* In case of copy-assignment use */
 	/*Room& operator=(const Room& that)
 	{

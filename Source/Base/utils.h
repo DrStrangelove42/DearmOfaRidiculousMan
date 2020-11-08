@@ -11,6 +11,20 @@
 
 using namespace std;
 
+enum KEY { Up, Down, Left, Right, A, W }; //TODO : what keys do we need ?
+
+/*
+This structure is meant to be sent across game layers (starting from Map) when the user
+types something to move or to perform an action.
+*/
+typedef struct
+{
+	int* currentRoom;		/* Pointer to the currentRoom field in the game engine. */
+	string warp_MapToLoad;	/* if warp_IsExternal is set to true, indicates the map to load. */
+	bool warp_IsExternal;	/* Tells the game that we need to go to another map. */
+	KEY key;
+} EVENT_ARGS;
+
 /* The hashmap where textures are stored. */
 static unordered_map<string, Texture*> textures;
 

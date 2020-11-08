@@ -53,3 +53,8 @@ Room** Map::getRooms()
 {
 	return rooms;
 }
+
+void Map::onKeyDown(EVENT_ARGS * ea)
+{
+	rooms[currentRoom]->onKeyDown(ea);
+}

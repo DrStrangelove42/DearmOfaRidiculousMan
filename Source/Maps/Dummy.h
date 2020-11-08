@@ -4,6 +4,7 @@
 #include "Map.h"
 #include "../Characters/Player.h"
 #include "../Blocks/StoneWallBlock.h"
+#include "../Blocks/FloorBlock.h"
 #include "Room.h"
 
 /* This is a demo of a map, for human testing purposes */

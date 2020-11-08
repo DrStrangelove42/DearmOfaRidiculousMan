@@ -10,28 +10,21 @@
 #include <time.h>
 #include "Base/config.h"
 #include "Base/utils.h"
+#include "Base/events.h"
 #include "Maps/Room.h"
 #include "Maps/Dummy.h"
 #include "Maps/Map.h"
 #include "Characters/Player.h"
 
-typedef struct
-{
-	SDL_Window* window;
-	RenderContext* renderer;
-	Map* currentMap;
-	bool quit;
-} GAME;
+using namespace std;
 
 /* Go to the main rendering loop of the game */
 int playDoarm(GAME* game);
 
-/* Events */
-void manageEvents(GAME* game);
-void onKeyDown(SDL_Event event);
-void onWindowEvent(SDL_Event, GAME*);
+/* Initializes the GAME structure. */
 GAME* initGame();
-void quitGame(GAME* game);
+
+
 
 
 
