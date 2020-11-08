@@ -6,6 +6,9 @@ DummyMap::DummyMap(Player& p, RenderContext& renderer) : Map(p, 3)
 	rooms[0] = new DummyRoom(p, renderer, 10, 6);
 	rooms[1] = new DummyRoom(p, renderer, 10, 3, 7, 6);
 	rooms[2] = new DummyRoom(p, renderer, 4, 15, 3, 6);
+
+	rooms[0]->replaceBlock(new WarpBlock(4, 5, player, "grass", renderer, 1, 1, 1));
+	rooms[0]->replaceBlock(new WarpBlock(5, 5, player, "floor", renderer, 2, 1, 1));
 	p.teleport(2, 2);
 }
 

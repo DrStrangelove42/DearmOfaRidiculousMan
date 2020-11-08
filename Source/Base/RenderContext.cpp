@@ -18,15 +18,16 @@ RenderContext::~RenderContext()
 		SDL_DestroyRenderer(renderer);
 }
 
-int RenderContext::clear()
+void RenderContext::clear()
 {
+	changeColor(0x000000ff);
 	SDL_RenderClear(renderer);
 }
 
-int RenderContext::doRender(SDL_Texture* t,
+void RenderContext::doRender(SDL_Texture* t,
 	const SDL_Rect* srcrect,
 	const SDL_Rect* dstrect,
-	const double           angle,
+	const double angle,
 	const SDL_Point* center,
 	const SDL_RendererFlip flip)
 {
@@ -41,4 +42,24 @@ void RenderContext::update()
 SDL_Texture* RenderContext::fromSurface(SDL_Surface* s)
 {
 	return SDL_CreateTextureFromSurface(renderer, s);
+}
+
+void RenderContext::changeColor(int color)
+{
+	if (0 != SDL_SetRenderDrawColor(renderer, (unsigned char)(color & 0xff000000),
+		(unsigned char)(color & 0x00ff0000),
+		(unsigned char)(color & 0x0000ff00),
+		(unsigned char)(color & 0x000000ff)))
+		throw runtime_error(SDL_GetError());
+}
+
+void RenderContext::drawRectangle(int x, int y, int w, int h)
+{
+	SDL_Rect rect = { x, y, w, h };
+	SDL_RenderDrawRect(renderer, &rect);
+}
+
+void RenderContext::drawLine(int x1, int y1, int x2, int y2)
+{
+	SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
 }

@@ -31,6 +31,7 @@ void onWindowEvent(SDL_Event event, GAME* game)
 void onKeyDown(SDL_Event event, GAME* game)
 {
 	EVENT_ARGS ea;
+	ea.currentRoom = &(game->currentMap->currentRoom);
 	switch (event.key.keysym.sym)
 	{
 	case SDLK_DOWN:

@@ -22,10 +22,12 @@ protected:
 	Player &player;
 	/* Number of rooms in the map */
 	int roomCount;
+	
+
+public:
 	/* Index of the room that is currently displayed (in which the player is) */
 	int currentRoom;
 
-public:
 	/* Creates a new empty map with a pre-allocated array for rooms. */
 	Map(Player& p, int roomCount);
 	/* Creates a Map object from a map file */

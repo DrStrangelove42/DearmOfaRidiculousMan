@@ -15,19 +15,21 @@ public:
     RenderContext(SDL_Window* window);
     ~RenderContext();
  
-    int clear();
+    void clear();
     void update();
 
     SDL_Texture* fromSurface(SDL_Surface*);
 
-    int doRender(SDL_Texture* t,
+    void doRender(SDL_Texture* t,
         const SDL_Rect* srcrect,
         const SDL_Rect* dstrect,
-        const double           angle,
+        const double angle,
         const SDL_Point* center,
         const SDL_RendererFlip flip);
 
-
+    void drawRectangle(int x, int y, int w, int h);
+    void drawLine(int x1, int y1, int x2, int y2);
+    void changeColor(int color);
 };
 
 #endif
