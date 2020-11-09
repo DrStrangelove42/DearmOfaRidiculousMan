@@ -20,7 +20,7 @@ void WarpBlock::render(RenderContext& renderer, int offsetX, int offsetY)
 	int Y = (y + offsetY) * SZ_BLOCKSIZE;
 	Block::render(renderer, offsetX, offsetY);
 	/*DEBUG*/
-	renderer.changeColor(0x00ffffff);
+	renderer.changeColor(0x0088ffff);
 	renderer.drawRectangle(X, Y, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
 	renderer.drawLine(X, Y, X + SZ_BLOCKSIZE, Y + SZ_BLOCKSIZE);
 	renderer.drawLine(X+ SZ_BLOCKSIZE, Y, X , Y + SZ_BLOCKSIZE);

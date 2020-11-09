@@ -7,8 +7,11 @@ DummyMap::DummyMap(Player& p, RenderContext& renderer) : Map(p, 3)
 	rooms[1] = new DummyRoom(p, renderer, 10, 3, 7, 6);
 	rooms[2] = new DummyRoom(p, renderer, 4, 15, 3, 6);
 
-	rooms[0]->replaceBlock(new WarpBlock(4, 5, player, "grass", renderer, 1, 1, 1));
-	rooms[0]->replaceBlock(new WarpBlock(5, 5, player, "floor", renderer, 2, 1, 1));
+	rooms[0]->replaceBlock(new WarpBlock(4, 5, player, "floor", renderer, 2, 1, 0));/*BACK:*/ rooms[2]->replaceBlock(new WarpBlock(1, 0, player, "floor", renderer, 0, 4, 5));
+	rooms[0]->replaceBlock(new WarpBlock(5, 5, player, "floor", renderer, 2, 2, 0));/*BACK:*/ rooms[2]->replaceBlock(new WarpBlock(2, 0, player, "floor", renderer, 0, 5, 5));
+	rooms[0]->replaceBlock(new WarpBlock(8, 5, player, "floor", renderer, 1, 1, 0));/*BACK:*/ rooms[1]->replaceBlock(new WarpBlock(1, 0, player, "floor", renderer, 0, 8, 5));
+
+	
 	p.teleport(2, 2);
 }
 

@@ -62,5 +62,7 @@ void quitGame(GAME* game)
 	delete game->currentMap;
 	delete game->renderer;
 
+	FreeTextures();
+
 	SDL_DestroyWindow(game->window);
 }

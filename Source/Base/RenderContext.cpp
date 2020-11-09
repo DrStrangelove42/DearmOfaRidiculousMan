@@ -46,10 +46,10 @@ SDL_Texture* RenderContext::fromSurface(SDL_Surface* s)
 
 void RenderContext::changeColor(int color)
 {
-	if (0 != SDL_SetRenderDrawColor(renderer, (unsigned char)(color & 0xff000000),
-		(unsigned char)(color & 0x00ff0000),
-		(unsigned char)(color & 0x0000ff00),
-		(unsigned char)(color & 0x000000ff)))
+	if (0 != SDL_SetRenderDrawColor(renderer, (unsigned char)(color >> 24),
+		(unsigned char)(color >> 16),
+		(unsigned char)(color >> 8),
+		(unsigned char)(color)))
 		throw runtime_error(SDL_GetError());
 }
 
