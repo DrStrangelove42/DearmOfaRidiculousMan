@@ -40,6 +40,10 @@ void Object::teleportOn(MovingEntity& m)
 	m.teleport(x, y);
 }
 
+void Object::updateObject(Player& p, RenderContext& renderer)
+{
+}
+
 void Object::tick(int time)
 {
 

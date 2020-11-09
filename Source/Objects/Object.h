@@ -36,6 +36,9 @@ public:
 	/* Places the moving entity on this block. */
 	void teleportOn(MovingEntity& m);
 
+	/* The following function describes how each type of object interacts with the player.*/
+	virtual void updateObject(Player& p, RenderContext& renderer);
+
 	/* Time management */
 	virtual void tick(int time);
 
