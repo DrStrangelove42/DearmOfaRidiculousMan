@@ -1,0 +1,77 @@
+How to create a world using a text file:
+
+The name of the text file (without the extension) is the name of the world.
+
+Each world is composed of a positive number of maps, which may correspond to floors in a dungeon for example.
+
+The first line contains the number of maps in the world.
+
+The following lines, up to the line containing ###, are the header.
+They contain information on the different types of objects or entities that can be found in the world.
+For each of these lines (if it isn't just blank space), the first character encodes the type of object/entity, the second is the identifier, and what follows is an encoding of the additional information.
+
+After the line containing ###, each map is described one by one.
+
+The first line of each map description must be ##.
+
+The second line in the description of a map is an integer containing the positive number of rooms.
+
+After this, each room is described one by one.
+
+Each room is described as follows:
+ - The first line contains #.
+ - The second line contains two integers: the width and the height of the room.
+ - After this, each line in the text file represents a line in the room.
+ - Every three characters encode one block in the room.
+ - Of the three characters, the first encodes the type of block,
+   the second the type of object/entity that is on that block,
+   the third is an optional identifier for that object/entity (which has a different function depending on the object/entity).
+ - The different characters that can encode types of blocks are :
+   - ' ' : empty block.
+   - 'w' : wall block.
+   - 'f' : floor block.
+ - The different characters that can encode objects/entities are :
+   - ' ' : no object or entity.
+   - 'p' : player starts on this block.
+   - '!' : block from which a player can warp. The coordinates of the block to which the player warps is described in the header, on a line starting with '!' followed by the identifier, and then the integers representing map number, room number, x coordinate, y coordinate. 
+   - 'k' : key, that unlocks doors having the same identifier.
+   - 'd' : door, that can be unlocked with a key having the same identifier.
+   - 'm' : monster, information about the type of monster should be written in the header, on a line starting with m followed by the identifier.
+   - 'c' : chest, information about the contents of the chest should be written in the header, on a line starting with c followed by the identifier.
+
+The format can be summarised as follows:
+
+*Contents of NameOfWorld.txt (or other extension)*
+Number of maps
+
+Information pertaining to objects and entities.
+
+###
+##
+Number of rooms in first map
+#
+Dimensions of first room of first map
+Layout of first room of first map
+#
+.
+.
+.
+#
+Dimensions of last room of first map
+Layout of last room of first map
+##
+.
+.
+.
+##
+Number of rooms in last map
+#
+Dimensions of first room of last map
+Layout of first room of last map
+#
+.
+.
+.
+#
+Dimensions of last room of last map
+Layout of last room of last map
