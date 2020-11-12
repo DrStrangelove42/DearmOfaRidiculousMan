@@ -2,6 +2,7 @@
 #define CHEST_H
 
 #include "Object.h"
+#include "../Items/Item.h"
 
 class Chest : public Object
 {
@@ -10,7 +11,7 @@ private:
         Item * contents;
 public:
 	/*Destructor*/
-	~Chest()
+	~Chest();
 	
 	/*Constructor*/
 	Chest(Item* contents, int posx, int posy, Player& p, RenderContext& renderer);

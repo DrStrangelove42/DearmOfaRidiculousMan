@@ -35,11 +35,6 @@ void Object::render(RenderContext& renderer, int offsetX, int offsetY)
 	loadedTx->render(renderer, (x + offsetX) * SZ_BLOCKSIZE, (y + offsetY) * SZ_BLOCKSIZE, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
 }
 
-void Object::teleportOn(MovingEntity& m)
-{
-	m.teleport(x, y);
-}
-
 void Object::updateObject(Player& p, RenderContext& renderer)
 {
 }

@@ -17,7 +17,7 @@ char Key::getId()
 
 void Key::updateObject(Player& p, RenderContext& renderer)
 {
-  if (x == p.getX() && y == p.getY(){
+  if (x == p.getX() && y == p.getY()){
       //TODO turn key into item and give to player
     }
 }

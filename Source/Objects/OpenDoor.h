@@ -10,7 +10,7 @@ private:
 	char id;
 public:
 	/*Destructor*/
-	~OpenDoor()
+	~OpenDoor();
 	
 	/*Constructor*/
 	OpenDoor(char identifier, int posx, int posy, Player& p, RenderContext& renderer);

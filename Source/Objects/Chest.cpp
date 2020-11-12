@@ -10,7 +10,7 @@ Chest::Chest(Item* contents, int posx, int posy, Player& p, RenderContext& rende
 
 }
 
-char Chest::getContents()
+Item* Chest::getContents()
 {
 	return contents;
 }

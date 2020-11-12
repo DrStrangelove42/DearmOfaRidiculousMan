@@ -34,9 +34,6 @@ public:
 	/* Rendering method, enabling the renderer to take the offset (in blocks) into account. */
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
 
-	/* Places the moving entity on this block. */
-	void teleportOn(MovingEntity& m);
-
 	/* The following function describes how each type of object interacts with the player.*/
 	virtual void updateObject(Player& p, RenderContext& renderer);
 
