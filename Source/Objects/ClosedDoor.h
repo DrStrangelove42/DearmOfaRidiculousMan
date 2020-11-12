@@ -1,19 +1,19 @@
-#ifndef DOOR_H
-#define DOOR_H
+#ifndef CLOSEDDOOR_H
+#define CLOSEDDOOR_H
 
 #include "Object.h"
 
-class Door : public Object
+class ClosedDoor : public Object
 {
 private:
 	/*Each door has a unique character as an identifier, and the door can be unlocked by a key iff they have the same identifier. */
 	char id;
 public:
 	/*Destructor*/
-	~Door()
+	~ClosedDoor()
 	
 	/*Constructor*/
-	Door(char identifier, int posx, int posy, Player& p, RenderContext& renderer);
+	ClosedDoor(char identifier, int posx, int posy, Player& p, RenderContext& renderer);
 	char getId();
 
 	/* How does a door interact with the player? */

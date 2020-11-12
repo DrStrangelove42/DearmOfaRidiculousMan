@@ -16,13 +16,14 @@ protected:
 	string texture;
 	/* The loaded texture */
 	Texture* loadedTx;
+	bool traversable;
 
 public:
 	/* Destructor. */
 	~Object();
 
 	/* Initialises a new Object with the specified informations. */
-	Object(int posx, int posy, Player& player, string tx, RenderContext& renderer);
+	Object(int posx, int posy, Player& player, string tx, RenderContext& renderer, bool trav);
 
 	int getX();
 	int getY();

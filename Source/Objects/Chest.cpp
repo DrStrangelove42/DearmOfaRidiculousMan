@@ -5,7 +5,7 @@ Chest::~Chest()
   delete[] contents;
 }
 
-Chest::Chest(Item* contents, int posx, int posy, Player& p, RenderContext& renderer) : Object(posx, posy, p, "key", renderer), contents(contents)
+Chest::Chest(Item* contents, int posx, int posy, Player& p, RenderContext& renderer) : Object(posx, posy, p, "key", renderer, false), contents(contents)
 {
 
 }
@@ -16,5 +16,5 @@ char Chest::getContents()
 }
 
 void Chest::updateObject(Player& p, RenderContext& renderer){
-  
+
 }

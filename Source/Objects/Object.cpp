@@ -1,6 +1,6 @@
 #include "Object.h"
 
-Object::Object(int posx, int posy, Player& p, string tx, RenderContext& renderer) : x(posx), y(posy), player(p), texture(tx)
+Object::Object(int posx, int posy, Player& p, string tx, RenderContext& renderer, bool trav) : x(posx), y(posy), player(p), texture(tx), traversable(trav)
 {
 	updateTexture(renderer);
 } 

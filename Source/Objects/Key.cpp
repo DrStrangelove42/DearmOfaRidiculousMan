@@ -5,7 +5,7 @@ Key::~Key()
 
 }
 
-Key::Key(char identifier, int posx, int posy, Player& p, RenderContext& renderer) : Object(posx, posy, p, "key", renderer), id(identifier)
+Key::Key(char identifier, int posx, int posy, Player& p, RenderContext& renderer) : Object(posx, posy, p, "key", renderer, true), id(identifier)
 {
 
 }
@@ -17,5 +17,7 @@ char Key::getId()
 
 void Key::updateObject(Player& p, RenderContext& renderer)
 {
-  
+  if (x == p.getX() && y == p.getY(){
+      //TODO turn key into item and give to player
+    }
 }
