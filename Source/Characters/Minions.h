@@ -15,7 +15,7 @@ protected:
 	Texture * texture;
 public:
 	Minions(RenderContext& renderer);
-	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0) = 0;
+	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
 	virtual void kill();
 	virtual void tick(int time);
 };
