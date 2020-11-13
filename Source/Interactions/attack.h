@@ -1,6 +1,6 @@
 //this file defines the attack interaction
-#ifndef ACQUIRE_H
-#define ACQUIRE_H
+#ifndef ATTACK_H
+#define ATTACK_H
 
 #include <string>
 
