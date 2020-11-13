@@ -12,19 +12,3 @@ bool LivingEntity::isAlive()
 {
 	return health > 0;
 }
-
-/*
-Game over if no lives left.
-*/
-void LivingEntity::kill()
-{
-	if (lives == 0)
-	{
-		// TODO gameover ?
-	}
-	else
-	{
-		lives--;
-		health = maxHealth;
-	}
-}

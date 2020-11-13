@@ -7,19 +7,17 @@
 #include "../Base/utils.h"
 #include "../Base/config.h"
 #include "MovingEntity.h"
+#include "LivingEntity.h"
 
-class Monster : public MovingEntity
+class Monster : public MovingEntity, public LivingEntity
 {
 protected:
-	int health;
-	int maxHealth;
-	SDL_Texture* texture;
+	Texture* texture;
 public:
-	Player(SDL_Renderer* renderer);
-	void damage(int dmg);
-	bool isAlive();
-	void render(SDL_Renderer* renderer);
+	Monster(RenderContext& renderer);
 
+	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0) = 0;
+	virtual void kill();
 	virtual void tick(int time);
 };
 

@@ -7,23 +7,18 @@
 #include "../Base/utils.h"
 #include "../Base/config.h"
 #include "MovingEntity.h"
-
+#include "LivingEntity.h"
 
 /*
 The Player object is the representation of the person
 playing the game.
 */
-class Player : public MovingEntity
+class Player : public MovingEntity, public LivingEntity
 {
 protected:
-	/* Health points of the player : when this reaches 0,
-	   the player lose a life (see <lives> field below) */
-	int health;
-	/* HP count (health points) */
-	int maxHealth;
+	
 	/* Number of lives until game over. */
 	int lives;
-
 	/* TODO : player's items */
 
 	/* The texture used for the player. */
@@ -31,17 +26,22 @@ protected:
 public:
 	/* Creates the player */
 	Player(RenderContext& renderer);
-	/* Applies damage to the player, making him lose HP according to its resistance. */
-	void damage(int dmg);
-	/* True if the player is alive (more than 0 HP) */
-	bool isAlive();
-	/* Instantly kills the player. */
-	void kill();
+	
+	virtual void kill();
+
 	/* Rendering management */
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
 	
 	/* Time management */
 	virtual void tick(int time);
+
+	/* Health points of the player : when this reaches 0,
+	   the player lose a life (see <lives> field below) */
+	int health;
+	/* HP count (health points) */
+	int maxHealth;
+	/* Number of lives until game over. */
+	int lives;
 };
 
 #endif

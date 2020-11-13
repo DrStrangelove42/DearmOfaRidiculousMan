@@ -9,18 +9,18 @@ Objects in the game that can be moved.
 class LivingEntity : public Entity
 {
 protected:
-	/* Health points of the player : when this reaches 0,
-	   the player lose a life (see <lives> field below) */
+	/* Health points of the entity */
 	int health;
 	/* HP count (health points) */
 	int maxHealth;
-	/* Number of lives until game over. */
-	int lives;
 
 public:
+	/* Applies damage to the player, making him lose HP according to its resistance. */
 	void damage(int dmg);
+	/* True if the player is alive (more than 0 HP) */
 	bool isAlive();
-	void kill();
+	/* Instantly kills the entity (pure virtual). */
+	virtual void kill() = 0;
 
 };
 
