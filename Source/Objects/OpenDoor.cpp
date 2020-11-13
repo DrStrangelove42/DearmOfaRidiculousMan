@@ -15,6 +15,6 @@ char OpenDoor::getId()
 	return id;
 }
 
-void OpenDoor::updateObject(Player& p, RenderContext& renderer){
+void OpenDoor::updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea){
 
 }

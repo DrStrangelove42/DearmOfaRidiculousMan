@@ -6,7 +6,7 @@
 class StoneWallBlock : public WallBlock
 {
  public:
-	 StoneWallBlock(int x, int y, Player& player, RenderContext& renderer);
+	 StoneWallBlock(int x, int y, RenderContext& renderer);
 };
 
 #endif

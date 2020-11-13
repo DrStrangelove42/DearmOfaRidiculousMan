@@ -35,7 +35,7 @@ public:
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
 
 	/* The following function describes how each type of object interacts with the player.*/
-	virtual void updateObject(Player& p, RenderContext& renderer);
+	virtual void updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea);
 
 	/* Time management */
 	virtual void tick(int time);
