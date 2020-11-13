@@ -3,16 +3,17 @@
 
 #include "Object.h"
 #include "../Items/Item.h"
+#include <unordered_map>
 
 class Chest : public Object
 {
 private:
 	/*An array of items contained in the chest.  */
-        Item * contents;
+	unordered_map<Item, int> contents;
 public:
 	/*Destructor*/
 	~Chest();
-	
+
 	/*Constructor*/
 	Chest(Item* contents, int posx, int posy, Player& p, RenderContext& renderer);
 	/* Returns the array of items that are in the chest. */

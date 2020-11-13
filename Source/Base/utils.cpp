@@ -19,15 +19,10 @@ Loads the texture with the specified identifier.
 */
 Texture* LoadTexture(string id, RenderContext& renderer)
 {
+	if (textures.find(id) == textures.end())
+		textures[id] = new Texture(renderer, id);
 
-	if (textures.find(id) != textures.end())
-	{
-		return textures[id];
-	}
-	else
-	{
-		return new Texture(renderer, id);
-	}
+	return textures[id];
 }
 
 void FreeTextures()

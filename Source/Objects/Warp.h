@@ -6,14 +6,14 @@
 class Warp : public Object
 {
 private:
-  int destMap;
-  int destRoom;
-  int destX;
-  int destY;
+	int destMap;
+	int destRoom;
+	int destX;
+	int destY;
 public:
 	/*Destructor*/
-	~Warp()
-	
+	~Warp();
+
 	/*Constructor*/
 	Warp(int destMap, int destRoom, int destX, int destY, int posx, int posy, Player& p, RenderContext& renderer);
 

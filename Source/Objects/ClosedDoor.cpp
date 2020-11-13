@@ -15,7 +15,8 @@ char ClosedDoor::getId()
 	return id;
 }
 
-void ClosedDoor::updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea){
-  
-  //TODO if player is within one block and has corresponding key in inventory, replace ClosedDoor with OpenDoor
+void ClosedDoor::updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea) {
+
+	//TODO if player is within one block and has corresponding key in inventory, replace ClosedDoor with OpenDoor
+	//*this = new OpenDoor() ?
 }

@@ -3,7 +3,7 @@
 Item::Item(string tx, RenderContext& renderer) : texture(tx)
 {
 	updateTexture(renderer);
-} 
+}
 
 Item::~Item()
 {
@@ -17,6 +17,7 @@ void Item::updateTexture(RenderContext& renderer)
 
 void Item::useItem()
 {
+
 }
 
 void Item::tick(int time)
