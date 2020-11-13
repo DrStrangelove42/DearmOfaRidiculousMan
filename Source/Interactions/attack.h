@@ -1,4 +1,8 @@
 //this file defines the attack interaction
+#ifndef ACQUIRE_H
+#define ACQUIRE_H
+
+#include <string>
 
 
 void Charactor::attack(int damage, bool validAttack)
@@ -12,3 +16,6 @@ void Charactor::attack(int damage, bool validAttack)
         setHealth(health_);
     }
 }
+
+
+#endif

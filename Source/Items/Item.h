@@ -5,7 +5,7 @@
 #include "../Base/utils.h"
 
 /*The word Item describes anything that is collectable by a player. Not to be confused with Objects. Items cannot be present on the map. An Object that is picked up by the player becomes an Item.*/
-
+// todo: add a limit property and current number property of items
 class Item : public Entity
 {
 protected:
