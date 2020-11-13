@@ -35,7 +35,7 @@ void Object::render(RenderContext& renderer, int offsetX, int offsetY)
 	loadedTx->render(renderer, (x + offsetX) * SZ_BLOCKSIZE, (y + offsetY) * SZ_BLOCKSIZE, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
 }
 
-void Object::updateObject(Player& p, RenderContext& renderer)
+void Object::updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea)
 {
 }
 

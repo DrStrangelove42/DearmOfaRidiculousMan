@@ -17,7 +17,7 @@ public:
 	char getId();
 
 	/* How does a door interact with the player? */
-	void updateObject(Player& p, RenderContext& renderer);
+	void updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea);
 };
 
 #endif

@@ -15,6 +15,6 @@ Item* Chest::getContents()
 	return contents;
 }
 
-void Chest::updateObject(Player& p, RenderContext& renderer){
+void Chest::updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea){
 
 }

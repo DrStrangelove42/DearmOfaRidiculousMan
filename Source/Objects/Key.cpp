@@ -15,7 +15,7 @@ char Key::getId()
 	return id;
 }
 
-void Key::updateObject(Player& p, RenderContext& renderer)
+void Key::updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea)
 {
   if (x == p.getX() && y == p.getY()){
       //TODO turn key into item and give to player

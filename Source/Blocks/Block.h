@@ -8,10 +8,11 @@
 class Block : public Entity
 {
 protected:
-	/* Position of the block */
-	int x, y;
-	/* Player */
-	Player& player;
+        /* Position coordinates */
+        int x;
+        int y;
+	/* Can we walk onto this block? */
+	bool traversable;
 	/* The texture ID */
 	string texture;
 	/* The loaded texture */
@@ -22,22 +23,16 @@ public:
 	~Block();
 
 	/* Initialises a new Block object with the specified informations. */
-	Block(int posx, int posy, Player& player, string tx, RenderContext& renderer);
-
-	int getX();
-	int getY();
-
-	/* Change the block position. */
-	void move(int px, int py);
+	Block(int pos x, int pos y, string tx, RenderContext& renderer);
 
 	/* Rendering method, enabling the renderer to take the offset (in blocks) into account. */
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
 
-	/* Places the moving entity on this block. */
+	/* Places the moving entity on this block.*/
 	void teleportOn(MovingEntity& m);
 
-	/* This method is called when the player enters the block. */
-	virtual void onEnter(EVENT_ARGS* ea);
+	/* This method is called when the player enters the block. May end up being useless.*/
+	//virtual void onEnter(EVENT_ARGS* ea);
 
 	/* Time management */
 	virtual void tick(int time);

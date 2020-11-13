@@ -1,11 +1,11 @@
 #include "FloorBlock.h"
 
-FloorBlock::FloorBlock(int posx, int posy, Player &player, RenderContext& renderer) : Block(posx, posy, player, "floor", renderer)
+FloorBlock::FloorBlock(int posx, int posy, RenderContext& renderer) : Block(posx, posy, "floor", renderer), traversable(*(true))
 {
 
 }
 
-void FloorBlock::onEnter(EVENT_ARGS* ea)
-{
-	teleportOn(player);
-}
+//void FloorBlock::onEnter(EVENT_ARGS* ea)
+//{
+//	teleportOn(player);
+//}
