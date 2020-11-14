@@ -9,7 +9,7 @@ ones) begin with a capital letter.
 
 int InitUtils()
 {
-	textures = unordered_map<string, Texture*>();
+	//Do some initialisation ?
 
 	return 0;
 }
