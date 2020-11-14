@@ -15,9 +15,9 @@ public:
 	~Chest();
 
 	/*Constructor*/
-	Chest(Item* contents, int posx, int posy, Player& p, RenderContext& renderer);
+	Chest(unordered_map<Item, int> contents, string identifier, int posx, int posy, Player& p, RenderContext& renderer);
 	/* Returns the array of items that are in the chest. */
-	Item* getContents();
+	unordered_map<Item, int> getContents();
 
 	/* How does a chest interact with the player? */
 	void updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea);

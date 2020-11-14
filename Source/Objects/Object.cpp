@@ -1,6 +1,6 @@
 #include "Object.h"
 
-Object::Object(int posx, int posy, Player& p, string tx, RenderContext& renderer, bool trav) : x(posx), y(posy), player(p), texture(tx), traversable(trav)
+Object::Object(string identifier, int posx, int posy, Player& p, string tx, RenderContext& renderer, bool trav) : id(identifier), x(posx), y(posy), player(p), texture(tx), traversable(trav)
 {
 	updateTexture(renderer);
 } 
@@ -23,6 +23,16 @@ int Object::getX()
 int Object::getY()
 {
 	return y;
+}
+
+string Object::getId()
+{
+	return id;
+}
+
+bool Object::getTrav()
+{
+	return traversable;
 }
 
 void Object::move(int px, int py)

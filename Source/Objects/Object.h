@@ -8,6 +8,8 @@
 class Object : public Entity
 {
 protected:
+        /* Identifier of the object */
+        string id;
 	/* Position of the object */
 	int x, y;
 	/* Player */
@@ -23,10 +25,13 @@ public:
 	~Object();
 
 	/* Initialises a new Object with the specified informations. */
-	Object(int posx, int posy, Player& player, string tx, RenderContext& renderer, bool trav);
+	Object(string identifier, int posx, int posy, Player& player, string tx, RenderContext& renderer, bool trav);
 
+	/* Getters */
 	int getX();
 	int getY();
+	string getId();
+	bool getTrav();
 
 	/* Change the object position. */
 	void move(int px, int py);

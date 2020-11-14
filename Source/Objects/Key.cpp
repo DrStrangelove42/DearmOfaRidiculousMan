@@ -5,8 +5,8 @@ Key::~Key()
 
 }
 
-Key::Key(char identifier, int posx, int posy, Player& p, RenderContext& renderer) : 
-    Object(posx, posy, p, "key", renderer, true), id(identifier)
+Key::Key(string identifier, int posx, int posy, Player& p, RenderContext& renderer) : 
+  Object(identifier, posx, posy, p, "key", renderer, true)
 {
 
 }

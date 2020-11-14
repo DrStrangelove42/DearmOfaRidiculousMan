@@ -23,7 +23,14 @@ public:
 	~Block();
 
 	/* Initialises a new Block object with the specified informations. */
-	Block(int pos x, int pos y, string tx, RenderContext& renderer);
+	Block(int posx, int posy, string tx, RenderContext& renderer);
+
+	/*Getters*/
+	int getX();
+	int getY();
+	bool getTrav();
+
+	void setTrav(bool trav);
 
 	/* Rendering method, enabling the renderer to take the offset (in blocks) into account. */
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);

@@ -5,13 +5,13 @@ Chest::~Chest()
 	delete[] contents;
 }
 
-Chest::Chest(Item* contents, int posx, int posy, Player& p, RenderContext& renderer) : 
-	Object(posx, posy, p, "key", renderer, false), contents(contents)
+Chest::Chest(unordered_map<Item, int> contents, string identifier, int posx, int posy, Player& p, RenderContext& renderer) : 
+  Object(identifier, posx, posy, p, "key", renderer, false), contents(contents)
 {
-	contents = 
+
 }
 
-Item* Chest::getContents()
+unordered_map<Item, int> Chest::getContents()
 {
 	return contents;
 }

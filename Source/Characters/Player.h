@@ -40,8 +40,6 @@ public:
 	int health;
 	/* HP count (health points) */
 	int maxHealth;
-	/* Number of lives until game over. */
-	int lives;
 };
 
 #endif

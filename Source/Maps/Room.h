@@ -5,7 +5,9 @@
 #include "../Base/Entity.h"
 #include "../Blocks/FloorBlock.h"
 #include "../Blocks/Block.h"
+#include "../Objects/Object.h"
 #include <SDL2/SDL.h>
+#include <unordered_map>
 
 class Room : public Entity
 {
@@ -24,6 +26,8 @@ protected:
 	Block*** blocks;
 	/* If the room has already been visited */
 	bool discovered;
+	/* The unordered map of objects in the room.*/
+	static unordered_map <Object, string> objects;
 
 public:
 	/* Creates a new Room object */
@@ -32,6 +36,9 @@ public:
 	/* Standard destructor */
 	virtual ~Room();
 
+	/* Add object */
+	void addObject(Object object);
+	
 	/* Rendering method, enabling the renderer to take the offset (in blocks) into account. */
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
 

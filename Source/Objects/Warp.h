@@ -15,7 +15,7 @@ public:
 	~Warp();
 
 	/*Constructor*/
-	Warp(int destMap, int destRoom, int destX, int destY, int posx, int posy, Player& p, RenderContext& renderer);
+	Warp(int destMap, int destRoom, int destX, int destY, int posx, int posy, string identifier, Player& p, RenderContext& renderer);
 
 	/* How does a warp interact with the player? */
 	void updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea);

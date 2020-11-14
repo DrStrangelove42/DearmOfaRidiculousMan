@@ -11,10 +11,11 @@ Room::Room(int width, int height, Player& p, RenderContext& renderer) : w(width)
 			blocks[i] = new Block * [h];
 			for (int j = 0; j < h; j++)
 			{
-				blocks[i][j] = new Block(i, j, player, "empty", renderer);
+				blocks[i][j] = new Block(i, j, "empty", renderer);
 			}
 		}
 	}
+	objects = unordered_map<Object, string>();
 }
 
 Room::~Room()
@@ -31,6 +32,11 @@ Room::~Room()
 	if (w > 0)
 	{
 		delete[] blocks;
+	}
+	for (auto& entry : objects)
+	{
+		cout << "Freeing " << entry.first << endl;
+		delete entry.second;
 	}
 }
 
@@ -66,6 +72,20 @@ int Room::getY()
 	return y;
 }
 
+void Room::addObject(Object object)
+{
+        string id=object.getId();
+        if (objects.find(id) == objects.end())
+        {
+		objects[id] = object;
+		blocks[object.getX()][object.getY()]->setTrav(object.getTrav());
+	}
+	else
+	{
+	        cout << "Two objects have the same identifier " << id << endl;
+	}
+}
+
 void Room::tick(int time)
 {
 	//TODO
@@ -93,26 +113,26 @@ void Room::onKeyDown(EVENT_ARGS* ea)
 	int curX = player.getX();
 	int curY = player.getY();
 	/*
-	We transfert the event to the destination block. It decides if the
+	We transfer the event to the destination block. It decides if the
 	player moves by itself.
 	*/
 	switch (ea->key)
 	{
 	case Up:
-		if (curY > 0)
-			blocks[curX][curY - 1]->onEnter(ea);
+	        if (curY > 0 && blocks[curX][curY - 1]->getTrav())
+		        player.teleport(curX, curY - 1);
 		break;
 	case Left:
-		if (curX > 0)
-			blocks[curX - 1][curY]->onEnter(ea);
+	        if (curX > 0 && blocks[curX - 1][curY]->getTrav())
+		        player.teleport(curX - 1, curY);
 		break;
 	case Right:
-		if (curX < w - 1)
-			blocks[curX + 1][curY]->onEnter(ea);
+	        if (curX < w - 1 && blocks[curX + 1][curY]->getTrav())
+		        player.teleport(curX + 1, curY);
 		break;
 	case Down:
-		if (curY < h - 1)
-			blocks[curX][curY + 1]->onEnter(ea);
+	        if (curY < h - 1 && blocks[curX][curY + 1]->getTrav())
+		        player.teleport(curX, curY + 1);
 		break;
 	default:
 		break;
