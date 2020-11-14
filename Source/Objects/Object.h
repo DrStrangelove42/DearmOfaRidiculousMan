@@ -8,8 +8,8 @@
 class Object : public Entity
 {
 protected:
-        /* Identifier of the object */
-        string id;
+	/* Identifier of the object */
+	string id;
 	/* Position of the object */
 	int x, y;
 	/* Player */
@@ -30,7 +30,7 @@ public:
 	/* Getters */
 	int getX();
 	int getY();
-	string getId();
+	string getId() const;
 	bool getTrav();
 
 	/* Change the object position. */
@@ -49,6 +49,19 @@ public:
 	Note that there is no function to change the texture from the outside of the object, because we
 	don't want to, for now.*/
 	virtual void updateTexture(RenderContext& renderer);
+
+	bool operator== (const Object& otherObj) const
+	{
+		return otherObj.id == id;
+	}
+};
+
+struct ObjectHash
+{
+	size_t operator()(const Object& o) const
+	{
+		return hash<string>()(o.getId());
+	}
 };
 
 #endif

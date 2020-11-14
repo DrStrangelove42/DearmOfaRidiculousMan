@@ -15,12 +15,10 @@ Room::Room(int width, int height, Player& p, RenderContext& renderer) : w(width)
 			}
 		}
 	}
-	objects = unordered_map<Object, string>();
 }
 
 Room::~Room()
 {
-
 	for (int i = 0; i < w; i++)
 	{
 		for (int j = 0; j < h; j++)
@@ -33,11 +31,7 @@ Room::~Room()
 	{
 		delete[] blocks;
 	}
-	for (auto& entry : objects)
-	{
-		cout << "Freeing " << entry.first << endl;
-		delete entry.second;
-	}
+	//The objects in the map, which are deep copies of the objects we added, are deleted automatically.
 }
 
 void Room::render(RenderContext& renderer, int offsetX, int offsetY)
@@ -74,15 +68,14 @@ int Room::getY()
 
 void Room::addObject(Object object)
 {
-        string id=object.getId();
-        if (objects.find(id) == objects.end())
-        {
-		objects[id] = object;
+	if (objects.find(object) == objects.end())
+	{
+		objects[object] = 1;
 		blocks[object.getX()][object.getY()]->setTrav(object.getTrav());
 	}
 	else
 	{
-	        cout << "Two objects have the same identifier " << id << endl;
+		cout << "Two objects have the same identifier " << object.getId() << endl;
 	}
 }
 
@@ -119,20 +112,20 @@ void Room::onKeyDown(EVENT_ARGS* ea)
 	switch (ea->key)
 	{
 	case Up:
-	        if (curY > 0 && blocks[curX][curY - 1]->getTrav())
-		        player.teleport(curX, curY - 1);
+		if (curY > 0 && blocks[curX][curY - 1]->getTrav())
+			player.teleport(curX, curY - 1);
 		break;
 	case Left:
-	        if (curX > 0 && blocks[curX - 1][curY]->getTrav())
-		        player.teleport(curX - 1, curY);
+		if (curX > 0 && blocks[curX - 1][curY]->getTrav())
+			player.teleport(curX - 1, curY);
 		break;
 	case Right:
-	        if (curX < w - 1 && blocks[curX + 1][curY]->getTrav())
-		        player.teleport(curX + 1, curY);
+		if (curX < w - 1 && blocks[curX + 1][curY]->getTrav())
+			player.teleport(curX + 1, curY);
 		break;
 	case Down:
-	        if (curY < h - 1 && blocks[curX][curY + 1]->getTrav())
-		        player.teleport(curX, curY + 1);
+		if (curY < h - 1 && blocks[curX][curY + 1]->getTrav())
+			player.teleport(curX, curY + 1);
 		break;
 	default:
 		break;

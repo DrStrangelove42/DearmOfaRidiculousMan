@@ -9,6 +9,8 @@
 #include <SDL2/SDL.h>
 #include <unordered_map>
 
+using namespace std;
+
 class Room : public Entity
 {
 protected:
@@ -27,7 +29,7 @@ protected:
 	/* If the room has already been visited */
 	bool discovered;
 	/* The unordered map of objects in the room.*/
-	static unordered_map <Object, string> objects;
+	unordered_map <Object, int, ObjectHash> objects;
 
 public:
 	/* Creates a new Room object */

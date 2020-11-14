@@ -55,6 +55,8 @@ void onKeyDown(SDL_Event event, GAME* game)
 	}
 
 	game->currentMap->onKeyDown(&ea);
+	//TODO if map changes:
+	////Load "WorldName".append(destMap);
 }
 
 void quitGame(GAME* game)

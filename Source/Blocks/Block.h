@@ -8,9 +8,9 @@
 class Block : public Entity
 {
 protected:
-        /* Position coordinates */
-        int x;
-        int y;
+	/* Position coordinates */
+	int x;
+	int y;
 	/* Can we walk onto this block? */
 	bool traversable;
 	/* The texture ID */
@@ -23,7 +23,7 @@ public:
 	~Block();
 
 	/* Initialises a new Block object with the specified informations. */
-	Block(int posx, int posy, string tx, RenderContext& renderer);
+	Block(int posx, int posy, string tx, RenderContext& renderer, bool trav = false);
 
 	/*Getters*/
 	int getX();
@@ -38,8 +38,9 @@ public:
 	/* Places the moving entity on this block.*/
 	void teleportOn(MovingEntity& m);
 
-	/* This method is called when the player enters the block. May end up being useless.*/
-	//virtual void onEnter(EVENT_ARGS* ea);
+	/* This method is called when the player enters the block. May end up being useless. Vincent : Not sure : im using the traversable flag in onEnter,
+	so I bring back this function from the dead.*/
+	virtual void onEnter(EVENT_ARGS* ea);
 
 	/* Time management */
 	virtual void tick(int time);

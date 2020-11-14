@@ -25,7 +25,7 @@ int Object::getY()
 	return y;
 }
 
-string Object::getId()
+string Object::getId() const
 {
 	return id;
 }

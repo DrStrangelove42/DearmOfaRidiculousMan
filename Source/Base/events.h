@@ -12,6 +12,7 @@ typedef struct
 	SDL_Window* window;
 	RenderContext* renderer;
 	Map* currentMap;
+	Player* player;
 	bool quit;
 } GAME;
 

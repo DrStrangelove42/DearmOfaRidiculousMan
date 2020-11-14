@@ -1,9 +1,9 @@
 #include "Block.h"
 
-Block::Block(int posx, int posy, string tx, RenderContext& renderer) : x(posx), y(posy), traversable(false), texture(tx)
+Block::Block(int posx, int posy, string tx, RenderContext& renderer, bool trav) : x(posx), y(posy), traversable(trav), texture(tx)
 {
 	updateTexture(renderer);
-} 
+}
 
 Block::~Block()
 {
@@ -12,22 +12,22 @@ Block::~Block()
 
 int Block::getX()
 {
-  return x;
+	return x;
 }
 
 int Block::getY()
 {
-  return y;
+	return y;
 }
 
-int Block::getTrav()
+bool Block::getTrav()
 {
-  return traversable;
+	return traversable;
 }
 
 void Block::setTrav(bool trav)
 {
-  traversable = trav;
+	traversable = trav;
 }
 
 void Block::updateTexture(RenderContext& renderer)
@@ -50,7 +50,7 @@ void Block::tick(int time)
 
 }
 
-//void Block::onEnter(EVENT_ARGS* ea)
-//{
+void Block::onEnter(EVENT_ARGS* ea)
+{
 	/* Just ignores the move, because we are an empty block. (?Todo) */
-//}
+}

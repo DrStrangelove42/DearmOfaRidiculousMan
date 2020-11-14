@@ -30,7 +30,7 @@ int playDoarm(GAME* game)
 {
 	RenderContext& renderer = *(game->renderer);
 	Player me(renderer);
-
+#ifdef COMPILABLE
 	game->currentMap = new DummyMap(me, renderer); //POC
 
 	while (!(game->quit))
@@ -38,14 +38,14 @@ int playDoarm(GAME* game)
 		game->renderer->clear();
 		
 		manageEvents(game);
-
+		
 		game->currentMap->render(renderer);
 
 		game->renderer->update();
 
 		renderSleep(50);
 	}
-
+#endif
 	return EXIT_SUCCESS;
 }
 

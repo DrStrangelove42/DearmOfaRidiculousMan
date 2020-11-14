@@ -3,8 +3,13 @@
 
 #include "../Base/Entity.h"
 #include "../Base/utils.h"
+#include <string>
 
-/*The word Item describes anything that is collectable by a player. Not to be confused with Objects. Items cannot be present on the map. An Object that is picked up by the player becomes an Item.*/
+using namespace std;
+
+/*The word Item describes anything that is collectable by a player. 
+Not to be confused with Objects. Items cannot be present on the map. 
+An Object that is picked up by the player becomes an Item.*/
 // todo: add a limit property and current number property of items
 class Item : public Entity
 {
@@ -34,6 +39,23 @@ public:
 	Note that there is no function to change the texture from the outside of the object, because we
 	don't want to, for now.*/
 	virtual void updateTexture(RenderContext& renderer);
+
+	virtual string getId() const;
+
+	bool operator== (const Item& otherObj) const
+	{
+		return otherObj.getId() == getId();
+	}
+	
+	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
+};
+
+struct ItemHash
+{
+	size_t operator()(const Item& o) const
+	{
+		return hash<string>()(o.getId());
+	}
 };
 
 #endif
