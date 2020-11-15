@@ -20,7 +20,7 @@ void Item::useItem()
 
 }
 
-void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0)
+void Item::render(RenderContext& renderer, int offsetX , int offsetY )
 {
 	//Do not render anything as an Item is abstract for us.
 }
@@ -32,5 +32,5 @@ void Item::tick(int time)
 
 string Item::getId() const
 {
-	//TODO
+        return id;
 }

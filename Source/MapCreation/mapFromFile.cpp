@@ -4,7 +4,7 @@
 #include "../Maps/Map.h"
 #include "../Blocks/WallBlock.h"
 #include "../Blocks/FloorBlock.h"
-#include "../Blocks/WarpBlock.h"
+//#include "../Blocks/WarpBlock.h"
 
 //This function transforms a text file into the corresponding map files and a file describing the mutables. When a new game is started, the mutable file is applied to the maps to create the default map. When a game is saved, a copy of the mutable file with the appropriate changes is saved, and can then be loaded at a later date by applying the new mutable file to the maps
 
@@ -73,10 +73,10 @@ void worldFromFile(string filename, string ext, Player& p, RenderContext& render
 						cout << "Case ' ' not treated yet." << endl;
 						break;
 					case 'w':
-						currentRoom->replaceBlock(new WallBlock(j, i, p, renderer));
+						currentRoom->replaceBlock(new WallBlock(j, i, renderer));
 						break;
 					case 'f':
-						currentRoom->replaceBlock(new FloorBlock(j, i, p, renderer));
+						currentRoom->replaceBlock(new FloorBlock(j, i, renderer));
 						break;
 					default:
 						cout << "Case " << line[3 * j] << " not treated yet." << endl;
@@ -101,7 +101,7 @@ void worldFromFile(string filename, string ext, Player& p, RenderContext& render
 								destination.erase(y);
 								int destY = stoi(destination);
 								if (destMap = map) {
-									currentRoom->replaceBlock(new WarpBlock(j, i, p, "floor", renderer, destRoom, destX, destY));
+								  //currentRoom->replaceBlock(new WarpBlock(j, i, p, "floor", renderer, destRoom, destX, destY));
 								}
 								{
 									cout << "Warp towards other maps not treated yet." << endl;

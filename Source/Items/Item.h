@@ -14,6 +14,8 @@ An Object that is picked up by the player becomes an Item.*/
 class Item : public Entity
 {
 protected:
+        /* Identifier of the object */
+        string id;
 	/* The texture ID */
 	string texture;
 	/* The loaded texture */
@@ -27,7 +29,7 @@ public:
 	Item(string tx, RenderContext& renderer);
 
 	/* Rendering method, enabling the renderer to take the offset (in blocks) into account. */
-	//virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
+	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
 
 	/* The following function describes how each type of item interacts withthe map when the player uses it.*/
 	virtual void useItem();
@@ -40,21 +42,22 @@ public:
 	don't want to, for now.*/
 	virtual void updateTexture(RenderContext& renderer);
 
-	virtual string getId() const;
+	/* Getter */
+	string getId() const;
 
-	bool operator== (const Item& otherObj) const
+	bool operator== (const Item& otherItem) const
 	{
-		return otherObj.getId() == getId();
+		return otherItem.id == id;
 	}
 	
-	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
+	//virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
 };
 
 struct ItemHash
 {
-	size_t operator()(const Item& o) const
+	size_t operator()(const Item& i) const
 	{
-		return hash<string>()(o.getId());
+		return hash<string>()(i.getId());
 	}
 };
 
