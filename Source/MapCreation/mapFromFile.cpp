@@ -2,17 +2,13 @@
 #include <fstream>
 #include <string>
 #include "../Maps/Map.h"
-#include "../Blocks/WallBlock.h"
-#include "../Blocks/FloorBlock.h"
-//#include "../Blocks/WarpBlock.h"
 
-//This function transforms a text file into the corresponding map files and a file describing the mutables. When a new game is started, the mutable file is applied to the maps to create the default map. When a game is saved, a copy of the mutable file with the appropriate changes is saved, and can then be loaded at a later date by applying the new mutable file to the maps
+//This function transforms a text file into a folder of texts files which are sufficient to describe the map completely and to be able to modify the maps to save progress. It will create, for each of the maps in the world, a file corresponding to the layout of the map as well as a file containing the objects and monsters that are in the map (and their characteristics, these can change throughout the game, we will therefore modify these files to save progress)
 
-//TODO the mutable file
-
-void worldFromFile(string filename, string ext, Player& p, RenderContext& renderer) {
+void worldFromFile(string filename, string ext) {
 	int NumberOfMaps, NumberOfRooms, height, width;
 	string line;
+	string newFile = filename.append("/").append(filename); //A string we will use often
 	ifstream World(filename.append(ext));
 
 	getline(World, line);
@@ -38,15 +34,17 @@ void worldFromFile(string filename, string ext, Player& p, RenderContext& render
 		header[i] = descriptions.substr(0, firstlineskip);
 		descriptions.erase(0, firstlineskip + 1);
 	}
-
+        ofstream start(newFile.append("Start").append(ext)); //We create a new file in which we will detail the start position and characteristics of the player
 	for (int map = 0; map < NumberOfMaps; map++) {
+	        ofstream layout(newFile.append(to_string(map)).append(ext));
+		ofstream data(newFile.append(to_string(map)).append("Data").append(ext));
 		getline(World, line);
 		if (line != "##") {
 			cout << "Expected ## before beginning of map " << map << endl;
 		}
 		getline(World, line);
 		NumberOfRooms = stoi(line);
-		Map* currentMap = new Map(p, NumberOfRooms);
+		layout << to_string(NumberOfRooms) << endl;
 		for (int room = 0; room < NumberOfRooms; room++) {
 			getline(World, line);
 			if (line != "#") {
@@ -60,85 +58,43 @@ void worldFromFile(string filename, string ext, Player& p, RenderContext& render
 			line.erase(h);
 			height = stoi(line);
 
-			Room* currentRoom = new Room(width, height, p, renderer);
+			layout << to_string(width) << " " << to_string(height) << endl;
+
 			for (int i = 0; i < height; i++) {
 				getline(World, line);
 				string extraspaces = string(width * 3 - line.length(), ' ');
 				line += extraspaces; //We add extra spaces so that all lines in the file are of the same length : width*3. If we find an empty space, it is an empty block. 
 				for (int j = 0; j < width; j++) {
-					switch (line[3 * j])
-					{
-					case ' ':
-						//TODO Empty block (for non rectangular rooms mainly)
-						cout << "Case ' ' not treated yet." << endl;
-						break;
-					case 'w':
-						currentRoom->replaceBlock(new WallBlock(j, i, renderer));
-						break;
-					case 'f':
-						currentRoom->replaceBlock(new FloorBlock(j, i, renderer));
-						break;
-					default:
-						cout << "Case " << line[3 * j] << " not treated yet." << endl;
-					}
+				        layout << line[3 * j];
 					switch (line[3 * j + 1])
 					{
 					case ' ':
 						break;
 					case 'p':
-						currentMap->currentRoom = room; //This should actually be stored in the mutable file
-						p.teleport(j, i);
-					case '!':
+					        start << to_string(map) << " " << to_string(room) << " " << to_string(i) << " " << to_string(j) << endl;
+						for (int k = 0; k < headerLength; k++) { //There may be information in the header as to what health or items the player starts with for example
+							if (header[k][0] == 'p') {
+							  start << (header[k]).erase(0);
+							}
+						}
+						start.close();
+					        break;
+					default:
 						for (int k = 0; k < headerLength; k++) {
-							if (header[k][0] == '!' && header[k][1] == line[3 * j + 2]) {
-								string destination = header[k].erase(0, 2);
-								size_t roomAndCoord, coords, y;
-								int destMap = stoi(destination, &roomAndCoord);
-								destination.erase(roomAndCoord);
-								int destRoom = stoi(destination, &coords);
-								destination.erase(coords);
-								int destX = stoi(destination, &y);
-								destination.erase(y);
-								int destY = stoi(destination);
-								if (destMap = map) {
-								  //currentRoom->replaceBlock(new WarpBlock(j, i, p, "floor", renderer, destRoom, destX, destY));
-								}
-								{
-									cout << "Warp towards other maps not treated yet." << endl;
-								}
+						        if (header[k][0] == line[3 * j + 1] && header[k][1] == line[3 * j + 2]) {
+							        data << to_string(room) << " " << to_string(j) << " " << to_string(i) << " " << header[k] << endl;
 								break;
 							}
 						}
-					case 'k':
-						//TODO key case. Key identifier is line[3*j+2]
-						cout << "Key case not treated yet." << endl;
-						break;
-					case 'd':
-						//TODO door case. Door identifier is line[3*j+2]
-						cout << "Door case not treated yet." << endl;
-						break;
-
-						//Chests and monsters should be added to the file of mutable elements
-
-					case 'm':
-						//TODO monster case. Monster identifier is given by line[3*j+2]
-						cout << "Monster case not treated yet." << endl;
-						break;
-					case 'c':
-						//TODO chest case. Chest identifier is given by line[3*j+2]
-						cout << "Chest case not treated yet." << endl;
-						break;
-					default:
-						cout << "Case " << line[3 * j + 1] << " not treated yet." << endl;
 					}
 				}
+				layout << endl;
 			}
-			currentMap->getRooms()[room] = currentRoom;
 		}
-		//TODO create map "filename".append(map), a map without the mutables
+		layout.close();
+		data.close();
+		
 	}
 	World.close();
-	//For each case, when necessary, we should look in descriptions to find the extra information needed for the object/entity. For example, if we find a chest with identifier 1, we search for the first string in descriptions starting with "c1", after which the contents will be encoded.
-	//Furthermore, for certain types of objects, the identifier links that object with another object. For example, if we have !1, that block will warp us to the block that is followed by ?1, if we have k1, that key will unlock doors d1.
 	return;
 }
