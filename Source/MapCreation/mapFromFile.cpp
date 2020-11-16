@@ -1,10 +1,10 @@
 #include "mapFromFile.h"
 
-void worldFromFile(string filename, string ext) {
+void worldFromFile(string location, string filename, string ext) {
 	int NumberOfMaps, NumberOfRooms, height, width;
 	string line;
-	string newFile = filename.append("/").append(filename); //A string we will use often
-	ifstream World(filename.append(ext));
+	string newFile = location + filename + "/" + filename; //A string we will use often
+	ifstream World(location + filename + ext);
 
 	getline(World, line);
 	NumberOfMaps = stoi(line);
@@ -29,10 +29,10 @@ void worldFromFile(string filename, string ext) {
 		header[i] = descriptions.substr(0, firstlineskip);
 		descriptions.erase(0, firstlineskip + 1);
 	}
-	ofstream start(newFile.append("Start").append(ext)); //We create a new file in which we will detail the start position and characteristics of the player
+	ofstream start(newFile + "Start" + ext); //We create a new file in which we will detail the start position and characteristics of the player
 	for (int map = 0; map < NumberOfMaps; map++) {
-		ofstream layout(newFile.append(to_string(map)).append(ext));
-		ofstream data(newFile.append(to_string(map)).append("Data").append(ext));
+		ofstream layout(newFile + to_string(map) + ext);
+		ofstream data(newFile + to_string(map) + "Data" + ext);
 		getline(World, line);
 		if (line != "##") {
 			cout << "Expected ## before beginning of map " << map << endl;
@@ -95,9 +95,9 @@ void worldFromFile(string filename, string ext) {
 	return;
 }
 
-Map* mapFromFiles(string filename, string ext, Player& p, RenderContext& renderer, int startMap, int startRoom, int startX, int startY)
+Map* Map::mapFromFiles(string filename, string ext, Player& p, RenderContext& renderer, int startMap, int startRoom)
 {
-	ifstream start(filename.append("Start").append(ext));
+	ifstream start(filename + "Start" + ext);
 	string line1, line2, line3;
 	size_t a;
 	int startMap2, startRoom2, startX2, startY2;
@@ -112,8 +112,8 @@ Map* mapFromFiles(string filename, string ext, Player& p, RenderContext& rendere
 		startMap2 = startMap;
 	}
 
-	ifstream layout(filename.append(to_string(startMap2)).append(ext));
-	ifstream data(filename.append(to_string(startMap2)).append("Data").append(ext));
+	ifstream layout(filename + to_string(startMap2) + ext);
+	ifstream data(filename + to_string(startMap2) + "Data" + ext);
 
 	getline(layout, line2);
 	int NumberOfRooms = stoi(line2);
@@ -186,7 +186,7 @@ Map* mapFromFiles(string filename, string ext, Player& p, RenderContext& rendere
 			int destX = stoi(line3, &a);
 			line3.erase(0, a);
 			int destY = stoi(line3);
-			currentMap->getRooms()[room]->addObject(Warp(destMap, destRoom, destX, destY, x, y, id, filename, ext, p, renderer));
+			currentMap->getRooms()[room]->addObject(Warp(destMap, destRoom, destX, destY, x, y, id, p, renderer));
 			break;
 		}
 		case 'k':
@@ -221,15 +221,13 @@ Map* mapFromFiles(string filename, string ext, Player& p, RenderContext& rendere
 		startX2 = stoi(line1, &a);
 		line1.erase(0, a);
 		startY2 = stoi(line1);
+		p.teleport(startX2, startY2);
 	}
 	else
 	{
 		startRoom2 = startRoom;
-		startX2 = startX;
-		startY2 = startY;
 	}
 	currentMap->currentRoom = startRoom2;
-	p.teleport(startX2, startY2);
 	//TODO other player characteristics
 	start.close();
 	return currentMap;

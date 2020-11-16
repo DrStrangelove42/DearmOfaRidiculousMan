@@ -55,8 +55,10 @@ void onKeyDown(SDL_Event event, GAME* game)
 	}
 
 	game->currentMap->onKeyDown(&ea);
-	//TODO if map changes:
-	////Load "WorldName".append(destMap);
+	if (ea.warp_IsExternal)
+	  {
+	    game->currentMap=new Map(game->worldname, game->ext, *(game->player), *(game->renderer), *(ea.currentMap), *(ea.currentRoom));
+	  }
 }
 
 void quitGame(GAME* game)

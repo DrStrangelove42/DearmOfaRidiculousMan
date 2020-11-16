@@ -11,6 +11,8 @@ typedef struct
 {
 	SDL_Window* window;
 	RenderContext* renderer;
+        string worldname;
+        string ext; //extension used for text files
 	Map* currentMap;
 	Player* player;
 	bool quit;

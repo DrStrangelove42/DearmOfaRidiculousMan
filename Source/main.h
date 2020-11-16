@@ -12,7 +12,6 @@
 #include "Base/utils.h"
 #include "Base/events.h"
 #include "Maps/Room.h"
-#include "Maps/Dummy.h"
 #include "Maps/Map.h"
 #include "Characters/Player.h"
 #include "MapCreation/mapFromFile.h"

@@ -30,10 +30,16 @@ int playDoarm(GAME* game)
 {
 	RenderContext& renderer = *(game->renderer);
 	Player me(renderer);
-#ifdef COMPILABLE
-	string worldname = "./MapCreation/TestMaps/TestMap";
-	worldFromFile(worldname, ".txt");
-	game->currentMap = new mapFromFiles(worldname.append("/").append("TestMap",".txt",p,renderer); //POC
+	//#ifdef COMPILABLE
+	string location =  "./Source/MapCreation/TestMaps/";
+	string worldname = "TestMap";
+	cout << "a\n";
+	worldFromFile(location, worldname, ".txt");
+	cout << "b\n";
+	worldname = location + worldname+ "/TestMap";
+	game -> worldname = worldname;
+	game -> ext = ".txt";
+	game -> currentMap = new Map(worldname,".txt",me,renderer); //POC
 
 	while (!(game->quit))
 	{
@@ -47,7 +53,7 @@ int playDoarm(GAME* game)
 
 		renderSleep(50);
 	}
-#endif
+					    //#endif
 	return EXIT_SUCCESS;
 }
 

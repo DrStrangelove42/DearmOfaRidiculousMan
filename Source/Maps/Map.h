@@ -22,6 +22,8 @@ protected:
 	Player &player;
 	/* Number of rooms in the map */
 	int roomCount;
+
+	Map* mapFromFiles(string filename, string ext, Player& p, RenderContext& renderer, int startMap, int startRoom);
 	
 
 public:
@@ -31,7 +33,7 @@ public:
 	/* Creates a new empty map with a pre-allocated array for rooms. */
 	Map(Player& p, int roomCount);
 	/* Creates a Map object from a map file */
-	Map(Player& p, string file);
+	Map(string filename, string ext, Player& p, RenderContext& renderer, int startMap = -1, int startRoom = -1);
 
 	/* Std destructor */
 	virtual ~Map();

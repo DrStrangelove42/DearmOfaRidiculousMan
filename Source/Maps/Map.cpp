@@ -14,9 +14,9 @@ Map::~Map()
 	delete[] rooms;
 }
 
-Map::Map(Player& p, string file) : player(p)
+Map::Map(string filename, string ext, Player& p, RenderContext& renderer, int startMap, int startRoom) : player(p)
 {
-	//TODO : decode a map file.
+  mapFromFiles(filename, ext, p, renderer, startMap, startRoom);
 }
 
 void Map::render(RenderContext& renderer, int offsetX, int offsetY)
