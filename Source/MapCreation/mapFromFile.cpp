@@ -14,7 +14,7 @@ void worldFromFile(string location, string filename, string ext) {
 
 	getline(World, line);
 
-	while (line != "###") {
+	while (line.length()==0 || line[0] != '#') {
 		if (line != "") {
 			descriptions += line + "\n";
 			headerLength += 1;
@@ -34,7 +34,7 @@ void worldFromFile(string location, string filename, string ext) {
 		ofstream layout(newFile + to_string(map) + ext);
 		ofstream data(newFile + to_string(map) + "Data" + ext);
 		getline(World, line);
-		if (line != "##") {
+		if (line.length()==0 || line[0] != '#') {
 			cout << "Expected ## before beginning of map " << map << endl;
 		}
 		getline(World, line);
@@ -42,7 +42,7 @@ void worldFromFile(string location, string filename, string ext) {
 		layout << to_string(NumberOfRooms) << endl;
 		for (int room = 0; room < NumberOfRooms; room++) {
 			getline(World, line);
-			if (line != "#") {
+			if (line.length()==0 || line[0] != '#') {
 				cout << "Expected # before beginning of room " << room << endl;
 				return;
 			}
@@ -57,8 +57,12 @@ void worldFromFile(string location, string filename, string ext) {
 
 			for (int i = 0; i < height; i++) {
 				getline(World, line);
+				if (line[line.length()-1]=='\r')
+				  {
+				    line.erase(line.length()-1);
+				  }
 				string extraspaces = string(width * 3 - line.length(), ' ');
-				line += extraspaces; //We add extra spaces so that all lines in the file are of the same length : width*3. If we find an empty space, it is an empty block. 
+				line += extraspaces; //We add extra spaces so that all lines in the file are of the same length : width*3. If we find an empty space, it is an empty block.
 				for (int j = 0; j < width; j++) {
 					layout << line[3 * j];
 					switch (line[3 * j + 1])
@@ -120,18 +124,11 @@ Map* Map::mapFromFiles(string filename, string ext, Player& p, RenderContext& re
 	Map* currentMap = new Map(p, NumberOfRooms);
 	for (int room = 0; room < NumberOfRooms; room++)
 	{
-		getline(layout, line2);
-		if (line2 != "#")
-		{
-			cout << "Expected # before beginning of room " << room << endl;
-			return currentMap;
-		}
-
 		/* We determine the dimensions of the room. */
 		getline(layout, line2);
 		size_t h;
 		int width = stoi(line2, &h);
-		line2.erase(h);
+		line2.erase(0,h);
 		int height = stoi(line2);
 
 		Room* currentRoom = new Room(width, height, p, renderer);

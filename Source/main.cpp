@@ -33,9 +33,7 @@ int playDoarm(GAME* game)
 	//#ifdef COMPILABLE
 	string location =  "./Source/MapCreation/TestMaps/";
 	string worldname = "TestMap";
-	cout << "a\n";
 	worldFromFile(location, worldname, ".txt");
-	cout << "b\n";
 	worldname = location + worldname+ "/TestMap";
 	game -> worldname = worldname;
 	game -> ext = ".txt";

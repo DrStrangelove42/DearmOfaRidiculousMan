@@ -1,0 +1,17 @@
+2
+10 6
+wwwwffwwww
+wffffffffw
+wfffwwfffw
+wfffwwfffw
+wffffffffw
+wwwwwwwwww
+6 8
+wwwwww
+wffffw
+wffffw
+wffffw
+wffffw
+wffffw
+wffffw
+wwffww
