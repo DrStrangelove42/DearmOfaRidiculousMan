@@ -31,7 +31,9 @@ int playDoarm(GAME* game)
 	RenderContext& renderer = *(game->renderer);
 	Player me(renderer);
 #ifdef COMPILABLE
-	game->currentMap = new DummyMap(me, renderer); //POC
+	string worldname = "./MapCreation/TestMaps/TestMap";
+	worldFromFile(worldname, ".txt");
+	game->currentMap = new mapFromFiles(worldname.append("/").append("TestMap",".txt",p,renderer); //POC
 
 	while (!(game->quit))
 	{

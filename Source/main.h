@@ -15,6 +15,7 @@
 #include "Maps/Dummy.h"
 #include "Maps/Map.h"
 #include "Characters/Player.h"
+#include "MapCreation/mapFromFile.h"
 
 using namespace std;
 

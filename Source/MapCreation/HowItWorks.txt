@@ -30,6 +30,7 @@ Each room is described as follows:
    - ' ' : empty block.
    - 'w' : wall block.
    - 'f' : floor block.
+   - 's' : stone wall block
  - The different characters that can encode objects/entities are :
    - ' ' : no object or entity.
    - 'p' : player starts on this block.

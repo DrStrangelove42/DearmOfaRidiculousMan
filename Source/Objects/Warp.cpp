@@ -5,23 +5,23 @@ Warp::~Warp()
 
 }
 
-Warp::Warp(string destMap, int destRoom, int destX, int destY, int posx, int posy, string identifier, Player& p, RenderContext& renderer) :
-	Object(identifier, posx, posy, p, "empty", renderer, true), destMap(destMap), destRoom(destRoom), destX(destX), destY(destY)
+Warp::Warp(int destMap, int destRoom, int destX, int destY, int posx, int posy, string identifier, string worldname, string ext, Player& p, RenderContext& renderer) :
+  Object(identifier, posx, posy, p, "empty", renderer, true), destMap(destMap), destRoom(destRoom), destX(destX), destY(destY), worldname(worldname), ext(ext)
 {
 
 }
 
 void Warp::updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea)
 {
-	if (destMap == ea->warp_MapToLoad)
+        if (destMap == *(ea->currentMap))
 	{
 		*(ea->currentRoom) = destRoom;
 		p.teleport(destX, destY);
 	}
+	else
 	{
-		//TODO not sure how this would work with events, etc
-		ea->warp_IsExternal=true;
-		ea->warp_MapToLoad = destRoom;
-		//p.teleport(destX, destY); <-- No, the new map handles this.
+	          *(ea -> currentMap)=destMap;
+		  *(ea -> currentRoom)=destRoom;
+		  mapFromFiles(worldname, ext, p, renderer, destMap, destRoom, destX, destY);
 	}
 }

@@ -2,6 +2,7 @@
 #define WARP_H
 
 #include "Object.h"
+#include "../MapCreation/mapFromFile.h"
 #include <string>
 
 using namespace std;
@@ -9,16 +10,18 @@ using namespace std;
 class Warp : public Object
 {
 private:
-	string destMap;
+	int destMap;
 	int destRoom;
 	int destX;
 	int destY;
+	string worldname;
+	string ext;
 public:
 	/*Destructor*/
 	~Warp();
 
 	/*Constructor*/
-	Warp(string destMap, int destRoom, int destX, int destY, int posx, int posy, string identifier, Player& p, RenderContext& renderer);
+	Warp(int destMap, int destRoom, int destX, int destY, int posx, int posy, string identifier, string worldname, string ext, Player& p, RenderContext& renderer);
 
 	/* How does a warp interact with the player? */
 	void updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea);
