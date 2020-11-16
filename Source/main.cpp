@@ -10,7 +10,7 @@ int main(int argc, char** argv)
 
 	if (!renderInit())
 		return DumpError("Init error.");
-	
+
 	GAME* game = initGame();
 
 	if (NULL == game)
@@ -20,7 +20,7 @@ int main(int argc, char** argv)
 
 	/*Free the memory*/
 	FreeTextures();
-	
+
 	quitGame(game);
 	return status;
 }
@@ -30,27 +30,26 @@ int playDoarm(GAME* game)
 {
 	RenderContext& renderer = *(game->renderer);
 	Player me(renderer);
-	//#ifdef COMPILABLE
-	string location =  "./Source/MapCreation/TestMaps/";
-	string worldname = "TestMap";
-	worldFromFile(location, worldname, ".txt");
-	worldname = location + worldname+ "/TestMap";
-	game -> worldname = worldname;
-	game -> ext = ".txt";
-	game -> currentMap = new Map(worldname,".txt",me,renderer); //POC
+
+	string worldName = "TestMap";
+	Map::worldFromFile(MAPFILES_LOCATION, worldName);
+	worldName = MAPFILES_LOCATION + worldName + "/TestMap";
+	game->worldName = worldName;
+	game->currentMap = new Map(worldName, me, renderer); //POC
+
 	while (!(game->quit))
 	{
 		game->renderer->clear();
-		
+
 		manageEvents(game);
-		
+
 		game->currentMap->render(renderer);
 
 		game->renderer->update();
 
 		renderSleep(50);
 	}
-					    //#endif
+
 	return EXIT_SUCCESS;
 }
 

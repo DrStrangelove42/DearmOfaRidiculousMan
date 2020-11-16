@@ -6,8 +6,16 @@
 #include "../Base/Entity.h"
 #include "../Base/config.h"
 #include "../Characters/Player.h"
-#include <SDL2/SDL.h>
-
+ 
+#include <iostream>
+#include <fstream>
+#include "../Objects/Object.h"
+#include "../Objects/Warp.h"
+#include "../Maps/Map.h"
+#include "../Blocks/Block.h"
+#include "../Blocks/WallBlock.h"
+#include "../Blocks/FloorBlock.h"
+#include "../Blocks/StoneWallBlock.h"
 /*
 A map represents a set of rooms displayed one at a time (or one centered
 in the view and the others black or greyed).
@@ -22,17 +30,33 @@ protected:
 	Player &player;
 	/* Number of rooms in the map */
 	int roomCount;
-
-	Map* mapFromFiles(string filename, string ext, Player& p, RenderContext& renderer, int startMap, int startRoom);
 	
+	
+	/*
+	This function transforms a text file into a folder of texts files which are sufficient 
+	to describe the map completely and to be able to modify the maps to save progress. 
+	It will create, for each of the maps in the world, a file corresponding to the layout 
+	of the map as well as a file containing the objects and monsters that are in the map 
+	(and their characteristics, these can change throughout the game, we will therefore 
+	modify these files to save progress)
+	*/
+	Map* mapFromFiles(string filename, Player& p, RenderContext& renderer, int startMap, int startRoom);
 
 public:
+	/*
+	This function turns a folder of files representing a world and returns the current map.
+	destMap, destRoom, destX and destY correspond to the destination coordinates, i.e. where
+	the player starts. When they are different from -1, the player is warping from one map to
+	another, and when they are equal to -1 we must read them in the Start file.
+	*/
+	static void worldFromFile(string location, string filename);
+
 	/* Index of the room that is currently displayed (in which the player is) */
 	int currentRoom;
 	/* Creates a new empty map with a pre-allocated array for rooms. */
 	Map(Player& p, int roomCount);
 	/* Creates a Map object from a map file */
-	Map(string filename, string ext, Player& p, RenderContext& renderer, int startMap = -1, int startRoom = -1);
+	Map(string filename, Player& p, RenderContext& renderer, int startMap = -1, int startRoom = -1);
 
 	/* Std destructor */
 	virtual ~Map();

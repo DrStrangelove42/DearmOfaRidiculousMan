@@ -105,10 +105,7 @@ void Room::onKeyDown(EVENT_ARGS* ea)
 {
 	int curX = player.getX();
 	int curY = player.getY();
-	/*
-	We transfer the event to the destination block. It decides if the
-	player moves by itself.
-	*/
+	
 	switch (ea->key)
 	{
 	case Up:

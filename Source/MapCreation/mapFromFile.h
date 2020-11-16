@@ -1,4 +1,4 @@
-#ifndef MAPFROMFILE_H
+/*#ifndef MAPFROMFILE_H
 #define MAPFROMFILE_H
 
 #include <iostream>
@@ -22,4 +22,4 @@ void worldFromFile(string location, string filename, string ext);
 
 Map* mapFromFiles(string filename, string ext, Player& p, RenderContext& renderer, int startMap = -1, int startRoom = -1);
 
-#endif
+#endif*/

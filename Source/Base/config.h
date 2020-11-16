@@ -1,7 +1,9 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#include <SDL2/SDL.h>
+#include <string>
+
+using namespace std;
 
 /*Size constants*/
 extern int SZ_BLOCKSIZE;	/* The size of a block, in pixels */
@@ -17,4 +19,7 @@ fonctions located in the <utils> module.*/
 extern int VIEW_OFFSET_X;
 extern int VIEW_OFFSET_Y;
 
+extern string WORLDFILE_EXT;
+extern string MAPFILE_EXT;
+extern string MAPFILES_LOCATION;
 #endif

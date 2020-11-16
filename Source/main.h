@@ -24,8 +24,4 @@ int playDoarm(GAME* game);
 /* Initializes the GAME structure. */
 GAME* initGame();
 
-
-
-
-
 #endif

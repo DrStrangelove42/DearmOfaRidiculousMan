@@ -56,9 +56,9 @@ void onKeyDown(SDL_Event event, GAME* game)
 
 	game->currentMap->onKeyDown(&ea);
 	if (ea.warp_IsExternal)
-	  {
-	    game->currentMap=new Map(game->worldname, game->ext, *(game->player), *(game->renderer), *(ea.currentMap), *(ea.currentRoom));
-	  }
+	{
+		game->currentMap = new Map(game->worldName, *(game->player), *(game->renderer), *(ea.currentMap), *(ea.currentRoom));
+	}
 }
 
 void quitGame(GAME* game)

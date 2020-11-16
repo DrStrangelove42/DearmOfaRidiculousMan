@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include <string>
 #include "../Maps/Map.h"
+#include "../Base/config.h"
 
 using namespace std;
 
@@ -11,8 +12,7 @@ typedef struct
 {
 	SDL_Window* window;
 	RenderContext* renderer;
-        string worldname;
-        string ext; //extension used for text files
+	string worldName;
 	Map* currentMap;
 	Player* player;
 	bool quit;
