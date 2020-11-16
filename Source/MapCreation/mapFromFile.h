@@ -1,3 +1,6 @@
+#ifndef MAPFROMFILE_H
+#define MAPFROMFILE_H
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -18,3 +21,5 @@ void worldFromFile(string filename, string ext);
 //This function turns a folder of files representing a world and returns the current map. destMap, destRoom, destX and destY correspond to the destination coordinates, i.e. where the player starts. When they are different from -1, the player is warping from one map to another, and when they are equal to -1 we must read them in the Start file.
 
 Map* mapFromFiles(string filename, string ext, Player& p, RenderContext& renderer, int startMap = -1, int startRoom = -1, int startX = -1, int startY= -1);
+
+#endif
