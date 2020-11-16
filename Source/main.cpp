@@ -38,7 +38,6 @@ int playDoarm(GAME* game)
 	game -> worldname = worldname;
 	game -> ext = ".txt";
 	game -> currentMap = new Map(worldname,".txt",me,renderer); //POC
-
 	while (!(game->quit))
 	{
 		game->renderer->clear();

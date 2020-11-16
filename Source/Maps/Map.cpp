@@ -2,7 +2,7 @@
 
 Map::Map(Player& p, int roomCount) : player(p), roomCount(roomCount), currentRoom(0)
 {
-	rooms = new Room * [roomCount];
+	rooms = new Room* [roomCount];
 }
 
 Map::~Map()
@@ -44,14 +44,14 @@ void Map::tick(int time)
 	rooms[currentRoom]->tick(time);
 }
 
-int Map::getRoomCount()
-{
-	return roomCount;
-}
-
 Room** Map::getRooms()
 {
 	return rooms;
+}
+
+int Map::getCurrentRoom()
+{
+  return currentRoom;
 }
 
 void Map::onKeyDown(EVENT_ARGS * ea)

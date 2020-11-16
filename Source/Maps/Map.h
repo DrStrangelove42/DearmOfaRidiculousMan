@@ -29,7 +29,6 @@ protected:
 public:
 	/* Index of the room that is currently displayed (in which the player is) */
 	int currentRoom;
-
 	/* Creates a new empty map with a pre-allocated array for rooms. */
 	Map(Player& p, int roomCount);
 	/* Creates a Map object from a map file */
@@ -67,6 +66,7 @@ public:
 	/* Accessors */
 	int getRoomCount();
 	Room** getRooms();
+	int getCurrentRoom();
 };
 
 #endif
