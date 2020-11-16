@@ -21,6 +21,8 @@ Map::Map(string filename, Player& p, RenderContext& renderer, int startMap, int 
 
 void Map::render(RenderContext& renderer, int offsetX, int offsetY)
 {
+        cout << currentRoom << endl;
+	cout << &rooms << endl;
 	Room* cur = rooms[currentRoom];
 
 	int offX = offsetX - cur->getX() + (BLOCKS_W - cur->getW()) / 2;
