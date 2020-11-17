@@ -16,7 +16,7 @@ Map::~Map()
 
 Map::Map(string filename, Player& p, RenderContext& renderer, int startMap, int startRoom) : player(p)
 {
-	mapFromFiles(filename, p, renderer, startMap, startRoom);
+  mapFromFiles(filename, p, renderer, startMap, startRoom);
 }
 
 void Map::render(RenderContext& renderer, int offsetX, int offsetY)
