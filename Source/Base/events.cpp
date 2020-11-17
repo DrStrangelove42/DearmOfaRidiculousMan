@@ -60,6 +60,10 @@ void onKeyDown(SDL_Event event, GAME* game)
 	{
 		game->currentMap = new Map(game->worldName, *(game->player), *(game->renderer), *(ea.currentMap), *(ea.currentRoom));
 	}
+	else
+	  {
+	    game->currentMap->getRooms()[*(ea.currentRoom)]->setDiscovered(true);
+	  }
 }
 
 void quitGame(GAME* game)

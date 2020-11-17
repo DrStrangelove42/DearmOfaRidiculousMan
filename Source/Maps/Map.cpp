@@ -129,7 +129,7 @@ void Map::worldFromFile(string location, string filename) {
 					case ' ':
 						break;
 					case 'p':
-						start << to_string(map) << " " << to_string(room) << " " << to_string(i) << " " << to_string(j) << endl;
+						start << to_string(map) << " " << to_string(room) << " " << to_string(j) << " " << to_string(i) << endl;
 						for (int k = 0; k < headerLength; k++) { //There may be information in the header as to what health or items the player starts with for example
 							if (header[k][0] == 'p') {
 								start << header[k].erase(0);
@@ -224,6 +224,7 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int 
 		rooms[room] = thisRoom;
 	}
 	layout.close();
+	rooms[currentRoom]->setDiscovered(true);
 
 	while (getline(data, line3)) //We now add the objects to the rooms
 	{

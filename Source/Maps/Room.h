@@ -86,6 +86,10 @@ public:
 	int getH();
 	int getX();
 	int getY();
+	Block*** getBlocks();
+
+	/* Setters */
+	void setDiscovered(bool b);
 };
 
 

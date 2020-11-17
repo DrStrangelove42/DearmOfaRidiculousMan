@@ -66,6 +66,15 @@ int Room::getY()
 	return y;
 }
 
+Block*** Room::getBlocks()
+{
+  return blocks;
+}
+
+void Room::setDiscovered(bool b)
+{
+  discovered = b;
+}
 void Room::addObject(Object object)
 {
 	if (objects.find(object) == objects.end())
