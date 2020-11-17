@@ -3,6 +3,7 @@
 
 #include <string>
 #include "../Base/Entity.h"
+#include "../Base/utils.h"
 #include "../Blocks/FloorBlock.h"
 #include "../Blocks/Block.h"
 #include "../Objects/Object.h"
@@ -40,6 +41,9 @@ public:
 
 	/* Add object */
 	void addObject(Object object);
+
+	/* Updates all objects in the room accordingly. */
+	void updateAllObjects(RenderContext& renderer, EVENT_ARGS* ea = NULL);
 	
 	/* Rendering method, enabling the renderer to take the offset (in blocks) into account. */
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);

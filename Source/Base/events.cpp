@@ -9,14 +9,20 @@ void manageEvents(GAME* game)
 		switch (event.type)
 		{
 		case SDL_KEYDOWN:
-			onKeyDown(event, game);
+		  {
+		        EVENT_ARGS ea;
+			onKeyDown(&ea, event, game);
+			//cout << ea;
+			game->currentMap->getRooms()[game->currentMap->currentRoom]->updateAllObjects(*(game->renderer), &ea);
 			break;
+		  }
 
 		case SDL_WINDOWEVENT:
 			onWindowEvent(event, game);
 			break;
 
 		default:
+		  game->currentMap->getRooms()[game->currentMap->currentRoom]->updateAllObjects(*(game->renderer));
 			break;
 		}
 	}
@@ -28,41 +34,40 @@ void onWindowEvent(SDL_Event event, GAME* game)
 		game->quit = true;
 }
 
-void onKeyDown(SDL_Event event, GAME* game)
+void onKeyDown(EVENT_ARGS* ea, SDL_Event event, GAME* game)
 {
-	EVENT_ARGS ea;
-	ea.warp_IsExternal = false;
-	ea.currentRoom = &(game->currentMap->currentRoom);
+	ea->warp_IsExternal = false;
+	ea->currentRoom = &(game->currentMap->currentRoom);
 	switch (event.key.keysym.sym)
 	{
 	case SDLK_DOWN:
 	case SDLK_s:
-		ea.key = Down;
+		ea->key = Down;
 		break;
 	case SDLK_UP:
 	case SDLK_z:
-		ea.key = Up;
+		ea->key = Up;
 		break;
 	case SDLK_LEFT:
 	case SDLK_q:
-		ea.key = Left;
+		ea->key = Left;
 		break;
 	case SDLK_RIGHT:
 	case SDLK_d:
-		ea.key = Right;
+		ea->key = Right;
 		break;
 	default:
 		break;
 	}
 
-	game->currentMap->onKeyDown(&ea);
-	if (ea.warp_IsExternal)
+	game->currentMap->onKeyDown(ea);
+	if (ea->warp_IsExternal)
 	{
-		game->currentMap = new Map(game->worldName, *(game->player), *(game->renderer), *(ea.currentMap), *(ea.currentRoom));
+		game->currentMap = new Map(game->worldName, *(game->player), *(game->renderer), *(ea->currentMap), *(ea->currentRoom));
 	}
 	else
 	  {
-	    game->currentMap->getRooms()[*(ea.currentRoom)]->setDiscovered(true);
+	    game->currentMap->getRooms()[*(ea->currentRoom)]->setDiscovered(true);
 	  }
 }
 

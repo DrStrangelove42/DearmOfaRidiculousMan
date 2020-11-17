@@ -88,6 +88,17 @@ void Room::addObject(Object object)
 	}
 }
 
+void Room::updateAllObjects(RenderContext& renderer, EVENT_ARGS* ea)
+{
+      for (auto& entry : objects)
+	{
+	  Object obj = entry.first;
+	  obj.updateObject(player, renderer, ea);
+	  objects.erase(obj);
+	  objects[obj] = 1;
+	}
+}
+
 void Room::tick(int time)
 {
 	//TODO

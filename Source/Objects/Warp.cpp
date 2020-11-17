@@ -13,7 +13,11 @@ Warp::Warp(int destMap, int destRoom, int destX, int destY, int posx, int posy, 
 
 void Warp::updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea)
 {
-	p.teleport(destX, destY);
+        if (ea==NULL)
+          {
+            return;
+          }
+        p.teleport(destX, destY);
 	*(ea->currentRoom) = destRoom;
 
 	if (destMap != *(ea->currentMap))

@@ -20,7 +20,7 @@ typedef struct
 
 /* Events */
 void manageEvents(GAME* game);
-void onKeyDown(SDL_Event event, GAME* game);
+void onKeyDown(EVENT_ARGS* ea, SDL_Event event, GAME* game);
 void onWindowEvent(SDL_Event, GAME*);
 /* Destroy the game structure and quits the program. */
 void quitGame(GAME* game);
