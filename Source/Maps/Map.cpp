@@ -21,8 +21,6 @@ Map::Map(string filename, Player& p, RenderContext& renderer, int startMap, int 
 
 void Map::render(RenderContext& renderer, int offsetX, int offsetY)
 {
-        cout << currentRoom << endl;
-	cout << &rooms << endl;
 	Room* cur = rooms[currentRoom];
 
 	int offX = offsetX - cur->getX() + (BLOCKS_W - cur->getW()) / 2;
@@ -160,30 +158,35 @@ void Map::worldFromFile(string location, string filename) {
 	return;
 }
 
-Map* Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int startMap, int startRoom)
+void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int startMap, int startRoom)
 {
 	ifstream start(filename + "Start" + WORLDFILE_EXT);
 	string line1, line2, line3;
 	size_t a;
-	int startMap2, startRoom2, startX2, startY2;
+	int startX, startY;
+
 	if (startMap == -1)
 	{
 		getline(start, line1);
-		startMap2 = stoi(line1, &a);
+		startMap = stoi(line1, &a);
 		line1.erase(0, a);
+		startRoom = stoi(line1, &a);
+		line1.erase(0, a);
+		startX = stoi(line1, &a);
+		line1.erase(0, a);
+		startY = stoi(line1);
+		player.teleport(startX, startY);
 	}
-	else
-	{
-		startMap2 = startMap;
-	}
-
-	ifstream layout(filename + to_string(startMap2) + WORLDFILE_EXT);
-	ifstream data(filename + to_string(startMap2) + "Data" + WORLDFILE_EXT);
+	//TODO other player characteristics
+	start.close();
+	ifstream layout(filename + to_string(startMap) + WORLDFILE_EXT);
+	ifstream data(filename + to_string(startMap) + "Data" + WORLDFILE_EXT);
 
 	getline(layout, line2);
-	int NumberOfRooms = stoi(line2);
-	Map* currentMap = new Map(p, NumberOfRooms);
-	for (int room = 0; room < NumberOfRooms; room++)
+	roomCount = stoi(line2);
+	rooms = new Room* [roomCount];
+	currentRoom = startRoom;
+	for (int room = 0; room < roomCount; room++)
 	{
 		/* We determine the dimensions of the room. */
 		getline(layout, line2);
@@ -192,7 +195,7 @@ Map* Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int 
 		line2.erase(0, h);
 		int height = stoi(line2);
 
-		Room* currentRoom = new Room(width, height, p, renderer);
+		Room* thisRoom = new Room(width, height, p, renderer);
 		for (int i = 0; i < height; i++)
 		{
 			getline(layout, line2);
@@ -202,13 +205,13 @@ Map* Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int 
 				case ' ':
 					break;
 				case 'w':
-					currentRoom->replaceBlock(new WallBlock(j, i, renderer));
+					thisRoom->replaceBlock(new WallBlock(j, i, renderer));
 					break;
 				case 'f':
-					currentRoom->replaceBlock(new FloorBlock(j, i, renderer));
+					thisRoom->replaceBlock(new FloorBlock(j, i, renderer));
 					break;
 				case 's':
-					currentRoom->replaceBlock(new StoneWallBlock(j, i, renderer));
+					thisRoom->replaceBlock(new StoneWallBlock(j, i, renderer));
 					break;
 				default:
 					cout << "Case " << line2[j] << " not treated yet." << endl;
@@ -216,7 +219,7 @@ Map* Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int 
 				}
 			}
 		}
-		currentMap->getRooms()[room] = currentRoom;
+		rooms[room] = thisRoom;
 	}
 	layout.close();
 
@@ -244,7 +247,7 @@ Map* Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int 
 			int destX = stoi(line3, &a);
 			line3.erase(0, a);
 			int destY = stoi(line3);
-			currentMap->getRooms()[room]->addObject(Warp(destMap, destRoom, destX, destY, x, y, id, p, renderer));
+			rooms[room]->addObject(Warp(destMap, destRoom, destX, destY, x, y, id, p, renderer));
 			break;
 		}
 		case 'k':
@@ -272,21 +275,5 @@ Map* Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int 
 		}
 	}
 	data.close();
-	if (startRoom == -1)
-	{
-		startRoom2 = stoi(line1, &a);
-		line1.erase(0, a);
-		startX2 = stoi(line1, &a);
-		line1.erase(0, a);
-		startY2 = stoi(line1);
-		p.teleport(startX2, startY2);
-	}
-	else
-	{
-		startRoom2 = startRoom;
-	}
-	currentMap->currentRoom = startRoom2;
-	//TODO other player characteristics
-	start.close();
-	return currentMap;
+	return;
 }

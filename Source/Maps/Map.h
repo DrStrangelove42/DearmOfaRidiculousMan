@@ -40,7 +40,7 @@ protected:
 	(and their characteristics, these can change throughout the game, we will therefore 
 	modify these files to save progress)
 	*/
-	Map* mapFromFiles(string filename, Player& p, RenderContext& renderer, int startMap, int startRoom);
+	void mapFromFiles(string filename, Player& p, RenderContext& renderer, int startMap, int startRoom);
 
 public:
 	/*
