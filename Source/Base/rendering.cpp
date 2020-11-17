@@ -12,6 +12,7 @@ bool renderInit()
 
 void renderQuit()
 {
+	SDL_QuitSubSystem(SDL_INIT_VIDEO);
 	SDL_Quit();
 }
 

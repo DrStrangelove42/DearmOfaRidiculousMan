@@ -32,6 +32,7 @@ void FreeTextures()
 		cout << "Freeing " << entry.first << endl;
 		delete entry.second;
 	}
+	textures.clear();
 }
 
 int DumpError(string err)

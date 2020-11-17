@@ -2,7 +2,6 @@
 #define WARP_H
 
 #include "Object.h"
-#include "../MapCreation/mapFromFile.h"
 #include <string>
 
 using namespace std;

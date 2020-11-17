@@ -14,7 +14,6 @@
 #include "Maps/Room.h"
 #include "Maps/Map.h"
 #include "Characters/Player.h"
-#include "MapCreation/mapFromFile.h"
 
 using namespace std;
 

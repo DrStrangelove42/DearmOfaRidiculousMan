@@ -22,7 +22,8 @@ Texture::Texture(RenderContext& context, string id)
 
 Texture::~Texture()
 {
-	SDL_DestroyTexture(texture);
+	if (NULL != texture)
+		SDL_DestroyTexture(texture);
 }
 
 void Texture::renderUnscaled(RenderContext& context, int x, int y, double angle, SDL_Point* center, SDL_RendererFlip flip)

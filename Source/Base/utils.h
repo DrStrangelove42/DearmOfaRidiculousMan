@@ -22,8 +22,8 @@ types something to move or to perform an action.
 typedef struct
 {
 	int* currentRoom;		/* Pointer to the currentRoom field in the game engine. */
-	int* currentMap;	/* if warp_IsExternal is set to true, indicates the map to load. */
-        bool warp_IsExternal;	/* Tells the game that we need to go to another map. */
+	int* currentMap;		/* if warp_IsExternal is set to true, indicates the map to load. */
+	bool warp_IsExternal;	/* Tells the game that we need to go to another map. */
 	KEY key;
 	Player* player;
 } EVENT_ARGS;

@@ -18,10 +18,9 @@ int main(int argc, char** argv)
 
 	status = playDoarm(game);
 
-	/*Free the memory*/
-	FreeTextures();
-
 	quitGame(game);
+
+	renderQuit();
 	return status;
 }
 
@@ -29,13 +28,15 @@ int main(int argc, char** argv)
 int playDoarm(GAME* game)
 {
 	RenderContext& renderer = *(game->renderer);
-	Player me(renderer);
+	Player * me = new Player(renderer);
+	game->player = me;
 
 	string worldName = "TestMap";
+	
 	Map::worldFromFile(MAPFILES_LOCATION, worldName);
 	worldName = MAPFILES_LOCATION + worldName + "/TestMap";
 	game->worldName = worldName;
-	game->currentMap = new Map(worldName, me, renderer); //POC
+	game->currentMap = new Map(worldName, *me, renderer);
 
 	while (!(game->quit))
 	{

@@ -31,6 +31,7 @@ void onWindowEvent(SDL_Event event, GAME* game)
 void onKeyDown(SDL_Event event, GAME* game)
 {
 	EVENT_ARGS ea;
+	ea.warp_IsExternal = false;
 	ea.currentRoom = &(game->currentMap->currentRoom);
 	switch (event.key.keysym.sym)
 	{
@@ -64,9 +65,12 @@ void onKeyDown(SDL_Event event, GAME* game)
 void quitGame(GAME* game)
 {
 	delete game->currentMap;
-	delete game->renderer;
+	delete game->player;
 
 	FreeTextures();
 
+	delete game->renderer;
 	SDL_DestroyWindow(game->window);
+
+	delete game;
 }

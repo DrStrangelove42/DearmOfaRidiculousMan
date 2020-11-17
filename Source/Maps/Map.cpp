@@ -16,7 +16,7 @@ Map::~Map()
 
 Map::Map(string filename, Player& p, RenderContext& renderer, int startMap, int startRoom) : player(p)
 {
-  mapFromFiles(filename, p, renderer, startMap, startRoom);
+	mapFromFiles(filename, p, renderer, startMap, startRoom);
 }
 
 void Map::render(RenderContext& renderer, int offsetX, int offsetY)
@@ -184,8 +184,10 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int 
 
 	getline(layout, line2);
 	roomCount = stoi(line2);
-	rooms = new Room* [roomCount];
+
+	rooms = new Room * [roomCount];
 	currentRoom = startRoom;
+	Room* thisRoom;
 	for (int room = 0; room < roomCount; room++)
 	{
 		/* We determine the dimensions of the room. */
@@ -195,7 +197,7 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int 
 		line2.erase(0, h);
 		int height = stoi(line2);
 
-		Room* thisRoom = new Room(width, height, p, renderer);
+		thisRoom = new Room(width, height, p, renderer);
 		for (int i = 0; i < height; i++)
 		{
 			getline(layout, line2);

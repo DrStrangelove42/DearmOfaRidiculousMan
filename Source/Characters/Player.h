@@ -24,6 +24,7 @@ protected:
 	/* The texture used for the player. */
 	Texture* texture;
 public:
+	~Player() {};
 	/* Creates the player */
 	Player(RenderContext& renderer);
 	

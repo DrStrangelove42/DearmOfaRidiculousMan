@@ -14,7 +14,7 @@ Room::Room(int width, int height, Player& p, RenderContext& renderer) : w(width)
 				blocks[i][j] = new Block(i, j, "empty", renderer);
 			}
 		}
-	}
+	} 
 }
 
 Room::~Room()
@@ -30,7 +30,7 @@ Room::~Room()
 	if (w > 0)
 	{
 		delete[] blocks;
-	}
+	} 
 	//The objects in the map, which are deep copies of the objects we added, are deleted automatically.
 }
 
@@ -105,7 +105,7 @@ void Room::onKeyDown(EVENT_ARGS* ea)
 {
 	int curX = player.getX();
 	int curY = player.getY();
-	
+
 	switch (ea->key)
 	{
 	case Up:
