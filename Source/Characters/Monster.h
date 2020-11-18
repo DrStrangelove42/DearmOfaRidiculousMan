@@ -9,12 +9,15 @@
 #include "MovingEntity.h"
 #include "LivingEntity.h"
 
+using namespace std;
+
 class Monster : public MovingEntity, public LivingEntity
 {
 protected:
+	int damage;
 	Texture* texture;
 public:
-	Monster(RenderContext& renderer);
+	Monster(RenderContext& renderer, string textureId);
 
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
 	virtual void kill();
