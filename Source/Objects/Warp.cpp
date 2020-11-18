@@ -19,13 +19,10 @@ void Warp::updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea)
           }
         p.teleport(destX, destY);
 	*(ea->currentRoom) = destRoom;
-	//cout << destMap << endl;
-	//cout << *(ea->currentMap) << endl;
-
 	if (destMap != *(ea->currentMap))
 	{
-	  //cout << "aa" << endl;
 		*(ea->currentMap) = destMap;
 		ea->warp_IsExternal = true;
 	}
+	//TODO make warps possible onto other blocks containing warps (bool justwarped)
 }
