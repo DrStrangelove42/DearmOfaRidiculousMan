@@ -14,9 +14,9 @@ Map::~Map()
 	delete[] rooms;
 }
 
-Map::Map(string filename, Player& p, RenderContext& renderer, int startMap, int startRoom) : player(p)
+Map::Map(string filename, Player& p, RenderContext& renderer, int* startMap, int startRoom) : player(p)
 {
-	mapFromFiles(filename, p, renderer, startMap, startRoom);
+  mapFromFiles(filename, p, renderer, startMap, startRoom);
 }
 
 void Map::render(RenderContext& renderer, int offsetX, int offsetY)
@@ -158,17 +158,17 @@ void Map::worldFromFile(string location, string filename) {
 	return;
 }
 
-void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int startMap, int startRoom)
+void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int* startMap, int startRoom)
 {
 	ifstream start(filename + "Start" + WORLDFILE_EXT);
 	string line1, line2, line3;
 	size_t a;
 	int startX, startY;
 
-	if (startMap == -1)
+	if (*startMap == -1)
 	{
 		getline(start, line1);
-		startMap = stoi(line1, &a);
+		*startMap = stoi(line1, &a);
 		line1.erase(0, a);
 		startRoom = stoi(line1, &a);
 		line1.erase(0, a);
@@ -179,8 +179,8 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int 
 	}
 	//TODO other player characteristics
 	start.close();
-	ifstream layout(filename + to_string(startMap) + WORLDFILE_EXT);
-	ifstream data(filename + to_string(startMap) + "Data" + WORLDFILE_EXT);
+	ifstream layout(filename + to_string(*startMap) + WORLDFILE_EXT);
+	ifstream data(filename + to_string(*startMap) + "Data" + WORLDFILE_EXT);
 
 	getline(layout, line2);
 	roomCount = stoi(line2);

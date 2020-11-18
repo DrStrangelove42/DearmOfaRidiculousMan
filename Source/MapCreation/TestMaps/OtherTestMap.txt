@@ -1,0 +1,24 @@
+2
+
+!1 1 0 1 1
+!2 0 0 1 1
+
+###
+##
+1
+#
+4 4
+w  w  w  w
+w  fp f  w
+w  f  f!1w
+w  w  w  w
+##
+1
+#
+6 6
+w  w  w  w  w  w
+w  f  f  f  f  w
+w  f  f  f  f  w
+w  f  f  f  f  w
+w  f  f  f  f!2w
+w  w  w  w  w  w

@@ -40,7 +40,7 @@ protected:
 	(and their characteristics, these can change throughout the game, we will therefore 
 	modify these files to save progress)
 	*/
-	void mapFromFiles(string filename, Player& p, RenderContext& renderer, int startMap, int startRoom);
+	void mapFromFiles(string filename, Player& p, RenderContext& renderer, int* startMap, int startRoom);
 
 public:
 	/*
@@ -56,7 +56,7 @@ public:
 	/* Creates a new empty map with a pre-allocated array for rooms. */
 	Map(Player& p, int roomCount);
 	/* Creates a Map object from a map file */
-	Map(string filename, Player& p, RenderContext& renderer, int startMap = -1, int startRoom = -1);
+	Map(string filename, Player& p, RenderContext& renderer, int* startMap, int startRoom = -1);
 
 	/* Std destructor */
 	virtual ~Map();

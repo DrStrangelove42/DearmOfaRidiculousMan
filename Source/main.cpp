@@ -34,9 +34,10 @@ int playDoarm(GAME* game)
 	string worldName = "TestMap";
 	
 	Map::worldFromFile(MAPFILES_LOCATION, worldName);
-	worldName = MAPFILES_LOCATION + worldName + "/TestMap";
+	worldName = MAPFILES_LOCATION + worldName + "/" + worldName;
 	game->worldName = worldName;
-	game->currentMap = new Map(worldName, *me, renderer);
+	game->currentMapId = new int (-1);
+	game->currentMap = new Map(worldName, *me, renderer, game->currentMapId);
 
 	while (!(game->quit))
 	{

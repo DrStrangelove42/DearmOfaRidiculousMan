@@ -29,7 +29,7 @@ protected:
 	Block*** blocks;
 	/* If the room has already been visited */
 	bool discovered;
-	/* The unordered map of objects in the room.*/
+	/* The unordered map of objects in the room.*/ //TODO change data structure?
 	unordered_map <string , Object*> objects;
 
 public:
