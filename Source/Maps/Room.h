@@ -34,7 +34,7 @@ protected:
 
 public:
 	/* Creates a new Room object */
-	Room(int width, int height, Player& p, RenderContext& renderer);
+	Room(int width, int height, int absx, int absy, Player& p, RenderContext& renderer);
 
 	/* Standard destructor */
 	virtual ~Room();

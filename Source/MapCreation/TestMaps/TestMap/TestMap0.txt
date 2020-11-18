@@ -1,5 +1,6 @@
 2
 10 6
+-2 8
 wwwwffwwww
 wffffffffw
 wfffwwfffw
@@ -7,6 +8,7 @@ wfffwwfffw
 wffffffffw
 wwwwwwwwww
 6 8
+0 0
 wwwwww
 wffffw
 wffffw

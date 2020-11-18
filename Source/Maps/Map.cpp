@@ -105,7 +105,9 @@ void Map::worldFromFile(string location, string filename) {
 				cout << "Expected # before beginning of room " << room << endl;
 				return;
 			}
+			
 			/* We determine the dimensions of the room. */
+			
 			getline(World, line);
 			size_t h;
 			width = stoi(line, &h);
@@ -113,7 +115,17 @@ void Map::worldFromFile(string location, string filename) {
 			height = stoi(line);
 
 			layout << to_string(width) << " " << to_string(height) << endl;
+			
+			/* We determine the absolute position of the room. */
 
+			int x , y;
+			getline(World, line);
+			x = stoi(line, &h);
+			line.erase(0, h);
+			y = stoi(line);
+
+			layout << to_string(x) << " " << to_string(y) << endl;
+			
 			for (int i = 0; i < height; i++) {
 				getline(World, line);
 				if (line[line.length() - 1] == '\r')
@@ -196,8 +208,11 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 		int width = stoi(line2, &h);
 		line2.erase(0, h);
 		int height = stoi(line2);
-
-		thisRoom = new Room(width, height, p, renderer);
+		getline(layout, line2);
+		int x = stoi(line2, &h);
+		line2.erase(0, h);
+		int y = stoi(line2);
+		thisRoom = new Room(width, height, x, y, p, renderer);
 		for (int i = 0; i < height; i++)
 		{
 			getline(layout, line2);

@@ -1,6 +1,6 @@
 #include "Room.h"
 
-Room::Room(int width, int height, Player& p, RenderContext& renderer) : w(width), h(height), player(p), discovered(false)
+Room::Room(int width, int height, int absx, int absy, Player& p, RenderContext& renderer) : w(width), h(height), x(absx), y(absy), player(p), discovered(false)
 {
 	if (w > 0 && h > 0)
 	{

@@ -1,0 +1,66 @@
+5
+11 11
+0 0
+wwwwfffwwww
+wfffffffffw
+wffffwffffw
+wfffwwwfffw
+fffwwwwwfff
+ffwwwwwwwff
+fffwwwwwfff
+wfffwwwfffw
+wffffwffffw
+wfffffffffw
+wwwwfffwwww
+11 11
+0 -11
+wwwwwwwwwww
+wfffffffffw
+wffffwffffw
+wfffwwwfffw
+wffwwwwwffw
+wfwwwwwwwfw
+wffwwwwwffw
+wfffwwwfffw
+wffffwffffw
+wfffffffffw
+wwwwfffwwww
+11 11
+-11 0
+wwwwwwwwwww
+wfffffffffw
+wffffwffffw
+wfffwwwfffw
+wffwwwwwfff
+wfwwwwwwwff
+wffwwwwwfff
+wfffwwwfffw
+wffffwffffw
+wfffffffffw
+wwwwwwwwwww
+11 11
+0 11
+wwwwfffwwww
+wfffffffffw
+wffffwffffw
+wfffwwwfffw
+wffwwwwwffw
+wfwwwwwwwfw
+wffwwwwwffw
+wfffwwwfffw
+wffffwffffw
+wfffffffffw
+wwwwwwwwwww
+11 11
+11 0
+wwwwwwwwwww
+wfffffffffw
+wffffwffffw
+wfffwwwfffw
+fffwwwwwffw
+ffwwwwwwwfw
+fffwwwwwffw
+wfffwwwfffw
+wffffwffffw
+wfffffffffw
+wwwwwwwwwww
