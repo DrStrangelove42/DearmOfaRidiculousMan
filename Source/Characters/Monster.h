@@ -17,11 +17,11 @@ protected:
 	int damage;
 	Texture* texture;
 public:
-	Monster(RenderContext& renderer, string textureId);
+	Monster(RenderContext& renderer, string textureId, int dmg);
 
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
 	virtual void kill();
-	virtual void tick(int time) = 0;
+	virtual void tick(int time);
 };
 
 #endif
