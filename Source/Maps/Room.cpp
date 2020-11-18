@@ -75,16 +75,16 @@ void Room::setDiscovered(bool b)
 {
   discovered = b;
 }
-void Room::addObject(Object object)
+void Room::addObject(Object* object)
 {
-	if (objects.find(object) == objects.end())
+  if (objects.find(object->getId()) == objects.end())
 	{
-		objects[object] = 1;
-		blocks[object.getX()][object.getY()]->setTrav(object.getTrav());
+	        objects[object->getId()] = object;
+		blocks[object->getX()][object->getY()]->setTrav(object->getTrav());
 	}
 	else
 	{
-		cout << "Two objects have the same identifier " << object.getId() << endl;
+		cout << "Two objects have the same identifier " << object->getId() << endl;
 	}
 }
 
@@ -92,10 +92,7 @@ void Room::updateAllObjects(RenderContext& renderer, EVENT_ARGS* ea)
 {
       for (auto& entry : objects)
 	{
-	  Object obj = entry.first;
-	  obj.updateObject(player, renderer, ea);
-	  objects.erase(obj);
-	  objects[obj] = 1;
+	  entry.second->updateObject(player, renderer, ea);
 	}
 }
 

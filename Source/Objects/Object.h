@@ -27,6 +27,8 @@ public:
 	/* Initialises a new Object with the specified informations. */
 	Object(string identifier, int posx, int posy, Player& player, string tx, RenderContext& renderer, bool trav);
 
+	Object(const Object& other);
+
 	/* Getters */
 	int getX();
 	int getY();

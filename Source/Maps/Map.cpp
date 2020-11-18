@@ -250,7 +250,7 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int 
 			int destX = stoi(line3, &a);
 			line3.erase(0, a);
 			int destY = stoi(line3);
-			rooms[room]->addObject(Warp(destMap, destRoom, destX, destY, x, y, id, p, renderer));
+			rooms[room]->addObject(new Warp(destMap, destRoom, destX, destY, x, y, id, p, renderer));
 			break;
 		}
 		case 'k':

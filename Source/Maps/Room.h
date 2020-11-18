@@ -30,7 +30,7 @@ protected:
 	/* If the room has already been visited */
 	bool discovered;
 	/* The unordered map of objects in the room.*/
-	unordered_map <Object, int, ObjectHash> objects;
+	unordered_map <string , Object*> objects;
 
 public:
 	/* Creates a new Room object */
@@ -40,7 +40,7 @@ public:
 	virtual ~Room();
 
 	/* Add object */
-	void addObject(Object object);
+	void addObject(Object* object);
 
 	/* Updates all objects in the room accordingly. */
 	void updateAllObjects(RenderContext& renderer, EVENT_ARGS* ea = NULL);
