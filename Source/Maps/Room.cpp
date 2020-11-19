@@ -105,6 +105,8 @@ void Room::updateAllObjects(RenderContext& renderer, EVENT_ARGS* ea)
 void Room::tick(int time, RenderContext& r)
 {
 	updateAllObjects(r);
+	for (Monster m : monsters)
+		m.tick(time, r);
 }
 
 void Room::replaceBlock(Block* newBlock)

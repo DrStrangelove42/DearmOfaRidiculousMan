@@ -7,8 +7,8 @@
 #include "../Blocks/FloorBlock.h"
 #include "../Blocks/Block.h"
 #include "../Objects/Object.h"
-#include <SDL2/SDL.h>
 #include <unordered_map>
+#include "../Characters/Monster.h"
 
 using namespace std;
 
@@ -32,6 +32,7 @@ protected:
 	/* The unordered map of objects in the room.*/ //TODO change data structure?
 	unordered_map <string, Object*> objects;
 
+	vector<Monster> monsters;
 public:
 	/* Creates a new Room object */
 	Room(int width, int height, int absx, int absy, Player& p, RenderContext& renderer);
@@ -58,7 +59,7 @@ public:
 	void replaceBlock(Block* newBlock);
 
 	/* Event system */
-	virtual void onKeyDown(EVENT_ARGS *ea);
+	virtual void onKeyDown(EVENT_ARGS* ea);
 
 	Block* getCurrentBlock();
 
