@@ -4,43 +4,61 @@
 #
 11 11
 0 0
-
+!1 0 1 2 0
+!2 0 1 3 0
+!3 1 1 3 2
+!4 1 1 3 2
+d1 1wn
+d2 1ws
+#
 w  w  w  w  w  w  w  w  w  w  
+w  fp f  f  f  f  f  f  f  w
 w  f  f  f  f  f  f  f  f  w
 w  f  f  f  f  f  f  f  f  w
-w  f  f  f  f  f  f  f  f  w
-w  f  f  f  f  f  f  f  f  fd1
-w  f  f  f  f  f  f  f  f  fd2
+w  f  f  f  f  f  f  f  f  fd1 !3
+w  f  f  f  f  f  f  f  f  fd2 !4
 w  f  f  f  f  f  f  f  f  w
 w  f  f  f  f  f  f  f  f  w
 w  f  f  f  f  f  f  f  f  w
 w  w  w  w  f  f  w  w  w  w
              !1 !2
-
-
-
+#
+6 7
+2 10
+!1 0 0 4 11
+!2 0 0 5 11
+#
+       !1 !2
+w  w  f  f  w  w 
+w  f  f  f  f  w
+w  f  f  f  f  w
+w  f  f  f  f  w
+w  f  f  f  fk1w
+w  w  w  w  w  w
 3
 #
 12 10
 0 0
 
-d1 1wn
-d2 1ws
+d1 2wn
+d2 2ws
 
 !1 0 1 4 2
 !2 0 1 4 3
 
 !3 1 0 7 4
 !4 1 0 7 4
+
+c1 sw
 #
    s  s  s  s  s  s  s  s  s  s  
    s  f  f  f  f  f  f  f  f  s
    s  f  f  f  f  f  f  f  f  s
    s  f  f  f  f  f  f  f  f  s
  !1f  f  f  f  f  f  f  f  f  fd1 !3
- !2f  f  f  f  f  f  f  fp f  fd2 !4
+ !2f  f  f  f  f  f  f  f  f  fd2 !4
    s  f  f  f  f  f  f  f  f  s
-   s  f  f  f  f  f  f  f  f  s
+   s  f  f  f  f  f  f  fc1f  s
    s  f  f  f  f  f  f  f  f  s
    s  s  s  s  s  s  s  s  s  s  
 #
@@ -64,14 +82,16 @@ s  s  s  s  s  s
 -43 1
 !1 0 1 1 2
 !2 0 1 1 3
+
+c2 sh
 #
 s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s
+s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  fc2s
 s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s
 s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f!1
 s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f!2
 s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s
-s  fk1f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s
+s  fk2f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s
 s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s 
 ##
 1
