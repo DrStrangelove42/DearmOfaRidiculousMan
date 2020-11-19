@@ -21,6 +21,9 @@
 #include "../Blocks/StoneWallBlock.h"
 #include "../Characters/Monsters/Ghost.h"
 #include "../Characters/Monsters/Skeleton.h"
+#include "../Items/Item.h"
+#include "../Items/Shield.h"
+#include "../Items/Sword.h"
 
 /*
 A map represents a set of rooms displayed one at a time (or one centered
