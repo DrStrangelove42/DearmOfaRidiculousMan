@@ -1,5 +1,5 @@
 #include "Monster.h"
-
+#include <stdlib.h>
 Monster::Monster(RenderContext& renderer,
 	Player& p,
 	string textureId,
@@ -28,6 +28,7 @@ void Monster::tick(int time, RenderContext& r)
 		lastTime = time;
 		alarm();
 		attackRound();
+		
 	}
 }
 

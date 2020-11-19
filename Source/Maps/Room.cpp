@@ -106,7 +106,23 @@ void Room::tick(int time, RenderContext& r)
 {
 	updateAllObjects(r);
 	for (Monster* m : monsters)
+	{
 		m->tick(time, r);
+		int r = rand() % 4;
+		switch (r)
+		{
+		case 0:
+			tryTeleportAt(*m, m->getX() + 1, m->getY()); break;
+		case 1:
+			tryTeleportAt(*m, m->getX(), m->getY() + 1); break;
+		case 2:
+			tryTeleportAt(*m, m->getX() - 1, m->getY()); break;
+		case 3:
+			tryTeleportAt(*m, m->getX(), m->getY() - 1); break;
+		default:
+			break;
+		}
+	}
 }
 
 void Room::attackMonsters()
