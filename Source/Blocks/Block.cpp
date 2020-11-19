@@ -1,6 +1,6 @@
 #include "Block.h"
 
-Block::Block(int posx, int posy, string tx, RenderContext& renderer, bool trav) : x(posx), y(posy), traversable(new bool(trav)), texture(tx)
+Block::Block(int posx, int posy, string tx, RenderContext& renderer, bool trav) : x(posx), y(posy), traversable(trav), texture(tx)
 {
 	updateTexture(renderer);
 }
@@ -20,9 +20,14 @@ int Block::getY()
 	return y;
 }
 
-bool* Block::getTrav()
+bool Block::getTrav()
 {
 	return traversable;
+}
+
+void Block::setTrav(bool t)
+{
+	traversable = t;
 }
 
 void Block::updateTexture(RenderContext& renderer)

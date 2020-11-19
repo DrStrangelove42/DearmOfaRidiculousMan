@@ -30,7 +30,11 @@ protected:
 	/* The texture used for the player. */
 	Texture* texture;
 
+
 public:
+	string textureId;
+	void updateTexture(RenderContext& renderer);
+
 	~Player() {};
 	/* Creates the player */
 	Player(RenderContext& renderer, int lives = 1, int attack = 5, int defense = 0, int startHealth = 100, int startMoney = 0, int startExp = 0);

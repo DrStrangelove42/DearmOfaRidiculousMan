@@ -2,7 +2,7 @@
 
 Chest::~Chest()
 {
-	
+
 }
 
 Chest::Chest(string identifier, int posx, int posy, Player& p, RenderContext& renderer) :
@@ -26,29 +26,29 @@ void Chest::addItem(Item i, int count)
 
 void Chest::updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea)
 {
-        if (ea == NULL || texture == "openchest" || abs(x - p.getX()) + abs(y - p.getY())>1)
+	if (ea == NULL || texture == "openchest" || abs(x - p.getX()) + abs(y - p.getY()) > 1)
 	{
-	        return;
+		return;
 	}
 	texture = "openchest";
 	updateTexture(renderer);
 	for (auto& entry : contents)
 	{
-	        p.pickUpItem(entry.first, entry.second);
+		p.pickUpItem(entry.first, entry.second);
 
 		//The following part might need to be changed if the player skins become more complex, but its purpose is to change the skin of the player if a shield or sword is found in a chest
-		
+
 		string itemid = entry.first.getId();
-		if ((p.texture == "player" || p.texture == "playershield") && itemid.length() >= 2 && itemid.substr(0,2) == "sw")
+		if ((p.textureId == "player" || p.textureId == "playershield") && itemid.length() >= 2 && itemid.substr(0, 2) == "sw")
 		{
-		        p.texture+="sword";
+			p.textureId += "sword";
 		}
-		if ((p.texture == "player" || p.texture == "playersword") && itemid.length() >= 2 && itemid.substr(0,2) == "sh")
+		if ((p.textureId == "player" || p.textureId == "playersword") && itemid.length() >= 2 && itemid.substr(0, 2) == "sh")
 		{
-		        p.texture+="shield";
+			p.textureId += "shield";
 		}
 		p.updateTexture(renderer);
 	}
-	
-  
+
+
 }

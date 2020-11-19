@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(RenderContext& renderer, int lives, int attack, int defense, int startHealth, int startMoney, int startExp) : lives(lives), LivingEntity(startHealth, startMoney, startExp)
+Player::Player(RenderContext& renderer, int lives, int attack, int defense, int startHealth, int startMoney, int startExp) : lives(lives), textureId("mario"), LivingEntity(startHealth, startMoney, startExp)
 {
 	texture = LoadTexture("player", renderer);
 }
@@ -27,6 +27,11 @@ void Player::kill()
 		lives--;
 		health = maxHealth;
 	}
+}
+
+void Player::updateTexture(RenderContext& renderer)
+{
+	texture = LoadTexture(textureId, renderer);
 }
 
 void Player::tick(int time, RenderContext& r)

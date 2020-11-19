@@ -17,6 +17,7 @@ protected:
 	/* The loaded texture */
 	Texture* loadedTx;
 
+	bool traversable;
 public:
 	/* Destructor. */
 	~Block();
