@@ -10,11 +10,14 @@ void Monster :: randomMoving()
 // in this function the Monster is Moving randomly on the map and when it meets obstacles it turns back.
 {
     direction = rand()%4;
-    if ( cantMove = false )
+    if ( getTrav() = false )//if it didn't hit a obstacle
     {
-        //march towards this direction for n seconds
+        //todo : march towards this direction for n seconds
     }
-    else direction = rand()%4 // if meet obstacle reset direction
+    else 
+    {
+        randomMoving();// if meet obstacle reset direction
+    } 
 }
 
 void Monster :: towardObject()
