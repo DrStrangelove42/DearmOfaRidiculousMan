@@ -126,7 +126,7 @@ Block* Room::getCurrentBlock()
 
 void Room::tryTeleportAt(MovingEntity& e, int x, int y)
 {
-	if (x > 0 && blocks[x][y]->getTrav())
+	if (x > 0 && y > 0 && x < w && y < h && blocks[x][y]->getTrav())
 	{
 		e.teleport(x, y);
 	}
