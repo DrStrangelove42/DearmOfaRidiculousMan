@@ -37,7 +37,13 @@ void Monster::attackRound()
 		player.damage(damage);
 	}
 }
-
+void Monster::alarm()
+{
+	if (abs(x - player.getX()) < alarmRadius && abs(y - player.getY()) < alarmRadius)
+	{
+		alarmed = true;
+	}
+}
 void Monster::render(RenderContext& renderer, int offsetX, int offsetY)
 {
 	int xx = (x + offsetX) * SZ_BLOCKSIZE;

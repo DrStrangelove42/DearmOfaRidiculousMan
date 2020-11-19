@@ -20,8 +20,10 @@ protected:
 	
 	int attackDelay;
 	int attackRadius;
+	int alarmRadius;
 	Texture* texture;
 public:
+	
 	Monster(RenderContext& renderer,
 		Player& p,
 		string textureId,
@@ -30,8 +32,10 @@ public:
 		int atkDelay = 1000,
 		int atkRadius = 1,
 		int coins = 200,
-		int exp = 50);
+		int exp = 50
+		bool alarmed = false );
 	virtual void attackRound();
+	virtual void alarm();
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
 	virtual void kill();
 	virtual void tick(int time);
