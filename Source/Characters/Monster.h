@@ -25,6 +25,7 @@ public:
 	Monster(RenderContext& renderer,
 		Player& p,
 		string textureId,
+		int health,
 		int dmg,
 		int atkDelay = 1000,
 		int atkRadius = 1,

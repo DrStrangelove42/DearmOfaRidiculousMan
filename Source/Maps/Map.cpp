@@ -35,7 +35,7 @@ void Map::render(RenderContext& renderer, int offsetX, int offsetY)
 			rooms[i]->render(renderer, offX, offY);
 		}
 	}
-
+	
 	player.render(renderer, offX + cur->getX(), offY + cur->getY());
 }
 

@@ -26,7 +26,7 @@ protected:
 public:
 	~Player() {};
 	/* Creates the player */
-	Player(RenderContext& renderer);
+	Player(RenderContext& renderer, int lives = 1, int startHealth = 100,  int startMoney = 0, int startExp = 0);
 	
 	virtual void kill();
 

@@ -17,7 +17,8 @@ void Warp::updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea)
 	{
 		return;
 	}
-	p.teleport(destX, destY);
+	ea->destX = destX;
+	ea->destY = destY;
 	*(ea->currentRoom) = destRoom;
 	if (destMap != *(ea->currentMap))
 	{

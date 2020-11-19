@@ -29,6 +29,7 @@ int playDoarm(GAME* game)
 {
 	RenderContext& renderer = *(game->renderer);
 	Player * me = new Player(renderer);
+
 	game->player = me;
 
 	string worldName = "BigTestMap";

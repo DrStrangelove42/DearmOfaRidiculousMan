@@ -34,9 +34,13 @@ void onWindowEvent(SDL_Event event, GAME* game)
 void onKeyDown(SDL_Event event, GAME* game)
 {
         EVENT_ARGS* ea = new EVENT_ARGS();
-	ea->warp_IsExternal = false;
-	ea->currentMap = game->currentMapId;
 	ea->currentRoom = &(game->currentMap->currentRoom);
+	ea->currentMap = game->currentMapId;
+	ea->warp_IsExternal = false;
+	ea->player = game->player;
+	/* The following will allow us to know if the player needs to be teleported. */
+	ea->destX = -1;
+	ea->destY = -1;
 	switch (event.key.keysym.sym)
 	{
 	case SDLK_DOWN:
@@ -61,15 +65,20 @@ void onKeyDown(SDL_Event event, GAME* game)
 
 	game->currentMap->onKeyDown(ea);
 	game->currentMap->getRooms()[game->currentMap->currentRoom]->updateAllObjects(*(game->renderer), ea);
-	if (ea->warp_IsExternal)
+	
+	if (ea->destX != -1)
 	{
-		game->currentMap = new Map(game->worldName, *(game->player), *(game->renderer), ea->currentMap, *(ea->currentRoom));
+	        (ea->player)->teleport(ea->destX, ea->destY);
+	        if (ea->warp_IsExternal)
+		{
+		        game->currentMap = new Map(game->worldName, *(game->player), *(game->renderer), ea->currentMap, *(ea->currentRoom));
 		
+	        }
+	        else
+	        {
+	                game->currentMap->getRooms()[*(ea->currentRoom)]->setDiscovered(true);
+		}
 	}
-	else
-	  {
-	    game->currentMap->getRooms()[*(ea->currentRoom)]->setDiscovered(true);
-	  }
 }
 
 void quitGame(GAME* game)

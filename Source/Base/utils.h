@@ -26,6 +26,8 @@ typedef struct
 	bool warp_IsExternal;	/* Tells the game that we need to go to another map. */
 	KEY key;
 	Player* player;
+        int destX;
+        int destY;
 } EVENT_ARGS;
 
 /* The hashmap where textures are stored. */

@@ -17,6 +17,7 @@ protected:
 	int money;
 	int experience;
 public:
+	LivingEntity(int startHealth, int startMoney, int startExp);
 	/* Applies damage to the player, making him lose HP according to its resistance. */
 	void damage(int dmg);
 	/* True if the player is alive (more than 0 HP) */

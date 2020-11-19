@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(RenderContext& renderer)
+Player::Player(RenderContext& renderer, int lives, int startHealth, int startMoney, int startExp) : lives(lives), LivingEntity(startHealth, startMoney, startExp)
 {
 	texture = LoadTexture("mario", renderer);
 }

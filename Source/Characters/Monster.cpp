@@ -3,15 +3,14 @@
 Monster::Monster(RenderContext& renderer,
 	Player& p,
 	string textureId,
+	int health,
 	int dmg,
 	int atkDelay,
 	int atkRadius,
 	int coins,
 	int exp) :
-	damage(dmg), player(p), attackDelay(atkDelay), attackRadius(atkRadius)
+        LivingEntity(health, coins, exp), damage(dmg), player(p), attackDelay(atkDelay), attackRadius(atkRadius)
 {
-	money = coins;
-	experience = exp;
 	texture = LoadTexture(textureId, renderer);
 }
 
