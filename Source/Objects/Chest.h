@@ -19,7 +19,9 @@ public:
 	/* Returns a reference to the array of items that are in the chest. */
 	unordered_map<Item, int, ItemHash>& getContents();
 
-	void addItem(Item i, int count);
+	/* Adds count times the item i to the chest. */
+
+	void addItem(Item i, int count = 1);
 
 	/* How does a chest interact with the player? */
 	void updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea);

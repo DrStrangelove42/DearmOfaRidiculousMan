@@ -44,15 +44,15 @@ void Player::getCoins(int n)
 	money += n;
 }
 
-void Player::pickUpItem(Item item)
+void Player::pickUpItem(Item item, int count)
 {
         if (items.find(item.getId()) == items.end())
 	{
-	        items[item.getId()] = 1;
+	        items[item.getId()] = count;
 	}
 	else
 	{
-	        items[item.getId()] += 1;
+	        items[item.getId()] += count;
 	}
 }
 

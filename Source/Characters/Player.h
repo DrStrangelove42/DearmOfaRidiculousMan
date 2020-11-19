@@ -48,8 +48,8 @@ public:
 	/* HP count (health points) */
 	int maxHealth;
 
-	/* Adds an item to a player's inventory. */
-	void pickUpItem(Item item);
+	/* Adds count times the item to a player's inventory. */
+	void pickUpItem(Item item, int count = 1);
 
 	/* Tells us whether the player has a particular item or not. */
 	bool hasItem(string itemId);
