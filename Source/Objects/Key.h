@@ -9,7 +9,7 @@ public:
 	/*Destructor*/
 	~Key();
 	
-	/*Constructor, a key's identifier should be the letter k followed by a word w, the key can only unlock doors starting with dw*/
+	/*Constructor, a key's identifier should be the letter k followed by a character c, the key can only unlock doors starting with dc*/
 	Key(string identifier, int posx, int posy, Player& p, RenderContext& renderer);
 
 	/* How does a key interact with the player? */

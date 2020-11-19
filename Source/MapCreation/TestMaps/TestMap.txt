@@ -1,17 +1,12 @@
 1
-
-!1 0 1 2 6
-!2 0 1 3 6
-
-!3 0 0 4 1
-!4 0 0 5 1
-
-###
 ##
 2
 #
 10 6
 -2 8
+!1 0 1 2 6
+!2 0 1 3 6
+#
 w  w  w  w  f!1f!2w  w  w  w  
 w  f  f  f  f  f  f  f  f  w  
 w  f  f  f  w  w  f  f  f  w  
@@ -21,6 +16,9 @@ w  w  w  w  w  w  w  w  w  w
 #
 6 8
 0 0
+!3 0 0 4 1
+!4 0 0 5 1
+#
 w  w  w  w  w  w
 w  f  f  f  f  w
 w  f  f  f  f  w

@@ -43,3 +43,25 @@ void Player::getCoins(int n)
 {
 	money += n;
 }
+
+void Player::pickUpItem(Item item)
+{
+        if (items.find(item.getId()) == items.end())
+	{
+	        items[item.getId()] = 1;
+	}
+	else
+	{
+	        items[item.getId()] += 1;
+	}
+}
+
+bool Player::hasItem(string itemid)
+{
+        return (items.find(itemid) != items.end() && items[itemid]>0);
+}
+
+bool Player::hasItem(Item item)
+{
+        return (items.find(item.getId()) != items.end() && items[item.getId()]>0);
+}

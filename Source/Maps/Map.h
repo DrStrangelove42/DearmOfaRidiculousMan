@@ -10,12 +10,15 @@
 #include <iostream>
 #include <fstream>
 #include "../Objects/Object.h"
+#include "../Objects/Door.h"
+#include "../Objects/Key.h"
 #include "../Objects/Warp.h"
 #include "../Maps/Map.h"
 #include "../Blocks/Block.h"
 #include "../Blocks/WallBlock.h"
 #include "../Blocks/FloorBlock.h"
 #include "../Blocks/StoneWallBlock.h"
+
 /*
 A map represents a set of rooms displayed one at a time (or one centered
 in the view and the others black or greyed).

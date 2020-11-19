@@ -13,7 +13,11 @@ Key::Key(string identifier, int posx, int posy, Player& p, RenderContext& render
 
 void Key::updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea)
 {
-	if (x == p.getX() && y == p.getY()) {
-		//TODO turn key into item and give to player
+	if (texture == "empty" || ea == NULL || x != p.getX() || y != p.getY())
+	{
+	        return;
 	}
+	p.pickUpItem(Item(id,"key", renderer));
+	texture = "empty";
+	updateTexture(renderer);
 }

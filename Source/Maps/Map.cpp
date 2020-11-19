@@ -16,7 +16,7 @@ Map::~Map()
 
 Map::Map(string filename, Player& p, RenderContext& renderer, int* startMap, int startRoom) : player(p)
 {
-  mapFromFiles(filename, p, renderer, startMap, startRoom);
+        mapFromFiles(filename, p, renderer, startMap, startRoom);
 }
 
 void Map::render(RenderContext& renderer, int offsetX, int offsetY)
@@ -68,26 +68,6 @@ void Map::worldFromFile(string location, string filename) {
 	getline(World, line);
 	NumberOfMaps = stoi(line);
 
-	string descriptions = "";
-	int headerLength = 0;
-
-	getline(World, line);
-
-	while (line.length() == 0 || line[0] != '#') {
-		if (line != "") {
-			descriptions += line + "\n";
-			headerLength += 1;
-		}
-		getline(World, line);
-	}
-
-	string* header = new string[headerLength]; //This array will contain each non-empty line (except the first one which contains the number of maps) before the first ## in the file, that is to say all the additional information needed to describe objects and entities (or anything else that is added), such as contents of chests, characteristics of monsters, that are i the world.
-
-	for (int i = 0; i < headerLength; i++) {
-		int firstlineskip = descriptions.find("\n");
-		header[i] = descriptions.substr(0, firstlineskip);
-		descriptions.erase(0, firstlineskip + 1);
-	}
 	ofstream start(newFile + "Start" + WORLDFILE_EXT); //We create a new file in which we will detail the start position and characteristics of the player
 	for (int map = 0; map < NumberOfMaps; map++) {
 		ofstream layout(newFile + to_string(map) + WORLDFILE_EXT);
@@ -99,15 +79,18 @@ void Map::worldFromFile(string location, string filename) {
 		getline(World, line);
 		NumberOfRooms = stoi(line);
 		layout << to_string(NumberOfRooms) << endl;
+		
 		for (int room = 0; room < NumberOfRooms; room++) {
-			getline(World, line);
-			if (line.length() == 0 || line[0] != '#') {
-				cout << "Expected # before beginning of room " << room << endl;
+
+		        getline(World, line);
+			if (line.length() == 0 || line[0] != '#')
+			{
+			        cout << "Expected # before beginning of room " << room << endl;
 				return;
 			}
-			
+		  
 			/* We determine the dimensions of the room. */
-			
+		  
 			getline(World, line);
 			size_t h;
 			width = stoi(line, &h);
@@ -125,6 +108,31 @@ void Map::worldFromFile(string location, string filename) {
 			y = stoi(line);
 
 			layout << to_string(x) << " " << to_string(y) << endl;
+
+			string descriptions = "";
+			int headerLength = 0;
+
+			getline(World, line);
+
+			while (line.length() == 0 || line[0] != '#') {
+			        if (line != "")
+				{
+			        	  descriptions += line + "\n";
+					  headerLength += 1;
+				}
+				getline(World, line);
+			}
+
+			string* header = new string[headerLength];
+
+			//This array will contain each non-empty line between the absolute position of the room and the next line starting with #, that is to say all the additional information needed to describe objects and entities (or anything else that is added), such as contents of chests, characteristics of monsters, that are in the room.
+
+			for (int i = 0; i < headerLength; i++)
+			{
+			        int firstlineskip = descriptions.find("\n");
+				header[i] = descriptions.substr(0, firstlineskip);
+				descriptions.erase(0, firstlineskip + 1);
+			}
 			
 			for (int i = 0; i < height; i++) {
 				getline(World, line);
@@ -132,7 +140,7 @@ void Map::worldFromFile(string location, string filename) {
 				{
 					line.erase(line.length() - 1);
 				}
-				string extraspaces = string(width * 3 - line.length(), ' ');
+				string extraspaces = string(max(0,width * 3 - int(line.length())), ' ');
 				line += extraspaces; //We add extra spaces so that all lines in the file are of the same length : width*3. If we find an empty space, it is an empty block.
 				for (int j = 0; j < width; j++) {
 					layout << line[3 * j];
@@ -150,11 +158,18 @@ void Map::worldFromFile(string location, string filename) {
 						start.close();
 						break;
 					default:
+					        data << to_string(room) << " " << to_string(j) << " " << to_string(i) << " ";
+						bool notinheader = true;
 						for (int k = 0; k < headerLength; k++) {
 							if (header[k][0] == line[3 * j + 1] && header[k][1] == line[3 * j + 2]) {
-								data << to_string(room) << " " << to_string(j) << " " << to_string(i) << " " << header[k] << endl;
+								data << header[k] << endl;
+								notinheader = false;
 								break;
 							}
+						}
+						if (notinheader)
+						{
+						        data << line[3 * j + 1] << line[3 * j + 2] << endl;
 						}
 						break;
 					}
@@ -202,7 +217,7 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 	Room* thisRoom;
 	for (int room = 0; room < roomCount; room++)
 	{
-		/* We determine the dimensions of the room. */
+	        /* We determine the dimensions of the room. */
 		getline(layout, line2);
 		size_t h;
 		int width = stoi(line2, &h);
@@ -244,6 +259,7 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 	while (getline(data, line3)) //We now add the objects to the rooms
 	{
 		//For each object, we extract its position in the map, its identifier, and the rest of the information needed to construct the object and add it to the map
+	        //int uniqueId = 0; //This integer is used to make sure the identifier of each objects in the room is unique
 		int room, x, y;
 		size_t a;
 		room = stoi(line3, &a);
@@ -256,9 +272,9 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 		{
 		case '!':
 		{
-			string id = line3.substr(0, 2);
+		        string id = line3.substr(0, 2);
 			line3.erase(0, 2);
-			int destMap = stoi(line3, &a);
+		        int destMap = stoi(line3, &a);
 			line3.erase(0, a);
 			int destRoom = stoi(line3, &a);
 			line3.erase(0, a);
@@ -269,16 +285,17 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 			break;
 		}
 		case 'k':
-			//TODO key case. Key identifier is line[3*j+2]
-			cout << "Key case not treated yet." << endl;
+		{
+		        string id = line3.substr(0, 2);
+		        rooms[room]->addObject(new Key(id, x, y, p, renderer));
 			break;
+		}
 		case 'd':
-			//TODO door case. Door identifier is line[3*j+2]
-			cout << "Door case not treated yet." << endl;
+		{
+		        string id = line3.substr(0, 6);
+		        rooms[room]->addObject(new Door(id, x, y, p, renderer));
 			break;
-
-			//Chests and monsters should be added to the file of mutable elements
-
+		}
 		case 'm':
 			//TODO monster case. Monster identifier is given by line[3*j+2]
 			cout << "Monster case not treated yet." << endl;

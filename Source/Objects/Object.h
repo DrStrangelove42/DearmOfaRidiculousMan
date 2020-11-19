@@ -18,7 +18,6 @@ protected:
 	string texture;
 	/* The loaded texture */
 	Texture* loadedTx;
-	bool traversable;
 
 public:
 	/* Destructor. */
@@ -28,6 +27,8 @@ public:
 	Object(string identifier, int posx, int posy, Player& player, string tx, RenderContext& renderer, bool trav);
 
 	Object(const Object& other);
+
+	bool traversable;
 
 	/* Getters */
 	int getX();

@@ -37,6 +37,7 @@ Room::~Room()
 void Room::render(RenderContext& renderer, int offsetX, int offsetY)
 {
 	if (discovered)
+	{
 		for (int i = 0; i < w; i++)
 		{
 			for (int j = 0; j < h; j++)
@@ -44,6 +45,11 @@ void Room::render(RenderContext& renderer, int offsetX, int offsetY)
 				blocks[i][j]->render(renderer, offsetX + x, offsetY + y);
 			}
 		}
+		for (auto& entry : objects)
+		{
+		        entry.second->render(renderer, offsetX + x, offsetY + y);
+		}
+	}
 }
 
 int Room::getW()
@@ -77,10 +83,10 @@ void Room::setDiscovered(bool b)
 }
 void Room::addObject(Object* object)
 {
-  if (objects.find(object->getId()) == objects.end())
+        if (objects.find(object->getId()) == objects.end())
 	{
 	        objects[object->getId()] = object;
-		blocks[object->getX()][object->getY()]->setTrav(object->getTrav());
+		blocks[object->getX()][object->getY()]->setTrav(&(object->traversable));
 	}
 	else
 	{
@@ -126,19 +132,19 @@ void Room::onKeyDown(EVENT_ARGS* ea)
 	switch (ea->key)
 	{
 	case Up:
-		if (curY > 0 && blocks[curX][curY - 1]->getTrav())
+	        if (curY > 0 && *(blocks[curX][curY - 1]->getTrav()))
 			player.teleport(curX, curY - 1);
 		break;
 	case Left:
-		if (curX > 0 && blocks[curX - 1][curY]->getTrav())
+	        if (curX > 0 && *(blocks[curX - 1][curY]->getTrav()))
 			player.teleport(curX - 1, curY);
 		break;
 	case Right:
-		if (curX < w - 1 && blocks[curX + 1][curY]->getTrav())
+	        if (curX < w - 1 && *(blocks[curX + 1][curY]->getTrav()))
 			player.teleport(curX + 1, curY);
 		break;
 	case Down:
-		if (curY < h - 1 && blocks[curX][curY + 1]->getTrav())
+	        if (curY < h - 1 && *(blocks[curX][curY + 1]->getTrav()))
 			player.teleport(curX, curY + 1);
 		break;
 	default:

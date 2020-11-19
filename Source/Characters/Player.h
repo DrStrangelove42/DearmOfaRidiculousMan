@@ -6,8 +6,10 @@
 #include "../Base/Entity.h"
 #include "../Base/utils.h"
 #include "../Base/config.h"
+#include "../Items/item.h"
 #include "MovingEntity.h"
 #include "LivingEntity.h"
+#include <unordered_map>
 
 /*
 The Player object is the representation of the person
@@ -19,10 +21,11 @@ protected:
 	
 	/* Number of lives until game over. */
 	int lives;
-	/* TODO : player's items */
-
+	/* Player's items */
+	unordered_map <string , int> items; //int is how many of that type of item player has (eg might have several times the same potion)
 	/* The texture used for the player. */
 	Texture* texture;
+	
 public:
 	~Player() {};
 	/* Creates the player */
@@ -44,6 +47,13 @@ public:
 	int health;
 	/* HP count (health points) */
 	int maxHealth;
+
+	/* Adds an item to a player's inventory. */
+	void pickUpItem(Item item);
+
+	/* Tells us whether the player has a particular item or not. */
+	bool hasItem(string itemId);
+	bool hasItem(Item item);
 };
 
 #endif

@@ -14,7 +14,7 @@ An Object that is picked up by the player becomes an Item.*/
 class Item : public Entity
 {
 protected:
-        /* Identifier of the object */
+        /* Identifier of the item */
         string id;
 	/* The texture ID */
 	string texture;
@@ -26,7 +26,7 @@ public:
 	~Item();
 
 	/* Initialises a new Item with the specified informations. */
-	Item(string tx, RenderContext& renderer);
+	Item(string identifier, string tx, RenderContext& renderer);
 
 	/* Rendering method, enabling the renderer to take the offset (in blocks) into account. */
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);

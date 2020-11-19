@@ -1,4 +1,9 @@
 1
+##
+5
+#
+11 11
+0 0
 
 !a 0 1 4 10
 !b 0 1 5 10
@@ -16,42 +21,28 @@
 !k 0 3 5 0
 !l 0 3 6 0
 
-!m 0 0 4 0
-!n 0 0 5 0
-!o 0 0 6 0
-
-!p 0 0 0 4
-!q 0 0 0 5
-!r 0 0 0 6
-
-!s 0 0 4 10
-!t 0 0 5 10
-!u 0 0 6 10
-
-!v 0 0 10 4
-!w 0 0 10 5
-!x 0 0 10 6
-
-###
-##
-5
+d1 1sw
+d2 1sn
+d3 1se
 #
-11 11
-0 0
 w  w  w  w  f!af!bf!cw  w  w  w  
+w  w  w  w  fd1fd2fd3w  w  w  w
 w  f  f  f  f  f  f  f  f  f  w
-w  f  f  f  f  w  f  f  f  f  w
-w  f  f  f  w  w  w  f  f  f  w
-f!gf  f  w  w  w  w  w  f  f  f!d
-f!hf  w  w  w  w  w  w  w  f  f!e
-f!if  f  w  w  w  w  w  f  f  f!f
-w  f  f  f  w  w  w  f  f  f  w
-w  f  f  f  f  w  f  f  f  f  w
+w  f  f  f  f  f  f  f  f  f  w
+f!gf  f  f  f  f  f  f  f  f  f!d
+f!hf  f  f  f  f  f  f  f  f  f!e
+f!if  f  f  f  f  f  f  f  f  f!f
+w  f  f  f  f  f  f  f  f  f  w
+w  f  f  f  f  f  f  f  fk1f  w
 w  f  f  f  f  fp f  f  f  f  w
 w  w  w  w  f!jf!kf!lw  w  w  w  
 #
 11 11
-0 -11
+0 -10
+!m 0 0 4 0
+!n 0 0 5 0
+!o 0 0 6 0
+#
 w  w  w  w  w  w  w  w  w  w  w  
 w  f  f  f  f  f  f  f  f  f  w
 w  f  f  f  f  w  f  f  f  f  w
@@ -65,7 +56,11 @@ w  f  f  f  f  f  f  f  f  f  w
 w  w  w  w  f!mf!nf!ow  w  w  w  
 #
 11 11
--11 0
+-10 0
+!p 0 0 0 4
+!q 0 0 0 5
+!r 0 0 0 6
+#
 w  w  w  w  w  w  w  w  w  w  w  
 w  f  f  f  f  f  f  f  f  f  w
 w  f  f  f  f  w  f  f  f  f  w
@@ -79,7 +74,11 @@ w  f  f  f  f  f  f  f  f  f  w
 w  w  w  w  w  w  w  w  w  w  w  
 #
 11 11
-0 11
+0 10
+!s 0 0 4 10
+!t 0 0 5 10
+!u 0 0 6 10
+#
 w  w  w  w  f!sf!tf!uw  w  w  w  
 w  f  f  f  f  f  f  f  f  f  w
 w  f  f  f  f  w  f  f  f  f  w
@@ -93,7 +92,11 @@ w  f  f  f  f  f  f  f  f  f  w
 w  w  w  w  w  w  w  w  w  w  w  
 #
 11 11
-11 0
+10 0
+!v 0 0 10 4
+!w 0 0 10 5
+!x 0 0 10 6
+#
 w  w  w  w  w  w  w  w  w  w  w  
 w  f  f  f  f  f  f  f  f  f  w
 w  f  f  f  f  w  f  f  f  f  w
