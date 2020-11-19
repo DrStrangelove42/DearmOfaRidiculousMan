@@ -5,7 +5,7 @@
 #include <string>
 #include "../Characters/LivingEntity.h"
 
-class Attack
+class Attack//abort for now
 
 
 #endif
