@@ -1,6 +1,6 @@
 #include "Item.h"
 
-Item::Item(string identifier, string tx, RenderContext& renderer) : id(identifier), texture(tx)
+Item::Item(string identifier, string tx, RenderContext& renderer, int attack, int defense) : id(identifier), texture(tx), attack(attack), defense(defense)
 {
 	updateTexture(renderer);
 }

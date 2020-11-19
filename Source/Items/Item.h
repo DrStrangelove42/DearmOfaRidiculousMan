@@ -20,13 +20,17 @@ protected:
 	string texture;
 	/* The loaded texture */
 	Texture* loadedTx;
+	/* Attack characteristic, makes the player's attacks stronger. */
+        int attack;
+	/* Defense characteristic, makes the player's defense stronger. */
+	int defense;
 
 public:
 	/* Destructor. */
 	~Item();
 
 	/* Initialises a new Item with the specified informations. */
-	Item(string identifier, string tx, RenderContext& renderer);
+	Item(string identifier, string tx, RenderContext& renderer, int attack, int defense);
 
 	/* Rendering method, enabling the renderer to take the offset (in blocks) into account. */
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);

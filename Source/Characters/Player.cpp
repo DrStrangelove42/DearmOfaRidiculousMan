@@ -2,7 +2,7 @@
 
 Player::Player(RenderContext& renderer, int lives, int startHealth, int startMoney, int startExp) : lives(lives), LivingEntity(startHealth, startMoney, startExp)
 {
-	texture = LoadTexture("mario", renderer);
+	texture = LoadTexture("player", renderer);
 }
 
 void Player::render(RenderContext& renderer, int offsetX, int offsetY)
@@ -49,6 +49,8 @@ void Player::pickUpItem(Item item, int count)
         if (items.find(item.getId()) == items.end())
 	{
 	        items[item.getId()] = count;
+		attack = max(item.getAttack(), attack);
+		defense = max(item.getDefense(), defense);
 	}
 	else
 	{
