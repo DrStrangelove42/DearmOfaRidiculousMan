@@ -303,22 +303,22 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 			Chest* newChest = new Chest(id, x, y, p, renderer);
 			while (line3.length()>=2)
 			{
-			        switch(line3.substr(0,2))
+			        switch(line3[1])
 			        {
-				case "sw"
-				        newChest.addItem(Sword("sw"+to_string(uniqueId++), renderer));
+				case 'w':
+				        newChest->addItem(Sword("sw"+to_string(uniqueId++), renderer));
 				break;
-				case "sh"
-				        newChest.addItem(Shield("sh"+to_string(uniqueId++), renderer));
+				case 'h':
+				        newChest->addItem(Shield("sh"+to_string(uniqueId++), renderer));
 				  break;
 				}
 				line3.erase(0,2);
-				if (line3.length>0)
+				if (line3.length()>0)
 				{
 				      line3.erase(0,1);
 				}
 			}
-			rooms[room]->addObject(newchest);
+			rooms[room]->addObject(newChest);
 			break;
 		}
 		case 'g':
