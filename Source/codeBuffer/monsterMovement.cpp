@@ -13,15 +13,20 @@ void Monster :: Move(int direction, float speed)
 void Monster :: randomMoving()
 // in this function the Monster is Moving randomly on the map and when it meets obstacles it turns back.
 {
-    direction = rand()%4;
-    if ( getTrav() = false )//if it didn't hit a obstacle
+    if (alarmed = false) // if not alarmed keep randomMoving
     {
-        Move();
+        direction = rand()%4;
+        if ( getTrav() = false )//if it didn't hit a obstacle
+        {
+            Move();
+        }
+        else 
+        {
+            randomMoving();// if meet obstacle reset direction
+        } 
+
     }
-    else 
-    {
-        randomMoving();// if meet obstacle reset direction
-    } 
+    else return 0; //stop if alarmed
 }
 
 void Monster :: towardObject()
@@ -51,5 +56,6 @@ void Monster :: towardObject()
         Move();
         towardObject();
     }
+    else return 0;// stop if reached attack range.
 }
 #endif
