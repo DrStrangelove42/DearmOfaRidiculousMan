@@ -16,7 +16,7 @@ int Monster :: randomMoving()
 {
     if (alarmed = false) // if not alarmed keep randomMoving
     {   
-        srand(time(0));
+        srand(time(0));// fetch random seed and random the directions
         direction = rand()%4;
         if ( getTrav() = false )//if it didn't hit a obstacle
         {
