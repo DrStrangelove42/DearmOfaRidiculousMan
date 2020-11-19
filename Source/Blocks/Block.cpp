@@ -25,11 +25,6 @@ bool* Block::getTrav()
 	return traversable;
 }
 
-void Block::setTrav(bool* trav)
-{
-	traversable = trav;
-}
-
 void Block::updateTexture(RenderContext& renderer)
 {
 	loadedTx = LoadTexture(texture, renderer);

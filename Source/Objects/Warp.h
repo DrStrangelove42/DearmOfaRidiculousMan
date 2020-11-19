@@ -24,7 +24,7 @@ public:
 	/* How does a warp interact with the player? */
 	void updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea);
 	bool getJustWarped();
-        void setJustWarped(bool b);
+	void setJustWarped(bool b);
 };
 
 #endif

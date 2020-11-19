@@ -29,7 +29,7 @@ void Player::kill()
 	}
 }
 
-void Player::tick(int time)
+void Player::tick(int time, RenderContext& r)
 {
 
 }
@@ -46,22 +46,22 @@ void Player::getCoins(int n)
 
 void Player::pickUpItem(Item item, int count)
 {
-        if (items.find(item.getId()) == items.end())
+	if (items.find(item.getId()) == items.end())
 	{
-	        items[item.getId()] = count;
+		items[item.getId()] = count;
 	}
 	else
 	{
-	        items[item.getId()] += count;
+		items[item.getId()] += count;
 	}
 }
 
 bool Player::hasItem(string itemid)
 {
-        return (items.find(itemid) != items.end() && items[itemid]>0);
+	return (items.find(itemid) != items.end() && items[itemid] > 0);
 }
 
 bool Player::hasItem(Item item)
 {
-        return (items.find(item.getId()) != items.end() && items[item.getId()]>0);
+	return (items.find(item.getId()) != items.end() && items[item.getId()] > 0);
 }

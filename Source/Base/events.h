@@ -14,7 +14,7 @@ typedef struct
 	RenderContext* renderer;
 	string worldName;
 	Map* currentMap;
-        int* currentMapId;
+	int* currentMapId;
 	Player* player;
 	bool quit;
 } GAME;

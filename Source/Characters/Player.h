@@ -37,7 +37,7 @@ public:
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
 	
 	/* Time management */
-	virtual void tick(int time);
+	virtual void tick(int time, RenderContext& r);
 
 	virtual void getExperience(int exp);
 	virtual void getCoins(int n);

@@ -14,7 +14,7 @@ Room::Room(int width, int height, int absx, int absy, Player& p, RenderContext& 
 				blocks[i][j] = new Block(i, j, "empty", renderer);
 			}
 		}
-	} 
+	}
 }
 
 Room::~Room()
@@ -30,7 +30,7 @@ Room::~Room()
 	if (w > 0)
 	{
 		delete[] blocks;
-	} 
+	}
 	//The objects in the map, which are deep copies of the objects we added, are deleted automatically.
 }
 
@@ -47,7 +47,7 @@ void Room::render(RenderContext& renderer, int offsetX, int offsetY)
 		}
 		for (auto& entry : objects)
 		{
-		        entry.second->render(renderer, offsetX + x, offsetY + y);
+			entry.second->render(renderer, offsetX + x, offsetY + y);
 		}
 	}
 }
@@ -74,18 +74,18 @@ int Room::getY()
 
 Block*** Room::getBlocks()
 {
-  return blocks;
+	return blocks;
 }
 
 void Room::setDiscovered(bool b)
 {
-  discovered = b;
+	discovered = b;
 }
 void Room::addObject(Object* object)
 {
-        if (objects.find(object->getId()) == objects.end())
+	if (objects.find(object->getId()) == objects.end())
 	{
-	        objects[object->getId()] = object;
+		objects[object->getId()] = object;
 		blocks[object->getX()][object->getY()]->setTrav(&(object->traversable));
 	}
 	else
@@ -96,15 +96,15 @@ void Room::addObject(Object* object)
 
 void Room::updateAllObjects(RenderContext& renderer, EVENT_ARGS* ea)
 {
-      for (auto& entry : objects)
+	for (auto& entry : objects)
 	{
-	  entry.second->updateObject(player, renderer, ea);
+		entry.second->updateObject(player, renderer, ea);
 	}
 }
 
-void Room::tick(int time)
+void Room::tick(int time, RenderContext& r)
 {
-	//TODO
+	updateAllObjects(r);
 }
 
 void Room::replaceBlock(Block* newBlock)
@@ -124,6 +124,14 @@ Block* Room::getCurrentBlock()
 	return blocks[player.getX()][player.getY()];
 }
 
+void Room::tryTeleportAt(MovingEntity& e, int x, int y)
+{
+	if (x > 0 && blocks[x][y]->getTrav())
+	{
+		e.teleport(x, y);
+	}
+}
+
 void Room::onKeyDown(EVENT_ARGS* ea)
 {
 	int curX = player.getX();
@@ -132,22 +140,20 @@ void Room::onKeyDown(EVENT_ARGS* ea)
 	switch (ea->key)
 	{
 	case Up:
-	        if (curY > 0 && *(blocks[curX][curY - 1]->getTrav()))
-			player.teleport(curX, curY - 1);
+		curY--;
 		break;
 	case Left:
-	        if (curX > 0 && *(blocks[curX - 1][curY]->getTrav()))
-			player.teleport(curX - 1, curY);
+		curX--;
 		break;
 	case Right:
-	        if (curX < w - 1 && *(blocks[curX + 1][curY]->getTrav()))
-			player.teleport(curX + 1, curY);
+		curX++;
 		break;
 	case Down:
-	        if (curY < h - 1 && *(blocks[curX][curY + 1]->getTrav()))
-			player.teleport(curX, curY + 1);
+		curY++;
 		break;
 	default:
 		break;
 	}
+
+	tryTeleportAt(curX, curY);
 }

@@ -1,4 +1,5 @@
 #include "Warp.h"
+#include "Warp.h"
 
 Warp::~Warp()
 {
@@ -26,4 +27,14 @@ void Warp::updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea)
 		ea->warp_IsExternal = true;
 	}
 	//TODO make warps possible onto other blocks containing warps (bool justwarped)
+}
+
+bool Warp::getJustWarped()
+{
+	return justWarped;
+}
+
+void Warp::setJustWarped(bool b)
+{
+	justWarped = b;
 }

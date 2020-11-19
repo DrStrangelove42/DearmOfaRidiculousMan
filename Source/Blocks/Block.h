@@ -11,8 +11,7 @@ protected:
 	/* Position coordinates */
 	int x;
 	int y;
-	/* Can we walk onto this block? */
-	bool* traversable;
+
 	/* The texture ID */
 	string texture;
 	/* The loaded texture */
@@ -28,9 +27,9 @@ public:
 	/*Getters*/
 	int getX();
 	int getY();
-	bool* getTrav();
+	bool getTrav();
 
-	void setTrav(bool* trav);
+	void setTrav(bool trav);
 
 	/* Rendering method, enabling the renderer to take the offset (in blocks) into account. */
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);

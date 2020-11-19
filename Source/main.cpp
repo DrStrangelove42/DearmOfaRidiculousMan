@@ -40,6 +40,8 @@ int playDoarm(GAME* game)
 	game->currentMapId = new int (-1);
 	game->currentMap = new Map(worldName, *me, renderer, game->currentMapId);
 
+	int currentTime;
+
 	while (!(game->quit))
 	{
 		game->renderer->clear();
@@ -47,6 +49,10 @@ int playDoarm(GAME* game)
 		manageEvents(game);
 
 		game->currentMap->render(renderer);
+
+		currentTime = GetTime();
+		game->currentMap->tick(currentTime, renderer);
+		game->player->tick(currentTime, renderer);
 
 		game->renderer->update();
 
