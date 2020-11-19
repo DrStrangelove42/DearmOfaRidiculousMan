@@ -7,6 +7,5 @@ FloorBlock::FloorBlock(int posx, int posy, RenderContext& renderer) : Block(posx
 
 void FloorBlock::onEnter(EVENT_ARGS* ea)
 {
-	if (traversable)
-		teleportOn(*(ea->player));
+	 
 }

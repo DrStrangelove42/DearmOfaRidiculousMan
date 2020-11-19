@@ -15,9 +15,9 @@ void Key::updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea)
 {
 	if (texture == "empty" || ea == NULL || x != p.getX() || y != p.getY())
 	{
-	        return;
+		return;
 	}
-	p.pickUpItem(Item(id,"key", renderer));
+	p.pickUpItem(Item(id, "key", renderer, 0, 0));
 	texture = "empty";
 	updateTexture(renderer);
 }

@@ -7,21 +7,21 @@
 
 using namespace std;
 
-/*The word Item describes anything that is collectable by a player. 
-Not to be confused with Objects. Items cannot be present on the map. 
+/*The word Item describes anything that is collectable by a player.
+Not to be confused with Objects. Items cannot be present on the map.
 An Object that is picked up by the player becomes an Item.*/
 // todo: add a limit property and current number property of items
 class Item : public Entity
 {
 protected:
-        /* Identifier of the item */
-        string id;
+	/* Identifier of the item */
+	string id;
 	/* The texture ID */
 	string texture;
 	/* The loaded texture */
 	Texture* loadedTx;
 	/* Attack characteristic, makes the player's attacks stronger. */
-        int attack;
+	int attack;
 	/* Defense characteristic, makes the player's defense stronger. */
 	int defense;
 
@@ -37,7 +37,8 @@ public:
 
 	/* The following function describes how each type of item interacts withthe map when the player uses it.*/
 	virtual void useItem();
-
+	int getAttack();
+	int getDefense();
 	/* Time management */
 	virtual void tick(int time, RenderContext& r);
 
@@ -53,7 +54,7 @@ public:
 	{
 		return otherItem.id == id;
 	}
-	
+
 	//virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
 };
 

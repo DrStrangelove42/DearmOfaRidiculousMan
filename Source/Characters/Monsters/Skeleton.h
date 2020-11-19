@@ -6,12 +6,12 @@
 /*
 We create a type of monster : skeletons. These will always have the same characteristics.
 */
-class Player : public MovingEntity, public LivingEntity
+class Skeleton : public Monster
 {
 protected:
-  
+
 public:
-        Skeleton(RenderContext& renderer, Player& p);
+	Skeleton(RenderContext& renderer, Player& p);
 	~Skeleton();
 };
 

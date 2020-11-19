@@ -7,6 +7,8 @@ Every visible object in the window is an Entity.
 */
 class Entity
 {
+protected:
+ 
 public:
 	virtual ~Entity() {};
 	/* Rendering method, enabling the renderer to take the offset (in blocks) into account. */

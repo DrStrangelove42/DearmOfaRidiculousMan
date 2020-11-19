@@ -21,6 +21,7 @@ protected:
 	int attackDelay;
 	int attackRadius;
 	int alarmRadius;
+	bool alarmed;
 	Texture* texture;
 public:
 	
