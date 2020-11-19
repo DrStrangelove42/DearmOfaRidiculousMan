@@ -32,7 +32,7 @@ public:
 		int atkDelay = 1000,
 		int atkRadius = 1,
 		int coins = 200,
-		int exp = 50
+		int exp = 50,
 		bool alarmed = false );
 	virtual void attackRound();
 	virtual void alarm();
