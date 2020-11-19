@@ -1,7 +1,7 @@
 #if false
 //modification in monster.h
 protected:
-float speed
+float speed;
 
 public:
 int direction, // 0,1,2,3 stands for left, right, up, down
