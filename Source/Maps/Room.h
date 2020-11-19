@@ -39,6 +39,8 @@ public:
 
 	void addMonster(Monster& m);
 
+	void attackMonsters();
+
 	/* Standard destructor */
 	virtual ~Room();
 

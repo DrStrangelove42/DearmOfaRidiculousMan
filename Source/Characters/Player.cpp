@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(RenderContext& renderer, int lives, int startHealth, int startMoney, int startExp) : lives(lives), LivingEntity(startHealth, startMoney, startExp)
+Player::Player(RenderContext& renderer, int lives, int attack, int defense, int startHealth, int startMoney, int startExp) : lives(lives), LivingEntity(startHealth, startMoney, startExp)
 {
 	texture = LoadTexture("player", renderer);
 }
@@ -29,7 +29,7 @@ void Player::kill()
 	}
 }
 
-void Player::tick(int time)
+void Player::tick(int time, RenderContext& r)
 {
 
 }
@@ -44,26 +44,41 @@ void Player::getCoins(int n)
 	money += n;
 }
 
+bool Player::isInAttackRange(int mx, int my)
+{
+	return abs(x - mx) < 2 && abs(y - my) < 2;
+}
+
+int Player::getAttack()
+{
+	return attack;
+}
+
+int Player::getDefense()
+{
+	return defense;
+}
+
 void Player::pickUpItem(Item item, int count)
 {
-        if (items.find(item.getId()) == items.end())
+	if (items.find(item.getId()) == items.end())
 	{
-	        items[item.getId()] = count;
+		items[item.getId()] = count;
 		attack = max(item.getAttack(), attack);
 		defense = max(item.getDefense(), defense);
 	}
 	else
 	{
-	        items[item.getId()] += count;
+		items[item.getId()] += count;
 	}
 }
 
 bool Player::hasItem(string itemid)
 {
-        return (items.find(itemid) != items.end() && items[itemid]>0);
+	return (items.find(itemid) != items.end() && items[itemid] > 0);
 }
 
 bool Player::hasItem(Item item)
 {
-        return (items.find(item.getId()) != items.end() && items[item.getId()]>0);
+	return (items.find(item.getId()) != items.end() && items[item.getId()] > 0);
 }
