@@ -32,7 +32,7 @@ int playDoarm(GAME* game)
 
 	game->player = me;
 
-	string worldName = "NewTestMap";
+	string worldName = "FinalMap";
 	
 	Map::worldFromFile(MAPFILES_LOCATION, worldName);
 	worldName = MAPFILES_LOCATION + worldName + "/" + worldName;

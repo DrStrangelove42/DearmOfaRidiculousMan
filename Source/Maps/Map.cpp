@@ -259,7 +259,7 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 	while (getline(data, line3)) //We now add the objects to the rooms
 	{
 		//For each object, we extract its position in the map, its identifier, and the rest of the information needed to construct the object and add it to the map
-			//int uniqueId = 0; //This integer is used to make sure the identifier of each objects in the room is unique
+	        int uniqueId = 0; //This integer is used to make sure the identifier of each objects in the room is unique
 		int room, x, y;
 		size_t a;
 		room = stoi(line3, &a);
@@ -296,14 +296,37 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 			rooms[room]->addObject(new Door(id, x, y, p, renderer));
 			break;
 		}
-		case 'g':
-			//TODO monster case. Monster identifier is given by line[3*j+2]
-			cout << "Monster case not treated yet." << endl;
-			break;
 		case 'c':
-			//TODO chest case. Chest identifier is given by line[3*j+2]
-			cout << "Chest case not treated yet." << endl;
+		{
+			string id = line3.substr(0, 2);
+			line3.erase(0,3);
+			Chest* newChest = new Chest(id, x, y, p, renderer);
+			while (line3.length()>=2)
+			{
+			        switch(line3.substr(0,2))
+			        {
+				case "sw"
+				        newChest.addItem(Sword("sw"+to_string(uniqueId++), renderer));
+				break;
+				case "sh"
+				        newChest.addItem(Shield("sh"+to_string(uniqueId++), renderer));
+				  break;
+				}
+				line3.erase(0,2);
+				if (line3.length>0)
+				{
+				      line3.erase(0,1);
+				}
+			}
+			rooms[room]->addObject(newchest);
 			break;
+		}
+		case 'g':
+		  rooms[room]->addMonster(new Ghost(renderer,p));
+		  break;
+		case 's':
+		  rooms[room]->addMonster(new Skeleton(renderer,p));
+		  break;
 		default:
 			cout << "Case " << line3[0] << " not treated yet." << endl;
 			break;
