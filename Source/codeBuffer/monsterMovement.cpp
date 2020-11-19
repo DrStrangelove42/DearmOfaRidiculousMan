@@ -1,3 +1,4 @@
+#if false
 //modification in monster.h
 protected:
 int speed
@@ -22,3 +23,4 @@ void Monster :: towardObject()
 {
 
 }
+#endif

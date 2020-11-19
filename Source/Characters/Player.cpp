@@ -49,6 +49,8 @@ void Player::pickUpItem(Item item, int count)
 	if (items.find(item.getId()) == items.end())
 	{
 		items[item.getId()] = count;
+		attack = max(item.getAttack(), attack);
+		defense = max(item.getDefense(), defense);
 	}
 	else
 	{
