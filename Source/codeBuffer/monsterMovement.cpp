@@ -1,5 +1,6 @@
 #if false
 //modification in monster.h
+#include<time.h>
 protected:
 float speed;
 
@@ -14,7 +15,8 @@ int Monster :: randomMoving()
 // in this function the Monster is Moving randomly on the map and when it meets obstacles it turns back.
 {
     if (alarmed = false) // if not alarmed keep randomMoving
-    {
+    {   
+        srand(time(0));
         direction = rand()%4;
         if ( getTrav() = false )//if it didn't hit a obstacle
         {
