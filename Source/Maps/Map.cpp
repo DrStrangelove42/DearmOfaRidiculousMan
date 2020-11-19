@@ -16,7 +16,7 @@ Map::~Map()
 
 Map::Map(string filename, Player& p, RenderContext& renderer, int* startMap, int startRoom) : player(p)
 {
-        mapFromFiles(filename, p, renderer, startMap, startRoom);
+	mapFromFiles(filename, p, renderer, startMap, startRoom);
 }
 
 void Map::render(RenderContext& renderer, int offsetX, int offsetY)
@@ -35,13 +35,13 @@ void Map::render(RenderContext& renderer, int offsetX, int offsetY)
 			rooms[i]->render(renderer, offX, offY);
 		}
 	}
-	
+
 	player.render(renderer, offX + cur->getX(), offY + cur->getY());
 }
 
-void Map::tick(int time)
+void Map::tick(int time, RenderContext& r)
 {
-	rooms[currentRoom]->tick(time);
+	rooms[currentRoom]->tick(time, g);
 }
 
 Room** Map::getRooms()
@@ -79,18 +79,18 @@ void Map::worldFromFile(string location, string filename) {
 		getline(World, line);
 		NumberOfRooms = stoi(line);
 		layout << to_string(NumberOfRooms) << endl;
-		
+
 		for (int room = 0; room < NumberOfRooms; room++) {
 
-		        getline(World, line);
+			getline(World, line);
 			if (line.length() == 0 || line[0] != '#')
 			{
-			        cout << "Expected # before beginning of room " << room << endl;
+				cout << "Expected # before beginning of room " << room << endl;
 				return;
 			}
-		  
+
 			/* We determine the dimensions of the room. */
-		  
+
 			getline(World, line);
 			size_t h;
 			width = stoi(line, &h);
@@ -98,10 +98,10 @@ void Map::worldFromFile(string location, string filename) {
 			height = stoi(line);
 
 			layout << to_string(width) << " " << to_string(height) << endl;
-			
+
 			/* We determine the absolute position of the room. */
 
-			int x , y;
+			int x, y;
 			getline(World, line);
 			x = stoi(line, &h);
 			line.erase(0, h);
@@ -115,10 +115,10 @@ void Map::worldFromFile(string location, string filename) {
 			getline(World, line);
 
 			while (line.length() == 0 || line[0] != '#') {
-			        if (line != "")
+				if (line != "")
 				{
-			        	  descriptions += line + "\n";
-					  headerLength += 1;
+					descriptions += line + "\n";
+					headerLength += 1;
 				}
 				getline(World, line);
 			}
@@ -129,18 +129,18 @@ void Map::worldFromFile(string location, string filename) {
 
 			for (int i = 0; i < headerLength; i++)
 			{
-			        int firstlineskip = descriptions.find("\n");
+				int firstlineskip = descriptions.find("\n");
 				header[i] = descriptions.substr(0, firstlineskip);
 				descriptions.erase(0, firstlineskip + 1);
 			}
-			
+
 			for (int i = 0; i < height; i++) {
 				getline(World, line);
 				if (line[line.length() - 1] == '\r')
 				{
 					line.erase(line.length() - 1);
 				}
-				string extraspaces = string(max(0,width * 3 - int(line.length())), ' ');
+				string extraspaces = string(max(0, width * 3 - int(line.length())), ' ');
 				line += extraspaces; //We add extra spaces so that all lines in the file are of the same length : width*3. If we find an empty space, it is an empty block.
 				for (int j = 0; j < width; j++) {
 					layout << line[3 * j];
@@ -158,7 +158,7 @@ void Map::worldFromFile(string location, string filename) {
 						start.close();
 						break;
 					default:
-					        data << to_string(room) << " " << to_string(j) << " " << to_string(i) << " ";
+						data << to_string(room) << " " << to_string(j) << " " << to_string(i) << " ";
 						bool notinheader = true;
 						for (int k = 0; k < headerLength; k++) {
 							if (header[k][0] == line[3 * j + 1] && header[k][1] == line[3 * j + 2]) {
@@ -169,7 +169,7 @@ void Map::worldFromFile(string location, string filename) {
 						}
 						if (notinheader)
 						{
-						        data << line[3 * j + 1] << line[3 * j + 2] << endl;
+							data << line[3 * j + 1] << line[3 * j + 2] << endl;
 						}
 						break;
 					}
@@ -217,7 +217,7 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 	Room* thisRoom;
 	for (int room = 0; room < roomCount; room++)
 	{
-	        /* We determine the dimensions of the room. */
+		/* We determine the dimensions of the room. */
 		getline(layout, line2);
 		size_t h;
 		int width = stoi(line2, &h);
@@ -259,7 +259,7 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 	while (getline(data, line3)) //We now add the objects to the rooms
 	{
 		//For each object, we extract its position in the map, its identifier, and the rest of the information needed to construct the object and add it to the map
-	        //int uniqueId = 0; //This integer is used to make sure the identifier of each objects in the room is unique
+			//int uniqueId = 0; //This integer is used to make sure the identifier of each objects in the room is unique
 		int room, x, y;
 		size_t a;
 		room = stoi(line3, &a);
@@ -272,9 +272,9 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 		{
 		case '!':
 		{
-		        string id = line3.substr(0, 2);
+			string id = line3.substr(0, 2);
 			line3.erase(0, 2);
-		        int destMap = stoi(line3, &a);
+			int destMap = stoi(line3, &a);
 			line3.erase(0, a);
 			int destRoom = stoi(line3, &a);
 			line3.erase(0, a);
@@ -286,14 +286,14 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 		}
 		case 'k':
 		{
-		        string id = line3.substr(0, 2);
-		        rooms[room]->addObject(new Key(id, x, y, p, renderer));
+			string id = line3.substr(0, 2);
+			rooms[room]->addObject(new Key(id, x, y, p, renderer));
 			break;
 		}
 		case 'd':
 		{
-		        string id = line3.substr(0, 6);
-		        rooms[room]->addObject(new Door(id, x, y, p, renderer));
+			string id = line3.substr(0, 6);
+			rooms[room]->addObject(new Door(id, x, y, p, renderer));
 			break;
 		}
 		case 'm':

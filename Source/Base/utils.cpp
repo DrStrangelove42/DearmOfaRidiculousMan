@@ -40,3 +40,12 @@ int DumpError(string err)
 	cout << "Error : " << err << "\nInternal error: " << renderErrorDetails() << endl;
 	return EXIT_FAILURE;
 }
+
+int GetTime()
+{
+	using namespace std::chrono;
+	static  high_resolution_clock::time_point referenceTime = high_resolution_clock::now();
+	high_resolution_clock::time_point n = high_resolution_clock::now();
+	duration<double, milli> time_span = n - referenceTime;
+	return (int)time_span.count();
+}

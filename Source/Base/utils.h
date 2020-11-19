@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include <chrono>
 #include <unordered_map>
 #include "config.h"
 #include "Texture.h"
@@ -46,5 +47,8 @@ void FreeTextures();
 
 /* Initialisation of the <utils> module. */
 int InitUtils();
+
+/* Returns the number of millisecond  */
+int GetTime();
 
 #endif

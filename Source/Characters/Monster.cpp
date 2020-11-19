@@ -20,12 +20,13 @@ void Monster::kill()
 	player.getCoins(money);
 }
 
-void Monster::tick(int time)
+void Monster::tick(int time, RenderContext& r)
 {
 	static int lastTime = 0;
 	if (time - lastTime >= attackDelay)
 	{
 		lastTime = time;
+		alarm();
 		attackRound();
 	}
 }
@@ -37,6 +38,7 @@ void Monster::attackRound()
 		player.damage(damage);
 	}
 }
+
 void Monster::alarm()
 {
 	if (abs(x - player.getX()) < alarmRadius && abs(y - player.getY()) < alarmRadius)
@@ -44,6 +46,7 @@ void Monster::alarm()
 		alarmed = true;
 	}
 }
+
 void Monster::render(RenderContext& renderer, int offsetX, int offsetY)
 {
 	int xx = (x + offsetX) * SZ_BLOCKSIZE;

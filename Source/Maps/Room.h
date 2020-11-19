@@ -30,7 +30,7 @@ protected:
 	/* If the room has already been visited */
 	bool discovered;
 	/* The unordered map of objects in the room.*/ //TODO change data structure?
-	unordered_map <string , Object*> objects;
+	unordered_map <string, Object*> objects;
 
 public:
 	/* Creates a new Room object */
@@ -42,14 +42,17 @@ public:
 	/* Add object */
 	void addObject(Object* object);
 
+	/* Ask to move the entity on the room */
+	void tryTeleportAt(MovingEntity& e, int x, int y);
+
 	/* Updates all objects in the room accordingly. */
 	void updateAllObjects(RenderContext& renderer, EVENT_ARGS* ea = NULL);
-	
+
 	/* Rendering method, enabling the renderer to take the offset (in blocks) into account. */
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
 
 	/* Time management */
-	virtual void tick(int time);
+	virtual void tick(int time, RenderContext& r);
 
 	/* Changes a block in the room, according to its location */
 	void replaceBlock(Block* newBlock);

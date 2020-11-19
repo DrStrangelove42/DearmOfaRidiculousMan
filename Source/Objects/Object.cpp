@@ -54,7 +54,7 @@ void Object::updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea)
 {
 }
 
-void Object::tick(int time)
+void Object::tick(int time, RenderContext& renderer)
 {
 
 }
