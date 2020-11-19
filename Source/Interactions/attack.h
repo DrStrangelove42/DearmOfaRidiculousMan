@@ -1,21 +1,11 @@
-//this file defines the attack interaction
+//this file defines the attack interaction, currently it's the damage funtion in LivingEntity but it'll be enriched here
 #ifndef ATTACK_H
 #define ATTACK_H
 
 #include <string>
+#include "../Characters/LivingEntity.h"
 
-
-void Charactor::attack(int damage, bool validAttack)
-{
-    if(validAttack)
-    {
-        setHealth(getHealth()-(attack-defense_));
-    }
-    else
-    {
-        setHealth(health_);
-    }
-}
+class Attack
 
 
 #endif
