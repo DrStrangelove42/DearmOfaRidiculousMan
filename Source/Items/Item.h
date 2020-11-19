@@ -39,7 +39,7 @@ public:
 	virtual void useItem();
 
 	/* Time management */
-	virtual void tick(int time);
+	virtual void tick(int time, RenderContext& r);
 
 	/* Forces the item to reload the texture corresponding to the current ID in <texture>.
 	Note that there is no function to change the texture from the outside of the object, because we

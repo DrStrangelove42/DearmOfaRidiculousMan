@@ -105,27 +105,27 @@ void Room::updateAllObjects(RenderContext& renderer, EVENT_ARGS* ea)
 void Room::tick(int time, RenderContext& r)
 {
 	updateAllObjects(r);
-	for (Monster& m : monsters)
-		m.tick(time, r);
+	for (Monster* m : monsters)
+		m->tick(time, r);
 }
 
 void Room::attackMonsters()
 {
-	for (Monster& m : monsters)
+	for (Monster* m : monsters)
 	{
-		if (player.isInAttackRange(m.getX(), m.getY()))
+		if (player.isInAttackRange(m->getX(), m->getY()))
 		{
-			m.damage(player.getAttack())
+			m->damage(player.getAttack());
 		}
 	}
 }
 
-void Room::addMonster(Monster& m)
+void Room::addMonster(Monster* m)
 {
 	monsters.push_back(m);
 }
 
-void Room::removeMonster(Monster& m)
+void Room::removeMonster(Monster* m)
 {
 	monsters.remove(m);
 }
@@ -179,12 +179,12 @@ void Room::onKeyDown(EVENT_ARGS* ea)
 		break;
 	case B:
 		//Atk
-		attackMonsters(curX, curY);
+		attackMonsters();
 		break;
 	default:
 		break;
 	}
 
 	if (curX != player.getX() || curY != player.getY())
-		tryTeleportAt(curX, curY);
+		tryTeleportAt(player, curX, curY);
 }

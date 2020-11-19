@@ -42,7 +42,7 @@ public:
 	virtual void onEnter(EVENT_ARGS* ea);
 
 	/* Time management */
-	virtual void tick(int time);
+	virtual void tick(int time, RenderContext&);
 
 	/* Forces the object to reload the texture corresponding to the current ID in <texture>.
 	Note that there is no function to change the texture from the outside of the object, because we

@@ -8,6 +8,7 @@
 #include "../Blocks/Block.h"
 #include "../Objects/Object.h"
 #include <unordered_map>
+#include <list>
 #include "../Characters/Monster.h"
 
 using namespace std;
@@ -32,13 +33,13 @@ protected:
 	/* The unordered map of objects in the room.*/ //TODO change data structure?
 	unordered_map <string, Object*> objects;
 
-	list<Monster&> monsters;
+	list<Monster*> monsters;
 public:
 	/* Creates a new Room object */
 	Room(int width, int height, int absx, int absy, Player& p, RenderContext& renderer);
 
-	void addMonster(Monster& m);
-
+	void addMonster(Monster* m);
+	void removeMonster(Monster* m);
 	void attackMonsters();
 
 	/* Standard destructor */

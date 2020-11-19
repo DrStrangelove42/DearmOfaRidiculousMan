@@ -40,7 +40,7 @@ void Block::teleportOn(MovingEntity& m)
 	m.teleport(x, y);
 }
 
-void Block::tick(int time)
+void Block::tick(int time, RenderContext& r)
 {
 
 }
