@@ -166,10 +166,27 @@ Block* Room::getCurrentBlock()
 
 void Room::tryTeleportAt(MovingEntity& e, int x, int y)
 {
-	if (x >= 0 && y >= 0 && x < w && y < h && blocks[x][y]->getTrav())
+	if (x >= 0 && y >= 0 && x < w && y < h && isTraversable(x, y))
 	{
 		e.teleport(x, y);
 	}
+}
+
+bool Room::isTraversable(int mx, int my)
+{
+	bool tr = blocks[mx][my]->getTrav();
+	if (!tr)
+		return false;
+	for (auto& entry : objects)
+	{
+		if (entry.second->getX() == mx &&
+			entry.second->getY() == my)
+		{
+			if (!entry.second->getTrav())
+				return false;
+		}
+	}
+	return true;
 }
 
 void Room::onKeyDown(EVENT_ARGS* ea)

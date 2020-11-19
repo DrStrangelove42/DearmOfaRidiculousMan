@@ -37,7 +37,7 @@ protected:
 public:
 	/* Creates a new Room object */
 	Room(int width, int height, int absx, int absy, Player& p, RenderContext& renderer);
-
+	bool isTraversable(int, int);
 	void addMonster(Monster* m);
 	void removeMonster(Monster* m);
 	void attackMonsters();
