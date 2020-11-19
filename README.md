@@ -13,9 +13,9 @@ you can find the install instructions here:
 
 https://wiki.libsdl.org/Installation
 
-Or simply using;
+Or simply using:
 
-'brew install sdl2'
+`brew install sdl2`
 
 It's currently under developping:
 
