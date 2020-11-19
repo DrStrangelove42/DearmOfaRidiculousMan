@@ -1,0 +1,23 @@
+2
+11 11
+0 0
+wwwwwwwwww 
+wffffffffw 
+wffffffffw 
+wffffffffw 
+wfffffffff 
+wfffffffff 
+wffffffffw 
+wffffffffw 
+wffffffffw 
+wwwwffwwww 
+           
+6 7
+2 10
+      
+wwffww
+wffffw
+wffffw
+wffffw
+wffffw
+wwwwww
