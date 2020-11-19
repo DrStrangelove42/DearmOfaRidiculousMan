@@ -7,7 +7,10 @@ Player::Player(RenderContext& renderer)
 
 void Player::render(RenderContext& renderer, int offsetX, int offsetY)
 {
-	texture->render(renderer, (x + offsetX) * SZ_BLOCKSIZE, (y + offsetY) * SZ_BLOCKSIZE, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
+	int xx = (x + offsetX) * SZ_BLOCKSIZE;
+	int yy = (y + offsetY) * SZ_BLOCKSIZE;
+	texture->render(renderer, xx, yy, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
+	drawHealthBar(renderer, xx, yy);
 }
 
 /*
@@ -29,4 +32,14 @@ void Player::kill()
 void Player::tick(int time)
 {
 
+}
+
+void Player::getExperience(int exp)
+{
+	experience += exp;
+}
+
+void Player::getCoins(int n)
+{
+	money += n;
 }

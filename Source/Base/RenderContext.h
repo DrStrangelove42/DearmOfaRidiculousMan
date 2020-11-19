@@ -27,8 +27,10 @@ public:
 		const SDL_Point* center,
 		const SDL_RendererFlip flip);
 
-	void drawRectangle(int x, int y, int w, int h);
+	void drawRectangle(int x, int y, int w, int h, bool fill = false);
 	void drawLine(int x1, int y1, int x2, int y2);
+
+	/* Sets the current color, in the format 0xRRGGBBAA */
 	void changeColor(int color);
 };
 

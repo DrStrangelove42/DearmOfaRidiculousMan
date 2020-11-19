@@ -53,10 +53,13 @@ void RenderContext::changeColor(int color)
 		throw runtime_error(SDL_GetError());
 }
 
-void RenderContext::drawRectangle(int x, int y, int w, int h)
+void RenderContext::drawRectangle(int x, int y, int w, int h, bool fill)
 {
 	SDL_Rect rect = { x, y, w, h };
-	SDL_RenderDrawRect(renderer, &rect);
+	if (fill)
+		SDL_RenderFillRect(renderer, &rect);
+	else
+		SDL_RenderDrawRect(renderer, &rect);
 }
 
 void RenderContext::drawLine(int x1, int y1, int x2, int y2)

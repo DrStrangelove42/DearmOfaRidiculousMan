@@ -36,6 +36,9 @@ public:
 	/* Time management */
 	virtual void tick(int time);
 
+	virtual void getExperience(int exp);
+	virtual void getCoins(int n);
+
 	/* Health points of the player : when this reaches 0,
 	   the player lose a life (see <lives> field below) */
 	int health;

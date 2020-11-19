@@ -1,7 +1,6 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include <SDL2/SDL.h>
 #include "RenderContext.h"
 /*
 Every visible object in the window is an Entity.

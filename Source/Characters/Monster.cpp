@@ -1,21 +1,48 @@
 #include "Monster.h"
 
-Monster::Monster(RenderContext& renderer, string textureId, int dmg) : damage(dmg)
+Monster::Monster(RenderContext& renderer,
+	Player& p,
+	string textureId,
+	int dmg,
+	int atkDelay,
+	int atkRadius,
+	int coins,
+	int exp) :
+	damage(dmg), player(p), attackDelay(atkDelay), attackRadius(atkRadius)
 {
+	money = coins;
+	experience = exp;
 	texture = LoadTexture(textureId, renderer);
 }
 
 void Monster::kill()
 {
-	//player wins XP? Coins?
+	player.getExperience(experience);
+	player.getCoins(money);
 }
 
 void Monster::tick(int time)
 {
-	//Way to get to the player TODO
+	static int lastTime = 0;
+	if (time - lastTime >= attackDelay)
+	{
+		lastTime = time;
+		attackRound();
+	}
 }
 
-void Monster::render(RenderContext& renderer, int offsetX = 0, int offsetY = 0)
+void Monster::attackRound()
 {
-	texture->render(renderer, (x + offsetX) * SZ_BLOCKSIZE, (y + offsetY) * SZ_BLOCKSIZE, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
+	if (abs(x - player.getX()) < attackRadius && abs(y - player.getY()) < attackRadius)
+	{
+		player.damage(damage);
+	}
+}
+
+void Monster::render(RenderContext& renderer, int offsetX, int offsetY)
+{
+	int xx = (x + offsetX) * SZ_BLOCKSIZE;
+	int yy = (y + offsetY) * SZ_BLOCKSIZE;
+	texture->render(renderer, xx, yy, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
+	drawHealthBar(renderer, xx, yy);
 }

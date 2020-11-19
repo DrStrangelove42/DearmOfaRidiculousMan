@@ -2,7 +2,7 @@
 #define LIVING_H
 
 #include "../Base/Entity.h"
-
+#include "../Base/config.h"
 /*
 Objects in the game that can be moved.
 */
@@ -14,6 +14,8 @@ protected:
 	/* HP count (health points) */
 	int maxHealth;
 
+	int money;
+	int experience;
 public:
 	/* Applies damage to the player, making him lose HP according to its resistance. */
 	void damage(int dmg);
@@ -22,6 +24,7 @@ public:
 	/* Instantly kills the entity (pure virtual). */
 	virtual void kill() = 0;
 
+	virtual void drawHealthBar(RenderContext& renderer, int offsetX, int offsetY);
 };
 
 #endif
