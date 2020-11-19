@@ -34,4 +34,12 @@ At the next stage, we'll generate more complex maps to meet the theme of the gam
 
 - The little girl will guild you to your dream and be your way out of it ! 
 
+Also there'll be more features, such as:
+
+- Entry menu.
+
+- Different texture packs.
+
+- Save file.
+
 
