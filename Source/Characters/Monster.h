@@ -15,7 +15,7 @@ using namespace std;
 class Monster : public MovingEntity, public LivingEntity
 {
 protected:
-	int damage;
+	int attackValue;
 	Player& player;
 	
 	int attackDelay;

@@ -109,6 +109,17 @@ void Room::tick(int time, RenderContext& r)
 		m.tick(time, r);
 }
 
+void Room::attackMonsters()
+{
+	for (Monster& m : monsters)
+	{
+		if (player.isInAttackRange(m.getX(), m.getY()))
+		{
+			m.damage(player.getAttack())
+		}
+	}
+}
+
 void Room::addMonster(Monster& m)
 {
 	monsters.push_back(m);
@@ -163,9 +174,17 @@ void Room::onKeyDown(EVENT_ARGS* ea)
 	case Down:
 		curY++;
 		break;
+	case A:
+		//TODO Jump ?
+		break;
+	case B:
+		//Atk
+		attackMonsters(curX, curY);
+		break;
 	default:
 		break;
 	}
 
-	tryTeleportAt(curX, curY);
+	if (curX != player.getX() || curY != player.getY())
+		tryTeleportAt(curX, curY);
 }
