@@ -41,7 +41,7 @@ void Map::render(RenderContext& renderer, int offsetX, int offsetY)
 
 void Map::tick(int time, RenderContext& r)
 {
-	rooms[currentRoom]->tick(time, g);
+	rooms[currentRoom]->tick(time, r);
 }
 
 Room** Map::getRooms()
@@ -296,7 +296,7 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 			rooms[room]->addObject(new Door(id, x, y, p, renderer));
 			break;
 		}
-		case 'm':
+		case 'g':
 			//TODO monster case. Monster identifier is given by line[3*j+2]
 			cout << "Monster case not treated yet." << endl;
 			break;
