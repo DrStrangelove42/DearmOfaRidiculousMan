@@ -8,8 +8,8 @@ Monster::Monster(RenderContext& renderer,
 	int atkDelay,
 	int atkRadius,
 	int coins,
-	int exp) :
-        LivingEntity(health, coins, exp), damage(dmg), player(p), attackDelay(atkDelay), attackRadius(atkRadius)
+	int exp, bool alarmd) :
+        LivingEntity(health, coins, exp), attackValue(dmg), player(p), attackDelay(atkDelay), attackRadius(atkRadius),alarmed(alarmd)
 {
 	texture = LoadTexture(textureId, renderer);
 }
@@ -35,7 +35,7 @@ void Monster::attackRound()
 {
 	if (abs(x - player.getX()) < attackRadius && abs(y - player.getY()) < attackRadius)
 	{
-		player.damage(damage);
+		player.damage(attackValue);
 	}
 }
 

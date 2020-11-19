@@ -37,7 +37,8 @@ public:
 
 	/* The following function describes how each type of item interacts withthe map when the player uses it.*/
 	virtual void useItem();
-
+	int getAttack();
+	int getDefense();
 	/* Time management */
 	virtual void tick(int time, RenderContext& r);
 

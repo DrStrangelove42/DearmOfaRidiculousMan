@@ -30,6 +30,16 @@ void Item::tick(int time, RenderContext& r)
 
 }
 
+int Item::getAttack()
+{
+	return attack;
+}
+
+int Item::getDefense()
+{
+	return defense;
+}
+
 string Item::getId() const
 {
         return id;
