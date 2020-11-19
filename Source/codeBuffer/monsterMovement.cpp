@@ -8,7 +8,7 @@ int direction, // 0,1,2,3 stands for left, right, up, down
 
 void Monster :: Move(int direction, float speed)
 {
-    //todo move at the current direction at current speed for one brick
+    //todo : move at the current direction at current speed for one tile
 }
 int Monster :: randomMoving()
 // in this function the Monster is Moving randomly on the map and when it meets obstacles it turns back.
