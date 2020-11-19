@@ -1,0 +1,31 @@
+3
+12 10
+0 0
+ ssssssssss 
+ sffffffffs 
+ sffffffffs 
+ sffffffffs 
+ ffffffffff 
+ ffffffffff 
+ sffffffffs 
+ sffffffffs 
+ sffffffffs 
+ ssssssssss 
+8 6
+-5 2
+ ssssss 
+ sffffs 
+ ffffff 
+ ffffff 
+ sffffs 
+ ssssss 
+41 8
+-45 1
+ssssssssssssssssssssssssssssssssssssssss 
+sffffffffffffffffffffffffffffffffffffffs 
+sffffffffffffffffffffffffffffffffffffffs 
+sfffffffffffffffffffffffffffffffffffffff 
+sfffffffffffffffffffffffffffffffffffffff 
+sffffffffffffffffffffffffffffffffffffffs 
+sffffffffffffffffffffffffffffffffffffffs 
+ssssssssssssssssssssssssssssssssssssssss 
