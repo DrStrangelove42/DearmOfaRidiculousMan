@@ -53,7 +53,7 @@ void Room::render(RenderContext& renderer, int offsetX, int offsetY)
 
 		for (Monster* m : monsters)
 		{
-			m->render(renderer, offsetX, offsetY);
+			m->render(renderer, offsetX + x, offsetY + y);
 		}
 	}
 }
