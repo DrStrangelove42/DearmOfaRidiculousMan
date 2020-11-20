@@ -322,11 +322,19 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 			break;
 		}
 		case 'g':
-		  rooms[room]->addMonster(new Ghost(renderer,p));
-		  break;
+		{
+		        Ghost* newGhost = new Ghost(renderer,p);
+		        newGhost->teleport(x,y);
+		        rooms[room]->addMonster(newGhost);
+		        break;
+		}
 		case 's':
-		  rooms[room]->addMonster(new Skeleton(renderer,p));
-		  break;
+		{
+		        Skeleton* newSkeleton = new Skeleton(renderer,p);
+		        newSkeleton->teleport(x,y);
+		        rooms[room]->addMonster(newSkeleton);
+		        break;
+		}
 		default:
 			cout << "Case " << line3[0] << " not treated yet." << endl;
 			break;
