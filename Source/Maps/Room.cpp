@@ -87,7 +87,7 @@ void Room::addObject(Object* object)
 	if (objects.find(object->getId()) == objects.end())
 	{
 		objects[object->getId()] = object;
-		blocks[object->getX()][object->getY()]->setTrav(object->traversable);
+		blocks[object->getX()][object->getY()]->setTrav(true);
 	}
 	else
 	{
@@ -173,10 +173,12 @@ void Room::tryTeleportAt(MovingEntity& e, int x, int y)
 }
 
 bool Room::isTraversable(int mx, int my)
-{
+{ 
 	bool tr = blocks[mx][my]->getTrav();
+
 	if (!tr)
 		return false;
+	
 	for (auto& entry : objects)
 	{
 		if (entry.second->getX() == mx &&
@@ -186,6 +188,7 @@ bool Room::isTraversable(int mx, int my)
 				return false;
 		}
 	}
+
 	return true;
 }
 
