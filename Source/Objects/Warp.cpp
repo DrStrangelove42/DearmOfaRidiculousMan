@@ -14,7 +14,7 @@ Warp::Warp(int destMap, int destRoom, int destX, int destY, int posx, int posy, 
 
 void Warp::updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea)
 {
-	if ( x != p.getX() || y != p.getY())
+	if (ea == NULL || x != p.getX() || y != p.getY())
 	{
 		return;
 	}

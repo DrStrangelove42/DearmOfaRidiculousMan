@@ -87,7 +87,7 @@ void Room::addObject(Object* object)
 	if (objects.find(object->getId()) == objects.end())
 	{
 		objects[object->getId()] = object;
-		blocks[object->getX()][object->getY()]->setTrav(true);
+		blocks[object->getX()][object->getY()]->setTrav(true);//TODO
 	}
 	else
 	{
