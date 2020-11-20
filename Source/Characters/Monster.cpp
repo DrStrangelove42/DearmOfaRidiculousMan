@@ -28,7 +28,6 @@ void Monster::tick(int time, RenderContext& r)
 		lastTime = time;
 		alarm();
 		attackRound();
-		
 	}
 }
 

@@ -113,20 +113,26 @@ void Room::tick(int time, RenderContext& r)
 	updateAllObjects(r);
 	for (Monster* m : monsters)
 	{
+		static int lastTime = time;
 		m->tick(time, r);
-		int r = rand() % 4;
-		switch (r)
+		if (time - lastTime >= 1000)
 		{
-		case 0:
-			tryTeleportAt(*m, m->getX() + 1, m->getY()); break;
-		case 1:
-			tryTeleportAt(*m, m->getX(), m->getY() + 1); break;
-		case 2:
-			tryTeleportAt(*m, m->getX() - 1, m->getY()); break;
-		case 3:
-			tryTeleportAt(*m, m->getX(), m->getY() - 1); break;
-		default:
-			break;
+
+			int r = rand() % 4;
+			switch (r)
+			{
+			case 0:
+				tryTeleportAt(*m, m->getX() + 1, m->getY()); break;
+			case 1:
+				tryTeleportAt(*m, m->getX(), m->getY() + 1); break;
+			case 2:
+				tryTeleportAt(*m, m->getX() - 1, m->getY()); break;
+			case 3:
+				tryTeleportAt(*m, m->getX(), m->getY() - 1); break;
+			default:
+				break;
+			}
+			lastTime = time;
 		}
 	}
 }
@@ -178,12 +184,12 @@ void Room::tryTeleportAt(MovingEntity& e, int x, int y)
 }
 
 bool Room::isTraversable(int mx, int my)
-{ 
+{
 	bool tr = blocks[mx][my]->getTrav();
 
 	if (!tr)
 		return false;
-	
+
 	for (auto& entry : objects)
 	{
 		if (entry.second->getX() == mx &&
