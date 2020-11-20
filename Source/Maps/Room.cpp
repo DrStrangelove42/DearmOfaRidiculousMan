@@ -50,6 +50,11 @@ void Room::render(RenderContext& renderer, int offsetX, int offsetY)
 		{
 			entry.second->render(renderer, offsetX + x, offsetY + y);
 		}
+
+		for (Monster* m : monsters)
+		{
+			m->render(renderer, offsetX, offsetY);
+		}
 	}
 }
 
