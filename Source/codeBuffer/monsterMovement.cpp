@@ -16,7 +16,7 @@ int Monster :: randomMoving()
 {
     if (alarmed = false) // if not alarmed keep randomMoving
     {   
-        srand(time(0));
+        srand(time(0));// fetch random seed and random the directions
         direction = rand()%4;
         if ( getTrav() = false )//if it didn't hit a obstacle
         {
@@ -31,32 +31,32 @@ int Monster :: randomMoving()
     else return 0; //stop if alarmed
 }
 
-int Monster :: towardObject()
+int Monster :: toObject()
 // in this function the Monster is alarmed and will move to the object.
 {
     if (x > = (player.getX() - atkRadius)) // if out of attacking range at right, move left, etc
     {
         direction = 1;
         Move();
-        towardObject();
+        toObject();
     }
     else if (x < = (player.getX() - atkRadius))
     {
         direction = 0;
         Move();
-        towardObject();
+        toObject();
     }
     else if (y > = (player.getY() - atkRadius))
     {
         direction = 3;
         Move();
-        towardObject();
+        toObject();
     }
     else if (y < = (player.getY() - atkRadius))
     {
         direction = 2;
         Move();
-        towardObject();
+        toObject();
     }
     else return 0;// stop if reached attack range.
 }
