@@ -6,7 +6,7 @@
 #include "../Base/Entity.h"
 #include "../Base/utils.h"
 #include "../Base/config.h"
-#include "../Items/item.h"
+#include "../Items/Item.h"
 #include "MovingEntity.h"
 #include "LivingEntity.h"
 #include <unordered_map>
