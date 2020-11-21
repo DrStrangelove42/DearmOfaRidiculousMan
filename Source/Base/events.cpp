@@ -38,6 +38,7 @@ void onKeyDown(SDL_Event event, GAME* game)
 	ea->currentMap = game->currentMapId;
 	ea->warp_IsExternal = false;
 	ea->player = game->player;
+	ea->key = Other;
 	/* The following will allow us to know if the player needs to be teleported. */
 	ea->destX = -1;
 	ea->destY = -1;

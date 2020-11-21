@@ -12,7 +12,7 @@
 
 using namespace std;
 
-enum KEY { Up, Down, Left, Right, A, W, B, Y, X, L, R }; //TODO : what keys do we need ?
+enum KEY { Up, Down, Left, Right, A, W, B, Y, X, L, R, Other}; //TODO : what keys do we need ?
 
 class Player;
 
