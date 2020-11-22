@@ -26,7 +26,7 @@ void Monster::tick(int time, RenderContext& r)
 	if (time - lastTime >= attackDelay)
 	{
 		lastTime = time;
-		alarm();
+		Alarmed();
 		attackRound();
 	}
 }
