@@ -36,7 +36,7 @@ public:
 		int exp = 50,
 		bool alarmed = false );
 	virtual void attackRound();
-	virtual void alarm();
+	virtual void Alarmed();
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
 	virtual void kill();
 	virtual void tick(int time, RenderContext& r);

@@ -8,8 +8,8 @@ Monster::Monster(RenderContext& renderer,
 	int atkDelay,
 	int atkRadius,
 	int coins,
-	int exp, bool alarmd) :
-        LivingEntity(health, coins, exp), attackValue(dmg), player(p), attackDelay(atkDelay), attackRadius(atkRadius),alarmed(alarmd)
+	int exp, bool alarmed) :
+        LivingEntity(health, coins, exp), attackValue(dmg), player(p), attackDelay(atkDelay), attackRadius(atkRadius), Alarmed(alarmed)
 {
 	texture = LoadTexture(textureId, renderer);
 }
