@@ -210,23 +210,7 @@ void Room::onKeyDown(EVENT_ARGS* ea)
 
 	switch (ea->key)
 	{
-	case Up && Left:
-		curY--;
-		curX--;
-		break;
-	case Up && Right:
-		curY--;
-		curX++;
 
-		break;
-	case Down && Left:
-		curY++;
-		curX--;
-		break;
-	case Down && Right:
-		curY++;
-		curX++;
-		break;
 	case Up:
 		curY--;
 		break;
