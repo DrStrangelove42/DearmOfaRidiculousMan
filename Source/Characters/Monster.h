@@ -30,7 +30,21 @@ protected:
 
 	Room& room;
 public:
-	
+	/// <summary>
+	/// Creates a new monster.
+	/// </summary>
+	/// <param name="renderer">The rendering context.</param>
+	/// <param name="p">The current player.</param>
+	/// <param name="r">A reference to the room containing the monster.</param>
+	/// <param name="textureId">Texture file id to load.</param>
+	/// <param name="health">The max health of the monster.</param>
+	/// <param name="dmg">Damage level.</param>
+	/// <param name="atkDelay">Delay, in millisecond, between each attack round.</param>
+	/// <param name="atkRadius">Attack range.</param>
+	/// <param name="coins">Coins owned by the monster.</param>
+	/// <param name="exp">Experience given to the player when the monster die.</param>
+	/// <param name="moveDelay">Delay, in millisecond, between each move.</param>
+	/// <param name="alarmed">If the monster is initially alarmed.</param>
 	Monster(RenderContext& renderer,
 		Player& p,
 		Room& r,
@@ -43,8 +57,18 @@ public:
 		int exp = 50,
 		int moveDelay = 500,
 		bool alarmed = false );
+
+	/// <summary>
+	/// Go on an attack round.
+	/// </summary>
 	virtual void attackRound();
+
+	/// <summary>
+	/// Alarms the monster if necessary.
+	/// </summary>
 	virtual void manageAlarm();
+
+	/// <param name="offsetY"></param>
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
 	virtual void kill();
 	virtual void tick(int time, RenderContext& r);
