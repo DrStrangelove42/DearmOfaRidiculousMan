@@ -9,9 +9,17 @@ ones) begin with a capital letter.
 
 int InitUtils()
 {
-	//Do some initialisation ?
+	srand(static_cast<unsigned int>(time(NULL)));
 
 	return 0;
+}
+
+/*
+Returns a pseudo-random number in [0, max[.
+*/
+int GetRandom(int max)
+{
+	return rand() % max;
 }
 
 /*

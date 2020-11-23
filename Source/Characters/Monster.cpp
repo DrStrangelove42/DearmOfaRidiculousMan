@@ -1,15 +1,18 @@
 #include "Monster.h"
+#include "../Maps/Room.h"
 #include <stdlib.h>
+
 Monster::Monster(RenderContext& renderer,
 	Player& p,
+	Room& r,
 	string textureId,
 	int health,
 	int dmg,
 	int atkDelay,
 	int atkRadius,
 	int coins,
-	int exp, bool alarmed) :
-        LivingEntity(health, coins, exp), attackValue(dmg), player(p), attackDelay(atkDelay), attackRadius(atkRadius), Alarmed(alarmed)
+	int exp, int mvDelay, bool alarmed) :
+	LivingEntity(health, coins, exp), attackValue(dmg), player(p), room(r), attackDelay(atkDelay), attackRadius(atkRadius), alarmed(alarmed), moveDelay(mvDelay)
 {
 	texture = LoadTexture(textureId, renderer);
 }
@@ -22,12 +25,32 @@ void Monster::kill()
 
 void Monster::tick(int time, RenderContext& r)
 {
-	static int lastTime = 0;
-	if (time - lastTime >= attackDelay)
+	static int lastTimeAtk = 0;
+	static int lastTimeMv = 0;
+	if (time - lastTimeAtk >= attackDelay)
 	{
-		lastTime = time;
-		Alarmed();
+		lastTimeAtk = time;
+		manageAlarm();
 		attackRound();
+	}
+	if (time - lastTimeMv >= moveDelay)
+	{
+		room.tryTeleportAt(*this, x + GetRandom(3) - 1, y + GetRandom(3) - 1);
+
+		/*switch (r)
+		{
+		case 0:
+			room.tryTeleportAt(*m, x + 1, y); break;
+		case 1:
+			room.tryTeleportAt(*m, x, y + 1); break;
+		case 2:
+			room.tryTeleportAt(*m, x - 1, y); break;
+		case 3:
+			room.tryTeleportAt(*m, x, y - 1); break;
+		default:
+			break;
+		}*/
+		lastTimeMv = time;
 	}
 }
 
@@ -39,7 +62,7 @@ void Monster::attackRound()
 	}
 }
 
-void Monster::alarm()
+void Monster::manageAlarm()
 {
 	if (abs(x - player.getX()) < alarmRadius && abs(y - player.getY()) < alarmRadius)
 	{

@@ -11,7 +11,7 @@ class Skeleton : public Monster
 protected:
 
 public:
-	Skeleton(RenderContext& renderer, Player& p);
+	Skeleton(RenderContext& renderer, Player& p, Room& r);
 	~Skeleton();
 };
 

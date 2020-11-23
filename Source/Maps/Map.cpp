@@ -259,7 +259,7 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 	while (getline(data, line3)) //We now add the objects to the rooms
 	{
 		//For each object, we extract its position in the map, its identifier, and the rest of the information needed to construct the object and add it to the map
-	        int uniqueId = 0; //This integer is used to make sure the identifier of each objects in the room is unique
+		int uniqueId = 0; //This integer is used to make sure the identifier of each objects in the room is unique
 		int room, x, y;
 		size_t a;
 		room = stoi(line3, &a);
@@ -299,23 +299,23 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 		case 'c':
 		{
 			string id = line3.substr(0, 2);
-			line3.erase(0,3);
+			line3.erase(0, 3);
 			Chest* newChest = new Chest(id, x, y, p, renderer);
-			while (line3.length()>=2)
+			while (line3.length() >= 2)
 			{
-			        switch(line3[1])
-			        {
-				case 'w':
-				        newChest->addItem(Sword("sw"+to_string(uniqueId++), renderer));
-				break;
-				case 'h':
-				        newChest->addItem(Shield("sh"+to_string(uniqueId++), renderer));
-				  break;
-				}
-				line3.erase(0,2);
-				if (line3.length()>0)
+				switch (line3[1])
 				{
-				      line3.erase(0,1);
+				case 'w':
+					newChest->addItem(Sword("sw" + to_string(uniqueId++), renderer));
+					break;
+				case 'h':
+					newChest->addItem(Shield("sh" + to_string(uniqueId++), renderer));
+					break;
+				}
+				line3.erase(0, 2);
+				if (line3.length() > 0)
+				{
+					line3.erase(0, 1);
 				}
 			}
 			rooms[room]->addObject(newChest);
@@ -323,17 +323,17 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 		}
 		case 'g':
 		{
-		        Ghost* newGhost = new Ghost(renderer,p);
-		        newGhost->teleport(x,y);
-		        rooms[room]->addMonster(newGhost);
-		        break;
+			Ghost* newGhost = new Ghost(renderer, p, *(rooms[room]));
+			newGhost->teleport(x, y);
+			rooms[room]->addMonster(newGhost);
+			break;
 		}
 		case 's':
 		{
-		        Skeleton* newSkeleton = new Skeleton(renderer,p);
-		        newSkeleton->teleport(x,y);
-		        rooms[room]->addMonster(newSkeleton);
-		        break;
+			Skeleton* newSkeleton = new Skeleton(renderer, p,*(rooms[room]));
+			newSkeleton->teleport(x, y);
+			rooms[room]->addMonster(newSkeleton);
+			break;
 		}
 		default:
 			cout << "Case " << line3[0] << " not treated yet." << endl;

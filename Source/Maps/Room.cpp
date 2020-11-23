@@ -2,7 +2,6 @@
 
 Room::Room(int width, int height, int absx, int absy, Player& p, RenderContext& renderer) : w(width), h(height), x(absx), y(absy), player(p), discovered(false)
 {
-	srand(time(0));
 	if (w > 0 && h > 0)
 	{
 		blocks = new Block * *[width];
@@ -113,27 +112,7 @@ void Room::tick(int time, RenderContext& r)
 	updateAllObjects(r);
 	for (Monster* m : monsters)
 	{
-		static int lastTime = time;
 		m->tick(time, r);
-		if (time - lastTime >= 1000)
-		{
-
-			int r = rand() % 4;
-			switch (r)
-			{
-			case 0:
-				tryTeleportAt(*m, m->getX() + 1, m->getY()); break;
-			case 1:
-				tryTeleportAt(*m, m->getX(), m->getY() + 1); break;
-			case 2:
-				tryTeleportAt(*m, m->getX() - 1, m->getY()); break;
-			case 3:
-				tryTeleportAt(*m, m->getX(), m->getY() - 1); break;
-			default:
-				break;
-			}
-			lastTime = time;
-		}
 	}
 }
 

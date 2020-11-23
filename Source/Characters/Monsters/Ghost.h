@@ -11,7 +11,7 @@ class Ghost : public Monster
 protected:
 
 public:
-	Ghost(RenderContext& renderer, Player& p);
+	Ghost(RenderContext& renderer, Player& p, Room& r);
 	~Ghost();
 };
 

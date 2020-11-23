@@ -51,4 +51,5 @@ int InitUtils();
 /* Returns the number of millisecond  */
 int GetTime();
 
+int GetRandom(int max);
 #endif
