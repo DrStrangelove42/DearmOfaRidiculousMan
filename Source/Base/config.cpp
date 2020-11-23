@@ -14,6 +14,17 @@ fonctions located in the <utils> module.*/
 int VIEW_OFFSET_X = 0;
 int VIEW_OFFSET_Y = 0;
 
+/// <summary>
+/// The extension used for files containing wolds
+/// </summary>
 string WORLDFILE_EXT = ".txt";
+
+/// <summary>
+/// The extension of map files.
+/// </summary>
 string MAPFILE_EXT = ".txt";
+
+/// <summary>
+/// Location of maps
+/// </summary>
 string MAPFILES_LOCATION = "./Source/MapCreation/TestMaps/";
