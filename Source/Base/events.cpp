@@ -9,17 +9,21 @@ void manageEvents(GAME* game)
 		switch (event.type)
 		{
 		case SDL_KEYDOWN:
-		  {
+		{
 			onKeyDown(event, game);
 			break;
-		  }
-
+		}
+		case SDL_MOUSEMOTION:
+		case SDL_MOUSEBUTTONDOWN:
+		case SDL_MOUSEBUTTONUP:
+			onMouseEvent(event, game);
+			break;
 		case SDL_WINDOWEVENT:
 			onWindowEvent(event, game);
 			break;
 
 		default:
-		  game->currentMap->getRooms()[game->currentMap->currentRoom]->updateAllObjects(*(game->renderer));
+			game->currentMap->getRooms()[game->currentMap->currentRoom]->updateAllObjects(*(game->renderer));
 			break;
 		}
 	}
@@ -31,9 +35,56 @@ void onWindowEvent(SDL_Event event, GAME* game)
 		game->quit = true;
 }
 
+void onMouseEvent(SDL_Event event, GAME* game)
+{
+	MOUSE_DATA* md = new MOUSE_DATA();
+
+	switch (event.type)
+	{
+	case SDL_MOUSEMOTION:
+		md->state = MouseStateNone;
+		md->x = event.motion.x;
+		md->y = event.motion.y;
+		md->button = MouseNoButton;
+		break;
+	default:
+		md->x = event.button.x;
+		md->y = event.button.y;
+		switch (event.type)
+		{
+		case SDL_MOUSEBUTTONDOWN:
+			md->state = MouseStatePushed;
+			break;
+		case SDL_MOUSEBUTTONUP:
+			md->state = MouseStateReleased;
+			break;
+		default:
+			break;
+		}
+
+		switch (event.button.button)
+		{
+		case SDL_BUTTON_LEFT:
+			md->button = MouseLeft;
+			break;
+		case SDL_BUTTON_MIDDLE:
+			md->button = MouseMiddle;
+			break;
+		case SDL_BUTTON_RIGHT:
+			md->button = MouseRight;
+			break;
+		default:
+			break;
+		}
+		break;
+	}
+
+	game->currentMap->onMouseEvent(md);
+}
+
 void onKeyDown(SDL_Event event, GAME* game)
 {
-        EVENT_ARGS* ea = new EVENT_ARGS();
+	EVENT_ARGS* ea = new EVENT_ARGS();
 	ea->currentRoom = &(game->currentMap->currentRoom);
 	ea->currentMap = game->currentMapId;
 	ea->warp_IsExternal = false;
@@ -66,18 +117,18 @@ void onKeyDown(SDL_Event event, GAME* game)
 
 	game->currentMap->onKeyDown(ea);
 	game->currentMap->getRooms()[game->currentMap->currentRoom]->updateAllObjects(*(game->renderer), ea);
-	
+
 	if (ea->destX != -1)
 	{
-	        (ea->player)->teleport(ea->destX, ea->destY);
-	        if (ea->warp_IsExternal)
+		(ea->player)->teleport(ea->destX, ea->destY);
+		if (ea->warp_IsExternal)
 		{
-		        game->currentMap = new Map(game->worldName, *(game->player), *(game->renderer), ea->currentMap, *(ea->currentRoom));
-		
-	        }
-	        else
-	        {
-	                game->currentMap->getRooms()[*(ea->currentRoom)]->setDiscovered(true);
+			game->currentMap = new Map(game->worldName, *(game->player), *(game->renderer), ea->currentMap, *(ea->currentRoom));
+
+		}
+		else
+		{
+			game->currentMap->getRooms()[*(ea->currentRoom)]->setDiscovered(true);
 		}
 	}
 }

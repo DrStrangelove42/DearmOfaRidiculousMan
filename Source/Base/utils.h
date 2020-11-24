@@ -31,6 +31,26 @@ typedef struct
 	int destY;
 } EVENT_ARGS;
 
+enum MOUSE_STATE
+{
+	MouseStateReleased, MouseStatePushed, MouseStateNone
+};
+
+enum MOUSE_BUTTON
+{
+	MouseLeft, MouseRight, MouseMiddle, MouseNoButton
+};
+
+typedef struct
+{
+	int x;
+	int y;
+	MOUSE_STATE state;
+	MOUSE_BUTTON button;
+} MOUSE_DATA;
+
+
+
 /// <summary>
 /// The hashmap where textures are stored.
 /// Textures beginning with 'text/' are reserved for text rendering.

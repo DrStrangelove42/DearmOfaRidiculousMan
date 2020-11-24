@@ -81,6 +81,8 @@ public:
 	/* Event system */
 	virtual void onKeyDown(EVENT_ARGS* ea);
 
+	virtual void onMouseEvent(MOUSE_DATA* md);
+
 	/* Copy-assignment operator */
 	/*Map& operator=(const Map& that)
 	{
