@@ -5,6 +5,7 @@
 #include "Room.h"
 #include "../Base/Entity.h"
 #include "../Base/config.h"
+#include "../Base/utils.h"
 #include "../Characters/Player.h"
  
 #include <iostream>
@@ -40,7 +41,8 @@ protected:
 	/* Number of rooms in the map */
 	int roomCount;
 	
-	
+	string name;
+	Texture* titleTexture;
 	/*
 	This function transforms a text file into a folder of texts files which are sufficient 
 	to describe the map completely and to be able to modify the maps to save progress. 

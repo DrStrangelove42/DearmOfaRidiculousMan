@@ -14,9 +14,10 @@ Map::~Map()
 	delete[] rooms;
 }
 
-Map::Map(string filename, Player& p, RenderContext& renderer, int* startMap, int startRoom) : player(p)
+Map::Map(string filename, Player& p, RenderContext& renderer, int* startMap, int startRoom) : player(p), name(filename)
 {
 	mapFromFiles(filename, p, renderer, startMap, startRoom);
+	titleTexture = LoadString("CURRENT MAP : " + filename, renderer);
 }
 
 void Map::render(RenderContext& renderer, int offsetX, int offsetY)
@@ -37,11 +38,18 @@ void Map::render(RenderContext& renderer, int offsetX, int offsetY)
 	}
 
 	player.render(renderer, offX + cur->getX(), offY + cur->getY());
+
+	titleTexture->renderUnscaled(renderer, 0, 0);
 }
 
 void Map::tick(int time, RenderContext& r)
 {
 	rooms[currentRoom]->tick(time, r);
+}
+
+int Map::getRoomCount()
+{
+	return roomCount;
 }
 
 Room** Map::getRooms()
@@ -343,3 +351,4 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 	data.close();
 	return;
 }
+

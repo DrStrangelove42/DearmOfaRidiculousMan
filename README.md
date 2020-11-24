@@ -1,5 +1,5 @@
 # DreamOfaRidiculousMan
-## **Welcome to the Dream of a Ridiculous Man ! ** ##
+## Welcome to the Dream of a Ridiculous Man ! ##
 
 It's a rogue-like game based on the novel by Fyodor M. Dostoyevsky, and inspired by the inspired Movie directed by Aleksandr Petrov:
 
@@ -9,15 +9,23 @@ supported OS : macOS & linux.
 >Sorry Windows not yet.
 
 required library : SDL2.
-you can find the install instructions here:
 
-https://wiki.libsdl.org/Installation
+On Linux Debian :
 
-Or simply using:
+`sudo apt install libsdl2-dev`
+`sudo apt install libsdl2-ttf-dev`
+
+Or with brew :
 
 `brew install sdl2`
 
-It's currently under developping:
+Alternatively you can find the install instructions here:
+
+https://wiki.libsdl.org/Installation
+
+
+
+It's currently under development:
 
 - [x] Map generating, see the HowItWorks.txt in '/Source/MapCreating'
 - [x] Room functions(door, keys, creates,etc)

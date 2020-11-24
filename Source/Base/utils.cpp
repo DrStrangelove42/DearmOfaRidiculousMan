@@ -33,6 +33,29 @@ Texture* LoadTexture(string id, RenderContext& renderer)
 	return textures[id];
 }
 
+Texture* LoadString(string text, RenderContext& r)
+{
+	string id = "text/" + text;
+	if (textures.find(id) == textures.end())
+	{
+		//Not rendered yet
+		SDL_Color White = { 255, 255, 255, 255 };
+		SDL_Surface* s = TTF_RenderText_Solid(FONT, text.c_str(), White);
+		SDL_Texture* t = r.fromSurface(s);
+
+		int w, h;
+		if (TTF_SizeText(FONT, text.c_str(), &w, &h))
+		{
+			cout << TTF_GetError() << endl;
+			return NULL;
+		}
+
+		textures[id] = new Texture(t, w, h);
+	}
+
+	return textures[id];
+}
+
 void FreeTextures()
 {
 	for (auto& entry : textures)
@@ -52,7 +75,7 @@ int DumpError(string err)
 int GetTime()
 {
 	using namespace std::chrono;
-	static  high_resolution_clock::time_point referenceTime = high_resolution_clock::now();
+	static high_resolution_clock::time_point referenceTime = high_resolution_clock::now();
 	high_resolution_clock::time_point n = high_resolution_clock::now();
 	duration<double, milli> time_span = n - referenceTime;
 	return (int)time_span.count();

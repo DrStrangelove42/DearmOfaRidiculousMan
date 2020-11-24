@@ -31,13 +31,18 @@ typedef struct
         int destY;
 } EVENT_ARGS;
 
-/* The hashmap where textures are stored. */
+/// <summary>
+/// The hashmap where textures are stored.
+/// Textures beginning with 'text/' are reserved for text rendering.
+/// </summary>
 static unordered_map<string, Texture*> textures;
 
 /* Use this function to load a texture from a BMP file. If it succeeds,
 the texture is saved in <textures> and will be loaded from memory next
 time this function is called for the same texture ID.*/
 Texture* LoadTexture(string id, RenderContext& r);
+
+Texture* LoadString(string text, RenderContext& r);
 
 /* Writes the error in the console output in a human-friendly way. */
 int DumpError(string err);

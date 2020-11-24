@@ -1,5 +1,8 @@
 #include "rendering.h"
 
+TTF_Font* FONT;
+int FONTSIZE = 16;
+
 void renderSleep(unsigned int ms)
 {
 	SDL_Delay(ms);
@@ -7,11 +10,17 @@ void renderSleep(unsigned int ms)
 
 bool renderInit()
 {
+	if (TTF_Init() == -1)
+		return false;
+
+	FONT = TTF_OpenFont("Res/ibm.ttf", FONTSIZE);
+
 	return SDL_Init(SDL_INIT_VIDEO) == 0;
 }
 
 void renderQuit()
 {
+	TTF_Quit();
 	SDL_QuitSubSystem(SDL_INIT_VIDEO);
 	SDL_Quit();
 }

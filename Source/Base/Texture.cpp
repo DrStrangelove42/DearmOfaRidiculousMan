@@ -20,6 +20,11 @@ Texture::Texture(RenderContext& context, string id)
 	texture = tx;
 }
 
+Texture::Texture(SDL_Texture* texture, int w, int h) : texture(texture), w(w), h(h)
+{
+
+}
+
 Texture::~Texture()
 {
 	if (NULL != texture)

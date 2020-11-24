@@ -23,6 +23,7 @@ private:
 	int h;
 public:
 	Texture(RenderContext& context, string id);
+	Texture(SDL_Texture* texture, int w, int h);
 	~Texture();
 
 	/*//Set color modulation
