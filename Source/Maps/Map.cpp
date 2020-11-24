@@ -40,6 +40,7 @@ void Map::render(RenderContext& renderer, int offsetX, int offsetY)
 	player.render(renderer, offX + cur->getX(), offY + cur->getY());
 
 	titleTexture->renderUnscaled(renderer, 0, 0);
+	LoadString("Room : " + to_string(currentRoom),renderer)->renderUnscaled(renderer, 0, 16);
 }
 
 void Map::tick(int time, RenderContext& r)

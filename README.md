@@ -13,6 +13,7 @@ required library : SDL2.
 On Linux Debian :
 
 `sudo apt install libsdl2-dev`
+
 `sudo apt install libsdl2-ttf-dev`
 
 Or with brew :
@@ -25,14 +26,14 @@ https://wiki.libsdl.org/Installation
 
 
 
-It's currently under development:
+Currently under development:
 
 - [x] Map generating, see the HowItWorks.txt in '/Source/MapCreating'
 - [x] Room functions(door, keys, creates,etc)
 - [x] Player and Monster basic features and movements
 - [x] Fighting and Exp gaining
 - [x] Not-So-Intelligent Monster
-- [ ] Phase 2, more complex interactions.
+- [x] Phase 2, more complex interactions.
 
 At the next stage, we'll generate more complex maps to meet the theme of the game:
 
