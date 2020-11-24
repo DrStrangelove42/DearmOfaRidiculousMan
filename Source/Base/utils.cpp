@@ -33,14 +33,18 @@ Texture* LoadTexture(string id, RenderContext& renderer)
 	return textures[id];
 }
 
-Texture* LoadString(string text, RenderContext& r)
+Texture* LoadString(string text, RenderContext& r, int color)
 {
 	string id = "text/" + text;
 	if (textures.find(id) == textures.end())
 	{
 		//Not rendered yet
-		SDL_Color White = { 255, 255, 255, 255 };
-		SDL_Surface* s = TTF_RenderText_Solid(FONT, text.c_str(), White);
+		SDL_Color c = { (unsigned char)(color >> 24),
+							(unsigned char)(color >> 16),
+							(unsigned char)(color >> 8),
+							(unsigned char)(color) };
+
+		SDL_Surface* s = TTF_RenderText_Solid(FONT, text.c_str(), c);
 		SDL_Texture* t = r.fromSurface(s);
 
 		int w, h;

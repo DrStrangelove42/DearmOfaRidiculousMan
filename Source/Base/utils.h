@@ -12,7 +12,7 @@
 
 using namespace std;
 
-enum KEY { Up, Down, Left, Right, A, W, B, Y, X, L, R, Other}; //TODO : what keys do we need ?
+enum KEY { Up, Down, Left, Right, A, W, B, Y, X, L, R, Other }; //TODO : what keys do we need ?
 
 class Player;
 
@@ -27,8 +27,8 @@ typedef struct
 	bool warp_IsExternal;	/* Tells the game that we need to go to another map. */
 	KEY key;
 	Player* player;
-        int destX;
-        int destY;
+	int destX;
+	int destY;
 } EVENT_ARGS;
 
 /// <summary>
@@ -42,7 +42,14 @@ the texture is saved in <textures> and will be loaded from memory next
 time this function is called for the same texture ID.*/
 Texture* LoadTexture(string id, RenderContext& r);
 
-Texture* LoadString(string text, RenderContext& r);
+/// <summary>
+/// Builds a texture with the text inside.
+/// </summary>
+/// <param name="text"></param>
+/// <param name="r"></param>
+/// <param name="color"></param>
+/// <returns></returns>
+Texture* LoadString(string text, RenderContext& r, int color = 0xffffffff);
 
 /* Writes the error in the console output in a human-friendly way. */
 int DumpError(string err);
