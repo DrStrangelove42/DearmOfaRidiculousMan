@@ -66,7 +66,7 @@ public:
 	int currentRoom;
 	/* Creates a new empty map with a pre-allocated array for rooms. */
 	Map(Player& p, int roomCount);
-	/* Creates a Map object from a map file */
+	/* Creates a Map object from a map file. Either it is the initial creation of the map, in which case *startMap is worth -1 and the initial map, room and position must be read in the start file, or it is a warp to an external map, in which case startMap and startRoom are specified.*/
 	Map(string filename, Player& p, RenderContext& renderer, int* startMap, int startRoom = -1);
 
 	/* Std destructor */
