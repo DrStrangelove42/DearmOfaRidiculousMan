@@ -46,6 +46,7 @@ Texture* LoadString(string text, RenderContext& r, int color)
 
 		SDL_Surface* s = TTF_RenderText_Solid(FONT, text.c_str(), c);
 		SDL_Texture* t = r.fromSurface(s);
+		SDL_FreeSurface(s);
 
 		int w, h;
 		if (TTF_SizeText(FONT, text.c_str(), &w, &h))
@@ -53,7 +54,6 @@ Texture* LoadString(string text, RenderContext& r, int color)
 			cout << TTF_GetError() << endl;
 			return NULL;
 		}
-
 		textures[id] = new Texture(t, w, h);
 	}
 

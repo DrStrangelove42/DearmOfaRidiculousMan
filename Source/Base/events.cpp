@@ -23,7 +23,7 @@ void manageEvents(GAME* game)
 			break;
 
 		default:
-			game->currentMap->getRooms()[game->currentMap->currentRoom]->updateAllObjects(*(game->renderer));
+			
 			break;
 		}
 	}

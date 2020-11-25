@@ -32,14 +32,9 @@ int playDoarm(GAME* game)
 
 	game->player = me;
 
-	string worldName = "FinalMap";
-	
-	Map::worldFromFile(MAPFILES_LOCATION, worldName);
-	worldName = MAPFILES_LOCATION + worldName + "/" + worldName;
-	game->worldName = worldName;
-	game->currentMapId = new int (-1);
-	game->currentMap = new Map(worldName, *me, renderer, game->currentMapId);
-
+	game->currentMapId = new int(0);
+	game->currentMap = new MainMenu(*me, game);
+	game->worldName = "Main menu";
 	int currentTime;
 
 	while (!(game->quit))

@@ -70,34 +70,7 @@ void Map::onKeyDown(EVENT_ARGS* ea)
 
 void Map::onMouseEvent(MOUSE_DATA* md)
 {
-	return;
-	string state = "";
-	switch (md->button)
-	{
-	case MouseLeft:
-		state += "L";
-		break;
-	case MouseMiddle:
-		state += "M";
-		break;
-	case MouseRight:
-		state += "R";
-		break;
-	default:
-		break;
-	}
-	switch (md->state)
-	{
-	case MouseStateReleased:
-		state += " up ";
-		break;
-	case MouseStatePushed:
-		state += " down ";
-		break;
-	default:
-		break;
-	}
-	cout << "button " << state << endl;
+	
 }
 
 void Map::worldFromFile(string location, string filename) {

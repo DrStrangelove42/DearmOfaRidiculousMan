@@ -13,6 +13,7 @@
 #include "Base/events.h"
 #include "Maps/Room.h"
 #include "Maps/Map.h"
+#include "Maps/MainMenu.h"
 #include "Characters/Player.h"
 
 using namespace std;

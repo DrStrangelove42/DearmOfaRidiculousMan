@@ -25,7 +25,7 @@ void MainMenu::onPlayClick(int id)
 	Map::worldFromFile(MAPFILES_LOCATION, worldName);
 	worldName = MAPFILES_LOCATION + worldName + "/" + worldName;
 	game->worldName = worldName;
-	game->currentMapId = new int(-1);
+	*(game->currentMapId) = 0;
 	game->currentMap = new Map(worldName, *(game->player), *(game->renderer), game->currentMapId);
 }
 
