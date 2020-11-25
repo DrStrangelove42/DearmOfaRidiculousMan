@@ -83,6 +83,9 @@ public:
 
 	virtual void onMouseEvent(MOUSE_DATA* md);
 
+	/* Updates all objects in the room accordingly. */
+	void updateAllObjects(RenderContext& renderer, EVENT_ARGS* ea = NULL);
+
 	/* Copy-assignment operator */
 	/*Map& operator=(const Map& that)
 	{

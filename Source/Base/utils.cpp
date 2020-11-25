@@ -35,7 +35,7 @@ Texture* LoadTexture(string id, RenderContext& renderer)
 
 Texture* LoadString(string text, RenderContext& r, int color)
 {
-	string id = "text/" + text;
+	string id = "text." + to_string(color) + "/" + text;
 	if (textures.find(id) == textures.end())
 	{
 		//Not rendered yet

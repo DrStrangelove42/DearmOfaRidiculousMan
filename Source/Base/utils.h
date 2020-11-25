@@ -12,7 +12,7 @@
 
 using namespace std;
 
-enum KEY { Up, Down, Left, Right, A, W, B, Y, X, L, R, Other }; //TODO : what keys do we need ?
+enum KEY { Up, Down, Left, Right, A, W, B, Y, X, Other }; //TODO : what keys do we need ?
 
 class Player;
 
@@ -26,6 +26,7 @@ typedef struct
 	int* currentMap;		/* if warp_IsExternal is set to true, indicates the map to load. */
 	bool warp_IsExternal;	/* Tells the game that we need to go to another map. */
 	KEY key;
+	char keyLetter;
 	Player* player;
 	int destX;
 	int destY;

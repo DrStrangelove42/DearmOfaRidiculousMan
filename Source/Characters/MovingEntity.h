@@ -14,6 +14,8 @@ protected:
 	int y;
 
 public:
+	MovingEntity();
+	MovingEntity(int x, int y);
 	/* Moves the entity to (x, y) */
 	void teleport(int x, int y);
 	/* Accessors */

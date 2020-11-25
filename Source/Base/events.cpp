@@ -23,7 +23,7 @@ void manageEvents(GAME* game)
 			break;
 
 		default:
-			
+
 			break;
 		}
 	}
@@ -111,16 +111,34 @@ void onKeyDown(SDL_Event event, GAME* game)
 	case SDLK_d:
 		ea->key = Right;
 		break;
+	case SDLK_a:
+		ea->key = A;
+		break;
+	case SDLK_b:
+		ea->key = B;
+		break;
 	default:
+		ea->key = Other;
 		break;
 	}
 
+	const char* sc = SDL_GetKeyName(event.key.keysym.sym);
+	if (NULL != sc)
+	{
+		string scancode(sc);
+
+		if (scancode.size() == 1)
+			ea->keyLetter = scancode[0];
+		else
+			ea->keyLetter = 0;
+	}
+
 	game->currentMap->onKeyDown(ea);
-	game->currentMap->getRooms()[game->currentMap->currentRoom]->updateAllObjects(*(game->renderer), ea);
+	game->currentMap->updateAllObjects(*(game->renderer), ea);
 
 	if (ea->destX != -1)
 	{
-		(ea->player)->teleport(ea->destX, ea->destY);
+		ea->player->teleport(ea->destX, ea->destY);
 		if (ea->warp_IsExternal)
 		{
 			game->currentMap = new Map(game->worldName, *(game->player), *(game->renderer), ea->currentMap, *(ea->currentRoom));

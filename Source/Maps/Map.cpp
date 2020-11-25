@@ -70,7 +70,13 @@ void Map::onKeyDown(EVENT_ARGS* ea)
 
 void Map::onMouseEvent(MOUSE_DATA* md)
 {
-	
+
+}
+
+void Map::updateAllObjects(RenderContext& renderer, EVENT_ARGS* ea)
+{
+	if (currentRoom < roomCount)
+		rooms[currentRoom]->updateAllObjects(renderer, ea);
 }
 
 void Map::worldFromFile(string location, string filename) {

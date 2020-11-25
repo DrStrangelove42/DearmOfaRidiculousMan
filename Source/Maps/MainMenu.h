@@ -28,7 +28,11 @@ class MainMenu : public Map
 {
 protected:
 	Button** buttons;
+	Label** labels;
+	Label* animation;
 	int buttonCount;
+	int labelCount;
+	Texture** animationTextures;
 	GAME* game;
 public:
 	MainMenu(Player& p, GAME* g);
@@ -36,6 +40,8 @@ public:
 	void onQuitClick(int id);
 	virtual ~MainMenu();
 	virtual void onMouseEvent(MOUSE_DATA* md);
+	/* Event system */
+	virtual void onKeyDown(EVENT_ARGS* ea);
 	/* Rendering method, enabling the renderer to take the offset (in blocks) into account. */
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
 	/* Time management */
