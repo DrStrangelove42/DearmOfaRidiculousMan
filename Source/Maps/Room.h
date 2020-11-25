@@ -37,35 +37,85 @@ protected:
 public:
 	/* Creates a new Room object */
 	Room(int width, int height, int absx, int absy, Player& p, RenderContext& renderer);
+	
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name=""></param>
+	/// <param name=""></param>
+	/// <returns></returns>
 	bool isTraversable(int, int);
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="m"></param>
 	void addMonster(Monster* m);
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="m"></param>
 	void removeMonster(Monster* m);
+	/// <summary>
+	/// 
+	/// </summary>
 	void attackMonsters();
 
 	/* Standard destructor */
 	virtual ~Room();
 
-	/* Add object */
+	/// <summary>
+	/// Adds an object to the room.
+	/// </summary>
+	/// <param name="object"></param>
 	void addObject(Object* object);
 
-	/* Ask to move the entity on the room */
+	/// <summary>
+	/// Asks to move the entity on the room
+	/// </summary>
+	/// <param name="e"></param>
+	/// <param name="x"></param>
+	/// <param name="y"></param>
 	void tryTeleportAt(MovingEntity& e, int x, int y);
 
-	/* Updates all objects in the room accordingly. */
+	/// <summary>
+	/// Updates all objects in the room accordingly.
+	/// </summary>
+	/// <param name="renderer"></param>
+	/// <param name="ea"></param>
 	void updateAllObjects(RenderContext& renderer, EVENT_ARGS* ea = NULL);
 
-	/* Rendering method, enabling the renderer to take the offset (in blocks) into account. */
+	/// <summary>
+	/// Rendering method, enabling the renderer to take the offset (in blocks) into account.
+	/// </summary>
+	/// <param name="renderer"></param>
+	/// <param name="offsetX"></param>
+	/// <param name="offsetY"></param>
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
 
-	/* Time management */
+	/// <summary>
+	/// Time management
+	/// </summary>
+	/// <param name="time"></param>
+	/// <param name="r"></param>
 	virtual void tick(int time, RenderContext& r);
 
-	/* Changes a block in the room, according to its location */
+	/// <summary>
+	/// Changes a block in the room, according to its location
+	/// </summary>
+	/// <param name="newBlock"></param>
 	void replaceBlock(Block* newBlock);
 
-	/* Event system */
+	/// <summary>
+	/// When a key is pushed on the keyboard.
+	/// </summary>
+	/// <param name="ea"></param>
 	virtual void onKeyDown(EVENT_ARGS* ea);
 
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <returns></returns>
 	Block* getCurrentBlock();
 
 	/* In case of copy-assignment use */

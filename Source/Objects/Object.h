@@ -8,26 +8,61 @@
 class Object : public Entity
 {
 protected:
-	/* Identifier of the object */
+	/// <summary>
+	/// Identifier of the object
+	/// </summary>
 	string id;
-	/* Position of the object */
-	int x, y;
-	/* Player */
+
+	/// <summary>
+	/// Position of the object
+	/// </summary>
+	int x;
+
+	/// <summary>
+	/// Position of the object
+	/// </summary>
+	int y;
+
+	/// <summary>
+	/// Player
+	/// </summary>
 	Player& player;
-	/* The texture ID */
+
+
+	/// <summary>
+	/// The texture ID
+	/// </summary>
 	string texture;
-	/* The loaded texture */
+
+	/// <summary>
+	/// The loaded texture
+	/// </summary>
 	Texture* loadedTx;
 
 public:
-	/* Destructor. */
 	~Object();
 
-	/* Initialises a new Object with the specified informations. */
+	/// <summary>
+	/// Initialises a new Object with the specified informations.
+	/// </summary>
+	/// <param name="identifier"></param>
+	/// <param name="posx"></param>
+	/// <param name="posy"></param>
+	/// <param name="player"></param>
+	/// <param name="tx"></param>
+	/// <param name="renderer"></param>
+	/// <param name="trav"></param>
 	Object(string identifier, int posx, int posy, Player& player, string tx, RenderContext& renderer, bool trav);
 
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="other"></param>
 	Object(const Object& other);
 
+	/// <summary>
+	/// 
+	/// </summary>
 	bool traversable;
 
 	/* Getters */
@@ -36,21 +71,42 @@ public:
 	string getId() const;
 	bool getTrav();
 
-	/* Change the object position. */
+	/// <summary>
+	/// Change the object position. 
+	/// </summary>
+	/// <param name="px"></param>
+	/// <param name="py"></param>
 	void move(int px, int py);
 
-	/* Rendering method, enabling the renderer to take the offset (in blocks) into account. */
+	/// <summary>
+	///  Rendering method, enabling the renderer to take the offset (in blocks) into account.
+	/// </summary>
+	/// <param name="renderer"></param>
+	/// <param name="offsetX"></param>
+	/// <param name="offsetY"></param>
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
 
-	/* The following function describes how each type of object interacts with the player.*/
+	/// <summary>
+	/// The following function describes how each type of object interacts with the player.
+	/// </summary>
+	/// <param name="p"></param>
+	/// <param name="renderer"></param>
+	/// <param name="ea"></param>
 	virtual void updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea);
 
-	/* Time management */
+	/// <summary>
+	/// Time management
+	/// </summary>
+	/// <param name="time"></param>
+	/// <param name="renderer"></param>
 	virtual void tick(int time, RenderContext& renderer);
 
-	/* Forces the object to reload the texture corresponding to the current ID in <texture>.
-	Note that there is no function to change the texture from the outside of the object, because we
-	don't want to, for now.*/
+	/// <summary>
+	/// Forces the object to reload the texture corresponding to the current ID in <texture>.
+	/// Note that there is no function to change the texture from the outside of the object, because we
+	///	don't want to, for now.
+	/// </summary>
+	/// <param name="renderer"></param>
 	virtual void updateTexture(RenderContext& renderer);
 
 	bool operator== (const Object& otherObj) const
@@ -59,6 +115,9 @@ public:
 	}
 };
 
+/// <summary>
+/// Map helpers
+/// </summary>
 struct ObjectHash
 {
 	size_t operator()(const Object& o) const

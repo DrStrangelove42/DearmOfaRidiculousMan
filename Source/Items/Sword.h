@@ -13,7 +13,12 @@ public:
 	/* Destructor. */
 	~Sword();
 
-	/* Initialises a new Item with the specified informations. */
+	/// <summary>
+	/// Initialises a new Item with the specified informations.
+	/// </summary>
+	/// <param name="identifier"></param>
+	/// <param name="renderer"></param>
+	/// <param name="attack"></param>
 	Sword(string identifier, RenderContext& renderer, int attack = 10);
 };
 

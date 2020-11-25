@@ -34,57 +34,96 @@ The initial room is always the first room in the (non empty) array 'rooms'.
 class Map : public Entity
 {
 protected:
-	/* Array of pointers to rooms */
+	/// <summary>
+	/// Array of pointers to rooms
+	/// </summary>
 	Room ** rooms;
-	/* Reference to the player */
+	
+	/// <summary>
+	/// Reference to the player
+	/// </summary>
 	Player &player;
-	/* Number of rooms in the map */
+	
+	/// <summary>
+	/// Number of rooms in the map
+	/// </summary>
 	int roomCount;
 	
+	/// <summary>
+	/// 
+	/// </summary>
 	string name;
+
+	/// <summary>
+	/// 
+	/// </summary>
 	Texture* titleTexture;
-	/*
-	This function transforms a text file into a folder of texts files which are sufficient 
-	to describe the map completely and to be able to modify the maps to save progress. 
-	It will create, for each of the maps in the world, a file corresponding to the layout 
-	of the map as well as a file containing the objects and monsters that are in the map 
-	(and their characteristics, these can change throughout the game, we will therefore 
-	modify these files to save progress)
-	*/
+	
+	/// <summary>
+	/// This function transforms a text file into a folder of texts files which are sufficient 
+	/// to describe the map completelyand to be able to modify the maps to save progress.
+	///	It will create, for each of the maps in the world, a file corresponding to the layout
+	///	of the map as well as a file containing the objectsand monsters that are in the map
+	///	(and their characteristics, these can change throughout the game, we will therefore
+	/// modify these files to save progress)
+	/// </summary>
+	/// <param name="filename"></param>
+	/// <param name="p"></param>
+	/// <param name="renderer"></param>
+	/// <param name="startMap"></param>
+	/// <param name="startRoom"></param>
 	void mapFromFiles(string filename, Player& p, RenderContext& renderer, int* startMap, int startRoom);
 
 public:
-	/*
-	This function turns a folder of files representing a world and returns the current map.
-	destMap, destRoom, destX and destY correspond to the destination coordinates, i.e. where
-	the player starts. When they are different from -1, the player is warping from one map to
-	another, and when they are equal to -1 we must read them in the Start file.
-	*/
+	/// <summary>
+	/// This function turns a folder of files representing a world and returns the current map.
+	/// destMap, destRoom, destXand destY correspond to the destination coordinates, i.e.where
+	///	the player starts.When they are different from - 1, the player is warping from one map to
+	///	another, and when they are equal to - 1 we must read them in the Start file.
+	/// </summary>
+	/// <param name="location"></param>
+	/// <param name="filename"></param>
 	static void worldFromFile(string location, string filename);
 
-	/* Index of the room that is currently displayed (in which the player is) */
+	/// <summary>
+	/// Index of the room that is currently displayed (in which the player is)
+	/// </summary>
 	int currentRoom;
-	/* Creates a new empty map with a pre-allocated array for rooms. */
+	/// <summary>
+	/// Creates a new empty map with a pre-allocated array for rooms.
+	/// </summary>
+	/// <param name="p"></param>
+	/// <param name="roomCount"></param>
 	Map(Player& p, int roomCount);
-	/* Creates a Map object from a map file. Either it is the initial creation of the map, in which case *startMap is worth -1 and the initial map, room and position must be read in the start file, or it is a warp to an external map, in which case startMap and startRoom are specified.*/
+	
+	/// <summary>
+	///  Creates a Map object from a map file. Either it is the initial creation of the map, 
+	/// in which case *startMap is worth -1 and the initial map, room and position must be read in 
+	/// the start file, or it is a warp to an external map, in which case startMap and startRoom are specified.
+	/// </summary>
+	/// <param name="filename"></param>
+	/// <param name="p"></param>
+	/// <param name="renderer"></param>
+	/// <param name="startMap"></param>
+	/// <param name="startRoom"></param>
 	Map(string filename, Player& p, RenderContext& renderer, int* startMap, int startRoom = -1);
 
 	/* Std destructor */
 	virtual ~Map();
 
-	/* Rendering method, enabling the renderer to take the offset (in blocks) into account. */
-	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
+	
+	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);/* Rendering method, enabling the renderer to take the offset (in blocks) into account. */
 
-	/* Time management */
-	virtual void tick(int time, RenderContext& r);
+	
+	virtual void tick(int time, RenderContext& r);/* Time management */
 
-	/* Event system */
-	virtual void onKeyDown(EVENT_ARGS* ea);
+	
+	virtual void onKeyDown(EVENT_ARGS* ea);/* Event system */
 
 	virtual void onMouseEvent(MOUSE_DATA* md);
 
-	/* Updates all objects in the room accordingly. */
-	void updateAllObjects(RenderContext& renderer, EVENT_ARGS* ea = NULL);
+	
+	void updateAllObjects(RenderContext& renderer, EVENT_ARGS* ea = NULL);/* Updates all objects in the room accordingly. */
 
 	/* Copy-assignment operator */
 	/*Map& operator=(const Map& that)

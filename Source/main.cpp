@@ -4,6 +4,16 @@
 
 using namespace std;
 
+/// <summary>
+/// 
+/// Main entry point of DOARM.
+/// 
+/// No command line options.
+/// 
+/// </summary>
+/// <param name="argc"></param>
+/// <param name="argv"></param>
+/// <returns></returns>
 int main(int argc, char** argv)
 {
 	int status = 0;
@@ -24,7 +34,6 @@ int main(int argc, char** argv)
 	return status;
 }
 
-/*Main loop*/
 int playDoarm(GAME* game)
 {
 	RenderContext& renderer = *(game->renderer);

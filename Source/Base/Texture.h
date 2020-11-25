@@ -15,15 +15,35 @@ A class encapsulating a texture that can be rendered.
 class Texture
 {
 private:
-	/* The texture under the hood */
+	/// <summary>
+	/// The texture under the hood
+	/// </summary>
 	SDL_Texture* texture;
 
-	/* Dimensions */
+	/// <summary>
+	/// Witdh
+	/// </summary>
 	int w;
+	/// <summary>
+	/// Height
+	/// </summary>
 	int h;
 public:
+	/// <summary>
+	/// Creates a new texture
+	/// </summary>
+	/// <param name="context"></param>
+	/// <param name="id"></param>
 	Texture(RenderContext& context, string id);
+
+	/// <summary>
+	/// Encapsulates an existing native texture
+	/// </summary>
+	/// <param name="texture"></param>
+	/// <param name="w"></param>
+	/// <param name="h"></param>
 	Texture(SDL_Texture* texture, int w, int h);
+	
 	~Texture();
 
 	/*//Set color modulation
@@ -35,12 +55,40 @@ public:
 	//Set alpha modulation
 	void setAlpha(Uint8 alpha);*/
 
-	//Renders texture at given point
+	/// <summary>
+	/// Renders texture at given point, without scaling
+	/// </summary>
+	/// <param name="context"></param>
+	/// <param name="x"></param>
+	/// <param name="y"></param>
+	/// <param name="angle"></param>
+	/// <param name="center"></param>
+	/// <param name="flip"></param>
 	void renderUnscaled(RenderContext& context, int x, int y, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
+
+	/// <summary>
+	/// Renders texture at given point
+	/// </summary>
+	/// <param name="context"></param>
+	/// <param name="x"></param>
+	/// <param name="y"></param>
+	/// <param name="width"></param>
+	/// <param name="height"></param>
+	/// <param name="angle"></param>
+	/// <param name="center"></param>
+	/// <param name="flip"></param>
 	void render(RenderContext& context, int x, int y, int width, int height, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
-	//Gets image dimensions
+	/// <summary>
+	/// Gets the width of this Texture.
+	/// </summary>
+	/// <returns></returns>
 	int getWidth();
+
+	/// <summary>
+	/// Gets the height of this Texture.
+	/// </summary>
+	/// <returns></returns>
 	int getHeight();
 };
 

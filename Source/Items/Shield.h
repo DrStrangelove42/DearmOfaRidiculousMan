@@ -13,7 +13,12 @@ public:
 	/* Destructor. */
 	~Shield();
 
-	/* Initialises a new Item with the specified informations. */
+	/// <summary>
+	/// Initialises a new Item with the specified informations.
+	/// </summary>
+	/// <param name="identifier"></param>
+	/// <param name="renderer"></param>
+	/// <param name="defense"></param>
 	Shield(string identifier, RenderContext& renderer, int defense = 10);
 };
 

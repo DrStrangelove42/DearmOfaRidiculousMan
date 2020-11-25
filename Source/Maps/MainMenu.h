@@ -27,18 +27,56 @@ The initial room is always the first room in the (non empty) array 'rooms'.
 class MainMenu : public Map
 {
 protected:
+	/// <summary>
+	/// 
+	/// </summary>
 	Button** buttons;
+	/// <summary>
+	/// 
+	/// </summary>
 	Label** labels;
+	/// <summary>
+	/// 
+	/// </summary>
 	Label* animation;
+	/// <summary>
+	/// 
+	/// </summary>
 	int buttonCount;
+	/// <summary>
+	/// 
+	/// </summary>
 	int labelCount;
+	/// <summary>
+	/// 
+	/// </summary>
 	Texture** animationTextures;
+	/// <summary>
+	/// 
+	/// </summary>
 	GAME* game;
 public:
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="p"></param>
+	/// <param name="g"></param>
 	MainMenu(Player& p, GAME* g);
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="id"></param>
 	void onPlayClick(int id);
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="id"></param>
 	void onQuitClick(int id);
 	virtual ~MainMenu();
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="md"></param>
 	virtual void onMouseEvent(MOUSE_DATA* md);
 	/* Event system */
 	virtual void onKeyDown(EVENT_ARGS* ea);

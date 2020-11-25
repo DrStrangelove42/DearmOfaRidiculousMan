@@ -15,19 +15,47 @@ using namespace std;
 
 class Room;
 
+/// <summary>
+/// 
+/// </summary>
 class Monster : public MovingEntity, public LivingEntity
 {
 protected:
+	/// <summary>
+	/// 
+	/// </summary>
 	int attackValue;
+	/// <summary>
+	/// 
+	/// </summary>
 	Player& player;
-	
+	/// <summary>
+	/// 
+	/// </summary>
 	int attackDelay;
+	/// <summary>
+	/// 
+	/// </summary>
 	int attackRadius;
+	/// <summary>
+	/// 
+	/// </summary>
 	int alarmRadius;
+	/// <summary>
+	/// 
+	/// </summary>
 	int moveDelay; 
+	/// <summary>
+	/// 
+	/// </summary>
 	bool alarmed;
+	/// <summary>
+	/// 
+	/// </summary>
 	Texture* texture;
-
+	/// <summary>
+	/// 
+	/// </summary>
 	Room& room;
 public:
 	/// <summary>

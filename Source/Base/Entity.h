@@ -22,6 +22,12 @@ public:
 	/// <param name="offsetX">X Offset, in blocks</param>
 	/// <param name="offsetY">Y Offset, in blocks</param>
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0) = 0;
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="time"></param>
+	/// <param name=""></param>
 	virtual void tick(int time, RenderContext&) = 0;
 
 };

@@ -12,17 +12,30 @@ protected:
 	int x;
 	int y;
 
-	/* The texture ID */
+	/// <summary>
+	/// The texture ID
+	/// </summary>
 	string texture;
-	/* The loaded texture */
+	/// <summary>
+	/// The loaded texture
+	/// </summary>
 	Texture* loadedTx;
-
+	/// <summary>
+	/// 
+	/// </summary>
 	bool traversable;
 public:
 	/* Destructor. */
 	~Block();
 
-	/* Initialises a new Block object with the specified informations. */
+	/// <summary>
+	///  Initialises a new Block object with the specified informations. 
+	/// </summary>
+	/// <param name="posx"></param>
+	/// <param name="posy"></param>
+	/// <param name="tx"></param>
+	/// <param name="renderer"></param>
+	/// <param name="trav"></param>
 	Block(int posx, int posy, string tx, RenderContext& renderer, bool trav = false);
 
 	/*Getters*/
@@ -30,16 +43,24 @@ public:
 	int getY();
 	bool getTrav();
 
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="trav"></param>
 	void setTrav(bool trav);
 
 	/* Rendering method, enabling the renderer to take the offset (in blocks) into account. */
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
 
-	/* Places the moving entity on this block.*/
+	/// <summary>
+	/// Places the moving entity on this block.
+	/// </summary>
+	/// <param name="m"></param>
 	void teleportOn(MovingEntity& m);
-
-	/* This method is called when the player enters the block. May end up being useless. Vincent : Not sure : im using the traversable flag in onEnter,
-	so I bring back this function from the dead.*/
+	/// <summary>
+	/// This method is called when the player enters the block. May end up being useless. 
+	/// </summary>
+	/// <param name="ea"></param>
 	virtual void onEnter(EVENT_ARGS* ea);
 
 	/* Time management */

@@ -14,22 +14,39 @@ An Object that is picked up by the player becomes an Item.*/
 class Item : public Entity
 {
 protected:
-	/* Identifier of the item */
+	/// <summary>
+	/// Identifier of the item
+	/// </summary>
 	string id;
-	/* The texture ID */
+	/// <summary>
+	/// The texture ID
+	/// </summary>
 	string texture;
-	/* The loaded texture */
+	/// <summary>
+	/// The loaded texture 
+	/// </summary>
 	Texture* loadedTx;
-	/* Attack characteristic, makes the player's attacks stronger. */
+	/// <summary>
+	/// Attack characteristic, makes the player's attacks stronger.
+	/// </summary>
 	int attack;
-	/* Defense characteristic, makes the player's defense stronger. */
+	/// <summary>
+	/// Defense characteristic, makes the player's defense stronger.
+	/// </summary>
 	int defense;
 
 public:
 	/* Destructor. */
 	~Item();
 
-	/* Initialises a new Item with the specified informations. */
+	/// <summary>
+	/// Initialises a new Item with the specified informations. 
+	/// </summary>
+	/// <param name="identifier"></param>
+	/// <param name="tx"></param>
+	/// <param name="renderer"></param>
+	/// <param name="attack"></param>
+	/// <param name="defense"></param>
 	Item(string identifier, string tx, RenderContext& renderer, int attack, int defense);
 
 	/* Rendering method, enabling the renderer to take the offset (in blocks) into account. */
@@ -42,9 +59,12 @@ public:
 	/* Time management */
 	virtual void tick(int time, RenderContext& r);
 
-	/* Forces the item to reload the texture corresponding to the current ID in <texture>.
-	Note that there is no function to change the texture from the outside of the object, because we
-	don't want to, for now.*/
+	/// <summary>
+	/// Forces the item to reload the texture corresponding to the current ID in <texture>.
+	/// Note that there is no function to change the texture from the outside of the object, because we
+	/// don't want to, for now.
+	/// </summary>
+	/// <param name="renderer"></param>
 	virtual void updateTexture(RenderContext& renderer);
 
 	/* Getter */
@@ -58,6 +78,9 @@ public:
 	//virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
 };
 
+/// <summary>
+/// Map helper
+/// </summary>
 struct ItemHash
 {
 	size_t operator()(const Item& i) const
