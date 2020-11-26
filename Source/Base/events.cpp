@@ -171,3 +171,4 @@ void quitGame(GAME* game)
 
 	delete game;
 }
+ 

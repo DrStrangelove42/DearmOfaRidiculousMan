@@ -276,6 +276,8 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 	layout.close();
 	rooms[currentRoom]->setDiscovered(true);
 
+	int uniqueId = 0; //This integer is used to make sure the identifier of each objects in the room is unique
+	
 	while (getline(data, line3)) //We now add the objects to the rooms
 	{
 		//For each object, we extract its position in the map, its identifier, and the rest of the information needed to construct the object and add it to the map
@@ -283,7 +285,6 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 		{
 		        line3.erase(line3.length() - 1);
 		}
-		int uniqueId = 0; //This integer is used to make sure the identifier of each objects in the room is unique
 		int room, x, y;
 		size_t a;
 		room = stoi(line3, &a);
@@ -296,7 +297,7 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 		{
 		case '!':
 		{
-		  string id = line3.substr(0, 2) + to_string(uniqueId++);
+		        string id = line3.substr(0, 2) + to_string(uniqueId++);
 			line3.erase(0, 2);
 			int destMap = stoi(line3, &a);
 			line3.erase(0, a);
