@@ -6,14 +6,19 @@ Warp::~Warp()
 
 }
 
-Warp::Warp(int destMap, int destRoom, int destX, int destY, int posx, int posy, string identifier, Player& p, RenderContext& renderer) :
-	Object(identifier, posx, posy, p, "empty", renderer, true), destMap(destMap), destRoom(destRoom), destX(destX), destY(destY)
+Warp::Warp(int destMap, int destRoom, int destX, int destY, int posx, int posy, string identifier, Player& p, RenderContext& renderer, int delay) :
+  Object(identifier, posx, posy, p, "empty", renderer, true), destMap(destMap), destRoom(destRoom), destX(destX), destY(destY), delay(delay)
 {
 
 }
 
 void Warp::updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea)
 {
+        if (delay>0)
+        {
+                delay--;
+		return;
+	}
 	if (ea == NULL || x != p.getX() || y != p.getY())
 	{
 		return;
@@ -26,15 +31,4 @@ void Warp::updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea)
 		*(ea->currentMap) = destMap;
 		ea->warp_IsExternal = true;
 	}
-	//TODO make warps possible onto other blocks containing warps (bool justwarped)
-}
-
-bool Warp::getJustWarped()
-{
-	return justWarped;
-}
-
-void Warp::setJustWarped(bool b)
-{
-	justWarped = b;
 }

@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include <string>
+#include "../Maps/MainMenu.h"
 #include "../Maps/Map.h"
 #include "../Base/config.h"
 
@@ -48,7 +49,6 @@ typedef struct
 	/// </summary>
 	bool quit;
 } GAME;
-
 
 
 /// <summary>

@@ -141,7 +141,15 @@ void onKeyDown(SDL_Event event, GAME* game)
 		ea->player->teleport(ea->destX, ea->destY);
 		if (ea->warp_IsExternal)
 		{
-			game->currentMap = new Map(game->worldName, *(game->player), *(game->renderer), ea->currentMap, *(ea->currentRoom));
+		        if (*(ea->currentMap) == -1)
+			{
+			        game->currentMap = new MainMenu(*(game->player), game);
+				game->worldName = "Main menu";
+			}
+			else
+			{
+			        game->currentMap = new Map(game->worldName, *(game->player), *(game->renderer), ea->currentMap, *(ea->currentRoom));
+			}
 
 		}
 		else

@@ -99,13 +99,14 @@ s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s 
 #
 18 9
 0 0
+!a -1 0 0 0 1000
 #
 s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s
-s  f  s  s  s  s  f  f  s  s  s  s  f  f  s  f  s
-s  f  s  f  f  f  f  f  s  f  f  f  f  f  s  f  s
-s  f  s  f  s  s  s  f  s  f  s  s  s  f  s  f  s
-s  f  s  f  f  s  f  f  s  f  f  s  f  f  f  f  s
-s  f  s  s  s  s  f  f  s  s  s  s  f  f  s  f  s
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s
+s  f!af!af!af!af!af!af!af!af!af!af!af!af!af!af!as
+s  f!as  s  s  s  f!af!as  s  s  s  f!af!as  f!as
+s  f!as  f!af!af!af!af!as  f!af!af!af!af!as  f!as
+s  f!as  f!as  s  s  f!as  f!as  s  s  f!as  f!as
+s  f!as  f!af!as  f!af!as  f!af!as  f!af!af!af!as
+s  f!as  s  s  s  f!af!as  s  s  s  f!af!as  f!as
+s  f!af!af!af!af!af!af!af!af!af!af!af!af!af!af!as
 s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s
