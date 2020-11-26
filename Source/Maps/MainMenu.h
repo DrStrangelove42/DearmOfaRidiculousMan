@@ -2,7 +2,7 @@
 #define MENU_H
 
 #include <string>
-#include "../Base/events.h"
+#include "../Base/game.h"
 #include "../Base/Entity.h"
 #include "../Base/config.h"
 #include "../Base/utils.h"
