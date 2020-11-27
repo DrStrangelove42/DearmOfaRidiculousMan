@@ -93,7 +93,7 @@ void MainMenu::render(RenderContext& renderer, int offsetX, int offsetY)
 	player.render(renderer, offsetX, offsetY);
 }
 
-void MainMenu::tick(int time, RenderContext& r, GAME* game)
+void MainMenu::tick(int time, GAME* game)
 {
 	static int i = 0;
 	static int lastTime = 0;

@@ -103,16 +103,16 @@ void Room::updateAllObjects(RenderContext& renderer, GAME* game)
 {
 	for (auto& entry : objects)
 	{
-		entry.second->updateObject(player, renderer, game);
+		entry.second->updateObject(player, game);
 	}
 }
 
-void Room::tick(int time, RenderContext& r, GAME* game)
+void Room::tick(int time, GAME* game)
 {
-        updateAllObjects(r, game);
+	updateAllObjects(*(game->renderer), game);
 	for (Monster* m : monsters)
 	{
-	  m->tick(time, r, game);
+		m->tick(time, game);
 	}
 }
 
@@ -158,7 +158,7 @@ void Room::tryTeleportAt(MovingEntity& e, int x, int y)
 {
 	if (x >= 0 && y >= 0 && x < w && y < h && isTraversable(x, y))
 	{
-	        e.teleport(x, y);
+		e.teleport(x, y);
 	}
 }
 
@@ -214,5 +214,5 @@ void Room::onKeyDown(GAME* game)
 	}
 
 	if (curX != player.getX() || curY != player.getY())
-	        tryTeleportAt(player, curX, curY);
+		tryTeleportAt(player, curX, curY);
 }

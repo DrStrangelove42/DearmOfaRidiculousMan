@@ -11,7 +11,7 @@ class MainMenu;
 
 class Warp : public Object
 {
-private:
+protected:
 	/// <summary>
 	/// The map we are going to warp to. If destMap == -1, we return to the main menu map.
 	/// </summary>
@@ -57,17 +57,8 @@ public:
 	/// <param name="p"></param>
 	/// <param name="renderer"></param>
 	/// <param name="ea"></param>
-	void updateObject(Player& p, RenderContext& renderer, GAME* game);
-	/// <summary>
-	/// 
-	/// </summary>
-	/// <returns></returns>
-	bool getJustWarped();
-	/// <summary>
-	/// 
-	/// </summary>
-	/// <param name="b"></param>
-	void setJustWarped(bool b);
+	void updateObject(Player& p, GAME* game);
+	
 };
 
 #endif

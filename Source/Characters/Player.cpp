@@ -34,7 +34,7 @@ void Player::updateTexture(RenderContext& renderer)
 	texture = LoadTexture(textureId, renderer);
 }
 
-void Player::tick(int time, RenderContext& r, GAME* game)
+void Player::tick(int time, GAME* game)
 {
 
 }

@@ -25,7 +25,7 @@ public:
 	/// <param name="p"></param>
 	/// <param name="renderer"></param>
 	/// <param name="ea"></param>
-	void updateObject(Player& p, RenderContext& renderer, GAME* game);
+	void updateObject(Player& p, GAME* game);
 };
 
 #endif

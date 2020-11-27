@@ -43,9 +43,9 @@ void Map::render(RenderContext& renderer, int offsetX, int offsetY)
 	LoadString("Room : " + to_string(currentRoom), renderer, 0x00FFffff)->renderUnscaled(renderer, 0, 16);
 }
 
-void Map::tick(int time, RenderContext& r, GAME* game)
+void Map::tick(int time, GAME* game)
 {
-        rooms[currentRoom]->tick(time, r, game);
+        rooms[currentRoom]->tick(time, game);
 }
 
 int Map::getRoomCount()

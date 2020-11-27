@@ -10,7 +10,7 @@ Door::Door(string identifier, int posx, int posy, Player& p, RenderContext& rend
 
 }
 
-void Door::updateObject(Player& p, RenderContext& renderer, GAME* game)
+void Door::updateObject(Player& p, GAME* game)
 {
 	if (traversable || abs(x - p.getX()) + abs(y - p.getY()) > 1)
 	{
@@ -20,6 +20,6 @@ void Door::updateObject(Player& p, RenderContext& renderer, GAME* game)
 	{
 		traversable = true;
 		texture = "door" + id.substr(5, 1);
-		updateTexture(renderer);
+		updateTexture(*(game->renderer));
 	}
 }

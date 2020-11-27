@@ -24,13 +24,14 @@ void Chest::addItem(Item i, int count)
 		contents[i] += count;
 }
 
-void Chest::updateObject(Player& p, RenderContext& renderer, GAME* game)
+void Chest::updateObject(Player& p, GAME* game)
 {
 	if (texture == "openchest" || abs(x - p.getX()) + abs(y - p.getY()) > 1)
 	{
 		return;
 	}
 	texture = "openchest";
+	RenderContext& renderer = *(game->renderer);
 	updateTexture(renderer);
 	for (auto& entry : contents)
 	{

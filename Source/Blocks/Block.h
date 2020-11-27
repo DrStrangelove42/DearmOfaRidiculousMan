@@ -60,7 +60,7 @@ public:
 	void teleportOn(MovingEntity& m);
 
 	/* Time management */
-	virtual void tick(int time, RenderContext&, GAME* game);
+	virtual void tick(int time, GAME* game);
 
 	/* Forces the object to reload the texture corresponding to the current ID in <texture>.
 	Note that there is no function to change the texture from the outside of the object, because we

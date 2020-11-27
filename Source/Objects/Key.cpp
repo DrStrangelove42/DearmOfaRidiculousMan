@@ -11,12 +11,13 @@ Key::Key(string identifier, int posx, int posy, Player& p, RenderContext& render
 
 }
 
-void Key::updateObject(Player& p, RenderContext& renderer, GAME* game)
+void Key::updateObject(Player& p, GAME* game)
 {
 	if (texture == "empty" || x != p.getX() || y != p.getY())
 	{
 		return;
 	}
+	RenderContext& renderer = *(game->renderer);
 	p.pickUpItem(Item(id, "key", renderer, 0, 0));
 	texture = "empty";
 	updateTexture(renderer);

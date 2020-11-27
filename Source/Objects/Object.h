@@ -6,23 +6,13 @@
 #include "../Base/game.h"
 #include "../Characters/Player.h"
 
-class Object : public Entity
+class Object : public MovingEntity
 {
 protected:
 	/// <summary>
 	/// Identifier of the object
 	/// </summary>
 	string id;
-
-	/// <summary>
-	/// Position of the object
-	/// </summary>
-	int x;
-
-	/// <summary>
-	/// Position of the object
-	/// </summary>
-	int y;
 
 	/// <summary>
 	/// Player
@@ -66,9 +56,6 @@ public:
 	/// </summary>
 	bool traversable;
 
-	/* Getters */
-	int getX();
-	int getY();
 	string getId() const;
 	bool getTrav();
 
@@ -93,14 +80,14 @@ public:
 	/// <param name="p"></param>
 	/// <param name="renderer"></param>
 	/// <param name="ea"></param>
-	virtual void updateObject(Player& p, RenderContext& renderer, GAME* game);
+	virtual void updateObject(Player& p, GAME* game);
 
 	/// <summary>
 	/// Time management
 	/// </summary>
 	/// <param name="time"></param>
 	/// <param name="renderer"></param>
-	virtual void tick(int time, RenderContext& renderer, GAME* game);
+	virtual void tick(int time, GAME* game);
 
 	/// <summary>
 	/// Forces the object to reload the texture corresponding to the current ID in <texture>.

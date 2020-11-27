@@ -6,18 +6,16 @@
 #include "../Base/Entity.h"
 #include "../Base/utils.h"
 #include "../Base/config.h"
-#include "MovingEntity.h"
-#include "LivingEntity.h"
+#include "Monster.h"
 
-class Minions : public MovingEntity, public LivingEntity
+class Minions : public Monster
 {
 protected:
 	Texture * texture;
 public:
-	Minions(RenderContext& renderer);
-	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
+	//Minions(RenderContext& renderer);
 	virtual void kill();
-	virtual void tick(int time);
+	virtual void tick(int time, GAME* game);
 };
 
 #endif

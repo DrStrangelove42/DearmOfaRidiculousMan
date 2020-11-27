@@ -1,13 +1,20 @@
 #include "Object.h"
 
-Object::Object(string identifier, int posx, int posy, Player& p, string tx, RenderContext& renderer, bool trav) : id(identifier), x(posx), y(posy), player(p), texture(tx), traversable(trav)
+Object::Object(string identifier, int posx, int posy, Player& p, string tx, RenderContext& renderer, bool trav) : MovingEntity(posx, posy), id(identifier), player(p), texture(tx), traversable(trav)
 {
 	updateTexture(renderer);
 }
 
-Object::Object(const Object& other) : id(other.id), x(other.x), y(other.y), player(other.player), texture(other.texture), loadedTx(other.loadedTx), traversable(other.traversable)
+Object::Object(const Object& other) : MovingEntity(other.x, other.y), id(other.id), player(other.player), texture(other.texture), loadedTx(other.loadedTx), traversable(other.traversable) {}
+
+bool Object::getTrav()
 {
-  
+	return traversable;
+}
+
+void Object::move(int px, int py)
+{
+	teleport(px, py);
 }
 
 Object::~Object()
@@ -16,6 +23,27 @@ Object::~Object()
 }
 
 void Object::updateTexture(RenderContext& renderer)
+{
+	loadedTx = LoadTexture(texture, renderer);
+}
+
+
+string Object::getId() const
+{
+	return id;
+}
+
+
+void Object::render(RenderContext& renderer, int offsetX, int offsetY)
+{
+	loadedTx->render(renderer, (x + offsetX) * SZ_BLOCKSIZE, (y + offsetY) * SZ_BLOCKSIZE, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
+}
+
+void Object::updateObject(Player& p, GAME* g)
+{
+}
+
+void Object::tick(int time, GAME* g)
 {
 
 }

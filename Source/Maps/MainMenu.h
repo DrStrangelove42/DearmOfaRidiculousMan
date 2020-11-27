@@ -83,7 +83,7 @@ public:
 	/* Rendering method, enabling the renderer to take the offset (in blocks) into account. */
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
 	/* Time management */
-	virtual void tick(int time, RenderContext& r, GAME* game);
+	virtual void tick(int time, GAME* game);
 };
 
 #endif

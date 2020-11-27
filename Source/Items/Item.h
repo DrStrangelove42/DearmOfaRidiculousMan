@@ -58,7 +58,7 @@ public:
 	int getAttack();
 	int getDefense();
 	/* Time management */
-	virtual void tick(int time, RenderContext& r, GAME* game);
+	virtual void tick(int time, GAME* game);
 
 	/// <summary>
 	/// Forces the item to reload the texture corresponding to the current ID in <texture>.

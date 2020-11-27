@@ -20,7 +20,7 @@ void Label::render(RenderContext& renderer, int offsetX, int offsetY)
 	texture->renderUnscaled(renderer, x + SZ_BLOCKSIZE * offsetX, y + SZ_BLOCKSIZE * offsetY);
 }
 
-void Label::tick(int time, RenderContext& r, GAME* game)
+void Label::tick(int time, GAME* game)
 {
 
 }

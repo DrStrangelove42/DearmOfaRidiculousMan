@@ -99,7 +99,7 @@ public:
 	/// </summary>
 	/// <param name="time"></param>
 	/// <param name="r"></param>
-	virtual void tick(int time, RenderContext& r, GAME* game);
+	virtual void tick(int time, GAME* game);
 
 	/// <summary>
 	/// Changes a block in the room, according to its location
