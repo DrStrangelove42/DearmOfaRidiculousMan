@@ -2,10 +2,18 @@
 #define GAME_H
 
 #include <SDL2/SDL.h>
-#include "../Maps/Map.h"
+//#include "../Maps/Map.h"
 
+class Map;
+class Player;
+class RenderContext;
 
 using namespace std;
+
+/// <summary>
+/// The type of keys associated with actions typed on the keyboard.
+/// </summary>
+enum KEY { Up, Down, Left, Right, A, W, B, Y, X, Other };
 
 /// <summary>
 /// A structure used to carry information about the current game.
@@ -46,6 +54,19 @@ typedef struct
 	/// If set to true, implies the end of the game.
 	/// </summary>
 	bool quit;
+
+	/// <summary>
+	/// The key the player has pressed, so that we can perform the corresponding action. It is worth Other by default.
+	/// </summary>
+	KEY key;
+
+	/// <summary>
+	/// The character corresponding to the key pressed.
+        /// This is different from Key, if for example the user is typing text to name a world for example.
+        /// For keys with letters, it is the said letter.
+	/// For the others (including numpad), this is not defined.
+	/// </summary>
+	char keyLetter;
 } GAME;
 
 #endif

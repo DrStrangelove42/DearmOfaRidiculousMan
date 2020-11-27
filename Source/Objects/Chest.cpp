@@ -24,9 +24,9 @@ void Chest::addItem(Item i, int count)
 		contents[i] += count;
 }
 
-void Chest::updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea)
+void Chest::updateObject(Player& p, RenderContext& renderer, GAME* game)
 {
-	if (ea == NULL || texture == "openchest" || abs(x - p.getX()) + abs(y - p.getY()) > 1)
+	if (texture == "openchest" || abs(x - p.getX()) + abs(y - p.getY()) > 1)
 	{
 		return;
 	}

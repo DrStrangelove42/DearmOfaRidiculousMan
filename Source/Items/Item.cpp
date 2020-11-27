@@ -25,7 +25,7 @@ void Item::render(RenderContext& renderer, int offsetX , int offsetY )
 	//Do not render anything as an Item is abstract for us.
 }
 
-void Item::tick(int time, RenderContext& r)
+void Item::tick(int time, RenderContext& r, GAME* game)
 {
 
 }

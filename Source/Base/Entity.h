@@ -28,7 +28,7 @@ public:
 	/// </summary>
 	/// <param name="time"></param>
 	/// <param name=""></param>
-	virtual void tick(int time, RenderContext&) = 0;
+	virtual void tick(int time, RenderContext&, GAME* game) = 0;
 
 };
 

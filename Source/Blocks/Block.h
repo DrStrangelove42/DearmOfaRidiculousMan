@@ -3,6 +3,7 @@
 
 #include "../Base/Entity.h"
 #include "../Base/utils.h"
+#include "../Base/game.h"
 #include "../Characters/Player.h"
 
 class Block : public Entity
@@ -57,14 +58,9 @@ public:
 	/// </summary>
 	/// <param name="m"></param>
 	void teleportOn(MovingEntity& m);
-	/// <summary>
-	/// This method is called when the player enters the block. May end up being useless. 
-	/// </summary>
-	/// <param name="ea"></param>
-	virtual void onEnter(EVENT_ARGS* ea);
 
 	/* Time management */
-	virtual void tick(int time, RenderContext&);
+	virtual void tick(int time, RenderContext&, GAME* game);
 
 	/* Forces the object to reload the texture corresponding to the current ID in <texture>.
 	Note that there is no function to change the texture from the outside of the object, because we

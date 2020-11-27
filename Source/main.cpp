@@ -53,8 +53,8 @@ int playDoarm(GAME* game)
 		manageEvents(game);
 
 		currentTime = GetTime();
-		game->currentMap->tick(currentTime, renderer);
-		game->player->tick(currentTime, renderer);
+		game->currentMap->tick(currentTime, renderer, game);
+		game->player->tick(currentTime, renderer, game);
 
 		game->currentMap->render(renderer);
 

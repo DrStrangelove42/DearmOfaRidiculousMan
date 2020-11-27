@@ -9,9 +9,9 @@ void MainMenu::onMouseEvent(MOUSE_DATA* md)
 	}
 }
 
-void MainMenu::onKeyDown(EVENT_ARGS* ea)
+void MainMenu::onKeyDown(GAME* game)
 {
-	switch (ea->keyLetter)
+	switch (game->keyLetter)
 	{
 	case 'Q':
 		onQuitClick(0);
@@ -93,7 +93,7 @@ void MainMenu::render(RenderContext& renderer, int offsetX, int offsetY)
 	player.render(renderer, offsetX, offsetY);
 }
 
-void MainMenu::tick(int time, RenderContext& r)
+void MainMenu::tick(int time, RenderContext& r, GAME* game)
 {
 	static int i = 0;
 	static int lastTime = 0;

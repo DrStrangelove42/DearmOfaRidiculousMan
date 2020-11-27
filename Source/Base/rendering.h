@@ -5,6 +5,7 @@
 #include <SDL2/SDL_ttf.h>
 #include <string>
 #include "config.h"
+#include "game.h"
 
 extern TTF_Font* FONT;
 extern int FONTSIZE;

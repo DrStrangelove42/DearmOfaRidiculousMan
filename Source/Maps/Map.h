@@ -5,6 +5,7 @@
 #include "Room.h"
 #include "../Base/Entity.h"
 #include "../Base/config.h"
+#include "../Base/game.h"
 #include "../Base/utils.h"
 #include "../Characters/Player.h"
  
@@ -115,15 +116,12 @@ public:
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);/* Rendering method, enabling the renderer to take the offset (in blocks) into account. */
 
 	
-	virtual void tick(int time, RenderContext& r);/* Time management */
+	virtual void tick(int time, RenderContext& r, GAME* game);/* Time management */
 
 	
-	virtual void onKeyDown(EVENT_ARGS* ea);/* Event system */
+	virtual void onKeyDown(GAME* game);/* Event system */
 
 	virtual void onMouseEvent(MOUSE_DATA* md);
-
-	
-	void updateAllObjects(RenderContext& renderer, EVENT_ARGS* ea = NULL);/* Updates all objects in the room accordingly. */
 
 	/* Copy-assignment operator */
 	/*Map& operator=(const Map& that)

@@ -48,7 +48,7 @@ void Button::render(RenderContext& renderer, int offsetX, int offsetY)
 	Label::render(renderer, offsetX, offsetY);
 }
 
-void Button::tick(int time, RenderContext& r)
+void Button::tick(int time, RenderContext& r, GAME* game)
 {
 
 }

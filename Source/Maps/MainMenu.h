@@ -79,11 +79,11 @@ public:
 	/// <param name="md"></param>
 	virtual void onMouseEvent(MOUSE_DATA* md);
 	/* Event system */
-	virtual void onKeyDown(EVENT_ARGS* ea);
+	virtual void onKeyDown(GAME* game);
 	/* Rendering method, enabling the renderer to take the offset (in blocks) into account. */
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
 	/* Time management */
-	virtual void tick(int time, RenderContext& r);
+	virtual void tick(int time, RenderContext& r, GAME* game);
 };
 
 #endif

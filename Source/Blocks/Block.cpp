@@ -45,12 +45,7 @@ void Block::teleportOn(MovingEntity& m)
 	m.teleport(x, y);
 }
 
-void Block::tick(int time, RenderContext& r)
+void Block::tick(int time, RenderContext& r, GAME* game)
 {
 
-}
-
-void Block::onEnter(EVENT_ARGS* ea)
-{
-	/* Just ignores the move, because we are an empty block. (?Todo) */
 }

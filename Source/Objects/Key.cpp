@@ -11,9 +11,9 @@ Key::Key(string identifier, int posx, int posy, Player& p, RenderContext& render
 
 }
 
-void Key::updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea)
+void Key::updateObject(Player& p, RenderContext& renderer, GAME* game)
 {
-	if (texture == "empty" || ea == NULL || x != p.getX() || y != p.getY())
+	if (texture == "empty" || x != p.getX() || y != p.getY())
 	{
 		return;
 	}

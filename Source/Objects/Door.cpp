@@ -10,9 +10,9 @@ Door::Door(string identifier, int posx, int posy, Player& p, RenderContext& rend
 
 }
 
-void Door::updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea)
+void Door::updateObject(Player& p, RenderContext& renderer, GAME* game)
 {
-	if (ea == NULL || traversable || abs(x - p.getX()) + abs(y - p.getY()) > 1)
+	if (traversable || abs(x - p.getX()) + abs(y - p.getY()) > 1)
 	{
 		return;
 	}

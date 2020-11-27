@@ -3,17 +3,15 @@
 void manageEvents(GAME* game)
 {
 	SDL_Event event;
-
-	EVENT_ARGS* ea = new EVENT_ARGS();
 	
-	ea->currentRoom = &(game->currentMap->currentRoom);
+	/*ea->currentRoom = &(game->currentMap->currentRoom);
 	ea->currentMap = game->currentMapId;
 	ea->warp_IsExternal = false;
 	ea->player = game->player;
 	ea->key = Other;
-	/* The following will allow us to know if the player needs to be teleported. */
+	 The following will allow us to know if the player needs to be teleported. 
 	ea->destX = -1;
-	ea->destY = -1;
+	ea->destY = -1;*/
 
 	while (SDL_PollEvent(&event))
 	{
@@ -21,7 +19,7 @@ void manageEvents(GAME* game)
 		{
 		case SDL_KEYDOWN:
 		{
-		        onKeyDown(event, game, ea);
+		        onKeyDown(event, game);
 			break;
 		}
 		case SDL_MOUSEMOTION:
@@ -36,29 +34,6 @@ void manageEvents(GAME* game)
 		default:
 
 			break;
-		}
-		game->currentMap->updateAllObjects(*(game->renderer), ea);
-
-		if (ea->destX != -1)
-		{
-		        ea->player->teleport(ea->destX, ea->destY);
-			if (ea->warp_IsExternal)
-			{
-			        if (*(ea->currentMap) == -1)
-				{
-				        game->currentMap = new MainMenu(*(game->player), game);
-					game->worldName = "Main menu";
-				}
-				else
-				{
-				        game->currentMap = new Map(game->worldName, *(game->player), *(game->renderer), ea->currentMap, *(ea->currentRoom));
-				}
-
-			}
-			else
-			{
-			        game->currentMap->getRooms()[*(ea->currentRoom)]->setDiscovered(true);
-			}
 		}
 	}
 }
@@ -116,34 +91,34 @@ void onMouseEvent(SDL_Event event, GAME* game)
 	game->currentMap->onMouseEvent(md);
 }
 
-EVENT_ARGS* onKeyDown(SDL_Event event, GAME* game, EVENT_ARGS* ea)
+void onKeyDown(SDL_Event event, GAME* game)
 {
 	switch (event.key.keysym.sym)
 	{
 	case SDLK_DOWN:
 	case SDLK_s:
-		ea->key = Down;
+		game->key = Down;
 		break;
 	case SDLK_UP:
 	case SDLK_z:
-		ea->key = Up;
+		game->key = Up;
 		break;
 	case SDLK_LEFT:
 	case SDLK_q:
-		ea->key = Left;
+		game->key = Left;
 		break;
 	case SDLK_RIGHT:
 	case SDLK_d:
-		ea->key = Right;
+		game->key = Right;
 		break;
 	case SDLK_a:
-		ea->key = A;
+		game->key = A;
 		break;
 	case SDLK_b:
-		ea->key = B;
+		game->key = B;
 		break;
 	default:
-		ea->key = Other;
+		game->key = Other;
 		break;
 	}
 
@@ -153,14 +128,12 @@ EVENT_ARGS* onKeyDown(SDL_Event event, GAME* game, EVENT_ARGS* ea)
 		string scancode(sc);
 
 		if (scancode.size() == 1)
-			ea->keyLetter = scancode[0];
+			game->keyLetter = scancode[0];
 		else
-			ea->keyLetter = 0;
+			game->keyLetter = 0;
 	}
 
-	game->currentMap->onKeyDown(ea);
-
-	return ea;
+	game->currentMap->onKeyDown(game,game->key);
 }
 
 void quitGame(GAME* game)

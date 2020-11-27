@@ -12,23 +12,32 @@ Warp::Warp(int destMap, int destRoom, int destX, int destY, int posx, int posy, 
 
 }
 
-void Warp::updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea)
+void Warp::updateObject(Player& p, RenderContext& renderer, GAME* game)
 {
         if (delay>0)
         {
                 delay--;
 		return;
 	}
-	if (ea == NULL || x != p.getX() || y != p.getY())
+	if (x != p.getX() || y != p.getY())
 	{
 		return;
 	}
-	ea->destX = destX;
-	ea->destY = destY;
-	*(ea->currentRoom) = destRoom;
-	if (destMap != *(ea->currentMap))
+	p.teleport(destX, destY);
+	game->currentMap->currentRoom = destRoom;
+	if (destMap == -1)
 	{
-		*(ea->currentMap) = destMap;
-		ea->warp_IsExternal = true;
+	        *(game->currentMapId) = -1;
+	        game->currentMap = new MainMenu(*(game->player), game);
+		game->worldName = "Main menu";
+		return;
 	}
+	if (destMap != *(game->currentMapId))
+	{
+		*(game->currentMapId) = destMap;
+		game->currentMap = new Map(game->worldName, p, renderer, game->currentMapId, destRoom);
+	}
+	
+	else
+		game->currentMap->getRooms()[destRoom]->setDiscovered(true);
 }

@@ -43,9 +43,9 @@ void Map::render(RenderContext& renderer, int offsetX, int offsetY)
 	LoadString("Room : " + to_string(currentRoom), renderer, 0x00FFffff)->renderUnscaled(renderer, 0, 16);
 }
 
-void Map::tick(int time, RenderContext& r)
+void Map::tick(int time, RenderContext& r, GAME* game)
 {
-	rooms[currentRoom]->tick(time, r);
+        rooms[currentRoom]->tick(time, r, game);
 }
 
 int Map::getRoomCount()
@@ -63,20 +63,14 @@ int Map::getCurrentRoom()
 	return currentRoom;
 }
 
-void Map::onKeyDown(EVENT_ARGS* ea)
+void Map::onKeyDown(GAME* game)
 {
-	rooms[currentRoom]->onKeyDown(ea);
+        rooms[currentRoom]->onKeyDown(game);
 }
 
 void Map::onMouseEvent(MOUSE_DATA* md)
 {
 
-}
-
-void Map::updateAllObjects(RenderContext& renderer, EVENT_ARGS* ea)
-{
-	if (currentRoom < roomCount)
-		rooms[currentRoom]->updateAllObjects(renderer, ea);
 }
 
 void Map::worldFromFile(string location, string filename) {

@@ -12,61 +12,7 @@
 
 using namespace std;
 
-/// <summary>
-/// The type of keys typed on the keyboard.
-/// </summary>
-enum KEY { Up, Down, Left, Right, A, W, B, Y, X, Other }; //TODO : what keys do we need ?
-
-
 class Player;
-
-/// <summary>
-/// This structure is meant to be sent across game layers (starting from Map) when the user
-/// types something to move or to perform an action.
-/// </summary>
-typedef struct
-{
-	/// <summary>
-	/// Pointer to the currentRoom field in the game engine.
-	/// </summary>
-	int* currentRoom;		
-
-	/// <summary>
-	/// if warp_IsExternal is set to true, indicates the map to load.
-	/// </summary>
-	int* currentMap;	
-
-	/// <summary>
-	/// Tells the game that we need to go to another map.
-	/// </summary>
-	bool warp_IsExternal;	
-
-	/// <summary>
-	/// The key type
-	/// </summary>
-	KEY key;
-
-	/// <summary>
-	/// For keys with letters, the said letter.
-	/// For the others (including numpad), this is not defined.
-	/// </summary>
-	char keyLetter;
-
-	/// <summary>
-	/// Current player.
-	/// </summary>
-	Player* player;
-
-	/// <summary>
-	/// Destination X after a warp.
-	/// </summary>
-	int destX;
-
-	/// <summary>
-	/// Destination Y after a warp.
-	/// </summary>
-	int destY;
-} EVENT_ARGS;
 
 /// <summary>
 /// Different states of the mouse.

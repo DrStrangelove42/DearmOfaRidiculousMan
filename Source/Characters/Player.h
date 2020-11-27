@@ -6,6 +6,7 @@
 #include "../Base/Entity.h"
 #include "../Base/utils.h"
 #include "../Base/config.h"
+#include "../Base/game.h"
 #include "../Items/Item.h"
 #include "MovingEntity.h"
 #include "LivingEntity.h"
@@ -73,7 +74,7 @@ public:
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
 
 	/* Time management */
-	virtual void tick(int time, RenderContext& r);
+	virtual void tick(int time, RenderContext& r, GAME* game);
 
 	/// <summary>
 	/// 

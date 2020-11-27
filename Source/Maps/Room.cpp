@@ -99,20 +99,20 @@ void Room::addObject(Object* object)
 	}
 }
 
-void Room::updateAllObjects(RenderContext& renderer, EVENT_ARGS* ea)
+void Room::updateAllObjects(RenderContext& renderer, GAME* game)
 {
 	for (auto& entry : objects)
 	{
-		entry.second->updateObject(player, renderer, ea);
+		entry.second->updateObject(player, renderer, game);
 	}
 }
 
-void Room::tick(int time, RenderContext& r)
+void Room::tick(int time, RenderContext& r, GAME* game)
 {
-	updateAllObjects(r);
+        updateAllObjects(r, game);
 	for (Monster* m : monsters)
 	{
-		m->tick(time, r);
+	  m->tick(time, r, game);
 	}
 }
 
@@ -158,7 +158,7 @@ void Room::tryTeleportAt(MovingEntity& e, int x, int y)
 {
 	if (x >= 0 && y >= 0 && x < w && y < h && isTraversable(x, y))
 	{
-		e.teleport(x, y);
+	        e.teleport(x, y);
 	}
 }
 
@@ -182,12 +182,12 @@ bool Room::isTraversable(int mx, int my)
 	return true;
 }
 
-void Room::onKeyDown(EVENT_ARGS* ea)
+void Room::onKeyDown(GAME* game)
 {
 	int curX = player.getX();
 	int curY = player.getY();
 
-	switch (ea->key)
+	switch (game->key)
 	{
 
 	case Up:
@@ -214,5 +214,5 @@ void Room::onKeyDown(EVENT_ARGS* ea)
 	}
 
 	if (curX != player.getX() || curY != player.getY())
-		tryTeleportAt(player, curX, curY);
+	        tryTeleportAt(player, curX, curY);
 }

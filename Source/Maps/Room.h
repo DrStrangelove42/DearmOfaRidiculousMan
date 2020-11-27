@@ -3,6 +3,7 @@
 
 #include <string>
 #include "../Base/Entity.h"
+#include "../Base/game.h"
 #include "../Base/utils.h"
 #include "../Blocks/FloorBlock.h"
 #include "../Blocks/Block.h"
@@ -83,7 +84,7 @@ public:
 	/// </summary>
 	/// <param name="renderer"></param>
 	/// <param name="ea"></param>
-	void updateAllObjects(RenderContext& renderer, EVENT_ARGS* ea = NULL);
+	void updateAllObjects(RenderContext& renderer, GAME* game);
 
 	/// <summary>
 	/// Rendering method, enabling the renderer to take the offset (in blocks) into account.
@@ -98,7 +99,7 @@ public:
 	/// </summary>
 	/// <param name="time"></param>
 	/// <param name="r"></param>
-	virtual void tick(int time, RenderContext& r);
+	virtual void tick(int time, RenderContext& r, GAME* game);
 
 	/// <summary>
 	/// Changes a block in the room, according to its location
@@ -110,7 +111,7 @@ public:
 	/// When a key is pushed on the keyboard.
 	/// </summary>
 	/// <param name="ea"></param>
-	virtual void onKeyDown(EVENT_ARGS* ea);
+	virtual void onKeyDown(GAME* game);
 
 	/// <summary>
 	/// 

@@ -3,6 +3,7 @@
 
 #include "../Base/Entity.h"
 #include "../Base/utils.h"
+#include "../Base/game.h"
 #include "../Characters/Player.h"
 
 class Object : public Entity
@@ -92,14 +93,14 @@ public:
 	/// <param name="p"></param>
 	/// <param name="renderer"></param>
 	/// <param name="ea"></param>
-	virtual void updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea);
+	virtual void updateObject(Player& p, RenderContext& renderer, GAME* game);
 
 	/// <summary>
 	/// Time management
 	/// </summary>
 	/// <param name="time"></param>
 	/// <param name="renderer"></param>
-	virtual void tick(int time, RenderContext& renderer);
+	virtual void tick(int time, RenderContext& renderer, GAME* game);
 
 	/// <summary>
 	/// Forces the object to reload the texture corresponding to the current ID in <texture>.

@@ -54,7 +54,7 @@ public:
 	/// <param name="p"></param>
 	/// <param name="renderer"></param>
 	/// <param name="ea"></param>
-	void updateObject(Player& p, RenderContext& renderer, EVENT_ARGS* ea);
+	void updateObject(Player& p, RenderContext& renderer, GAME* game);
 	/// <summary>
 	/// 
 	/// </summary>

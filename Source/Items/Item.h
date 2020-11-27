@@ -3,6 +3,7 @@
 
 #include "../Base/Entity.h"
 #include "../Base/utils.h"
+#include "../Base/game.h"
 #include <string>
 
 using namespace std;
@@ -57,7 +58,7 @@ public:
 	int getAttack();
 	int getDefense();
 	/* Time management */
-	virtual void tick(int time, RenderContext& r);
+	virtual void tick(int time, RenderContext& r, GAME* game);
 
 	/// <summary>
 	/// Forces the item to reload the texture corresponding to the current ID in <texture>.

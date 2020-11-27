@@ -6,6 +6,7 @@
 #include "../Base/Texture.h"
 #include "../Characters/MovingEntity.h"
 #include "../Base/utils.h"
+#include "../Base/game.h"
 
 using namespace std;
 
@@ -45,7 +46,7 @@ public:
 	/// <param name="offsetX"></param>
 	/// <param name="offsetY"></param>
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
-	virtual void tick(int time, RenderContext&);
+	virtual void tick(int time, RenderContext& r, GAME* game);
 };
 
 #endif

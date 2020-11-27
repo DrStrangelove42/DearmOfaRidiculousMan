@@ -23,7 +23,7 @@ void Monster::kill()
 	player.getCoins(money);
 }
 
-void Monster::tick(int time, RenderContext& r)
+void Monster::tick(int time, RenderContext& r, GAME* game)
 {
 	static int lastTimeAtk = 0;
 	static int lastTimeMv = 0;
