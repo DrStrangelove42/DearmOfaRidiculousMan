@@ -16,3 +16,6 @@ Object::~Object()
 }
 
 void Object::updateTexture(RenderContext& renderer)
+{
+
+}

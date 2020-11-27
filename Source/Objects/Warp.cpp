@@ -1,5 +1,6 @@
 #include "Warp.h"
-#include "Warp.h"
+#include "../Maps/Map.h"
+#include "../Maps/MainMenu.h"
 
 Warp::~Warp()
 {

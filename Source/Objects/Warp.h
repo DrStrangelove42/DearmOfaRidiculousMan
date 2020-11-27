@@ -6,6 +6,9 @@
 
 using namespace std;
 
+class Map;
+class MainMenu;
+
 class Warp : public Object
 {
 private:

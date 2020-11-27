@@ -3,15 +3,6 @@
 void manageEvents(GAME* game)
 {
 	SDL_Event event;
-	
-	/*ea->currentRoom = &(game->currentMap->currentRoom);
-	ea->currentMap = game->currentMapId;
-	ea->warp_IsExternal = false;
-	ea->player = game->player;
-	ea->key = Other;
-	 The following will allow us to know if the player needs to be teleported. 
-	ea->destX = -1;
-	ea->destY = -1;*/
 
 	while (SDL_PollEvent(&event))
 	{
@@ -133,7 +124,7 @@ void onKeyDown(SDL_Event event, GAME* game)
 			game->keyLetter = 0;
 	}
 
-	game->currentMap->onKeyDown(game,game->key);
+	game->currentMap->onKeyDown(game);
 }
 
 void quitGame(GAME* game)
