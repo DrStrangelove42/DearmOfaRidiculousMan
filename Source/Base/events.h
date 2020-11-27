@@ -21,7 +21,7 @@ void manageEvents(GAME* game);
 /// </summary>
 /// <param name="event">The underlying event structure.</param>
 /// <param name="game">The current game object.</param>
-void onKeyDown(SDL_Event event, GAME* game);
+EVENT_ARGS* onKeyDown(SDL_Event event, GAME* game, EVENT_ARGS* ea);
 
 /// <summary>
 /// Called on any event concerning the window.
