@@ -1,6 +1,6 @@
 #include "Button.h"
 
-Button::Button(Texture* texture, int x, int y, int id, function<void(int)> onClick) : Label(texture, x, y), id(id), onClick(onClick),mouseOver(false),overTexture(NULL)
+Button::Button(Texture* texture, int x, int y, int id, function<void(int)> onClick) : Label(texture, x, y), id(id), onClick(onClick), mouseOver(false), overTexture(NULL)
 {
 	normalTexture = texture;
 }
@@ -10,7 +10,7 @@ Button::Button(string caption, RenderContext& r, int x, int y, int id, function<
 	normalTexture = texture;
 }
 
-Button::Button(string caption, RenderContext& r, int x, int y, int id, function<void(int)> onClick, int color, int overColor) : 
+Button::Button(string caption, RenderContext& r, int x, int y, int id, function<void(int)> onClick, int color, int overColor) :
 	Label(caption, r, x, y, color), id(id), onClick(onClick), mouseOver(false)
 {
 	overTexture = LoadString(caption, r, overColor);
@@ -19,8 +19,8 @@ Button::Button(string caption, RenderContext& r, int x, int y, int id, function<
 
 void Button::onMouseEvent(MOUSE_DATA* md)
 {
-	if (x + texture->getWidth() >= md->x && md->x >= x &&
-		y + texture->getHeight() >= md->y && md->y >= y)
+	if (x + texture->getWidth() + SZ_BLOCKSIZE >= md->x && md->x >= x - SZ_BLOCKSIZE &&
+		y + texture->getHeight() + SZ_BLOCKSIZE >= md->y && md->y >= y - SZ_BLOCKSIZE)
 	{
 		mouseOver = true;
 		if (md->state == MouseStatePushed && md->button == MouseLeft)
@@ -39,6 +39,8 @@ void Button::render(RenderContext& renderer, int offsetX, int offsetY)
 		if (mouseOver)
 		{
 			texture = overTexture;
+			renderer.changeColor(0xffffffff);
+			renderer.drawRectangle(x - SZ_BLOCKSIZE, y - SZ_BLOCKSIZE, texture->getWidth() + 2 * SZ_BLOCKSIZE, texture->getHeight() + 2 * SZ_BLOCKSIZE);
 		}
 		else
 		{

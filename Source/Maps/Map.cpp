@@ -45,7 +45,7 @@ void Map::render(RenderContext& renderer, int offsetX, int offsetY)
 
 void Map::tick(int time, GAME* game)
 {
-        rooms[currentRoom]->tick(time, game);
+	rooms[currentRoom]->tick(time, game);
 }
 
 int Map::getRoomCount()
@@ -65,7 +65,7 @@ int Map::getCurrentRoom()
 
 void Map::onKeyDown(GAME* game)
 {
-        rooms[currentRoom]->onKeyDown(game);
+	rooms[currentRoom]->onKeyDown(game);
 }
 
 void Map::onMouseEvent(MOUSE_DATA* md)
@@ -271,13 +271,13 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 	rooms[currentRoom]->setDiscovered(true);
 
 	int uniqueId = 0; //This integer is used to make sure the identifier of each objects in the room is unique
-	
+
 	while (getline(data, line3)) //We now add the objects to the rooms
 	{
 		//For each object, we extract its position in the map, its identifier, and the rest of the information needed to construct the object and add it to the map
-	        if (line3[line3.length() - 1] == '\r')
+		if (line3[line3.length() - 1] == '\r')
 		{
-		        line3.erase(line3.length() - 1);
+			line3.erase(line3.length() - 1);
 		}
 		int room, x, y;
 		size_t a;
@@ -291,7 +291,7 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 		{
 		case '!':
 		{
-		        string id = line3.substr(0, 2) + to_string(uniqueId++);
+			string id = line3.substr(0, 2) + to_string(uniqueId++);
 			line3.erase(0, 2);
 			int destMap = stoi(line3, &a);
 			line3.erase(0, a);
@@ -301,10 +301,14 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 			line3.erase(0, a);
 			int destY = stoi(line3, &a);
 			line3.erase(0, a);
-			if (line3=="")
-			  {rooms[room]->addObject(new Warp(destMap, destRoom, destX, destY, x, y, id, p, renderer));}
+			if (line3 == "")
+			{
+				rooms[room]->addObject(new Warp(destMap, destRoom, destX, destY, x, y, id, p, renderer));
+			}
 			else
-			  {rooms[room]->addObject(new Warp(destMap, destRoom, destX, destY, x, y, id, p, renderer, stoi(line3)));}
+			{
+				rooms[room]->addObject(new Warp(destMap, destRoom, destX, destY, x, y, id, p, renderer, stoi(line3)));
+			}
 			break;
 		}
 		case 'k':

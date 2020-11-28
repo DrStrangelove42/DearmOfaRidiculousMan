@@ -25,8 +25,6 @@ void Monster::kill()
 
 void Monster::tick(int time, GAME* game)
 {
-	static int lastTimeAtk = 0;
-	static int lastTimeMv = 0;
 	if (time - lastTimeAtk >= attackDelay)
 	{
 		lastTimeAtk = time;
@@ -56,7 +54,7 @@ void Monster::tick(int time, GAME* game)
 
 void Monster::attackRound()
 {
-	if (abs(x - player.getX()) < attackRadius && abs(y - player.getY()) < attackRadius)
+	if (abs(x - player.getX()) <= attackRadius && abs(y - player.getY()) <= attackRadius)
 	{
 		player.damage(attackValue);
 	}
@@ -64,7 +62,7 @@ void Monster::attackRound()
 
 void Monster::manageAlarm()
 {
-	if (abs(x - player.getX()) < alarmRadius && abs(y - player.getY()) < alarmRadius)
+	if (abs(x - player.getX()) <= alarmRadius && abs(y - player.getY()) <= alarmRadius)
 	{
 		alarmed = true;
 	}

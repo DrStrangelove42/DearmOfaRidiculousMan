@@ -71,6 +71,12 @@ public:
 	/// </summary>
 	/// <param name="md"></param>
 	void onMouseEvent(MOUSE_DATA* md);
+	/// <summary>
+	/// For buttons, the rendering is in absolute position (no offset).
+	/// </summary>
+	/// <param name="renderer"></param>
+	/// <param name="offsetX">Ignored.</param>
+	/// <param name="offsetY">Ignored.</param>
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
 	virtual void tick(int time, RenderContext& r, GAME* game);
 };

@@ -1,5 +1,6 @@
 #include "Room.h"
-
+#include "../Characters/Monsters/Skeleton.h"
+#include "../Characters/Monsters/Ghost.h"
 Room::Room(int width, int height, int absx, int absy, Player& p, RenderContext& renderer) : w(width), h(height), x(absx), y(absy), player(p), discovered(false)
 {
 	if (w > 0 && h > 0)
@@ -212,6 +213,9 @@ void Room::onKeyDown(GAME* game)
 	default:
 		break;
 	}
+
+	if (game->keyLetter == 'M')
+		addMonster(new Ghost(*(game->renderer), *(game->player), *this));
 
 	if (curX != player.getX() || curY != player.getY())
 		tryTeleportAt(player, curX, curY);
