@@ -1,5 +1,7 @@
 #include "config.h"
 
+bool DEBUG_MODE = true;
+
 /*Size constants*/
 int SZ_BLOCKSIZE = 20;
 int SZ_SCREENWIDTH = 1000;

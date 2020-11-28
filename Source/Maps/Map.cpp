@@ -39,8 +39,11 @@ void Map::render(RenderContext& renderer, int offsetX, int offsetY)
 
 	player.render(renderer, offX + cur->getX(), offY + cur->getY());
 
-	titleTexture->renderUnscaled(renderer, 0, 0);
-	LoadString("Room : " + to_string(currentRoom), renderer, 0x00FFffff)->renderUnscaled(renderer, 0, 16);
+	if (DEBUG_MODE)
+	{
+		titleTexture->renderUnscaled(renderer, 0, 0);
+		LoadString("Room : " + to_string(currentRoom), renderer, 0x00FFffff)->renderUnscaled(renderer, 0, 16);
+	}
 }
 
 void Map::tick(int time, GAME* game)
