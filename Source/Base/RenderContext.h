@@ -9,7 +9,7 @@ A class encapsulating a rendering context.
 */
 class RenderContext
 {
-private:
+protected:
 	/// <summary>
 	/// The native renderer.
 	/// </summary>
@@ -19,7 +19,7 @@ public:
 	/// Creates a new render context from the specified window.
 	/// </summary>
 	/// <param name="window"></param>
-	RenderContext(SDL_Window* window);
+	RenderContext(Window& window);
 	~RenderContext();
 
 	/// <summary>

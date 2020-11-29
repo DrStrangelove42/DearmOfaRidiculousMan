@@ -1,8 +1,8 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <SDL2/SDL.h>
-//#include "../Maps/Map.h"
+
+#include "../Base/Window.h"
 
 class Map;
 class Player;
@@ -23,7 +23,7 @@ typedef struct
 	/// <summary>
 	/// A pointer to the window managed by SDL.
 	/// </summary>
-	SDL_Window* window;
+	Window* window;
 
 	/// <summary>
 	/// Our graphics context.

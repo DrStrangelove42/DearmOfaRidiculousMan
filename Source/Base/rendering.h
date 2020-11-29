@@ -29,12 +29,6 @@ bool renderInit();
 std::string renderErrorDetails();
 
 /// <summary>
-/// Creates a window
-/// </summary>
-/// <returns></returns>
-SDL_Window* renderCreateWindow();
-
-/// <summary>
 /// Exits rendering module
 /// </summary>
 void renderQuit();

@@ -10,7 +10,7 @@ void manageEvents(GAME* game)
 		{
 		case SDL_KEYDOWN:
 		{
-		        onKeyDown(event, game);
+			onKeyDown(event, game);
 			break;
 		}
 		case SDL_MOUSEMOTION:
@@ -135,8 +135,8 @@ void quitGame(GAME* game)
 	FreeTextures();
 
 	delete game->renderer;
-	SDL_DestroyWindow(game->window);
+	delete game->window;
 
 	delete game;
 }
- 
+

@@ -2,9 +2,9 @@
 
 using namespace std;
 
-RenderContext::RenderContext(SDL_Window* window)
+RenderContext::RenderContext(Window& window)
 {
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	renderer = window.getRenderer();
 
 	if (NULL == renderer)
 	{

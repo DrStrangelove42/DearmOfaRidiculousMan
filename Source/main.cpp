@@ -75,7 +75,7 @@ GAME* initGame()
 	GAME* game = new GAME();
 
 	game->quit = false;
-	game->window = renderCreateWindow();
+	game->window = new Window("DOARM", SZ_SCREENWIDTH, SZ_SCREENHEIGHT);
 
 	if (NULL == game->window)
 	{
@@ -83,7 +83,7 @@ GAME* initGame()
 		return NULL;
 	}
 
-	game->renderer = new RenderContext(game->window);
+	game->renderer = new RenderContext(*(game->window));
 
 	return game;
 }
