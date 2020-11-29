@@ -5,6 +5,8 @@ Player::Player(RenderContext& renderer, Window& main, int lives, int attack, int
 	texture = LoadTexture("player", renderer);
 
 	infosWindow = new Window("Player informations", SZ_INFOSWIDTH, SZ_SCREENHEIGHT, main.getX() + main.getW(), main.getY());
+	infosRenderer = new RenderContext(*infosWindow);
+	heart = LoadTexture("heart", *infosRenderer);
 }
 
 void Player::render(RenderContext& renderer, int offsetX, int offsetY)
@@ -13,6 +15,23 @@ void Player::render(RenderContext& renderer, int offsetX, int offsetY)
 	int yy = (y + offsetY) * SZ_BLOCKSIZE;
 	texture->render(renderer, xx, yy, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
 	drawHealthBar(renderer, xx, yy);
+
+	infosRenderer->clear(); 
+	xx = 0;
+	yy = 0;
+	
+	for (int i = 0; i < lives; i++)
+	{
+		if (xx >= SZ_INFOSWIDTH)
+		{
+			xx = 0;
+			yy += heart->getHeight();
+		}
+		heart->renderUnscaled(*infosRenderer, xx, yy);
+		xx += heart->getWidth();
+	}
+	
+	infosRenderer->update();
 }
 
 /*
@@ -43,6 +62,7 @@ Player::~Player()
 
 void Player::tick(int time, GAME* game)
 {
+	
 
 }
 

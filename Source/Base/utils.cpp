@@ -38,33 +38,39 @@ Texture* LoadString(string text, RenderContext& r, int color)
 	string id = "text." + to_string(color) + "/" + text;
 	if (textures.find(id) == textures.end())
 	{
-		//Not rendered yet
-		SDL_Color c = { (unsigned char)(color >> 24),
+		textures[id] = LoadVolatileString(text, r, color);
+	}
+
+	return textures[id];
+}
+
+Texture* LoadVolatileString(string text, RenderContext& r, int color)
+{
+	SDL_Color c = { (unsigned char)(color >> 24),
 							(unsigned char)(color >> 16),
 							(unsigned char)(color >> 8),
 							(unsigned char)(color) };
 
-		SDL_Surface* s = TTF_RenderText_Solid(FONT, text.c_str(), c);
-		SDL_Texture* t = r.fromSurface(s);
-		SDL_FreeSurface(s);
+	SDL_Surface* s = TTF_RenderText_Solid(FONT, text.c_str(), c);
+	SDL_Texture* t = r.fromSurface(s);
+	SDL_FreeSurface(s);
 
-		int w, h;
-		if (TTF_SizeText(FONT, text.c_str(), &w, &h))
-		{
-			cout << TTF_GetError() << endl;
-			return NULL;
-		}
-		textures[id] = new Texture(t, w, h);
+	int w, h;
+	if (TTF_SizeText(FONT, text.c_str(), &w, &h))
+	{
+		cout << TTF_GetError() << endl;
+		return NULL;
 	}
 
-	return textures[id];
+	return new Texture(t, w, h);
 }
 
 void FreeTextures()
 {
 	for (auto& entry : textures)
 	{
-		cout << "Freeing " << entry.first << endl;
+		if (DEBUG_MODE)
+			cout << "Freeing " << entry.first << " :: "<< entry.second->getHeight() << "*" << entry.second->getWidth() << endl;
 		delete entry.second;
 	}
 	textures.clear();

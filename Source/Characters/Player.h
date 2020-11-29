@@ -46,6 +46,8 @@ protected:
 	/// 
 	/// </summary>
 	Window* infosWindow;
+	RenderContext* infosRenderer;
+	Texture* heart;
 
 public:
 	/// <summary>
@@ -69,7 +71,7 @@ public:
 	/// <param name="startHealth"></param>
 	/// <param name="startMoney"></param>
 	/// <param name="startExp"></param>
-	Player(RenderContext& renderer, Window& main, int lives = 1, int attack = 5, int defense = 0, int startHealth = 100, int startMoney = 0, int startExp = 0);
+	Player(RenderContext& renderer, Window& main, int lives = 3, int attack = 5, int defense = 0, int startHealth = 100, int startMoney = 0, int startExp = 0);
 
 	/// <summary>
 	/// Instant kill

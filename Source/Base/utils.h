@@ -64,6 +64,16 @@ Texture* LoadTexture(string id, RenderContext& r);
 Texture* LoadString(string text, RenderContext& r, int color = 0xffffffff);
 
 /// <summary>
+/// Loads a temporary texture used to draw ever-changing text on screen.
+/// This way, we do not fill the RAM with every string possible.
+/// </summary>
+/// <param name="text"></param>
+/// <param name="r"></param>
+/// <param name="color"></param>
+/// <returns></returns>
+Texture* LoadVolatileString(string text, RenderContext& r, int color);
+
+/// <summary>
 /// Writes the error in the console output in a human-friendly way.
 /// </summary>
 /// <param name="err"></param>

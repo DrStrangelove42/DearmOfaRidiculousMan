@@ -17,6 +17,8 @@ Texture::Texture(RenderContext& context, string id)
 	if (NULL == tx)
 		throw runtime_error("Unable to create texture #" + id + " : " + string(SDL_GetError()));
 
+	SDL_QueryTexture(tx, NULL, NULL, &w, &h);
+
 	texture = tx;
 }
 
