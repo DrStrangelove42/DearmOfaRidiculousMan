@@ -1,8 +1,10 @@
 #include "Player.h"
 
-Player::Player(RenderContext& renderer, int lives, int attack, int defense, int startHealth, int startMoney, int startExp) : lives(lives), textureId("player"), LivingEntity(startHealth, startMoney, startExp)
+Player::Player(RenderContext& renderer, Window& main, int lives, int attack, int defense, int startHealth, int startMoney, int startExp) : lives(lives), textureId("player"), LivingEntity(startHealth, startMoney, startExp)
 {
 	texture = LoadTexture("player", renderer);
+
+	infosWindow = new Window("Player informations", SZ_INFOSWIDTH, SZ_SCREENHEIGHT, main.getX() + main.getW(), main.getY());
 }
 
 void Player::render(RenderContext& renderer, int offsetX, int offsetY)
@@ -32,6 +34,11 @@ void Player::kill()
 void Player::updateTexture(RenderContext& renderer)
 {
 	texture = LoadTexture(textureId, renderer);
+}
+
+Player::~Player()
+{
+	delete infosWindow;
 }
 
 void Player::tick(int time, GAME* game)

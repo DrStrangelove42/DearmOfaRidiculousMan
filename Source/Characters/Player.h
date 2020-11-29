@@ -8,6 +8,7 @@
 #include "../Base/config.h"
 #include "../Base/game.h"
 #include "../Items/Item.h"
+#include "../Base/Window.h"
 #include "MovingEntity.h"
 #include "LivingEntity.h"
 #include <unordered_map>
@@ -41,6 +42,11 @@ protected:
 	/// </summary>
 	Texture* texture;
 
+	/// <summary>
+	/// 
+	/// </summary>
+	Window* infosWindow;
+
 public:
 	/// <summary>
 	/// 
@@ -52,7 +58,7 @@ public:
 	/// <param name="renderer"></param>
 	void updateTexture(RenderContext& renderer);
 
-	~Player() {};
+	~Player();
 	/// <summary>
 	/// Creates the player
 	/// </summary>
@@ -63,7 +69,7 @@ public:
 	/// <param name="startHealth"></param>
 	/// <param name="startMoney"></param>
 	/// <param name="startExp"></param>
-	Player(RenderContext& renderer, int lives = 1, int attack = 5, int defense = 0, int startHealth = 100, int startMoney = 0, int startExp = 0);
+	Player(RenderContext& renderer, Window& main, int lives = 1, int attack = 5, int defense = 0, int startHealth = 100, int startMoney = 0, int startExp = 0);
 
 	/// <summary>
 	/// Instant kill

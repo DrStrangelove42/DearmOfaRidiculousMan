@@ -17,6 +17,10 @@ protected:
 	/// The native window.
 	/// </summary>
 	SDL_Window* window;
+	/// <summary>
+	/// Size of the window
+	/// </summary>
+	int w, h;
 public:
 	/// <summary>
 	/// 
@@ -54,6 +58,24 @@ public:
 	/// </summary>
 	/// <returns></returns>
 	int getY();
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <returns></returns>
+	int getW();
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <returns></returns>
+	int getH();
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <returns></returns>
+	int getId();
 
 };
 

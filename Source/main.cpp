@@ -37,7 +37,7 @@ int main(int argc, char** argv)
 int playDoarm(GAME* game)
 {
 	RenderContext& renderer = *(game->renderer);
-	Player * me = new Player(renderer);
+	Player* me = new Player(renderer, *(game->window));
 
 	game->player = me;
 

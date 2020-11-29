@@ -31,8 +31,9 @@ void manageEvents(GAME* game)
 
 void onWindowEvent(SDL_Event event, GAME* game)
 {
-	if (event.window.event == SDL_WINDOWEVENT_CLOSE)
-		game->quit = true;
+	if (event.window.windowID == game->window->getId())
+		if (event.window.event == SDL_WINDOWEVENT_CLOSE)
+			game->quit = true;
 }
 
 void onMouseEvent(SDL_Event event, GAME* game)
