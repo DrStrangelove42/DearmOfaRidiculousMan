@@ -56,9 +56,7 @@ int playDoarm(GAME* game)
 		game->currentMap->tick(currentTime, game);
 		game->player->tick(currentTime, game);
 
-		game->currentMap->render(renderer);
-
-		
+		game->currentMap->render(renderer);		
 
 		game->renderer->update();
 

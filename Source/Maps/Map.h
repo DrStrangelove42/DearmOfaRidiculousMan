@@ -8,9 +8,6 @@
 #include "../Base/game.h"
 #include "../Base/utils.h"
 #include "../Characters/Player.h"
- 
-#include <iostream>
-#include <fstream>
 #include "../Objects/Object.h"
 #include "../Objects/Chest.h"
 #include "../Objects/Door.h"
@@ -26,6 +23,8 @@
 #include "../Items/Item.h"
 #include "../Items/Shield.h"
 #include "../Items/Sword.h"
+#include <iostream>
+#include <fstream>
 
 /*
 A map represents a set of rooms displayed one at a time (or one centered
@@ -38,18 +37,18 @@ protected:
 	/// <summary>
 	/// Array of pointers to rooms
 	/// </summary>
-	Room ** rooms;
-	
+	Room** rooms;
+
 	/// <summary>
 	/// Reference to the player
 	/// </summary>
-	Player &player;
-	
+	Player& player;
+
 	/// <summary>
 	/// Number of rooms in the map
 	/// </summary>
 	int roomCount;
-	
+
 	/// <summary>
 	/// 
 	/// </summary>
@@ -59,14 +58,12 @@ protected:
 	/// 
 	/// </summary>
 	Texture* titleTexture;
-	
+
 	/// <summary>
-	/// This function transforms a text file into a folder of texts files which are sufficient 
-	/// to describe the map completelyand to be able to modify the maps to save progress.
-	///	It will create, for each of the maps in the world, a file corresponding to the layout
-	///	of the map as well as a file containing the objectsand monsters that are in the map
-	///	(and their characteristics, these can change throughout the game, we will therefore
-	/// modify these files to save progress)
+	/// This function takes a folder of files representing a world and returns the current map.
+	/// destMap, destRoom, destX and destY correspond to the destination coordinates, i.e. where
+	///	the player starts. When they are different from -1, the player is warping from one map to
+	///	another, and when they are equal to -1 we must read them in the Start file.
 	/// </summary>
 	/// <param name="filename"></param>
 	/// <param name="p"></param>
@@ -75,16 +72,60 @@ protected:
 	/// <param name="startRoom"></param>
 	void mapFromFiles(string filename, Player& p, RenderContext& renderer, int* startMap, int startRoom);
 
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="data"></param>
+	/// <param name="renderer"></param>
+	/// <param name="p"></param>
+	void intlGetObjectsFromFile(ifstream& data, RenderContext& renderer, Player& p);
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="layout"></param>
+	/// <param name="p"></param>
+	/// <param name="renderer"></param>
+	/// <returns></returns>
+	Room* intlRoomFromFile(ifstream& layout, Player& p, RenderContext& renderer);
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="newFile"></param>
+	/// <param name="map"></param>
+	/// <param name="World"></param>
+	/// <param name="start"></param>
+	/// <returns></returns>
+	static bool intlParseMap(string& newFile, int map, ifstream& World, ofstream& start);
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="World"></param>
+	/// <param name="map"></param>
+	/// <param name="room"></param>
+	/// <param name="layout"></param>
+	/// <param name="start"></param>
+	/// <param name="data"></param>
+	/// <returns></returns>
+	static bool intlParseRoom(ifstream& World, int map, int room, ofstream& layout, ofstream& start, ofstream& data);
+
 public:
 	/// <summary>
-	/// This function turns a folder of files representing a world and returns the current map.
-	/// destMap, destRoom, destXand destY correspond to the destination coordinates, i.e.where
-	///	the player starts.When they are different from - 1, the player is warping from one map to
-	///	another, and when they are equal to - 1 we must read them in the Start file.
+	/// This function transforms a text file into a folder of texts files which are sufficient 
+	/// to describe the map completely and to be able to modify the maps to save progress.
+	///	It will create, for each of the maps in the world, a file corresponding to the layout
+	///	of the map as well as a file containing the objectsand monsters that are in the map
+	///	(and their characteristics, these can change throughout the game, we will therefore
+	/// modify these files to save progress).
 	/// </summary>
 	/// <param name="location"></param>
 	/// <param name="filename"></param>
 	static void worldFromFile(string location, string filename);
+
+
+
 
 	/// <summary>
 	/// Index of the room that is currently displayed (in which the player is)
@@ -96,9 +137,9 @@ public:
 	/// <param name="p"></param>
 	/// <param name="roomCount"></param>
 	Map(Player& p, int roomCount);
-	
+
 	/// <summary>
-	///  Creates a Map object from a map file. Either it is the initial creation of the map, 
+	/// Creates a Map object from a map file. Either it is the initial creation of the map, 
 	/// in which case *startMap is worth -1 and the initial map, room and position must be read in 
 	/// the start file, or it is a warp to an external map, in which case startMap and startRoom are specified.
 	/// </summary>
@@ -112,13 +153,13 @@ public:
 	/* Std destructor */
 	virtual ~Map();
 
-	
+
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);/* Rendering method, enabling the renderer to take the offset (in blocks) into account. */
 
-	
+
 	virtual void tick(int time, GAME* game);/* Time management */
 
-	
+
 	virtual void onKeyDown(GAME* game);/* Event system */
 
 	virtual void onMouseEvent(MOUSE_DATA* md);
@@ -139,7 +180,7 @@ public:
 		}
 		return *this;
 	}*/
-	
+
 	/* Accessors */
 	int getRoomCount();
 	Room** getRooms();

@@ -16,8 +16,10 @@ Map::~Map()
 
 Map::Map(string filename, Player& p, RenderContext& renderer, int* startMap, int startRoom) : player(p), name(filename)
 {
-        mapFromFiles(filename, p, renderer, startMap, startRoom);
-	titleTexture = LoadString("CURRENT MAP : " + filename, renderer);
+	/*<--DON'T PUT A TAB HERE IT'S UGLY !*/
+	mapFromFiles(filename, p, renderer, startMap, startRoom);
+	if (DEBUG_MODE)
+		titleTexture = LoadString("CURRENT MAP : " + filename, renderer);
 }
 
 void Map::render(RenderContext& renderer, int offsetX, int offsetY)
@@ -76,8 +78,9 @@ void Map::onMouseEvent(MOUSE_DATA* md)
 
 }
 
-void Map::worldFromFile(string location, string filename) {
-	int NumberOfMaps, NumberOfRooms, height, width;
+void Map::worldFromFile(string location, string filename)
+{
+	int NumberOfMaps;
 	string line;
 	string newFile = location + filename + "/" + filename; //A string we will use often
 	ifstream World(location + filename + WORLDFILE_EXT);
@@ -86,139 +89,171 @@ void Map::worldFromFile(string location, string filename) {
 	NumberOfMaps = stoi(line);
 
 	ofstream start(newFile + "Start" + WORLDFILE_EXT); //We create a new file in which we will detail the start position and characteristics of the player
-	for (int map = 0; map < NumberOfMaps; map++) {
-		ofstream layout(newFile + to_string(map) + WORLDFILE_EXT);
-		ofstream data(newFile + to_string(map) + "Data" + WORLDFILE_EXT);
-		getline(World, line);
-		if (line.length() == 0 || line[0] != '#') {
-			cout << "Expected ## before beginning of map " << map << endl;
+	for (int map = 0; map < NumberOfMaps; map++)
+	{
+		if (!intlParseMap(newFile, map, World, start))
+			return;
+	}
+	World.close();
+}
+
+bool Map::intlParseMap(string& newFile, int map, ifstream& World, ofstream& start)
+{
+	string line;
+	ofstream layout(newFile + to_string(map) + WORLDFILE_EXT);
+	ofstream data(newFile + to_string(map) + "Data" + WORLDFILE_EXT);
+
+	getline(World, line);
+	if (line.length() == 0 || line[0] != '#')
+		cout << "Expected ## before beginning of map " << map << endl;
+
+	getline(World, line);
+	int NumberOfRooms = stoi(line);
+	layout << to_string(NumberOfRooms) << endl;
+
+	for (int room = 0; room < NumberOfRooms; room++)
+	{
+		{
+			if (!intlParseRoom(World, map, room, layout, start, data))
+				return false;
+		}
+	}
+	layout.close();
+	data.close();
+	return true;
+}
+
+bool Map::intlParseRoom(ifstream& World, int map, int room, ofstream& layout, ofstream& start, ofstream& data)
+{
+	int height, width;
+	string line;
+	getline(World, line);
+	if (line.length() == 0 || line[0] != '#')
+	{
+		cout << "Expected # before beginning of room " << room << endl;
+		return false;
+	}
+
+	/* We determine the dimensions of the room. */
+	getline(World, line);
+	size_t h;
+	width = stoi(line, &h);
+	line.erase(0, h);
+	height = stoi(line);
+
+	layout << to_string(width) << " " << to_string(height) << endl;
+
+	/* We determine the absolute position of the room. */
+
+	int x, y;
+	getline(World, line);
+	x = stoi(line, &h);
+	line.erase(0, h);
+	y = stoi(line);
+
+	layout << to_string(x) << " " << to_string(y) << endl;
+
+	string descriptions = "";
+	int headerLength = 0;
+
+	getline(World, line);
+
+	while (line.length() == 0 || line[0] != '#')
+	{
+		if (line != "")
+		{
+			descriptions += line + "\n";
+			headerLength += 1;
 		}
 		getline(World, line);
-		NumberOfRooms = stoi(line);
-		layout << to_string(NumberOfRooms) << endl;
+	}
 
-		for (int room = 0; room < NumberOfRooms; room++) {
+	/*This array will contain each non-empty line between the absolute position of
+	the room and the next line starting with #, that is to say all the additional
+	information needed to describe objects and entities (or anything else that is
+	added), such as contents of chests, characteristics of monsters, that are in
+	the room.*/
+	string* header = new string[headerLength];
 
-			getline(World, line);
-			if (line.length() == 0 || line[0] != '#')
+	for (int i = 0; i < headerLength; i++)
+	{
+		int firstlineskip = descriptions.find("\n");
+		header[i] = descriptions.substr(0, firstlineskip);
+		descriptions.erase(0, firstlineskip + 1);
+	}
+
+	/*Block parsing (for player start block)*/
+	for (int i = 0; i < height; i++)
+	{
+		getline(World, line);
+		if (line[line.length() - 1] == '\r')
+		{
+			line.erase(line.length() - 1);
+		}
+		string extraspaces = string(max(0, width * 3 - int(line.length())), ' ');
+		line += extraspaces; //We add extra spaces so that all lines in the file are of the same length : width*3. If we find an empty space, it is an empty block.
+		for (int j = 0; j < width; j++)
+		{
+			layout << line[3 * j];
+			switch (line[3 * j + 1])
 			{
-				cout << "Expected # before beginning of room " << room << endl;
-				return;
-			}
-
-			/* We determine the dimensions of the room. */
-
-			getline(World, line);
-			size_t h;
-			width = stoi(line, &h);
-			line.erase(0, h);
-			height = stoi(line);
-
-			layout << to_string(width) << " " << to_string(height) << endl;
-
-			/* We determine the absolute position of the room. */
-
-			int x, y;
-			getline(World, line);
-			x = stoi(line, &h);
-			line.erase(0, h);
-			y = stoi(line);
-
-			layout << to_string(x) << " " << to_string(y) << endl;
-
-			string descriptions = "";
-			int headerLength = 0;
-
-			getline(World, line);
-
-			while (line.length() == 0 || line[0] != '#') {
-				if (line != "")
-				{
-					descriptions += line + "\n";
-					headerLength += 1;
-				}
-				getline(World, line);
-			}
-
-			string* header = new string[headerLength];
-
-			//This array will contain each non-empty line between the absolute position of the room and the next line starting with #, that is to say all the additional information needed to describe objects and entities (or anything else that is added), such as contents of chests, characteristics of monsters, that are in the room.
-
-			for (int i = 0; i < headerLength; i++)
-			{
-				int firstlineskip = descriptions.find("\n");
-				header[i] = descriptions.substr(0, firstlineskip);
-				descriptions.erase(0, firstlineskip + 1);
-			}
-
-			for (int i = 0; i < height; i++) {
-				getline(World, line);
-				if (line[line.length() - 1] == '\r')
-				{
-					line.erase(line.length() - 1);
-				}
-				string extraspaces = string(max(0, width * 3 - int(line.length())), ' ');
-				line += extraspaces; //We add extra spaces so that all lines in the file are of the same length : width*3. If we find an empty space, it is an empty block.
-				for (int j = 0; j < width; j++) {
-					layout << line[3 * j];
-					switch (line[3 * j + 1])
+			case ' ':
+				break;
+			case 'p':
+				start << to_string(map) << " " << to_string(room) << " " << to_string(j) << " " << to_string(i) << endl;
+				for (int k = 0; k < headerLength; k++)
+				{ //There may be information in the header as to what health or items the player starts with for example
+					if (header[k][0] == 'p')
 					{
-					case ' ':
-						break;
-					case 'p':
-						start << to_string(map) << " " << to_string(room) << " " << to_string(j) << " " << to_string(i) << endl;
-						for (int k = 0; k < headerLength; k++) { //There may be information in the header as to what health or items the player starts with for example
-							if (header[k][0] == 'p') {
-								start << header[k].erase(0);
-							}
-						}
-						start.close();
-						break;
-					default:
-						data << to_string(room) << " " << to_string(j) << " " << to_string(i) << " ";
-						bool notinheader = true;
-						for (int k = 0; k < headerLength; k++) {
-							if (header[k][0] == line[3 * j + 1] && header[k][1] == line[3 * j + 2]) {
-								data << header[k] << endl;
-								notinheader = false;
-								break;
-							}
-						}
-						if (notinheader)
-						{
-							data << line[3 * j + 1] << line[3 * j + 2] << endl;
-						}
+						start << header[k].erase(0);
+					}
+				}
+				start.close();
+				break;
+			default:
+				data << to_string(room) << " " << to_string(j) << " " << to_string(i) << " ";
+				bool notinheader = true;
+				for (int k = 0; k < headerLength; k++)
+				{
+					if (header[k][0] == line[3 * j + 1] && header[k][1] == line[3 * j + 2])
+					{
+						data << header[k] << endl;
+						notinheader = false;
 						break;
 					}
 				}
-				layout << endl;
+				if (notinheader)
+				{
+					data << line[3 * j + 1] << line[3 * j + 2] << endl;
+				}
+				break;
 			}
 		}
-		layout.close();
-		data.close();
-
+		layout << endl;
 	}
-	World.close();
-	return;
+	return true;
 }
 
 void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int* startMap, int startRoom)
 {
-	ifstream start(filename + "Start" + WORLDFILE_EXT);
-	string line1, line2, line3;
+	ifstream start(filename + "Start" + MAPFILE_EXT);
+	string line;
 	size_t a;
 	int startX, startY;
 
+	/*
+	TODO : Explications here
+	*/
 	if (*startMap == -1)
 	{
-		getline(start, line1);
-		*startMap = stoi(line1, &a);
-		line1.erase(0, a);
-		startRoom = stoi(line1, &a);
-		line1.erase(0, a);
-		startX = stoi(line1, &a);
-		line1.erase(0, a);
-		startY = stoi(line1);
+		getline(start, line);
+		*startMap = stoi(line, &a);
+		line.erase(0, a);
+		startRoom = stoi(line, &a);
+		line.erase(0, a);
+		startX = stoi(line, &a);
+		line.erase(0, a);
+		startY = stoi(line);
 		player.teleport(startX, startY);
 	}
 	//TODO other player characteristics
@@ -226,58 +261,33 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 	ifstream layout(filename + to_string(*startMap) + WORLDFILE_EXT);
 	ifstream data(filename + to_string(*startMap) + "Data" + WORLDFILE_EXT);
 
-	getline(layout, line2);
-	roomCount = stoi(line2);
+	getline(layout, line);
+	roomCount = stoi(line);
 
 	rooms = new Room * [roomCount];
 	currentRoom = startRoom;
-	Room* thisRoom;
+
 	for (int room = 0; room < roomCount; room++)
-	{
-		/* We determine the dimensions of the room. */
-		getline(layout, line2);
-		size_t h;
-		int width = stoi(line2, &h);
-		line2.erase(0, h);
-		int height = stoi(line2);
-		getline(layout, line2);
-		int x = stoi(line2, &h);
-		line2.erase(0, h);
-		int y = stoi(line2);
-		thisRoom = new Room(width, height, x, y, p, renderer);
-		for (int i = 0; i < height; i++)
-		{
-			getline(layout, line2);
-			for (int j = 0; j < width; j++) {
-				switch (line2[j])
-				{
-				case ' ':
-					break;
-				case 'w':
-					thisRoom->replaceBlock(new WallBlock(j, i, renderer));
-					break;
-				case 'f':
-					thisRoom->replaceBlock(new FloorBlock(j, i, renderer));
-					break;
-				case 's':
-					thisRoom->replaceBlock(new StoneWallBlock(j, i, renderer));
-					break;
-				default:
-					cout << "Case " << line2[j] << " not treated yet." << endl;
-					break;
-				}
-			}
-		}
-		rooms[room] = thisRoom;
-	}
+		rooms[room] = intlRoomFromFile(layout, p, renderer);
+
 	layout.close();
 	rooms[currentRoom]->setDiscovered(true);
 
+	intlGetObjectsFromFile(data, renderer, p);
+
+	data.close();
+}
+
+void Map::intlGetObjectsFromFile(ifstream& data, RenderContext& renderer, Player& p)
+{
+	string line3;
 	int uniqueId = 0; //This integer is used to make sure the identifier of each objects in the room is unique
 
 	while (getline(data, line3)) //We now add the objects to the rooms
 	{
-		//For each object, we extract its position in the map, its identifier, and the rest of the information needed to construct the object and add it to the map
+		/*For each object, we extract its position in the map, its identifier,
+		and the rest of the information needed to construct the object and add
+		it to the map*/
 		if (line3[line3.length() - 1] == '\r')
 		{
 			line3.erase(line3.length() - 1);
@@ -294,12 +304,12 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 		{
 		case '!':
 		{
-		        rooms[room]->addObject(new Warp(line3, &uniqueId, x, y, renderer));
+			rooms[room]->addObject(new Warp(line3, &uniqueId, x, y, renderer));
 			break;
 		}
 		case 'k':
 		{
-		        rooms[room]->addObject(new Key(line3.substr(0,2), x, y, renderer));
+			rooms[room]->addObject(new Key(line3.substr(0, 2), x, y, renderer));
 			break;
 		}
 		case 'd':
@@ -309,7 +319,7 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 		}
 		case 'c':
 		{
-		        rooms[room]->addObject(new Chest(line3, &uniqueId, x, y, renderer));
+			rooms[room]->addObject(new Chest(line3, &uniqueId, x, y, renderer));
 			break;
 		}
 		case 'g':
@@ -331,7 +341,45 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 			break;
 		}
 	}
-	data.close();
-	return;
+}
+
+Room* Map::intlRoomFromFile(ifstream& layout, Player& p, RenderContext& renderer)
+{
+	string line2;
+	Room* thisRoom;/* We determine the dimensions of the room. */
+	getline(layout, line2);
+	size_t h;
+	int width = stoi(line2, &h);
+	line2.erase(0, h);
+	int height = stoi(line2);
+	getline(layout, line2);
+	int x = stoi(line2, &h);
+	line2.erase(0, h);
+	int y = stoi(line2);
+	thisRoom = new Room(width, height, x, y, p, renderer);
+	for (int i = 0; i < height; i++)
+	{
+		getline(layout, line2);
+		for (int j = 0; j < width; j++) {
+			switch (line2[j])
+			{
+			case ' ':
+				break;
+			case 'w':
+				thisRoom->replaceBlock(new WallBlock(j, i, renderer));
+				break;
+			case 'f':
+				thisRoom->replaceBlock(new FloorBlock(j, i, renderer));
+				break;
+			case 's':
+				thisRoom->replaceBlock(new StoneWallBlock(j, i, renderer));
+				break;
+			default:
+				cout << "Case " << line2[j] << " not treated yet." << endl;
+				break;
+			}
+		}
+	}
+	return thisRoom;
 }
 
