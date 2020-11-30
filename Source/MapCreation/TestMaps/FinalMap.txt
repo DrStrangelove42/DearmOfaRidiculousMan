@@ -8,8 +8,8 @@
 !2 0 1 3 2
 !3 1 1 3 2
 !4 1 1 3 2
-d1 1wn
-d2 1ws
+d1 1 w n
+d2 1 w s
 #
 w  w  w  w  w  w  w  w  w  w  
 w  fp f  f  f  f  f  f  f  w
@@ -41,15 +41,15 @@ w  w  w  w  w  w
 12 10
 0 0
 
-d1 2wn
-d2 2ws
+d1 2 w n
+d2 2 w s
 
 !1 1 1 5 2
 !2 1 1 5 3
 
 !3 2 0 7 4
 
-c1 sw
+c1 (sw)
 #
    s  s  s  s  s  s  s  s  s  s  
    s  f  f  f  f  f  f  f  f  s
@@ -83,7 +83,7 @@ c1 sw
 !1 1 1 2 2
 !2 1 1 2 3
 
-c2 sh
+c2 (sh)
 #
 s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  
 s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  fc2s

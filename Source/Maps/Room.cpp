@@ -100,17 +100,17 @@ void Room::addObject(Object* object)
 	}
 }
 
-void Room::updateAllObjects(RenderContext& renderer, GAME* game)
+void Room::updateAllObjects(GAME* game)
 {
 	for (auto& entry : objects)
 	{
-		entry.second->updateObject(player, game);
+		entry.second->updateObject(game);
 	}
 }
 
 void Room::tick(int time, GAME* game)
 {
-	updateAllObjects(*(game->renderer), game);
+	updateAllObjects(game);
 	for (Monster* m : monsters)
 	{
 		m->tick(time, game);

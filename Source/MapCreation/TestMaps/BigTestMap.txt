@@ -21,9 +21,9 @@
 !k 0 3 5 0
 !l 0 3 6 0
 
-d1 1sw
-d2 1sn
-d3 1se
+d1 1 s w
+d2 1 s n
+d3 1 s e
 #
 w  w  w  w  f!af!bf!cw  w  w  w  
 w  w  w  w  fd1fd2fd3w  w  w  w

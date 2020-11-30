@@ -15,12 +15,6 @@ protected:
 	string id;
 
 	/// <summary>
-	/// Player
-	/// </summary>
-	Player& player;
-
-
-	/// <summary>
 	/// The texture ID
 	/// </summary>
 	string texture;
@@ -39,11 +33,10 @@ public:
 	/// <param name="identifier"></param>
 	/// <param name="posx"></param>
 	/// <param name="posy"></param>
-	/// <param name="player"></param>
 	/// <param name="tx"></param>
 	/// <param name="renderer"></param>
 	/// <param name="trav"></param>
-	Object(string identifier, int posx, int posy, Player& player, string tx, RenderContext& renderer, bool trav);
+	Object(string identifier, int posx, int posy, string tx, RenderContext& renderer, bool trav);
 
 	/// <summary>
 	/// 
@@ -77,10 +70,8 @@ public:
 	/// <summary>
 	/// The following function describes how each type of object interacts with the player.
 	/// </summary>
-	/// <param name="p"></param>
-	/// <param name="renderer"></param>
-	/// <param name="ea"></param>
-	virtual void updateObject(Player& p, GAME* game);
+	/// <param name="game"></param>
+	virtual void updateObject(GAME* game);
 
 	/// <summary>
 	/// Time management

@@ -15,17 +15,14 @@ public:
 	/// <param name="identifier"></param>
 	/// <param name="posx"></param>
 	/// <param name="posy"></param>
-	/// <param name="p"></param>
 	/// <param name="renderer"></param>
-	Key(string identifier, int posx, int posy, Player& p, RenderContext& renderer);
+	Key(string identifier, int posx, int posy, RenderContext& renderer);
 
 	/// <summary>
 	/// How does a key interact with the player?
 	/// </summary>
-	/// <param name="p"></param>
-	/// <param name="renderer"></param>
-	/// <param name="ea"></param>
-	void updateObject(Player& p, GAME* game);
+	/// <param name="game"></param>
+	void updateObject(GAME* game);
 };
 
 #endif

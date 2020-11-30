@@ -5,20 +5,20 @@ Key::~Key()
 
 }
 
-Key::Key(string identifier, int posx, int posy, Player& p, RenderContext& renderer) :
-	Object(identifier, posx, posy, p, "key", renderer, true)
+Key::Key(string identifier, int posx, int posy, RenderContext& renderer) :
+	Object(identifier, posx, posy, "key", renderer, true)
 {
 
 }
 
-void Key::updateObject(Player& p, GAME* game)
+void Key::updateObject(GAME* game)
 {
-	if (texture == "empty" || x != p.getX() || y != p.getY())
+	if (texture == "empty" || x != game->player->getX() || y != game->player->getY())
 	{
 		return;
 	}
 	RenderContext& renderer = *(game->renderer);
-	p.pickUpItem(Item(id, "key", renderer, 0, 0));
+	game->player->pickUpItem(Item(id, "key", renderer, 0, 0));
 	texture = "empty";
 	updateTexture(renderer);
 }

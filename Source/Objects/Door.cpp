@@ -5,21 +5,26 @@ Door::~Door()
 
 }
 
-Door::Door(string identifier, int posx, int posy, Player& p, RenderContext& renderer) : Object(identifier, posx, posy, p, "door" + identifier.substr(4, 1), renderer, false)
+Door::Door(string keyId, string openOrientation, string closedOrientation, string identifier, int posx, int posy, RenderContext& renderer) : keyId(keyId), openOrientation(openOrientation), closedOrientation(closedOrientation), Object(identifier, posx, posy, "door" + closedOrientation, renderer, false)
 {
 
 }
 
-void Door::updateObject(Player& p, GAME* game)
+Door::Door(string headerline, int posx, int posy, RenderContext& renderer) : Door(headerline.substr(3,1), headerline.substr(7,1), headerline.substr(5,1),headerline.substr(0,2), posx, posy, renderer)
 {
-	if (traversable || abs(x - p.getX()) + abs(y - p.getY()) > 1)
+
+}
+
+void Door::updateObject(GAME* game)
+{
+	if (traversable || abs(x - game->player->getX()) + abs(y - game->player->getY()) > 1)
 	{
 		return;
 	}
-	if (p.hasItem("k" + id.substr(3, 1)))
+	if (game->player->hasItem("k" + keyId))
 	{
 		traversable = true;
-		texture = "door" + id.substr(5, 1);
+		texture = "door" + openOrientation;
 		updateTexture(*(game->renderer));
 	}
 }

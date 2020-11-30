@@ -84,7 +84,7 @@ public:
 	/// </summary>
 	/// <param name="renderer"></param>
 	/// <param name="ea"></param>
-	void updateAllObjects(RenderContext& renderer, GAME* game);
+	void updateAllObjects(GAME* game);
 
 	/// <summary>
 	/// Rendering method, enabling the renderer to take the offset (in blocks) into account.

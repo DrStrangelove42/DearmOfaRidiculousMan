@@ -1,11 +1,11 @@
 #include "Object.h"
 
-Object::Object(string identifier, int posx, int posy, Player& p, string tx, RenderContext& renderer, bool trav) : MovingEntity(posx, posy), id(identifier), player(p), texture(tx), traversable(trav)
+Object::Object(string identifier, int posx, int posy, string tx, RenderContext& renderer, bool trav) : MovingEntity(posx, posy), id(identifier), texture(tx), traversable(trav)
 {
 	updateTexture(renderer);
 }
 
-Object::Object(const Object& other) : MovingEntity(other.x, other.y), id(other.id), player(other.player), texture(other.texture), loadedTx(other.loadedTx), traversable(other.traversable) {}
+Object::Object(const Object& other) : MovingEntity(other.x, other.y), id(other.id), texture(other.texture), loadedTx(other.loadedTx), traversable(other.traversable) {}
 
 bool Object::getTrav()
 {
@@ -39,7 +39,7 @@ void Object::render(RenderContext& renderer, int offsetX, int offsetY)
 	loadedTx->render(renderer, (x + offsetX) * SZ_BLOCKSIZE, (y + offsetY) * SZ_BLOCKSIZE, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
 }
 
-void Object::updateObject(Player& p, GAME* g)
+void Object::updateObject(GAME* g)
 {
 }
 

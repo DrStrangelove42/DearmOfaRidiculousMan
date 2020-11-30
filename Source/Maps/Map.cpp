@@ -16,7 +16,7 @@ Map::~Map()
 
 Map::Map(string filename, Player& p, RenderContext& renderer, int* startMap, int startRoom) : player(p), name(filename)
 {
-	mapFromFiles(filename, p, renderer, startMap, startRoom);
+        mapFromFiles(filename, p, renderer, startMap, startRoom);
 	titleTexture = LoadString("CURRENT MAP : " + filename, renderer);
 }
 
@@ -294,61 +294,22 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 		{
 		case '!':
 		{
-			string id = line3.substr(0, 2) + to_string(uniqueId++);
-			line3.erase(0, 2);
-			int destMap = stoi(line3, &a);
-			line3.erase(0, a);
-			int destRoom = stoi(line3, &a);
-			line3.erase(0, a);
-			int destX = stoi(line3, &a);
-			line3.erase(0, a);
-			int destY = stoi(line3, &a);
-			line3.erase(0, a);
-			if (line3 == "")
-			{
-				rooms[room]->addObject(new Warp(destMap, destRoom, destX, destY, x, y, id, p, renderer));
-			}
-			else
-			{
-				rooms[room]->addObject(new Warp(destMap, destRoom, destX, destY, x, y, id, p, renderer, stoi(line3)));
-			}
+		        rooms[room]->addObject(new Warp(line3, &uniqueId, x, y, renderer));
 			break;
 		}
 		case 'k':
 		{
-			string id = line3.substr(0, 2);
-			rooms[room]->addObject(new Key(id, x, y, p, renderer));
+		        rooms[room]->addObject(new Key(line3.substr(0,2), x, y, renderer));
 			break;
 		}
 		case 'd':
 		{
-			string id = line3.substr(0, 6);
-			rooms[room]->addObject(new Door(id, x, y, p, renderer));
+			rooms[room]->addObject(new Door(line3, x, y, renderer));
 			break;
 		}
 		case 'c':
 		{
-			string id = line3.substr(0, 2);
-			line3.erase(0, 3);
-			Chest* newChest = new Chest(id, x, y, p, renderer);
-			while (line3.length() >= 2)
-			{
-				switch (line3[1])
-				{
-				case 'w':
-					newChest->addItem(Sword("sw" + to_string(uniqueId++), renderer));
-					break;
-				case 'h':
-					newChest->addItem(Shield("sh" + to_string(uniqueId++), renderer));
-					break;
-				}
-				line3.erase(0, 2);
-				if (line3.length() > 0)
-				{
-					line3.erase(0, 1);
-				}
-			}
-			rooms[room]->addObject(newChest);
+		        rooms[room]->addObject(new Chest(line3, &uniqueId, x, y, renderer));
 			break;
 		}
 		case 'g':

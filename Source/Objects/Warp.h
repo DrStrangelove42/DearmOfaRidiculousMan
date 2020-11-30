@@ -46,18 +46,27 @@ public:
 	/// <param name="posx"></param>
 	/// <param name="posy"></param>
 	/// <param name="identifier"></param>
-	/// <param name="p"></param>
 	/// <param name="renderer"></param>
 	/// <param name="delay"></param>
-	Warp(int destMap, int destRoom, int destX, int destY, int posx, int posy, string identifier, Player& p, RenderContext& renderer, int delay = 0);
+	Warp(int destMap, int destRoom, int destX, int destY, int posx, int posy, string identifier, RenderContext& renderer, int delay = 0);
 
+
+	/// <summary>
+	/// Constructor used to deduce the members from a string when creating maps
+	/// </summary>
+	/// <param name="headerline"></param>
+	/// <param name="uniqueId"></param>
+	/// <param name="posx"></param>
+	/// <param name="posy"></param>
+	/// <param name="identifier"></param>
+	/// <param name="renderer"></param>
+	Warp(string information, int* uniqueId, int posx, int posy,  RenderContext& renderer);
+	
 	/// <summary>
 	/// How does a warp interact with the player?
 	/// </summary>
-	/// <param name="p"></param>
-	/// <param name="renderer"></param>
-	/// <param name="ea"></param>
-	void updateObject(Player& p, GAME* game);
+	/// <param name="game"></param>
+	void updateObject(GAME* game);
 	
 };
 
