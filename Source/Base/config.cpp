@@ -29,4 +29,4 @@ string MAPFILE_EXT = ".txt";
 /// <summary>
 /// Location of maps
 /// </summary>
-string MAPFILES_LOCATION = "./Source/MapCreation/TestMaps/";
+string MAPFILES_LOCATION = "./Res/Maps/TestMaps/";
