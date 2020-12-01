@@ -185,6 +185,7 @@ public:
 	int getRoomCount();
 	Room** getRooms();
 	int getCurrentRoom();
+	Room& getCurrentRoomObject();
 };
 
 #endif

@@ -19,6 +19,17 @@ void MainMenu::onKeyDown(GAME* game)
 	case 'S':
 		onPlayClick(0);
 		break;
+	case 'M':
+	{
+		string worldName = "MainMap";
+
+		Map::worldFromFile(MAPFILES_LOCATION, worldName);
+		worldName = MAPFILES_LOCATION + worldName + "/" + worldName;
+		game->worldName = worldName;
+		*(game->currentMapId) = -1;
+		game->currentMap = new Map(worldName, *(game->player), *(game->renderer), game->currentMapId);
+		break;
+	}
 	default:
 		break;
 	}

@@ -1,4 +1,6 @@
 #include "Player.h"
+#include "../Maps/Room.h"
+#include "../Maps/Map.h"
 
 Player::Player(RenderContext& renderer, Window& main, int lives, int attack, int defense, int startHealth, int startMoney, int startExp) : lives(lives), textureId("player"), LivingEntity(startHealth, startMoney, startExp)
 {
@@ -63,7 +65,58 @@ Player::~Player()
 void Player::tick(int time, GAME* game)
 {
 	
+}
 
+void Player::onKeyDown(GAME* game)
+{
+	Room& room = game->currentMap->getCurrentRoomObject();
+
+	int curX = x;
+	int curY = y;
+
+	switch (game->key)
+	{
+
+	case Up:
+		curY--;
+		break;
+	case Left:
+		curX--;
+		break;
+	case Right:
+		curX++;
+		break;
+	case Down:
+		curY++;
+		break;
+	case A:
+		//TODO Jump ?
+		break;
+	case B:
+		//Atk
+		attackMonsters(room);
+		break;
+	default:
+		break;
+	}
+	if (DEBUG_MODE)
+		if (game->keyLetter == 'M')
+			room.addMonster(new Ghost(*(game->renderer), *this, room));
+
+	if (curX != x || curY != y)
+		room.tryTeleportAt(*this, curX, curY);
+}
+
+
+void Player::attackMonsters(Room& room)
+{
+	for (Monster* m : room.getMonsters())
+	{
+		if (isInAttackRange(m->getX(), m->getY()))
+		{
+			m->damage(attack);
+		}
+	}
 }
 
 void Player::getExperience(int exp)

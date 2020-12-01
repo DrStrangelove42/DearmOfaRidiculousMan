@@ -18,6 +18,11 @@ Room::Room(int width, int height, int absx, int absy, Player& p, RenderContext& 
 	}
 }
 
+list<Monster*>& Room::getMonsters()
+{
+	return monsters;
+}
+
 Room::~Room()
 {
 	for (int i = 0; i < w; i++)
@@ -113,20 +118,13 @@ void Room::tick(int time, GAME* game)
 	updateAllObjects(game);
 	for (Monster* m : monsters)
 	{
-		m->tick(time, game);
+		if (m->isAlive())
+			m->tick(time, game);
+		else
+			removeMonster(m);
 	}
 }
 
-void Room::attackMonsters()
-{
-	for (Monster* m : monsters)
-	{
-		if (player.isInAttackRange(m->getX(), m->getY()))
-		{
-			m->damage(player.getAttack());
-		}
-	}
-}
 
 void Room::addMonster(Monster* m)
 {
@@ -185,38 +183,5 @@ bool Room::isTraversable(int mx, int my)
 
 void Room::onKeyDown(GAME* game)
 {
-	int curX = player.getX();
-	int curY = player.getY();
-
-	switch (game->key)
-	{
-
-	case Up:
-		curY--;
-		break;
-	case Left:
-		curX--;
-		break;
-	case Right:
-		curX++;
-		break;
-	case Down:
-		curY++;
-		break;
-	case A:
-		//TODO Jump ?
-		break;
-	case B:
-		//Atk
-		attackMonsters();
-		break;
-	default:
-		break;
-	}
-	if (DEBUG_MODE)
-		if (game->keyLetter == 'M')
-			addMonster(new Ghost(*(game->renderer), *(game->player), *this));
-
-	if (curX != player.getX() || curY != player.getY())
-		tryTeleportAt(player, curX, curY);
+	player.onKeyDown(game);
 }

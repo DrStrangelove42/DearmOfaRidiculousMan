@@ -2,6 +2,9 @@
 #define ENTITY_H
 
 #include "RenderContext.h"
+#include <iostream>
+using namespace std;
+
 /*
 Every visible object in the window is an Entity.
 */
@@ -13,7 +16,7 @@ public:
 	/// <summary>
 	/// Standard destructor.
 	/// </summary>
-	virtual ~Entity() {};
+	virtual ~Entity() { cout << "destruct" << endl; };
 	
 	/// <summary>
 	/// Rendering method, enabling the renderer to take the offset (in blocks) into account.

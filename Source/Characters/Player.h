@@ -9,10 +9,12 @@
 #include "../Base/game.h"
 #include "../Items/Item.h"
 #include "../Base/Window.h"
+
 #include "MovingEntity.h"
 #include "LivingEntity.h"
 #include <unordered_map>
-
+class Room;
+class Map;
 /// <summary>
 /// The Player object is the representation of the person
 /// playing the game.
@@ -83,6 +85,17 @@ public:
 
 	/* Time management */
 	virtual void tick(int time, GAME* game);
+
+	/// <summary>
+	/// When a key is pushed on the keyboard.
+	/// </summary>
+	/// <param name="ea"></param>
+	virtual void onKeyDown(GAME* game);
+
+	/// <summary>
+	/// 
+	/// </summary>
+	void attackMonsters(Room&);
 
 	/// <summary>
 	/// 

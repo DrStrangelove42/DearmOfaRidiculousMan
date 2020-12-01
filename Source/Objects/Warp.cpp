@@ -13,25 +13,25 @@ Warp::Warp(int destMap, int destRoom, int destX, int destY, int posx, int posy, 
 
 }
 
-Warp::Warp(string information, int* uniqueId, int posx, int posy, RenderContext& renderer) : Object(information.substr(0,2)+to_string((*uniqueId)++), posx, posy, "empty", renderer, true)
+Warp::Warp(string information, int* uniqueId, int posx, int posy, RenderContext& renderer) : Object(information.substr(0, 2) + to_string((*uniqueId)++), posx, posy, "empty", renderer, true)
 {
-        size_t a;
-        information.erase(0, 3);
+	size_t a;
+	information.erase(0, 3);
 	destMap = stoi(information, &a);
-	information.erase(0, a+1);
+	information.erase(0, a + 1);
 	destRoom = stoi(information, &a);
-	information.erase(0, a+1);
+	information.erase(0, a + 1);
 	destX = stoi(information, &a);
-	information.erase(0, a+1);
+	information.erase(0, a + 1);
 	destY = stoi(information, &a);
 	information.erase(0, a);
 	try
 	{
-	        delay = stoi(information);
+		delay = stoi(information);
 	}
-	catch(...)
+	catch (...)
 	{
-	        delay = 0;
+		delay = 0;
 	}
 }
 

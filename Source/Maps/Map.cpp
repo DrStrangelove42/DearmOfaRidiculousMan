@@ -16,7 +16,6 @@ Map::~Map()
 
 Map::Map(string filename, Player& p, RenderContext& renderer, int* startMap, int startRoom) : player(p), name(filename)
 {
-	/*<--DON'T PUT A TAB HERE IT'S UGLY !*/
 	mapFromFiles(filename, p, renderer, startMap, startRoom);
 	if (DEBUG_MODE)
 		titleTexture = LoadString("CURRENT MAP : " + filename, renderer);
@@ -66,6 +65,11 @@ Room** Map::getRooms()
 int Map::getCurrentRoom()
 {
 	return currentRoom;
+}
+
+Room& Map::getCurrentRoomObject()
+{
+	return *(getRooms()[currentRoom]);
 }
 
 void Map::onKeyDown(GAME* game)

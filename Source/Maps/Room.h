@@ -57,10 +57,12 @@ public:
 	/// </summary>
 	/// <param name="m"></param>
 	void removeMonster(Monster* m);
+	 
 	/// <summary>
 	/// 
 	/// </summary>
-	void attackMonsters();
+	/// <returns></returns>
+	list<Monster*>& getMonsters();
 
 	/* Standard destructor */
 	virtual ~Room();

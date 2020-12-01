@@ -19,8 +19,10 @@ Monster::Monster(RenderContext& renderer,
 
 void Monster::kill()
 {
+	health = 0;
 	player.getExperience(experience);
 	player.getCoins(money);
+	//room.removeMonster(this);
 }
 
 void Monster::tick(int time, GAME* game)
