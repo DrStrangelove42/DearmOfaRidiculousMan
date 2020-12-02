@@ -74,7 +74,9 @@ GAME* initGame()
 
 	game->quit = false;
 	game->window = new Window("DOARM", SZ_SCREENWIDTH, SZ_SCREENHEIGHT);
-
+	game->key = Other;
+	game->keyLetter = '\0';
+	
 	if (NULL == game->window)
 	{
 		DumpError("Window error.");

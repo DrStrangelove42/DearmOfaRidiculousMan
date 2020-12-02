@@ -1,6 +1,6 @@
 #include "Map.h"
 
-Map::Map(Player& p, int roomCount) : player(p), roomCount(roomCount), currentRoom(0)
+Map::Map(Player& p, int roomCount) : player(p), roomCount(roomCount), currentRoom(0), titleTexture(NULL)
 {
 	rooms = new Room * [roomCount];
 }
@@ -40,7 +40,7 @@ void Map::render(RenderContext& renderer, int offsetX, int offsetY)
 
 	player.render(renderer, offX + cur->getX(), offY + cur->getY());
 
-	if (DEBUG_MODE)
+	if (DEBUG_MODE && titleTexture != NULL)
 	{
 		titleTexture->renderUnscaled(renderer, 0, 0);
 		LoadString("Room : " + to_string(currentRoom), renderer, 0x00FFffff)->renderUnscaled(renderer, 0, 16);
@@ -109,7 +109,7 @@ bool Map::intlParseMap(string& newFile, int map, ifstream& World, ofstream& star
 
 	getline(World, line);
 	if (line.length() <= 1 || line[0] != '#' || line[1] != '#')
-	        cout << "Expected ## before beginning of map " << map << " in " << newFile << endl;
+		cout << "Expected ## before beginning of map " << map << " in " << newFile << endl;
 
 	getline(World, line);
 	int NumberOfRooms = stoi(line);
@@ -118,7 +118,7 @@ bool Map::intlParseMap(string& newFile, int map, ifstream& World, ofstream& star
 	for (int room = 0; room < NumberOfRooms; room++)
 	{
 		{
-		  if (!intlParseRoom(newFile,World, map, room, layout, start, data))
+			if (!intlParseRoom(newFile, World, map, room, layout, start, data))
 				return false;
 		}
 	}
@@ -134,7 +134,7 @@ bool Map::intlParseRoom(string& newFile, ifstream& World, int map, int room, ofs
 	getline(World, line);
 	if (line.length() == 0 || line[0] != '#')
 	{
-	  cout << "Expected # before beginning of room " << room << " in map " << map << " in " << newFile << endl;
+		cout << "Expected # before beginning of room " << room << " in map " << map << " in " << newFile << endl;
 		return false;
 	}
 
@@ -181,7 +181,7 @@ bool Map::intlParseRoom(string& newFile, ifstream& World, int map, int room, ofs
 
 	for (int i = 0; i < headerLength; i++)
 	{
-		int firstlineskip = descriptions.find("\n");
+		size_t firstlineskip = descriptions.find("\n");
 		header[i] = descriptions.substr(0, firstlineskip);
 		descriptions.erase(0, firstlineskip + 1);
 	}
@@ -196,7 +196,7 @@ bool Map::intlParseRoom(string& newFile, ifstream& World, int map, int room, ofs
 		}
 		string extraspaces = string(max(0, width * 3 - int(line.length())), ' ');
 		line += extraspaces; //We add extra spaces so that all lines in the file are of the same length : width*3. If we find an empty space, it is an empty block.
-		for (int j = 0; j < width; j++)
+		for (size_t j = 0; j < width; j++)
 		{
 			layout << line[3 * j];
 			switch (line[3 * j + 1])
@@ -250,9 +250,9 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 	*/
 	if (*startMap == -1)
 	{
-	        if (not getline(start, line))
+		if (not getline(start, line))
 		{
-		        cout << "No initial position for player found in " << filename <<endl;
+			cout << "No initial position for player found in " << filename << endl;
 		}
 		*startMap = stoi(line, &a);
 		line.erase(0, a);
@@ -275,7 +275,7 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 	currentRoom = startRoom;
 
 	for (int room = 0; room < roomCount; room++)
-	        rooms[room] = intlRoomFromFile(filename, layout, p, renderer);
+		rooms[room] = intlRoomFromFile(filename, layout, p, renderer);
 
 	layout.close();
 	rooms[currentRoom]->setDiscovered(true);
@@ -309,50 +309,50 @@ void Map::intlGetObjectsFromFile(string filename, ifstream& data, RenderContext&
 		line3.erase(0, a + 1);
 		try
 		{
-		switch (line3[0])
-		{
-		case '!':
-		{
-			rooms[room]->addObject(new Warp(line3, &uniqueId, x, y, renderer));
-			break;
-		}
-		case 'k':
-		{
-			rooms[room]->addObject(new Key(line3.substr(0, 2), x, y, renderer));
-			break;
-		}
-		case 'd':
-		{
-			rooms[room]->addObject(new Door(line3, x, y, renderer));
-			break;
-		}
-		case 'c':
-		{
-			rooms[room]->addObject(new Chest(line3, &uniqueId, x, y, renderer));
-			break;
-		}
-		case 'g':
-		{
-			Ghost* newGhost = new Ghost(renderer, p, *(rooms[room]));
-			newGhost->teleport(x, y);
-			rooms[room]->addMonster(newGhost);
-			break;
-		}
-		case 's':
-		{
-			Skeleton* newSkeleton = new Skeleton(renderer, p, *(rooms[room]));
-			newSkeleton->teleport(x, y);
-			rooms[room]->addMonster(newSkeleton);
-			break;
-		}
-		default:
-		        cout << "Case " << line3[0] << " not treated yet in " << filename << endl;
-			break;
-		}
+			switch (line3[0])
+			{
+			case '!':
+			{
+				rooms[room]->addObject(new Warp(line3, &uniqueId, x, y, renderer));
+				break;
+			}
+			case 'k':
+			{
+				rooms[room]->addObject(new Key(line3.substr(0, 2), x, y, renderer));
+				break;
+			}
+			case 'd':
+			{
+				rooms[room]->addObject(new Door(line3, x, y, renderer));
+				break;
+			}
+			case 'c':
+			{
+				rooms[room]->addObject(new Chest(line3, &uniqueId, x, y, renderer));
+				break;
+			}
+			case 'g':
+			{
+				Ghost* newGhost = new Ghost(renderer, p, *(rooms[room]));
+				newGhost->teleport(x, y);
+				rooms[room]->addMonster(newGhost);
+				break;
+			}
+			case 's':
+			{
+				Skeleton* newSkeleton = new Skeleton(renderer, p, *(rooms[room]));
+				newSkeleton->teleport(x, y);
+				rooms[room]->addMonster(newSkeleton);
+				break;
+			}
+			default:
+				cout << "Case " << line3[0] << " not treated yet in " << filename << endl;
+				break;
+			}
 		}
 		catch (...)
 		{
-		        cout << "Incomplete header in " << filename << endl;
+			cout << "Incomplete header in " << filename << endl;
 		}
 	}
 }
@@ -389,7 +389,7 @@ Room* Map::intlRoomFromFile(string filename, ifstream& layout, Player& p, Render
 				thisRoom->replaceBlock(new StoneWallBlock(j, i, renderer));
 				break;
 			default:
-			        cout << "Case " << line2[j] << " not treated yet in " << filename << endl;
+				cout << "Case " << line2[j] << " not treated yet in " << filename << endl;
 				break;
 			}
 		}

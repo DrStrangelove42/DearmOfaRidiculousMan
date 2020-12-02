@@ -11,39 +11,39 @@ Chest::Chest(string identifier, int posx, int posy, RenderContext& renderer) :
 
 }
 
-Chest::Chest(string headerline, int* uniqueId, int posx, int posy, RenderContext& renderer) : Chest(headerline.substr(0,2), posx, posy, renderer)
+Chest::Chest(string headerline, int* uniqueId, int posx, int posy, RenderContext& renderer) : Chest(headerline.substr(0, 2), posx, posy, renderer)
 {
-        headerline.erase(0, 3);
+	headerline.erase(0, 3);
 	// After the identifier, the items in the chest are described between parentheses, one after the other.
-	while (headerline.length() > 0 && headerline[0]=='(')
+	while (headerline.length() > 0 && headerline[0] == '(')
 	{
-		int nextpar = headerline.find(')');
-		string currentItem = headerline.substr(1,nextpar-1);
-		headerline.erase(0,nextpar+2);
-		if (currentItem.substr(0,2) == "sw")
+		size_t nextpar = headerline.find(')');
+		string currentItem = headerline.substr(1, nextpar - 1);
+		headerline.erase(0, nextpar + 2);
+		if (currentItem.substr(0, 2) == "sw")
 		{
-	                currentItem.erase(0,3);
+			currentItem.erase(0, 3);
 			try
 			{
-		                int attack = stoi(currentItem);
+				int attack = stoi(currentItem);
 				addItem(Sword("sw" + to_string(*(uniqueId)++), renderer, attack));
 			}
-			catch(...)
+			catch (...)
 			{
-		                addItem(Sword("sw" + to_string(*(uniqueId)++), renderer));
+				addItem(Sword("sw" + to_string(*(uniqueId)++), renderer));
 			}
 		}
-		else if (currentItem.substr(0,2) == "sh")
+		else if (currentItem.substr(0, 2) == "sh")
 		{
-	                currentItem.erase(0,3);
+			currentItem.erase(0, 3);
 			try
 			{
-		                int defense = stoi(currentItem);
+				int defense = stoi(currentItem);
 				addItem(Shield("sh" + to_string(*(uniqueId)++), renderer, defense));
 			}
-			catch(...)
+			catch (...)
 			{
-		                addItem(Shield("sh" + to_string(*(uniqueId)++), renderer));
+				addItem(Shield("sh" + to_string(*(uniqueId)++), renderer));
 			}
 		}
 	}
@@ -64,7 +64,7 @@ void Chest::addItem(Item i, int count)
 
 void Chest::updateObject(GAME* game)
 {
-        if (texture == "openchest" || abs(x - game->player->getX()) + abs(y - game->player->getY()) > 1)
+	if (texture == "openchest" || abs(x - game->player->getX()) + abs(y - game->player->getY()) > 1)
 	{
 		return;
 	}

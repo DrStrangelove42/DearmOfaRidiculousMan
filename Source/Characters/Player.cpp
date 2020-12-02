@@ -33,10 +33,10 @@ void Player::render(RenderContext& renderer, int offsetX, int offsetY)
 	}
 	yy += heart->getHeight();
 	xx = 0;
-	Texture* tmp = LoadVolatileString(to_string(experience) + " EXP", *infosRenderer, 0xCEB600FF);
+	Texture* tmp = LoadString(to_string(experience) + " EXP", *infosRenderer, 0xCEB600FF);
 	tmp->renderUnscaled(*infosRenderer, xx, yy);
 	yy += tmp->getHeight();
-	tmp = LoadVolatileString(to_string(money) + " Gold", *infosRenderer, 0xDDDD00FF);
+	tmp = LoadString(to_string(money) + " Gold", *infosRenderer, 0xDDDD00FF);
 	tmp->renderUnscaled(*infosRenderer, xx, yy);
 	infosRenderer->update();
 }
@@ -64,6 +64,7 @@ void Player::updateTexture(RenderContext& renderer)
 
 Player::~Player()
 {
+	delete infosRenderer;
 	delete infosWindow;
 }
 

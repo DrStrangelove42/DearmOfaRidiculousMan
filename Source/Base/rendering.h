@@ -7,7 +7,8 @@
 #include "config.h"
 #include "game.h"
 #ifdef WIN6
-#include <windows.h>
+#include <Windows.h>
+#undef LoadString
 #endif
 
 extern TTF_Font* FONT;
