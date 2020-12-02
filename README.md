@@ -1,17 +1,17 @@
 # DreamOfaRidiculousMan
-## Welcome to the Dream of a Ridiculous Man ! ##
+Welcome to the Dream of a Ridiculous Man ! ##
 
 It's a rogue-like game based on the novel by Fyodor M. Dostoyevsky, and inspired by the inspired Movie directed by Aleksandr Petrov:
 
 https://m.youtube.com/watch?v=jIr7cs6eEAs
 
-### Requirements
+## Requirements
 
 Supported OSes : macOS & Linux & Windows
 
 Required library : SDL2 (see below to install dependencies and build the game).
 
-### Currently under development:
+## Currently under development:
 
 - [x] Map generating, see the HowItWorks.txt in '/Source/MapCreating'
 - [x] Room functions(door, keys, creates,etc)
@@ -36,19 +36,19 @@ Also there'll be more features, such as:
 
 - Save file.
 
-### Build the Project
+## Build the Project
 
-####Install SDL 2
-#####On Linux Debian :
+### Install SDL 2
+#### On Linux Debian :
 
 `sudo apt install libsdl2-dev` \
 `sudo apt install libsdl2-ttf-dev`
 
-#####On MacOS with brew :
+#### On MacOS with brew :
 
 `brew install sdl2`
 
-#####On Windows 
+#### On Windows 
 1) Download SDL and SDL_ttf from here:\
 https://www.libsdl.org/download-2.0.php\
 Go under *Development Libraries*\
@@ -67,15 +67,15 @@ This last path is our include directory, remember it.
 Remark : with MinGW, the .lib files become the .a files.
 
 5) Now you are ready for compilation.
-#####References
+#### References
 https://wiki.libsdl.org/Installation
 
-#### Compilation
-#####On UNIX-like systems
+### Compilation
+#### On UNIX-like systems
 Go to the project root directory and type the following command in a terminal:\
 ```make```
 
-#####On Windows with Visual Studio
+#### On Windows with Visual Studio
 If you have Visual Studio installed (version 2019 tested, but the older vesions from 2015 should work),
 just open the solution or the project file located in the ```/Windows``` folder.
 1) Go to **Project > properties of doarm > Build events > Pre-build** and fill the textbox with the following command:\
@@ -90,10 +90,10 @@ You can now run the executable file (F5 in Visual Studio). The output file will 
 along with its .dll files, so you can launch it from there as well.
 
 
-#####On Windows with MSBUILD (from MS Build Tools, not tested yet)
+#### On Windows with MSBUILD (from MS Build Tools, not tested yet)
 1) Go to the ```/Windows``` subfolder, and edit the ```make.bat``` file with your paths (follow the instructions there).
 2) Then you can launch the BAT script with a terminal or directly on double-clicking on it in the Windows Explorer.
 
-#####On Windows with MinGW
+#### On Windows with MinGW
 
 Coming soon.
