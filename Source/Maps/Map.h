@@ -75,19 +75,21 @@ protected:
 	/// <summary>
 	/// 
 	/// </summary>
+	/// <param name="filename"></param>
 	/// <param name="data"></param>
 	/// <param name="renderer"></param>
 	/// <param name="p"></param>
-	void intlGetObjectsFromFile(ifstream& data, RenderContext& renderer, Player& p);
+	void intlGetObjectsFromFile(string filename, ifstream& data, RenderContext& renderer, Player& p);
 
 	/// <summary>
 	/// 
 	/// </summary>
+	/// <param name="filename"></param>
 	/// <param name="layout"></param>
 	/// <param name="p"></param>
 	/// <param name="renderer"></param>
 	/// <returns></returns>
-	Room* intlRoomFromFile(ifstream& layout, Player& p, RenderContext& renderer);
+	Room* intlRoomFromFile(string filename, ifstream& layout, Player& p, RenderContext& renderer);
 
 	/// <summary>
 	/// 
@@ -102,6 +104,7 @@ protected:
 	/// <summary>
 	/// 
 	/// </summary>
+	/// <param name="newFile"></param>
 	/// <param name="World"></param>
 	/// <param name="map"></param>
 	/// <param name="room"></param>
@@ -109,7 +112,7 @@ protected:
 	/// <param name="start"></param>
 	/// <param name="data"></param>
 	/// <returns></returns>
-	static bool intlParseRoom(ifstream& World, int map, int room, ofstream& layout, ofstream& start, ofstream& data);
+	static bool intlParseRoom(string& newFile, ifstream& World, int map, int room, ofstream& layout, ofstream& start, ofstream& data);
 
 public:
 	/// <summary>
