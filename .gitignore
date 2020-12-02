@@ -1,3 +1,8 @@
 *.o
 *~
 doarm
+*.exe
+*.dll
+Windows/Win32
+Windows/x64
+Windows/.vs

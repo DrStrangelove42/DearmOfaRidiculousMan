@@ -14,7 +14,9 @@ bool renderInit()
 		return false;
 
 	FONT = TTF_OpenFont("Res/ibm.ttf", FONTSIZE);
-
+#ifdef WIN6
+	SetProcessDPIAware();
+#endif
 	return SDL_Init(SDL_INIT_VIDEO) == 0;
 }
 

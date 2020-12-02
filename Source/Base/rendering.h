@@ -6,6 +6,9 @@
 #include <string>
 #include "config.h"
 #include "game.h"
+#ifdef WIN6
+#include <windows.h>
+#endif
 
 extern TTF_Font* FONT;
 extern int FONTSIZE;

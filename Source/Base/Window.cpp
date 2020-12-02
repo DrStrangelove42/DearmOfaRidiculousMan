@@ -59,6 +59,6 @@ int Window::getH()
 
 int Window::getId()
 {
-	SDL_GetWindowID(window);
+	return SDL_GetWindowID(window);
 }
 
