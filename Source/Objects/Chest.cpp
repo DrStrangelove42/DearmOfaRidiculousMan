@@ -73,7 +73,6 @@ void Chest::updateObject(GAME* game)
 	updateTexture(renderer);
 	for (auto& entry : contents)
 	{
-	  cout << game->player->getAttack() << endl << game->player->getDefense() << endl;
 		game->player->pickUpItem(entry.first, entry.second);
 
 		//The following part might need to be changed if the player skins become more complex, but its purpose is to change the skin of the player if a shield or sword is found in a chest

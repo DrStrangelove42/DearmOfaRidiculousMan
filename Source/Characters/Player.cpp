@@ -155,8 +155,7 @@ void Player::pickUpItem(Item item, int count)
 	{
 		items[item.getId()] = count;
 		attack = max(item.getAttack(), attack);
-		defense = max(item.getDefense(),
-			      defense);
+		defense = max(item.getDefense(), defense);
 	}
 	else
 	{
