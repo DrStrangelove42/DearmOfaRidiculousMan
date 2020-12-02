@@ -16,7 +16,7 @@ public:
 	/// <summary>
 	/// Standard destructor.
 	/// </summary>
-	virtual ~Entity() { cout << "destruct" << endl; };
+	virtual ~Entity() {  };
 	
 	/// <summary>
 	/// Rendering method, enabling the renderer to take the offset (in blocks) into account.

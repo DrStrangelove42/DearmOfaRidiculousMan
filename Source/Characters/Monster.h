@@ -62,6 +62,7 @@ protected:
 	/// </summary>
 	Room& room;
 public:
+	virtual ~Monster() { cout << "delete monster" << endl; }
 	/// <summary>
 	/// Creates a new monster.
 	/// </summary>

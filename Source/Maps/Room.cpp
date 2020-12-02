@@ -92,6 +92,25 @@ void Room::setDiscovered(bool b)
 {
 	discovered = b;
 }
+
+void Room::cleanMonsters()
+{
+	list<Monster*> toDel;
+
+	for (Monster* m : monsters)
+	{
+		if (!m->isAlive())
+			toDel.push_back(m);
+	}
+
+	for (Monster* d : toDel)
+	{
+		removeMonster(d);
+	}
+
+	toDel.clear();
+}
+
 void Room::addObject(Object* object)
 {
 	if (objects.find(object->getId()) == objects.end())
@@ -120,8 +139,12 @@ void Room::tick(int time, GAME* game)
 	{
 		if (m->isAlive())
 			m->tick(time, game);
-		else
-			removeMonster(m);
+	}
+
+	if (time - lastCleaned >= cleanDelay)
+	{
+		cleanMonsters();
+		lastCleaned = time;
 	}
 }
 
@@ -134,6 +157,7 @@ void Room::addMonster(Monster* m)
 void Room::removeMonster(Monster* m)
 {
 	monsters.remove(m);
+	delete m;
 }
 
 void Room::replaceBlock(Block* newBlock)

@@ -35,10 +35,13 @@ protected:
 	unordered_map <string, Object*> objects;
 
 	list<Monster*> monsters;
+
+	int lastCleaned = 0;
+	int cleanDelay = 10000;
 public:
 	/* Creates a new Room object */
 	Room(int width, int height, int absx, int absy, Player& p, RenderContext& renderer);
-	
+
 	/// <summary>
 	/// 
 	/// </summary>
@@ -57,7 +60,7 @@ public:
 	/// </summary>
 	/// <param name="m"></param>
 	void removeMonster(Monster* m);
-	 
+
 	/// <summary>
 	/// 
 	/// </summary>
@@ -156,6 +159,11 @@ public:
 
 	/* Setters */
 	void setDiscovered(bool b);
+
+	/// <summary>
+	/// Removes dead monsters.
+	/// </summary>
+	void cleanMonsters();
 };
 
 

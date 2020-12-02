@@ -12,7 +12,7 @@ Monster::Monster(RenderContext& renderer,
 	int atkRadius,
 	int coins,
 	int exp, int mvDelay, bool alarmed) :
-	LivingEntity(health, coins, exp), attackValue(dmg), player(p), room(r), attackDelay(atkDelay), attackRadius(atkRadius), alarmed(alarmed), moveDelay(mvDelay)
+	LivingEntity(health, coins, exp), attackValue(dmg), player(p), room(r), attackDelay(atkDelay), attackRadius(atkRadius), alarmed(alarmed), moveDelay(mvDelay),alarmRadius(3)
 {
 	texture = LoadTexture(textureId, renderer);
 }
@@ -27,6 +27,7 @@ void Monster::kill()
 
 void Monster::tick(int time, GAME* game)
 {
+	if (!isAlive()) return;
 	if (time - lastTimeAtk >= attackDelay)
 	{
 		lastTimeAtk = time;
@@ -72,6 +73,7 @@ void Monster::manageAlarm()
 
 void Monster::render(RenderContext& renderer, int offsetX, int offsetY)
 {
+	if (!isAlive()) return;
 	int xx = (x + offsetX) * SZ_BLOCKSIZE;
 	int yy = (y + offsetY) * SZ_BLOCKSIZE;
 	texture->render(renderer, xx, yy, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
