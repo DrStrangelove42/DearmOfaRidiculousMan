@@ -2,10 +2,9 @@
 #include "../Maps/Room.h"
 #include "../Maps/Map.h"
 
-Player::Player(RenderContext& renderer, Window& main, int lives, int attack, int defense, int startHealth, int startMoney, int startExp) : lives(lives), textureId("player"), LivingEntity(startHealth, startMoney, startExp)
+Player::Player(RenderContext& renderer, Window& main, int lives, int attack, int defense, int startHealth, int startMoney, int startExp) : LivingEntity(startHealth, startMoney, startExp), lives(lives), textureId("player"), attack(attack), defense(defense)
 {
 	texture = LoadTexture("player", renderer);
-
 	infosWindow = new Window("Player informations", SZ_INFOSWIDTH, SZ_SCREENHEIGHT, main.getX() + main.getW(), main.getY());
 	infosRenderer = new RenderContext(*infosWindow);
 	heart = LoadTexture("heart", *infosRenderer);
@@ -156,7 +155,8 @@ void Player::pickUpItem(Item item, int count)
 	{
 		items[item.getId()] = count;
 		attack = max(item.getAttack(), attack);
-		defense = max(item.getDefense(), defense);
+		defense = max(item.getDefense(),
+			      defense);
 	}
 	else
 	{
