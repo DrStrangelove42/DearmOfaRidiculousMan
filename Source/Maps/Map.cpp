@@ -108,8 +108,8 @@ bool Map::intlParseMap(string& newFile, int map, ifstream& World, ofstream& star
 	ofstream data(newFile + to_string(map) + "Data" + WORLDFILE_EXT);
 
 	getline(World, line);
-	if (line.length() == 0 || line[0] != '#')
-		cout << "Expected ## before beginning of map " << map << endl;
+	if (line.length() <= 1 || line[0] != '#' || line[1] != '#')
+	        cout << "Expected ## before beginning of map " << map << " in " << newFile << endl;
 
 	getline(World, line);
 	int NumberOfRooms = stoi(line);
@@ -118,7 +118,7 @@ bool Map::intlParseMap(string& newFile, int map, ifstream& World, ofstream& star
 	for (int room = 0; room < NumberOfRooms; room++)
 	{
 		{
-			if (!intlParseRoom(World, map, room, layout, start, data))
+		  if (!intlParseRoom(newFile,World, map, room, layout, start, data))
 				return false;
 		}
 	}
@@ -127,14 +127,14 @@ bool Map::intlParseMap(string& newFile, int map, ifstream& World, ofstream& star
 	return true;
 }
 
-bool Map::intlParseRoom(ifstream& World, int map, int room, ofstream& layout, ofstream& start, ofstream& data)
+bool Map::intlParseRoom(string& newFile, ifstream& World, int map, int room, ofstream& layout, ofstream& start, ofstream& data)
 {
 	int height, width;
 	string line;
 	getline(World, line);
 	if (line.length() == 0 || line[0] != '#')
 	{
-		cout << "Expected # before beginning of room " << room << endl;
+	  cout << "Expected # before beginning of room " << room << " in map " << map << " in " << newFile << endl;
 		return false;
 	}
 
@@ -250,7 +250,10 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 	*/
 	if (*startMap == -1)
 	{
-		getline(start, line);
+	        if (not getline(start, line))
+		{
+		        cout << "No initial position for player found in " << filename <<endl;
+		}
 		*startMap = stoi(line, &a);
 		line.erase(0, a);
 		startRoom = stoi(line, &a);
@@ -272,17 +275,17 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 	currentRoom = startRoom;
 
 	for (int room = 0; room < roomCount; room++)
-		rooms[room] = intlRoomFromFile(layout, p, renderer);
+	        rooms[room] = intlRoomFromFile(filename, layout, p, renderer);
 
 	layout.close();
 	rooms[currentRoom]->setDiscovered(true);
 
-	intlGetObjectsFromFile(data, renderer, p);
+	intlGetObjectsFromFile(filename, data, renderer, p);
 
 	data.close();
 }
 
-void Map::intlGetObjectsFromFile(ifstream& data, RenderContext& renderer, Player& p)
+void Map::intlGetObjectsFromFile(string filename, ifstream& data, RenderContext& renderer, Player& p)
 {
 	string line3;
 	int uniqueId = 0; //This integer is used to make sure the identifier of each objects in the room is unique
@@ -304,6 +307,8 @@ void Map::intlGetObjectsFromFile(ifstream& data, RenderContext& renderer, Player
 		line3.erase(0, a);
 		y = stoi(line3, &a);
 		line3.erase(0, a + 1);
+		try
+		{
 		switch (line3[0])
 		{
 		case '!':
@@ -341,13 +346,18 @@ void Map::intlGetObjectsFromFile(ifstream& data, RenderContext& renderer, Player
 			break;
 		}
 		default:
-			cout << "Case " << line3[0] << " not treated yet." << endl;
+		        cout << "Case " << line3[0] << " not treated yet in " << filename << endl;
 			break;
+		}
+		}
+		catch (...)
+		{
+		        cout << "Incomplete header in " << filename << endl;
 		}
 	}
 }
 
-Room* Map::intlRoomFromFile(ifstream& layout, Player& p, RenderContext& renderer)
+Room* Map::intlRoomFromFile(string filename, ifstream& layout, Player& p, RenderContext& renderer)
 {
 	string line2;
 	Room* thisRoom;/* We determine the dimensions of the room. */
@@ -379,7 +389,7 @@ Room* Map::intlRoomFromFile(ifstream& layout, Player& p, RenderContext& renderer
 				thisRoom->replaceBlock(new StoneWallBlock(j, i, renderer));
 				break;
 			default:
-				cout << "Case " << line2[j] << " not treated yet." << endl;
+			        cout << "Case " << line2[j] << " not treated yet in " << filename << endl;
 				break;
 			}
 		}

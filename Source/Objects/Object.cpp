@@ -41,6 +41,7 @@ void Object::render(RenderContext& renderer, int offsetX, int offsetY)
 
 void Object::updateObject(GAME* g)
 {
+
 }
 
 void Object::tick(int time, GAME* g)
