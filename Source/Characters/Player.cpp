@@ -18,10 +18,10 @@ void Player::render(RenderContext& renderer, int offsetX, int offsetY)
 	texture->render(renderer, xx, yy, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
 	drawHealthBar(renderer, xx, yy);
 
-	infosRenderer->clear(); 
+	infosRenderer->clear();
 	xx = 0;
 	yy = 0;
-	
+
 	for (int i = 0; i < lives; i++)
 	{
 		if (xx >= SZ_INFOSWIDTH)
@@ -32,7 +32,13 @@ void Player::render(RenderContext& renderer, int offsetX, int offsetY)
 		heart->renderUnscaled(*infosRenderer, xx, yy);
 		xx += heart->getWidth();
 	}
-	
+	yy += heart->getHeight();
+	xx = 0;
+	Texture* tmp = LoadVolatileString(to_string(experience) + " EXP", *infosRenderer, 0xCEB600FF);
+	tmp->renderUnscaled(*infosRenderer, xx, yy);
+	yy += tmp->getHeight();
+	tmp = LoadVolatileString(to_string(money) + " Gold", *infosRenderer, 0xDDDD00FF);
+	tmp->renderUnscaled(*infosRenderer, xx, yy);
 	infosRenderer->update();
 }
 
@@ -64,7 +70,7 @@ Player::~Player()
 
 void Player::tick(int time, GAME* game)
 {
-	
+
 }
 
 void Player::onKeyDown(GAME* game)
