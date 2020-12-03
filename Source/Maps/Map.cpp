@@ -17,9 +17,18 @@ Map::~Map()
 Map::Map(string worldName, Player& p, RenderContext& renderer, int* startMap, int startRoom) : player(p), worldName(worldName)
 {
         // First we determine whether the files representing the world need to be generated, that is to say whether these files don't exist or whether they are older than the file representing the world.
-        struct stat world;
+        struct stat dataLocation;
+	struct stat world;
 	struct stat data;
-	if(stat((WORLDFILES_LOCATION + worldName + EXT).c_str(), &world)!=0)
+
+	if (stat((WORLDFILES_LOCATION).c_str(), &dataLocation)!=0)
+	{
+	        string d = "./Data/";
+	        mkdir(d.c_str(),0777);
+		mkdir((WORLDDATA_LOCATION).c_str(),0777);
+	}
+	
+	if (stat((WORLDFILES_LOCATION + worldName + EXT).c_str(), &world)!=0)
 	{
 	        cout << WORLDFILES_LOCATION + worldName + EXT << " doesn't exist..." << endl;
 		return;
