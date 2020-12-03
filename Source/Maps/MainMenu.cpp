@@ -22,9 +22,6 @@ void MainMenu::onKeyDown(GAME* game)
 	case 'M':
 	{
 		string worldName = "MainMap";
-
-		Map::worldFromFile(MAPFILES_LOCATION, worldName);
-		worldName = MAPFILES_LOCATION + worldName + "/" + worldName;
 		game->worldName = worldName;
 		*(game->currentMapId) = -1;
 		game->currentMap = new Map(worldName, *(game->player), *(game->renderer), game->currentMapId);
@@ -69,9 +66,6 @@ MainMenu::MainMenu(Player& p, GAME* g) : Map(p, 0), game(g)
 void MainMenu::onPlayClick(int id)
 {
 	string worldName = "FinalMap";
-
-	Map::worldFromFile(MAPFILES_LOCATION, worldName);
-	worldName = MAPFILES_LOCATION + worldName + "/" + worldName;
 	game->worldName = worldName;
 	*(game->currentMapId) = -1;
 	game->currentMap = new Map(worldName, *(game->player), *(game->renderer), game->currentMapId);

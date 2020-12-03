@@ -22,7 +22,7 @@ fonctions located in the <utils> module.*/
 extern int VIEW_OFFSET_X;
 extern int VIEW_OFFSET_Y;
 
-extern string WORLDFILE_EXT;
-extern string MAPFILE_EXT;
-extern string MAPFILES_LOCATION;
+extern string EXT;
+extern string WORLDFILES_LOCATION;
+extern string WORLDDATA_LOCATION;
 #endif

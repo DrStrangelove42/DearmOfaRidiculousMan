@@ -14,11 +14,31 @@ Map::~Map()
 	delete[] rooms;
 }
 
-Map::Map(string filename, Player& p, RenderContext& renderer, int* startMap, int startRoom) : player(p), name(filename)
+Map::Map(string worldName, Player& p, RenderContext& renderer, int* startMap, int startRoom) : player(p), worldName(worldName)
 {
-	mapFromFiles(filename, p, renderer, startMap, startRoom);
+        // First we determine whether the files representing the world need to be generated, that is to say whether these files don't exist or whether they are older than the file representing the world.
+        struct stat world;
+	struct stat data;
+	if(stat((WORLDFILES_LOCATION + worldName + EXT).c_str(), &world)!=0)
+	{
+	        cout << WORLDFILES_LOCATION + worldName + EXT << " doesn't exist..." << endl;
+		return;
+	}
+	if(stat((WORLDDATA_LOCATION + worldName + "/" + worldName + "Start" + EXT).c_str(), &data)!=0)
+	{
+	        mkdir((WORLDDATA_LOCATION + worldName + "/").c_str(),0777);
+	        worldFromFile(worldName);
+	}
+	else
+	{
+	        auto worldTime = world.st_mtime;
+		auto dataTime = data.st_mtime;
+		if (dataTime < worldTime)
+		        worldFromFile(worldName);
+	}
+	mapFromFiles(worldName, p, renderer, startMap, startRoom);
 	if (DEBUG_MODE)
-		titleTexture = LoadString("CURRENT MAP : " + filename, renderer);
+		titleTexture = LoadString("CURRENT MAP : " + worldName, renderer);
 }
 
 void Map::render(RenderContext& renderer, int offsetX, int offsetY)
@@ -82,17 +102,17 @@ void Map::onMouseEvent(MOUSE_DATA* md)
 
 }
 
-void Map::worldFromFile(string location, string filename)
+void Map::worldFromFile(string worldName)
 {
 	int NumberOfMaps;
 	string line;
-	string newFile = location + filename + "/" + filename; //A string we will use often
-	ifstream World(location + filename + WORLDFILE_EXT);
+	string newFile = WORLDDATA_LOCATION + worldName + "/" + worldName; //A string we will use often
+	ifstream World(WORLDFILES_LOCATION + worldName + EXT);
 
 	getline(World, line);
 	NumberOfMaps = stoi(line);
 
-	ofstream start(newFile + "Start" + WORLDFILE_EXT); //We create a new file in which we will detail the start position and characteristics of the player
+	ofstream start(newFile + "Start" + EXT); //We create a new file in which we will detail the start position and characteristics of the player
 	for (int map = 0; map < NumberOfMaps; map++)
 	{
 		if (!intlParseMap(newFile, map, World, start))
@@ -104,8 +124,8 @@ void Map::worldFromFile(string location, string filename)
 bool Map::intlParseMap(string& newFile, int map, ifstream& World, ofstream& start)
 {
 	string line;
-	ofstream layout(newFile + to_string(map) + WORLDFILE_EXT);
-	ofstream data(newFile + to_string(map) + "Data" + WORLDFILE_EXT);
+	ofstream layout(newFile + to_string(map) + EXT);
+	ofstream data(newFile + to_string(map) + "Data" + EXT);
 
 	getline(World, line);
 	if (line.length() <= 1 || line[0] != '#' || line[1] != '#')
@@ -238,9 +258,10 @@ bool Map::intlParseRoom(string& newFile, ifstream& World, int map, int room, ofs
 	return true;
 }
 
-void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int* startMap, int startRoom)
+void Map::mapFromFiles(string worldName, Player& p, RenderContext& renderer, int* startMap, int startRoom)
 {
-	ifstream start(filename + "Start" + MAPFILE_EXT);
+        string filename = WORLDDATA_LOCATION + worldName + "/" + worldName;
+	ifstream start(filename + "Start" + EXT);
 	string line;
 	size_t a;
 	int startX, startY;
@@ -265,8 +286,8 @@ void Map::mapFromFiles(string filename, Player& p, RenderContext& renderer, int*
 	}
 	//TODO other player characteristics
 	start.close();
-	ifstream layout(filename + to_string(*startMap) + WORLDFILE_EXT);
-	ifstream data(filename + to_string(*startMap) + "Data" + WORLDFILE_EXT);
+	ifstream layout(filename + to_string(*startMap) + EXT);
+	ifstream data(filename + to_string(*startMap) + "Data" + EXT);
 
 	getline(layout, line);
 	roomCount = stoi(line);

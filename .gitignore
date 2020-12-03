@@ -6,3 +6,4 @@ doarm
 Windows/Win32
 Windows/x64
 Windows/.vs
+Data/*

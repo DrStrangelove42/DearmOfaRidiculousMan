@@ -26,6 +26,16 @@
 #include <iostream>
 #include <fstream>
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#ifndef WIN32
+#include <unistd.h>
+#endif
+
+#ifdef WIN32
+#define stat _stat
+#endif
+
 /*
 A map represents a set of rooms displayed one at a time (or one centered
 in the view and the others black or greyed).
@@ -50,9 +60,9 @@ protected:
 	int roomCount;
 
 	/// <summary>
-	/// 
+	/// The name of the current world.
 	/// </summary>
-	string name;
+	string worldName;
 
 	/// <summary>
 	/// 
@@ -65,21 +75,21 @@ protected:
 	///	the player starts. When they are different from -1, the player is warping from one map to
 	///	another, and when they are equal to -1 we must read them in the Start file.
 	/// </summary>
-	/// <param name="filename"></param>
+	/// <param name="worldName"></param>
 	/// <param name="p"></param>
 	/// <param name="renderer"></param>
 	/// <param name="startMap"></param>
 	/// <param name="startRoom"></param>
-	void mapFromFiles(string filename, Player& p, RenderContext& renderer, int* startMap, int startRoom);
+	void mapFromFiles(string worldName, Player& p, RenderContext& renderer, int* startMap, int startRoom);
 
 	/// <summary>
 	/// 
 	/// </summary>
-	/// <param name="filename"></param>
+	/// <param name="worldName"></param>
 	/// <param name="data"></param>
 	/// <param name="renderer"></param>
 	/// <param name="p"></param>
-	void intlGetObjectsFromFile(string filename, ifstream& data, RenderContext& renderer, Player& p);
+	void intlGetObjectsFromFile(string worldName, ifstream& data, RenderContext& renderer, Player& p);
 
 	/// <summary>
 	/// 
@@ -123,9 +133,8 @@ public:
 	///	(and their characteristics, these can change throughout the game, we will therefore
 	/// modify these files to save progress).
 	/// </summary>
-	/// <param name="location"></param>
-	/// <param name="filename"></param>
-	static void worldFromFile(string location, string filename);
+	/// <param name="worldName"></param>
+	static void worldFromFile(string worldName);
 
 
 

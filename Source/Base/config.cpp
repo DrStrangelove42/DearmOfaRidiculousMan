@@ -17,16 +17,16 @@ int VIEW_OFFSET_X = 0;
 int VIEW_OFFSET_Y = 0;
 
 /// <summary>
-/// The extension used for files containing wolds
+/// The extension used for text files describing worlds or maps.
 /// </summary>
-string WORLDFILE_EXT = ".txt";
+string EXT = ".txt";
 
 /// <summary>
-/// The extension of map files.
+/// Location of files describing worlds.
 /// </summary>
-string MAPFILE_EXT = ".txt";
+string WORLDFILES_LOCATION = "./Res/Worlds/";
 
 /// <summary>
-/// Location of maps
+/// Location of files generated to describe worlds.
 /// </summary>
-string MAPFILES_LOCATION = "./Res/Maps/TestMaps/";
+string WORLDDATA_LOCATION = "./Data/Worlds/";
