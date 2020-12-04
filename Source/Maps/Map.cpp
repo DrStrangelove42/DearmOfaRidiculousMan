@@ -16,34 +16,34 @@ Map::~Map()
 
 Map::Map(string worldName, Player& p, RenderContext& renderer, int* startMap, int startRoom) : player(p), worldName(worldName)
 {
-        // First we determine whether the files representing the world need to be generated, that is to say whether these files don't exist or whether they are older than the file representing the world.
-        struct stat dataLocation;
+	// First we determine whether the files representing the world need to be generated, that is to say whether these files don't exist or whether they are older than the file representing the world.
+	struct stat dataLocation;
 	struct stat world;
 	struct stat data;
 
-	if (stat((WORLDFILES_LOCATION).c_str(), &dataLocation)!=0)
+	if (stat((WORLDDATA_LOCATION).c_str(), &dataLocation) != 0)
 	{
-	        string d = "./Data/";
-	        mkdir(d.c_str(),0777);
-		mkdir((WORLDDATA_LOCATION).c_str(),0777);
+		string d = "./Data/";
+		mkdir(d.c_str(), 0777);
+		mkdir((WORLDDATA_LOCATION).c_str(), 0777);
 	}
-	
-	if (stat((WORLDFILES_LOCATION + worldName + EXT).c_str(), &world)!=0)
+
+	if (stat((WORLDFILES_LOCATION + worldName + EXT).c_str(), &world) != 0)
 	{
-	        cout << WORLDFILES_LOCATION + worldName + EXT << " doesn't exist..." << endl;
+		cout << WORLDFILES_LOCATION + worldName + EXT << " doesn't exist..." << endl;
 		return;
 	}
-	if(stat((WORLDDATA_LOCATION + worldName + "/" + worldName + "Start" + EXT).c_str(), &data)!=0)
+	if (stat((WORLDDATA_LOCATION + worldName + "/" + worldName + "Start" + EXT).c_str(), &data) != 0)
 	{
-	        mkdir((WORLDDATA_LOCATION + worldName + "/").c_str(),0777);
-	        worldFromFile(worldName);
+		mkdir((WORLDDATA_LOCATION + worldName + "/").c_str(), 0777);
+		worldFromFile(worldName);
 	}
 	else
 	{
-	        auto worldTime = world.st_mtime;
+		auto worldTime = world.st_mtime;
 		auto dataTime = data.st_mtime;
 		if (dataTime < worldTime)
-		        worldFromFile(worldName);
+			worldFromFile(worldName);
 	}
 	mapFromFiles(worldName, p, renderer, startMap, startRoom);
 	if (DEBUG_MODE)
@@ -269,7 +269,7 @@ bool Map::intlParseRoom(string& newFile, ifstream& World, int map, int room, ofs
 
 void Map::mapFromFiles(string worldName, Player& p, RenderContext& renderer, int* startMap, int startRoom)
 {
-        string filename = WORLDDATA_LOCATION + worldName + "/" + worldName;
+	string filename = WORLDDATA_LOCATION + worldName + "/" + worldName;
 	ifstream start(filename + "Start" + EXT);
 	string line;
 	size_t a;
@@ -283,14 +283,18 @@ void Map::mapFromFiles(string worldName, Player& p, RenderContext& renderer, int
 		if (not getline(start, line))
 		{
 			cout << "No initial position for player found in " << filename << endl;
+			startX = 1;
+			startY = 1; //TODO This doesnt work !
 		}
-		*startMap = stoi(line, &a);
-		line.erase(0, a);
-		startRoom = stoi(line, &a);
-		line.erase(0, a);
-		startX = stoi(line, &a);
-		line.erase(0, a);
-		startY = stoi(line);
+		else {
+			*startMap = stoi(line, &a);
+			line.erase(0, a);
+			startRoom = stoi(line, &a);
+			line.erase(0, a);
+			startX = stoi(line, &a);
+			line.erase(0, a);
+			startY = stoi(line);
+		}
 		player.teleport(startX, startY);
 	}
 	//TODO other player characteristics

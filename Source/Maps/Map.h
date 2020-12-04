@@ -28,12 +28,10 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
-#ifndef WIN32
-#include <unistd.h>
-#endif
 
-#ifdef WIN32
-#define stat _stat
+#ifdef WIN6
+#include <direct.h>
+#define mkdir(a,b) (_mkdir(a))
 #endif
 
 /*
