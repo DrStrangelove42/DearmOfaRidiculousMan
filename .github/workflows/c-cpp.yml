@@ -13,7 +13,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    #- name: configure
-    #  run: ./configure
+    - name: graphics lib
+      run:
+        apt install libsdl2-dev
+        apt install libsdl2-ttf-dev
+    - name: configure
+      run: ./configure
     - name: make
       run: make
