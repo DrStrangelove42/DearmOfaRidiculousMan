@@ -13,10 +13,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: graphics lib
-      run:
-        apt install libsdl2-dev
-        apt install libsdl2-ttf-dev
+    - name: graphics-lib
+      run: |
+        sudo apt install libsdl2-dev
+        sudo apt install libsdl2-ttf-dev
     - name: configure
       run: ./configure
     - name: make

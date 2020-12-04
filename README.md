@@ -49,6 +49,8 @@ Also there'll be more features, such as:
 
 `brew install sdl2`
 
+`brew install sdl2_ttf`
+
 #### On Windows 
 1) Download SDL and SDL_ttf from here:\
 https://www.libsdl.org/download-2.0.php\
