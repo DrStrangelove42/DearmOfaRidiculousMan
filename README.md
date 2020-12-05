@@ -19,7 +19,7 @@ Required library : SDL2 (see below to install dependencies and build the game).
 - [x] Player and Monster basic features and movements
 - [x] Fighting and Exp gaining
 - [x] Not-So-Intelligent Monster
-- [x] Phase 2, more complex interactions.
+- [x] Entry menu
 
 At the next stage, we'll generate more complex maps to meet the theme of the game:
 
@@ -31,9 +31,7 @@ At the next stage, we'll generate more complex maps to meet the theme of the gam
 
 Also there'll be more features, such as:
 
-- Entry menu.
-
-- Different texture packs.
+- Different texture packs to enrich the story.
 
 - Save file.
 
