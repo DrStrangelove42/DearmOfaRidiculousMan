@@ -25,3 +25,6 @@ doarm: $(OBJ)
 clean:
 	rm -f $(OBJ)
 	rm -f doarm
+	
+doc:
+	doxygen Doc/Doxyfile

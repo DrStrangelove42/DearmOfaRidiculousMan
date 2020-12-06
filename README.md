@@ -45,8 +45,7 @@ Also there'll be more features, such as:
 
 #### On MacOS with brew :
 
-`brew install sdl2`
-
+`brew install sdl2`\
 `brew install sdl2_ttf`
 
 #### On Windows 
@@ -103,3 +102,11 @@ that first appeared on Vista.*
 #### On Windows with MinGW
 
 Coming soon.
+
+## Generate the documentation
+
+On UNIX-like system you can generate HTML documentation with Doxygen with the command:\
+```make doc```
+
+Alternatively you can start Doxywizard and load the file located at ```Doc/Doxyfile```, then 
+run the generator.
