@@ -1,10 +1,10 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include "../Base/config.h"
 #include <string>
 #include "Room.h"
 #include "../Base/Entity.h"
-#include "../Base/config.h"
 #include "../Base/game.h"
 #include "../Base/utils.h"
 #include "../Characters/Player.h"
@@ -29,7 +29,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#ifdef WIN6
+#ifdef WIN 
 #include <direct.h>
 #define mkdir(a,b) (_mkdir(a))
 #endif

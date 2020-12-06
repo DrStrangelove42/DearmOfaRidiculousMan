@@ -77,6 +77,7 @@ Go to the project root directory and type the following command in a terminal:\
 ```make```
 
 #### On Windows with Visual Studio
+
 If you have Visual Studio installed (version 2019 tested, but the older vesions from 2015 should work),
 just open the solution or the project file located in the ```/Windows``` folder.
 1) Go to **Project > properties of doarm > Build events > Pre-build** and fill the textbox with the following command:\
@@ -90,6 +91,10 @@ just open the solution or the project file located in the ```/Windows``` folder.
 You can now run the executable file (F5 in Visual Studio). The output file will be copied in the root folder of the repository,
 along with its .dll files, so you can launch it from there as well.
 
+*If your system is older than Windows Vista (e.g. Windows XP or older), replace 
+the ```/D WIN6``` macro definition in Project properties > C/C++ > Command line by
+```/D WIN```. This will prevent problems about high DPI awareness, which is a feature 
+that first appeared on Vista.*
 
 #### On Windows with MSBUILD (from MS Build Tools, not tested yet)
 1) Go to the ```/Windows``` subfolder, and edit the ```make.bat``` file with your paths (follow the instructions there).

@@ -1,5 +1,21 @@
+/*
+CONFIG Module
+Constant and preprocessor magic happen here.
+
+For modules using MSWindows specific functions, this
+file MUST be included first to avoid 'WIN' define problems
+in case WIN6 only is defined.
+*/
+
 #ifndef CONFIG_H
 #define CONFIG_H
+
+/*
+Preprocessor definitions for MS Windows only
+*/
+#ifdef WIN6
+#define WIN 
+#endif
 
 #include <string>
 
