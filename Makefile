@@ -31,6 +31,6 @@ doc:
 	doxygen Doc/Doxyfile
 
 test:
-	cd Test && make
+	cd ./Test && make
 
 .PHONY: clean test
