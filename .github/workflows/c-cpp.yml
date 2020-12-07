@@ -21,13 +21,7 @@ jobs:
     #  run: ./configure
     - name: make
       run: make
-
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: do-tests
-        run: |
-          sudo apt install libcppunit-dev
-          make test
+    - name: do-tests
+      run: |
+        sudo apt install libcppunit-dev
+        make test
