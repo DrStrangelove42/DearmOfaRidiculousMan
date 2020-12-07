@@ -4,9 +4,9 @@
 
 CC      = g++
 
-LIBS 	= -lSDL2 -lSDL2_ttf
+LIBS 	= `sdl2-config --libs` -lSDL2_ttf
 
-CFLAGS  =  -std=c++14 `sdl2-config --cflags` #-I/usr/include/SDL2 -D_REENTRANT #-Weffc++ -Wall  -Wextra -Wsign-conversion
+CFLAGS  =  -std=c++14 `sdl2-config --cflags`
 CFLAGS += -g
 
 rwildcard=$(foreach d,$(wildcard $(1:=/*)),$(call rwildcard,$d,$2) $(filter $(subst *,%,$2),$d))
@@ -33,4 +33,4 @@ doc:
 test:
 	cd ./Test && make
 
-.PHONY: clean test
+.PHONY: clean test doc
