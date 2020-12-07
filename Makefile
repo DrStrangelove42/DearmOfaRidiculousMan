@@ -25,6 +25,12 @@ doarm: $(OBJ)
 clean:
 	rm -f $(OBJ)
 	rm -f doarm
+	cd Test && make clean
 	
 doc:
 	doxygen Doc/Doxyfile
+
+test:
+	cd Test && make
+
+.PHONY: clean test

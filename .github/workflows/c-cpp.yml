@@ -21,3 +21,9 @@ jobs:
     #  run: ./configure
     - name: make
       run: make
+
+  test:
+    - name: do-tests
+      run: |
+        sudo apt install libcppunit-dev
+        make test
