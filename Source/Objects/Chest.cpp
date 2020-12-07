@@ -18,48 +18,48 @@ Chest::Chest(string headerline, int* uniqueId, int posx, int posy, RenderContext
 	while (headerline.length() > 0 && headerline[0] == '(')
 	{
 		size_t nextpar = headerline.find(')');
-		string currentItem = headerline.substr(1, nextpar - 1);
+		string currentObject = headerline.substr(1, nextpar - 1);
 		headerline.erase(0, nextpar + 2);
-		if (currentItem.substr(0, 2) == "sw")
+		if (currentObject.substr(0, 2) == "sw")
 		{
-			currentItem.erase(0, 3);
+			currentObject.erase(0, 3);
 			try
 			{
-				int attack = stoi(currentItem);
-				addItem(Sword("sw" + to_string(*(uniqueId)++), renderer, attack));
+				int attack = stoi(currentObject);
+				addObject(Sword("sw" + to_string(*(uniqueId)++), -1, -1, renderer, attack));
 			}
 			catch (...)
 			{
-				addItem(Sword("sw" + to_string(*(uniqueId)++), renderer));
+			  addObject(Sword("sw" + to_string(*(uniqueId)++), -1, -1, renderer));
 			}
 		}
-		else if (currentItem.substr(0, 2) == "sh")
+		else if (currentObject.substr(0, 2) == "sh")
 		{
-			currentItem.erase(0, 3);
+			currentObject.erase(0, 3);
 			try
 			{
-				int defense = stoi(currentItem);
-				addItem(Shield("sh" + to_string(*(uniqueId)++), renderer, defense));
+				int defense = stoi(currentObject);
+				addObject(Shield("sh" + to_string(*(uniqueId)++), -1, -1, renderer, defense));
 			}
 			catch (...)
 			{
-				addItem(Shield("sh" + to_string(*(uniqueId)++), renderer));
+			  addObject(Shield("sh" + to_string(*(uniqueId)++), -1, -1, renderer));
 			}
 		}
 	}
 }
 
-unordered_map<Item, int, ItemHash>& Chest::getContents()
+unordered_map<Object, int, ObjectHash>& Chest::getContents()
 {
 	return contents;
 }
 
-void Chest::addItem(Item i, int count)
+void Chest::addObject(Object obj, int count)
 {
-	if (contents.find(i) == contents.end())
-		contents[i] = count;
+	if (contents.find(obj) == contents.end())
+		contents[obj] = count;
 	else
-		contents[i] += count;
+		contents[obj] += count;
 }
 
 void Chest::updateObject(GAME* game)
@@ -73,16 +73,16 @@ void Chest::updateObject(GAME* game)
 	updateTexture(renderer);
 	for (auto& entry : contents)
 	{
-		game->player->pickUpItem(entry.first, entry.second);
+		game->player->pickUpObject(entry.first, entry.second);
 
 		//The following part might need to be changed if the player skins become more complex, but its purpose is to change the skin of the player if a shield or sword is found in a chest
 
-		string itemid = entry.first.getId();
-		if ((game->player->textureId == "player" || game->player->textureId == "playershield") && itemid.length() >= 2 && itemid.substr(0, 2) == "sw")
+		string objid = entry.first.getId();
+		if ((game->player->textureId == "player" || game->player->textureId == "playershield") && objid.length() >= 2 && objid.substr(0, 2) == "sw")
 		{
 			game->player->textureId += "sword";
 		}
-		if ((game->player->textureId == "player" || game->player->textureId == "playersword") && itemid.length() >= 2 && itemid.substr(0, 2) == "sh")
+		if ((game->player->textureId == "player" || game->player->textureId == "playersword") && objid.length() >= 2 && objid.substr(0, 2) == "sh")
 		{
 			game->player->textureId += "shield";
 		}

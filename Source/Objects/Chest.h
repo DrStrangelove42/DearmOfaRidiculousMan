@@ -2,9 +2,8 @@
 #define CHEST_H
 
 #include "Object.h"
-#include "../Items/Item.h"
-#include "../Items/Sword.h"
-#include "../Items/Shield.h"
+#include "../Objects/Sword.h"
+#include "../Objects/Shield.h"
 #include <unordered_map>
 
 class Chest : public Object
@@ -13,7 +12,7 @@ private:
 	/// <summary>
 	/// An array of items contained in the chest. 
 	/// </summary>
-	unordered_map<Item, int, ItemHash> contents;
+	unordered_map<Object, int, ObjectHash> contents;
 public:
 	/*Destructor*/
 	~Chest();
@@ -38,17 +37,17 @@ public:
 	Chest(string headerline, int* uniqueId, int posx, int posy, RenderContext& renderer);
 	
 	/// <summary>
-	/// Returns a reference to the array of items that are in the chest.
+	/// Returns a reference to the array of objects that are in the chest.
 	/// </summary>
 	/// <returns></returns>
-	unordered_map<Item, int, ItemHash>& getContents();
+	unordered_map<Object, int, ObjectHash>& getContents();
 
 	/// <summary>
-	/// Adds count times the item i to the chest.
+	/// Adds count times the object obj to the chest.
 	/// </summary>
-	/// <param name="i"></param>
+	/// <param name="obj"></param>
 	/// <param name="count"></param>
-	void addItem(Item i, int count = 1);
+	void addObject(Object obj, int count = 1);
 
 	/// <summary>
 	/// How does a chest interact with the player?

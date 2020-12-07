@@ -21,7 +21,7 @@ void Door::updateObject(GAME* game)
 	{
 		return;
 	}
-	if (game->player->hasItem("k" + keyId))
+	if (game->player->hasObject("k" + keyId))
 	{
 		traversable = true;
 		texture = "door" + openOrientation;

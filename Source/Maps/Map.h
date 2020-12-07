@@ -12,6 +12,8 @@
 #include "../Objects/Chest.h"
 #include "../Objects/Door.h"
 #include "../Objects/Key.h"
+#include "../Objects/Shield.h"
+#include "../Objects/Sword.h"
 #include "../Objects/Warp.h"
 #include "../Maps/Map.h"
 #include "../Blocks/Block.h"
@@ -20,9 +22,6 @@
 #include "../Blocks/StoneWallBlock.h"
 #include "../Characters/Monsters/Ghost.h"
 #include "../Characters/Monsters/Skeleton.h"
-#include "../Items/Item.h"
-#include "../Items/Shield.h"
-#include "../Items/Sword.h"
 #include <iostream>
 #include <fstream>
 

@@ -18,7 +18,7 @@ void Key::updateObject(GAME* game)
 		return;
 	}
 	RenderContext& renderer = *(game->renderer);
-	game->player->pickUpItem(Item(id, "key", renderer, 0, 0));
+	game->player->pickUpObject(*this);
 	texture = "empty";
 	updateTexture(renderer);
 }

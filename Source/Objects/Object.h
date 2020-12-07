@@ -10,19 +10,29 @@ class Object : public MovingEntity
 {
 protected:
 	/// <summary>
-	/// Identifier of the object
+	/// Identifier of the object.
 	/// </summary>
 	string id;
 
 	/// <summary>
-	/// The texture ID
+	/// The texture ID.
 	/// </summary>
 	string texture;
 
 	/// <summary>
-	/// The loaded texture
+	/// The loaded texture.
 	/// </summary>
 	Texture* loadedTx;
+
+	/// <summary>
+	/// Attack characteristic, makes the player's attacks stronger when picked up.
+	/// </summary>
+	int attack;
+	
+	/// <summary>
+	/// Defense characteristic, makes the player's defense stronger when picked up.
+	/// </summary>
+	int defense;
 
 public:
 	~Object();
@@ -36,7 +46,9 @@ public:
 	/// <param name="tx"></param>
 	/// <param name="renderer"></param>
 	/// <param name="trav"></param>
-	Object(string identifier, int posx, int posy, string tx, RenderContext& renderer, bool trav);
+	/// <param name="attack"></param>
+	/// <param name="defense"></param>
+	Object(string identifier, int posx, int posy, string tx, RenderContext& renderer, bool trav, int attack = 0, int defense = 0);
 
 	/// <summary>
 	/// 
@@ -51,6 +63,8 @@ public:
 
 	string getId() const;
 	bool getTrav();
+	int getAttack();
+	int getDefense();
 
 	/// <summary>
 	/// Change the object position. 
