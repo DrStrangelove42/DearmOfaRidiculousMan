@@ -7,7 +7,6 @@
 #include "../Base/utils.h"
 #include "../Base/config.h"
 #include "../Base/game.h"
-#include "../Items/Item.h"
 #include "../Base/Window.h"
 
 #include "MovingEntity.h"
@@ -15,6 +14,7 @@
 #include <unordered_map>
 class Room;
 class Map;
+class Object;
 /// <summary>
 /// The Player object is the representation of the person
 /// playing the game.
@@ -38,7 +38,7 @@ protected:
 	/// Player's items
 	/// int is how many of that type of item player has (eg might have several times the same potion)
 	/// </summary>
-	unordered_map <string, int> items; 
+	unordered_map <string, int> inventory; 
 	/// <summary>
 	/// The texture used for the player.
 	/// </summary>
@@ -132,20 +132,20 @@ public:
 	/// </summary>
 	/// <param name="item"></param>
 	/// <param name="count"></param>
-	void pickUpItem(Item item, int count = 1);
+	void pickUpObject(Object obj, int count = 1);
 
 	/// <summary>
 	/// Tells us whether the player has a particular item or not.
 	/// </summary>
 	/// <param name="itemId"></param>
 	/// <returns></returns>
-	bool hasItem(string itemId);
+	bool hasObject(string objId);
 	/// <summary>
 	/// Tells us whether the player has a particular item or not.
 	/// </summary>
 	/// <param name="item"></param>
 	/// <returns></returns>
-	bool hasItem(Item item);
+	bool hasObject(Object obj);
 };
 
 #endif

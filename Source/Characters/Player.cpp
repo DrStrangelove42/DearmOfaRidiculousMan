@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "../Maps/Room.h"
 #include "../Maps/Map.h"
+#include "../Objects/Object.h"
 
 Player::Player(RenderContext& renderer, Window& main, int lives, int attack, int defense, int startHealth, int startMoney, int startExp) : LivingEntity(startHealth, startMoney, startExp), lives(lives), textureId("player"), attack(attack), defense(defense)
 {
@@ -150,26 +151,26 @@ int Player::getDefense()
 	return defense;
 }
 
-void Player::pickUpItem(Item item, int count)
+void Player::pickUpObject(Object obj, int count)
 {
-	if (items.find(item.getId()) == items.end())
+	if (inventory.find(obj.getId()) == inventory.end())
 	{
-		items[item.getId()] = count;
-		attack = max(item.getAttack(), attack);
-		defense = max(item.getDefense(), defense);
+		inventory[obj.getId()] = count;
+		attack = max(obj.getAttack(), attack);
+		defense = max(obj.getDefense(), defense);
 	}
 	else
 	{
-		items[item.getId()] += count;
+		inventory[obj.getId()] += count;
 	}
 }
 
-bool Player::hasItem(string itemid)
+bool Player::hasObject(string objId)
 {
-	return (items.find(itemid) != items.end() && items[itemid] > 0);
+	return (inventory.find(objId) != inventory.end() && inventory[objId] > 0);
 }
 
-bool Player::hasItem(Item item)
+bool Player::hasObject(Object obj)
 {
-	return (items.find(item.getId()) != items.end() && items[item.getId()] > 0);
+	return (inventory.find(obj.getId()) != inventory.end() && inventory[obj.getId()] > 0);
 }

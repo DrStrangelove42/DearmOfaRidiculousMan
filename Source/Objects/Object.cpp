@@ -1,15 +1,25 @@
 #include "Object.h"
 
-Object::Object(string identifier, int posx, int posy, string tx, RenderContext& renderer, bool trav) : MovingEntity(posx, posy), id(identifier), texture(tx), traversable(trav)
+Object::Object(string identifier, int posx, int posy, string tx, RenderContext& renderer, bool trav, int attack, int defense) : MovingEntity(posx, posy), id(identifier), texture(tx), traversable(trav), attack(attack), defense(defense)
 {
 	updateTexture(renderer);
 }
 
-Object::Object(const Object& other) : MovingEntity(other.x, other.y), id(other.id), texture(other.texture), loadedTx(other.loadedTx), traversable(other.traversable) {}
+Object::Object(const Object& other) : MovingEntity(other.x, other.y), id(other.id), texture(other.texture), loadedTx(other.loadedTx), traversable(other.traversable), attack(other.attack), defense(other.defense) {}
 
 bool Object::getTrav()
 {
 	return traversable;
+}
+
+int Object::getAttack()
+{
+	return attack;
+}
+
+int Object::getDefense()
+{
+	return defense;
 }
 
 void Object::move(int px, int py)
