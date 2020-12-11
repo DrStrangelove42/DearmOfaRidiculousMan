@@ -21,7 +21,9 @@
 #include "../Blocks/FloorBlock.h"
 #include "../Blocks/StoneWallBlock.h"
 #include "../Characters/Monsters/Ghost.h"
+#include "../Characters/Monsters/IntelligentGhost.h"
 #include "../Characters/Monsters/Skeleton.h"
+#include "../Characters/Monsters/IntelligentSkeleton.h"
 #include <iostream>
 #include <fstream>
 

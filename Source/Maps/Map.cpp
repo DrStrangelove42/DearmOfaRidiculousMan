@@ -372,9 +372,23 @@ void Map::intlGetObjectsFromFile(string filename, ifstream& data, RenderContext&
 				rooms[room]->addMonster(newGhost);
 				break;
 			}
+			case 'G':
+			{
+				IntelligentGhost* newGhost = new IntelligentGhost(renderer, p, *(rooms[room]));
+				newGhost->teleport(x, y);
+				rooms[room]->addMonster(newGhost);
+				break;
+			}
 			case 's':
 			{
 				Skeleton* newSkeleton = new Skeleton(renderer, p, *(rooms[room]));
+				newSkeleton->teleport(x, y);
+				rooms[room]->addMonster(newSkeleton);
+				break;
+			}
+			case 'S':
+			{
+				IntelligentSkeleton* newSkeleton = new IntelligentSkeleton(renderer, p, *(rooms[room]));
 				newSkeleton->teleport(x, y);
 				rooms[room]->addMonster(newSkeleton);
 				break;

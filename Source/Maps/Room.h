@@ -49,7 +49,7 @@ public:
 	/// <param name=""></param>
 	/// <returns></returns>
 	bool isTraversable(int, int);
-
+	
 	/// <summary>
 	/// 
 	/// </summary>

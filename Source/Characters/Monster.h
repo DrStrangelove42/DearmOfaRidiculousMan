@@ -21,10 +21,10 @@ class Room;
 /// </summary>
 class Monster : public MovingEntity, public LivingEntity
 {
-private:
+protected:
 	int lastTimeAtk = 0;
 	int lastTimeMv = 0;
-protected:
+	
 	/// <summary>
 	/// 
 	/// </summary>

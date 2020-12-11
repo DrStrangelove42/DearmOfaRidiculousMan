@@ -1,37 +1,60 @@
 #include "IntelligentMonster.h"
+#include "../Maps/Room.h"
 
-int IntelligentMonster::h(bool diagMovement, int x, int y, int destX, int destY)
+IntelligentMonster::IntelligentMonster(RenderContext& renderer,
+				       Player& p,
+				       Room& r,
+				       string textureId,
+				       int health,
+				       int dmg,
+				       int atkDelay,
+				       int atkRadius,
+				       int coins,
+				       int exp,
+				       int moveDelay,
+				       bool alarmed,
+				       bool diagMovement) : Monster(renderer, p, r, textureId, health, dmg, atkDelay, atkRadius, coins, exp, moveDelay, alarmed), diagMovement(diagMovement), destX(-1), destY(-1), path(NULL), width(r.getW()), height(r.getH())
+{
+
+}
+
+IntelligentMonster::~IntelligentMonster()
+{
+
+}
+
+int IntelligentMonster::h(int x, int y)
 {
         if (diagMovement)
 	        return max(abs(x-destX),abs(y-destY));
 	else
 	        return abs(x-destX) + abs(y-destY);
 }
-//h is the heuristic function, it tells us the length of an optimal path from position (x,y) to (destX, destY) if all blocks were traversable.
 
-void IntelligentMonster::reconstructPath(int* &path, int** pred, int numberOfSteps, int destX, int destY)
+void IntelligentMonster::reconstructPath(int* &path, int** pred)
 {
-        int* optPath = new int[2*numberOfSteps + 1];
-	optPath[0] = numberOfSteps;
+        int* optPath = new int[2*pathLength];
 	int currentX = destX;
 	int currentY = destY;
 	// We start with (destX, destY), then work our way backwards to (startX, startY) thanks to pred. 
-	for (int i = numberOfSteps; i>0; i--)
+	for (int i = pathLength-1; i >= 0; i--)
 	{
 	        int movementX = pred[currentX][2*currentY];
 		int movementY = pred[currentX][2*currentY+1];
-		optPath[2 * i - 1] = movementX;
-		optPath[2 * i] = movementY;
+		optPath[2 * i] = movementX;
+		optPath[2 * i + 1] = movementY;
 		currentX = currentX - movementX;
 		currentY = currentY - movementY;
 	}
 	path = optPath;
 }
 
-void IntelligentMonster::optimalPath(int* &path, int startX, int startY, int destX, int destY, int width, int height, bool** trav, bool diagMovement)
+void IntelligentMonster::optimalPath(int* &path, bool** trav)
 {
+        int startX = x, startY = y;
         int numberOfDirs = (diagMovement ? 8 : 4);
 	//The number of directions the monster can potentially  move in from any block (8 if we allow diagonal movement, 4 if we don't).
+	
 	int dirs[16] = {0,-1,1,0,0,1,-1,0,1,-1,1,1,-1,1,-1,-1};
 	//dirs is an array representing the different directions the monster can move in. For each i < numberOfDirs, a direction is represented by its relative movement along the x axis in dir[2*i] and along its y axis in dir[2*i+1]. The first four movements represented are North, East, South and West, and the last four are the diagonal movements. Therefore, if numberOfDirs is 4, the diagonal movements won't be considered.
 
@@ -58,8 +81,13 @@ void IntelligentMonster::optimalPath(int* &path, int startX, int startY, int des
 	
 	priority_queue <int*, vector<int*>, queueCompare> openSet;
 	// openSet contains the blocks that the algorithm is still considering as well as there expected cost. Each of it selements is an array of integers of size 3, where the first element is the expected cost (which is the number of steps of the algorithm to reach (x,y) plus h(x,y)), the second is the x coordinate, and the third is the y coordinate. The fuction queueCompare is defined such that the element with the smallest expected cost is popped when calling pop.
-	int topush[3] = {h(diagMovement, startX, startY, destX, destY), startX, startY};
+
+	int* topush = new int [3];
+	topush[0] = h(startX, startY);
+	topush[1] = startX;
+	topush[2] = startY;
 	openSet.push(topush);
+
 	int currentStep;
 
 	bool foundPath = false;
@@ -69,13 +97,14 @@ void IntelligentMonster::optimalPath(int* &path, int startX, int startY, int des
 		int* currentBlock = openSet.top();
 		openSet.pop();
 		int currentBlockX = currentBlock[1], currentBlockY = currentBlock[2];
-		//cout << currentBlock[0] << endl;
-		//cout << currentBlockX << " " << currentBlockY << endl;
+		
 		// We compute the number of steps that it took to get to this block: in openSet we store the number of steps plus the h of the block so we can get it by subtracting.
-		currentStep = currentBlock[0] - h(diagMovement, currentBlockX, currentBlockY, destX, destY);
+		currentStep = currentBlock[0] - h(currentBlockX, currentBlockY);
+		
 		if (currentBlockX == destX && currentBlockY == destY)
 		{
-		        reconstructPath(path, pred, currentStep, destX, destY);
+		        pathLength = currentStep;
+			reconstructPath(path, pred);
 			foundPath = true;
 			break;
 		}
@@ -91,7 +120,7 @@ void IntelligentMonster::optimalPath(int* &path, int startX, int startY, int des
 				pred[nextBlockX][2*nextBlockY] = dirs[2*i];
 				pred[nextBlockX][2*nextBlockY + 1] = dirs[2*i + 1];
 				int* topush = new int [3];
-				topush[0] = currentStep + h(diagMovement, nextBlockX, nextBlockY, destX, destY);
+				topush[0] = currentStep + h(nextBlockX, nextBlockY);
 				topush[1] = nextBlockX;
 				topush[2] = nextBlockY;
 				openSet.push(topush);
@@ -101,7 +130,54 @@ void IntelligentMonster::optimalPath(int* &path, int startX, int startY, int des
 	// If we exit the while loop because openSet is empty, then there is no path from (startX,startY) to (destX,destY), we therefore make path the array containing only 0.
 	if (!foundPath)
 	{
-	        int optPath[1] = {0};
-	        path = optPath;
+	        pathLength = 0;
 	}	  
+	for (int i = 0; i < width ; i++)
+	{
+	        delete pred[i];
+		delete discovered[i];
+	}
+	delete pred;
+	delete discovered;
+}
+
+void IntelligentMonster::tick(int time, GAME* game)
+{
+	if (!isAlive()) return;
+	if (time - lastTimeAtk >= attackDelay)
+	{
+		lastTimeAtk = time;
+		manageAlarm();
+		attackRound();
+	}
+	if (time - lastTimeMv >= moveDelay)
+	{
+	        if (destX != player.getX() || destY != player.getY())
+		{
+		        destX = player.getX();
+			destY = player.getY();
+			bool** trav = new bool*[width];
+			for (int i = 0; i < width; i++)
+			{
+			        trav[i] = new bool[height];
+				for (int j = 0; j < height; j++)
+				{
+				        trav[i][j] = room.isTraversable(i,j);
+				}
+			}
+			optimalPath(path, trav);
+			pathStep = 0;
+			for (int i = 0; i < width; i++)
+			{
+			        delete trav[i];
+			}
+			delete trav;
+		}
+		if (pathStep < pathLength)
+		{
+		        room.tryTeleportAt(*this, x + path[2 * pathStep], y + path[2 * pathStep + 1]);
+			pathStep ++;
+		}	       
+		lastTimeMv = time;
+	}
 }
