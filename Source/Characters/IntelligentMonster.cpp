@@ -109,7 +109,7 @@ void IntelligentMonster::optimalPath(int* &path, bool** trav)
 			break;
 		}
 		currentStep++;
-		for (int i = 0; i < numberOfDirs; i++)
+		for (int i = numberOfDirs-1; i >= 0; i--)
 		{
 		        // For each of the directions possible, we look at the current block's neighbour in that direction. If that block is in the room, is traversable, and hasn't yet been discovered, we have discovered a new shortest path from the starting position to this block, we therefore update pred and discovered accordingly, and add the block to the open set with the correct estimated cost.
 		        int nextBlockX = currentBlockX + dirs[2*i];
