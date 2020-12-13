@@ -12,11 +12,6 @@ using namespace std;
 
 class Label : public MovingEntity
 {
-protected:
-	/// <summary>
-	/// 
-	/// </summary>
-	Texture* texture;
 public:
 	/// <summary>
 	/// 
@@ -34,11 +29,7 @@ public:
 	/// <param name="y"></param>
 	/// <param name="color"></param>
 	Label(string caption, RenderContext& r, int x, int y, int color=0xffffffff);
-	/// <summary>
-	/// 
-	/// </summary>
-	/// <param name="t"></param>
-	void setTexture(Texture* t);
+
 	/// <summary>
 	/// 
 	/// </summary>

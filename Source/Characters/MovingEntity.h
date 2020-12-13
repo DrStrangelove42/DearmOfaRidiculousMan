@@ -1,21 +1,18 @@
 #ifndef MOVING_H
 #define MOVING_H
 
-#include "../Base/Entity.h"
+#include "../Base/DrawableEntity.h"
 
 /// <summary>
 /// Objects in the game that can be moved.
 /// </summary>
-class MovingEntity : public Entity
+class MovingEntity : public DrawableEntity
 {
 protected:
-	/* Coordinates of the entity */
-	int x;
-	int y;
 
 public:
-	MovingEntity();
-	MovingEntity(int x, int y);
+	MovingEntity(int x, int y, RenderContext& renderer, string texture);
+	MovingEntity(int x, int y, Texture* text);
 	/// <summary>
 	/// Moves the entity to (x, y)
 	/// </summary>

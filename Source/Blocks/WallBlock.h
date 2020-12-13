@@ -5,14 +5,14 @@
 
 class WallBlock : public Block
 {
- public:
-	 /// <summary>
-	 /// 
-	 /// </summary>
-	 /// <param name="x"></param>
-	 /// <param name="y"></param>
-	 /// <param name="renderer"></param>
-	 WallBlock(int x, int y, RenderContext& renderer);
+public:
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="x"></param>
+	/// <param name="y"></param>
+	/// <param name="renderer"></param>
+	WallBlock(int x, int y, RenderContext& renderer);
 };
 
 #endif

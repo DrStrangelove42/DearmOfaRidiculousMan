@@ -1,11 +1,14 @@
 #include "Player.h"
+#include "../Base/game.h"
+#include "../Base/Window.h"
 #include "../Maps/Room.h"
 #include "../Maps/Map.h"
 #include "../Objects/Object.h"
 
-Player::Player(RenderContext& renderer, Window& main, int lives, int attack, int defense, int startHealth, int startMoney, int startExp) : LivingEntity(startHealth, startMoney, startExp), lives(lives), textureId("player"), attack(attack), defense(defense)
+Player::Player(RenderContext& renderer, Window& main, int lives, int attack, int defense, int startHealth, int startMoney, int startExp) :
+	LivingEntity(startHealth, startMoney, startExp), MovingEntity(0, 0, renderer, "player"),
+	lives(lives), attack(attack), defense(defense)
 {
-	texture = LoadTexture("player", renderer);
 	infosWindow = new Window("Player informations", SZ_INFOSWIDTH, SZ_SCREENHEIGHT, main.getX() + main.getW(), main.getY());
 	infosRenderer = new RenderContext(*infosWindow);
 	heart = LoadTexture("heart", *infosRenderer);
@@ -15,7 +18,7 @@ void Player::render(RenderContext& renderer, int offsetX, int offsetY)
 {
 	int xx = (x + offsetX) * SZ_BLOCKSIZE;
 	int yy = (y + offsetY) * SZ_BLOCKSIZE;
-	texture->render(renderer, xx, yy, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
+	loadedTx->render(renderer, xx, yy, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
 	drawHealthBar(renderer, xx, yy);
 
 	infosRenderer->clear();
@@ -56,11 +59,6 @@ void Player::kill()
 		lives--;
 		health = maxHealth;
 	}
-}
-
-void Player::updateTexture(RenderContext& renderer)
-{
-	texture = LoadTexture(textureId, renderer);
 }
 
 Player::~Player()

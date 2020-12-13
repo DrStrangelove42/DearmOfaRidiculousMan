@@ -1,10 +1,10 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
-#include "../Base/Entity.h"
+
+#include "../Characters/MovingEntity.h"
 #include "../Base/utils.h"
 #include "../Base/game.h"
-#include "../Characters/Player.h"
 
 class Object : public MovingEntity
 {
@@ -13,16 +13,6 @@ protected:
 	/// Identifier of the object.
 	/// </summary>
 	string id;
-
-	/// <summary>
-	/// The texture ID.
-	/// </summary>
-	string texture;
-
-	/// <summary>
-	/// The loaded texture.
-	/// </summary>
-	Texture* loadedTx;
 
 	/// <summary>
 	/// Attack characteristic, makes the player's attacks stronger when picked up.
@@ -74,14 +64,6 @@ public:
 	void move(int px, int py);
 
 	/// <summary>
-	///  Rendering method, enabling the renderer to take the offset (in blocks) into account.
-	/// </summary>
-	/// <param name="renderer"></param>
-	/// <param name="offsetX"></param>
-	/// <param name="offsetY"></param>
-	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
-
-	/// <summary>
 	/// The following function describes how each type of object interacts with the player.
 	/// </summary>
 	/// <param name="game"></param>
@@ -93,14 +75,6 @@ public:
 	/// <param name="time"></param>
 	/// <param name="renderer"></param>
 	virtual void tick(int time, GAME* game);
-
-	/// <summary>
-	/// Forces the object to reload the texture corresponding to the current ID in <texture>.
-	/// Note that there is no function to change the texture from the outside of the object, because we
-	///	don't want to, for now.
-	/// </summary>
-	/// <param name="renderer"></param>
-	virtual void updateTexture(RenderContext& renderer);
 
 	bool operator== (const Object& otherObj) const
 	{

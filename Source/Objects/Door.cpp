@@ -1,5 +1,5 @@
 #include "Door.h"
-
+#include "../Characters/Player.h"
 Door::~Door()
 {
 

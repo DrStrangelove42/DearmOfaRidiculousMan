@@ -1,5 +1,5 @@
 #include "Chest.h"
-
+#include "../Characters/Player.h"
 Chest::~Chest()
 {
 
@@ -30,7 +30,7 @@ Chest::Chest(string headerline, int* uniqueId, int posx, int posy, RenderContext
 			}
 			catch (...)
 			{
-			  addObject(Sword("sw" + to_string(*(uniqueId)++), -1, -1, renderer));
+				addObject(Sword("sw" + to_string(*(uniqueId)++), -1, -1, renderer));
 			}
 		}
 		else if (currentObject.substr(0, 2) == "sh")
@@ -43,7 +43,7 @@ Chest::Chest(string headerline, int* uniqueId, int posx, int posy, RenderContext
 			}
 			catch (...)
 			{
-			  addObject(Shield("sh" + to_string(*(uniqueId)++), -1, -1, renderer));
+				addObject(Shield("sh" + to_string(*(uniqueId)++), -1, -1, renderer));
 			}
 		}
 	}
@@ -75,16 +75,18 @@ void Chest::updateObject(GAME* game)
 	{
 		game->player->pickUpObject(entry.first, entry.second);
 
-		//The following part might need to be changed if the player skins become more complex, but its purpose is to change the skin of the player if a shield or sword is found in a chest
+		//The following part might need to be changed if the player skins become more complex, 
+		//but its purpose is to change the skin of the player if a shield or sword is found in a chest
 
 		string objid = entry.first.getId();
-		if ((game->player->textureId == "player" || game->player->textureId == "playershield") && objid.length() >= 2 && objid.substr(0, 2) == "sw")
+		string& refTexture = game->player->getTextureID();
+		if ((refTexture == "player" || refTexture == "playershield") && objid.length() >= 2 && objid.substr(0, 2) == "sw")
 		{
-			game->player->textureId += "sword";
+			refTexture += "sword";
 		}
-		if ((game->player->textureId == "player" || game->player->textureId == "playersword") && objid.length() >= 2 && objid.substr(0, 2) == "sh")
+		if ((refTexture == "player" || refTexture == "playersword") && objid.length() >= 2 && objid.substr(0, 2) == "sh")
 		{
-			game->player->textureId += "shield";
+			refTexture += "shield";
 		}
 		game->player->updateTexture(renderer);
 	}

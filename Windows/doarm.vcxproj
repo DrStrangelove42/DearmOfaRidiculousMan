@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Base\config.cpp" />
+    <ClCompile Include="..\Source\Base\DrawableEntity.cpp" />
     <ClCompile Include="..\Source\Base\Entity.cpp" />
     <ClCompile Include="..\Source\Base\events.cpp" />
     <ClCompile Include="..\Source\Base\RenderContext.cpp" />
@@ -41,7 +42,6 @@
     <ClCompile Include="..\Source\Characters\Monsters\Skeleton.cpp" />
     <ClCompile Include="..\Source\Characters\MovingEntity.cpp" />
     <ClCompile Include="..\Source\Characters\Player.cpp" />
-    <ClCompile Include="..\Source\codeBuffer\monsterMovement.cpp" />
     <ClCompile Include="..\Source\Interactions\Button.cpp" />
     <ClCompile Include="..\Source\Interactions\Label.cpp" />
     <ClCompile Include="..\Source\main.cpp" />
@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\Base\config.h" />
+    <ClInclude Include="..\Source\Base\DrawableEntity.h" />
     <ClInclude Include="..\Source\Base\Entity.h" />
     <ClInclude Include="..\Source\Base\events.h" />
     <ClInclude Include="..\Source\Base\game.h" />

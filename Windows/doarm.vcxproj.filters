@@ -75,9 +75,6 @@
     <ClCompile Include="..\Source\Characters\Player.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\codeBuffer\monsterMovement.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\Interactions\Button.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -121,6 +118,9 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Characters\Monsters\IntelligentSkeleton.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Base\DrawableEntity.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -231,6 +231,9 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\Characters\Monsters\IntelligentGhost.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Base\DrawableEntity.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

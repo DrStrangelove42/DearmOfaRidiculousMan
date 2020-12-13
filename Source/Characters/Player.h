@@ -2,16 +2,12 @@
 #define PLAYER_H
 
 #include <string>
-
-#include "../Base/Entity.h"
 #include "../Base/utils.h"
 #include "../Base/config.h"
-#include "../Base/game.h"
-#include "../Base/Window.h"
-
 #include "MovingEntity.h"
 #include "LivingEntity.h"
 #include <unordered_map>
+
 class Room;
 class Map;
 class Object;
@@ -39,10 +35,7 @@ protected:
 	/// int is how many of that type of item player has (eg might have several times the same potion)
 	/// </summary>
 	unordered_map <string, int> inventory; 
-	/// <summary>
-	/// The texture used for the player.
-	/// </summary>
-	Texture* texture;
+ 
 
 	/// <summary>
 	/// 
@@ -52,16 +45,7 @@ protected:
 	Texture* heart;
 
 public:
-	/// <summary>
-	/// 
-	/// </summary>
-	string textureId;
-	/// <summary>
-	/// 
-	/// </summary>
-	/// <param name="renderer"></param>
-	void updateTexture(RenderContext& renderer);
-
+ 
 	~Player();
 	/// <summary>
 	/// Creates the player

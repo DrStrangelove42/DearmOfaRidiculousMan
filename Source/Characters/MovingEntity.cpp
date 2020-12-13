@@ -1,13 +1,12 @@
 #include "MovingEntity.h"
 
-MovingEntity::MovingEntity() :x(0), y(0)
+MovingEntity::MovingEntity(int x, int y, RenderContext& renderer, string texture) : DrawableEntity(x, y, renderer, texture)
 {
 
 }
 
-MovingEntity::MovingEntity(int x, int y) : x(x), y(y)
+MovingEntity::MovingEntity(int x, int y, Texture* text) : DrawableEntity(x, y, text)
 {
-
 }
 
 void MovingEntity::teleport(int nx, int ny)
