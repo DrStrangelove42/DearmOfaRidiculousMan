@@ -11,8 +11,10 @@ MovingEntity::MovingEntity(int x, int y, Texture* text) : DrawableEntity(x, y, t
 
 void MovingEntity::teleport(int nx, int ny)
 {
-	x = nx;
-	y = ny;
+	if (nx >= 0)
+		x = nx;
+	if (ny >= 0)
+		y = ny;
 }
 
 int MovingEntity::getX()

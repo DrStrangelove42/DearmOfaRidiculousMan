@@ -13,6 +13,7 @@ public:
 	/// <param name="y"></param>
 	/// <param name="renderer"></param>
 	WallBlock(int x, int y, RenderContext& renderer);
+	WallBlock(int posx, int posy, RenderContext& renderer, string texture);
 };
 
 #endif

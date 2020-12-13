@@ -28,6 +28,7 @@ Each room is described as follows:
  - The different characters that can encode types of blocks are:
    - ' ' : empty block.
    - 'w' : wall block.
+   - 'b'ush, 'g'rass, 't'ree
    - 'f' : floor block.
    - 's' : stone wall block
  - The different characters that can encode objects/entities are:

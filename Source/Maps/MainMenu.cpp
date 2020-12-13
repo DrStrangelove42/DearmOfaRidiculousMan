@@ -65,7 +65,7 @@ MainMenu::MainMenu(Player& p, GAME* g) : Map(p, 0), game(g)
 
 void MainMenu::onPlayClick(int id)
 {
-	string worldName = "FinalMap";
+	string worldName = "MainMap";
 	game->worldName = worldName;
 	*(game->currentMapId) = -1;
 	game->currentMap = new Map(worldName, *(game->player), *(game->renderer), game->currentMapId);

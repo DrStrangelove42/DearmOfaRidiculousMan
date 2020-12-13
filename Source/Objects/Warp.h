@@ -3,6 +3,7 @@
 
 #include "Object.h"
 #include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -32,6 +33,10 @@ protected:
 	/// The delay, in ticks, before the warp is active (if for example we want the player to warp back to the main menu map after a certain amount of time).
 	/// </summary>
 	int delay;
+	/// <summary>
+	/// If not empty, the warp is to be done toward a different world.
+	/// </summary>
+	string destWorld;
 public:
 	/*Destructor*/
 	~Warp();
@@ -49,6 +54,21 @@ public:
 	/// <param name="renderer"></param>
 	/// <param name="delay"></param>
 	Warp(int destMap, int destRoom, int destX, int destY, int posx, int posy, string identifier, RenderContext& renderer, int delay = 0);
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="destMap"></param>
+	/// <param name="destRoom"></param>
+	/// <param name="destX"></param>
+	/// <param name="destY"></param>
+	/// <param name="posx"></param>
+	/// <param name="posy"></param>
+	/// <param name="identifier"></param>
+	/// <param name="renderer"></param>
+	/// <param name="delay"></param>
+	/// <param name="destWorld"></param>
+	Warp(int destMap, int destRoom, int destX, int destY, int posx, int posy, string identifier, RenderContext& renderer, int delay, string destWorld);
 
 
 	/// <summary>

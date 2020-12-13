@@ -1,42 +1,84 @@
 1
 ##
-1
+2
 #
-25 35
+26 35
 0 0
+!1 0 1 1 -1
 #
-s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  
-s  fp f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  w  w  w  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  w        w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  w        w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  w        w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  w  w  w  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
-s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s 
+b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b     
+b  gp g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g   !1
+b  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g   !1
+b  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g   !1
+b  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g   !1
+b  g  g  g  g  g  g  g  g  g  g  g  g  g  g  b  b  b  g  g  g  g  g  g  g   !1
+b  g  g  g  g  g  g  g  g  g  g  g  b  b  b  t  b  b  b  g  g  g  g  g  g   !1
+b  g  g  g  g  w  w  w  w  g  g  g  b  t  t  t  t  t  b  g  g  g  g  g  g   !1
+b  g  g  g  g  w        w  g  g  g  b  t  t  t  t  t  b  b  g  g  g  g  g   !1
+b  g  g  g  g  w        w  g  g  g  b  t  t  t  t  t  t  t  b  g  g  g  g   !1
+b  g  g  g  g  w        w  g  g  t  t  t  t  t  t  t  t  t  b  g  g  g  g   !1
+b  g  g  g  g  w  w  w  w  g  g  t  t  t  t  t  t  t  t  t  g  g  g  g  g   !1
+b  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g   !1
+b  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  b  g  g  g  g   !1
+b  g  g  g  g  g  g  g  g  g  g  t  t  t  t  t  t  t  t  t  b  g  g  g  g   !1
+b  g  g  g  g  g  g  g  g  g  b  t  t  t  t  t  t  t  t  t  b  g  g  g  g   !1
+b  g  g  g  g  g  g  g  g  g  b  t  t  t  t  t  t  t  b  b  g  g  g  g  g   !1
+b  g  g  g  g  g  g  g  b  b  t  t  t  t  t  t  t  t  b  g  g  g  g  g  g   !1
+b  g  g  g  g  g  g  b  b  b  t  t  t  t  t  t  b  g  g  g  g  g  g  g  g   !1
+b  g  g  g  g  g  b  t  t  t  t  t  t  t  t  b  g  g  g  g  g  g  g  g  g   !1
+b  g  g  g  g  b  b  t  t  t  t  t  t  t  t  b  g  g  g  g  g  g  g  g  g   !1
+b  g  g  b  b  b  b  t  t  t  t  t  t  t  t  b  g  g  g  g  g  g  g  g  g   !1
+b  g  b  t  t  t  t  t  t  t  t  t  t  t  b  b  g  g  g  g  g  g  g  g  g   !1
+b  g  b  t  t  t  t  t  t  t  t  t  t  t  t  b  g  g  g  g  g  g  g  g  g   !1
+b  g  b  t  t  t  t  t  t  t  t  t  t  t  t  b  g  g  g  g  g  g  g  g  g   !1
+b  g  b  t  t  t  t  t  t  t  t  t  t  t  b  b  g  g  g  g  g  g  g  g  g   !1
+b  g  b  t  t  t  t  t  t  t  t  t  t  t  b  g  g  g  g  g  g  g  g  g  g   !1
+b  g  b  t  t  t  t  t  t  t  t  t  t  b  g  g  g  g  g  g  g  g  g  g  g   !1
+b  g  g  b  b  b  t  t  t  t  t  b  b  g  g  g  g  g  g  g  g  g  g  g  g   !1
+b  b  g  g  g  b  t  t  t  b  b  g  g  g  g  g  g  g  g  g  g  g  g  g  g   !1
+b  b  g  g  g  g  b  b  b  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g   !1
+b  b  b  b  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g   !1
+b  b  b  b  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g   !1
+b  b  b  b  b  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g   !1
+b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b     
+#
+26 35
+24 0
+!1 0 0 22 -1
+!2 0 0 2 2 X FinalMap
+#
+   b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  
+ !1g  gp g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  b  
+ !1g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  b  
+ !1g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  t  t  b  
+ !1g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  t  t  b  
+ !1g  g  g  g  g  g  g  g  g  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  s  
+ !1g  g  g  g  g  g  t  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
+ !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
+ !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
+ !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
+ !1g  g  g  g  g  g  t  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
+ !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
+ !1g  g  g  g  g  g  g  g  g  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  s  
+ !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
+ !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
+ !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
+ !1g  g  g  g  g  g  g  g  g  fd1f  f  f  f  f  f  f  f  f  f  f  f   !2 !2s  
+ !1g  g  g  g  g  g  g  g  g  fd1f  f  f  f  f  f  f  f  f  f  f  f   !2 !2s  
+ !1g  g  g  g  g  g  g  g  g  fd1f  f  f  f  f  f  f  f  f  f  f  f   !2 !2s  
+ !1g  g  g  g  g  g  g  g  g  fd1f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
+ !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
+ !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
+ !1g  g  g  g  g  g  g  g  g  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  s  
+ !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
+ !1g  g  g  g  g  g  t  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
+ !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
+ !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
+ !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
+ !1g  g  g  g  g  g  t  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
+ !1g  b  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
+ !1g  b  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
+ !1g  b  b  b  g  g  g  g  g  w  w  w  w  w  w  w  w  w  f  f  w  w  w  w  s  
+ !1g  b  b  b  g  g  g  g  g  s  g  g  g  g  g  g  g  g  g  g  g  g  g  g  s  
+ !1g  b  b  b  b  g  g  g  g  s  g  g  g  g  g  g  t  g  g  t  g  g  g  g  s  
+   b  b  b  b  b  b  b  b  b  s  g  g  g  t  g  g  g  g  g  g  g  g  t  g  s  

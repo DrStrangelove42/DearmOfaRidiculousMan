@@ -14,7 +14,8 @@ Map::~Map()
 	delete[] rooms;
 }
 
-Map::Map(string worldName, Player& p, RenderContext& renderer, int* startMap, int startRoom) : player(p), worldName(worldName)
+Map::Map(string worldName, Player& p, RenderContext& renderer, int* startMap, int startRoom) : 
+	player(p), worldName(worldName)
 {
 	// First we determine whether the files representing the world need to be generated, that is to say whether these files don't exist or whether they are older than the file representing the world.
 	struct stat dataLocation;
@@ -177,7 +178,6 @@ bool Map::intlParseRoom(string& newFile, ifstream& World, int map, int room, ofs
 	layout << to_string(width) << " " << to_string(height) << endl;
 
 	/* We determine the absolute position of the room. */
-
 	int x, y;
 	getline(World, line);
 	x = stoi(line, &h);
@@ -264,6 +264,7 @@ bool Map::intlParseRoom(string& newFile, ifstream& World, int map, int room, ofs
 		}
 		layout << endl;
 	}
+	delete[] header;
 	return true;
 }
 
@@ -419,6 +420,7 @@ Room* Map::intlRoomFromFile(string filename, ifstream& layout, Player& p, Render
 	line2.erase(0, h);
 	int y = stoi(line2);
 	thisRoom = new Room(width, height, x, y, p, renderer);
+
 	for (int i = 0; i < height; i++)
 	{
 		getline(layout, line2);
@@ -429,6 +431,15 @@ Room* Map::intlRoomFromFile(string filename, ifstream& layout, Player& p, Render
 				break;
 			case 'w':
 				thisRoom->replaceBlock(new WallBlock(j, i, renderer));
+				break;
+			case 'g':
+				thisRoom->replaceBlock(new FloorBlock(j, i, renderer, "grass"));
+				break;
+			case 'b':
+				thisRoom->replaceBlock(new FloorBlock(j, i, renderer, "bush"));
+				break;
+			case 't':
+				thisRoom->replaceBlock(new WallBlock(j, i, renderer, "tree"));
 				break;
 			case 'f':
 				thisRoom->replaceBlock(new FloorBlock(j, i, renderer));

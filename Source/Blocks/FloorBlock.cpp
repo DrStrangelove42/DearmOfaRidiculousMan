@@ -4,3 +4,8 @@ FloorBlock::FloorBlock(int posx, int posy, RenderContext& renderer) : Block(posx
 {
 
 }
+
+FloorBlock::FloorBlock(int posx, int posy, RenderContext& renderer, string texture) : Block(posx, posy, texture, renderer, true)
+{
+
+}
