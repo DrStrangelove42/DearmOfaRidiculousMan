@@ -84,15 +84,6 @@
     <ClCompile Include="..\Source\Interactions\Label.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Items\Item.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Items\Shield.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Items\Sword.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\Maps\MainMenu.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -115,6 +106,21 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Objects\Warp.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Objects\Shield.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Objects\Sword.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Characters\IntelligentMonster.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Characters\Monsters\IntelligentGhost.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Characters\Monsters\IntelligentSkeleton.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -161,16 +167,10 @@
     <ClInclude Include="..\Source\Base\Texture.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\Items\Sword.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="..\Source\Blocks\StoneWallBlock.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\Characters\Monsters\Skeleton.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\Items\Shield.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\Maps\Room.h">
@@ -215,10 +215,22 @@
     <ClInclude Include="..\Source\Objects\Key.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\Items\Item.h">
+    <ClInclude Include="..\Source\Characters\Monsters\Ghost.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\Characters\Monsters\Ghost.h">
+    <ClInclude Include="..\Source\Objects\Shield.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Objects\Sword.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Characters\IntelligentMonster.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Characters\Monsters\IntelligentSkeleton.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Characters\Monsters\IntelligentGhost.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

@@ -31,19 +31,19 @@
     <ClCompile Include="..\Source\Blocks\FloorBlock.cpp" />
     <ClCompile Include="..\Source\Blocks\StoneWallBlock.cpp" />
     <ClCompile Include="..\Source\Blocks\WallBlock.cpp" />
+    <ClCompile Include="..\Source\Characters\IntelligentMonster.cpp" />
     <ClCompile Include="..\Source\Characters\LivingEntity.cpp" />
     <ClCompile Include="..\Source\Characters\Minions.cpp" />
     <ClCompile Include="..\Source\Characters\Monster.cpp" />
     <ClCompile Include="..\Source\Characters\Monsters\Ghost.cpp" />
+    <ClCompile Include="..\Source\Characters\Monsters\IntelligentGhost.cpp" />
+    <ClCompile Include="..\Source\Characters\Monsters\IntelligentSkeleton.cpp" />
     <ClCompile Include="..\Source\Characters\Monsters\Skeleton.cpp" />
     <ClCompile Include="..\Source\Characters\MovingEntity.cpp" />
     <ClCompile Include="..\Source\Characters\Player.cpp" />
     <ClCompile Include="..\Source\codeBuffer\monsterMovement.cpp" />
     <ClCompile Include="..\Source\Interactions\Button.cpp" />
     <ClCompile Include="..\Source\Interactions\Label.cpp" />
-    <ClCompile Include="..\Source\Items\Item.cpp" />
-    <ClCompile Include="..\Source\Items\Shield.cpp" />
-    <ClCompile Include="..\Source\Items\Sword.cpp" />
     <ClCompile Include="..\Source\main.cpp" />
     <ClCompile Include="..\Source\Maps\MainMenu.cpp" />
     <ClCompile Include="..\Source\Maps\Map.cpp" />
@@ -52,6 +52,8 @@
     <ClCompile Include="..\Source\Objects\Door.cpp" />
     <ClCompile Include="..\Source\Objects\Key.cpp" />
     <ClCompile Include="..\Source\Objects\Object.cpp" />
+    <ClCompile Include="..\Source\Objects\Shield.cpp" />
+    <ClCompile Include="..\Source\Objects\Sword.cpp" />
     <ClCompile Include="..\Source\Objects\Warp.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -68,18 +70,18 @@
     <ClInclude Include="..\Source\Blocks\FloorBlock.h" />
     <ClInclude Include="..\Source\Blocks\StoneWallBlock.h" />
     <ClInclude Include="..\Source\Blocks\WallBlock.h" />
+    <ClInclude Include="..\Source\Characters\IntelligentMonster.h" />
     <ClInclude Include="..\Source\Characters\LivingEntity.h" />
     <ClInclude Include="..\Source\Characters\Minions.h" />
     <ClInclude Include="..\Source\Characters\Monster.h" />
     <ClInclude Include="..\Source\Characters\Monsters\Ghost.h" />
+    <ClInclude Include="..\Source\Characters\Monsters\IntelligentGhost.h" />
+    <ClInclude Include="..\Source\Characters\Monsters\IntelligentSkeleton.h" />
     <ClInclude Include="..\Source\Characters\Monsters\Skeleton.h" />
     <ClInclude Include="..\Source\Characters\MovingEntity.h" />
     <ClInclude Include="..\Source\Characters\Player.h" />
     <ClInclude Include="..\Source\Interactions\Button.h" />
     <ClInclude Include="..\Source\Interactions\Label.h" />
-    <ClInclude Include="..\Source\Items\Item.h" />
-    <ClInclude Include="..\Source\Items\Shield.h" />
-    <ClInclude Include="..\Source\Items\Sword.h" />
     <ClInclude Include="..\Source\main.h" />
     <ClInclude Include="..\Source\Maps\MainMenu.h" />
     <ClInclude Include="..\Source\Maps\Map.h" />
@@ -88,6 +90,8 @@
     <ClInclude Include="..\Source\Objects\Door.h" />
     <ClInclude Include="..\Source\Objects\Key.h" />
     <ClInclude Include="..\Source\Objects\Object.h" />
+    <ClInclude Include="..\Source\Objects\Shield.h" />
+    <ClInclude Include="..\Source\Objects\Sword.h" />
     <ClInclude Include="..\Source\Objects\Warp.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
