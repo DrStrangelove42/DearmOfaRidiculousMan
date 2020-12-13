@@ -2,25 +2,25 @@
 # $<  first dependency
 # $^  dependencies list
 
-CC      = g++
+CXX      = g++
 
 LIBS 	= `sdl2-config --libs` -lSDL2_ttf
 
-CFLAGS  =  -std=c++14 `sdl2-config --cflags`
-CFLAGS += -g
+CXXFLAGS  =  -std=c++14 `sdl2-config --cflags`
 
 rwildcard=$(foreach d,$(wildcard $(1:=/*)),$(call rwildcard,$d,$2) $(filter $(subst *,%,$2),$d))
 
 SRC := $(call rwildcard,./Source,*.cpp)
 OBJ = $(SRC:.cpp=.o)
 
+all: CXXFLAGS += -g
 all: doarm
 
 doarm: $(OBJ)
-	$(CC) $(LDFLAGS)  $^ -o $@ $(LIBS)
+	$(CXX) $(LDFLAGS)  $^ -o $@ $(LIBS)
 
 %.o: %.cpp %.h
-	$(CC) -o $@ -c $< $(CFLAGS)
+	$(CXX) -o $@ -c $< $(CXXFLAGS)
 
 clean:
 	rm -f $(OBJ)
@@ -33,4 +33,6 @@ doc:
 test:
 	cd ./Test && make
 
-.PHONY: clean test doc
+release: doarm
+
+.PHONY: clean test doc release
