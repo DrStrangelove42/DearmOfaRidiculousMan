@@ -48,7 +48,7 @@ b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b
 !2 0 0 2 2 X FinalMap
 #
    b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  
- !1g  gp g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  b  
+ !1g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  b  
  !1g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  b  
  !1g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  t  t  b  
  !1g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  t  t  b  
@@ -63,10 +63,10 @@ b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b
  !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
  !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
  !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
- !1g  g  g  g  g  g  g  g  g  fd1f  f  f  f  f  f  f  f  f  f  f  f   !2 !2s  
- !1g  g  g  g  g  g  g  g  g  fd1f  f  f  f  f  f  f  f  f  f  f  f   !2 !2s  
- !1g  g  g  g  g  g  g  g  g  fd1f  f  f  f  f  f  f  f  f  f  f  f   !2 !2s  
- !1g  g  g  g  g  g  g  g  g  fd1f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
+ !1g  g  g  g  g  g  g  g  g  f  f  f  f  f  f  f  f  f  f  f  f  f   !2 !2s  
+ !1g  g  g  g  g  g  g  g  g  f  f  f  f  f  f  f  f  f  f  f  f  f   !2 !2s  
+ !1g  g  g  g  g  g  g  g  g  f  f  f  f  f  f  f  f  f  f  f  f  f   !2 !2s  
+ !1g  g  g  g  g  g  g  g  g  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
  !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
  !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
  !1g  g  g  g  g  g  g  g  g  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  s  

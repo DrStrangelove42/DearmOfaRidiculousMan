@@ -19,7 +19,9 @@ Monster::Monster(RenderContext& renderer,
 
 void Monster::kill()
 {
-	health = 0;
+	if (health == -1)
+	        return;
+	health = -1;
 	player.getExperience(experience);
 	player.getCoins(money);
 	//room.removeMonster(this);
