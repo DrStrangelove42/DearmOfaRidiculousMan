@@ -16,7 +16,7 @@ public:
 	/// <summary>
 	/// Standard destructor.
 	/// </summary>
-	virtual ~Entity() {  };
+	virtual ~Entity() { };
 	
 	/// <summary>
 	/// Rendering method, enabling the renderer to take the offset (in blocks) into account.
@@ -32,7 +32,6 @@ public:
 	/// <param name="time"></param>
 	/// <param name=""></param>
 	virtual void tick(int time, GAME* game) = 0;
-
 };
 
 #endif

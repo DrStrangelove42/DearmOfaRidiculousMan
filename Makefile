@@ -13,14 +13,20 @@ rwildcard=$(foreach d,$(wildcard $(1:=/*)),$(call rwildcard,$d,$2) $(filter $(su
 SRC := $(call rwildcard,./Source,*.cpp)
 OBJ = $(SRC:.cpp=.o)
 
+#deps
+CXXFLAGS += -MMD -MP
+DEPS := $(OBJ:.o=.d)
+
+PREFIX = /usr/local
+
 all: CXXFLAGS += -g
 all: doarm
 
 doarm: $(OBJ)
 	$(CXX) $(LDFLAGS)  $^ -o $@ $(LIBS)
 
-%.o: %.cpp %.h
-	$(CXX) -o $@ -c $< $(CXXFLAGS)
+%.o: %.cpp
+	$(CXX) $(DEPFLAGS) $(CXXFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJ)
@@ -35,4 +41,9 @@ test:
 
 release: doarm
 
+install:
+	install -m 755 tool $(DESTDIR)$(PREFIX)/bin
+
 .PHONY: clean test doc release
+
+-include $(DEPS)
