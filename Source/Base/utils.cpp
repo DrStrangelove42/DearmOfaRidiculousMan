@@ -78,7 +78,7 @@ void FreeTextures()
 
 int DumpError(string err)
 {
-	cout << "Error : " << err << "\nInternal error: " << renderErrorDetails() << endl;
+	cout << "Error : " << err << "\nInternal error: " << RenderErrorDetails() << endl;
 	return EXIT_FAILURE;
 }
 

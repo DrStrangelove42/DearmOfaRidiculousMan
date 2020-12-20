@@ -1,7 +1,7 @@
 #ifndef RENDERCTXT_H
 #define RENDERCTXT_H
 
-#include "rendering.h"
+#include "utilsSDL.h"
 #include <stdexcept>
 
 /*

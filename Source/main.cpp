@@ -18,7 +18,7 @@ int main(int argc, char** argv)
 {
 	int status = 0;
 
-	if (!renderInit())
+	if (!RenderInit())
 		return DumpError("Init error.");
 
 	GAME* game = initGame();
@@ -30,7 +30,7 @@ int main(int argc, char** argv)
 
 	quitGame(game);
 
-	renderQuit();
+	RenderQuit();
 	return status;
 }
 
@@ -60,7 +60,7 @@ int playDoarm(GAME* game)
 
 		game->renderer->update();
 
-		renderSleep(50);
+		RenderSleep(50);
 	}
 
 	return EXIT_SUCCESS;

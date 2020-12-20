@@ -8,7 +8,7 @@
 #include "config.h"
 #include "Texture.h"
 #include "RenderContext.h"
-#include "rendering.h"
+#include "utilsSDL.h"
 
 using namespace std;
 

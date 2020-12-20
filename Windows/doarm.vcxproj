@@ -24,7 +24,7 @@
     <ClCompile Include="..\Source\Base\Entity.cpp" />
     <ClCompile Include="..\Source\Base\events.cpp" />
     <ClCompile Include="..\Source\Base\RenderContext.cpp" />
-    <ClCompile Include="..\Source\Base\rendering.cpp" />
+    <ClCompile Include="..\Source\Base\utilsSDL.cpp" />
     <ClCompile Include="..\Source\Base\Texture.cpp" />
     <ClCompile Include="..\Source\Base\utils.cpp" />
     <ClCompile Include="..\Source\Base\Window.cpp" />
@@ -63,7 +63,7 @@
     <ClInclude Include="..\Source\Base\events.h" />
     <ClInclude Include="..\Source\Base\game.h" />
     <ClInclude Include="..\Source\Base\RenderContext.h" />
-    <ClInclude Include="..\Source\Base\rendering.h" />
+    <ClInclude Include="..\Source\Base\utilsSDL.h" />
     <ClInclude Include="..\Source\Base\Texture.h" />
     <ClInclude Include="..\Source\Base\utils.h" />
     <ClInclude Include="..\Source\Base\Window.h" />

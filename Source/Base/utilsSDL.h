@@ -1,10 +1,9 @@
-#ifndef RENDERING_H
-#define RENDERING_H
+#ifndef UTILS_SDL_H
+#define UTILS_SDL_H
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <string>
-#include "config.h"
 #include "game.h"
 #ifdef WIN6
 #include <Windows.h>
@@ -18,22 +17,23 @@ extern int FONTSIZE;
 /// Stops during ms milliseconds.
 /// </summary>
 /// <param name="ms">The delay</param>
-void renderSleep(unsigned int ms);
+void RenderSleep(unsigned int ms);
 
 /// <summary>
 /// Initialisation of the rendering module
 /// </summary>
 /// <returns></returns>
-bool renderInit();
+bool RenderInit();
 
 /// <summary>
 /// Dump errors in the console.
 /// </summary>
 /// <returns></returns>
-std::string renderErrorDetails();
+string RenderErrorDetails();
 
 /// <summary>
 /// Exits rendering module
 /// </summary>
-void renderQuit();
+void RenderQuit();
+/*End of SDL-Specific zone*/
 #endif
