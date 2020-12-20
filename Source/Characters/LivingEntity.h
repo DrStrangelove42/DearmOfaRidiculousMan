@@ -42,7 +42,7 @@ public:
 	/// True if the player is alive (more than 0 HP)
 	/// </summary>
 	/// <returns></returns>
-	bool isAlive();
+	bool isAlive()const;
 	/// <summary>
 	/// Instantly kills the entity (pure virtual).
 	/// </summary>
@@ -53,7 +53,7 @@ public:
 	/// <param name="renderer"></param>
 	/// <param name="offsetX"></param>
 	/// <param name="offsetY"></param>
-	virtual void drawHealthBar(RenderContext& renderer, int offsetX, int offsetY);
+	virtual void drawHealthBar(RenderContext& renderer, int offsetX, int offsetY)const;
 };
 
 #endif

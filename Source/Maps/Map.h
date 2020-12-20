@@ -123,6 +123,13 @@ protected:
 	/// <returns></returns>
 	static bool intlParseRoom(string& newFile, ifstream& World, int map, int room, ofstream& layout, ofstream& start, ofstream& data);
 
+
+
+
+	/// <summary>
+	/// Index of the room that is currently displayed (in which the player is)
+	/// </summary>
+	int currentRoom;
 public:
 	/// <summary>
 	/// This function transforms a text file into a folder of texts files which are sufficient 
@@ -135,13 +142,6 @@ public:
 	/// <param name="worldName"></param>
 	static void worldFromFile(string worldName);
 
-
-
-
-	/// <summary>
-	/// Index of the room that is currently displayed (in which the player is)
-	/// </summary>
-	int currentRoom;
 	/// <summary>
 	/// Creates a new empty map with a pre-allocated array for rooms.
 	/// </summary>
@@ -165,7 +165,7 @@ public:
 	virtual ~Map();
 
 
-	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);/* Rendering method, enabling the renderer to take the offset (in blocks) into account. */
+	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0) const;/* Rendering method, enabling the renderer to take the offset (in blocks) into account. */
 
 
 	virtual void tick(int time, GAME* game);/* Time management */
@@ -193,6 +193,7 @@ public:
 	}*/
 
 	/* Accessors */
+	void setCurrentRoom(int c);
 	int getRoomCount();
 	Room** getRooms();
 	int getCurrentRoom();

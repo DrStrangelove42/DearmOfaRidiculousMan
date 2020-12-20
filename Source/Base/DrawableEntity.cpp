@@ -20,7 +20,7 @@ void DrawableEntity::setTexture(Texture* texture)
 	loadedTx = texture;
 }
 
-void DrawableEntity::render(RenderContext& renderer, int offsetX, int offsetY)
+void DrawableEntity::render(RenderContext& renderer, int offsetX, int offsetY)  const
 {
 	int xx = (x + offsetX);
 	int yy = (y + offsetY);
@@ -28,6 +28,11 @@ void DrawableEntity::render(RenderContext& renderer, int offsetX, int offsetY)
 	{
 		loadedTx->render(renderer, xx * SZ_BLOCKSIZE, yy * SZ_BLOCKSIZE, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
 	}
+}
+
+void DrawableEntity::sideRender(RenderContext& renderer, int xx, int yy)  const
+{
+	loadedTx->render(renderer, xx, yy, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
 }
 
 string& DrawableEntity::getTextureID()

@@ -36,7 +36,7 @@ public:
 	/// <param name="renderer"></param>
 	/// <param name="offsetX"></param>
 	/// <param name="offsetY"></param>
-	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
+	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0)const;
 	virtual void tick(int time, GAME* game);
 };
 

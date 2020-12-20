@@ -38,8 +38,8 @@ MainMenu::MainMenu(Player& p, GAME* g) : Map(p, 0), game(g)
 	buttonCount = 2;
 	buttons = new Button * [buttonCount];
 
-	buttons[0] = new Button("Play", r, SZ_SCREENWIDTH / 3, SZ_SCREENHEIGHT / 2, 0, [this](int id) {onPlayClick(id); }, 0x00ffaaff, 0xffff00ff);
-	buttons[1] = new Button("Quit", r, 2 * SZ_SCREENWIDTH / 3, SZ_SCREENHEIGHT / 2, 0, [this](int id) {onQuitClick(id); }, 0xff00aaff, 0xffff00ff);
+	buttons[0] = new Button("Play", r, SZ_SCREENWIDTH / 3,  SZ_SCREENHEIGHT -150, 0, [this](int id) {onPlayClick(id); }, 0x00ffaaff, 0xffff00ff);
+	buttons[1] = new Button("Quit", r, 2 * SZ_SCREENWIDTH / 3,  SZ_SCREENHEIGHT -150, 0, [this](int id) {onQuitClick(id); }, 0xff00aaff, 0xffff00ff);
 
 	labelCount = 4;
 	labels = new Label * [labelCount];
@@ -57,7 +57,7 @@ MainMenu::MainMenu(Player& p, GAME* g) : Map(p, 0), game(g)
 	labels[0] = new Label(welcome, (SZ_SCREENWIDTH - welcome->getWidth() - animationTextures[0]->getWidth()) / 2, SZ_SCREENHEIGHT / 3);
 	animation = new Label(animationTextures[0], labels[0]->getX() + welcome->getWidth(), labels[0]->getY());
 	labels[1] = new Label(subtitle, (SZ_SCREENWIDTH - subtitle->getWidth()) / 2, labels[0]->getY() + welcome->getHeight() + 10);
-	labels[2] = new Label(info, (SZ_SCREENWIDTH - info->getWidth()) / 2, SZ_SCREENHEIGHT - 100);
+	labels[2] = new Label(info, (SZ_SCREENWIDTH - info->getWidth()) / 2, SZ_SCREENHEIGHT - 200);
 	labels[3] = animation;
 
 	player.teleport(BLOCKS_W / 2, BLOCKS_H / 2);
@@ -83,7 +83,7 @@ MainMenu::~MainMenu()
 	//Not delete[] animationTextures because these ones were created through LoadString.
 }
 
-void MainMenu::render(RenderContext& renderer, int offsetX, int offsetY)
+void MainMenu::render(RenderContext& renderer, int offsetX, int offsetY)const
 {
 	for (int i = 0; i < buttonCount; i++)
 	{
@@ -95,7 +95,7 @@ void MainMenu::render(RenderContext& renderer, int offsetX, int offsetY)
 		labels[i]->render(renderer, offsetX, offsetY);
 	}
 
-	player.render(renderer, offsetX, offsetY);
+	player.DrawableEntity::render(renderer, offsetX, offsetY);
 }
 
 void MainMenu::tick(int time, GAME* game)

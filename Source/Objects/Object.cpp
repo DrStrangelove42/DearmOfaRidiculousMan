@@ -8,17 +8,17 @@ Object::Object(string identifier, int posx, int posy, string tx, RenderContext& 
 
 Object::Object(const Object& other) : MovingEntity(other), id(other.id), traversable(other.traversable), attack(other.attack), defense(other.defense) {}
 
-bool Object::getTrav()
+bool Object::getTrav() const
 {
 	return traversable;
 }
 
-int Object::getAttack()
+int Object::getAttack() const
 {
 	return attack;
 }
 
-int Object::getDefense()
+int Object::getDefense() const
 {
 	return defense;
 }
@@ -28,19 +28,21 @@ void Object::move(int px, int py)
 	teleport(px, py);
 }
 
+
+
 Object::~Object()
 {
 
-}
+} 
 
 string Object::getId() const
 {
 	return id;
 }
 
-void Object::updateObject(GAME* g)
+bool Object::updateObject(GAME* g)
 {
-
+	return false;
 }
 
 void Object::tick(int time, GAME* g)

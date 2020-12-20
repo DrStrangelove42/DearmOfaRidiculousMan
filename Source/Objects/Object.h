@@ -25,8 +25,7 @@ protected:
 	int defense;
 
 public:
-	~Object();
-
+	~Object(); 
 	/// <summary>
 	/// Initialises a new Object with the specified informations.
 	/// </summary>
@@ -52,9 +51,9 @@ public:
 	bool traversable;
 
 	string getId() const;
-	bool getTrav();
-	int getAttack();
-	int getDefense();
+	bool getTrav() const;
+	int getAttack() const;
+	int getDefense() const;
 
 	/// <summary>
 	/// Change the object position. 
@@ -65,9 +64,10 @@ public:
 
 	/// <summary>
 	/// The following function describes how each type of object interacts with the player.
+	/// Returns true if the object has been picked up (thus informing that we should remove it from the room)
 	/// </summary>
 	/// <param name="game"></param>
-	virtual void updateObject(GAME* game);
+	virtual bool updateObject(GAME* game);
 
 	/// <summary>
 	/// Time management

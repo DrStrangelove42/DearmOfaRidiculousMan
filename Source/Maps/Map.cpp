@@ -14,8 +14,8 @@ Map::~Map()
 	delete[] rooms;
 }
 
-Map::Map(string worldName, Player& p, RenderContext& renderer, int* startMap, int startRoom) : 
-	player(p), worldName(worldName)
+Map::Map(string worldName, Player& p, RenderContext& renderer, int* startMap, int startRoom) :
+	player(p), worldName(worldName), currentRoom(0), roomCount(0), titleTexture(NULL), rooms(NULL)
 {
 	// First we determine whether the files representing the world need to be generated, that is to say whether these files don't exist or whether they are older than the file representing the world.
 	struct stat dataLocation;
@@ -25,8 +25,16 @@ Map::Map(string worldName, Player& p, RenderContext& renderer, int* startMap, in
 	if (stat((WORLDDATA_LOCATION).c_str(), &dataLocation) != 0)
 	{
 		string d = "./Data/";
-		mkdir(d.c_str(), 0777);
-		mkdir((WORLDDATA_LOCATION).c_str(), 0777);
+		if (mkdir(d.c_str(), 0777) != 0)
+		{
+			cout << "MKDIR DATA failed" << endl;
+			return;
+		}
+		if (mkdir((WORLDDATA_LOCATION).c_str(), 0777) != 0)
+		{
+			cout << "MKDIR " << WORLDDATA_LOCATION << " failed" << endl;
+			return;
+		}
 	}
 
 	if (stat((WORLDFILES_LOCATION + worldName + EXT).c_str(), &world) != 0)
@@ -36,7 +44,11 @@ Map::Map(string worldName, Player& p, RenderContext& renderer, int* startMap, in
 	}
 	if (stat((WORLDDATA_LOCATION + worldName + "/" + worldName + "Start" + EXT).c_str(), &data) != 0)
 	{
-		mkdir((WORLDDATA_LOCATION + worldName + "/").c_str(), 0777);
+		if (mkdir((WORLDDATA_LOCATION + worldName + "/").c_str(), 0777) != 0)
+		{
+			cout << "MKDIR " << WORLDDATA_LOCATION + worldName << " failed" << endl;
+			return;
+		}
 		worldFromFile(worldName);
 	}
 	else
@@ -51,7 +63,7 @@ Map::Map(string worldName, Player& p, RenderContext& renderer, int* startMap, in
 		titleTexture = LoadString("CURRENT MAP : " + worldName, renderer);
 }
 
-void Map::render(RenderContext& renderer, int offsetX, int offsetY)
+void Map::render(RenderContext& renderer, int offsetX, int offsetY) const
 {
 	Room* cur = rooms[currentRoom];
 
@@ -80,6 +92,11 @@ void Map::render(RenderContext& renderer, int offsetX, int offsetY)
 void Map::tick(int time, GAME* game)
 {
 	rooms[currentRoom]->tick(time, game);
+}
+
+void Map::setCurrentRoom(int c)
+{
+	currentRoom = c;
 }
 
 int Map::getRoomCount()

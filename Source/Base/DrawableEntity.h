@@ -44,7 +44,15 @@ public:
 	/// <param name="renderer"></param>
 	/// <param name="offsetX">X Offset, in blocks.</param>
 	/// <param name="offsetY">Y Offset, in blocks.</param>
-	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
+	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0) const;
+
+	/// <summary>
+	/// Absolute rendering of the drawable entity (useful to draw it somewhere else outside a map)
+	/// </summary>
+	/// <param name="renderer"></param>
+	/// <param name="xx"></param>
+	/// <param name="yy"></param>
+	void sideRender(RenderContext& renderer, int xx, int yy) const;
 
 	string& getTextureID();
 };

@@ -12,14 +12,19 @@ Player::Player(RenderContext& renderer, Window& main, int lives, int attack, int
 	heart = LoadTexture("heart", renderer);
 }
 
-void Player::render(RenderContext& renderer, int offsetX, int offsetY)
+void Player::render(RenderContext& renderer, int offsetX, int offsetY)const
 {
 	int xx = (x + offsetX) * SZ_BLOCKSIZE;
 	int yy = (y + offsetY) * SZ_BLOCKSIZE;
 	loadedTx->render(renderer, xx, yy, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
 	//DrawableEntity::render(renderer, offsetX, offsetY);
 	drawHealthBar(renderer, xx, yy);
+	renderInventory(renderer, xx, yy);
+}
 
+void Player::renderInventory(RenderContext& renderer, int xx, int yy)const
+{
+	/*Infos*/
 	xx = infosX;
 	yy = infosY;
 
@@ -41,6 +46,25 @@ void Player::render(RenderContext& renderer, int offsetX, int offsetY)
 	yy += tmp->getHeight();
 	tmp = LoadString(to_string(money) + " Gold", renderer, 0xDDDD00FF);
 	tmp->renderUnscaled(renderer, xx, yy);
+
+	yy += tmp->getHeight() + SZ_BLOCKSIZE;
+
+	tmp = LoadString("Collected stuff", renderer, 0xFFFFFFFF);
+	tmp->renderUnscaled(renderer, xx, yy);
+
+	xx = infosX;
+	yy += tmp->getHeight();
+	/*The inventory*/
+	for (auto& entry : inventory)
+	{
+		inventoryLookup.at(entry.first)->sideRender(renderer, xx, yy);
+		xx += SZ_BLOCKSIZE;
+		if (xx >= infosX + SZ_INFOSWIDTH)
+		{
+			xx = infosX;
+			yy += SZ_BLOCKSIZE;
+		}
+	}
 }
 
 /*
@@ -61,7 +85,8 @@ void Player::kill()
 
 Player::~Player()
 {
-
+	inventory.clear();
+	inventoryLookup.clear();
 }
 
 void Player::tick(int time, GAME* game)
@@ -146,18 +171,18 @@ int Player::getDefense()
 	return defense;
 }
 
-void Player::pickUpObject(Object obj, int count)
+void Player::pickUpObject(const Object* obj, int count)
 {
-	if (inventory.find(obj.getId()) == inventory.end())
+	if (inventory.find(obj->getId()) == inventory.end())
 	{
-		inventory[obj.getId()] = count;
-		attack = max(obj.getAttack(), attack);
-		defense = max(obj.getDefense(), defense);
+		inventory[obj->getId()] = 0;
+		attack = max(obj->getAttack(), attack);
+		defense = max(obj->getDefense(), defense);
 	}
-	else
-	{
-		inventory[obj.getId()] += count;
-	}
+
+	inventory[obj->getId()] += count;
+
+	inventoryLookup[obj->getId()] = const_cast<Object*>(obj); //C++ is fairly annoying too
 }
 
 bool Player::hasObject(string objId)

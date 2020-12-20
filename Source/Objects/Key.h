@@ -1,13 +1,11 @@
 #ifndef KEY_H
 #define KEY_H
 
-#include "Object.h"
+#include "PickableObject.h"
 
-class Key : public Object
+class Key : public PickableObject
 {
-public:
-	/*Destructor*/
-	~Key();
+public: 
 	
 	/// <summary>
 	/// Constructor, a key's identifier should be the letter k followed by a character c, the key can only unlock doors starting with dc
@@ -17,12 +15,6 @@ public:
 	/// <param name="posy"></param>
 	/// <param name="renderer"></param>
 	Key(string identifier, int posx, int posy, RenderContext& renderer);
-
-	/// <summary>
-	/// How does a key interact with the player?
-	/// </summary>
-	/// <param name="game"></param>
-	void updateObject(GAME* game);
 };
 
 #endif

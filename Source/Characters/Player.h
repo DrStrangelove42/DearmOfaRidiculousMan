@@ -34,8 +34,8 @@ protected:
 	/// Player's items
 	/// int is how many of that type of item player has (eg might have several times the same potion)
 	/// </summary>
-	unordered_map <string, int> inventory; 
- 
+	unordered_map<string, int> inventory;
+	unordered_map<string, Object*> inventoryLookup;
 	/// <summary>
 	/// Horizontal offset of the infos sub window
 	/// </summary>
@@ -51,7 +51,7 @@ protected:
 	Texture* heart;
 
 public:
- 
+
 	~Player();
 	/// <summary>
 	/// Creates the player
@@ -71,7 +71,10 @@ public:
 	virtual void kill();
 
 	/* Rendering management */
-	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
+	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0)const;
+
+	void renderInventory(RenderContext& renderer, int xx, int yy)const;
+
 
 	/* Time management */
 	virtual void tick(int time, GAME* game);
@@ -122,7 +125,7 @@ public:
 	/// </summary>
 	/// <param name="item"></param>
 	/// <param name="count"></param>
-	void pickUpObject(Object obj, int count = 1);
+	void pickUpObject(const  Object* obj, int count = 1);
 
 	/// <summary>
 	/// Tells us whether the player has a particular item or not.

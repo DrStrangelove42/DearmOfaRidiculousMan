@@ -15,11 +15,11 @@ Door::Door(string headerline, int posx, int posy, RenderContext& renderer) : Doo
 
 }
 
-void Door::updateObject(GAME* game)
+bool Door::updateObject(GAME* game)
 {
 	if (traversable || abs(x - game->player->getX()) + abs(y - game->player->getY()) > 1)
 	{
-		return;
+		return false;
 	}
 	if (game->player->hasObject("k" + keyId))
 	{
@@ -27,4 +27,6 @@ void Door::updateObject(GAME* game)
 		texture = "door" + openOrientation;
 		updateTexture(*(game->renderer));
 	}
+
+	return false;
 }

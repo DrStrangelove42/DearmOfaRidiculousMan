@@ -14,12 +14,12 @@ void LivingEntity::damage(int dmg)
 		kill();
 }
 
-bool LivingEntity::isAlive()
+bool LivingEntity::isAlive()const
 {
 	return health > 0;
 }
 
-void LivingEntity::drawHealthBar(RenderContext& renderer, int x, int y)
+void LivingEntity::drawHealthBar(RenderContext& renderer, int x, int y)const
 {
 	static int sz4 = SZ_BLOCKSIZE >> 2;
 	static int sz2 = SZ_BLOCKSIZE >> 1;

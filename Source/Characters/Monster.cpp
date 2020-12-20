@@ -73,7 +73,7 @@ void Monster::manageAlarm()
 	}
 }
 
-void Monster::render(RenderContext& renderer, int offsetX, int offsetY)
+void Monster::render(RenderContext& renderer, int offsetX, int offsetY)const
 {
 	if (!isAlive()) return;
 	int xx = (x + offsetX) * SZ_BLOCKSIZE;

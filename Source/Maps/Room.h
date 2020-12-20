@@ -31,7 +31,7 @@ protected:
 	Block*** blocks;
 	/* If the room has already been visited */
 	bool discovered;
-	/* The unordered map of objects in the room.*/ //TODO change data structure?
+	/* The unordered map of objects in the room.*/
 	unordered_map <string, Object*> objects;
 
 	list<Monster*> monsters;
@@ -60,6 +60,8 @@ public:
 	/// </summary>
 	/// <param name="m"></param>
 	void removeMonster(Monster* m);
+
+	void removeObject(string id);
 
 	/// <summary>
 	/// 
@@ -97,7 +99,7 @@ public:
 	/// <param name="renderer"></param>
 	/// <param name="offsetX"></param>
 	/// <param name="offsetY"></param>
-	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
+	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0)const;
 
 	/// <summary>
 	/// Time management
@@ -151,10 +153,10 @@ public:
 	}*/
 
 	/* Accessors */
-	int getW();
-	int getH();
-	int getX();
-	int getY();
+	int getW()const;
+	int getH()const;
+	int getX()const;
+	int getY()const;
 	Block*** getBlocks();
 
 	/* Setters */

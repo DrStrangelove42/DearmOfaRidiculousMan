@@ -1,18 +1,15 @@
 #ifndef SHIELD_H
 #define SHIELD_H
 
-#include "Object.h"
+#include "PickableObject.h"
 
 using namespace std;
 
 //Identifier starts with sh
 
-class Shield : public Object
+class Shield : public PickableObject
 {
 public:
-	/* Destructor. */
-	~Shield();
-
 	/// <summary>
 	/// Initialises a new Shield with the specified informations.
 	/// </summary>
@@ -22,12 +19,6 @@ public:
 	/// <param name="renderer"></param>
 	/// <param name="defense"></param>
 	Shield(string identifier, int posx, int posy, RenderContext& renderer, int defense = 10);
-
-	/// <summary>
-	/// Function that updates a shield present in the Room.
-	/// </summary>
-	/// <param name="game"></param>
-	void updateObject(GAME* game);
 };
 
 #endif

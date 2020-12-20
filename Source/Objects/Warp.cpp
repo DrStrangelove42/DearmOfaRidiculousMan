@@ -71,21 +71,21 @@ Warp::Warp(string information, int* uniqueId, int posx, int posy, RenderContext&
 	}
 }
 
-void Warp::updateObject(GAME* game)
+bool Warp::updateObject(GAME* game)
 {
 	if (delay > 0)
 	{
 		delay--;
-		return;
+		return false;
 	}
 	if (x != game->player->getX() || y != game->player->getY())
 	{
-		return;
+		return false;
 	}
 
 	RenderContext& renderer = *(game->renderer);
 	game->player->teleport(destX, destY);
-	game->currentMap->currentRoom = destRoom;
+	game->currentMap->setCurrentRoom(destRoom);
 	if (destWorld.empty())
 	{
 		if (destMap == -1)
@@ -93,7 +93,7 @@ void Warp::updateObject(GAME* game)
 			*(game->currentMapId) = -1;
 			game->currentMap = new MainMenu(*(game->player), game);
 			game->worldName = "Main menu";
-			return;
+			return false;
 		}
 		if (destMap != *(game->currentMapId))
 		{
@@ -109,4 +109,6 @@ void Warp::updateObject(GAME* game)
 		*(game->currentMapId) = -1;
 		game->currentMap = new Map(destWorld, *(game->player), *(game->renderer), game->currentMapId);
 	}
+
+	return false;
 }

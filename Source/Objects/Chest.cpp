@@ -62,18 +62,18 @@ void Chest::addObject(Object obj, int count)
 		contents[obj] += count;
 }
 
-void Chest::updateObject(GAME* game)
+bool Chest::updateObject(GAME* game)
 {
 	if (texture == "openchest" || abs(x - game->player->getX()) + abs(y - game->player->getY()) > 1)
 	{
-		return;
+		return false;
 	}
 	texture = "openchest";
 	RenderContext& renderer = *(game->renderer);
 	updateTexture(renderer);
 	for (auto& entry : contents)
 	{
-		game->player->pickUpObject(entry.first, entry.second);
+		game->player->pickUpObject(&(entry.first), entry.second);
 
 		//The following part might need to be changed if the player skins become more complex, 
 		//but its purpose is to change the skin of the player if a shield or sword is found in a chest
@@ -91,5 +91,5 @@ void Chest::updateObject(GAME* game)
 		game->player->updateTexture(renderer);
 	}
 
-
+	return false;
 }

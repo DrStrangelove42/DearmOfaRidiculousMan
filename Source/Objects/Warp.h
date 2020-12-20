@@ -86,7 +86,7 @@ public:
 	/// How does a warp interact with the player?
 	/// </summary>
 	/// <param name="game"></param>
-	void updateObject(GAME* game);
+	bool updateObject(GAME* game);
 	
 };
 

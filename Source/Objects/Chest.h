@@ -53,7 +53,7 @@ public:
 	/// How does a chest interact with the player?
 	/// </summary>
 	/// <param name="game"></param>
-	void updateObject(GAME* game);
+	bool updateObject(GAME* game);
 };
 
 #endif

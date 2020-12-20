@@ -1,7 +1,8 @@
 #include "Room.h"
 #include "../Characters/Monsters/Skeleton.h"
 #include "../Characters/Monsters/Ghost.h"
-Room::Room(int width, int height, int absx, int absy, Player& p, RenderContext& renderer) : w(width), h(height), x(absx), y(absy), player(p), discovered(false),blocks(NULL)
+
+Room::Room(int width, int height, int absx, int absy, Player& p, RenderContext& renderer) : w(width), h(height), x(absx), y(absy), player(p), discovered(false), blocks(NULL)
 {
 	if (w > 0 && h > 0)
 	{
@@ -40,7 +41,7 @@ Room::~Room()
 	//The objects in the map, which are deep copies of the objects we added, are deleted automatically.
 }
 
-void Room::render(RenderContext& renderer, int offsetX, int offsetY)
+void Room::render(RenderContext& renderer, int offsetX, int offsetY)const
 {
 	if (discovered)
 	{
@@ -63,22 +64,22 @@ void Room::render(RenderContext& renderer, int offsetX, int offsetY)
 	}
 }
 
-int Room::getW()
+int Room::getW()const
 {
 	return w;
 }
 
-int Room::getH()
+int Room::getH()const
 {
 	return h;
 }
 
-int Room::getX()
+int Room::getX()const
 {
 	return x;
 }
 
-int Room::getY()
+int Room::getY()const
 {
 	return y;
 }
@@ -126,9 +127,18 @@ void Room::addObject(Object* object)
 
 void Room::updateAllObjects(GAME* game)
 {
+	list<string>  toDel;
 	for (auto& entry : objects)
 	{
-		entry.second->updateObject(game);
+		if (entry.second->updateObject(game))
+		{
+			toDel.push_back(entry.first);
+		}
+	}
+
+	for (string d : toDel)
+	{
+		objects.erase(d);
 	}
 }
 
@@ -158,6 +168,11 @@ void Room::removeMonster(Monster* m)
 {
 	monsters.remove(m);
 	delete m;
+}
+
+void Room::removeObject(string id)
+{
+	objects.erase(id);
 }
 
 void Room::replaceBlock(Block* newBlock)
