@@ -36,12 +36,18 @@ protected:
 	/// </summary>
 	unordered_map <string, int> inventory; 
  
+	/// <summary>
+	/// Horizontal offset of the infos sub window
+	/// </summary>
+	int infosX;
+	/// <summary>
+	/// Vertical ffset of the infos sub window
+	/// </summary>
+	int infosY;
 
 	/// <summary>
-	/// 
+	/// A Heart texture for player lives.
 	/// </summary>
-	Window* infosWindow;
-	RenderContext* infosRenderer;
 	Texture* heart;
 
 public:

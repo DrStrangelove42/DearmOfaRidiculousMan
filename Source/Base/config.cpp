@@ -4,9 +4,11 @@ bool DEBUG_MODE = true;
 
 /*Size constants*/
 int SZ_BLOCKSIZE = 20;
-int SZ_SCREENWIDTH = 1000;
-int SZ_SCREENHEIGHT = 800;
 int SZ_INFOSWIDTH = 300;
+int SZ_MAINWIDTH = 1000;
+int SZ_SCREENWIDTH = SZ_MAINWIDTH + SZ_INFOSWIDTH;
+int SZ_SCREENHEIGHT = 800;
+
 /*Current viewport*/
 int BLOCKS_W = 50;	/* Max width of blocks on the screen */
 int BLOCKS_H = 40;	/* Max height of blocks on the screen */

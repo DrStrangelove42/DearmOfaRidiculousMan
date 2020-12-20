@@ -69,8 +69,8 @@ void FreeTextures()
 {
 	for (auto& entry : textures)
 	{
-		if (DEBUG_MODE)
-			cout << "Freeing " << entry.first << " :: " << entry.second->getHeight() << "*" << entry.second->getWidth() << endl;
+		//if (DEBUG_MODE)
+		//	cout << "Freeing " << entry.first << " :: " << entry.second->getHeight() << "*" << entry.second->getWidth() << endl;
 		delete entry.second;
 	}
 	textures.clear();

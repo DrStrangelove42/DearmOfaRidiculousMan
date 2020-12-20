@@ -22,7 +22,6 @@ Warp::Warp(int destMap, int destRoom, int destX, int destY, int posx, int posy, 
 Warp::Warp(string information, int* uniqueId, int posx, int posy, RenderContext& renderer) :
 	Object(information.substr(0, 2) + to_string((*uniqueId)++), posx, posy, "empty", renderer, true), delay(0), destWorld("")
 {
-	size_t a;
 	auto iss = istringstream{ information };
 	string str = "";
 	/*Tokenisation, more reliable*/

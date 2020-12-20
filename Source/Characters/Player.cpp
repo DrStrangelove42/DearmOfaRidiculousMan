@@ -7,11 +7,9 @@
 
 Player::Player(RenderContext& renderer, Window& main, int lives, int attack, int defense, int startHealth, int startMoney, int startExp) :
 	LivingEntity(startHealth, startMoney, startExp), MovingEntity(0, 0, renderer, "player"),
-	lives(lives), attack(attack), defense(defense)
+	lives(lives), attack(attack), defense(defense), infosX(SZ_MAINWIDTH), infosY(0)
 {
-	infosWindow = new Window("Player informations", SZ_INFOSWIDTH, SZ_SCREENHEIGHT, main.getX() + main.getW(), main.getY());
-	infosRenderer = new RenderContext(*infosWindow);
-	heart = LoadTexture("heart", *infosRenderer);
+	heart = LoadTexture("heart", renderer);
 }
 
 void Player::render(RenderContext& renderer, int offsetX, int offsetY)
@@ -19,30 +17,30 @@ void Player::render(RenderContext& renderer, int offsetX, int offsetY)
 	int xx = (x + offsetX) * SZ_BLOCKSIZE;
 	int yy = (y + offsetY) * SZ_BLOCKSIZE;
 	loadedTx->render(renderer, xx, yy, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
+	//DrawableEntity::render(renderer, offsetX, offsetY);
 	drawHealthBar(renderer, xx, yy);
 
-	infosRenderer->clear();
-	xx = 0;
-	yy = 0;
+	xx = infosX;
+	yy = infosY;
 
 	for (int i = 0; i < lives; i++)
 	{
-		if (xx >= SZ_INFOSWIDTH)
+		if (xx >= infosX + SZ_INFOSWIDTH)
 		{
-			xx = 0;
+			xx = infosX;
 			yy += heart->getHeight();
 		}
-		heart->renderUnscaled(*infosRenderer, xx, yy);
+		heart->renderUnscaled(renderer, xx, yy);
 		xx += heart->getWidth();
 	}
+
 	yy += heart->getHeight();
-	xx = 0;
-	Texture* tmp = LoadString(to_string(experience) + " EXP", *infosRenderer, 0xCEB600FF);
-	tmp->renderUnscaled(*infosRenderer, xx, yy);
+	xx = infosX;
+	Texture* tmp = LoadString(to_string(experience) + " EXP", renderer, 0xCEB600FF);
+	tmp->renderUnscaled(renderer, xx, yy);
 	yy += tmp->getHeight();
-	tmp = LoadString(to_string(money) + " Gold", *infosRenderer, 0xDDDD00FF);
-	tmp->renderUnscaled(*infosRenderer, xx, yy);
-	infosRenderer->update();
+	tmp = LoadString(to_string(money) + " Gold", renderer, 0xDDDD00FF);
+	tmp->renderUnscaled(renderer, xx, yy);
 }
 
 /*
@@ -63,8 +61,7 @@ void Player::kill()
 
 Player::~Player()
 {
-	delete infosRenderer;
-	delete infosWindow;
+
 }
 
 void Player::tick(int time, GAME* game)

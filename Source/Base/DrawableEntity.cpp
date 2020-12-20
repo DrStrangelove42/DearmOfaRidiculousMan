@@ -5,7 +5,7 @@ DrawableEntity::DrawableEntity(int x, int y, RenderContext& renderer, string tx)
 	updateTexture(renderer);
 }
 
-DrawableEntity::DrawableEntity(int x, int y, Texture* tx) : x(x),y(y),texture(""), loadedTx(tx)
+DrawableEntity::DrawableEntity(int x, int y, Texture* tx) : x(x), y(y), texture(""), loadedTx(tx)
 {
 }
 
@@ -22,7 +22,12 @@ void DrawableEntity::setTexture(Texture* texture)
 
 void DrawableEntity::render(RenderContext& renderer, int offsetX, int offsetY)
 {
-	loadedTx->render(renderer, (x + offsetX) * SZ_BLOCKSIZE, (y + offsetY) * SZ_BLOCKSIZE, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
+	int xx = (x + offsetX);
+	int yy = (y + offsetY);
+	if (xx < BLOCKS_W && yy < BLOCKS_H)
+	{
+		loadedTx->render(renderer, xx * SZ_BLOCKSIZE, yy * SZ_BLOCKSIZE, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
+	}
 }
 
 string& DrawableEntity::getTextureID()

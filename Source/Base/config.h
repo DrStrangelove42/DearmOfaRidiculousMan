@@ -25,6 +25,8 @@ extern bool DEBUG_MODE;
 
 /*Size constants*/
 extern int SZ_BLOCKSIZE;	/* The size of a block, in pixels */
+extern int SZ_MAINWIDTH;
+extern int SZ_INFOSWIDTH;
 extern int SZ_SCREENWIDTH;	/* Width of the window, in pixels */
 extern int SZ_SCREENHEIGHT;	/* Height of the window, in pixels */
 extern int SZ_INFOSWIDTH;	/* Width of the player window, in pixels */
