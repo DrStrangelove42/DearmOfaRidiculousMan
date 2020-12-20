@@ -17,6 +17,8 @@ class Object;
 /// </summary>
 class Player : public MovingEntity, public LivingEntity
 {
+private:
+	int lastAttackTime;
 protected:
 	/// <summary>
 	/// Number of lives until game over.
@@ -46,6 +48,10 @@ protected:
 	int infosY;
 
 	/// <summary>
+	/// 
+	/// </summary>
+	int attackDelay;
+	/// <summary>
 	/// A Heart texture for player lives.
 	/// </summary>
 	Texture* heart;
@@ -70,13 +76,28 @@ public:
 	/// </summary>
 	virtual void kill();
 
-	/* Rendering management */
+	/// <summary>
+	/// Rendering management
+	/// </summary>
+	/// <param name="renderer"></param>
+	/// <param name="offsetX"></param>
+	/// <param name="offsetY"></param>
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0)const;
 
+	/// <summary>
+	/// Rendering management of the right panel
+	/// </summary>
+	/// <param name="renderer"></param>
+	/// <param name="xx"></param>
+	/// <param name="yy"></param>
 	void renderInventory(RenderContext& renderer, int xx, int yy)const;
 
 
-	/* Time management */
+	/// <summary>
+	/// Time management
+	/// </summary>
+	/// <param name="time"></param>
+	/// <param name="game"></param>
 	virtual void tick(int time, GAME* game);
 
 	/// <summary>

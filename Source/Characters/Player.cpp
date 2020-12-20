@@ -7,7 +7,7 @@
 
 Player::Player(RenderContext& renderer, Window& main, int lives, int attack, int defense, int startHealth, int startMoney, int startExp) :
 	LivingEntity(startHealth, startMoney, startExp), MovingEntity(0, 0, renderer, "player"),
-	lives(lives), attack(attack), defense(defense), infosX(SZ_MAINWIDTH), infosY(0)
+	lives(lives), attack(attack), defense(defense), infosX(SZ_MAINWIDTH), infosY(0), attackDelay(500)
 {
 	heart = LoadTexture("heart", renderer);
 }
@@ -74,7 +74,7 @@ void Player::kill()
 {
 	if (lives == 0)
 	{
-		// TODO gameover ?
+		
 	}
 	else
 	{
@@ -91,7 +91,7 @@ Player::~Player()
 
 void Player::tick(int time, GAME* game)
 {
-
+	
 }
 
 void Player::onKeyDown(GAME* game)
@@ -137,11 +137,16 @@ void Player::onKeyDown(GAME* game)
 
 void Player::attackMonsters(Room& room)
 {
-	for (Monster* m : room.getMonsters())
+	int t = GetTime();
+	if (t - lastAttackTime >= attackDelay)
 	{
-		if (isInAttackRange(m->getX(), m->getY()))
+		lastAttackTime = GetTime();
+		for (Monster* m : room.getMonsters())
 		{
-			m->damage(attack);
+			if (isInAttackRange(m->getX(), m->getY()))
+			{
+				m->damage(attack);
+			}
 		}
 	}
 }
