@@ -74,7 +74,6 @@ bool Chest::updateObject(GAME* game)
 	for (auto& entry : contents)
 	{
 		game->player->pickUpObject(&(entry.first), entry.second);
-
 		//The following part might need to be changed if the player skins become more complex, 
 		//but its purpose is to change the skin of the player if a shield or sword is found in a chest
 

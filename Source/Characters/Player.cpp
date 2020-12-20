@@ -4,10 +4,11 @@
 #include "../Maps/Room.h"
 #include "../Maps/Map.h"
 #include "../Objects/Object.h"
+#include "../Maps/GameOverMenu.h"
 
-Player::Player(RenderContext& renderer, Window& main, int lives, int attack, int defense, int startHealth, int startMoney, int startExp) :
+Player::Player(RenderContext& renderer, int lives, int attack, int defense, int startHealth, int startMoney, int startExp) :
 	LivingEntity(startHealth, startMoney, startExp), MovingEntity(0, 0, renderer, "player"),
-	lives(lives), attack(attack), defense(defense), infosX(SZ_MAINWIDTH), infosY(0), attackDelay(500)
+	lives(lives), attack(attack), defense(defense), infosX(SZ_MAINWIDTH), infosY(0), attackDelay(500), lastAttackTime(0)
 {
 	heart = LoadTexture("heart", renderer);
 }
@@ -55,9 +56,9 @@ void Player::renderInventory(RenderContext& renderer, int xx, int yy)const
 	xx = infosX;
 	yy += tmp->getHeight();
 	/*The inventory*/
-	for (auto& entry : inventory)
+	for (auto& entry : inventoryLookup)
 	{
-		inventoryLookup.at(entry.first)->sideRender(renderer, xx, yy);
+		entry.second->sideRender(renderer, xx, yy);
 		xx += SZ_BLOCKSIZE;
 		if (xx >= infosX + SZ_INFOSWIDTH)
 		{
@@ -74,7 +75,7 @@ void Player::kill()
 {
 	if (lives == 0)
 	{
-		
+
 	}
 	else
 	{
@@ -91,7 +92,11 @@ Player::~Player()
 
 void Player::tick(int time, GAME* game)
 {
-	
+	if (lives == 0 && !isAlive())
+	{
+		delete game->currentMap;
+		game->currentMap = new GameOverMenu(*this, game);
+	}
 }
 
 void Player::onKeyDown(GAME* game)
