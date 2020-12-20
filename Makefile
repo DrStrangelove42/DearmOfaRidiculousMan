@@ -42,7 +42,15 @@ test:
 release: doarm
 
 install:
-	install -m 755 tool $(DESTDIR)$(PREFIX)/bin
+	mkdir ~/.doarm
+	cp -r Res/ ~/.doarm/
+	install -m 755 doarm $(DESTDIR)$(PREFIX)/bin
+
+uninstall:
+	rm -f $(DESTDIR)$(PREFIX)/bin/doarm
+	cp -rf ~/.doarm/*
+	rmdir ~./doarm
+
 
 .PHONY: clean test doc release
 

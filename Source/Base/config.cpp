@@ -21,12 +21,14 @@ int VIEW_OFFSET_Y = 0;
 /// </summary>
 string EXT = ".txt";
 
+string DATA_LOCATION = DEBUG_MODE ? "./" : "~/.doarm/";
+
 /// <summary>
 /// Location of files describing worlds.
 /// </summary>
-string WORLDFILES_LOCATION = "./Res/Worlds/";
+string WORLDFILES_LOCATION = DATA_LOCATION + "Res/Worlds/";
 
 /// <summary>
 /// Location of files generated to describe worlds.
 /// </summary>
-string WORLDDATA_LOCATION = "./Data/Worlds/";
+string WORLDDATA_LOCATION = DATA_LOCATION + "Data/Worlds/";
