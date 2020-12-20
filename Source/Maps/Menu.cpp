@@ -6,11 +6,13 @@ void Menu::onMouseEvent(MOUSE_DATA* md)
 	for (Button* b : buttons)
 	{
 		b->onMouseEvent(md);
+		if (deleting)
+			return;
 	}
 }
 
 
-Menu::Menu(Player& p, GAME* g) : Map(p, 0), game(g)
+Menu::Menu(Player& p, GAME* g) : Map(p, 0), game(g), deleting(false)
 {
 
 }
@@ -29,6 +31,7 @@ Menu::~Menu()
 	buttons.clear();
 	labels.clear();
 	//Not delete[] animationTextures because these ones were created through LoadString.
+	deleting = true;
 }
 
 void Menu::render(RenderContext& renderer, int offsetX, int offsetY) const

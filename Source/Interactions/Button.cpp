@@ -22,6 +22,7 @@ void Button::onMouseEvent(MOUSE_DATA* md)
 	if (x + loadedTx->getWidth() + SZ_BLOCKSIZE >= md->x && md->x >= x - SZ_BLOCKSIZE &&
 		y + loadedTx->getHeight() + SZ_BLOCKSIZE >= md->y && md->y >= y - SZ_BLOCKSIZE)
 	{
+
 		mouseOver = true;
 		if (md->state == MouseStatePushed && md->button == MouseLeft)
 		{
@@ -30,6 +31,8 @@ void Button::onMouseEvent(MOUSE_DATA* md)
 	}
 	else
 		mouseOver = false;
+
+	cout << "mouse event over" << mouseOver << endl;
 }
 
 void Button::render(RenderContext& renderer, int offsetX, int offsetY)
@@ -38,6 +41,7 @@ void Button::render(RenderContext& renderer, int offsetX, int offsetY)
 	{
 		if (mouseOver)
 		{
+
 			loadedTx = overTexture;
 			renderer.changeColor(0xffffffff);
 			renderer.drawRectangle(x - SZ_BLOCKSIZE, y - SZ_BLOCKSIZE, loadedTx->getWidth() + 2 * SZ_BLOCKSIZE, loadedTx->getHeight() + 2 * SZ_BLOCKSIZE);
@@ -47,6 +51,7 @@ void Button::render(RenderContext& renderer, int offsetX, int offsetY)
 			loadedTx = normalTexture;
 		}
 	}
+	cout << "render over" << mouseOver << endl;
 	Label::render(renderer, offsetX, offsetY);
 }
 

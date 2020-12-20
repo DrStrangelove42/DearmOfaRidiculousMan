@@ -38,6 +38,12 @@ protected:
 	/// 
 	/// </summary>
 	GAME* game;
+
+	/// <summary>
+	/// Allows to exit a loop when 
+	/// </summary>
+	bool deleting;
+
 public:
 	/// <summary>
 	/// 
