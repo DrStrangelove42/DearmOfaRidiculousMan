@@ -85,7 +85,7 @@ just open the solution or the project file located in the ```/Windows``` folder.
 
 2) Build the project (F6)
 
-3) Finally, copy-paste the SDL.dll and SDL_ttf.dll in the output folder (like ```/x64/Debug/```).\
+3) Finally, copy-paste the SDL.dll and SDL_ttf.dll in the output folder (like ```/x64/Debug/```).
 
 You can now run the executable file (F5 in Visual Studio). The output file will be copied in the root folder of the repository,
 along with its .dll files, so you can launch it from there as well.
@@ -101,7 +101,7 @@ that first appeared on Vista.*
 
 #### On Windows with MinGW
 
-Coming soon.
+Mosty the same as on UNIX-like systems.
 
 ## Generate the documentation
 
