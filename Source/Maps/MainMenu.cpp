@@ -87,4 +87,6 @@ void MainMenu::tick(int time, GAME* game)
 		player.teleport(player.getX() + GetRandom(3) - 1, player.getY() + GetRandom(3) - 1);
 		lastTimeMv = time;
 	}
+
+	Menu::tick(time, game);
 }

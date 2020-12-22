@@ -49,7 +49,10 @@ void Menu::render(RenderContext& renderer, int offsetX, int offsetY) const
 
 void Menu::tick(int time, GAME* game)
 {
-
+	for (Button* b : buttons)
+	{
+		b->tick(time, game);
+	} 
 }
 
 void Menu::addButton(Button* b)

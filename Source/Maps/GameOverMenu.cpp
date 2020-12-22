@@ -15,7 +15,7 @@ void GameOverMenu::onRetryClick(int id)
 	delete game->player;
 	Player* newMe = new Player(*(game->renderer));
 	game->player = newMe;
-	game->currentMapId = new int(0);
+	*(game->currentMapId) = 0;
 	game->currentMap = new MainMenu(*newMe, game);
 	game->worldName = "Main menu";
 	delete this;

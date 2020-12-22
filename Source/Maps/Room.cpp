@@ -180,7 +180,7 @@ void Room::replaceBlock(Block* newBlock)
 	int i = newBlock->getX();
 	int j = newBlock->getY();
 
-	if (i < w && j < h)
+	if (i < w && j < h && j>=0&&i>=0)
 	{
 		delete blocks[i][j];
 		blocks[i][j] = newBlock;

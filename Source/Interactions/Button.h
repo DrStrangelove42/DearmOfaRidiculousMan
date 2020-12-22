@@ -13,6 +13,7 @@ using namespace std;
 class Button : public Label
 {
 protected:
+	string name;
 	/// <summary>
 	/// The callback takes the button ID as a parameter.
 	/// </summary>
@@ -77,8 +78,8 @@ public:
 	/// <param name="renderer"></param>
 	/// <param name="offsetX">Ignored.</param>
 	/// <param name="offsetY">Ignored.</param>
-	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0);
-	virtual void tick(int time, RenderContext& r, GAME* game);
+	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0)const;
+	virtual void tick(int time, GAME* game);
 };
 
 #endif

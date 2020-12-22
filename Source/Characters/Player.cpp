@@ -94,8 +94,74 @@ void Player::tick(int time, GAME* game)
 {
 	if (lives == 0 && !isAlive())
 	{
-		delete game->currentMap;
-		game->currentMap = new GameOverMenu(*this, game);
+		
+		static int steps;
+		static int i;
+		static int j;
+		static int s;
+		static int t = 0;
+		if (t == 0) {
+			steps = 4 * max(game->currentMap->getCurrentRoomObject().getH(), game->currentMap->getCurrentRoomObject().getW());
+			i = x;
+			j = y;
+			s = 1;
+			for (int n = 0; n < game->currentMap->getRoomCount(); n++)
+			{
+				if (n != game->currentMap->getCurrentRoom())
+				{
+					game->currentMap->getRooms()[n]->setDiscovered(false);
+				}
+			}
+		}
+
+		if (t < steps)
+		{
+			switch (t % 4)
+			{
+			case 0://to the right
+				for (int k = 0; k < s; k++)
+				{
+					i++;
+					game->currentMap->getCurrentRoomObject().replaceBlock(new Block(i, j, "empty", *(game->renderer)));
+				}
+				break;
+			case 1://downwards
+				s++;
+				for (int k = 0; k < s; k++)
+				{
+					j++;
+					game->currentMap->getCurrentRoomObject().replaceBlock(new Block(i, j, "empty", *(game->renderer)));
+				}
+				break;
+			case 2://to the left
+				for (int k = 0; k < s; k++)
+				{
+					i--;
+					game->currentMap->getCurrentRoomObject().replaceBlock(new Block(i, j, "empty", *(game->renderer)));
+				}
+				break;
+			case 3://upwards
+				s++;
+				for (int k = 0; k < s; k++)
+				{
+					j--;
+					game->currentMap->getCurrentRoomObject().replaceBlock(new Block(i, j, "empty", *(game->renderer)));
+				}
+				break;
+			default:
+				break;
+			}
+			t++;
+		}
+		else
+		{
+			t = 0;
+			lives++;
+			delete game->currentMap;
+			*(game->currentMapId) = 0;
+			game->worldName = "Game Over";
+			game->currentMap = new GameOverMenu(*this, game);
+		}
 	}
 }
 

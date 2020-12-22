@@ -1,7 +1,7 @@
 /* Entry point */
 
 #include "main.h"
-
+#include"Maps/GameOverMenu.h"
 using namespace std;
 
 /// <summary>
@@ -40,8 +40,6 @@ int playDoarm(GAME* game)
 	Player* me = new Player(renderer);
 
 	game->player = me;
-
-	game->currentMapId = new int(0);
 	game->currentMap = new MainMenu(*me, game);
 	game->worldName = "Main menu";
 	int currentTime;
@@ -74,7 +72,8 @@ GAME* initGame()
 
 	game->quit = false;
 	game->window = new Window("DOARM", SZ_SCREENWIDTH, SZ_SCREENHEIGHT);
-	game->key = Other;
+	game->key = KEY::Other;
+	game->currentMapId = new int(0);
 	game->keyLetter = '\0';
 	
 	if (NULL == game->window)

@@ -21,9 +21,9 @@ public:
 	/// </summary>
 	/// <param name="posx"></param>
 	/// <param name="posy"></param>
-	/// <param name="tx"></param>
+	/// <param name="tx">Texture ID</param>
 	/// <param name="renderer"></param>
-	/// <param name="trav"></param>
+	/// <param name="trav">If the block is traversable</param>
 	Block(int posx, int posy, string tx, RenderContext& renderer, bool trav = false);
 
 	/*Getters*/
