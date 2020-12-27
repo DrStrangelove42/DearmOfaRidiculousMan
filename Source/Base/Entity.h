@@ -2,6 +2,7 @@
 #define ENTITY_H
 
 #include "RenderContext.h"
+#include "game.h"
 #include <iostream>
 using namespace std;
 
