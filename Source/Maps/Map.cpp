@@ -60,7 +60,7 @@ Map::Map(string worldName, Player& p, RenderContext& renderer, int* startMap, in
 	}
 	mapFromFiles(worldName, p, renderer, startMap, startRoom);
 	if (DEBUG_MODE)
-		titleTexture = LoadString("CURRENT MAP : " + worldName, renderer);
+		titleTexture = renderer.LoadString("CURRENT MAP : " + worldName);
 }
 
 void Map::render(RenderContext& renderer, int offsetX, int offsetY) const
@@ -80,7 +80,7 @@ void Map::render(RenderContext& renderer, int offsetX, int offsetY) const
 	if (DEBUG_MODE && titleTexture != NULL)
 	{
 		titleTexture->renderUnscaled(renderer, 0, 0);
-		LoadString("Room : " + to_string(currentRoom), renderer, 0x00FFffff)->renderUnscaled(renderer, 0, 16);
+		renderer.LoadString("Room : " + to_string(currentRoom), 0x00FFffff)->renderUnscaled(renderer, 0, 16);
 	}
 }
 

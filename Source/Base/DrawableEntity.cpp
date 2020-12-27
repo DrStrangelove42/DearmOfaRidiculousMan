@@ -12,7 +12,7 @@ DrawableEntity::DrawableEntity(int x, int y, Texture* tx) : x(x), y(y), texture(
 void DrawableEntity::updateTexture(RenderContext& renderer)
 {
 	if (!texture.empty())
-		loadedTx = LoadTexture(texture, renderer);
+		loadedTx = renderer.LoadTexture(texture);
 }
 
 void DrawableEntity::setTexture(Texture* texture)

@@ -3,6 +3,7 @@
 
 #include "Entity.h"
 #include "../Base/utils.h"
+#include "Texture.h"
 
 class DrawableEntity : Entity
 {

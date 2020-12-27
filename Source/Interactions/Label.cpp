@@ -7,7 +7,7 @@ Label::Label(Texture* texture, int x, int y) : MovingEntity(x, y, texture)
 
 Label::Label(string caption, RenderContext& r, int x, int y, int color) : MovingEntity(x, y, r, "")
 {
-	loadedTx = LoadString(caption, r, color);
+	loadedTx = r.LoadString(caption, color);
 }
 
 void Label::render(RenderContext& renderer, int offsetX, int offsetY) const

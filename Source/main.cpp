@@ -3,7 +3,7 @@
 #include "main.h"
 #include"Maps/GameOverMenu.h"
 using namespace std;
-
+ 
 /// <summary>
 /// 
 /// Main entry point of DOARM.
@@ -18,7 +18,7 @@ int main(int argc, char** argv)
 {
 	int status = 0;
 
-	if (!RenderInit())
+	if (!RenderContext::RenderInit())
 		return DumpError("Init error.");
 
 	GAME* game = initGame();
@@ -30,7 +30,7 @@ int main(int argc, char** argv)
 
 	quitGame(game);
 
-	RenderQuit();
+	RenderContext::RenderQuit();
 	return status;
 }
 
@@ -58,7 +58,7 @@ int playDoarm(GAME* game)
 
 		game->renderer->update();
 
-		RenderSleep(50);
+		RenderContext::RenderSleep(50);
 	}
 
 	return EXIT_SUCCESS;

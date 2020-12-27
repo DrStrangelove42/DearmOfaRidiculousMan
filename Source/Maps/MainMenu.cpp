@@ -22,17 +22,17 @@ MainMenu::MainMenu(Player& p, GAME* g) : Menu(p, g)
 	addButton(new Button("Play", r, SZ_SCREENWIDTH / 3, SZ_SCREENHEIGHT - 150, 0, [this](int id) {onPlayClick(id); }, 0x00ffaaff, 0xffff00ff));
 	addButton(new Button("Quit", r, 2 * SZ_SCREENWIDTH / 3, SZ_SCREENHEIGHT - 150, 0, [this](int id) {onQuitClick(id); }, 0xff00aaff, 0xffff00ff));
 	
-	Texture* welcome = LoadString("Welcome to the ", r, 0xAA00FFFF);
+	Texture* welcome = r.LoadString("Welcome to the ", 0xAA00FFFF);
 	animationTextures = new Texture * [20];
 	int color;
 	for (int i = 0; i < 20; i++)
 	{
 		color = 255 | GetRandom(255) << 8 | GetRandom(255) << 16 | GetRandom(255) << 24;
-		animationTextures[i] = LoadString("Dream of a Ridiculous Man !", r, color);
+		animationTextures[i] = r.LoadString("Dream of a Ridiculous Man !", color);
 	}
 
-	Texture* subtitle = LoadString("ENS Software Engineering Project, year 2020", r, 0x007ACCFF);
-	Texture* info = LoadString("Press S to start, Q to quit. You can also click on the text-buttons below.", r, 0xaaaaaaff);
+	Texture* subtitle = r.LoadString("ENS Software Engineering Project, year 2020", 0x007ACCFF);
+	Texture* info = r.LoadString("Press S to start, Q to quit. You can also click on the text-buttons below.", 0xaaaaaaff);
 	addLabel(new Label(welcome, (SZ_SCREENWIDTH - welcome->getWidth() - animationTextures[0]->getWidth()) / 2, SZ_SCREENHEIGHT / 3));
 	animation = new Label(animationTextures[0], labels.front()->getX() + welcome->getWidth(), labels.front()->getY());
 	addLabel(new Label(subtitle, (SZ_SCREENWIDTH - subtitle->getWidth()) / 2, labels.front()->getY() + welcome->getHeight() + 10));

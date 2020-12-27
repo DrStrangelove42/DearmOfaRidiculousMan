@@ -15,7 +15,7 @@ Button::Button(string caption, RenderContext& r, int x, int y, int id, function<
 Button::Button(string caption, RenderContext& r, int x, int y, int id, function<void(int)> onClick, int color, int overColor) :
 	Label(caption, r, x, y, color), id(id), onClick(onClick), mouseOver(false), name(caption)
 {
-	overTexture = LoadString(caption, r, overColor);
+	overTexture = r.LoadString(caption, overColor);
 	normalTexture = loadedTx;
 }
 

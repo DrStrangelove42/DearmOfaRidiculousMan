@@ -1,6 +1,5 @@
 #include "RenderContext.h"
-
-using namespace std;
+#include "Texture.h"
 
 RenderContext::RenderContext(Window& window)
 {
@@ -65,4 +64,101 @@ void RenderContext::drawRectangle(int x, int y, int w, int h, bool fill)
 void RenderContext::drawLine(int x1, int y1, int x2, int y2)
 {
 	SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
+}
+
+
+/*Static functions*/
+
+
+void RenderContext::RenderSleep(unsigned int ms)
+{
+	SDL_Delay(ms);
+}
+
+bool RenderContext::RenderInit()
+{
+	if (TTF_Init() == -1)
+		return false;
+
+	FONTSIZE = 16;
+
+	FONT = TTF_OpenFont("Res/ibm.ttf", FONTSIZE);
+#ifdef WIN6
+	SetProcessDPIAware();
+#endif
+	return SDL_Init(SDL_INIT_VIDEO) == 0;
+}
+
+void RenderContext::RenderQuit()
+{
+	FreeTextures();
+	TTF_CloseFont(FONT);
+	TTF_Quit();
+	SDL_QuitSubSystem(SDL_INIT_VIDEO);
+	SDL_Quit();
+}
+
+string RenderContext::RenderErrorDetails()
+{
+	std::string ret(SDL_GetError());
+	return ret;
+}
+
+/*Utils former code moved here*/
+/*
+Loads the texture with the specified identifier.
+*/
+Texture* RenderContext::LoadTexture(string id)
+{
+	if (textures.find(id) == textures.end())
+		textures[id] = new Texture(*this, id);
+
+	return textures[id];
+}
+
+Texture* RenderContext::LoadString(string text, int color)
+{
+	string id = "text." + to_string(color) + "/" + text;
+	if (textures.find(id) == textures.end())
+	{
+		textures[id] = LoadVolatileString(text, color);
+	}
+
+	return textures[id];
+}
+
+TTF_Font* RenderContext::FONT;
+int RenderContext::FONTSIZE;
+unordered_map<string, Texture*> RenderContext::textures;
+
+Texture* RenderContext::LoadVolatileString(string text, int color)
+{
+	SDL_Color c = { (unsigned char)(color >> 24),
+							(unsigned char)(color >> 16),
+							(unsigned char)(color >> 8),
+							(unsigned char)(color) };
+
+	SDL_Surface* s = TTF_RenderText_Solid(FONT, text.c_str(), c);
+	SDL_Texture* t = this->fromSurface(s);
+	SDL_FreeSurface(s);
+
+	int w, h;
+	if (TTF_SizeText(FONT, text.c_str(), &w, &h))
+	{
+		cout << TTF_GetError() << endl;
+		return NULL;
+	}
+
+	return new Texture(t, w, h);
+}
+
+void RenderContext::FreeTextures()
+{
+	for (auto& entry : textures)
+	{
+		//if (DEBUG_MODE)
+		//	cout << "Freeing " << entry.first << " :: " << entry.second->getHeight() << "*" << entry.second->getWidth() << endl;
+		delete entry.second;
+	}
+	textures.clear();
 }

@@ -26,7 +26,7 @@
 #include "../Characters/Monsters/IntelligentSkeleton.h"
 #include <iostream>
 #include <fstream>
-
+#include "../Base/Texture.h"
 #include <sys/types.h>
 #include <sys/stat.h>
 

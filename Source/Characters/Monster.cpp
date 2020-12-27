@@ -14,7 +14,7 @@ Monster::Monster(RenderContext& renderer,
 	int exp, int mvDelay, bool alarmed) :
 	LivingEntity(health, coins, exp), MovingEntity(0, 0, renderer, textureId), attackValue(dmg), player(p), room(r), attackDelay(atkDelay), attackRadius(atkRadius), alarmed(alarmed), moveDelay(mvDelay), alarmRadius(3)
 {
-	texture = LoadTexture(textureId, renderer);
+	texture = renderer.LoadTexture(textureId);
 }
 
 void Monster::kill()

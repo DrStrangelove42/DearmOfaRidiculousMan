@@ -10,7 +10,7 @@ Player::Player(RenderContext& renderer, int lives, int attack, int defense, int 
 	LivingEntity(startHealth, startMoney, startExp), MovingEntity(0, 0, renderer, "player"),
 	lives(lives), attack(attack), defense(defense), infosX(SZ_MAINWIDTH), infosY(0), attackDelay(500), lastAttackTime(0)
 {
-	heart = LoadTexture("heart", renderer);
+	heart = renderer.LoadTexture("heart");
 }
 
 void Player::render(RenderContext& renderer, int offsetX, int offsetY)const
@@ -42,15 +42,15 @@ void Player::renderInventory(RenderContext& renderer, int xx, int yy)const
 
 	yy += heart->getHeight();
 	xx = infosX;
-	Texture* tmp = LoadString(to_string(experience) + " EXP", renderer, 0xCEB600FF);
+	Texture* tmp = renderer.LoadString(to_string(experience) + " EXP", 0xCEB600FF);
 	tmp->renderUnscaled(renderer, xx, yy);
 	yy += tmp->getHeight();
-	tmp = LoadString(to_string(money) + " Gold", renderer, 0xDDDD00FF);
+	tmp = renderer.LoadString(to_string(money) + " Gold", 0xDDDD00FF);
 	tmp->renderUnscaled(renderer, xx, yy);
 
 	yy += tmp->getHeight() + SZ_BLOCKSIZE;
 
-	tmp = LoadString("Collected stuff", renderer, 0xFFFFFFFF);
+	tmp = renderer.LoadString("Collected stuff", 0xFFFFFFFF);
 	tmp->renderUnscaled(renderer, xx, yy);
 
 	xx = infosX;

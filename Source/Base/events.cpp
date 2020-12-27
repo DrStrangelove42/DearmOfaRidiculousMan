@@ -133,8 +133,6 @@ void quitGame(GAME* game)
 	delete game->currentMap;
 	delete game->player;
 
-	FreeTextures();
-
 	delete game->renderer;
 	delete game->window;
 
