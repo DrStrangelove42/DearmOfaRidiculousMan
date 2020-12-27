@@ -19,12 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Source\Base\AnimatedTexture.cpp" />
     <ClCompile Include="..\Source\Base\config.cpp" />
     <ClCompile Include="..\Source\Base\DrawableEntity.cpp" />
     <ClCompile Include="..\Source\Base\Entity.cpp" />
     <ClCompile Include="..\Source\Base\events.cpp" />
     <ClCompile Include="..\Source\Base\RenderContext.cpp" />
-    <ClCompile Include="..\Source\Base\utilsSDL.cpp" />
     <ClCompile Include="..\Source\Base\Texture.cpp" />
     <ClCompile Include="..\Source\Base\utils.cpp" />
     <ClCompile Include="..\Source\Base\Window.cpp" />
@@ -60,13 +60,13 @@
     <ClCompile Include="..\Source\Objects\Warp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Source\Base\AnimatedTexture.h" />
     <ClInclude Include="..\Source\Base\config.h" />
     <ClInclude Include="..\Source\Base\DrawableEntity.h" />
     <ClInclude Include="..\Source\Base\Entity.h" />
     <ClInclude Include="..\Source\Base\events.h" />
     <ClInclude Include="..\Source\Base\game.h" />
     <ClInclude Include="..\Source\Base\RenderContext.h" />
-    <ClInclude Include="..\Source\Base\utilsSDL.h" />
     <ClInclude Include="..\Source\Base\Texture.h" />
     <ClInclude Include="..\Source\Base\utils.h" />
     <ClInclude Include="..\Source\Base\Window.h" />

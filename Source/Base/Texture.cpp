@@ -2,6 +2,11 @@
 
 Texture::Texture(RenderContext& context, string id)
 {
+	texture = internalLoadTexture(context, id, w, h);
+}
+
+SDL_Texture* Texture::internalLoadTexture(RenderContext& context, string id, int& w, int& h)
+{
 	SDL_Texture* tx = NULL;
 	SDL_Surface* bmp = NULL;
 
@@ -19,7 +24,7 @@ Texture::Texture(RenderContext& context, string id)
 
 	SDL_QueryTexture(tx, NULL, NULL, &w, &h);
 
-	texture = tx;
+	return tx;
 }
 
 Texture::Texture(SDL_Texture* texture, int w, int h) : texture(texture), w(w), h(h)

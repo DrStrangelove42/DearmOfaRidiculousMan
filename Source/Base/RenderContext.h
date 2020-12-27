@@ -1,7 +1,6 @@
 #ifndef RENDERCTXT_H
 #define RENDERCTXT_H
 
-#include "utilsSDL.h"
 #include "Window.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
