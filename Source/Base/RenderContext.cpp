@@ -105,9 +105,7 @@ string RenderContext::RenderErrorDetails()
 }
 
 /*Utils former code moved here*/
-/*
-Loads the texture with the specified identifier.
-*/
+
 Texture* RenderContext::LoadTexture(string id)
 {
 	if (textures.find(id) == textures.end())
@@ -127,6 +125,76 @@ Texture* RenderContext::LoadString(string text, int color)
 	return textures[id];
 }
 
+Texture* RenderContext::LoadText(string text, int color, int width)
+{
+	string id = "mtext." + to_string(color) + "/" + text;
+	if (textures.find(id) == textures.end())
+	{
+		text += " ";
+		SDL_Color c = { (unsigned char)(color >> 24),
+							   (unsigned char)(color >> 16),
+							   (unsigned char)(color >> 8),
+							   (unsigned char)(color) };
+
+		SDL_Surface* textSurface = SDL_CreateRGBSurface(0, width, SZ_SCREENHEIGHT, 32, 0, 0, 0, 0);
+		SDL_Rect cur = { 0,0,width,0 };
+		SDL_Surface* s;
+		int height = 0;
+		string word = "";
+		for (int i = 0; i < text.size(); i++)
+		{
+			switch (text[i])
+			{
+			case ' ':
+			case '\t':
+			case '-':
+				word += text[i];
+				/*Fall through*/
+			case '\n':
+			case '\r':
+				s = TTF_RenderText_Solid(FONT, word.c_str(), c);
+				cur.h = s->h;
+				cur.w = s->w;
+				if (cur.x + cur.w > width)
+				{
+					/*Line feed*/
+					cur.x = 0;
+					cur.y += cur.h;
+					height += cur.h;
+				}
+				SDL_BlitSurface(s, NULL, textSurface, &cur);
+				SDL_FreeSurface(s);
+				cur.x += cur.w;
+				word = "";
+				if (text[i] == '\r' || text[i] == '\n')
+				{
+					/*Line feed*/
+					cur.x = 0;
+					cur.y += cur.h;
+					height += cur.h;
+				}
+				break;
+			default:
+				word += text[i];
+				break;
+			}
+		}
+		height += cur.h;
+		cur.x = cur.y = 0;
+		cur.h = height;
+		cur.w = width;
+		/*Crop*/
+		SDL_Surface* croppedTextSurface = SDL_CreateRGBSurface(0, width, height, 32, 0, 0, 0, 0);
+		SDL_BlitSurface(textSurface, &cur, croppedTextSurface, &cur);
+		SDL_Texture* t = this->fromSurface(croppedTextSurface);
+		SDL_FreeSurface(croppedTextSurface);
+		SDL_FreeSurface(textSurface);
+		textures[id] = new Texture(t, width, height);
+	}
+
+	return textures[id];
+}
+
 TTF_Font* RenderContext::FONT;
 int RenderContext::FONTSIZE;
 unordered_map<string, Texture*> RenderContext::textures;
@@ -139,6 +207,7 @@ Texture* RenderContext::LoadVolatileString(string text, int color)
 							(unsigned char)(color) };
 
 	SDL_Surface* s = TTF_RenderText_Solid(FONT, text.c_str(), c);
+
 	SDL_Texture* t = this->fromSurface(s);
 	SDL_FreeSurface(s);
 

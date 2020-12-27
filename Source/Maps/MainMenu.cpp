@@ -21,7 +21,7 @@ MainMenu::MainMenu(Player& p, GAME* g) : Menu(p, g)
 
 	addButton(new Button("Play", r, SZ_SCREENWIDTH / 3, SZ_SCREENHEIGHT - 150, 0, [this](int id) {onPlayClick(id); }, 0x00ffaaff, 0xffff00ff));
 	addButton(new Button("Quit", r, 2 * SZ_SCREENWIDTH / 3, SZ_SCREENHEIGHT - 150, 0, [this](int id) {onQuitClick(id); }, 0xff00aaff, 0xffff00ff));
-	
+
 	Texture* welcome = r.LoadString("Welcome to the ", 0xAA00FFFF);
 	animationTextures = new Texture * [20];
 	int color;

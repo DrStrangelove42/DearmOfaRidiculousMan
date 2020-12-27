@@ -5,6 +5,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <string>
+#include "config.h"
 #ifdef WIN6
 #include <Windows.h>
 #undef LoadString
@@ -152,6 +153,11 @@ public:
 	/// <param name="color"></param>
 	/// <returns></returns>
 	Texture* LoadVolatileString(string text, int color);
+
+	/// <summary>
+	/// Loads a multiline text designed to fit in the specified width (in pixels).
+	/// </summary>
+	Texture* LoadText(string text, int color, int width);
 
 	/// <summary>
 	/// Frees memory.
