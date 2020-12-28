@@ -26,7 +26,7 @@ int VIEW_OFFSET_Y = 0;
 string EXT = ".txt";
 
 /// <summary>
-/// Absolute path to the data folder.
+/// Absolute path to the data folder. This must have a trailing slash.
 /// </summary>
 string DATA_LOCATION = DEBUG_MODE ? "./" : "~/.doarm/";
 
@@ -34,6 +34,16 @@ string DATA_LOCATION = DEBUG_MODE ? "./" : "~/.doarm/";
 /// Location of files describing worlds.
 /// </summary>
 string WORLDFILES_LOCATION = DATA_LOCATION + "Res/Worlds/";
+
+/// <summary>
+/// Location of files describing stories in Story Mode.
+/// </summary>
+string STORYFILES_LOCATION = DATA_LOCATION + "Res/StoryMode/";
+
+/// <summary>
+/// The extension used for text files describing stories in Story Mode.
+/// </summary>
+string STORYFILES_EXT = ".txt";
 
 /// <summary>
 /// Location of files generated to describe worlds.

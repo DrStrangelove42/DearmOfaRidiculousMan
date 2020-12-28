@@ -43,6 +43,8 @@ extern int VIEW_OFFSET_X;
 extern int VIEW_OFFSET_Y;
 
 extern string EXT;
+extern string STORYFILES_EXT;
 extern string WORLDFILES_LOCATION;
+extern string STORYFILES_LOCATION;
 extern string WORLDDATA_LOCATION;
 #endif

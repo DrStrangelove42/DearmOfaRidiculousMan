@@ -1,15 +1,44 @@
 #ifndef STORY_H
 #define STORY_H
 
+#include <string>
 #include "../Base/game.h"
+#include "../Base/config.h"
+#include <fstream>
+#include <iostream>
+#include <vector>
+
+using namespace std;
 
 class Story
 {
+	class Part
+	{
+
+	};
+
 protected:
+	/// <summary>
+	/// The different parts of the story to play.
+	/// </summary>
+	vector<Part*> parts;
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="path"></param>
 	void fromFile(string path);
 
+	string getLineType(string& line);
+
+	string nextToken(string& line, char sep);
 public:
-	Story();
+	/// <summary>
+	/// Name of the story to load from data files.
+	/// </summary>
+	/// <param name="path"></param>
+	Story(string path);
+
 	/// <summary>
 	/// 
 	/// </summary>

@@ -21,7 +21,7 @@ bool NPC::updateObject(GAME* game)
 	return false;
 }
 
-void NPC::addChoice(string text, RenderContext& r, function<void(int)> callback)
+void NPC::addChoice(string caption, RenderContext& r, function<void(int)> callback)
 {
-	choices.push_back(new Button(text, r, 5, int(choices.size()) * RenderContext::FONTSIZE * 3,int(choices.size()), callback));
+	choices.push_back(new Button(caption, r, 5, text->getHeight() + int(choices.size()) * RenderContext::FONTSIZE * 3, int(choices.size()), callback));
 }

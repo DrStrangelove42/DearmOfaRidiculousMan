@@ -86,4 +86,3 @@ GAME* initGame()
 
 	return game;
 }
-
