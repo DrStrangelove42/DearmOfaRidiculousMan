@@ -23,7 +23,7 @@ MainMenu::MainMenu(Player& p, GAME* g) : Menu(p, g)
 	RenderContext& r = *(g->renderer);
 
 	addButton(new Button("Play", r, SZ_SCREENWIDTH / 3, SZ_SCREENHEIGHT - 150, 0, [this](int id) {onPlayClick(id); }, 0x00ffaaff, 0xffff00ff));
-	addButton(new Button("Story mode", r, SZ_SCREENWIDTH / 2 - 50, SZ_SCREENHEIGHT - 150, 1, [this](int id) {onStoryModeClick(id); }, 0xff8800ff, 0xffff00ff));
+	addButton(new Button("Story mode", r, SZ_SCREENWIDTH / 2 - 40, SZ_SCREENHEIGHT - 150, 1, [this](int id) {onStoryModeClick(id); }, 0xff8800ff, 0xffff00ff));
 
 	addButton(new Button("Quit", r, 2 * SZ_SCREENWIDTH / 3, SZ_SCREENHEIGHT - 150, 2, [this](int id) {onQuitClick(id); }, 0xff00aaff, 0xffff00ff));
 
@@ -59,12 +59,7 @@ void MainMenu::onPlayClick(int id)
 
 void MainMenu::onStoryModeClick(int id)
 {
-
-	string worldName = "MainMap";
-	game->worldName = worldName;
-	*(game->currentMapId) = -1;
-	game->currentMap = new Map(worldName, *(game->player), *(game->renderer), game->currentMapId);
-	delete this;
+	game->player->setStory(new Story());
 }
 
 void MainMenu::onQuitClick(int id)

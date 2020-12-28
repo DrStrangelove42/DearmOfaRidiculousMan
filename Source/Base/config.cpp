@@ -9,6 +9,8 @@ int SZ_MAINWIDTH = 1000;
 int SZ_SCREENWIDTH = SZ_MAINWIDTH + SZ_INFOSWIDTH;
 int SZ_SCREENHEIGHT = 800;
 
+int WAIT_TIME = 50;
+
 /*Current viewport*/
 int BLOCKS_W = 50;	/* Max width of blocks on the screen */
 int BLOCKS_H = 40;	/* Max height of blocks on the screen */
@@ -23,6 +25,9 @@ int VIEW_OFFSET_Y = 0;
 /// </summary>
 string EXT = ".txt";
 
+/// <summary>
+/// Absolute path to the data folder.
+/// </summary>
 string DATA_LOCATION = DEBUG_MODE ? "./" : "~/.doarm/";
 
 /// <summary>

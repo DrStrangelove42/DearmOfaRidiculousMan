@@ -4,6 +4,7 @@
 #include "../Objects/Object.h"
 #include <functional>
 #include "../Interactions/Button.h"
+#include <list>
 
 class NPC : Object
 {

@@ -31,6 +31,8 @@ extern int SZ_SCREENWIDTH;	/* Width of the window, in pixels */
 extern int SZ_SCREENHEIGHT;	/* Height of the window, in pixels */
 extern int SZ_INFOSWIDTH;	/* Width of the player window, in pixels */
 
+extern int WAIT_TIME;
+
 /*Current viewport*/
 extern int BLOCKS_W;	/* Max width of blocks on the screen */
 extern int BLOCKS_H;	/* Max height of blocks on the screen */

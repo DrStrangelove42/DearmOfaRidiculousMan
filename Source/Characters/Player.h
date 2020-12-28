@@ -4,6 +4,7 @@
 #include <string>
 #include "../Base/utils.h"
 #include "../Base/config.h"
+#include "../Interactions/Story.h"
 #include "MovingEntity.h"
 #include "LivingEntity.h"
 #include <unordered_map>
@@ -56,6 +57,10 @@ protected:
 	/// </summary>
 	Texture* heart;
 
+	/// <summary>
+	/// The story object (used in story mode).
+	/// </summary>
+	Story* story;
 public:
 
 	~Player();
@@ -99,6 +104,13 @@ public:
 	/// <param name="time"></param>
 	/// <param name="game"></param>
 	virtual void tick(int time, GAME* game);
+
+	/// <summary>
+	/// Game over animation when the player is dead.
+	/// </summary>
+	/// <param name="time"></param>
+	/// <param name="game"></param>
+	void animateGameOver(int time, GAME* game);
 
 	/// <summary>
 	/// When a key is pushed on the keyboard.
@@ -160,6 +172,17 @@ public:
 	/// <param name="item"></param>
 	/// <returns></returns>
 	bool hasObject(Object obj);
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="story"></param>
+	void setStory(Story* s);
+
+	/// <summary>
+	/// 
+	/// </summary>
+	void clearStory();
 };
 
 #endif

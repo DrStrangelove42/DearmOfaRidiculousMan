@@ -12,7 +12,10 @@ bool NPC::updateObject(GAME* game)
 	if (abs(x - game->player->getX()) < 2 &&
 		abs(y - game->player->getY()) < 2)
 	{
-		text->renderUnscaled(*(game->renderer), SZ_MAINWIDTH + 5, SZ_SCREENHEIGHT / 2);
+		RenderContext& r = *(game->renderer);
+		text->renderUnscaled(r, SZ_MAINWIDTH + 5, SZ_SCREENHEIGHT / 2);
+		for (Button* btn : choices)
+			btn->render(r);
 	}
 
 	return false;

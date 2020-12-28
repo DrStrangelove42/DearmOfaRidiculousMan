@@ -1,7 +1,7 @@
 /* Entry point */
 
 #include "main.h"
-#include"Maps/GameOverMenu.h"
+ 
 using namespace std;
  
 /// <summary>
@@ -58,7 +58,7 @@ int playDoarm(GAME* game)
 
 		game->renderer->update();
 
-		RenderContext::RenderSleep(50);
+		RenderContext::RenderSleep(WAIT_TIME);
 	}
 
 	return EXIT_SUCCESS;

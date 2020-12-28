@@ -16,7 +16,6 @@
 
 using namespace std;
 
-/*Forward decl*/
 class Texture;
 
 /// <summary>
@@ -103,7 +102,7 @@ public:
 	/// <param name="color"></param>
 	void changeColor(int color);
 
-	/*Static functions*/
+	 
 	/// <summary>
 	/// Stops during ms milliseconds.
 	/// </summary>
@@ -126,10 +125,7 @@ public:
 	/// Exits rendering module
 	/// </summary>
 	static void RenderQuit();
-
-	/*Static functions from SDL-specific part of the Utils module*/
-	
-
+	 
 	/// <summary>
 	/// Use this function to load a texture from a BMP file. If it succeeds,
 	/// the texture is saved in <textures> and will be loaded from memory next

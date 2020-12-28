@@ -8,7 +8,8 @@
 
 Player::Player(RenderContext& renderer, int lives, int attack, int defense, int startHealth, int startMoney, int startExp) :
 	LivingEntity(startHealth, startMoney, startExp), MovingEntity(0, 0, renderer, "player"),
-	lives(lives), attack(attack), defense(defense), infosX(SZ_MAINWIDTH), infosY(0), attackDelay(500), lastAttackTime(0)
+	lives(lives), attack(attack), defense(defense), infosX(SZ_MAINWIDTH), infosY(0),
+	attackDelay(500), lastAttackTime(0), story(NULL)
 {
 	heart = renderer.LoadTexture("heart");
 }
@@ -94,74 +95,83 @@ void Player::tick(int time, GAME* game)
 {
 	if (lives == 0 && !isAlive())
 	{
-		
-		static int steps;
-		static int i;
-		static int j;
-		static int s;
-		static int t = 0;
-		if (t == 0) {
-			steps = 4 * max(game->currentMap->getCurrentRoomObject().getH(), game->currentMap->getCurrentRoomObject().getW());
-			i = x;
-			j = y;
-			s = 1;
-			for (int n = 0; n < game->currentMap->getRoomCount(); n++)
-			{
-				if (n != game->currentMap->getCurrentRoom())
-				{
-					game->currentMap->getRooms()[n]->setDiscovered(false);
-				}
-			}
-		}
+		animateGameOver(time, game);
+	}
 
-		if (t < steps)
+	if (story != NULL)
+	{
+		story->tick(time, game);
+	}
+}
+
+void Player::animateGameOver(int time, GAME* game)
+{
+	static int steps;
+	static int i;
+	static int j;
+	static int s;
+	static int t = 0;
+	if (t == 0) {
+		steps = 4 * max(game->currentMap->getCurrentRoomObject().getH(), game->currentMap->getCurrentRoomObject().getW());
+		i = x;
+		j = y;
+		s = 1;
+		for (int n = 0; n < game->currentMap->getRoomCount(); n++)
 		{
-			switch (t % 4)
+			if (n != game->currentMap->getCurrentRoom())
 			{
-			case 0://to the right
-				for (int k = 0; k < s; k++)
-				{
-					i++;
-					game->currentMap->getCurrentRoomObject().replaceBlock(new Block(i, j, "empty", *(game->renderer)));
-				}
-				break;
-			case 1://downwards
-				s++;
-				for (int k = 0; k < s; k++)
-				{
-					j++;
-					game->currentMap->getCurrentRoomObject().replaceBlock(new Block(i, j, "empty", *(game->renderer)));
-				}
-				break;
-			case 2://to the left
-				for (int k = 0; k < s; k++)
-				{
-					i--;
-					game->currentMap->getCurrentRoomObject().replaceBlock(new Block(i, j, "empty", *(game->renderer)));
-				}
-				break;
-			case 3://upwards
-				s++;
-				for (int k = 0; k < s; k++)
-				{
-					j--;
-					game->currentMap->getCurrentRoomObject().replaceBlock(new Block(i, j, "empty", *(game->renderer)));
-				}
-				break;
-			default:
-				break;
+				game->currentMap->getRooms()[n]->setDiscovered(false);
 			}
-			t++;
 		}
-		else
+	}
+
+	if (t < steps)
+	{
+		switch (t % 4)
 		{
-			t = 0;
-			lives++;
-			delete game->currentMap;
-			*(game->currentMapId) = 0;
-			game->worldName = "Game Over";
-			game->currentMap = new GameOverMenu(*this, game);
+		case 0://to the right
+			for (int k = 0; k < s; k++)
+			{
+				i++;
+				game->currentMap->getCurrentRoomObject().replaceBlock(new Block(i, j, "empty", *(game->renderer)));
+			}
+			break;
+		case 1://downwards
+			s++;
+			for (int k = 0; k < s; k++)
+			{
+				j++;
+				game->currentMap->getCurrentRoomObject().replaceBlock(new Block(i, j, "empty", *(game->renderer)));
+			}
+			break;
+		case 2://to the left
+			for (int k = 0; k < s; k++)
+			{
+				i--;
+				game->currentMap->getCurrentRoomObject().replaceBlock(new Block(i, j, "empty", *(game->renderer)));
+			}
+			break;
+		case 3://upwards
+			s++;
+			for (int k = 0; k < s; k++)
+			{
+				j--;
+				game->currentMap->getCurrentRoomObject().replaceBlock(new Block(i, j, "empty", *(game->renderer)));
+			}
+			break;
+		default:
+			break;
 		}
+		t++;
+	}
+	else
+	{
+		t = 0;
+		lives++;
+		delete game->currentMap;
+		*(game->currentMapId) = 0;
+		game->worldName = "Game Over";
+		game->currentMap = new GameOverMenu(*this, game);
 	}
 }
 
@@ -197,9 +207,15 @@ void Player::onKeyDown(GAME* game)
 	default:
 		break;
 	}
-	
+
 	if (curX != x || curY != y)
 		room.tryTeleportAt(*this, curX, curY);
+
+
+	if (story != NULL)
+	{
+		story->onKeyDown(game);
+	}
 }
 
 
@@ -266,4 +282,18 @@ bool Player::hasObject(string objId)
 bool Player::hasObject(Object obj)
 {
 	return (inventory.find(obj.getId()) != inventory.end() && inventory[obj.getId()] > 0);
+}
+
+void Player::setStory(Story* s)
+{
+	if (story != NULL)
+		clearStory();
+	story = s;
+}
+
+void Player::clearStory()
+{
+	if (story != NULL)
+		delete story;
+	story = NULL;
 }
