@@ -41,9 +41,11 @@
     <ClCompile Include="..\Source\Characters\Monsters\IntelligentSkeleton.cpp" />
     <ClCompile Include="..\Source\Characters\Monsters\Skeleton.cpp" />
     <ClCompile Include="..\Source\Characters\MovingEntity.cpp" />
+    <ClCompile Include="..\Source\Characters\NPC.cpp" />
     <ClCompile Include="..\Source\Characters\Player.cpp" />
     <ClCompile Include="..\Source\Interactions\Button.cpp" />
     <ClCompile Include="..\Source\Interactions\Label.cpp" />
+    <ClCompile Include="..\Source\Interactions\Story.cpp" />
     <ClCompile Include="..\Source\main.cpp" />
     <ClCompile Include="..\Source\Maps\GameOverMenu.cpp" />
     <ClCompile Include="..\Source\Maps\MainMenu.cpp" />
@@ -85,9 +87,11 @@
     <ClInclude Include="..\Source\Characters\Monsters\IntelligentSkeleton.h" />
     <ClInclude Include="..\Source\Characters\Monsters\Skeleton.h" />
     <ClInclude Include="..\Source\Characters\MovingEntity.h" />
+    <ClInclude Include="..\Source\Characters\NPC.h" />
     <ClInclude Include="..\Source\Characters\Player.h" />
     <ClInclude Include="..\Source\Interactions\Button.h" />
     <ClInclude Include="..\Source\Interactions\Label.h" />
+    <ClInclude Include="..\Source\Interactions\Story.h" />
     <ClInclude Include="..\Source\main.h" />
     <ClInclude Include="..\Source\Maps\GameOverMenu.h" />
     <ClInclude Include="..\Source\Maps\MainMenu.h" />

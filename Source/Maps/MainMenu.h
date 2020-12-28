@@ -17,7 +17,8 @@
 #include "../Objects/Key.h"
 #include "../Objects/Warp.h"
 #include "../Maps/Map.h"
- 
+#include "../Interactions/Story.h"
+
 using namespace std;
 
 /*
@@ -45,24 +46,24 @@ public:
 	/// <param name="p"></param>
 	/// <param name="g"></param>
 	MainMenu(Player& p, GAME* g);
+	virtual ~MainMenu();
 	/// <summary>
-	/// 
+	/// Called when the user clicks on the Play button.
 	/// </summary>
 	/// <param name="id"></param>
 	void onPlayClick(int id);
 
 	/// <summary>
-	/// 
+	/// Called when the user clicks on the Story Mode button.
 	/// </summary>
 	/// <param name="id"></param>
 	void onStoryModeClick(int id);
 
 	/// <summary>
-	/// 
+	/// Called when the user clicks on the quit button.
 	/// </summary>
 	/// <param name="id"></param>
 	void onQuitClick(int id);
-	virtual ~MainMenu();
 	/// <summary>
 	/// Event system from keyboard
 	/// </summary>

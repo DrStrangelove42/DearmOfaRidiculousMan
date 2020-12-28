@@ -32,13 +32,13 @@ protected:
 	SDL_Renderer* renderer;
 
 	static TTF_Font* FONT;
-	static int FONTSIZE;
 	/// <summary>
 	/// The hashmap where textures are stored.
 	/// Textures beginning with 'text/' are reserved for text rendering.
 	/// </summary>
 	static unordered_map<string, Texture*> textures;
 public:
+	static int FONTSIZE;
 	/// <summary>
 	/// Creates a new render context from the specified window.
 	/// </summary>

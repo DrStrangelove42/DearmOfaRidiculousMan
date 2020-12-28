@@ -59,6 +59,7 @@ void MainMenu::onPlayClick(int id)
 
 void MainMenu::onStoryModeClick(int id)
 {
+
 	string worldName = "MainMap";
 	game->worldName = worldName;
 	*(game->currentMapId) = -1;
