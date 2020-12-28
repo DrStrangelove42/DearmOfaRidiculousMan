@@ -197,10 +197,7 @@ void Player::onKeyDown(GAME* game)
 	default:
 		break;
 	}
-	if (DEBUG_MODE)
-		if (game->keyLetter == 'M')
-			room.addMonster(new Ghost(*(game->renderer), *this, room));
-
+	
 	if (curX != x || curY != y)
 		room.tryTeleportAt(*this, curX, curY);
 }

@@ -50,6 +50,13 @@ public:
 	/// </summary>
 	/// <param name="id"></param>
 	void onPlayClick(int id);
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="id"></param>
+	void onStoryModeClick(int id);
+
 	/// <summary>
 	/// 
 	/// </summary>

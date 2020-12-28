@@ -50,12 +50,14 @@
     <ClCompile Include="..\Source\Maps\Map.cpp" />
     <ClCompile Include="..\Source\Maps\Menu.cpp" />
     <ClCompile Include="..\Source\Maps\Room.cpp" />
+    <ClCompile Include="..\Source\Objects\Checkpoint.cpp" />
     <ClCompile Include="..\Source\Objects\Chest.cpp" />
     <ClCompile Include="..\Source\Objects\Door.cpp" />
     <ClCompile Include="..\Source\Objects\Key.cpp" />
     <ClCompile Include="..\Source\Objects\Object.cpp" />
     <ClCompile Include="..\Source\Objects\PickableObject.cpp" />
     <ClCompile Include="..\Source\Objects\Shield.cpp" />
+    <ClCompile Include="..\Source\Objects\Signboard.cpp" />
     <ClCompile Include="..\Source\Objects\Sword.cpp" />
     <ClCompile Include="..\Source\Objects\Warp.cpp" />
   </ItemGroup>
@@ -92,12 +94,14 @@
     <ClInclude Include="..\Source\Maps\Map.h" />
     <ClInclude Include="..\Source\Maps\Menu.h" />
     <ClInclude Include="..\Source\Maps\Room.h" />
+    <ClInclude Include="..\Source\Objects\Checkpoint.h" />
     <ClInclude Include="..\Source\Objects\Chest.h" />
     <ClInclude Include="..\Source\Objects\Door.h" />
     <ClInclude Include="..\Source\Objects\Key.h" />
     <ClInclude Include="..\Source\Objects\Object.h" />
     <ClInclude Include="..\Source\Objects\PickableObject.h" />
     <ClInclude Include="..\Source\Objects\Shield.h" />
+    <ClInclude Include="..\Source\Objects\Signboard.h" />
     <ClInclude Include="..\Source\Objects\Sword.h" />
     <ClInclude Include="..\Source\Objects\Warp.h" />
   </ItemGroup>

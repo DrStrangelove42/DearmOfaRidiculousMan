@@ -8,6 +8,9 @@ void MainMenu::onKeyDown(GAME* game)
 		onQuitClick(0);
 		break;
 	case 'S':
+		onStoryModeClick(0);
+		break;
+	case 'P':
 		onPlayClick(0);
 		break;
 	default:
@@ -20,7 +23,10 @@ MainMenu::MainMenu(Player& p, GAME* g) : Menu(p, g)
 	RenderContext& r = *(g->renderer);
 
 	addButton(new Button("Play", r, SZ_SCREENWIDTH / 3, SZ_SCREENHEIGHT - 150, 0, [this](int id) {onPlayClick(id); }, 0x00ffaaff, 0xffff00ff));
-	addButton(new Button("Quit", r, 2 * SZ_SCREENWIDTH / 3, SZ_SCREENHEIGHT - 150, 0, [this](int id) {onQuitClick(id); }, 0xff00aaff, 0xffff00ff));
+	addButton(new Button("Story mode", r, SZ_SCREENWIDTH / 2 - 50, SZ_SCREENHEIGHT - 150, 1, [this](int id) {onStoryModeClick(id); }, 0xff8800ff, 0xffff00ff));
+
+	addButton(new Button("Quit", r, 2 * SZ_SCREENWIDTH / 3, SZ_SCREENHEIGHT - 150, 2, [this](int id) {onQuitClick(id); }, 0xff00aaff, 0xffff00ff));
+
 
 	Texture* welcome = r.LoadString("Welcome to the ", 0xAA00FFFF);
 	animationTextures = new Texture * [20];
@@ -32,7 +38,7 @@ MainMenu::MainMenu(Player& p, GAME* g) : Menu(p, g)
 	}
 
 	Texture* subtitle = r.LoadString("ENS Software Engineering Project, year 2020", 0x007ACCFF);
-	Texture* info = r.LoadString("Press S to start, Q to quit. You can also click on the text-buttons below.", 0xaaaaaaff);
+	Texture* info = r.LoadString("Press P or S to start, Q to quit. You can also click on the text-buttons below.", 0xaaaaaaff);
 	addLabel(new Label(welcome, (SZ_SCREENWIDTH - welcome->getWidth() - animationTextures[0]->getWidth()) / 2, SZ_SCREENHEIGHT / 3));
 	animation = new Label(animationTextures[0], labels.front()->getX() + welcome->getWidth(), labels.front()->getY());
 	addLabel(new Label(subtitle, (SZ_SCREENWIDTH - subtitle->getWidth()) / 2, labels.front()->getY() + welcome->getHeight() + 10));
@@ -43,6 +49,15 @@ MainMenu::MainMenu(Player& p, GAME* g) : Menu(p, g)
 }
 
 void MainMenu::onPlayClick(int id)
+{
+	string worldName = "MainMap";
+	game->worldName = worldName;
+	*(game->currentMapId) = -1;
+	game->currentMap = new Map(worldName, *(game->player), *(game->renderer), game->currentMapId);
+	delete this;
+}
+
+void MainMenu::onStoryModeClick(int id)
 {
 	string worldName = "MainMap";
 	game->worldName = worldName;
@@ -65,6 +80,7 @@ void MainMenu::render(RenderContext& renderer, int offsetX, int offsetY) const
 {
 	Menu::render(renderer, offsetX, offsetY);
 
+	
 	player.DrawableEntity::render(renderer, offsetX, offsetY);
 }
 

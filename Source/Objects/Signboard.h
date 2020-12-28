@@ -2,9 +2,12 @@
 #define SIGNBOARD_H
 
 #include "Object.h"
+#include "../Base/config.h"
 
 class Signboard : public Object
 {
+protected:
+	Texture* textContent;
 public:
 	/*Destructor*/
 	virtual ~Signboard();
@@ -20,7 +23,7 @@ public:
 	/// <param name="trav"></param>
 	/// <param name="attack"></param>
 	/// <param name="defense"></param>
-	Signboard(string identifier, int posx, int posy, RenderContext& renderer);
+	Signboard(string identifier, int posx, int posy, RenderContext& renderer,string content);
 
 	/// <summary>
 	/// Interaction with the game.

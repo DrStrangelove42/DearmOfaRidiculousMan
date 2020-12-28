@@ -125,7 +125,7 @@ Texture* RenderContext::LoadString(string text, int color)
 	return textures[id];
 }
 
-Texture* RenderContext::LoadText(string text, int color, int width)
+Texture* RenderContext::LoadText(string text, int color, int backColor, int width, int padding)
 {
 	string id = "mtext." + to_string(color) + "/" + text;
 	if (textures.find(id) == textures.end())
@@ -135,11 +135,23 @@ Texture* RenderContext::LoadText(string text, int color, int width)
 							   (unsigned char)(color >> 16),
 							   (unsigned char)(color >> 8),
 							   (unsigned char)(color) };
+		
+		
 
 		SDL_Surface* textSurface = SDL_CreateRGBSurface(0, width, SZ_SCREENHEIGHT, 32, 0, 0, 0, 0);
-		SDL_Rect cur = { 0,0,width,0 };
+
+		if (backColor != 0)
+		{
+			SDL_Color bc = { (unsigned char)(backColor >> 24),
+										   (unsigned char)(backColor >> 16),
+										   (unsigned char)(backColor >> 8),
+										   (unsigned char)(backColor) };
+			SDL_FillRect(textSurface, NULL, SDL_MapRGBA(textSurface->format, bc.r, bc.g, bc.b,bc.a));
+		}
+
+		SDL_Rect cur = { padding,padding,width,0 };
 		SDL_Surface* s;
-		int height = 0;
+		int height = 2*padding;
 		string word = "";
 		for (int i = 0; i < text.size(); i++)
 		{
@@ -155,10 +167,10 @@ Texture* RenderContext::LoadText(string text, int color, int width)
 				s = TTF_RenderText_Solid(FONT, word.c_str(), c);
 				cur.h = s->h;
 				cur.w = s->w;
-				if (cur.x + cur.w > width)
+				if (cur.x + cur.w + padding > width)
 				{
 					/*Line feed*/
-					cur.x = 0;
+					cur.x = padding;
 					cur.y += cur.h;
 					height += cur.h;
 				}
@@ -169,7 +181,7 @@ Texture* RenderContext::LoadText(string text, int color, int width)
 				if (text[i] == '\r' || text[i] == '\n')
 				{
 					/*Line feed*/
-					cur.x = 0;
+					cur.x = padding;
 					cur.y += cur.h;
 					height += cur.h;
 				}
@@ -193,6 +205,11 @@ Texture* RenderContext::LoadText(string text, int color, int width)
 	}
 
 	return textures[id];
+}
+
+Texture* RenderContext::LoadText(string text, int color, int width)
+{
+	return LoadText(text, color, 0, width);
 }
 
 TTF_Font* RenderContext::FONT;

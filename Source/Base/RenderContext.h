@@ -160,6 +160,16 @@ public:
 	Texture* LoadText(string text, int color, int width);
 
 	/// <summary>
+	/// Loads a multiline text designed to fit in the specified width (in pixels).
+	/// </summary>
+	/// <param name="text"></param>
+	/// <param name="color"></param>
+	/// <param name="backColor"></param>
+	/// <param name="width"></param>
+	/// <returns></returns>
+	Texture* LoadText(string text, int color, int backColor, int width, int padding = 0);
+
+	/// <summary>
 	/// Frees memory.
 	/// </summary>
 	static void FreeTextures();
