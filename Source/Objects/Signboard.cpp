@@ -1,4 +1,5 @@
 #include "Signboard.h"
+#include "../Characters/Player.h"
 
 Signboard::~Signboard()
 {
@@ -12,7 +13,11 @@ Signboard::Signboard(string identifier, int posx, int posy, RenderContext& rende
 
 bool Signboard::updateObject(GAME* game)
 {
-	textContent->renderUnscaled(*(game->renderer), SZ_MAINWIDTH + 5, SZ_SCREENHEIGHT / 2);
+	if (abs(x - game->player->getX()) < 2 &&
+		abs(y - game->player->getY()) < 2)
+	{
+		textContent->renderUnscaled(*(game->renderer), SZ_MAINWIDTH + 5, SZ_SCREENHEIGHT / 2);
+	}
 
 	return false;
 }

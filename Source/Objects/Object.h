@@ -1,7 +1,6 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
-
 #include "../Characters/MovingEntity.h"
 #include "../Base/utils.h"
 #include "../Base/game.h"
