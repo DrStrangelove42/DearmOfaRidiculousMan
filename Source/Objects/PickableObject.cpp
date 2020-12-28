@@ -1,6 +1,7 @@
 #include "PickableObject.h"
 #include "../Characters/Player.h"
 #include "../Maps/Map.h"
+
 PickableObject::~PickableObject()
 {
 
@@ -17,6 +18,7 @@ bool PickableObject::updateObject(GAME* game)
 	{
 		return false;
 	}
+
 	RenderContext& renderer = *(game->renderer);
 	game->player->pickUpObject(this);
 	/*Delete the pointer from the room*/
