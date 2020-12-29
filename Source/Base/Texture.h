@@ -37,6 +37,34 @@ protected:
 	/// <param name="h"></param>
 	/// <returns></returns>
 	SDL_Texture* internalLoadTexture(RenderContext& context, string id, int& w, int& h);
+
+	/// <summary>
+	/// To avoid code duplication, this subfunction is called from render in the base class Texture but can
+	/// also be called from derived classes.
+	/// </summary>
+	/// <param name=""></param>
+	/// <param name="context"></param>
+	/// <param name="x"></param>
+	/// <param name="y"></param>
+	/// <param name="width"></param>
+	/// <param name="height"></param>
+	/// <param name="angle"></param>
+	/// <param name="center"></param>
+	/// <param name="flip"></param>
+	inline void internalRender(SDL_Texture*, RenderContext& context, int x, int y, int width, int height, double angle, SDL_Point* center, SDL_RendererFlip flip);
+
+	/// <summary>
+	/// To avoid code duplication, this subfunction is called from render in the base class Texture but can
+	/// also be called from derived classes.
+	/// </summary>
+	/// <param name="texture"></param>
+	/// <param name="context"></param>
+	/// <param name="x"></param>
+	/// <param name="y"></param>
+	/// <param name="angle"></param>
+	/// <param name="center"></param>
+	/// <param name="flip"></param>
+	inline void internalRenderUnscaled(SDL_Texture* texture, RenderContext& context, int x, int y, double angle, SDL_Point* center, SDL_RendererFlip flip);
 public:
 	/// <summary>
 	/// Encapsulates an existing native texture
@@ -53,7 +81,7 @@ public:
 	/// <param name="id"></param>
 	Texture(RenderContext& context, string id);
 
-	
+
 	virtual ~Texture();
 
 	/*//Set color modulation

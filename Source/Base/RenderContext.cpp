@@ -1,5 +1,6 @@
 #include "RenderContext.h"
 #include "Texture.h"
+#include "AnimatedTexture.h"
 
 RenderContext::RenderContext(Window& window)
 {
@@ -66,7 +67,7 @@ void RenderContext::drawLine(int x1, int y1, int x2, int y2)
 	SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
 }
 
- 
+
 void RenderContext::RenderSleep(unsigned int ms)
 {
 	SDL_Delay(ms);
@@ -106,7 +107,12 @@ string RenderContext::RenderErrorDetails()
 Texture* RenderContext::LoadTexture(string id)
 {
 	if (textures.find(id) == textures.end())
-		textures[id] = new Texture(*this, id);
+	{
+		if (id[0] == '*')
+			textures[id] = new AnimatedTexture(*this, id.substr(1), 250);
+		else
+			textures[id] = new Texture(*this, id);
+	}
 
 	return textures[id];
 }
@@ -132,8 +138,8 @@ Texture* RenderContext::LoadText(string text, int color, int backColor, int widt
 							   (unsigned char)(color >> 16),
 							   (unsigned char)(color >> 8),
 							   (unsigned char)(color) };
-		
-		
+
+
 
 		SDL_Surface* textSurface = SDL_CreateRGBSurface(0, width, SZ_SCREENHEIGHT, 32, 0, 0, 0, 0);
 
@@ -143,12 +149,12 @@ Texture* RenderContext::LoadText(string text, int color, int backColor, int widt
 										   (unsigned char)(backColor >> 16),
 										   (unsigned char)(backColor >> 8),
 										   (unsigned char)(backColor) };
-			SDL_FillRect(textSurface, NULL, SDL_MapRGBA(textSurface->format, bc.r, bc.g, bc.b,bc.a));
+			SDL_FillRect(textSurface, NULL, SDL_MapRGBA(textSurface->format, bc.r, bc.g, bc.b, bc.a));
 		}
 
 		SDL_Rect cur = { padding,padding,width,0 };
 		SDL_Surface* s;
-		int height = 2*padding;
+		int height = 2 * padding;
 		string word = "";
 		for (int i = 0; i < text.size(); i++)
 		{

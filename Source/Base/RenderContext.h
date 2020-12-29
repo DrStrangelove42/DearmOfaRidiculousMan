@@ -130,6 +130,7 @@ public:
 	/// Use this function to load a texture from a BMP file. If it succeeds,
 	/// the texture is saved in <textures> and will be loaded from memory next
 	/// time this function is called for the same texture ID.
+	/// To load an animated texture (from files id0, ..., idN), prefix id with '*'.
 	/// </summary>
 	Texture* LoadTexture(string id);
 

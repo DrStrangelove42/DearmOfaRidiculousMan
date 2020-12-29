@@ -8,10 +8,12 @@ LivingEntity::LivingEntity(int startHealth, int startMoney, int startExp) : heal
 
 void LivingEntity::damage(int dmg)
 {
-	if (health - dmg >= 0)
+	if (isAlive())
+	{
 		health -= dmg;
-	else
-		kill();
+		if (health < 0)
+			kill();
+	}
 }
 
 bool LivingEntity::isAlive()const

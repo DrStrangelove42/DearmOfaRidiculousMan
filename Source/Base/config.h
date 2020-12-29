@@ -31,6 +31,9 @@ extern int SZ_SCREENWIDTH;	/* Width of the window, in pixels */
 extern int SZ_SCREENHEIGHT;	/* Height of the window, in pixels */
 extern int SZ_INFOSWIDTH;	/* Width of the player window, in pixels */
 
+/// <summary>
+/// Delay, in ms, between each game loop.
+/// </summary>
 extern int WAIT_TIME;
 
 /*Current viewport*/
@@ -42,9 +45,31 @@ fonctions located in the <utils> module.*/
 extern int VIEW_OFFSET_X;
 extern int VIEW_OFFSET_Y;
 
+/// <summary>
+/// Extensions for worlds and maps
+/// </summary>
 extern string EXT;
+/// <summary>
+/// The extension used for text files describing stories in Story Mode.
+/// </summary>
 extern string STORYFILES_EXT;
+/// <summary>
+/// Location of files describing worlds.
+/// </summary>
 extern string WORLDFILES_LOCATION;
+
+/// <summary>
+/// Location of files describing stories in Story Mode.
+/// </summary>
 extern string STORYFILES_LOCATION;
+
+/// <summary>
+/// Location of files generated to describe worlds.
+/// </summary>
 extern string WORLDDATA_LOCATION;
+
+/// <summary>
+/// Absolute path to the data folder. This must have a trailing slash.
+/// </summary>
+extern string DATA_LOCATION;
 #endif

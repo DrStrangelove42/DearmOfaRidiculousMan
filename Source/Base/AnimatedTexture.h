@@ -3,6 +3,8 @@
 
 #include "Texture.h"
 #include <vector>
+#include "config.h"
+#include "utils.h"
 
 using namespace std;
 
@@ -17,14 +19,23 @@ protected:
 	/// </summary>
 	vector<SDL_Texture*> frames;
 
- 
+	/// <summary>
+	/// The number of render times between each frame (depending on the actual FPS).
+	/// </summary>
+	int delay;
+
+	int lastTime;
+
+	int curFrame;
+	int frameCount;
 public:
 	/// <summary>
-	/// Creates a new texture
+	/// Creates a new animated texture from files id0, ..., idN.
 	/// </summary>
 	/// <param name="context"></param>
-	/// <param name="id"></param>
-	AnimatedTexture(RenderContext& context, string id);
+	/// <param name="id">Root of the names</param>
+	/// <param name="delay">Delay, in ms, between two frames.</param>
+	AnimatedTexture(RenderContext& context, string id, int delay);
 
 	virtual ~AnimatedTexture();
 

@@ -6,6 +6,8 @@
 #include "../Objects/Object.h"
 #include "../Maps/GameOverMenu.h"
 
+#include "Monsters/Fireball.h"
+
 Player::Player(RenderContext& renderer, int lives, int attack, int defense, int startHealth, int startMoney, int startExp) :
 	LivingEntity(startHealth, startMoney, startExp), MovingEntity(0, 0, renderer, "player"),
 	lives(lives), attack(attack), defense(defense), infosX(SZ_MAINWIDTH), infosY(0),
@@ -76,7 +78,7 @@ void Player::kill()
 {
 	if (lives == 0)
 	{
-
+		health = 0;
 	}
 	else
 	{
@@ -177,6 +179,7 @@ void Player::animateGameOver(int time, GAME* game)
 
 void Player::onKeyDown(GAME* game)
 {
+	if (!isAlive()) return;
 	Room& room = game->currentMap->getCurrentRoomObject();
 
 	int curX = x;
@@ -211,6 +214,9 @@ void Player::onKeyDown(GAME* game)
 	if (curX != x || curY != y)
 		room.tryTeleportAt(*this, curX, curY);
 
+	if (DEBUG_MODE)
+		if (game->keyLetter == 'F')
+			room.addMonster(new Fireball(*(game->renderer), *this, room));
 
 	if (story != NULL)
 	{
