@@ -122,7 +122,7 @@ Texture* RenderContext::LoadString(string text, int color)
 	string id = "text." + to_string(color) + "/" + text;
 	if (textures.find(id) == textures.end())
 	{
-		textures[id] = LoadVolatileString(text, color);
+		textures[id] = LoadVolatileString(GetText(text), color);
 	}
 
 	return textures[id];

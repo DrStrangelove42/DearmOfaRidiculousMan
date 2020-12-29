@@ -3,8 +3,8 @@
 GameOverMenu::GameOverMenu(Player& p, GAME* g) : Menu(p, g)
 {
 	RenderContext& r = *(g->renderer);
-	addButton(new Button("Retry (R)", r, SZ_SCREENWIDTH / 3, 2 * SZ_SCREENHEIGHT / 3, 0, [this](int i) {onRetryClick(i); }, 0x00aa00ff, 0x00ff00ff));
-	addButton(new Button("Quit (Q)", r, 2 * SZ_SCREENWIDTH / 3, 2 * SZ_SCREENHEIGHT / 3, 0, [this](int i) {onQuitClick(i); }, 0xaaaaaaff, 0xaaaaffff));
+	addButton(new Button("RETRY", r, SZ_SCREENWIDTH / 3, 2 * SZ_SCREENHEIGHT / 3, 0, [this](int i) {onRetryClick(i); }, 0x00aa00ff, 0x00ff00ff));
+	addButton(new Button("QUIT", r, 2 * SZ_SCREENWIDTH / 3, 2 * SZ_SCREENHEIGHT / 3, 0, [this](int i) {onQuitClick(i); }, 0xaaaaaaff, 0xaaaaffff));
 
 	addLabel(new Label("GAME OVER !", r, SZ_SCREENWIDTH / 2 - 50, SZ_SCREENHEIGHT / 2, 0xaa00aaff));
 	

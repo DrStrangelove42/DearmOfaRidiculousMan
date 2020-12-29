@@ -72,4 +72,19 @@ extern string WORLDDATA_LOCATION;
 /// Absolute path to the data folder. This must have a trailing slash.
 /// </summary>
 extern string DATA_LOCATION;
+
+/// <summary>
+/// Absolute path to the text resources folder. This must have a trailing slash.
+/// </summary>
+extern string LANG_LOCATION;
+
+/// <summary>
+/// Extension of language files
+/// </summary>
+extern string LANGFILES_EXT;
+
+/// <summary>
+/// Current language identifier in the game.
+/// </summary>
+extern string LANGUAGE;
 #endif

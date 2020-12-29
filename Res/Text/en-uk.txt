@@ -1,0 +1,16 @@
+#HELP
+Use B to attack, zqsd or arrow keys to move.
+#Welcome
+Welcome to the 
+#PROJECT
+ENS Software Engineering Project, year 2020
+#PRESSMAIN
+Press P or S to start, Q to quit. You can also click on the text-buttons below.
+#PLAY
+Play
+#RETRY
+Retry
+#QUIT
+Quit
+#STORYMODE
+Story mode

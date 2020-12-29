@@ -35,3 +35,7 @@ string STORYFILES_LOCATION = DATA_LOCATION + "Res/StoryMode/";
 string STORYFILES_EXT = ".txt";
 
 string WORLDDATA_LOCATION = DATA_LOCATION + "Data/Worlds/";
+
+string LANGFILES_EXT = ".txt";
+string LANG_LOCATION = DATA_LOCATION + "Res/Text/";
+string LANGUAGE = "en-uk";
