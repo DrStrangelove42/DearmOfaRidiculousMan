@@ -14,3 +14,10 @@ Retry
 Quit
 #STORYMODE
 Story mode
+#BUTLERSPEECH
+ 
+Greetings Sir !
+
+Welcome back to the Mansion.
+#BUTLERNAME
+Mr. Fyodor

@@ -7,13 +7,17 @@ Butler::Butler(string name, string greeting, int posx, int posy, RenderContext& 
 
 }
 
+
+
 Butler::Butler(string headerline, int posx, int posy, RenderContext& renderer) :
-	Butler(NextToken(headerline, ' '), "", posx, posy, renderer)
+	Butler(EatToken(headerline), "", posx, posy, renderer)
 {
-	//todo
+	id = EatToken(headerline);
+	speech = headerline;
+	setTexture(renderer);
 }
 
 bool Butler::updateObject(GAME* game)
 {
-	return false;
+	return NPC::updateObject(game);
 }

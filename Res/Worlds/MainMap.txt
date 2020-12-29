@@ -46,6 +46,8 @@ b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b
 24 0
 !1 0 0 22 -1
 !2 0 0 2 2 X FinalMap
+b1 HELP
+B1 BUTLERNAME BUTLERSPEECH
 #
    b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  
  !1g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  b  
@@ -67,9 +69,9 @@ b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b
  !1g  g  g  g  g  g  g  g  g  f  f  f  f  f  f  f  f  f  f  f  f  f  W!2W!2s  
  !1g  g  g  g  g  g  g  g  g  f  f  f  f  f  f  f  f  f  f  f  f  f  W!2W!2s  
  !1g  g  g  g  g  g  g  g  g  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
+ !1g  g  g  g  g  g  g  g  g  w  f  fB1f  f  f  f  f  f  f  f  f  f  f  f  s  
  !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
- !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
- !1g  g  g  g  g  g  g  g  g  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  s  
+ !1g  g  g  g  g  g  g  g  gb1w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  s  
  !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
  !1g  g  g  g  g  g  t  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
  !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  

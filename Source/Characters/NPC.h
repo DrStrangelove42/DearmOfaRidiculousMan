@@ -28,6 +28,7 @@ protected:
 	/// </summary>
 	list<Button*> choices;
 
+	void setTexture(RenderContext& renderer);
 public:
 	/// <summary>
 	/// 

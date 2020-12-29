@@ -55,9 +55,25 @@ string NextToken(string& line, char sep)
 	return line.substr(0, line.find_first_of(sep));
 }
 
+string EatToken(string& line, char sep)
+{
+	size_t i = line.find_first_of(sep);
+	string newLine = line;
+	if (i != line.npos)
+	{
+		line = line.substr(i + 1);
+		return newLine.substr(0, i);
+	}
+	else
+	{
+		line = "";
+		return newLine;
+	}
+}
+
 map<string, string> loadedStrings;
 
-string GetText(string& id)
+string GetText(string id)
 {
 	if (loadedStrings.find(id) == loadedStrings.end())
 		return id;
