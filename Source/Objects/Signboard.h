@@ -14,7 +14,7 @@ public:
 	virtual ~Signboard();
 
 	/// <summary>
-	/// Initialises a new Object with the specified informations.
+	/// Initialises a new Signboard with the specified informations.
 	/// </summary>
 	/// <param name="identifier"></param>
 	/// <param name="posx"></param>
@@ -24,7 +24,17 @@ public:
 	/// <param name="trav"></param>
 	/// <param name="attack"></param>
 	/// <param name="defense"></param>
-	Signboard(string identifier, int posx, int posy, RenderContext& renderer,string content);
+	Signboard(string identifier, int posx, int posy, RenderContext& renderer, string content);
+
+	/// <summary>
+	/// Initialises a new Signboard from the header line in a map file.
+	/// </summary>
+	/// <param name="headerline"></param>
+	/// <param name="posx"></param>
+	/// <param name="posy"></param>
+	/// <param name="renderer"></param>
+	Signboard(string headerline, int posx, int posy, RenderContext& renderer);
+
 
 	/// <summary>
 	/// Interaction with the game.

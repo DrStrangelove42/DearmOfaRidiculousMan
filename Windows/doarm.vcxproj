@@ -32,6 +32,7 @@
     <ClCompile Include="..\Source\Blocks\FloorBlock.cpp" />
     <ClCompile Include="..\Source\Blocks\StoneWallBlock.cpp" />
     <ClCompile Include="..\Source\Blocks\WallBlock.cpp" />
+    <ClCompile Include="..\Source\Characters\Butler.cpp" />
     <ClCompile Include="..\Source\Characters\IntelligentMonster.cpp" />
     <ClCompile Include="..\Source\Characters\LivingEntity.cpp" />
     <ClCompile Include="..\Source\Characters\Minions.cpp" />
@@ -79,6 +80,7 @@
     <ClInclude Include="..\Source\Blocks\FloorBlock.h" />
     <ClInclude Include="..\Source\Blocks\StoneWallBlock.h" />
     <ClInclude Include="..\Source\Blocks\WallBlock.h" />
+    <ClInclude Include="..\Source\Characters\Butler.h" />
     <ClInclude Include="..\Source\Characters\IntelligentMonster.h" />
     <ClInclude Include="..\Source\Characters\LivingEntity.h" />
     <ClInclude Include="..\Source\Characters\Minions.h" />

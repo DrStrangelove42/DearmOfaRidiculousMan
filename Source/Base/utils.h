@@ -65,4 +65,12 @@ int GetTime();
 /// <param name="max"></param>
 /// <returns></returns>
 int GetRandom(int max);
+
+/// <summary>
+/// Returns the first token.
+/// </summary>
+/// <param name="line"></param>
+/// <param name="sep"></param>
+/// <returns></returns>
+string NextToken(string& line, char sep = ' ');
 #endif

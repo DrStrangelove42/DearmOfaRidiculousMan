@@ -10,7 +10,7 @@
 /// Non-player character, who can talk to the player and offer him choices
 /// in the story.
 /// </summary>
-class NPC : Object
+class NPC : public Object
 {
 protected:
 	/// <summary>

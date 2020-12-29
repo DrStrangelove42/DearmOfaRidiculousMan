@@ -47,3 +47,8 @@ int GetTime()
 	duration<double, milli> time_span = n - referenceTime;
 	return (int)time_span.count();
 }
+
+string NextToken(string& line, char sep)
+{
+	return line.substr(0, line.find_first_of(sep));
+}

@@ -4,6 +4,7 @@
 #include <string>
 #include "../Base/game.h"
 #include "../Base/config.h"
+#include "../Base/utils.h"
 #include <fstream>
 #include <iostream>
 #include <vector>
@@ -30,8 +31,6 @@ protected:
 	void fromFile(string path);
 
 	string getLineType(string& line);
-
-	string nextToken(string& line, char sep);
 public:
 	/// <summary>
 	/// Name of the story to load from data files.

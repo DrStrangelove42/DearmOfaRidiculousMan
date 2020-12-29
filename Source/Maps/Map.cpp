@@ -387,9 +387,9 @@ void Map::intlGetObjectsFromFile(string filename, ifstream& data, RenderContext&
 			}
 			case 'G':
 			{
-				IntelligentGhost* newGhost = new IntelligentGhost(renderer, p, *(rooms[room]));
-				newGhost->teleport(x, y);
-				rooms[room]->addMonster(newGhost);
+				IntelligentGhost* newIGhost = new IntelligentGhost(renderer, p, *(rooms[room]));
+				newIGhost->teleport(x, y);
+				rooms[room]->addMonster(newIGhost);
 				break;
 			}
 			case 's':
@@ -401,9 +401,26 @@ void Map::intlGetObjectsFromFile(string filename, ifstream& data, RenderContext&
 			}
 			case 'S':
 			{
-				IntelligentSkeleton* newSkeleton = new IntelligentSkeleton(renderer, p, *(rooms[room]));
-				newSkeleton->teleport(x, y);
-				rooms[room]->addMonster(newSkeleton);
+				IntelligentSkeleton* newISkeleton = new IntelligentSkeleton(renderer, p, *(rooms[room]));
+				newISkeleton->teleport(x, y);
+				rooms[room]->addMonster(newISkeleton);
+				break;
+			}
+			case 'F':
+			{
+				Fireball* newfireball = new Fireball(renderer, p, *(rooms[room]));
+				newfireball->teleport(x, y);
+				rooms[room]->addMonster(newfireball);
+				break;
+			}
+			case 'B':
+			{
+				rooms[room]->addObject(new Butler(line3, x, y, renderer));
+				break;
+			}
+			case 'b':
+			{
+				rooms[room]->addObject(new Signboard(line3, x, y, renderer));
 				break;
 			}
 			default:

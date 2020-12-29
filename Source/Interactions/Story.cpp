@@ -34,13 +34,10 @@ void Story::fromFile(string path)
 
 string Story::getLineType(string& line)
 {
-	return nextToken(line, ' ');
+	return NextToken(line, ' ');
 }
 
-string Story::nextToken(string& line, char sep)
-{
-	return line.substr(0, line.find_first_of(sep));
-}
+
 
 Story::Story(string name)
 {
