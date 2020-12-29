@@ -4,7 +4,7 @@ AnimatedTexture::AnimatedTexture(RenderContext& context, string id, int delay) :
 	Texture(NULL, 0, 0), delay(delay), curFrame(0), lastTime(0)
 {
 	int num = 0;
-	SDL_Texture* cur;
+	SDL_Texture* cur = NULL;
 	do
 	{
 		/*The last will determine the texture's size, hopefully they are all the same*/

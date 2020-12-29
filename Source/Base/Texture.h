@@ -51,7 +51,15 @@ protected:
 	/// <param name="angle"></param>
 	/// <param name="center"></param>
 	/// <param name="flip"></param>
-	inline void internalRender(SDL_Texture*, RenderContext& context, int x, int y, int width, int height, double angle, SDL_Point* center, SDL_RendererFlip flip);
+	inline void internalRender(SDL_Texture* tx, RenderContext& context, int x, int y, int width, int height, double angle, SDL_Point* center, SDL_RendererFlip flip)
+	{
+		if (NULL != tx)
+		{
+			SDL_Rect dst = { x + VIEW_OFFSET_X, y + VIEW_OFFSET_Y, width, height };
+
+			context.doRender(tx, NULL, &dst, angle, center, flip);
+		}
+	}
 
 	/// <summary>
 	/// To avoid code duplication, this subfunction is called from render in the base class Texture but can
@@ -64,7 +72,23 @@ protected:
 	/// <param name="angle"></param>
 	/// <param name="center"></param>
 	/// <param name="flip"></param>
-	inline void internalRenderUnscaled(SDL_Texture* texture, RenderContext& context, int x, int y, double angle, SDL_Point* center, SDL_RendererFlip flip);
+	inline void internalRenderUnscaled(SDL_Texture* tx, RenderContext& context, int x, int y, double angle, SDL_Point* center, SDL_RendererFlip flip)
+	{
+		if (NULL != tx)
+		{
+			SDL_Rect dst = { x + VIEW_OFFSET_X, y + VIEW_OFFSET_Y, w, h };
+
+			/*Later : to clip an image*/
+			/*if (clip != NULL) <- <SDL_Rect* clip> an argument of our function
+			{
+				renderQuad.w = clip->w;
+				renderQuad.h = clip->h;
+			}*/
+
+			context.doRender(tx, NULL, &dst, angle, center, flip);
+		}
+	}
+
 public:
 	/// <summary>
 	/// Encapsulates an existing native texture

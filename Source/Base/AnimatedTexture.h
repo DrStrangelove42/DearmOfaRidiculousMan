@@ -64,7 +64,7 @@ public:
 	virtual void render(RenderContext& context, int x, int y, int width, int height, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 	/// <summary>
-	/// 
+	/// Sets the delay of the texture.
 	/// </summary>
 	/// <param name="d"></param>
 	void setDelay(int d);

@@ -58,31 +58,3 @@ void Texture::render(RenderContext& context, int x, int y, int width, int height
 
 int Texture::getWidth() { return w; }
 int Texture::getHeight() { return h; }
-
-
-void Texture::internalRender(SDL_Texture* tx, RenderContext& context, int x, int y, int width, int height, double angle, SDL_Point* center, SDL_RendererFlip flip)
-{
-	if (NULL != tx)
-	{
-		SDL_Rect dst = { x + VIEW_OFFSET_X, y + VIEW_OFFSET_Y, width, height };
-
-		context.doRender(tx, NULL, &dst, angle, center, flip);
-	}
-}
-
-void Texture::internalRenderUnscaled(SDL_Texture* tx, RenderContext& context, int x, int y, double angle, SDL_Point* center, SDL_RendererFlip flip)
-{
-	if (NULL != tx)
-	{
-		SDL_Rect dst = { x + VIEW_OFFSET_X, y + VIEW_OFFSET_Y, w, h };
-
-		/*Later : to clip an image*/
-		/*if (clip != NULL) <- <SDL_Rect* clip> an argument of our function
-		{
-			renderQuad.w = clip->w;
-			renderQuad.h = clip->h;
-		}*/
-
-		context.doRender(tx, NULL, &dst, angle, center, flip);
-	}
-}
