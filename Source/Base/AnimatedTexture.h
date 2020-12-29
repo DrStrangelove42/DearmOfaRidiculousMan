@@ -13,9 +13,9 @@ class AnimatedTexture : public Texture
 {
 protected:
 	/// <summary>
-	/// The texture under the hood
+	/// The textures under the hood
 	/// </summary>
-	vector<SDL_Texture*> textures;
+	vector<SDL_Texture*> frames;
 
  
 public:

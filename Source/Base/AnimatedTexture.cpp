@@ -2,12 +2,21 @@
 
 AnimatedTexture::AnimatedTexture(RenderContext& context, string id) : Texture(NULL, 0, 0)
 {
-		 
+	int num = 0;
+	SDL_Texture* cur;
+	do
+	{
+		/*The last will determine the texture's size, hopefully they are all the same*/
+		cur = internalLoadTexture(context, id + to_string(num), w, h);
+		if (cur != NULL)
+			frames.push_back(cur);
+	} while (cur != NULL);
+
 }
 
 AnimatedTexture::~AnimatedTexture()
 {
-	if (NULL != texture)
+	for (SDL_Texture* texture : frames)
 		SDL_DestroyTexture(texture);
 }
 
