@@ -109,7 +109,7 @@ Texture* RenderContext::LoadTexture(string id)
 	if (textures.find(id) == textures.end())
 	{
 		if (id[0] == '*')
-			textures[id] = new AnimatedTexture(*this, id.substr(1), 250);
+			textures[id] = new AnimatedTexture(*this, id.substr(1));
 		else
 			textures[id] = new Texture(*this, id);
 	}

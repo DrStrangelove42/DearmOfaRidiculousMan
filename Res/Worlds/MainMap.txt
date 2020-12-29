@@ -63,9 +63,9 @@ b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b
  !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
  !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
  !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
- !1g  g  g  g  g  g  g  g  g  f  f  f  f  f  f  f  f  f  f  f  f  f   !2 !2s  
- !1g  g  g  g  g  g  g  g  g  f  f  f  f  f  f  f  f  f  f  f  f  f   !2 !2s  
- !1g  g  g  g  g  g  g  g  g  f  f  f  f  f  f  f  f  f  f  f  f  f   !2 !2s  
+ !1g  g  g  g  g  g  g  g  g  f  f  f  f  f  f  f  f  f  f  f  f  f  W!2W!2s  
+ !1g  g  g  g  g  g  g  g  g  f  f  f  f  f  f  f  f  f  f  f  f  f  W!2W!2s  
+ !1g  g  g  g  g  g  g  g  g  f  f  f  f  f  f  f  f  f  f  f  f  f  W!2W!2s  
  !1g  g  g  g  g  g  g  g  g  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
  !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
  !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  

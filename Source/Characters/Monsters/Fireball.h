@@ -2,6 +2,7 @@
 #define FIREBALL_H
 
 #include "../IntelligentMonster.h"
+#include "../../Base/AnimatedTexture.h"
 
 /// <summary>
 /// A fireball. These will always have the same characteristics.

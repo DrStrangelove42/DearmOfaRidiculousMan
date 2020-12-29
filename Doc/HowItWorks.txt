@@ -31,6 +31,9 @@ Each room is described as follows:
    - 'b'ush, 'g'rass, 't'ree
    - 'f' : floor block.
    - 's' : stone wall block
+   - '*' : glass floor block (semi-transparent)
+   - 'S' : sand floor block
+   - 'W' : water block
  - The different characters that can encode objects/entities are:
    - ' ' : no object or entity.
    - 'p' : player starts on this block.
@@ -40,7 +43,7 @@ Each room is described as follows:
    - 'm' : monster, information about the type of monster should be written in the header, on a line starting with m followed by the identifier.
    - 'c' : chest, information about the contents of the chest should be written in the header, on a line starting with c followed by the identifier.
    - 'F' : fireball
-   - 'B' : butler (NPC)
+   - 'B' : butler (NPC), header : 
    - 'b' : sign board
 The format can be summarised as follows:
 

@@ -35,7 +35,7 @@ public:
 	/// <param name="context"></param>
 	/// <param name="id">Root of the names</param>
 	/// <param name="delay">Delay, in ms, between two frames.</param>
-	AnimatedTexture(RenderContext& context, string id, int delay);
+	AnimatedTexture(RenderContext& context, string id, int delay = 500);
 
 	virtual ~AnimatedTexture();
 
@@ -63,7 +63,11 @@ public:
 	/// <param name="flip"></param>
 	virtual void render(RenderContext& context, int x, int y, int width, int height, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
- 
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="d"></param>
+	void setDelay(int d);
 };
 
 #endif

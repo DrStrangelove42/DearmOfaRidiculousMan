@@ -46,3 +46,8 @@ void AnimatedTexture::render(RenderContext& context, int x, int y, int width, in
 
 	internalRender(frames[curFrame], context, x, y, width, height, angle, center, flip);
 }
+
+void AnimatedTexture::setDelay(int d)
+{
+	delay = d;
+}

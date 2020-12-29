@@ -464,6 +464,15 @@ Room* Map::intlRoomFromFile(string filename, ifstream& layout, Player& p, Render
 			case 'g':
 				thisRoom->replaceBlock(new FloorBlock(j, i, renderer, "grass"));
 				break;
+			case '*':
+				thisRoom->replaceBlock(new FloorBlock(j, i, renderer, "glass"));
+				break;
+			case 'S':
+				thisRoom->replaceBlock(new FloorBlock(j, i, renderer, "sand"));
+				break;
+			case 'W':
+				thisRoom->replaceBlock(new FloorBlock(j, i, renderer, "*water"));
+				break;
 			case 'b':
 				thisRoom->replaceBlock(new FloorBlock(j, i, renderer, "bush"));
 				break;
