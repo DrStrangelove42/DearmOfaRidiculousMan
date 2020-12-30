@@ -6,24 +6,52 @@
 #include "../Base/config.h"
 #include "../Base/utils.h"
 #include <fstream>
+#include <functional>
 #include <iostream>
-#include <vector>
+#include <vector> 
 
 using namespace std;
 
 class Story
 {
-	class Part
-	{
+	class Step;
 
+	/// <summary>
+	/// A point in a part of the story.
+	/// </summary>
+	class Step
+	{
+	public:
+		/// <summary>
+		/// The different branches of the story from this point.
+		/// </summary>
+		vector<Step*> choices;
+		/// <summary>
+		/// The action function takes the main game as a parameter.
+		/// </summary>
+		function<void(GAME*)> action;
+	
 	};
 
+	/// <summary>
+	/// Main subdivision of the story.
+	/// </summary>
+	class Part
+	{
+	protected:
+		Step decisionTree;
+		Step* curStep;
+
+	public:
+		void branch(int i);
+	};
+	
 protected:
 	/// <summary>
 	/// The different parts of the story to play.
 	/// </summary>
 	vector<Part*> parts;
-
+	int curPart;
 	/// <summary>
 	/// 
 	/// </summary>
@@ -50,6 +78,14 @@ public:
 	/// </summary>
 	/// <param name="ea"></param>
 	virtual void onKeyDown(GAME* game);
+
+	/// <summary>
+	/// Move to a new step in the decision tree.
+	/// </summary>
+	/// <param name="index"></param>
+	virtual void branch(int index);
+
+	virtual void changePart(int index);
 };
 
 #endif
