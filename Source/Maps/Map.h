@@ -95,6 +95,40 @@ protected:
 	/// <summary>
 	/// 
 	/// </summary>
+	/// <param name="line"></param>
+	/// <param name="filename"></param>
+	/// <param name="renderer"></param>
+	/// <param name="uniqueId"></param>
+	/// <param name="x"></param>
+	/// <param name="y"></param>
+	/// <param name="p"></param>
+	/// <param name="room"></param>
+	void parseObjectOrMonster(string& line, string& filename, RenderContext& renderer, int* uniqueId, int x, int y, Player& p, int room);
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="line"></param>
+	/// <param name="renderer"></param>
+	/// <param name="uniqueId"></param>
+	/// <param name="x"></param>
+	/// <param name="y"></param>
+	/// <returns></returns>
+	static Object* parseObject(string& line, RenderContext& renderer, int* uniqueId, int x, int y);
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="line"></param>
+	/// <param name="renderer"></param>
+	/// <param name="x"></param>
+	/// <param name="y"></param>
+	/// <returns></returns>
+	static Monster* parseMonster(string& line, RenderContext& renderer, int x, int y, Player& p, Room& r);
+
+	/// <summary>
+	/// 
+	/// </summary>
 	/// <param name="filename"></param>
 	/// <param name="layout"></param>
 	/// <param name="p"></param>

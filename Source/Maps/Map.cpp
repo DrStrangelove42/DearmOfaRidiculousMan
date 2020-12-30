@@ -356,82 +356,100 @@ void Map::intlGetObjectsFromFile(string filename, ifstream& data, RenderContext&
 		line3.erase(0, a + 1);
 		try
 		{
-			switch (line3[0])
-			{
-			case '!':
-			{
-				rooms[room]->addObject(new Warp(line3, &uniqueId, x, y, renderer));
-				break;
-			}
-			case 'k':
-			{
-				rooms[room]->addObject(new Key(line3.substr(0, 2), x, y, renderer));
-				break;
-			}
-			case 'd':
-			{
-				rooms[room]->addObject(new Door(line3, x, y, renderer));
-				break;
-			}
-			case 'c':
-			{
-				rooms[room]->addObject(new Chest(line3, &uniqueId, x, y, renderer));
-				break;
-			}
-			case 'g':
-			{
-				Ghost* newGhost = new Ghost(renderer, p, *(rooms[room]));
-				newGhost->teleport(x, y);
-				rooms[room]->addMonster(newGhost);
-				break;
-			}
-			case 'G':
-			{
-				IntelligentGhost* newIGhost = new IntelligentGhost(renderer, p, *(rooms[room]));
-				newIGhost->teleport(x, y);
-				rooms[room]->addMonster(newIGhost);
-				break;
-			}
-			case 's':
-			{
-				Skeleton* newSkeleton = new Skeleton(renderer, p, *(rooms[room]));
-				newSkeleton->teleport(x, y);
-				rooms[room]->addMonster(newSkeleton);
-				break;
-			}
-			case 'S':
-			{
-				IntelligentSkeleton* newISkeleton = new IntelligentSkeleton(renderer, p, *(rooms[room]));
-				newISkeleton->teleport(x, y);
-				rooms[room]->addMonster(newISkeleton);
-				break;
-			}
-			case 'F':
-			{
-				Fireball* newfireball = new Fireball(renderer, p, *(rooms[room]));
-				newfireball->teleport(x, y);
-				rooms[room]->addMonster(newfireball);
-				break;
-			}
-			case 'B':
-			{
-				rooms[room]->addObject(new Butler(line3, x, y, renderer));
-				break;
-			}
-			case 'b':
-			{
-				rooms[room]->addObject(new Signboard(line3, x, y, renderer));
-				break;
-			}
-			default:
-				cout << "Case " << line3[0] << " not treated yet in " << filename << endl;
-				break;
-			}
+			parseObjectOrMonster(line3, filename, renderer, &uniqueId, x, y, p, room);
 		}
 		catch (...)
 		{
 			cout << "Incomplete header in " << filename << endl;
 		}
+	}
+}
+
+void Map::parseObjectOrMonster(string& line, string& filename, RenderContext& renderer, int* uniqueId, int x, int y, Player& p, int room)
+{
+	string monsters = "GgSsF";
+	string objects = "!kdcBb";
+	if (monsters.find_first_of(line[0]) != monsters.npos)
+	{
+		rooms[room]->addMonster(parseMonster(line, renderer, x, y, p, *(rooms[room])));
+	}
+	else if (objects.find_first_of(line[0]) != objects.npos)
+	{
+		rooms[room]->addObject(parseObject(line, renderer, uniqueId, x, y));
+	}
+	else
+		cout << "Case " << line[0] << " not treated yet in " << filename << endl;
+}
+
+Object* Map::parseObject(string& line, RenderContext& renderer, int* uniqueId, int x, int y)
+{
+	switch (line[0])
+	{
+	case '!':
+	{
+		return new Warp(line, uniqueId, x, y, renderer);
+	}
+	case 'k':
+	{
+		return new Key(line.substr(0, 2), x, y, renderer);
+	}
+	case 'd':
+	{
+		return new Door(line, x, y, renderer);
+	}
+	case 'c':
+	{
+		return new Chest(line, uniqueId, x, y, renderer);
+	}
+	case 'B':
+	{
+		return new Butler(line, x, y, renderer);
+	}
+	case 'b':
+	{
+		return new Signboard(line, x, y, renderer);
+	}
+	default:
+		return NULL;
+	}
+}
+
+Monster* Map::parseMonster(string& line, RenderContext& renderer, int x, int y, Player& p, Room& r)
+{
+	switch (line[0])
+	{
+	case 'g':
+	{
+		Ghost* newGhost = new Ghost(renderer, p, r);
+		newGhost->teleport(x, y);
+		return newGhost;
+	}
+	case 'G':
+	{
+		IntelligentGhost* newIGhost = new IntelligentGhost(renderer, p, r);
+		newIGhost->teleport(x, y);
+		return newIGhost;
+	}
+	case 's':
+	{
+		Skeleton* newSkeleton = new Skeleton(renderer, p, r);
+		newSkeleton->teleport(x, y);
+		return newSkeleton;
+	}
+	case 'S':
+	{
+		IntelligentSkeleton* newISkeleton = new IntelligentSkeleton(renderer, p, r);
+		newISkeleton->teleport(x, y);
+		return newISkeleton;
+	}
+	case 'F':
+	{
+		Fireball* newfireball = new Fireball(renderer, p, r);
+		newfireball->teleport(x, y);
+		return newfireball;
+	}
+	default:
+		return NULL;
 	}
 }
 
