@@ -3,7 +3,9 @@
 
 #include <string>
 #include <iostream>
+#include <fstream>
 #include <chrono>
+#include <map>
 
 #include "config.h"
 
@@ -73,4 +75,25 @@ int GetRandom(int max);
 /// <param name="sep"></param>
 /// <returns></returns>
 string NextToken(string& line, char sep = ' ');
+
+/// <summary>
+/// Returns the first token, and go forward in the string.
+/// </summary>
+/// <param name="line"></param>
+/// <param name="sep"></param>
+/// <returns></returns>
+string EatToken(string& line, char sep = ' ');
+
+/// <summary>
+/// Loads a string from the current language context.
+/// </summary>
+/// <param name="id"></param>
+/// <returns></returns>
+string GetText(string id);
+
+/// <summary>
+/// Initialisation of the current language context.
+/// </summary>
+/// <param name="langCode"></param>
+void LoadTextFromLanguage(string& langCode);
 #endif

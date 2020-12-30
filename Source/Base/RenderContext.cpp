@@ -122,7 +122,7 @@ Texture* RenderContext::LoadString(string text, int color)
 	string id = "text." + to_string(color) + "/" + text;
 	if (textures.find(id) == textures.end())
 	{
-		textures[id] = LoadVolatileString(text, color);
+		textures[id] = LoadVolatileString(GetText(text), color);
 	}
 
 	return textures[id];
@@ -167,20 +167,23 @@ Texture* RenderContext::LoadText(string text, int color, int backColor, int widt
 				/*Fall through*/
 			case '\n':
 			case '\r':
-				s = TTF_RenderText_Solid(FONT, word.c_str(), c);
-				cur.h = s->h;
-				cur.w = s->w;
-				if (cur.x + cur.w + padding > width)
+				if (!word.empty())
 				{
-					/*Line feed*/
-					cur.x = padding;
-					cur.y += cur.h;
-					height += cur.h;
+					s = TTF_RenderText_Solid(FONT, word.c_str(), c);
+					cur.h = s->h;
+					cur.w = s->w;
+					if (cur.x + cur.w + padding > width)
+					{
+						/*Line feed*/
+						cur.x = padding;
+						cur.y += cur.h;
+						height += cur.h;
+					}
+					SDL_BlitSurface(s, NULL, textSurface, &cur);
+					SDL_FreeSurface(s);
+					cur.x += cur.w;
+					word = "";
 				}
-				SDL_BlitSurface(s, NULL, textSurface, &cur);
-				SDL_FreeSurface(s);
-				cur.x += cur.w;
-				word = "";
 				if (text[i] == '\r' || text[i] == '\n')
 				{
 					/*Line feed*/

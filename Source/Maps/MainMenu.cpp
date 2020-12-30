@@ -22,13 +22,13 @@ MainMenu::MainMenu(Player& p, GAME* g) : Menu(p, g)
 {
 	RenderContext& r = *(g->renderer);
 
-	addButton(new Button("Play", r, SZ_SCREENWIDTH / 3, SZ_SCREENHEIGHT - 150, 0, [this](int id) {onPlayClick(id); }, 0x00ffaaff, 0xffff00ff));
-	addButton(new Button("Story mode", r, SZ_SCREENWIDTH / 2 - 40, SZ_SCREENHEIGHT - 150, 1, [this](int id) {onStoryModeClick(id); }, 0xff8800ff, 0xffff00ff));
+	addButton(new Button("PLAY", r, SZ_SCREENWIDTH / 3, SZ_SCREENHEIGHT - 150, 0, [this](int id) {onPlayClick(id); }, 0x00ffaaff, 0xffff00ff));
+	addButton(new Button("STORYMODE", r, SZ_SCREENWIDTH / 2 - 40, SZ_SCREENHEIGHT - 150, 1, [this](int id) {onStoryModeClick(id); }, 0xff8800ff, 0xffff00ff));
 
-	addButton(new Button("Quit", r, 2 * SZ_SCREENWIDTH / 3, SZ_SCREENHEIGHT - 150, 2, [this](int id) {onQuitClick(id); }, 0xff00aaff, 0xffff00ff));
+	addButton(new Button("QUIT", r, 2 * SZ_SCREENWIDTH / 3, SZ_SCREENHEIGHT - 150, 2, [this](int id) {onQuitClick(id); }, 0xff00aaff, 0xffff00ff));
 
 
-	Texture* welcome = r.LoadString("Welcome to the ", 0xAA00FFFF);
+	Texture* welcome = r.LoadString("Welcome", 0xAA00FFFF);
 	animationTextures = new Texture * [20];
 	int color;
 	for (int i = 0; i < 20; i++)
@@ -37,8 +37,8 @@ MainMenu::MainMenu(Player& p, GAME* g) : Menu(p, g)
 		animationTextures[i] = r.LoadString("Dream of a Ridiculous Man !", color);
 	}
 
-	Texture* subtitle = r.LoadString("ENS Software Engineering Project, year 2020", 0x007ACCFF);
-	Texture* info = r.LoadString("Press P or S to start, Q to quit. You can also click on the text-buttons below.", 0xaaaaaaff);
+	Texture* subtitle = r.LoadString("PROJECT", 0x007ACCFF);
+	Texture* info = r.LoadString("PRESSMAIN", 0xaaaaaaff);
 	addLabel(new Label(welcome, (SZ_SCREENWIDTH - welcome->getWidth() - animationTextures[0]->getWidth()) / 2, SZ_SCREENHEIGHT / 3));
 	animation = new Label(animationTextures[0], labels.front()->getX() + welcome->getWidth(), labels.front()->getY());
 	addLabel(new Label(subtitle, (SZ_SCREENWIDTH - subtitle->getWidth()) / 2, labels.front()->getY() + welcome->getHeight() + 10));

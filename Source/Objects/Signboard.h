@@ -9,6 +9,8 @@ class Signboard : public Object
 {
 protected:
 	Texture* textContent;
+
+	void setTexture(string text, RenderContext& renderer);
 public:
 	/*Destructor*/
 	virtual ~Signboard();
