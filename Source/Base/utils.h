@@ -6,6 +6,8 @@
 #include <fstream>
 #include <chrono>
 #include <map>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 #include "config.h"
 
