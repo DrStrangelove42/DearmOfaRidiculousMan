@@ -75,12 +75,11 @@ public:
 	/// Constructor used to deduce the members from a string when creating maps
 	/// </summary>
 	/// <param name="headerline"></param>
-	/// <param name="uniqueId"></param>
 	/// <param name="posx"></param>
 	/// <param name="posy"></param>
 	/// <param name="identifier"></param>
 	/// <param name="renderer"></param>
-	Warp(string information, int* uniqueId, int posx, int posy,  RenderContext& renderer);
+	Warp(string information, int posx, int posy,  RenderContext& renderer);
 	
 	/// <summary>
 	/// How does a warp interact with the player?

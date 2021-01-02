@@ -11,9 +11,11 @@ Chest::Chest(string identifier, int posx, int posy, RenderContext& renderer) :
 
 }
 
-Chest::Chest(string headerline, int* uniqueId, int posx, int posy, RenderContext& renderer) : Chest(headerline.substr(0, 2), posx, posy, renderer)
+Chest::Chest(string headerline, int* uniqueId, int posx, int posy, RenderContext& renderer) : Chest("", posx, posy, renderer)
 {
-	headerline.erase(0, 3);
+	size_t pos = headerline.find(" ");
+	id = headerline.substr(0,pos);
+	headerline.erase(0,pos+1);
 	// After the identifier, the items in the chest are described between parentheses, one after the other.
 	while (headerline.length() > 0 && headerline[0] == '(')
 	{

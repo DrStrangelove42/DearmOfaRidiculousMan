@@ -39,7 +39,7 @@ Each room is described as follows:
    - 'p' : player starts on this block.
    - '!' : block from which a player can warp. The coordinates of the block to which the player warps is described in the header, on a line starting with '!' followed by the identifier, and then the integers representing map number, room number, x coordinate, y coordinate, the delay, separated by spaces. 
    - 'k' : key, the following character is the identifier.
-   - 'd' : door that can be unlocked with a key. The characteristics of the door are described in the header, on a line starting with d followed by the identifier of the door, a space, the identifier of the key that unlocks it, and then the direction the door faces when it's open and when it's closed, no spaces.
+   - 'd' : door that can be unlocked with a key. The characteristics of the door are described in the header, on a line starting with d followed by the identifier of the door, a space, the identifier of the key that unlocks it, and then the direction the door faces when it's closed and when it's open, with spaces.
    - 'm' : monster, information about the type of monster should be written in the header, on a line starting with m followed by the identifier.
    - 'c' : chest, information about the contents of the chest should be written in the header, on a line starting with c followed by the identifier.
    - 'F' : fireball

@@ -19,11 +19,6 @@ Room::Room(int width, int height, int absx, int absy, Player& p, RenderContext& 
 	}
 }
 
-list<Monster*>& Room::getMonsters()
-{
-	return monsters;
-}
-
 Room::~Room()
 {
 	for (int i = 0; i < w; i++)
@@ -87,6 +82,17 @@ int Room::getY()const
 Block*** Room::getBlocks()
 {
 	return blocks;
+}
+
+list<Monster*>& Room::getMonsters()
+{
+	return monsters;
+}
+
+
+unordered_map <string, Object*>& Room::getObjects()
+{
+	return objects;
 }
 
 void Room::setDiscovered(bool b)

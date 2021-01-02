@@ -63,12 +63,6 @@ public:
 
 	void removeObject(string id);
 
-	/// <summary>
-	/// 
-	/// </summary>
-	/// <returns></returns>
-	list<Monster*>& getMonsters();
-
 	/* Standard destructor */
 	virtual ~Room();
 
@@ -158,6 +152,14 @@ public:
 	int getX()const;
 	int getY()const;
 	Block*** getBlocks();
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <returns></returns>
+	list<Monster*>& getMonsters();
+
+	unordered_map <string, Object*>& getObjects();
 
 	/* Setters */
 	void setDiscovered(bool b);
