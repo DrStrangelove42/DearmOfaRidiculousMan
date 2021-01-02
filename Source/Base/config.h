@@ -69,6 +69,11 @@ extern string STORYFILES_LOCATION;
 extern string WORLDDATA_LOCATION;
 
 /// <summary>
+/// Location of files used to save progress.
+/// </summary>
+extern string SAVES_LOCATION;
+
+/// <summary>
 /// Absolute path to the data folder. This must have a trailing slash.
 /// </summary>
 extern string DATA_LOCATION;

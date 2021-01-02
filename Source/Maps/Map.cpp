@@ -513,3 +513,37 @@ Room* Map::intlRoomFromFile(string filename, ifstream& layout, Player& p, Render
 	return thisRoom;
 }
 
+void Map::saveProgress(string name, int number)
+{
+	ifstream SaveData(SAVES_LOCATION + name + "/" + name + to_string(number) + "Data"+ EXT);
+	for (int room = 0; room < roomCount; room++)
+	{
+		unordered_map <string, Object*> objects = rooms[room]->getObjects();
+		for (auto& object : objects)
+		{
+			switch (object.first[0])
+			{
+			case '!':
+			{
+			}
+			case 'k':
+			{
+			}
+			case 'd':
+			{
+			}
+			case 'c':
+			{
+			}
+			case 'B':
+			{
+			}
+			case 'b':
+			{
+			}
+			default:
+				cout << "Saving object " << object.first[0] << " not treated yet" << endl;
+			}
+		}
+	}
+}

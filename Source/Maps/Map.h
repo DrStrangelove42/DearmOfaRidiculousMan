@@ -160,6 +160,15 @@ protected:
 	static bool intlParseRoom(string& newFile, ifstream& World, int map, int room, ofstream& layout, ofstream& start, ofstream& data);
 
 	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="name"></param>
+	/// <param name="number"></param>
+	/// <returns></returns>
+
+	void saveProgress(string name, int number);
+
+	/// <summary>
 	/// Index of the room that is currently displayed (in which the player is)
 	/// </summary>
 	int currentRoom;
