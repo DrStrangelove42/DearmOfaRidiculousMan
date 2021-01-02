@@ -43,6 +43,7 @@ class Story
 		Step* curStep;
 
 	public:
+		Part();
 		void branch(int i);
 	};
 	
@@ -56,15 +57,15 @@ protected:
 	/// 
 	/// </summary>
 	/// <param name="path"></param>
-	void fromFile(string path);
-
-	string getLineType(string& line);
+	void fromFile(string path, GAME* game);
 public:
 	/// <summary>
 	/// Name of the story to load from data files.
 	/// </summary>
 	/// <param name="path"></param>
-	Story(string path);
+	Story(string path, GAME* game);
+
+	~Story();
 
 	/// <summary>
 	/// 

@@ -105,26 +105,7 @@ protected:
 	/// <param name="room"></param>
 	void parseObjectOrMonster(string& line, string& filename, RenderContext& renderer, int* uniqueId, int x, int y, Player& p, int room);
 
-	/// <summary>
-	/// 
-	/// </summary>
-	/// <param name="line"></param>
-	/// <param name="renderer"></param>
-	/// <param name="uniqueId"></param>
-	/// <param name="x"></param>
-	/// <param name="y"></param>
-	/// <returns></returns>
-	static Object* parseObject(string& line, RenderContext& renderer, int* uniqueId, int x, int y);
-
-	/// <summary>
-	/// 
-	/// </summary>
-	/// <param name="line"></param>
-	/// <param name="renderer"></param>
-	/// <param name="x"></param>
-	/// <param name="y"></param>
-	/// <returns></returns>
-	static Monster* parseMonster(string& line, RenderContext& renderer, int x, int y, Player& p, Room& r);
+	
 
 	/// <summary>
 	/// 
@@ -164,6 +145,26 @@ protected:
 	/// </summary>
 	int currentRoom;
 public:
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="line"></param>
+	/// <param name="renderer"></param>
+	/// <param name="uniqueId"></param>
+	/// <param name="x"></param>
+	/// <param name="y"></param>
+	/// <returns></returns>
+	static Object* parseObject(string& line, RenderContext& renderer, int* uniqueId, int x, int y);
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="line"></param>
+	/// <param name="renderer"></param>
+	/// <param name="x"></param>
+	/// <param name="y"></param>
+	/// <returns></returns>
+	static Monster* parseMonster(string& line, RenderContext& renderer, int x, int y, Player& p, Room& r);
 	/// <summary>
 	/// This function transforms a text file into a folder of texts files which are sufficient 
 	/// to describe the map completely and to be able to modify the maps to save progress.
