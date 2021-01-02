@@ -2,6 +2,7 @@
 #define DOOR_H
 
 #include "Object.h"
+#include <sstream>
 
 class Door : public Object
 {

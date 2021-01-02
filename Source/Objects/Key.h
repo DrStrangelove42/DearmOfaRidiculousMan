@@ -8,7 +8,7 @@ class Key : public PickableObject
 public: 
 	
 	/// <summary>
-	/// Constructor, a key's identifier should be the letter k followed by a character c, the key can only unlock doors starting with dc
+	/// Constructor, the second character of a key's identifier is used to know which doors it can unlock.
 	/// </summary>
 	/// <param name="identifier"></param>
 	/// <param name="posx"></param>

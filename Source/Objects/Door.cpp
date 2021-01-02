@@ -10,9 +10,26 @@ Door::Door(string keyId, string openOrientation, string closedOrientation, strin
 
 }
 
-Door::Door(string headerline, int posx, int posy, RenderContext& renderer) : Door(headerline.substr(3,1), headerline.substr(7,1), headerline.substr(5,1),headerline.substr(0,2), posx, posy, renderer)
+Door::Door(string headerline, int posx, int posy, RenderContext& renderer) : Object("", posx, posy, "empty", renderer, false)
 {
+	auto iss = istringstream{ headerline };
+	string str = "";
+	/*Tokenisation, more reliable*/
+	vector<string> tokens;
+	while (iss >> str)
+	{
+		tokens.push_back(str);
+	}
+	/*
+	Recall the structure of Door info :
+	0 -> !<ID>
+	1 -> KeyId
+	2 -> ClosedOrientation
+	3 -> OpenOrientation
+	*/
 
+	string id = tokens[0], keyId = tokens[1], closedOr = tokens[2], openOr = tokens[3];
+	*this = Door(keyId, openOr, closedOr, id, posx, posy, renderer);
 }
 
 bool Door::updateObject(GAME* game)

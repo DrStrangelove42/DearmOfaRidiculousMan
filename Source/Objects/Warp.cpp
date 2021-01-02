@@ -19,8 +19,8 @@ Warp::Warp(int destMap, int destRoom, int destX, int destY, int posx, int posy, 
 
 }
 
-Warp::Warp(string information, int* uniqueId, int posx, int posy, RenderContext& renderer) :
-	Object(information.substr(0, 2) + to_string((*uniqueId)++), posx, posy, "empty", renderer, true), delay(0), destWorld("")
+Warp::Warp(string information, int posx, int posy, RenderContext& renderer) :
+	Object("", posx, posy, "empty", renderer, true), delay(0), destWorld("")
 {
 	auto iss = istringstream{ information };
 	string str = "";
@@ -41,6 +41,7 @@ Warp::Warp(string information, int* uniqueId, int posx, int posy, RenderContext&
 	6 ->			|  <dest world>]
 	*/
 
+	id = tokens[0];
 	destMap = stoi(tokens[1]);
 	destRoom = stoi(tokens[2]);
 	destX = stoi(tokens[3]);

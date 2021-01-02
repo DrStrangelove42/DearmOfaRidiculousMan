@@ -172,6 +172,7 @@ bool Map::intlParseMap(string& newFile, int map, ifstream& World, ofstream& star
 bool Map::intlParseRoom(string& newFile, ifstream& World, int map, int room, ofstream& layout, ofstream& start, ofstream& data)
 {
 	int height, width;
+	int uniqueId = 0; //This integer is used to make sure the identifier of each object in the room is unique
 	string line;
 	getline(World, line);
 	if (line.length() == 0 || line[0] != '#')
@@ -262,7 +263,7 @@ bool Map::intlParseRoom(string& newFile, ifstream& World, int map, int room, ofs
 				{
 					if (header[k][0] == line[3 * j + 1] && header[k][1] == line[3 * j + 2])
 					{
-						data << header[k] << endl;
+						data << header[k][0] << header[k][1] << uniqueId++ << header[k].substr(2) << endl;
 						notinheader = false;
 						break;
 					}
@@ -335,7 +336,7 @@ void Map::mapFromFiles(string worldName, Player& p, RenderContext& renderer, int
 void Map::intlGetObjectsFromFile(string filename, ifstream& data, RenderContext& renderer, Player& p)
 {
 	string line3;
-	int uniqueId = 0; //This integer is used to make sure the identifier of each objects in the room is unique
+	int uniqueId = 0; // This integer is used to make sure that objects in chests have unique identifiers.
 
 	while (getline(data, line3)) //We now add the objects to the rooms
 	{
@@ -387,7 +388,7 @@ Object* Map::parseObject(string& line, RenderContext& renderer, int* uniqueId, i
 	{
 	case '!':
 	{
-		return new Warp(line, uniqueId, x, y, renderer);
+		return new Warp(line, x, y, renderer);
 	}
 	case 'k':
 	{
