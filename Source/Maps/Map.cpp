@@ -339,9 +339,9 @@ void Map::intlGetObjectsFromFile(string filename, ifstream& data, RenderContext&
 
 	while (getline(data, line3)) //We now add the objects to the rooms
 	{
-		/*For each object, we extract its position in the map, its identifier,
+		/* For each object, we extract its position in the map, its identifier,
 		and the rest of the information needed to construct the object and add
-		it to the map*/
+		it to the map. */
 		if (line3[line3.length() - 1] == '\r')
 		{
 			line3.erase(line3.length() - 1);
@@ -489,7 +489,7 @@ Room* Map::intlRoomFromFile(string filename, ifstream& layout, Player& p, Render
 				thisRoom->replaceBlock(new FloorBlock(j, i, renderer, "sand"));
 				break;
 			case 'W':
-				thisRoom->replaceBlock(new FloorBlock(j, i, renderer, "*water"));
+				thisRoom->replaceBlock(new FloorBlock(j, i, renderer, "water"));
 				break;
 			case 'b':
 				thisRoom->replaceBlock(new FloorBlock(j, i, renderer, "bush"));
