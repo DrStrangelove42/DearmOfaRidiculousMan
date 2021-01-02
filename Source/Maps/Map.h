@@ -143,11 +143,12 @@ protected:
 	/// <summary>
 	/// 
 	/// </summary>
-	/// <param name="name"></param>
-	/// <param name="number"></param>
+	/// <param name="saveName"></param>
+	/// <param name="originalWorldName"></param>
+	/// <param name="mapNumber"></param>
 	/// <returns></returns>
 
-	void saveProgress(string name, int number);
+	void saveProgress(string saveName, string originalWorldName, int mapNumber);
 
 	/// <summary>
 	/// Index of the room that is currently displayed (in which the player is)

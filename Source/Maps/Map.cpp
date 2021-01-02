@@ -512,19 +512,42 @@ Room* Map::intlRoomFromFile(string filename, ifstream& layout, Player& p, Render
 	}
 	return thisRoom;
 }
-
-void Map::saveProgress(string name, int number)
+/*
+void Map::saveProgress(string saveName, string originalWorldName, int mapNumber)
 {
-	ifstream SaveData(SAVES_LOCATION + name + "/" + name + to_string(number) + "Data"+ EXT);
+	ofstream SaveData(SAVES_LOCATION + saveName + "/" + saveName + to_string(mapNumber) + "Data"+ EXT);
+	ifstream OriginalData(WORLDDATA_LOCATION + originalWorldName + "/" + originalWorldName + to_string(mapNumber) + "Data" + EXT);
+	//We will use the original list of objects to construct the new one.
+
+	string line;
+	while (getline(OriginalData,line))
+	{
+		if (line[line.length() - 1] == '\r')
+		{
+			line.erase(line.length() - 1);
+		}
+		int room, x, y;
+		size_t a;
+		room = stoi(line, &a);
+		line.erase(0, a);
+		x = stoi(line, &a);
+		line.erase(0, a);
+		y = stoi(line, &a);
+		line.erase(0, a + 1);
+	}
 	for (int room = 0; room < roomCount; room++)
 	{
 		unordered_map <string, Object*> objects = rooms[room]->getObjects();
 		for (auto& object : objects)
 		{
-			switch (object.first[0])
+			Object obj = *(object.second);
+			string toAdd = room + " " + to_string(obj.getX()) + " " + to_string(obj.getY()) + " " + obj.getId() + " "; //This is the string we will add to the file if the object indeed needs to be added.
+			switch (obj.getId()[0])
 			{
 			case '!':
 			{
+				Object obj = *(object.second);
+				toAdd += to_string(destMap) + " " + to_string(destRoom) + " " + to_string(destX) + " " + to_string(destY) + " " + 
 			}
 			case 'k':
 			{
@@ -547,3 +570,4 @@ void Map::saveProgress(string name, int number)
 		}
 	}
 }
+*/
