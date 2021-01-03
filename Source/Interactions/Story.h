@@ -22,15 +22,20 @@ class Story
 	class Step
 	{
 	public:
-		/// <summary>
-		/// The different branches of the story from this point.
-		/// </summary>
-		vector<Step*> choices;
+		bool done;
+
 		/// <summary>
 		/// The action function takes the main game as a parameter.
 		/// </summary>
 		function<void(GAME*)> action;
 	
+		/// <summary>
+		/// Creates a new step in the story.
+		/// </summary>
+		/// <param name="action">Action performed when the part containing this step is launched.</param>
+		Step(function<void(GAME*)> action);
+
+
 	};
 
 	/// <summary>
@@ -38,21 +43,27 @@ class Story
 	/// </summary>
 	class Part
 	{
-	protected:
-		Step decisionTree;
-		Step* curStep;
-
 	public:
+		/// <summary>
+		/// If a branch occurs, the part does not go forward automatically.
+		/// </summary>
+		vector<Step*> scenario;
+		int curStep;
+		bool done;
+
 		Part();
 		void branch(int i);
+
+		void nextStep();
+	 
 	};
 	
 protected:
 	/// <summary>
 	/// The different parts of the story to play.
 	/// </summary>
-	vector<Part*> parts;
-	int curPart;
+	map<string, Part*> parts;
+	Part* curPart;
 	/// <summary>
 	/// 
 	/// </summary>
@@ -86,7 +97,9 @@ public:
 	/// <param name="index"></param>
 	virtual void branch(int index);
 
-	virtual void changePart(int index);
+	virtual void changePart(string index);
+
+	Step* getCurrentStep();
 };
 
 #endif

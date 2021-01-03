@@ -101,10 +101,31 @@ public:
 	/// </summary>
 	virtual void manageAlarm();
 
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="renderer"></param>
+	/// <param name="offsetX"></param>
 	/// <param name="offsetY"></param>
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0)const;
+
+	/// <summary>
+	/// 
+	/// </summary>
 	virtual void kill();
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="time"></param>
+	/// <param name="game"></param>
 	virtual void tick(int time, GAME* game);
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="r"></param>
+	void setRoom(Room& r);
 };
 
 #endif
