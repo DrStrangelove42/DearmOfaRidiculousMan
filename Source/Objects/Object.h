@@ -24,7 +24,7 @@ protected:
 	int defense;
 
 public:
-	~Object(); 
+	virtual ~Object(); 
 	/// <summary>
 	/// Initialises a new Object with the specified informations.
 	/// </summary>

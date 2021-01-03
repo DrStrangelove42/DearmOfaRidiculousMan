@@ -1,6 +1,6 @@
 #include "Map.h"
 
-Map::Map(Player& p, int roomCount) : player(p), roomCount(roomCount), currentRoom(0), titleTexture(NULL)
+Map::Map(Player& p, int roomCount) : player(p), roomCount(roomCount), currentRoom(0), titleTexture(NULL), deleting(false)
 {
 	rooms = new Room * [roomCount];
 }
@@ -12,10 +12,14 @@ Map::~Map()
 		delete rooms[i];
 	}
 	delete[] rooms;
+
+	mouseEventHandlers.clear();
+
+	deleting = true;
 }
 
 Map::Map(string worldName, Player& p, RenderContext& renderer, int* startMap, int startRoom) :
-	player(p), worldName(worldName), currentRoom(0), roomCount(0), titleTexture(NULL), rooms(NULL)
+	player(p), worldName(worldName), currentRoom(0), roomCount(0), titleTexture(NULL), rooms(NULL), deleting(false)
 {
 	// First we determine whether the files representing the world need to be generated, that is to say whether these files don't exist or whether they are older than the file representing the world.
 	struct stat dataLocation;
@@ -114,6 +118,17 @@ Room& Map::getCurrentRoomObject()
 	return *(getRooms()[currentRoom]);
 }
 
+void Map::addMouseHandler(DrawableEntity* entity, function<void(MOUSE_DATA*)> callback)
+{
+	mouseEventHandlers[entity] = callback;
+}
+
+void Map::removeMouseHandler(DrawableEntity* entity)
+{
+	if (mouseEventHandlers.find(entity) != mouseEventHandlers.end())
+		mouseEventHandlers.erase(entity);
+}
+
 void Map::onKeyDown(GAME* game)
 {
 	rooms[currentRoom]->onKeyDown(game);
@@ -121,7 +136,13 @@ void Map::onKeyDown(GAME* game)
 
 void Map::onMouseEvent(MOUSE_DATA* md)
 {
-
+	for (auto& f : mouseEventHandlers)
+	{
+		if (f.first != NULL)
+			f.second(md);
+		if (deleting)
+			return;
+	}
 }
 
 void Map::worldFromFile(string worldName)
@@ -547,7 +568,7 @@ void Map::saveProgress(string saveName, string originalWorldName, int mapNumber)
 			case '!':
 			{
 				Object obj = *(object.second);
-				toAdd += to_string(destMap) + " " + to_string(destRoom) + " " + to_string(destX) + " " + to_string(destY) + " " + 
+				toAdd += to_string(destMap) + " " + to_string(destRoom) + " " + to_string(destX) + " " + to_string(destY) + " " +
 			}
 			case 'k':
 			{

@@ -127,7 +127,9 @@ void Room::addObject(Object* object)
 	}
 	else
 	{
-		cout << "Two objects have the same identifier " << object->getId() << endl;
+		//cout << "Two objects have the same identifier " << object->getId() << endl;
+		delete objects[object->getId()];
+		objects[object->getId()] = object;
 	}
 }
 

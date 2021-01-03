@@ -1,19 +1,19 @@
 #include "Button.h"
 
-Button::Button(Texture* texture, int x, int y, int id, function<void(int)> onClick) : 
-	Label(texture, x, y), id(id), onClick(onClick), mouseOver(false), overTexture(NULL), name("noname")
+Button::Button(Texture* texture, int x, int y, int id, function<void(int)> onClick) :
+	Label(texture, x, y), id(id), onClick(onClick), mouseOver(false), overTexture(NULL), name("noname"), overClr(0xFFFFFFFF)
 {
 	normalTexture = texture;
 }
 
 Button::Button(string caption, RenderContext& r, int x, int y, int id, function<void(int)> onClick, int color) :
-	Label(caption, r, x, y, color), id(id), onClick(onClick), mouseOver(false), overTexture(NULL), name(caption)
+	Label(caption, r, x, y, color), id(id), onClick(onClick), mouseOver(false), overTexture(NULL), name(caption), overClr(0xFFFFFFFF)
 {
 	normalTexture = loadedTx;
 }
 
 Button::Button(string caption, RenderContext& r, int x, int y, int id, function<void(int)> onClick, int color, int overColor) :
-	Label(caption, r, x, y, color), id(id), onClick(onClick), mouseOver(false), name(caption)
+	Label(caption, r, x, y, color), id(id), onClick(onClick), mouseOver(false), name(caption), overClr(overColor)
 {
 	overTexture = r.LoadString(caption, overColor);
 	normalTexture = loadedTx;
@@ -36,14 +36,12 @@ void Button::onMouseEvent(MOUSE_DATA* md)
 
 void Button::render(RenderContext& renderer, int offsetX, int offsetY) const
 {
-	if (overTexture != NULL)
+	if (mouseOver)
 	{
-		if (mouseOver)
-		{
-			renderer.changeColor(0xffffffff);
-			renderer.drawRectangle(x - SZ_BLOCKSIZE, y - SZ_BLOCKSIZE, loadedTx->getWidth() + 2 * SZ_BLOCKSIZE, loadedTx->getHeight() + 2 * SZ_BLOCKSIZE);
-		}
+		renderer.changeColor(overClr);
+		renderer.drawRectangle(x - SZ_BLOCKSIZE, y - SZ_BLOCKSIZE, loadedTx->getWidth() + 2 * SZ_BLOCKSIZE, loadedTx->getHeight() + 2 * SZ_BLOCKSIZE);
 	}
+
 	Label::render(renderer, offsetX, offsetY);
 }
 

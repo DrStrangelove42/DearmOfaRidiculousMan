@@ -8,7 +8,7 @@ void Story::fromFile(string path, GAME* game)
 	int id = 0xffff;
 	RenderContext& r = *(game->renderer);
 	Player& p = *(game->player);
-	
+
 	string firstPart = "";
 	//TODO set start map
 	string worldName = "MainMap";
@@ -43,7 +43,8 @@ void Story::fromFile(string path, GAME* game)
 			{
 				Object* obj = Map::parseObject(line, r, &id, x, y);
 				parsingPart->scenario.push_back(new Step(
-					[obj](GAME* game) {
+					[obj](GAME* game)
+					{
 						game->currentMap->getCurrentRoomObject().addObject(obj);
 					}
 				));
@@ -54,7 +55,8 @@ void Story::fromFile(string path, GAME* game)
 				//room obviously (see Room::addMonster).           vvvv
 				Monster* mob = Map::parseMonster(line, r, x, y, p, NULL);
 				parsingPart->scenario.push_back(new Step(
-					[mob](GAME* game) {
+					[mob](GAME* game)
+					{
 						game->currentMap->getCurrentRoomObject().addMonster(mob);
 					}
 				));
@@ -66,19 +68,25 @@ void Story::fromFile(string path, GAME* game)
 				string npc_txID = EatToken(line, ',');
 				string npc_name = EatToken(line, ',');
 				string npc_speech = EatToken(line, ',');
-				//TODO : maybe blocking NPCs ?                        -->   vvvv
-				NPC* npc = new NPC(npc_name, npc_speech, x, y, npc_txID, r, true);
+				//TODO : maybe blocking NPCs ?                              -->   vvvv
+				NPC* npc = new NPC(npc_name, npc_speech, x, y, npc_txID, r, NULL, true);
+				// The map will be set when the NPC is updated in it.       ^^^^
 				while (!line.empty())
 				{
 					string npc_curChoice = EatToken(line, ',');
 
 					string partIdx = EatToken(line, ',');
-					npc->addChoice(npc_curChoice, r, [p, partIdx](int choiceId) {p.getStory().changePart(partIdx); });
+					npc->addChoice(npc_curChoice, r, [this, partIdx](int choiceId)
+						{
+							this->changePart(partIdx);
+						}
+					);
 
 				}
 
 				parsingPart->scenario.push_back(new Step(
-					[npc](GAME* game) {
+					[npc](GAME* game)
+					{
 						game->currentMap->getCurrentRoomObject().addObject(npc);
 					}
 				));

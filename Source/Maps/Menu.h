@@ -39,11 +39,6 @@ protected:
 	/// </summary>
 	GAME* game;
 
-	/// <summary>
-	/// Allows to exit a loop when 
-	/// </summary>
-	bool deleting;
-
 public:
 	/// <summary>
 	/// 
@@ -53,11 +48,7 @@ public:
     Menu(Player& p, GAME* g);
 
 	virtual ~Menu();
-	/// <summary>
-	/// Events from the mouse
-	/// </summary>
-	/// <param name="md"></param>
-	virtual void onMouseEvent(MOUSE_DATA* md);
+	
 	/// <summary>
 	/// Event system from the keyboard
 	/// </summary>

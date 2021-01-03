@@ -34,6 +34,11 @@ protected:
 	/// 
 	/// </summary>
 	Texture* normalTexture;
+
+	/// <summary>
+	/// Selection rectangle color
+	/// </summary>
+	int overClr;
 public:
 	/// <summary>
 	/// 

@@ -27,10 +27,12 @@
 #include "../Characters/Monsters/Skeleton.h"
 #include "../Characters/Monsters/IntelligentSkeleton.h"
 #include <iostream>
+#include <functional>
 #include <fstream>
 #include "../Base/Texture.h"
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <unordered_map>
 
 #ifdef WIN 
 #include <direct.h>
@@ -45,6 +47,16 @@ The initial room is always the first room in the (non empty) array 'rooms'.
 class Map : public Entity
 {
 protected:
+	/// <summary>
+	/// Mouse-Event handlers
+	/// </summary>
+	unordered_map<DrawableEntity*, function<void(MOUSE_DATA*)>> mouseEventHandlers;
+
+	/// <summary>
+	/// Allows to exit a loop when a button for example destructs the Map object.
+	/// </summary>
+	bool deleting;
+
 	/// <summary>
 	/// Array of pointers to rooms
 	/// </summary>
@@ -241,6 +253,18 @@ public:
 	Room** getRooms();
 	int getCurrentRoom();
 	Room& getCurrentRoomObject();
+
+	/// <summary>
+	/// Adds a callback to call on receiving a mouse event.
+	/// </summary>
+	/// <param name="callback"></param>
+	void addMouseHandler(DrawableEntity* entity, function<void(MOUSE_DATA*)> callback);
+
+	/// <summary>
+	/// Removes a handler from the list.
+	/// </summary>
+	/// <param name="entity"></param>
+	void removeMouseHandler(DrawableEntity* entity);
 };
 
 #endif

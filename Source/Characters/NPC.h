@@ -6,6 +6,8 @@
 #include "../Interactions/Button.h"
 #include <list>
 
+class Map;
+
 /// <summary>
 /// Non-player character, who can talk to the player and offer him choices
 /// in the story.
@@ -28,7 +30,14 @@ protected:
 	/// </summary>
 	list<Button*> choices;
 
+	/// <summary>
+	/// Allows to add mouse events handlers only the first time the NPC object gets updated.
+	/// </summary>
+	bool signedInForEvents;
+
 	void setTexture(RenderContext& renderer);
+
+	Map* container;
 public:
 	/// <summary>
 	/// 
@@ -40,7 +49,9 @@ public:
 	/// <param name="tx"></param>
 	/// <param name="renderer"></param>
 	/// <param name="trav"></param>
-	NPC(string identifier, string speech, int posx, int posy, string tx, RenderContext& renderer, bool trav);
+	NPC(string identifier, string speech, int posx, int posy, string tx, RenderContext& renderer, Map* map, bool trav);
+
+	virtual ~NPC();
 
 	/// <summary>
 	/// The following function describes how each type of object interacts with the player.

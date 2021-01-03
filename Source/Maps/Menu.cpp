@@ -1,18 +1,6 @@
 #include "Menu.h"
 
-
-void Menu::onMouseEvent(MOUSE_DATA* md)
-{
-	for (Button* b : buttons)
-	{
-		b->onMouseEvent(md);
-		if (deleting)
-			return;
-	}
-}
-
-
-Menu::Menu(Player& p, GAME* g) : Map(p, 0), game(g), deleting(false)
+Menu::Menu(Player& p, GAME* g) : Map(p, 0), game(g)
 {
 
 }
@@ -20,8 +8,10 @@ Menu::Menu(Player& p, GAME* g) : Map(p, 0), game(g), deleting(false)
 
 Menu::~Menu()
 {
+
 	for (Button* b : buttons)
 	{
+		removeMouseHandler(b);
 		delete b;
 	}
 	for (Label* l : labels)
@@ -31,7 +21,6 @@ Menu::~Menu()
 	buttons.clear();
 	labels.clear();
 	//Not delete[] animationTextures because these ones were created through LoadString.
-	deleting = true;
 }
 
 void Menu::render(RenderContext& renderer, int offsetX, int offsetY) const
@@ -52,12 +41,18 @@ void Menu::tick(int time, GAME* game)
 	for (Button* b : buttons)
 	{
 		b->tick(time, game);
-	} 
+	}
 }
 
 void Menu::addButton(Button* b)
 {
 	buttons.push_back(b);
+	addMouseHandler(b,
+		[b](MOUSE_DATA* md)
+		{
+			b->onMouseEvent(md);
+		}
+	);
 }
 
 void Menu::addLabel(Label* l)
