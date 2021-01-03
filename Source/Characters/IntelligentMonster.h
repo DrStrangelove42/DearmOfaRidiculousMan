@@ -83,7 +83,7 @@ protected:
 public:
 	IntelligentMonster(RenderContext& renderer,
 			   Player& p,
-			   Room& r,
+			   Room*r,
 			   string textureId,
 			   int health,
 			   int dmg,

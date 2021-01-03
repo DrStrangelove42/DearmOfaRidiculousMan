@@ -147,7 +147,6 @@ protected:
 	/// <param name="originalWorldName"></param>
 	/// <param name="mapNumber"></param>
 	/// <returns></returns>
-
 	void saveProgress(string saveName, string originalWorldName, int mapNumber);
 
 	/// <summary>
@@ -174,7 +173,7 @@ public:
 	/// <param name="x"></param>
 	/// <param name="y"></param>
 	/// <returns></returns>
-	static Monster* parseMonster(string& line, RenderContext& renderer, int x, int y, Player& p, Room& r);
+	static Monster* parseMonster(string& line, RenderContext& renderer, int x, int y, Player& p, Room* r);
 	/// <summary>
 	/// This function transforms a text file into a folder of texts files which are sufficient 
 	/// to describe the map completely and to be able to modify the maps to save progress.

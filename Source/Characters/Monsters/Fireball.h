@@ -18,7 +18,7 @@ public:
 	/// <param name="renderer"></param>
 	/// <param name="p"></param>
 	/// <param name="r"></param>
-	Fireball(RenderContext& renderer, Player& p, Room& r);
+	Fireball(RenderContext& renderer, Player& p, Room* r);
 	~Fireball();
 };
 

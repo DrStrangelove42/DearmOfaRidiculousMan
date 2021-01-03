@@ -17,7 +17,7 @@ public:
 	/// <param name="renderer"></param>
 	/// <param name="p"></param>
 	/// <param name="r"></param>
-	Ghost(RenderContext& renderer, Player& p, Room& r);
+	Ghost(RenderContext& renderer, Player& p, Room* r);
 	~Ghost();
 };
 

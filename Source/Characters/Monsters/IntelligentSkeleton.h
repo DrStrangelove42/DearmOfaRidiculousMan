@@ -17,7 +17,7 @@ public:
 	/// <param name="renderer"></param>
 	/// <param name="p"></param>
 	/// <param name="r"></param>
-	IntelligentSkeleton(RenderContext& renderer, Player& p, Room& r);
+	IntelligentSkeleton(RenderContext& renderer, Player& p, Room* r);
 	~IntelligentSkeleton();
 };
 

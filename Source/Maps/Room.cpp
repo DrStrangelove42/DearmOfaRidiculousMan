@@ -167,7 +167,7 @@ void Room::tick(int time, GAME* game)
 
 void Room::addMonster(Monster* m)
 {
-	m->setRoom(*this);
+	m->setRoom(this);
 	monsters.push_back(m);
 }
 

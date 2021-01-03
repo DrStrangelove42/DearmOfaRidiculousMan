@@ -58,9 +58,9 @@ protected:
 	/// </summary>
 	Texture* texture;
 	/// <summary>
-	/// 
+	/// Pointer because sometimes the room changes.
 	/// </summary>
-	Room& room;
+	Room* room;
 public:
 	virtual ~Monster() { cout << "delete monster" << endl; }
 	/// <summary>
@@ -80,7 +80,7 @@ public:
 	/// <param name="alarmed">If the monster is initially alarmed.</param>
 	Monster(RenderContext& renderer,
 		Player& p,
-		Room& r,
+		Room* r,
 		string textureId,
 		int health,
 		int dmg,
@@ -125,7 +125,7 @@ public:
 	/// 
 	/// </summary>
 	/// <param name="r"></param>
-	void setRoom(Room& r);
+	void setRoom(Room* r);
 };
 
 #endif

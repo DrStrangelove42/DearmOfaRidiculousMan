@@ -8,7 +8,7 @@ void Story::fromFile(string path, GAME* game)
 	int id = 0xffff;
 	RenderContext r = *(game->renderer);
 	Player p = *(game->player);
-	Room dummyRoom = game->currentMap->getCurrentRoomObject();
+	 
 	string curPartName = "";
 	Part* curPart = new Part();
 	while (getline(file, line))
@@ -40,8 +40,9 @@ void Story::fromFile(string path, GAME* game)
 			}
 			else if (type == "MOB")
 			{
-				//Monsters parsed from here will need to be teleported according to the current room obviously (see Room::addMonster).
-				Monster* mob = Map::parseMonster(line, r, x, y, p, dummyRoom);
+				//Monsters parsed from here will need to be teleported according to the current 
+				//room obviously (see Room::addMonster).           vvvv
+				Monster* mob = Map::parseMonster(line, r, x, y, p, NULL);
 				curPart->scenario.push_back(new Step(
 					[mob](GAME* game) {
 						game->currentMap->getCurrentRoomObject().addMonster(mob);

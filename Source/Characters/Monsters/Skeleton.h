@@ -17,7 +17,7 @@ public:
 	/// <param name="renderer"></param>
 	/// <param name="p"></param>
 	/// <param name="r"></param>
-	Skeleton(RenderContext& renderer, Player& p, Room& r);
+	Skeleton(RenderContext& renderer, Player& p, Room* r);
 	~Skeleton();
 };
 

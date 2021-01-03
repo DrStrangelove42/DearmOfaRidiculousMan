@@ -85,7 +85,7 @@ void LoadTextFromLanguage(string& langCode)
 {
 	struct stat dummy;
 	string line;
-	string fname = LANG_LOCATION + "/" + langCode + LANGFILES_EXT;
+	string fname = LANG_LOCATION + langCode + LANGFILES_EXT;
 	if (stat(fname.c_str(), &dummy) != 0)
 	{
 		cout << fname << " doesn't exist..." << endl;

@@ -372,7 +372,7 @@ void Map::parseObjectOrMonster(string& line, string& filename, RenderContext& re
 	string objects = "!kdcBb";
 	if (monsters.find_first_of(line[0]) != monsters.npos)
 	{
-		rooms[room]->addMonster(parseMonster(line, renderer, x, y, p, *(rooms[room])));
+		rooms[room]->addMonster(parseMonster(line, renderer, x, y, p, rooms[room]));
 	}
 	else if (objects.find_first_of(line[0]) != objects.npos)
 	{
@@ -415,7 +415,7 @@ Object* Map::parseObject(string& line, RenderContext& renderer, int* uniqueId, i
 	}
 }
 
-Monster* Map::parseMonster(string& line, RenderContext& renderer, int x, int y, Player& p, Room& r)
+Monster* Map::parseMonster(string& line, RenderContext& renderer, int x, int y, Player& p, Room* r)
 {
 	switch (line[0])
 	{

@@ -3,7 +3,7 @@
 
 IntelligentMonster::IntelligentMonster(RenderContext& renderer,
 	Player& p,
-	Room& r,
+	Room* r,
 	string textureId,
 	int health,
 	int dmg,
@@ -13,7 +13,7 @@ IntelligentMonster::IntelligentMonster(RenderContext& renderer,
 	int exp,
 	int moveDelay,
 	bool alarmed,
-	bool diagMovement) : Monster(renderer, p, r, textureId, health, dmg, atkDelay, atkRadius, coins, exp, moveDelay, alarmed), diagMovement(diagMovement), destX(-1), destY(-1), path(NULL), width(r.getW()), height(r.getH())
+	bool diagMovement) : Monster(renderer, p, r, textureId, health, dmg, atkDelay, atkRadius, coins, exp, moveDelay, alarmed), diagMovement(diagMovement), destX(-1), destY(-1), path(NULL), width(r->getW()), height(r->getH())
 {
 
 }
@@ -162,7 +162,7 @@ void IntelligentMonster::tick(int time, GAME* game)
 				trav[i] = new bool[height];
 				for (int j = 0; j < height; j++)
 				{
-					trav[i][j] = room.isTraversable(i, j);
+					trav[i][j] = room->isTraversable(i, j);
 				}
 			}
 			optimalPath(path, trav);
@@ -175,7 +175,7 @@ void IntelligentMonster::tick(int time, GAME* game)
 		}
 		if (pathStep < pathLength)
 		{
-			room.tryTeleportAt(*this, x + path[2 * pathStep], y + path[2 * pathStep + 1]);
+			room->tryTeleportAt(*this, x + path[2 * pathStep], y + path[2 * pathStep + 1]);
 			pathStep++;
 		}
 		lastTimeMv = time;

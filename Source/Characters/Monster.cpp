@@ -4,7 +4,7 @@
 
 Monster::Monster(RenderContext& renderer,
 	Player& p,
-	Room& r,
+	Room* r,
 	string textureId,
 	int health,
 	int dmg,
@@ -38,7 +38,7 @@ void Monster::tick(int time, GAME* game)
 	}
 	if (time - lastTimeMv >= moveDelay)
 	{
-		room.tryTeleportAt(*this, x + GetRandom(3) - 1, y + GetRandom(3) - 1);
+		room->tryTeleportAt(*this, x + GetRandom(3) - 1, y + GetRandom(3) - 1);
 
 		/*switch (r)
 		{
@@ -57,9 +57,9 @@ void Monster::tick(int time, GAME* game)
 	}
 }
 
-void Monster::setRoom(Room& r)
+void Monster::setRoom(Room* r)
 {
-	//room = r;
+	room = r;
 }
 
 void Monster::attackRound()

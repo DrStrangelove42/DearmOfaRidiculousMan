@@ -17,7 +17,7 @@ public:
 	/// <param name="renderer"></param>
 	/// <param name="p"></param>
 	/// <param name="r"></param>
-	IntelligentGhost(RenderContext& renderer, Player& p, Room& r);
+	IntelligentGhost(RenderContext& renderer, Player& p, Room* r);
 	~IntelligentGhost();
 };
 

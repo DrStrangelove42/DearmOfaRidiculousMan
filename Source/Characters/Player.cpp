@@ -216,7 +216,7 @@ void Player::onKeyDown(GAME* game)
 
 	if (DEBUG_MODE)
 		if (game->keyLetter == 'F')
-			room.addMonster(new Fireball(*(game->renderer), *this, room));
+			room.addMonster(new Fireball(*(game->renderer), *this, &room));
 
 	if (story != NULL)
 	{
