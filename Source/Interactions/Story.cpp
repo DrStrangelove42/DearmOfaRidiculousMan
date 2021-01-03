@@ -20,7 +20,7 @@ void Story::fromFile(string path, GAME* game)
 	while (getline(file, line))
 	{
 		string type = EatToken(line);
-
+		if (type == "REM") continue;
 		if (type == "PART")
 		{
 			if (curPartName.empty())
@@ -103,6 +103,8 @@ void Story::fromFile(string path, GAME* game)
 		parts[curPartName] = parsingPart;
 	}
 	curPart = parts[firstPart];
+
+	file.close();
 }
 
 

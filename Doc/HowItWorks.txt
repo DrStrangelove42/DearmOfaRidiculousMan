@@ -1,3 +1,12 @@
+                                 HOW IT WORKS
+                  A General Guide to the DOARM data structures
+
+    Table of contents
+    I) Maps                                                     l. 8
+    II) Story mode scripts                                      l. 110
+
+I) Maps
+
 How to create a world using a text file:
 
 The name of the text file (without the extension) is the name of the world.
@@ -90,3 +99,50 @@ Absolute location of last room of last map
 Information pertaining to objects and entities in last room of last map
 #
 Layout of last room of last map
+
+
+
+
+
+
+
+
+II) Story mode scripts
+
+A story script is a textfile located in Res/StoryMode containing command lines (each line is a command line), 
+in a very straightforward flavour : each line starts with a upper-case keyword like PART or NPC.. Comments 
+are written with the keyword REM. 
+
+The first actual command (different from REM) must be PART. Parts are the main compbound of the story.
+When the player makes choices through NPCs, the part changes. 
+
+The language is sequential : the first part to be declared will be the starting part, and then parts are
+referenced by their identifiers (they may contain spaces).
+e.g. :
+_________________________________________________________________________________________
+| PART dummy                                                                            |
+| .                                                                                     |
+| . (commands - different from PART - to be executed in the "dummy" part)               |
+| .                                                                                     |
+| PART second dummy part                                                                |
+| .                                                                                     |
+| . (commands - different from PART - to be executed in the "second dummy part" part)   |
+| .                                                                                     |
+| PART ...                                                                              |
+
+Syntax of PART :
+    PART <name of the part>
+
+A part is made of several other commands which are described below. The description section is list of
+comma-separated values.
+
+    NPC x y textureID,name,speech,choice1,partIndex1,...,choiceN,partIndexN
+Creates a NPC (non player character) which can interact with the player in order to change the course of events.
+choiceI is the text of the choice (in a button below the NPC speech), and the associated partIndexI is the name of
+the part to go to if this option is chosen. For now, no commas are allowed in name, speech or any other field.
+
+    MOB x y <map monster id>
+Creates a monster. The description section is the same as in maps (like F for fireball)
+
+    OBJ x y <map object description>
+Creates an object. (Same as in maps, like k1 to create a key of id 1)
