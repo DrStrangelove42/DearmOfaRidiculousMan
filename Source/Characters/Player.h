@@ -184,6 +184,14 @@ public:
 	/// 
 	/// </summary>
 	void clearStory();
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <returns></returns>
+	Story& getStory() const;
+
+	
 };
 
 #endif

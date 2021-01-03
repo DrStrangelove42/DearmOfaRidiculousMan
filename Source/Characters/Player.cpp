@@ -303,3 +303,8 @@ void Player::clearStory()
 		delete story;
 	story = NULL;
 }
+
+Story& Player::getStory() const
+{
+	return *story;
+}

@@ -57,6 +57,11 @@ void Monster::tick(int time, GAME* game)
 	}
 }
 
+void Monster::setRoom(Room& r)
+{
+	//room = r;
+}
+
 void Monster::attackRound()
 {
 	if (abs(x - player.getX()) <= attackRadius && abs(y - player.getY()) <= attackRadius)
