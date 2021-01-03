@@ -11,7 +11,8 @@ How to create a world using a text file:
 
 The name of the text file (without the extension) is the name of the world.
 
-Each world is composed of a positive number of maps, which may correspond to floors in a dungeon for example.
+Each world is composed of a positive number of maps, which may correspond 
+to floors in a dungeon for example.
 
 The first line contains the number of maps in the world.
 
@@ -19,21 +20,27 @@ In the following lines, each map is described one by one.
 
 The first line of each map description must be ##.
 
-The second line in the description of a map is an integer containing the positive number of rooms.
+The second line in the description of a map is an integer containing the 
+positive number of rooms.
 
 After this, each room is described one by one.
 
 Each room is described as follows:
  - The first line contains #.
  - The second line contains two integers: the width and the height of the room.
- - The third line contains two integers describing the absolute position (coordinates x and y) of the room.
- - After this, the lines up to the next one containing # contain information on the different types of objects or entities that are in the room.
-   For each of these lines (if it isn't just blank space), the first character encodes the type of object/entity, the second is the identifier, and what follows is an encoding of the additional information.
+ - The third line contains two integers describing the absolute position 
+   (coordinates x and y) of the room.
+ - After this, the lines up to the next one containing # contain information 
+   on the different types of objects or entities that are in the room.
+   For each of these lines (if it isn't just blank space), the first character 
+   encodes the type of object/entity, the second is the identifier, and what 
+   follows is an encoding of the additional information.
  - After the line containing #, the layout of the room is described.
  - Every three characters encode one block in the room.
  - Of the three characters, the first encodes the type of block,
    the second the type of object/entity that is on that block,
-   the third is an optional identifier for that object/entity (which has a different function depending on the object/entity).
+   the third is an optional identifier for that object/entity (which has a 
+   different function depending on the object/entity).
  - The different characters that can encode types of blocks are:
    - ' ' : empty block.
    - 'w' : wall block.
@@ -46,11 +53,21 @@ Each room is described as follows:
  - The different characters that can encode objects/entities are:
    - ' ' : no object or entity.
    - 'p' : player starts on this block.
-   - '!' : block from which a player can warp. The coordinates of the block to which the player warps is described in the header, on a line starting with '!' followed by the identifier, and then the integers representing map number, room number, x coordinate, y coordinate, the delay, separated by spaces. 
+   - '!' : block from which a player can warp. The coordinates of the block
+           to which the player warps is described in the header, on a line 
+           starting with '!' followed by the identifier, and then the integers 
+           representing map number, room number, x coordinate, y coordinate, 
+           the delay, separated by spaces. 
    - 'k' : key, the following character is the identifier.
-   - 'd' : door that can be unlocked with a key. The characteristics of the door are described in the header, on a line starting with d followed by the identifier of the door, a space, the identifier of the key that unlocks it, and then the direction the door faces when it's closed and when it's open, with spaces.
-   - 'm' : monster, information about the type of monster should be written in the header, on a line starting with m followed by the identifier.
-   - 'c' : chest, information about the contents of the chest should be written in the header, on a line starting with c followed by the identifier.
+   - 'd' : door that can be unlocked with a key. The characteristics of the door 
+           are described in the header, on a line starting with d followed by 
+           the identifier of the door, a space, the identifier of the key that
+           unlocks it, and then the direction the door faces when it's closed 
+           and when it's open, with spaces.
+   - 'm' : monster, information about the type of monster should be written in 
+           the header, on a line starting with m followed by the identifier.
+   - 'c' : chest, information about the contents of the chest should be written 
+           in the header, on a line starting with c followed by the identifier.
    - 'F' : fireball
    - 'B' : butler (NPC), header :  text ID (only)
    - 'b' : sign board, header : idem.
