@@ -26,6 +26,11 @@ void Player::render(RenderContext& renderer, int offsetX, int offsetY)const
 	renderInventory(renderer, xx, yy);
 }
 
+bool Player::isAlive() const
+{
+	return lives > 0 || LivingEntity::isAlive();
+}
+
 void Player::renderInventory(RenderContext& renderer, int xx, int yy)const
 {
 	/*Infos*/

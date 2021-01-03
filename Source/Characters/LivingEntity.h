@@ -42,7 +42,7 @@ public:
 	/// True if the player is alive (more than 0 HP)
 	/// </summary>
 	/// <returns></returns>
-	bool isAlive()const;
+	virtual bool isAlive()const;
 	/// <summary>
 	/// Instantly kills the entity (pure virtual).
 	/// </summary>

@@ -91,6 +91,12 @@ public:
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0)const;
 
 	/// <summary>
+	/// The player can have a health of zero and still have lives left.
+	/// </summary>
+	/// <returns></returns>
+	virtual bool isAlive()const;
+
+	/// <summary>
 	/// Rendering management of the right panel
 	/// </summary>
 	/// <param name="renderer"></param>
