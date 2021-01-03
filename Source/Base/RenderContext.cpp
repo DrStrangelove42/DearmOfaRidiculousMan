@@ -50,6 +50,7 @@ void RenderContext::changeColor(int color)
 		(unsigned char)(color >> 16),
 		(unsigned char)(color >> 8),
 		(unsigned char)(color)))
+		//cout << SDL_GetError() << endl;
 		throw runtime_error(SDL_GetError());
 }
 

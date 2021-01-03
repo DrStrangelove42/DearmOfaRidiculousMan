@@ -6,22 +6,32 @@ void Story::fromFile(string path, GAME* game)
 	ifstream file(path);
 	string line;
 	int id = 0xffff;
-	RenderContext r = *(game->renderer);
-	Player p = *(game->player);
-	 
+	RenderContext& r = *(game->renderer);
+	Player& p = *(game->player);
+	
+	string firstPart = "";
+	//TODO set start map
+	string worldName = "MainMap";
+	game->worldName = worldName;
+	*(game->currentMapId) = -1;
+	game->currentMap = new Map(worldName, *(game->player), r, game->currentMapId);
 	string curPartName = "";
-	Part* curPart = new Part();
+	Part* parsingPart = new Part();
 	while (getline(file, line))
 	{
 		string type = EatToken(line);
 
 		if (type == "PART")
 		{
-			//flush previous part
-			parts[curPartName] = curPart;
+			if (curPartName.empty())
+				//first part
+				firstPart = line;
+			else
+				//flush previous part
+				parts[curPartName] = parsingPart;
 			//PART <name>
 			curPartName = line;
-			curPart = new Part();
+			parsingPart = new Part();
 		}
 		else
 		{
@@ -32,7 +42,7 @@ void Story::fromFile(string path, GAME* game)
 			if (type == "OBJ")
 			{
 				Object* obj = Map::parseObject(line, r, &id, x, y);
-				curPart->scenario.push_back(new Step(
+				parsingPart->scenario.push_back(new Step(
 					[obj](GAME* game) {
 						game->currentMap->getCurrentRoomObject().addObject(obj);
 					}
@@ -43,7 +53,7 @@ void Story::fromFile(string path, GAME* game)
 				//Monsters parsed from here will need to be teleported according to the current 
 				//room obviously (see Room::addMonster).           vvvv
 				Monster* mob = Map::parseMonster(line, r, x, y, p, NULL);
-				curPart->scenario.push_back(new Step(
+				parsingPart->scenario.push_back(new Step(
 					[mob](GAME* game) {
 						game->currentMap->getCurrentRoomObject().addMonster(mob);
 					}
@@ -66,6 +76,12 @@ void Story::fromFile(string path, GAME* game)
 					npc->addChoice(npc_curChoice, r, [p, partIdx](int choiceId) {p.getStory().changePart(partIdx); });
 
 				}
+
+				parsingPart->scenario.push_back(new Step(
+					[npc](GAME* game) {
+						game->currentMap->getCurrentRoomObject().addObject(npc);
+					}
+				));
 			}
 			else
 			{
@@ -74,11 +90,16 @@ void Story::fromFile(string path, GAME* game)
 			}
 		}
 	}
+	if (!curPartName.empty())
+	{
+		parts[curPartName] = parsingPart;
+	}
+	curPart = parts[firstPart];
 }
 
 
 
-Story::Story(string name, GAME* game) : curPart(0)
+Story::Story(string name, GAME* game)
 {
 	fromFile(STORYFILES_LOCATION + name + STORYFILES_EXT, game);
 }
@@ -128,7 +149,7 @@ Story::Step* Story::getCurrentStep()
 	return curPart->scenario[curPart->curStep];
 }
 
-Story::Part::Part() : curStep(0)
+Story::Part::Part() : curStep(0), done(false)
 {
 
 }

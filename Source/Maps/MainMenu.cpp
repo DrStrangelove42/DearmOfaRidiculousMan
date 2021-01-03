@@ -60,6 +60,7 @@ void MainMenu::onPlayClick(int id)
 void MainMenu::onStoryModeClick(int id)
 {
 	game->player->setStory(new Story("demo", game));
+	delete this;
 }
 
 void MainMenu::onQuitClick(int id)

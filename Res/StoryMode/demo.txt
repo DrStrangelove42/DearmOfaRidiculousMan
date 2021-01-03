@@ -1,0 +1,18 @@
+PART beginning
+NPC 10 10 mario,Mario,It's a me Mario ! What do you choose?,Fire,feu,Death,squeleton army
+PART feu
+MOB 5 5 F
+PART squeleton army
+MOB 5 5 F
+MOB 5 5 S
+MOB 5 5 s
+MOB 5 5 S
+MOB 5 5 s
+MOB 5 5 S
+MOB 5 5 s
+MOB 5 5 S
+MOB 5 5 s
+MOB 5 5 S
+MOB 5 5 s
+MOB 5 5 S
+MOB 5 5 s
