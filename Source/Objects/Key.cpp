@@ -5,4 +5,9 @@ Key::Key(string identifier, int posx, int posy, RenderContext& renderer) :
 	PickableObject(identifier, posx, posy, "key", renderer, true)
 {
 
-} 
+}
+
+string Key::objectToString()
+{
+	return (texture == "empty") ? "" : id;
+}

@@ -113,3 +113,8 @@ bool Warp::updateObject(GAME* game)
 
 	return false;
 }
+
+string Warp::objectToString()
+{
+	return id + " " + to_string(destMap) + " " + to_string(destRoom) + " " + to_string(destX) + " " + to_string(destY) + " " + to_string(delay) + " " + destWorld;
+}

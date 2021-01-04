@@ -4,3 +4,8 @@ Shield::Shield(string identifier, int posx, int posy, RenderContext& renderer, i
 {
 
 } 
+
+string Shield::objectToString()
+{
+	return "sh " + to_string(defense);
+}

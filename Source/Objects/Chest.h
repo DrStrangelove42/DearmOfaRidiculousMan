@@ -54,6 +54,11 @@ public:
 	/// </summary>
 	/// <param name="game"></param>
 	bool updateObject(GAME* game);
+
+	/// <summary>
+	/// We encode a chest with its id followed by the encoding of each of the objects in its contents, in parentheses.
+	/// </summary>
+	string objectToString();
 };
 
 #endif

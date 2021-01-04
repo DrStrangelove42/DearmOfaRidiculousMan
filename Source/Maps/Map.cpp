@@ -533,21 +533,22 @@ Room* Map::intlRoomFromFile(string filename, ifstream& layout, Player& p, Render
 	}
 	return thisRoom;
 }
-/*
-void Map::saveProgress(string saveName, string originalWorldName, int mapNumber)
+
+void Map::saveProgress(string saveName, string originalWorldName, int mapNumber, Player& p)
 {
 	ofstream SaveData(SAVES_LOCATION + saveName + "/" + saveName + to_string(mapNumber) + "Data"+ EXT);
 	ifstream OriginalData(WORLDDATA_LOCATION + originalWorldName + "/" + originalWorldName + to_string(mapNumber) + "Data" + EXT);
 	//We will use the original list of objects to construct the new one.
 
 	string line;
-	while (getline(OriginalData,line))
+	while (getline(OriginalData, line))
 	{
 		if (line[line.length() - 1] == '\r')
 		{
 			line.erase(line.length() - 1);
 		}
 		int room, x, y;
+		string id;
 		size_t a;
 		room = stoi(line, &a);
 		line.erase(0, a);
@@ -555,40 +556,26 @@ void Map::saveProgress(string saveName, string originalWorldName, int mapNumber)
 		line.erase(0, a);
 		y = stoi(line, &a);
 		line.erase(0, a + 1);
-	}
-	for (int room = 0; room < roomCount; room++)
-	{
+		id = line.substr(0,line.find(' '));
 		unordered_map <string, Object*> objects = rooms[room]->getObjects();
-		for (auto& object : objects)
+		auto search = objects.find(id);
+		if (search != objects.end())
 		{
-			Object obj = *(object.second);
-			string toAdd = room + " " + to_string(obj.getX()) + " " + to_string(obj.getY()) + " " + obj.getId() + " "; //This is the string we will add to the file if the object indeed needs to be added.
-			switch (obj.getId()[0])
+			Object obj = *(search->second);
+			string toAdd = obj.objectToString();
+			if (toAdd != "")
 			{
-			case '!':
-			{
-				Object obj = *(object.second);
-				toAdd += to_string(destMap) + " " + to_string(destRoom) + " " + to_string(destX) + " " + to_string(destY) + " " +
-			}
-			case 'k':
-			{
-			}
-			case 'd':
-			{
-			}
-			case 'c':
-			{
-			}
-			case 'B':
-			{
-			}
-			case 'b':
-			{
-			}
-			default:
-				cout << "Saving object " << object.first[0] << " not treated yet" << endl;
+				SaveData << room << " " << x << " " << y << " " << toAdd << endl;
 			}
 		}
+		else
+		{
+			cout << "No object with id " << id << " in room " << room << endl;
+		}
 	}
+	OriginalData.close();
+	SaveData.close();
+	//ofstream PlayerData(SAVES_LOCATION + saveName + "/" + saveName + "Start"+ EXT);
+	//TODO : Save player data: put player position, health, and inventory into PlayerData, add this step to file parsing also.
+	//TODO : Add monsters and NPC data to SaveData, with a similar technique to previously, by adding virtual method monsterToString() and npcToString() e.g.
 }
-*/

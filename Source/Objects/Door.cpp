@@ -26,10 +26,17 @@ Door::Door(string headerline, int posx, int posy, RenderContext& renderer) : Obj
 	1 -> KeyId
 	2 -> ClosedOrientation
 	3 -> OpenOrientation
+	4 -> 'c' if closed, 'o' if open (optional, 'c' by default)
 	*/
 
 	string id = tokens[0], keyId = tokens[1], closedOr = tokens[2], openOr = tokens[3];
 	*this = Door(keyId, openOr, closedOr, id, posx, posy, renderer);
+	if (tokens.size() > 3 && tokens[4] == "o")
+	{
+		traversable = true;
+		texture = "door" + openOrientation;
+		updateTexture(renderer);		
+	}
 }
 
 bool Door::updateObject(GAME* game)
@@ -46,4 +53,9 @@ bool Door::updateObject(GAME* game)
 	}
 
 	return false;
+}
+
+string Door::objectToString()
+{
+	return id + " " + keyId + " " + closedOrientation + " " + openOrientation + (traversable ? "o" : "");
 }

@@ -75,6 +75,11 @@ public:
 	/// <param name="renderer"></param>
 	virtual void tick(int time, GAME* game);
 
+	/// <summary>
+	/// Encodes the object into a string in the correct format (the same one used when creating maps, without the position)
+	/// </summary>
+	virtual string objectToString() const;
+
 	bool operator== (const Object& otherObj) const
 	{
 		return otherObj.id == id;

@@ -94,3 +94,18 @@ bool Chest::updateObject(GAME* game)
 
 	return false;
 }
+
+string Chest::objectToString()
+{
+	string encoding = id;
+	if (texture != "openchest")
+	{
+		for (auto& entry : contents)
+		{
+			encoding += " (";
+			encoding += entry.first.objectToString();
+			encoding += ")";
+		}
+	}
+	return encoding;	
+}

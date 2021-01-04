@@ -19,6 +19,11 @@ public:
 	/// <param name="renderer"></param>
 	/// <param name="defense"></param>
 	Shield(string identifier, int posx, int posy, RenderContext& renderer, int defense = 10);
+
+	/// <summary>
+	/// We encode a shield with sh followed by the defense parameter.
+	/// </summary>
+	string objectToString();
 };
 
 #endif

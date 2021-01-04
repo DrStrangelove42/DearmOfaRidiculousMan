@@ -20,6 +20,11 @@ public:
 	/// <param name="renderer"></param>
 	/// <param name="attack"></param>
 	Sword(string identifier, int posx, int posy, RenderContext& renderer, int attack = 10);
+
+	/// <summary>
+	/// We encode a sword with sw followed by the attack parameter.
+	/// </summary>
+	string objectToString();
 };
 
 #endif

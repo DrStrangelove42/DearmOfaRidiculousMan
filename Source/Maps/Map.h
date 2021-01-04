@@ -159,7 +159,7 @@ protected:
 	/// <param name="originalWorldName"></param>
 	/// <param name="mapNumber"></param>
 	/// <returns></returns>
-	void saveProgress(string saveName, string originalWorldName, int mapNumber);
+	void saveProgress(string saveName, string originalWorldName, int mapNumber, Player& p);
 
 	/// <summary>
 	/// Index of the room that is currently displayed (in which the player is)
