@@ -22,7 +22,7 @@ void Player::render(RenderContext& renderer, int offsetX, int offsetY)const
 	int yy = (y + offsetY) * SZ_BLOCKSIZE;
 	loadedTx->render(renderer, xx, yy, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
 	//DrawableEntity::render(renderer, offsetX, offsetY);
-	drawHealthBar(renderer, xx, yy);
+	drawHealthBar(renderer, xx, yy - 5);
 	renderInventory(renderer, xx, yy);
 }
 

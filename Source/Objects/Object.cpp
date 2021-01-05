@@ -52,5 +52,5 @@ void Object::tick(int time, GAME* g)
 
 string Object::objectToString() const
 {
-
+	return "Basic object";
 }
