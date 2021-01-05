@@ -35,8 +35,42 @@ void LivingEntity::drawHealthBar(RenderContext& renderer, int x, int y) const
 	renderer.drawRectangle(X - 1, Y - 1, int(SZ_BLOCKSIZE * 1.5) + 1, sz4 + 1);
 }
 
+int LivingEntity::getHealth()
+{
+	return health;
+}
+
+int LivingEntity::getMaxHealth()
+{
+	return maxHealth;
+}
+
+int LivingEntity::getMoney()
+{
+	return money;
+}
+
+int LivingEntity::getExperience()
+{
+	return experience;
+}
+
 void LivingEntity::setHealth(int h)
 {
 	health = h;
 }
   
+void LivingEntity::setMaxHealth(int mh)
+{
+	maxHealth = mh;
+}
+
+void LivingEntity::setMoney(int mon)
+{
+	money = mon;
+}
+
+void LivingEntity::setExperience(int exp)
+{
+	experience = exp;
+}

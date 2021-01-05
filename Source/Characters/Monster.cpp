@@ -26,8 +26,8 @@ void Monster::kill()
 {
 	if (!killed)
 	{
-		player.getExperience(experience);
-		player.getCoins(money);
+		player.gainExperience(experience);
+		player.gainCoins(money);
 		health = 0;
 		killed = true;
 	}

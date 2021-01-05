@@ -52,25 +52,54 @@ Each room is described as follows:
    - 'W' : water block
  - The different characters that can encode objects/entities are:
    - ' ' : no object or entity.
-   - 'p' : player starts on this block.
+   - 'p' : player starts on this block. Additional information about the player's
+	   starting situation can be described in the header, on a line starting
+	   with 'p', a space, and then successively integers representing
+	   the player's health (default : maximum), number of lives (default : 3),
+	   coins (default : 0), experience (default : 0), maximum health per
+	   life (default : 100), each separated by a space. To use the default
+	   value for any of these, write 'X' instead of an integer, and not all
+	   of them need to be present (For example if only one integer is
+	   written, it will be the value of the player's health, and the others
+	   will have the default value. After this, the player's initial
+	   inventory can be described, with each object described between
+	   parentheses, and each object separated with a space.
    - '!' : block from which a player can warp. The coordinates of the block
            to which the player warps is described in the header, on a line 
            starting with '!' followed by the identifier, and then the integers 
-           representing map number, room number, x coordinate, y coordinate, 
-           the delay, separated by spaces. 
+           representing map number, room number, x coordinate, y coordinate,
+	   separated by spaces.
+           Two optional parameters follow : the delay in ticks (or X to use the
+	   default value), and the destination world (for external warps). 
    - 'k' : key, the following character is the identifier.
    - 'd' : door that can be unlocked with a key. The characteristics of the door 
            are described in the header, on a line starting with d followed by 
            the identifier of the door, a space, the identifier of the key that
            unlocks it, and then the direction the door faces when it's closed 
-           and when it's open, with spaces.
-   - 'm' : monster, information about the type of monster should be written in 
-           the header, on a line starting with m followed by the identifier.
+           and when it's open, with spaces. After there is an optional character
+	   which can be used to describe the state of the door : 'c' if it's
+	   closed, 'o' if it's open. Note that doors are closed by default, so
+	   this is only useful if we want the door to be open.	   
    - 'c' : chest, information about the contents of the chest should be written 
-           in the header, on a line starting with c followed by the identifier.
-   - 'F' : fireball
-   - 'B' : butler (NPC), header :  text ID (only)
-   - 'b' : sign board, header : idem.
+           in the header, on a line starting with c followed by the identifier,
+	   and then the description of each of the objects in it between
+	   parentheses successively. The objects can be "sw" for a sword,
+	   followed by an optional integer for the attack value, the default
+	   being 10, or "sh" for a sword, followed by an optional integer for
+	   the defense value, the default being 10.
+   - a character representing a monster :
+	- 'g' : a ghost.
+	- 'G' : an intelligent ghost (one that follows the player).
+	- 's' : a skeleton.
+	- 'S' : an intelligent skeleton (one that follows the player).
+	- 'F' : a fireball.
+   - 'B' : a butler (NPC), the header should contain 'B' followed by the
+	   identifier, a space, the butler's name, a space, and the butler's
+	   speech. The name and the speech mustn't contain spaces, and
+   	   correspond to text found in Res/Text.
+   - 'b' : a signboard, the header should contain 'b', followed by the
+	   identifier, a space, and the sign's text content. Again, this doesn't
+	   contain spaces and corresponds to a text in Res/Text.
 The format can be summarised as follows:
 
 *Contents of NameOfWorld.txt (or other extension)*

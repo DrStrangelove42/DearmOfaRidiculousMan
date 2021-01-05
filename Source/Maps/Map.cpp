@@ -161,6 +161,12 @@ void Map::worldFromFile(string worldName)
 		if (!intlParseMap(newFile, map, World, start))
 			return;
 	}
+	if (start.is_open())
+	{		
+		cout << "No initial position found for player in " << worldName << ", setting it to default : map, room, x and y set to 0" << endl;
+		start << "0 0 0 0";
+		start.close();
+	}
 	World.close();
 }
 
@@ -267,15 +273,23 @@ bool Map::intlParseRoom(string& newFile, ifstream& World, int map, int room, ofs
 			case ' ':
 				break;
 			case 'p':
-				start << to_string(map) << " " << to_string(room) << " " << to_string(j) << " " << to_string(i) << endl;
-				for (int k = 0; k < headerLength; k++)
-				{ //There may be information in the header as to what health or items the player starts with for example
-					if (header[k][0] == 'p')
-					{
-						start << header[k].erase(0);
+				if (start.is_open())
+				{
+					start << to_string(map) << " " << to_string(room) << " " << to_string(j) << " " << to_string(i) << endl;
+					for (int k = 0; k < headerLength; k++)
+					{ //There may be information in the header as to what health or items the player starts with for example
+						if (header[k][0] == 'p')
+						{
+							start << header[k].substr(2); //We remove "p " from the beginning of the line.
+							break;
+						}
 					}
+					start.close();
 				}
-				start.close();
+				else
+				{				
+					cout << "Several initial positions for player found." << endl;
+				}			      
 				break;
 			default:
 				data << to_string(room) << " " << to_string(j) << " " << to_string(i) << " ";
@@ -311,15 +325,21 @@ void Map::mapFromFiles(string worldName, Player& p, RenderContext& renderer, int
 	int startX, startY;
 
 	/*
-	TODO : Explications here
+	If startMap contains the value -1, this means that this is the initial warp,
+	and so the initial coordinates of the player need to be read in the start file,
+	as well as its initial characteristics and inventory.
+	
+	Otherwise, startMap and startRoom are already what we need them to be, and the
+	teleportation of the player to the correct position in the room is already taken
+	care of.
 	*/
 	if (*startMap == -1)
-	{
-		if (not getline(start, line))
+	{	       
+		/*if (not getline(start, line))
 		{
 			cout << "No initial position for player found in " << filename << endl;
 			startX = 1;
-			startY = 1; //TODO This doesnt work !
+			startY = 1; //TODO This doesnt work ! Normally this block can no longer be executed as, if the player's position wasn't initialised, a default position was given.
 		}
 		else {
 			*startMap = stoi(line, &a);
@@ -329,10 +349,67 @@ void Map::mapFromFiles(string worldName, Player& p, RenderContext& renderer, int
 			startX = stoi(line, &a);
 			line.erase(0, a);
 			startY = stoi(line);
-		}
+		}*/
+		getline(start, line);
+		*startMap = stoi(line, &a);
+		line.erase(0, a);
+		startRoom = stoi(line, &a);
+		line.erase(0, a);
+		startX = stoi(line, &a);
+		line.erase(0, a);
+		startY = stoi(line);
 		player.teleport(startX, startY);
+		if (getline(start, line))
+		{
+			/* The player's initial information is composed of its initial characteristics followed by its inventory. */
+			a = line.find('(');
+			string characteristics = line.substr(0,a), inventory = line.substr(a);
+			
+			/* 
+			The player's characteristics are, in order : health, number of lives, coins, experience, maximum health per life.
+			We need to keep in mind that they are not all necessarily present, and that some may be worth "X" in which case we need to set it to the default value.
+			*/
+			int maxChar = 5;
+			auto iss = istringstream{ characteristics };
+			string str = "";
+			vector<string> tokens;
+			while (iss >> str)
+			{
+				tokens.push_back(str);
+			}
+			for (int i = 0; i < maxChar - tokens.size();i++)
+			{
+				tokens.push_back("X");
+			}
+			p = Player(renderer); //We reinitialise the player, the default values are therefore correct (except potentially health as it depends on another value).
+			if (tokens[0] !="X")
+			{
+				p.setHealth(stoi(tokens[0]));
+			}
+			if (tokens[1] !="X")
+			{
+				p.setLives(stoi(tokens[1]));
+			}
+			if (tokens[2] !="X")
+			{
+				p.setMoney(stoi(tokens[2]));
+			}
+			if (tokens[3] !="X")
+			{
+				p.setExperience(stoi(tokens[3]));
+			}
+			if (tokens[4] != "X")
+			{
+				p.setMaxHealth(stoi(tokens[4]));
+				if (tokens[0] == "X")
+				{
+					p.setHealth(stoi(tokens[4]));
+				}
+			}
+
+			//TODO : inventory. The objects generated and given to the player will be encoded in the same way as ones in chests, we need to find a way to unify both and to make it easier to extend a chest's possibilities (xp, money, life). Some virtual function used here and in chest?
+		}
 	}
-	//TODO other player characteristics
 	start.close();
 	ifstream layout(filename + to_string(*startMap) + EXT);
 	ifstream data(filename + to_string(*startMap) + "Data" + EXT);
@@ -569,7 +646,7 @@ Room* Map::intlRoomFromFile(string filename, ifstream& layout, Player& p, Render
 	return thisRoom;
 }
 
-void Map::saveProgress(string saveName, string originalWorldName, int mapNumber, Player& p)
+void Map::saveProgress(string saveName, string originalWorldName, int mapNumber, int roomNumber, Player& p)
 {
 	ofstream SaveData(SAVES_LOCATION + saveName + "/" + saveName + to_string(mapNumber) + "Data"+ EXT);
 	ifstream OriginalData(WORLDDATA_LOCATION + originalWorldName + "/" + originalWorldName + to_string(mapNumber) + "Data" + EXT);
@@ -619,6 +696,8 @@ void Map::saveProgress(string saveName, string originalWorldName, int mapNumber,
 	}
 	SaveData.close();
 	ofstream PlayerData(SAVES_LOCATION + saveName + "/" + saveName + "Start"+ EXT);
+	PlayerData << mapNumber << " " << roomNumber << p.getX() << p.getY() << endl;
+	PlayerData << p.getHealth() << " " << p.getLives() << " " << p.getMoney() << " " << p.getExperience() << " " << p.getMaxHealth();
+	//TODO : Add inventory, probably objectToString() for each element in the inventory, between parentheses. Also add initial attack and defense of player without objects (default being 5 and 0 respectively)
 	PlayerData.close();
-	//TODO : Save player data: put player position, health, and inventory into PlayerData, add this step to file parsing also.
 }

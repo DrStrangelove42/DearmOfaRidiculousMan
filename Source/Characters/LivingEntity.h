@@ -44,10 +44,48 @@ public:
 	void damage(int dmg);
 
 	/// <summary>
+	/// What is the entity's health?
+	/// </summary>
+	int getHealth();
+
+	/// <summary>
+	/// What is the entity's maxHealth?
+	/// </summary>
+	int getMaxHealth();
+
+	/// <summary>
+	/// What is the entity's amount of money?
+	/// </summary>
+	int getMoney();
+	
+	/// <summary>
+	/// What is the entity's experience?
+	/// </summary>
+	int getExperience();
+
+	/// <summary>
 	/// Changes the entity's health to the desired amount.
 	/// </summary>
 	/// <param name="h"></param>
 	void setHealth(int h);
+
+	/// <summary>
+	/// Changes the entity's maxHealth to the desired amount.
+	/// </summary>
+	/// <param name="h"></param>
+	void setMaxHealth(int mh);
+
+	/// <summary>
+	/// Changes the entity's money to the desired amount.
+	/// </summary>
+	/// <param name="mon"></param>
+	void setMoney(int mon);
+
+	/// <summary>
+	/// Changes the entity's experience to the desired amount.
+	/// </summary>
+	/// <param name="exp"></param>
+	void setExperience(int exp);
 	
 	/// <summary>
 	/// True if the player is alive (more than 0 HP)

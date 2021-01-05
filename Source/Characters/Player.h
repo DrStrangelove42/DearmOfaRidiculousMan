@@ -134,31 +134,39 @@ public:
 	/// 
 	/// </summary>
 	/// <param name="exp"></param>
-	virtual void getExperience(int exp);
+	virtual void gainExperience(int exp);
 
 	/// <summary>
 	/// 
 	/// </summary>
 	/// <param name="n"></param>
-	virtual void getCoins(int n);
+	virtual void gainCoins(int n);
 
 	/// <summary>
-	/// 
+	/// Returns a boolean indicating whether the player can attack the monster in position (mx,my)
 	/// </summary>
-	/// <param name=""></param>
-	/// <param name=""></param>
+	/// <param name="mx"></param>
+	/// <param name="my"></param>
 	/// <returns></returns>
-	bool isInAttackRange(int, int);
+	bool isInAttackRange(int mx, int my);
+	
 	/// <summary>
-	/// 
+	/// Returns player's attack value.
 	/// </summary>
 	/// <returns></returns>
 	int getAttack();
+	
 	/// <summary>
-	/// 
+	/// Returns player's defense value.
 	/// </summary>
 	/// <returns></returns>
 	int getDefense();
+
+	/// <summary>
+	/// Returns player's number of lives.
+	/// </summary>
+	/// <returns></returns>
+	int getLives();
 
 	/// <summary>
 	/// Adds count times the item to a player's inventory.
@@ -173,12 +181,19 @@ public:
 	/// <param name="itemId"></param>
 	/// <returns></returns>
 	bool hasObject(string objId);
+	
 	/// <summary>
 	/// Tells us whether the player has a particular item or not.
 	/// </summary>
 	/// <param name="item"></param>
 	/// <returns></returns>
 	bool hasObject(Object obj);
+
+	/// <summary>
+	/// Sets the number of lives of the player to l.
+	/// </summary>
+	/// <param name="l"></param>
+	void setLives(int l);
 
 	/// <summary>
 	/// 

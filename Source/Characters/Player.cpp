@@ -246,12 +246,12 @@ void Player::attackMonsters(Room& room)
 	}
 }
 
-void Player::getExperience(int exp)
+void Player::gainExperience(int exp)
 {
 	experience += exp;
 }
 
-void Player::getCoins(int n)
+void Player::gainCoins(int n)
 {
 	money += n;
 }
@@ -269,6 +269,11 @@ int Player::getAttack()
 int Player::getDefense()
 {
 	return defense;
+}
+
+int Player::getLives()
+{
+	return lives;
 }
 
 void Player::pickUpObject(const Object* obj, int count)
@@ -293,6 +298,11 @@ bool Player::hasObject(string objId)
 bool Player::hasObject(Object obj)
 {
 	return (inventory.find(obj.getId()) != inventory.end() && inventory[obj.getId()] > 0);
+}
+
+void Player::setLives(int l)
+{
+	lives = l;
 }
 
 void Player::setStory(Story* s)
