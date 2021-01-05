@@ -31,7 +31,7 @@ Door::Door(string headerline, int posx, int posy, RenderContext& renderer) : Obj
 
 	string id = tokens[0], keyId = tokens[1], closedOr = tokens[2], openOr = tokens[3];
 	*this = Door(keyId, openOr, closedOr, id, posx, posy, renderer);
-	if (tokens.size() > 3 && tokens[4] == "o")
+	if (tokens.size() > 4 && tokens[4] == "o")
 	{
 		traversable = true;
 		texture = "door" + openOrientation;
