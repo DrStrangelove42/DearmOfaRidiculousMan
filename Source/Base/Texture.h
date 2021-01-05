@@ -21,7 +21,7 @@ protected:
 	SDL_Texture* texture;
 
 	/// <summary>
-	/// Witdh
+	/// Width
 	/// </summary>
 	int w;
 	/// <summary>
