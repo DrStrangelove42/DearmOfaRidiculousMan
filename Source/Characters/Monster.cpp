@@ -12,19 +12,24 @@ Monster::Monster(RenderContext& renderer,
 	int atkRadius,
 	int coins,
 	int exp, int mvDelay, bool alarmed) :
-	LivingEntity(health, coins, exp), MovingEntity(0, 0, renderer, textureId), attackValue(dmg), player(p), room(r), attackDelay(atkDelay), attackRadius(atkRadius), alarmed(alarmed), moveDelay(mvDelay), alarmRadius(3)
+	LivingEntity(health, coins, exp), 
+	MovingEntity(0, 0, renderer, textureId), 
+	attackValue(dmg), player(p), room(r), attackDelay(atkDelay), 
+	attackRadius(atkRadius), alarmed(alarmed), moveDelay(mvDelay), alarmRadius(3),
+	killed(false)
 {
 	texture = renderer.LoadTexture(textureId);
 }
 
 void Monster::kill()
 {
-	if (health == -1)
-	        return;
-	health = -1;
-	player.getExperience(experience);
-	player.getCoins(money);
-	//room.removeMonster(this);
+	if (!killed)
+	{
+		player.getExperience(experience);
+		player.getCoins(money);
+		health = 0;
+		killed = true;
+	}
 }
 
 void Monster::tick(int time, GAME* game)

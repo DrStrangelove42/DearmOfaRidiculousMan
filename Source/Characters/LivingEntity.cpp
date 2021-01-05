@@ -11,7 +11,7 @@ void LivingEntity::damage(int dmg)
 	if (isAlive())
 	{
 		health -= dmg;
-		if (health < 0)
+		if (health <= 0)
 			kill();
 	}
 }

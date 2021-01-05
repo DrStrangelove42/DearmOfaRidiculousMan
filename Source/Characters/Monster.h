@@ -61,6 +61,11 @@ protected:
 	/// Pointer because sometimes the room changes.
 	/// </summary>
 	Room* room;
+
+	/// <summary>
+	/// If the monster have been killed.
+	/// </summary>
+	bool killed;
 public:
 	virtual ~Monster() { cout << "delete monster" << endl; }
 	/// <summary>
