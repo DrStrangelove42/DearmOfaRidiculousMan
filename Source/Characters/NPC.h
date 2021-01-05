@@ -16,9 +16,14 @@ class NPC : public Object
 {
 protected:
 	/// <summary>
-	/// The part of dialog given to the player when it approaches.
+	/// The part of dialog to load from Res/Text and give to the player when it approaches.
 	/// </summary>
 	string speech;
+
+	/// <summary>
+	/// The name of the NPC to load from Res/Text and give to the player when it approaches.
+	/// </summary>
+	string name;
 
 	/// <summary>
 	/// Buffered texture to draw in infos section.
@@ -67,6 +72,10 @@ public:
 	/// <param name="r"></param>
 	/// <param name="callback"></param>
 	void addChoice(string text, RenderContext& r, function<void(int)> callback);
+	/// <summary>
+	/// We encode an NPC with its id, its name, and its speech.
+	/// </summary>
+	string objectToString();
 };
 
 #endif

@@ -577,5 +577,5 @@ void Map::saveProgress(string saveName, string originalWorldName, int mapNumber,
 	SaveData.close();
 	//ofstream PlayerData(SAVES_LOCATION + saveName + "/" + saveName + "Start"+ EXT);
 	//TODO : Save player data: put player position, health, and inventory into PlayerData, add this step to file parsing also.
-	//TODO : Add monsters and NPC data to SaveData, with a similar technique to previously, by adding virtual method monsterToString() and npcToString() e.g.
+	//TODO : Add monsters data to SaveData, with a similar technique to previously, by adding virtual method monsterToString() and npcToString() e.g.
 }

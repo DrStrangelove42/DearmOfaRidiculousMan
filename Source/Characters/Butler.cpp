@@ -13,7 +13,7 @@ Butler::Butler(string name, string greeting, int posx, int posy, RenderContext& 
 Butler::Butler(string headerline, int posx, int posy, RenderContext& renderer) :
 	Butler(EatToken(headerline), "", posx, posy, renderer)
 {
-	id = EatToken(headerline);
+	name = EatToken(headerline);
 	speech = headerline;
 	setTexture(renderer);
 }
