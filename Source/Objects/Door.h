@@ -7,7 +7,7 @@
 class Door : public Object
 {
 private:
-  	/// <summary>
+	/// <summary>
 	/// Identifier of the key that unlocks this door. It is a string of length 1, and the door is unlocked by the key having identifier "k" + keyId.
 	/// </summary>
 	string keyId;
@@ -25,7 +25,7 @@ private:
 public:
 	/*Destructor*/
 	~Door();
-	
+
 	/// <summary>
 	/// Constructor
 	/// </summary>

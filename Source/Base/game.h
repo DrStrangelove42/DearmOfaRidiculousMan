@@ -62,8 +62,8 @@ typedef struct
 
 	/// <summary>
 	/// The character corresponding to the key pressed.
-        /// This is different from Key, if for example the user is typing text to name a world for example.
-        /// For keys with letters, it is the said letter.
+	/// This is different from Key, if for example the user is typing text to name a world for example.
+	/// For keys with letters, it is the said letter.
 	/// For the others (including numpad), this is not defined.
 	/// </summary>
 	char keyLetter;
