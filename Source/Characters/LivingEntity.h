@@ -13,16 +13,19 @@ protected:
 	/// Health points of the entity 
 	/// </summary>
 	int health;
+	
 	/// <summary>
 	/// HP count (health points)
 	/// </summary>
 	int maxHealth;
+	
 	/// <summary>
-	/// 
+	/// Amount of money the entity has or will yield when killed.
 	/// </summary>
 	int money;
+	
 	/// <summary>
-	/// 
+	/// Amount of experience the entity has or will yield when killed.
 	/// </summary>
 	int experience;
 public:
@@ -33,22 +36,32 @@ public:
 	/// <param name="startMoney"></param>
 	/// <param name="startExp"></param>
 	LivingEntity(int startHealth, int startMoney, int startExp);
+	
 	/// <summary>
-	/// Applies damage to the player, making him lose HP according to its resistance.
+	/// Applies damage to the character, making it lose HP according to its resistance.
 	/// </summary>
 	/// <param name="dmg"></param>
 	void damage(int dmg);
+
+	/// <summary>
+	/// Changes the entity's health to the desired amount.
+	/// </summary>
+	/// <param name="h"></param>
+	void setHealth(int h);
+	
 	/// <summary>
 	/// True if the player is alive (more than 0 HP)
 	/// </summary>
 	/// <returns></returns>
-	virtual bool isAlive()const;
+	virtual bool isAlive() const;
+	
 	/// <summary>
 	/// Instantly kills the entity (pure virtual).
 	/// </summary>
 	virtual void kill() = 0;
+	
 	/// <summary>
-	/// 
+	/// Draws the entity's healthbar.
 	/// </summary>
 	/// <param name="renderer"></param>
 	/// <param name="offsetX"></param>

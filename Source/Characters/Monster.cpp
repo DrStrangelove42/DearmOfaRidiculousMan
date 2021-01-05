@@ -16,7 +16,8 @@ Monster::Monster(RenderContext& renderer,
 	MovingEntity(0, 0, renderer, textureId), 
 	attackValue(dmg), player(p), room(r), attackDelay(atkDelay), 
 	attackRadius(atkRadius), alarmed(alarmed), moveDelay(mvDelay), alarmRadius(3),
-	killed(false)
+	killed(false),
+	type("") //No type yet
 {
 	texture = renderer.LoadTexture(textureId);
 }
@@ -90,4 +91,9 @@ void Monster::render(RenderContext& renderer, int offsetX, int offsetY)const
 	int yy = (y + offsetY) * SZ_BLOCKSIZE;
 	texture->render(renderer, xx, yy, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
 	drawHealthBar(renderer, xx, yy);
+}
+
+string Monster::monsterToString() const
+{
+	return isAlive() ? type + " " + to_string(health) : "";
 }

@@ -66,6 +66,11 @@ protected:
 	/// If the monster have been killed.
 	/// </summary>
 	bool killed;
+
+	/// <summary>
+	/// The string of length 1 that represents the type of monster.
+	/// </summary>
+	string type;		     
 public:
 	virtual ~Monster() { cout << "delete monster" << endl; }
 	/// <summary>
@@ -127,10 +132,12 @@ public:
 	virtual void tick(int time, GAME* game);
 
 	/// <summary>
-	/// 
+	/// Change room in which the monster resides.
 	/// </summary>
 	/// <param name="r"></param>
 	void setRoom(Room* r);
+
+	string monsterToString() const;
 };
 
 #endif

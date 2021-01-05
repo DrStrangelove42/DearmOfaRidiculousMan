@@ -444,31 +444,66 @@ Monster* Map::parseMonster(string& line, RenderContext& renderer, int x, int y, 
 	{
 		Ghost* newGhost = new Ghost(renderer, p, r);
 		newGhost->teleport(x, y);
+		try
+		{
+			newGhost->setHealth(stoi(line.substr(1)));
+		}
+		catch (...)/*Default health*/
+		{
+		}
 		return newGhost;
 	}
 	case 'G':
 	{
 		IntelligentGhost* newIGhost = new IntelligentGhost(renderer, p, r);
 		newIGhost->teleport(x, y);
+		try
+		{
+			newIGhost->setHealth(stoi(line.substr(1)));
+		}
+		catch (...)/*Default health*/
+		{
+		}
 		return newIGhost;
 	}
 	case 's':
 	{
 		Skeleton* newSkeleton = new Skeleton(renderer, p, r);
 		newSkeleton->teleport(x, y);
+		try
+		{
+			newSkeleton->setHealth(stoi(line.substr(1)));
+		}
+		catch (...)/*Default health*/
+		{
+		}
 		return newSkeleton;
 	}
 	case 'S':
 	{
 		IntelligentSkeleton* newISkeleton = new IntelligentSkeleton(renderer, p, r);
 		newISkeleton->teleport(x, y);
+		try
+		{
+			newISkeleton->setHealth(stoi(line.substr(1)));
+		}
+		catch (...)/*Default health*/
+		{
+		}
 		return newISkeleton;
 	}
 	case 'F':
 	{
-		Fireball* newfireball = new Fireball(renderer, p, r);
-		newfireball->teleport(x, y);
-		return newfireball;
+		Fireball* newFireball = new Fireball(renderer, p, r);
+		newFireball->teleport(x, y);
+		try
+		{
+			newFireball->setHealth(stoi(line.substr(1)));
+		}
+		catch (...)/*Default health*/
+		{
+		}
+		return newFireball;
 	}
 	default:
 		return NULL;
@@ -568,14 +603,22 @@ void Map::saveProgress(string saveName, string originalWorldName, int mapNumber,
 				SaveData << room << " " << x << " " << y << " " << toAdd << endl;
 			}
 		}
-		else
-		{
-			cout << "No object with id " << id << " in room " << room << endl;
-		}
 	}
 	OriginalData.close();
+	for (int room = 0; room < roomCount; room++)
+	{
+		list<Monster*> monsters = rooms[room]->getMonsters();
+		for (Monster* m : monsters)
+		{
+			string toAdd = m->monsterToString();
+			if (toAdd != "")
+			{
+				SaveData << room << " " <<  m->getX() << " " << m->getY() << " " << toAdd;
+			}
+		}
+	}
 	SaveData.close();
-	//ofstream PlayerData(SAVES_LOCATION + saveName + "/" + saveName + "Start"+ EXT);
+	ofstream PlayerData(SAVES_LOCATION + saveName + "/" + saveName + "Start"+ EXT);
+	PlayerData.close();
 	//TODO : Save player data: put player position, health, and inventory into PlayerData, add this step to file parsing also.
-	//TODO : Add monsters data to SaveData, with a similar technique to previously, by adding virtual method monsterToString() and npcToString() e.g.
 }
