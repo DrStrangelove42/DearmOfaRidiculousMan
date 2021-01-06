@@ -102,7 +102,7 @@ public:
 	/// <param name="color"></param>
 	void changeColor(int color);
 
-	 
+
 	/// <summary>
 	/// Stops during ms milliseconds.
 	/// </summary>
@@ -125,7 +125,7 @@ public:
 	/// Exits rendering module
 	/// </summary>
 	static void RenderQuit();
-	 
+
 	/// <summary>
 	/// Use this function to load a texture from a BMP file. If it succeeds,
 	/// the texture is saved in <textures> and will be loaded from memory next
