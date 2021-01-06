@@ -18,6 +18,14 @@ void PlayerTest::damageTest()
 	CPPUNIT_ASSERT(!p.isAlive());
 }
 
+void PlayerTest::killTest()
+{
+	Player p(*r, 1, 15, 10, 40);
+	p.kill();
+	p.kill();
+	CPPUNIT_ASSERT(!p.isAlive());
+}
+
 void PlayerTest::setUp()
 {
 	Window* m = new MockWindow();

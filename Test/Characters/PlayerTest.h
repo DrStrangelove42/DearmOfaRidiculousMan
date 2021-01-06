@@ -8,10 +8,12 @@
 class PlayerTest : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE(PlayerTest);
 	CPPUNIT_TEST(damageTest	);
+	CPPUNIT_TEST(killTest);
 	CPPUNIT_TEST_SUITE_END();
 
 public:
 	void damageTest();
+	void killTest();
 	void setUp();
 	void tearDown(); 
 };

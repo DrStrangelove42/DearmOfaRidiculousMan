@@ -35,7 +35,6 @@ void MockRenderContext::changeColor(int color)
 
 Texture* MockRenderContext::LoadTexture(string id)
 {
-	cout << "LOAD TEXTETER" << endl;
 	return nullptr;
 }
 
