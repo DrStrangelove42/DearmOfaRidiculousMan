@@ -334,22 +334,7 @@ void Map::mapFromFiles(string worldName, Player& p, RenderContext& renderer, int
 	care of.
 	*/
 	if (*startMap == -1)
-	{	       
-		/*if (not getline(start, line))
-		{
-			cout << "No initial position for player found in " << filename << endl;
-			startX = 1;
-			startY = 1; //TODO This doesnt work ! Normally this block can no longer be executed as, if the player's position wasn't initialised, a default position was given.
-		}
-		else {
-			*startMap = stoi(line, &a);
-			line.erase(0, a);
-			startRoom = stoi(line, &a);
-			line.erase(0, a);
-			startX = stoi(line, &a);
-			line.erase(0, a);
-			startY = stoi(line);
-		}*/
+	{
 		getline(start, line);
 		*startMap = stoi(line, &a);
 		line.erase(0, a);
@@ -358,57 +343,66 @@ void Map::mapFromFiles(string worldName, Player& p, RenderContext& renderer, int
 		startX = stoi(line, &a);
 		line.erase(0, a);
 		startY = stoi(line);
-		player.teleport(startX, startY);
-		if (getline(start, line))
+		
+		if (!getline(start, line))
 		{
-			/* The player's initial information is composed of its initial characteristics followed by its inventory. */
-			a = line.find('(');
-			string characteristics = line.substr(0,a), inventory = line.substr(a);
-			
-			/* 
-			The player's characteristics are, in order : health, number of lives, coins, experience, maximum health per life.
-			We need to keep in mind that they are not all necessarily present, and that some may be worth "X" in which case we need to set it to the default value.
-			*/
-			int maxChar = 5;
-			auto iss = istringstream{ characteristics };
-			string str = "";
-			vector<string> tokens;
-			while (iss >> str)
+			line = "";
+		}
+		
+		/* The player's initial information is composed of its initial characteristics followed by its inventory. */
+		a = line.find('(');
+		if (a == -1)
+		{
+			a = line.length();
+		}
+		string characteristics = line.substr(0,a), inventory = line.substr(a);
+		
+		/* 
+		The player's characteristics are, in order : health, number of lives, coins, experience, maximum health per life.
+		We need to keep in mind that they are not all necessarily present, and that some may be worth "X" in which case we need to set it to the default value.
+		*/
+		int maxChar = 5;
+		auto iss = istringstream{ characteristics };
+		string str = "";
+		vector<string> tokens;
+		while (iss >> str)
+		{
+			tokens.push_back(str);
+		}
+		int missing = maxChar - tokens.size();
+		for (int i = 0; i < missing; i++)
+		{
+			tokens.push_back("X");
+		}
+		p = Player(renderer); //We reinitialise the player, the default values are therefore correct (except potentially health as it depends on another value).
+		player.teleport(startX, startY);
+		if (tokens[0] != "X")
+		{
+			p.setHealth(stoi(tokens[0]));
+		}
+		if (tokens[1] != "X")
+		{
+			p.setLives(stoi(tokens[1]));
+		}
+		if (tokens[2] != "X")
+		{
+			p.setMoney(stoi(tokens[2]));
+		}
+		if (tokens[3] != "X")
+		{
+			p.setExperience(stoi(tokens[3]));
+		}
+		if (tokens[4] != "X")
+		{
+			p.setMaxHealth(stoi(tokens[4]));
+			if (tokens[0] == "X")
 			{
-				tokens.push_back(str);
+				p.setHealth(stoi(tokens[4]));
 			}
-			for (int i = 0; i < maxChar - tokens.size();i++)
-			{
-				tokens.push_back("X");
-			}
-			p = Player(renderer); //We reinitialise the player, the default values are therefore correct (except potentially health as it depends on another value).
-			if (tokens[0] !="X")
-			{
-				p.setHealth(stoi(tokens[0]));
-			}
-			if (tokens[1] !="X")
-			{
-				p.setLives(stoi(tokens[1]));
-			}
-			if (tokens[2] !="X")
-			{
-				p.setMoney(stoi(tokens[2]));
-			}
-			if (tokens[3] !="X")
-			{
-				p.setExperience(stoi(tokens[3]));
-			}
-			if (tokens[4] != "X")
-			{
-				p.setMaxHealth(stoi(tokens[4]));
-				if (tokens[0] == "X")
-				{
-					p.setHealth(stoi(tokens[4]));
-				}
-			}
+		}
 
 			//TODO : inventory. The objects generated and given to the player will be encoded in the same way as ones in chests, we need to find a way to unify both and to make it easier to extend a chest's possibilities (xp, money, life). Some virtual function used here and in chest?
-		}
+		
 	}
 	start.close();
 	ifstream layout(filename + to_string(*startMap) + EXT);
