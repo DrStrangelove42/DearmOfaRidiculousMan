@@ -23,6 +23,12 @@ protected:
 	int w, h;
 public:
 	/// <summary>
+	/// Dummy creator (this is in progress, and should be replaced in the future
+	/// by a generic Window class without any reference to a graphic library).
+	/// </summary>
+	Window();
+
+	/// <summary>
 	/// 
 	/// </summary>
 	/// <param name="title"></param>
@@ -45,37 +51,37 @@ public:
 	/// Returns the appropriate renderer
 	/// </summary>
 	/// <returns></returns>
-	SDL_Renderer* getRenderer();
+	virtual SDL_Renderer* getRenderer();
 
 	/// <summary>
 	/// 
 	/// </summary>
 	/// <returns></returns>
-	int getX();
+	virtual int getX();
 
 	/// <summary>
 	/// 
 	/// </summary>
 	/// <returns></returns>
-	int getY();
+	virtual int getY();
 
 	/// <summary>
 	/// 
 	/// </summary>
 	/// <returns></returns>
-	int getW();
+	virtual int getW();
 
 	/// <summary>
 	/// 
 	/// </summary>
 	/// <returns></returns>
-	int getH();
+	virtual int getH();
 
 	/// <summary>
 	/// 
 	/// </summary>
 	/// <returns></returns>
-	int getId();
+	virtual int getId();
 
 };
 

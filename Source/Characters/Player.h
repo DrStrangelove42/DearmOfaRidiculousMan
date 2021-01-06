@@ -31,10 +31,6 @@ protected:
 	/// </summary>
 	int attack;
 	/// <summary>
-	/// How much damage can a player absorb when being attacked.
-	/// </summary>
-	int defense;
-	/// <summary>
 	/// Player's items
 	/// int is how many of that type of item player has (eg might have several times the same potion)
 	/// </summary>
@@ -156,11 +152,7 @@ public:
 	/// <returns></returns>
 	int getAttack();
 	
-	/// <summary>
-	/// Returns player's defense value.
-	/// </summary>
-	/// <returns></returns>
-	int getDefense();
+
 
 	/// <summary>
 	/// Returns player's number of lives.

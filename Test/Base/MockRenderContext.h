@@ -1,5 +1,5 @@
-#ifndef RENDERCTXT_H
-#define RENDERCTXT_H
+#ifndef MOCKRENDERCTXT_H
+#define MOCKRENDERCTXT_H
 
 #include "../../Source/Base/RenderContext.h"
 
@@ -11,29 +11,11 @@ class Texture;
 /// A class encapsulating a rendering context, that is an object used as an interface
 /// with the graphics library to render the game.
 /// </summary>
-class MockRenderContext : RenderContext
+class MockRenderContext : public RenderContext
 {
-protected:
-	/// <summary>
-	/// The native renderer.
-	/// </summary>
-	SDL_Renderer* renderer;
 
-	static TTF_Font* FONT;
-	/// <summary>
-	/// The hashmap where textures are stored.
-	/// Textures beginning with 'text/' are reserved for text rendering.
-	/// </summary>
-	static unordered_map<string, Texture*> textures;
 public:
-	static int FONTSIZE;
-	/// <summary>
-	/// Creates a new render context from the specified window.
-	/// </summary>
-	/// <param name="window"></param>
-	RenderContext(Window& window);
-	~RenderContext();
-
+	MockRenderContext(Window& w);
 	/// <summary>
 	/// Erases the entire canevas.
 	/// </summary>
@@ -91,29 +73,7 @@ public:
 	/// <param name="color"></param>
 	void changeColor(int color);
 
-	 
-	/// <summary>
-	/// Stops during ms milliseconds.
-	/// </summary>
-	/// <param name="ms">The delay</param>
-	static void RenderSleep(unsigned int ms);
-
-	/// <summary>
-	/// Initialisation of the rendering module
-	/// </summary>
-	/// <returns></returns>
-	static bool RenderInit();
-
-	/// <summary>
-	/// Dump errors in the console.
-	/// </summary>
-	/// <returns></returns>
-	static string RenderErrorDetails();
-
-	/// <summary>
-	/// Exits rendering module
-	/// </summary>
-	static void RenderQuit();
+	  
 	 
 	/// <summary>
 	/// Use this function to load a texture from a BMP file. If it succeeds,
@@ -154,11 +114,6 @@ public:
 	/// <param name="width"></param>
 	/// <returns></returns>
 	Texture* LoadText(string text, int color, int backColor, int width, int padding = 0);
-
-	/// <summary>
-	/// Frees memory.
-	/// </summary>
-	static void FreeTextures();
 };
 
 #endif

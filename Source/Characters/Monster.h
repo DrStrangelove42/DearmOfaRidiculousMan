@@ -24,7 +24,7 @@ class Monster : public MovingEntity, public LivingEntity
 protected:
 	int lastTimeAtk = 0;
 	int lastTimeMv = 0;
-	
+
 	/// <summary>
 	/// 
 	/// </summary>
@@ -48,7 +48,7 @@ protected:
 	/// <summary>
 	/// 
 	/// </summary>
-	int moveDelay; 
+	int moveDelay;
 	/// <summary>
 	/// 
 	/// </summary>
@@ -70,7 +70,7 @@ protected:
 	/// <summary>
 	/// The string of length 1 that represents the type of monster.
 	/// </summary>
-	string type;		     
+	string type;
 public:
 	virtual ~Monster() { cout << "delete monster" << endl; }
 	/// <summary>
@@ -99,7 +99,7 @@ public:
 		int coins = 200,
 		int exp = 50,
 		int moveDelay = 500,
-		bool alarmed = false );
+		bool alarmed = false, int defense = 0);
 
 	/// <summary>
 	/// Go on an attack round.

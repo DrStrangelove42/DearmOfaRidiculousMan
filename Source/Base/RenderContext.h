@@ -43,24 +43,24 @@ public:
 	/// </summary>
 	/// <param name="window"></param>
 	RenderContext(Window& window);
-	~RenderContext();
+	virtual ~RenderContext();
 
 	/// <summary>
 	/// Erases the entire canevas.
 	/// </summary>
-	void clear();
+	virtual void clear();
 
 	/// <summary>
 	/// Flushes the graphical modifications to appear on the screen.
 	/// </summary>
-	void update();
+	virtual void update();
 
 	/// <summary>
 	/// 
 	/// </summary>
 	/// <param name=""></param>
 	/// <returns></returns>
-	SDL_Texture* fromSurface(SDL_Surface*);
+	virtual SDL_Texture* fromSurface(SDL_Surface*);
 
 	/// <summary>
 	/// 
@@ -71,7 +71,7 @@ public:
 	/// <param name="angle"></param>
 	/// <param name="center"></param>
 	/// <param name="flip"></param>
-	void doRender(SDL_Texture* t,
+	virtual void doRender(SDL_Texture* t,
 		const SDL_Rect* srcrect,
 		const SDL_Rect* dstrect,
 		const double angle,
@@ -86,7 +86,7 @@ public:
 	/// <param name="w"></param>
 	/// <param name="h"></param>
 	/// <param name="fill"></param>
-	void drawRectangle(int x, int y, int w, int h, bool fill = false);
+	virtual void drawRectangle(int x, int y, int w, int h, bool fill = false);
 	/// <summary>
 	/// 
 	/// </summary>
@@ -94,13 +94,13 @@ public:
 	/// <param name="y1"></param>
 	/// <param name="x2"></param>
 	/// <param name="y2"></param>
-	void drawLine(int x1, int y1, int x2, int y2);
+	virtual void drawLine(int x1, int y1, int x2, int y2);
 
 	/// <summary>
 	/// Sets the current color, in the format 0xRRGGBBAA 
 	/// </summary>
 	/// <param name="color"></param>
-	void changeColor(int color);
+	virtual void changeColor(int color);
 
 
 	/// <summary>
@@ -132,7 +132,7 @@ public:
 	/// time this function is called for the same texture ID.
 	/// To load an animated texture (from files id0, ..., idN), prefix id with '*'.
 	/// </summary>
-	Texture* LoadTexture(string id);
+	virtual Texture* LoadTexture(string id);
 
 	/// <summary>
 	/// Builds a texture with the text inside.
@@ -140,7 +140,7 @@ public:
 	/// <param name="text"></param> 
 	/// <param name="color"></param>
 	/// <returns></returns>
-	Texture* LoadString(string text, int color = 0xffffffff);
+	virtual Texture* LoadString(string text, int color = 0xffffffff);
 
 	/// <summary>
 	/// Loads a temporary texture used to draw ever-changing text on screen.
@@ -149,12 +149,12 @@ public:
 	/// <param name="text"></param> 
 	/// <param name="color"></param>
 	/// <returns></returns>
-	Texture* LoadVolatileString(string text, int color);
+	virtual Texture* LoadVolatileString(string text, int color);
 
 	/// <summary>
 	/// Loads a multiline text designed to fit in the specified width (in pixels).
 	/// </summary>
-	Texture* LoadText(string text, int color, int width);
+	virtual Texture* LoadText(string text, int color, int width);
 
 	/// <summary>
 	/// Loads a multiline text designed to fit in the specified width (in pixels).
@@ -164,7 +164,7 @@ public:
 	/// <param name="backColor"></param>
 	/// <param name="width"></param>
 	/// <returns></returns>
-	Texture* LoadText(string text, int color, int backColor, int width, int padding = 0);
+	virtual Texture* LoadText(string text, int color, int backColor, int width, int padding = 0);
 
 	/// <summary>
 	/// Frees memory.

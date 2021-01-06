@@ -9,8 +9,8 @@
 #include "Monsters/Fireball.h"
 
 Player::Player(RenderContext& renderer, int lives, int attack, int defense, int startHealth, int startMoney, int startExp) :
-	LivingEntity(startHealth, startMoney, startExp), MovingEntity(0, 0, renderer, "player"),
-	lives(lives), attack(attack), defense(defense), infosX(SZ_MAINWIDTH), infosY(0),
+	LivingEntity(startHealth, startMoney, startExp, defense), MovingEntity(0, 0, renderer, "player"),
+	lives(lives), attack(attack), infosX(SZ_MAINWIDTH), infosY(0),
 	attackDelay(500), lastAttackTime(0), story(NULL)
 {
 	heart = renderer.LoadTexture("heart");
@@ -266,10 +266,7 @@ int Player::getAttack()
 	return attack;
 }
 
-int Player::getDefense()
-{
-	return defense;
-}
+
 
 int Player::getLives()
 {

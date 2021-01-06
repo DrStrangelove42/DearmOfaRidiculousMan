@@ -15,7 +15,7 @@ void UtilsTest::Textures(void)
 
 void UtilsTest::setUp()
 {
-	CPPUNIT_ASSERT(InitUtils() == 0);
+	//CPPUNIT_ASSERT(InitUtils() == 0);
 }
 
 void UtilsTest::tearDown()

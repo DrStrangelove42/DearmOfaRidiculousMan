@@ -1,7 +1,8 @@
 #include "LivingEntity.h"
 #include <iostream>
 
-LivingEntity::LivingEntity(int startHealth, int startMoney, int startExp) : health(startHealth), maxHealth(startHealth), money(startMoney), experience(startExp)
+LivingEntity::LivingEntity(int startHealth, int startMoney, int startExp, int defense) :
+	defense(defense), health(startHealth), maxHealth(startHealth), money(startMoney), experience(startExp)
 {
 
 }
@@ -10,10 +11,15 @@ void LivingEntity::damage(int dmg)
 {
 	if (isAlive())
 	{
-		health -= dmg;
+		health -= max(0, dmg - defense);
 		if (health <= 0)
 			kill();
 	}
+}
+
+int LivingEntity::getDefense()
+{
+	return defense;
 }
 
 bool LivingEntity::isAlive()const
@@ -59,7 +65,7 @@ void LivingEntity::setHealth(int h)
 {
 	health = h;
 }
-  
+
 void LivingEntity::setMaxHealth(int mh)
 {
 	maxHealth = mh;

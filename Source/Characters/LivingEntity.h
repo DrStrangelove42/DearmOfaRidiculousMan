@@ -28,6 +28,11 @@ protected:
 	/// Amount of experience the entity has or will yield when killed.
 	/// </summary>
 	int experience;
+
+	/// <summary>
+	/// The defense
+	/// </summary>
+	int defense;
 public:
 	/// <summary>
 	/// 
@@ -35,7 +40,7 @@ public:
 	/// <param name="startHealth"></param>
 	/// <param name="startMoney"></param>
 	/// <param name="startExp"></param>
-	LivingEntity(int startHealth, int startMoney, int startExp);
+	LivingEntity(int startHealth, int startMoney, int startExp, int defense);
 	
 	/// <summary>
 	/// Applies damage to the character, making it lose HP according to its resistance.
@@ -68,6 +73,11 @@ public:
 	/// </summary>
 	/// <param name="h"></param>
 	void setHealth(int h);
+	/// <summary>
+	/// Returns entity's defense value.
+	/// </summary>
+	/// <returns></returns>
+	int getDefense();
 
 	/// <summary>
 	/// Changes the entity's maxHealth to the desired amount.

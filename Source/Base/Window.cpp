@@ -1,5 +1,10 @@
 #include "Window.h"
 
+Window::Window() :w(0), h(0), window((SDL_Window*)(0xDEADBEEF))
+{
+
+}
+
 Window::Window(string title, int w, int h) : w(w), h(h)
 {
 	window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,

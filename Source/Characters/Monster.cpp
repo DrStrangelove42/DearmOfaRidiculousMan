@@ -11,10 +11,10 @@ Monster::Monster(RenderContext& renderer,
 	int atkDelay,
 	int atkRadius,
 	int coins,
-	int exp, int mvDelay, bool alarmed) :
-	LivingEntity(health, coins, exp), 
-	MovingEntity(0, 0, renderer, textureId), 
-	attackValue(dmg), player(p), room(r), attackDelay(atkDelay), 
+	int exp, int mvDelay, bool alarmed, int defense) :
+	LivingEntity(health, coins, exp, defense),
+	MovingEntity(0, 0, renderer, textureId),
+	attackValue(dmg), player(p), room(r), attackDelay(atkDelay),
 	attackRadius(atkRadius), alarmed(alarmed), moveDelay(mvDelay), alarmRadius(3),
 	killed(false),
 	type("") //No type yet
