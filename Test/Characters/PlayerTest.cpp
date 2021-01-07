@@ -4,8 +4,6 @@
 
 CPPUNIT_TEST_SUITE_REGISTRATION(PlayerTest);
 
-MockRenderContext* r;
-
 void PlayerTest::damageTest()
 {
 	Player p(*r, 0, 15, 10, 40);

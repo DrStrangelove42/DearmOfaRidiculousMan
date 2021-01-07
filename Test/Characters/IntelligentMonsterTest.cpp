@@ -1,10 +1,8 @@
 #include "IntelligentMonsterTest.h"
 #include "../Base/MockWindow.h"
-#include "../Base/MockRenderContext.h"
+
 
 CPPUNIT_TEST_SUITE_REGISTRATION(IntelligentMonsterTest);
-
-MockRenderContext* r1;
 
 void IntelligentMonsterTest::movementTest()
 {
