@@ -56,7 +56,7 @@ void Monster::setRoom(Room* r)
 
 void Monster::moveToRoom(Room* r)
 {
-	room->removeMonster(this);
+	room->getMonsters().remove(this);
 	room = r;
 	room->addMonster(this);
 }
