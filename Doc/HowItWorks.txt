@@ -181,6 +181,7 @@ Syntax of PART :
 
 A part is made of several other commands which are described below. The description section is list of
 comma-separated values.
+	MAP World name, start map index, start room index
 
     NPC x y textureID,name,speech,choice1,partIndex1,...,choiceN,partIndexN
 Creates a NPC (non player character) which can interact with the player in order to change the course of events.
