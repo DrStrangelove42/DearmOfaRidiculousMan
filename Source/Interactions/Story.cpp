@@ -43,14 +43,15 @@ void Story::fromFile(string path, GAME* game)
 				foundMap = true;
 				changeMap(game, world_name, startMap, room_idx_toi);
 			}
-			
-			parsingPart->scenario.push_back(new Step(
-				[world_name, map_idx_toi, room_idx_toi](GAME* game)
-				{
-					int startMap = map_idx_toi;
-					changeMap(game, world_name, startMap, room_idx_toi);
-				}
-			));
+			else {
+				parsingPart->scenario.push_back(new Step(
+					[world_name, map_idx_toi, room_idx_toi](GAME* game)
+					{
+						int startMap = map_idx_toi;
+						changeMap(game, world_name, startMap, room_idx_toi);
+					}
+				));
+			}
 		}
 		else
 		{
@@ -88,7 +89,7 @@ void Story::fromFile(string path, GAME* game)
 				string npc_name = EatTokenEx(line, ',');
 				string npc_speech = EatTokenEx(line, ',');
 				//TODO : maybe blocking NPCs ?                              -->   vvvv
-				NPC* npc = new NPC(npc_name, npc_speech, x, y, npc_txID, r, NULL, true);
+				NPC* npc = new NPC(npc_name, npc_name, npc_speech, x, y, npc_txID, r, NULL, true);
 				// The map will be set when the NPC is updated in it.       ^^^^
 				while (!line.empty())
 				{

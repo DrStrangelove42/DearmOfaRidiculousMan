@@ -92,6 +92,12 @@ void Player::kill()
 	}
 }
 
+void Player::reset(int lives)
+{
+	health = maxHealth;
+	this->lives = lives;
+}
+
 Player::~Player()
 {
 	inventory.clear();
@@ -174,8 +180,13 @@ void Player::animateGameOver(int time, GAME* game)
 	{
 		t = 0;
 		lives++;
+		//In case of GameOver, the map is destroyed (only case)
+		destroyMap(game->worldName, *(game->currentMapId));
 		if (isLoaded("Game Over", 0))
+		{
+			
 			changeMap(game, "Game Over", 0);
+		}
 		else
 		{
 			*(game->currentMapId) = 0;

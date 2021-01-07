@@ -91,7 +91,7 @@ bool Warp::updateObject(GAME* game)
 	{
 		if (destMap == -1)
 		{
-			changeMap(game, "Main menu", -1, 0);//déjà chargée
+			changeMap(game, "Main menu", 0, 0);//déjà chargée
 			return false;
 		}
 		if (destMap != *(game->currentMapId))

@@ -78,6 +78,11 @@ public:
 	virtual void kill();
 
 	/// <summary>
+	/// 
+	/// </summary>
+	virtual void reset(int lives);
+
+	/// <summary>
 	/// Rendering management
 	/// </summary>
 	/// <param name="renderer"></param>

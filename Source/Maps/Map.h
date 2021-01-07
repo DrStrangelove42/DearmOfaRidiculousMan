@@ -49,6 +49,7 @@ The initial room is always the first room in the (non empty) array 'rooms'.
 class Map : public Entity
 {
 protected:
+	int startx, starty;
 	/// <summary>
 	/// Mouse-Event handlers
 	/// </summary>
@@ -268,6 +269,8 @@ public:
 	/// </summary>
 	/// <param name="entity"></param>
 	void removeMouseHandler(DrawableEntity* entity);
+
+	void teleportPlayerOnStart();
 };
 
 #endif

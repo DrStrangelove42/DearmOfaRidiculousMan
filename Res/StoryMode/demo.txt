@@ -1,5 +1,5 @@
 PART beginning
-MAP Main map, -1,-1
+MAP MainMap, -1,0
 NPC 10 10 mario,Mario,It's a me Mario ! What do you choose?,Fire,feu,Death,squeleton army, Flee , fuite
 PART feu
 MOB 5 5 F
@@ -20,4 +20,4 @@ MOB 6 5 S
 MOB 5 6 s
 NPC 10 10 mario,Mario,Run !
 PART fuite
-MAP BigTestMap, 0, 0
+MAP BigTestMap, -1, 0

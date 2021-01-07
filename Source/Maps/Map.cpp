@@ -1,6 +1,6 @@
 #include "Map.h"
 
-Map::Map(Player& p, int roomCount) : player(p), roomCount(roomCount), currentRoom(0), titleTexture(NULL), deleting(false)
+Map::Map(Player& p, int roomCount) : player(p), roomCount(roomCount), currentRoom(0), titleTexture(NULL), deleting(false), startx(2), starty(2)
 {
 	rooms = new Room * [roomCount];
 }
@@ -19,7 +19,7 @@ Map::~Map()
 }
 
 Map::Map(string worldName, Player& p, RenderContext& renderer, int* startMap, int startRoom) :
-	player(p), worldName(worldName), currentRoom(0), roomCount(0), titleTexture(NULL), rooms(NULL), deleting(false)
+	player(p), worldName(worldName), currentRoom(0), roomCount(0), titleTexture(NULL), rooms(NULL), deleting(false), startx(2), starty(2)
 {
 	// First we determine whether the files representing the world need to be generated, that is to say whether these files don't exist or whether they are older than the file representing the world.
 	struct stat dataLocation;
@@ -129,6 +129,11 @@ void Map::removeMouseHandler(DrawableEntity* entity)
 		mouseEventHandlers.erase(entity);
 }
 
+void Map::teleportPlayerOnStart()
+{
+	player.teleport(startx, starty);
+}
+
 void Map::onKeyDown(GAME* game)
 {
 	rooms[currentRoom]->onKeyDown(game);
@@ -162,7 +167,7 @@ void Map::worldFromFile(string worldName)
 			return;
 	}
 	if (start.is_open())
-	{		
+	{
 		cout << "No initial position found for player in " << worldName << ", setting it to default : map, room, x and y set to 0" << endl;
 		start << "0 0 0 0";
 		start.close();
@@ -287,9 +292,9 @@ bool Map::intlParseRoom(string& newFile, ifstream& World, int map, int room, ofs
 					start.close();
 				}
 				else
-				{				
+				{
 					cout << "Several initial positions for player found." << endl;
-				}			      
+				}
 				break;
 			default:
 				data << to_string(room) << " " << to_string(j) << " " << to_string(i) << " ";
@@ -328,7 +333,7 @@ void Map::mapFromFiles(string worldName, Player& p, RenderContext& renderer, int
 	If startMap contains the value -1, this means that this is the initial warp,
 	and so the initial coordinates of the player need to be read in the start file,
 	as well as its initial characteristics and inventory.
-	
+
 	Otherwise, startMap and startRoom are already what we need them to be, and the
 	teleportation of the player to the correct position in the room is already taken
 	care of.
@@ -343,21 +348,21 @@ void Map::mapFromFiles(string worldName, Player& p, RenderContext& renderer, int
 		startX = stoi(line, &a);
 		line.erase(0, a);
 		startY = stoi(line);
-		
+
 		if (!getline(start, line))
 		{
 			line = "";
 		}
-		
+
 		/* The player's initial information is composed of its initial characteristics followed by its inventory. */
 		a = line.find('(');
 		if (a == -1)
 		{
 			a = line.length();
 		}
-		string characteristics = line.substr(0,a), inventory = line.substr(a);
-		
-		/* 
+		string characteristics = line.substr(0, a), inventory = line.substr(a);
+
+		/*
 		The player's characteristics are, in order : health, number of lives, coins, experience, maximum health per life.
 		We need to keep in mind that they are not all necessarily present, and that some may be worth "X" in which case we need to set it to the default value.
 		*/
@@ -376,6 +381,7 @@ void Map::mapFromFiles(string worldName, Player& p, RenderContext& renderer, int
 		}
 		p = Player(renderer); //We reinitialise the player, the default values are therefore correct (except potentially health as it depends on another value).
 		player.teleport(startX, startY);
+		startx = startX; starty = startY;
 		if (tokens[0] != "X")
 		{
 			p.setHealth(stoi(tokens[0]));
@@ -401,8 +407,8 @@ void Map::mapFromFiles(string worldName, Player& p, RenderContext& renderer, int
 			}
 		}
 
-			//TODO : inventory. The objects generated and given to the player will be encoded in the same way as ones in chests, we need to find a way to unify both and to make it easier to extend a chest's possibilities (xp, money, life). Some virtual function used here and in chest?
-		
+		//TODO : inventory. The objects generated and given to the player will be encoded in the same way as ones in chests, we need to find a way to unify both and to make it easier to extend a chest's possibilities (xp, money, life). Some virtual function used here and in chest?
+
 	}
 	start.close();
 	ifstream layout(filename + to_string(*startMap) + EXT);
@@ -642,7 +648,7 @@ Room* Map::intlRoomFromFile(string filename, ifstream& layout, Player& p, Render
 
 void Map::saveProgress(string saveName, string originalWorldName, int mapNumber, int roomNumber, Player& p)
 {
-	ofstream SaveData(SAVES_LOCATION + saveName + "/" + saveName + to_string(mapNumber) + "Data"+ EXT);
+	ofstream SaveData(SAVES_LOCATION + saveName + "/" + saveName + to_string(mapNumber) + "Data" + EXT);
 	ifstream OriginalData(WORLDDATA_LOCATION + originalWorldName + "/" + originalWorldName + to_string(mapNumber) + "Data" + EXT);
 	//We will use the original list of objects to construct the new one.
 
@@ -662,7 +668,7 @@ void Map::saveProgress(string saveName, string originalWorldName, int mapNumber,
 		line.erase(0, a);
 		y = stoi(line, &a);
 		line.erase(0, a + 1);
-		id = line.substr(0,line.find(' '));
+		id = line.substr(0, line.find(' '));
 		unordered_map <string, Object*> objects = rooms[room]->getObjects();
 		auto search = objects.find(id);
 		if (search != objects.end())
@@ -684,12 +690,12 @@ void Map::saveProgress(string saveName, string originalWorldName, int mapNumber,
 			string toAdd = m->monsterToString();
 			if (toAdd != "")
 			{
-				SaveData << room << " " <<  m->getX() << " " << m->getY() << " " << toAdd;
+				SaveData << room << " " << m->getX() << " " << m->getY() << " " << toAdd;
 			}
 		}
 	}
 	SaveData.close();
-	ofstream PlayerData(SAVES_LOCATION + saveName + "/" + saveName + "Start"+ EXT);
+	ofstream PlayerData(SAVES_LOCATION + saveName + "/" + saveName + "Start" + EXT);
 	PlayerData << mapNumber << " " << roomNumber << p.getX() << p.getY() << endl;
 	PlayerData << p.getHealth() << " " << p.getLives() << " " << p.getMoney() << " " << p.getExperience() << " " << p.getMaxHealth();
 	//TODO : Add inventory, probably objectToString() for each element in the inventory, between parentheses. Also add initial attack and defense of player without objects (default being 5 and 0 respectively)

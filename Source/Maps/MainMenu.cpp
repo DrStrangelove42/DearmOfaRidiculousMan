@@ -72,7 +72,6 @@ void MainMenu::render(RenderContext& renderer, int offsetX, int offsetY) const
 {
 	Menu::render(renderer, offsetX, offsetY);
 
-
 	player.DrawableEntity::render(renderer, offsetX, offsetY);
 }
 

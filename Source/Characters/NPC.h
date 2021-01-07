@@ -54,7 +54,7 @@ public:
 	/// <param name="tx"></param>
 	/// <param name="renderer"></param>
 	/// <param name="trav"></param>
-	NPC(string identifier, string speech, int posx, int posy, string tx, RenderContext& renderer, Map* map, bool trav);
+	NPC(string identifier, string name, string speech, int posx, int posy, string tx, RenderContext& renderer, Map* map, bool trav);
 
 	virtual ~NPC();
 

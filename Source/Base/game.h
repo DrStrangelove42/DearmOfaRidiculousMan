@@ -91,6 +91,13 @@ void freeMaps();
 /// <returns></returns>
 bool isLoaded(string worldname, int mapIndex);
 
+/// <summary>
+/// 
+/// </summary>
+/// <param name="worldname"></param>
+/// <param name="mapIndex"></param>
+void destroyMap(string worldname, int mapIndex);
+
 struct PairHash
 {
 	size_t operator()(const pair<string, int>& o) const
