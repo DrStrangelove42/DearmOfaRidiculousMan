@@ -26,11 +26,14 @@ void PlayerTest::killTest()
 
 void PlayerTest::setUp()
 {
-	Window* m = new MockWindow();
+	m = new MockWindow();
 	r = new MockRenderContext(*m);
 }
 
 void PlayerTest::tearDown()
 {
-	
+	//delete r;
+	//delete m; do NOT delete because the destructors of window and rendercontext will be called
+	// This is a design flaw, il could be fixed by introducing RenderContext as a base virtual class,
+	//and deriving both in parallel MockRenderContext and SDLRenderContext from it.
 }

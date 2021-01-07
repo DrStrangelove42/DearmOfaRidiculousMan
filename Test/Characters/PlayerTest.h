@@ -13,6 +13,7 @@ class PlayerTest : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE_END();
 protected:
 	MockRenderContext* r;
+	Window* m;
 public:
 	void damageTest();
 	void killTest();
