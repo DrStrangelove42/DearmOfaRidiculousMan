@@ -83,9 +83,16 @@ public:
 	/// <summary>
 	/// Updates all objects in the room accordingly.
 	/// </summary>
-	/// <param name="renderer"></param>
-	/// <param name="ea"></param>
-	void updateAllObjects(GAME* game);
+	/// <param name="time"></param>
+	/// <param name="game"></param>
+	void tick(int time, GAME* game);
+
+	/// <summary>
+	/// Updates all monsters in the room accordingly.
+	/// </summary>
+	/// <param name="time"></param>
+	/// <param name="game"></param>
+	void updateAllMonsters(int time, GAME* game);
 
 	/// <summary>
 	/// Rendering method, enabling the renderer to take the offset (in blocks) into account.
@@ -94,13 +101,6 @@ public:
 	/// <param name="offsetX"></param>
 	/// <param name="offsetY"></param>
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0)const;
-
-	/// <summary>
-	/// Time management
-	/// </summary>
-	/// <param name="time"></param>
-	/// <param name="r"></param>
-	virtual void tick(int time, GAME* game);
 
 	/// <summary>
 	/// Changes a block in the room, according to its location
@@ -168,6 +168,22 @@ public:
 	/// Removes dead monsters.
 	/// </summary>
 	void cleanMonsters();
+
+	/// <summary>
+	/// Adds the warp information to each of the intelligent monsters in the room.
+	/// </summary>
+	/// <param name="x"></param>
+	/// <param name="y"></param>
+	/// <param name="destRoom"></param>
+	/// <param name="destX"></param>
+	/// <param name="destY"></param>
+	/// <param name="playerJustLeft"></param>
+	void sendMonstersToWarp(int x, int y, int destRoom, int destX, int destY, bool playerJustLeft);
+
+	/// <summary>
+	/// Empties the intelligent monsters in the room of their <code>warpInfo</code>: this is for when the monsters are in the same room as the player and so they no longer need to go towards a warp. The information needs to be cleaned to prepare for the next time that the player warps.
+	/// </summary>
+	void cleanMonsterWarpInfo();
 };
 
 

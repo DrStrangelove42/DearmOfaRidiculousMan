@@ -91,6 +91,10 @@ void Map::render(RenderContext& renderer, int offsetX, int offsetY) const
 void Map::tick(int time, GAME* game)
 {
 	rooms[currentRoom]->tick(time, game);
+	for (int i = 0; i < roomCount; i++)
+	{
+		rooms[i]->updateAllMonsters(time, game);
+	}
 }
 
 void Map::setCurrentRoom(int c)
@@ -361,7 +365,7 @@ void Map::mapFromFiles(string worldName, Player& p, RenderContext& renderer, int
 			a = line.length();
 		}
 		string characteristics = line.substr(0, a), inventory = line.substr(a);
-
+		//TODO put all this in player.h
 		/*
 		The player's characteristics are, in order : health, number of lives, coins, experience, maximum health per life.
 		We need to keep in mind that they are not all necessarily present, and that some may be worth "X" in which case we need to set it to the default value.
@@ -700,4 +704,13 @@ void Map::saveProgress(string saveName, string originalWorldName, int mapNumber,
 	PlayerData << p.getHealth() << " " << p.getLives() << " " << p.getMoney() << " " << p.getExperience() << " " << p.getMaxHealth();
 	//TODO : Add inventory, probably objectToString() for each element in the inventory, between parentheses. Also add initial attack and defense of player without objects (default being 5 and 0 respectively)
 	PlayerData.close();
+}
+
+void Map::sendMonstersToWarp(int x, int y, int destRoom, int destX, int destY)
+{
+	for (int i = 0; i < roomCount; i++)
+	{
+		rooms[i]->sendMonstersToWarp(x, y, destRoom, destX, destY, currentRoom == i);
+	}
+	rooms[destRoom]->cleanMonsterWarpInfo();
 }

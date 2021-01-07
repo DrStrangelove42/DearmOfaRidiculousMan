@@ -271,6 +271,16 @@ public:
 	void removeMouseHandler(DrawableEntity* entity);
 
 	void teleportPlayerOnStart();
+
+	/// <summary>
+	/// Adds the warp information to each of the intelligent monsters in the map.
+	/// </summary>
+	/// <param name="x"></param>
+	/// <param name="y"></param>
+	/// <param name="destRoom"></param>
+	/// <param name="destX"></param>
+	/// <param name="destY"></param>
+	void sendMonstersToWarp(int x, int y, int destRoom, int destX, int destY);
 };
 
 #endif

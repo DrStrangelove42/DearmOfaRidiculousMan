@@ -91,7 +91,7 @@ bool Warp::updateObject(GAME* game)
 	{
 		if (destMap == -1)
 		{
-			changeMap(game, "Main menu", 0, 0);//déjà chargée
+			changeMap(game, "Main menu", 0, 0); // Map already loaded
 			return false;
 		}
 		if (destMap != *(game->currentMapId))
@@ -100,13 +100,15 @@ bool Warp::updateObject(GAME* game)
 		}
 		else
 		{
+			game->currentMap->sendMonstersToWarp(x,y,destRoom,destX,destY);
 			game->currentMap->setCurrentRoom(destRoom);
-			game->currentMap->getRooms()[destRoom]->setDiscovered(true);
+			game->currentMap->getCurrentRoomObject().setDiscovered(true);
+			
 		}
 	}
 	else
 	{
-		//Autre monde
+		// Warp to a different world.
 		changeMap(game, destWorld, -1, destRoom);
 	}
 

@@ -1,5 +1,6 @@
 #include "IntelligentMonster.h"
 #include "../Maps/Room.h"
+#include "../Maps/Map.h"
 
 IntelligentMonster::IntelligentMonster(RenderContext& renderer,
 	Player& p,
@@ -82,7 +83,7 @@ void IntelligentMonster::optimalPath(int*& path, bool** trav)
 	// For a block (x,y), discovered[x][y] tells us whether the algorithm has discovered block (x,y) yet or not.
 
 	priority_queue <int*, vector<int*>, queueCompare> openSet;
-	// openSet contains the blocks that the algorithm is still considering as well as there expected cost. Each of it selements is an array of integers of size 3, where the first element is the expected cost (which is the number of steps of the algorithm to reach (x,y) plus h(x,y)), the second is the x coordinate, and the third is the y coordinate. The fuction queueCompare is defined such that the element with the smallest expected cost is popped when calling pop.
+	// openSet contains the blocks that the algorithm is still considering as well as there expected cost. Each of its elements is an array of integers of size 3, where the first element is the expected cost (which is the number of steps of the algorithm to reach (x,y) plus h(x,y)), the second is the x coordinate, and the third is the y coordinate. The fuction queueCompare is defined such that the element with the smallest expected cost is popped when calling pop.
 
 	int* topush = new int[3];
 	topush[0] = h(startX, startY);
@@ -145,10 +146,14 @@ void IntelligentMonster::optimalPath(int*& path, bool** trav)
 
 void IntelligentMonster::tick(int time, GAME* game)
 {
-	int width = room->getW();
-	int height = room->getH();
-
 	if (!isAlive()) return;
+
+	if (warpInfo.empty()) // i.e. If the monster is in the same room as the player, otherwise newDestX and newDestY have been updated by the warp taken by the player or when the monster is warped.
+	{
+		newDestX = player.getX();
+		newDestY = player.getY();
+	}
+	
 	if (time - lastTimeAtk >= attackDelay)
 	{
 		lastTimeAtk = time;
@@ -157,10 +162,13 @@ void IntelligentMonster::tick(int time, GAME* game)
 	}
 	if (time - lastTimeMv >= moveDelay)
 	{
-		if (destX != player.getX() || destY != player.getY())
+		// We only compute the monster's path if its destination has changed since its last move.
+		if (destX != newDestX || destY != newDestY)
 		{
-			destX = player.getX();
-			destY = player.getY();
+			destX = newDestX;
+			destY = newDestY;
+			int width = room->getW();
+			int height = room->getH();
 			bool** trav = new bool* [width];
 			for (int i = 0; i < width; i++)
 			{
@@ -183,6 +191,48 @@ void IntelligentMonster::tick(int time, GAME* game)
 			room->tryTeleportAt(*this, x + path[2 * pathStep], y + path[2 * pathStep + 1]);
 			pathStep++;
 		}
+		else if (!(warpInfo.empty())) //We have arrived on the warp
+		{
+			setRoom(game->currentMap->getRooms()[warpInfo.front()]);
+			warpInfo.pop();
+			int warpX = warpInfo.front();
+			warpInfo.pop();
+			int warpY = warpInfo.front();
+			warpInfo.pop();
+			room->tryTeleportAt(*this, warpX, warpY);
+			if (!(warpInfo.empty())) //warpInfo contains a new warp destination in this new room we've moved to
+			{
+				newDestX = warpInfo.front();
+				warpInfo.pop();
+				newDestY = warpInfo.front();
+				warpInfo.pop();
+			}
+		}
 		lastTimeMv = time;
+	}
+}
+
+void IntelligentMonster::sendMonsterToWarp(int x, int y, int destRoom, int destX, int destY, bool playerJustLeft)
+{
+	if (playerJustLeft)
+	{
+		newDestX = x;
+		newDestY = y;
+	}
+	else
+	{
+		warpInfo.push(x);
+		warpInfo.push(y);
+	}
+	warpInfo.push(destRoom);
+	warpInfo.push(destX);
+	warpInfo.push(destY);
+}
+
+void IntelligentMonster::cleanMonsterWarpInfo()
+{
+	while (!(warpInfo.empty()))
+	{
+		warpInfo.pop();
 	}
 }

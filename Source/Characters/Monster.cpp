@@ -45,20 +45,6 @@ void Monster::tick(int time, GAME* game)
 	if (time - lastTimeMv >= moveDelay)
 	{
 		room->tryTeleportAt(*this, x + GetRandom(3) - 1, y + GetRandom(3) - 1);
-
-		/*switch (r)
-		{
-		case 0:
-			room.tryTeleportAt(*m, x + 1, y); break;
-		case 1:
-			room.tryTeleportAt(*m, x, y + 1); break;
-		case 2:
-			room.tryTeleportAt(*m, x - 1, y); break;
-		case 3:
-			room.tryTeleportAt(*m, x, y - 1); break;
-		default:
-			break;
-		}*/
 		lastTimeMv = time;
 	}
 }
@@ -96,4 +82,12 @@ void Monster::render(RenderContext& renderer, int offsetX, int offsetY)const
 string Monster::monsterToString() const
 {
 	return isAlive() ? type + " " + to_string(health) : "";
+}
+
+void Monster::sendMonsterToWarp(int x, int y, int destRoom, int destX, int destY, bool playerJustLeft)
+{
+}
+
+void Monster::cleanMonsterWarpInfo()
+{
 }

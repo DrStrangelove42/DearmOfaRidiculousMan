@@ -26,39 +26,47 @@ protected:
 	int lastTimeMv = 0;
 
 	/// <summary>
-	/// 
+	/// How much damage the monster deals when attacking.
 	/// </summary>
 	int attackValue;
+	
 	/// <summary>
-	/// 
+	/// Player reference.
 	/// </summary>
 	Player& player;
+	
 	/// <summary>
-	/// 
+	/// Minimal amount of time between attacks, in ticks.
 	/// </summary>
 	int attackDelay;
+	
 	/// <summary>
-	/// 
+	/// Minimal distance, in blocks, from which the monster can attack.
 	/// </summary>
 	int attackRadius;
+	
 	/// <summary>
-	/// 
+	/// Minimal distance, in blocks, from which the monster is alarmed.
 	/// </summary>
 	int alarmRadius;
+	
 	/// <summary>
-	/// 
+	/// Minimal amount of time between movements, in ticks.
 	/// </summary>
 	int moveDelay;
+	
 	/// <summary>
-	/// 
+	/// Boolean indicating whether or not the monster is alarmed.
 	/// </summary>
 	bool alarmed;
+	
 	/// <summary>
-	/// 
+	/// Texture of the monster.
 	/// </summary>
 	Texture* texture;
+	
 	/// <summary>
-	/// Pointer because sometimes the room changes.
+	/// Pointer to the room since it may change.
 	/// </summary>
 	Room* room;
 
@@ -138,6 +146,22 @@ public:
 	void setRoom(Room* r);
 
 	string monsterToString() const;
+
+	/// <summary>
+	/// Adds the necessary information to <code>warpInfo</code> when the player warps, for intelligent monsters to follow the player.
+	/// </summary>
+	/// <param name="x"></param>
+	/// <param name="y"></param>
+	/// <param name="destRoom"></param>
+	/// <param name="destX"></param>
+	/// <param name="destY"></param>
+	/// <param name="playerJustLeft"></param>
+	virtual void sendMonsterToWarp(int x, int y, int destRoom, int destX, int destY, bool playerJustLeft);
+
+	/// <summary>
+	/// Empties the queue <code>warpInfo</code> for intelligent monsters.
+	/// </summary>
+	virtual void cleanMonsterWarpInfo();
 };
 
 #endif

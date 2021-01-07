@@ -89,7 +89,6 @@ list<Monster*>& Room::getMonsters()
 	return monsters;
 }
 
-
 unordered_map <string, Object*>& Room::getObjects()
 {
 	return objects;
@@ -133,7 +132,7 @@ void Room::addObject(Object* object)
 	}
 }
 
-void Room::updateAllObjects(GAME* game)
+void Room::tick(int time, GAME* game)
 {
 	list<string>  toDel;
 	for (auto& entry : objects)
@@ -150,9 +149,10 @@ void Room::updateAllObjects(GAME* game)
 	}
 }
 
-void Room::tick(int time, GAME* game)
+void Room::updateAllMonsters(int time, GAME* game)
 {
-	updateAllObjects(game);
+	if (!discovered) return;
+	
 	for (Monster* m : monsters)
 	{
 		if (m->isAlive())
@@ -165,7 +165,6 @@ void Room::tick(int time, GAME* game)
 		lastCleaned = time;
 	}
 }
-
 
 void Room::addMonster(Monster* m)
 {
@@ -232,4 +231,22 @@ bool Room::isTraversable(int mx, int my)
 void Room::onKeyDown(GAME* game)
 {
 	player.onKeyDown(game);
+}
+
+void Room::sendMonstersToWarp(int x, int y, int destRoom, int destX, int destY, bool playerJustLeft)
+{
+	for (Monster* m : monsters)
+	{
+		if (m->isAlive())
+			m->sendMonsterToWarp(x, y, destRoom, destX, destY, playerJustLeft);
+	}
+}
+
+void Room::cleanMonsterWarpInfo()
+{
+	for (Monster* m : monsters)
+	{
+		if (m->isAlive())
+			m->cleanMonsterWarpInfo();
+	}
 }

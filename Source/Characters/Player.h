@@ -45,9 +45,10 @@ protected:
 	int infosY;
 
 	/// <summary>
-	/// 
+	/// Minimal amount of time between attacks, in ticks 
 	/// </summary>
 	int attackDelay;
+	
 	/// <summary>
 	/// A Heart texture for player lives.
 	/// </summary>
@@ -205,8 +206,6 @@ public:
 	/// </summary>
 	/// <returns></returns>
 	Story& getStory() const;
-
-	
 };
 
 #endif
