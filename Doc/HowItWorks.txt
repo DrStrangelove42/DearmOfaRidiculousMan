@@ -8,23 +8,23 @@
 I) Maps
 
 How to create a world using a text file:
-
-The name of the text file (without the extension) is the name of the world.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Name - The name of the text file (without the extension) is the name of the world.
 
 Each world is composed of a positive number of maps, which may correspond 
 to floors in a dungeon for example.
-
-The first line contains the number of maps in the world.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+First line - The first line contains the number of maps in the world.
 
 In the following lines, each map is described one by one.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+First line of each map - The first line of each map description must be ##.
 
-The first line of each map description must be ##.
-
-The second line in the description of a map is an integer containing the 
+Second line of each map - The second line in the description of a map is an integer containing the 
 positive number of rooms.
 
 After this, each room is described one by one.
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Each room is described as follows:
  - The first line contains #.
  - The second line contains two integers: the width and the height of the room.
