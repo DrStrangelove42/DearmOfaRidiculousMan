@@ -64,9 +64,9 @@ void Player::renderInventory(RenderContext& renderer, int xx, int yy)const
 	xx = infosX;
 	yy += tmp->getHeight();
 	/*The inventory*/
-	for (auto& entry : inventoryLookup)
+	for (auto& entry : inventory)
 	{
-		entry.second->sideRender(renderer, xx, yy);
+		entry.first.sideRender(renderer, xx, yy);
 		xx += SZ_BLOCKSIZE;
 		if (xx >= infosX + SZ_INFOSWIDTH)
 		{
@@ -95,7 +95,6 @@ void Player::kill()
 Player::~Player()
 {
 	inventory.clear();
-	inventoryLookup.clear();
 }
 
 void Player::tick(int time, GAME* game)
@@ -266,8 +265,6 @@ int Player::getAttack()
 	return attack;
 }
 
-
-
 int Player::getLives()
 {
 	return lives;
@@ -275,26 +272,30 @@ int Player::getLives()
 
 void Player::pickUpObject(const Object* obj, int count)
 {
-	if (inventory.find(obj->getId()) == inventory.end())
+	if (inventory.find(*obj) == inventory.end())
 	{
-		inventory[obj->getId()] = 0;
+		inventory[*obj] = 0;
 		attack = max(obj->getAttack(), attack);
 		defense = max(obj->getDefense(), defense);
 	}
 
-	inventory[obj->getId()] += count;
-
-	inventoryLookup[obj->getId()] = const_cast<Object*>(obj); //C++ is fairly annoying too
+	inventory[*obj] += count;
 }
 
 bool Player::hasObject(string objId)
 {
-	return (inventory.find(objId) != inventory.end() && inventory[objId] > 0);
+	for (auto& entry : inventory)
+	{
+		if (entry.first.getId() == objId && entry.second > 0)
+			return true;
+	}
+	return false;
 }
 
 bool Player::hasObject(Object obj)
 {
-	return (inventory.find(obj.getId()) != inventory.end() && inventory[obj.getId()] > 0);
+	auto search = inventory.find(obj);
+	return (search != inventory.end() && search->second > 0);
 }
 
 void Player::setLives(int l)

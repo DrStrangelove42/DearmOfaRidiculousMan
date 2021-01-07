@@ -34,8 +34,7 @@ protected:
 	/// Player's items
 	/// int is how many of that type of item player has (eg might have several times the same potion)
 	/// </summary>
-	unordered_map<string, int> inventory;
-	unordered_map<string, Object*> inventoryLookup;
+	unordered_map<Object, int, ObjectHash> inventory;
 	/// <summary>
 	/// Horizontal offset of the infos sub window
 	/// </summary>
@@ -151,8 +150,6 @@ public:
 	/// </summary>
 	/// <returns></returns>
 	int getAttack();
-	
-
 
 	/// <summary>
 	/// Returns player's number of lives.
