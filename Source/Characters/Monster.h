@@ -140,11 +140,20 @@ public:
 	virtual void tick(int time, GAME* game);
 
 	/// <summary>
-	/// Change room in which the monster resides.
+	/// Set the room member of monster.
 	/// </summary>
 	/// <param name="r"></param>
 	void setRoom(Room* r);
 
+	/// <summary>
+	/// Change room in which the monster resides.
+	/// </summary>
+	/// <param name="r"></param>
+	void moveToRoom(Room* r);
+
+	/// <summary>
+	/// Encodes the monster in a string : its type followed by its health.
+	/// </summary>
 	string monsterToString() const;
 
 	/// <summary>

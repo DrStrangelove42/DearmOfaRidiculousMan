@@ -193,7 +193,7 @@ void IntelligentMonster::tick(int time, GAME* game)
 		}
 		else if (!(warpInfo.empty())) //We have arrived on the warp
 		{
-			setRoom(game->currentMap->getRooms()[warpInfo.front()]);
+			moveToRoom(game->currentMap->getRooms()[warpInfo.front()]);
 			warpInfo.pop();
 			int warpX = warpInfo.front();
 			warpInfo.pop();

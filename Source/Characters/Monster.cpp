@@ -54,6 +54,13 @@ void Monster::setRoom(Room* r)
 	room = r;
 }
 
+void Monster::moveToRoom(Room* r)
+{
+	room->removeMonster(this);
+	room = r;
+	room->addMonster(this);
+}
+
 void Monster::attackRound()
 {
 	if (abs(x - player.getX()) <= attackRadius && abs(y - player.getY()) <= attackRadius)
