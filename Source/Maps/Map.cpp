@@ -73,13 +73,19 @@ void Map::render(RenderContext& renderer, int offsetX, int offsetY) const
 
 	int offX = offsetX - cur->getX() + (BLOCKS_W - cur->getW()) / 2;
 	int offY = offsetY - cur->getY() + (BLOCKS_H - cur->getH()) / 2;
-
-	for (int i = 0; i < roomCount; i++)
+	int i = 0;
+	for (; i < currentRoom; i++)
 	{
 		rooms[i]->render(renderer, offX, offY);
 	}
+	cur->render(renderer, offX, offY);
 
 	player.render(renderer, offX + cur->getX(), offY + cur->getY());
+
+	for (i++; i < roomCount; i++)
+	{
+		rooms[i]->render(renderer, offX, offY);
+	}
 
 	if (DEBUG_MODE && titleTexture != NULL)
 	{
@@ -614,6 +620,9 @@ Room* Map::intlRoomFromFile(string filename, ifstream& layout, Player& p, Render
 			{
 			case ' ':
 				break;
+			case '.':
+				thisRoom->getBlocks()[j][i]->setTrav(true);
+				break;
 			case 'w':
 				thisRoom->replaceBlock(new WallBlock(j, i, renderer));
 				break;
@@ -622,6 +631,12 @@ Room* Map::intlRoomFromFile(string filename, ifstream& layout, Player& p, Render
 				break;
 			case '*':
 				thisRoom->replaceBlock(new FloorBlock(j, i, renderer, "glass"));
+				break;
+			case 'H':
+				thisRoom->replaceBlock(new FloorBlock(j, i, renderer, "stairsH"));
+				break;
+			case 'V':
+				thisRoom->replaceBlock(new FloorBlock(j, i, renderer, "stairsV"));
 				break;
 			case 'S':
 				thisRoom->replaceBlock(new FloorBlock(j, i, renderer, "sand"));

@@ -21,3 +21,7 @@ Greetings Sir !
 Welcome back to the Mansion.
 #BUTLERNAME
 Mr. Fyodor
+#LostHouse
+Ruins of the ancient observation tower 
+
+Access to the belvedere and secret room
