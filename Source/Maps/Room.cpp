@@ -1,6 +1,7 @@
 #include "Room.h"
 #include "../Characters/Monsters/Skeleton.h"
 #include "../Characters/Monsters/Ghost.h"
+#include "./Map.h"
 
 Room::Room(int width, int height, int absx, int absy, Player& p, RenderContext& renderer) : w(width), h(height), x(absx), y(absy), player(p), discovered(false), blocks(NULL)
 {
@@ -126,7 +127,6 @@ void Room::addObject(Object* object)
 	}
 	else
 	{
-		//cout << "Two objects have the same identifier " << object->getId() << endl;
 		delete objects[object->getId()];
 		objects[object->getId()] = object;
 	}
@@ -158,7 +158,7 @@ void Room::updateAllMonsters(int time, GAME* game)
 		if (m->isAlive())
 			m->tick(time, game);
 	}
-
+	
 	if (time - lastCleaned >= cleanDelay)
 	{
 		cleanMonsters();

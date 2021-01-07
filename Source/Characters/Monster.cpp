@@ -54,13 +54,6 @@ void Monster::setRoom(Room* r)
 	room = r;
 }
 
-void Monster::moveToRoom(Room* r)
-{
-	room->getMonsters().remove(this);
-	room = r;
-	room->addMonster(this);
-}
-
 void Monster::attackRound()
 {
 	if (abs(x - player.getX()) <= attackRadius && abs(y - player.getY()) <= attackRadius)
@@ -89,6 +82,24 @@ void Monster::render(RenderContext& renderer, int offsetX, int offsetY)const
 string Monster::monsterToString() const
 {
 	return isAlive() ? type + " " + to_string(health) : "";
+}
+
+Room* Monster::getRoom()
+{
+	return room;
+}
+
+void Monster::moveToRoom(Room* r)
+{
+	room->getMonsters().remove(this);
+	room = r;
+	room->addMonster(this);
+}
+
+void Monster::eliminate()
+{
+	killed = true;
+	health = 0;
 }
 
 void Monster::sendMonsterToWarp(int x, int y, int destRoom, int destX, int destY, bool playerJustLeft)

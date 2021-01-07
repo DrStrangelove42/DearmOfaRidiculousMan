@@ -14,27 +14,60 @@
 
 using namespace std;
 
+class Map;
+
 class Room : public Entity
 {
 protected:
-	/* Dimensions of the room, in blocks */
+	/// <summary>
+	/// Width of the room, in blocks.
+	/// </summary>
 	int w;
+	
+	/// <summary>
+	/// Height of the room, in blocks.
+	/// </summary>
 	int h;
-	/* Absolute location of the first block (top-left corner, blocks[0][0])
-	   of this room in the map, in blocks unit */
+	
+	/// <summary>
+	/// X coordinate of the absolute location of the first block (top-left corner, blocks[0][0]) of this room in the map, in blocks.
+	/// </summary>
 	int x;
+	
+	/// <summary>
+	/// Y coordinate of the absolute location of the first block (top-left corner, blocks[0][0]) of this room in the map, in blocks.
+	/// </summary>
 	int y;
 
-	/* The player currently in the room */
+	/// <summary>
+	/// A reference to the player.
+	/// </summary>
 	Player& player;
-	/* The blocks are the basic compound of a room */
+
+	/// <summary>
+	/// A matrix of size <code>w</code> times <code>h</code> of references to blocks, which are the basic compound of a room.
+	/// </summary>
 	Block*** blocks;
-	/* If the room has already been visited */
+
+	/// <summary>
+	/// A boolean indicating whether the room has already been visited by the player. We will only show on screen the rooms that have been discovered.
+	/// </summary>
 	bool discovered;
-	/* The unordered map of objects in the room.*/
+	
+	/// <summary>
+	/// The unordered map of objects in the room.
+	/// </summary>
 	unordered_map <string, Object*> objects;
 
+	/// <summary>
+	/// The list of monsters in the room.
+	/// </summary>
 	list<Monster*> monsters;
+
+	/// <summary>
+	/// A list of monsters that need deleting from the room.
+	/// </summary>
+	list<Monster*> toDelete;
 
 	int lastCleaned = 0;
 	int cleanDelay = 10000;

@@ -120,7 +120,7 @@ public:
 	virtual void manageAlarm();
 
 	/// <summary>
-	/// 
+	/// Renders the room.
 	/// </summary>
 	/// <param name="renderer"></param>
 	/// <param name="offsetX"></param>
@@ -128,10 +128,15 @@ public:
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0)const;
 
 	/// <summary>
-	/// 
+	/// Kills the monster, and gives the correct amount of money and experience to the player.
 	/// </summary>
 	virtual void kill();
 
+	/// <summary>
+	/// Eliminates the monster in such a way that it is considered killed and the player doesn't receive the money nor the experience carried by the monster.
+	/// </summary>
+	void eliminate();
+	
 	/// <summary>
 	/// 
 	/// </summary>
@@ -144,6 +149,11 @@ public:
 	/// </summary>
 	/// <param name="r"></param>
 	void setRoom(Room* r);
+
+	/// <summary>
+	/// Get the room member of monster.
+	/// </summary>
+	Room* getRoom();
 
 	/// <summary>
 	/// Change room in which the monster resides.
