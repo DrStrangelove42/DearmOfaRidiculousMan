@@ -71,6 +71,34 @@ string EatToken(string& line, char sep)
 	}
 }
 
+string EatTokenEx(string& line, char sep)
+{
+	//Invariant : line commence par un jeton, puis son séparateur (pas de séparateur au début).
+	size_t start = line.find_first_not_of(' '); //Espaces au début
+	if (start == line.npos) //Rien trouvé
+	{
+		line = "";
+		return "";
+	}
+	line = line.substr(start);
+	string nline = line;
+	size_t sepI = line.find_first_of(sep); //le séparateur
+	if (sepI == line.npos) //Pas de séparateur
+	{
+		sepI = line.size();
+		line = "";
+	}
+	else
+	{
+		line = line.substr(sepI + 1);
+	}
+	//Espaces après le jeton
+	nline = nline.substr(0, sepI);
+	size_t end = nline.find_last_not_of(' ') + 1;
+	nline = nline.substr(0, end);
+	return nline;
+}
+
 map<string, string> loadedStrings;
 
 string GetText(string id)

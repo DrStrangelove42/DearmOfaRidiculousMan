@@ -39,6 +39,8 @@
 #define mkdir(a,b) (_mkdir(a))
 #endif
 
+class Map;
+
 /*
 A map represents a set of rooms displayed one at a time (or one centered
 in the view and the others black or greyed).
@@ -165,6 +167,7 @@ protected:
 	/// Index of the room that is currently displayed (in which the player is)
 	/// </summary>
 	int currentRoom;
+
 public:
 	/// <summary>
 	/// 

@@ -87,6 +87,15 @@ string NextToken(string& line, char sep = ' ');
 string EatToken(string& line, char sep = ' ');
 
 /// <summary>
+/// Same as EatToken, but with trimming of the resulting token (removing of spaces 
+/// before and after it).
+/// </summary>
+/// <param name="line"></param>
+/// <param name="sep"></param>
+/// <returns></returns>
+string EatTokenEx(string& line, char sep =' ');
+
+/// <summary>
 /// Loads a string from the current language context.
 /// </summary>
 /// <param name="id"></param>

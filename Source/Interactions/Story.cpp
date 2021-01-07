@@ -10,16 +10,12 @@ void Story::fromFile(string path, GAME* game)
 	Player& p = *(game->player);
 
 	string firstPart = "";
-	//TODO set start map
-	string worldName = "MainMap";
-	game->worldName = worldName;
-	*(game->currentMapId) = -1;
-	game->currentMap = new Map(worldName, *(game->player), r, game->currentMapId);
+	bool foundMap = false;
 	string curPartName = "";
 	Part* parsingPart = new Part();
 	while (getline(file, line))
 	{
-		string type = EatToken(line);
+		string type = EatTokenEx(line);
 		if (type == "REM") continue;
 		if (type == "PART")
 		{
@@ -33,11 +29,34 @@ void Story::fromFile(string path, GAME* game)
 			curPartName = line;
 			parsingPart = new Part();
 		}
+		else if (type == "MAP")
+		{
+			string world_name = EatTokenEx(line, ',');
+			string map_idx = EatTokenEx(line, ',');
+			string room_idx = EatTokenEx(line, ',');
+			int map_idx_toi = stoi(map_idx);
+			int room_idx_toi = stoi(room_idx);
+		
+			if (!foundMap)//Trouvé une indication de map
+			{
+				int startMap = map_idx_toi;
+				foundMap = true;
+				changeMap(game, world_name, &startMap, room_idx_toi);
+			}
+			
+			parsingPart->scenario.push_back(new Step(
+				[world_name, map_idx_toi, room_idx_toi](GAME* game)
+				{
+					int startMap = map_idx_toi;
+					changeMap(game, world_name, &startMap, room_idx_toi);
+				}
+			));
+		}
 		else
 		{
 			int x, y;
-			x = stoi(EatToken(line));
-			y = stoi(EatToken(line));
+			x = stoi(EatTokenEx(line));
+			y = stoi(EatTokenEx(line));
 
 			if (type == "OBJ")
 			{
@@ -65,17 +84,17 @@ void Story::fromFile(string path, GAME* game)
 			{
 				//NPC x y textureID,name,speech,choice1,partIndex1,...
 				/*Choice is the text of the choice, followed the index of a part in the following comma-separated token*/
-				string npc_txID = EatToken(line, ',');
-				string npc_name = EatToken(line, ',');
-				string npc_speech = EatToken(line, ',');
+				string npc_txID = EatTokenEx(line, ',');
+				string npc_name = EatTokenEx(line, ',');
+				string npc_speech = EatTokenEx(line, ',');
 				//TODO : maybe blocking NPCs ?                              -->   vvvv
 				NPC* npc = new NPC(npc_name, npc_speech, x, y, npc_txID, r, NULL, true);
 				// The map will be set when the NPC is updated in it.       ^^^^
 				while (!line.empty())
 				{
-					string npc_curChoice = EatToken(line, ',');
+					string npc_curChoice = EatTokenEx(line, ',');
 
-					string partIdx = EatToken(line, ',');
+					string partIdx = EatTokenEx(line, ',');
 					npc->addChoice(npc_curChoice, r, [this, partIdx](int choiceId)
 						{
 							this->changePart(partIdx);

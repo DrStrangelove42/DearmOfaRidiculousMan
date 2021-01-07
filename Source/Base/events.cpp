@@ -130,7 +130,7 @@ void onKeyDown(SDL_Event event, GAME* game)
 
 void quitGame(GAME* game)
 {
-	delete game->currentMap;
+	freeMaps();
 	delete game->player;
 
 	delete game->renderer;

@@ -50,17 +50,13 @@ MainMenu::MainMenu(Player& p, GAME* g) : Menu(p, g)
 
 void MainMenu::onPlayClick(int id)
 {
-	string worldName = "MainMap";
-	game->worldName = worldName;
-	*(game->currentMapId) = -1;
-	game->currentMap = new Map(worldName, *(game->player), *(game->renderer), game->currentMapId);
-	delete this;
+	int startMap = 0;
+	changeMap(game, "MainMap", &startMap, 0);
 }
 
 void MainMenu::onStoryModeClick(int id)
 {
 	game->player->setStory(new Story("demo", game));
-	delete this;
 }
 
 void MainMenu::onQuitClick(int id)
@@ -77,7 +73,7 @@ void MainMenu::render(RenderContext& renderer, int offsetX, int offsetY) const
 {
 	Menu::render(renderer, offsetX, offsetY);
 
-	
+
 	player.DrawableEntity::render(renderer, offsetX, offsetY);
 }
 

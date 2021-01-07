@@ -69,4 +69,24 @@ typedef struct
 	char keyLetter;
 } GAME;
 
+/// <summary>
+/// 
+/// </summary>
+/// <param name="game"></param>
+/// <param name="worldname"></param>
+/// <param name="startMap"></param>
+/// <param name="startRoom"></param>
+void changeMap(GAME* game, string worldname,int* startMap, int startRoom);
+
+/// <summary>
+/// 
+/// </summary>
+void freeMaps();
+
+/// <summary>
+/// 
+/// </summary>
+/// <param name="worldname"></param>
+/// <returns></returns>
+bool isLoaded(string worldname);
 #endif
