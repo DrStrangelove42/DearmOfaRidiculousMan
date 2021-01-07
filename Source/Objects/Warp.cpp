@@ -86,7 +86,7 @@ bool Warp::updateObject(GAME* game)
 
 	RenderContext& renderer = *(game->renderer);
 	game->player->teleport(destX, destY);
-	game->currentMap->setCurrentRoom(destRoom);
+	
 	if (destWorld.empty())
 	{
 		if (destMap == -1)
@@ -96,11 +96,13 @@ bool Warp::updateObject(GAME* game)
 		}
 		if (destMap != *(game->currentMapId))
 		{
-			*(game->currentMapId) = destMap;
 			changeMap(game, game->worldName, destMap, destRoom); 
 		}
 		else
+		{
+			game->currentMap->setCurrentRoom(destRoom);
 			game->currentMap->getRooms()[destRoom]->setDiscovered(true);
+		}
 	}
 	else
 	{

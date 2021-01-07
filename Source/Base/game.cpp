@@ -36,7 +36,11 @@ void freeMaps()
 {
 	for (auto& entry : loadedMaps)
 	{
-		delete entry.second;
+		try {
+
+			//delete entry.second;
+		}
+		catch (...) {}
 	}
 	loadedMaps.clear();
 }
