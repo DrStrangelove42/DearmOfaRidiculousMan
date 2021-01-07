@@ -50,8 +50,7 @@ MainMenu::MainMenu(Player& p, GAME* g) : Menu(p, g)
 
 void MainMenu::onPlayClick(int id)
 {
-	int startMap = 0;
-	changeMap(game, "MainMap", &startMap, 0);
+	changeMap(game, "MainMap", -1, 0);
 }
 
 void MainMenu::onStoryModeClick(int id)

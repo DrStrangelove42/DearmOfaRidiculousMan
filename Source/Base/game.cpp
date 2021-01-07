@@ -5,30 +5,31 @@
 /// <summary>
 /// 
 /// </summary>
-unordered_map<string, Map*> loadedMaps;
+unordered_map<pair<string, int>, Map*, PairHash> loadedMaps;
 
-void changeMap(GAME* game, string worldname, int* startMap, int startRoom)
+void changeMap(GAME* game, string worldname, int mapIndex, int startRoom)
 {
 	//Sauvegarde
-	if (!isLoaded(game->worldName))
-		loadedMaps[game->worldName] = game->currentMap;
+	if (!isLoaded(game->worldName, *(game->currentMapId)))
+		loadedMaps[{game->worldName, * (game->currentMapId)}] = game->currentMap;
 
 	game->worldName = worldname;
-	if (loadedMaps.find(worldname) != loadedMaps.end())//déjà chargée en mémoire
+	if (isLoaded(worldname, mapIndex))//déjà chargée en mémoire
 	{
-		game->currentMap = loadedMaps[worldname];
+		game->currentMap = loadedMaps[{worldname, mapIndex}];
+		game->currentMap->setCurrentRoom(startRoom);
 	}
 	else
 	{
-		*(game->currentMapId) = -1;
-		game->currentMap = new Map(worldname, *(game->player), *(game->renderer), game->currentMapId);
-		loadedMaps[worldname] = game->currentMap;
+		*(game->currentMapId) = mapIndex;
+		game->currentMap = new Map(worldname, *(game->player), *(game->renderer), game->currentMapId, startRoom);
+		loadedMaps[{worldname, mapIndex}] = game->currentMap;
 	}
 }
 
-bool isLoaded(string worldname)
+bool isLoaded(string worldname, int mapIndex)
 {
-	return loadedMaps.find(worldname) != loadedMaps.end();
+	return loadedMaps.find({ worldname, mapIndex }) != loadedMaps.end();
 }
 
 void freeMaps()

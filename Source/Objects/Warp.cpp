@@ -91,24 +91,21 @@ bool Warp::updateObject(GAME* game)
 	{
 		if (destMap == -1)
 		{
-			*(game->currentMapId) = -1;
-			game->currentMap = new MainMenu(*(game->player), game);
-			game->worldName = "Main menu";
+			changeMap(game, "Main menu", -1, 0);//déjà chargée
 			return false;
 		}
 		if (destMap != *(game->currentMapId))
 		{
 			*(game->currentMapId) = destMap;
-			game->currentMap = new Map(game->worldName, *(game->player), renderer, game->currentMapId, destRoom);
+			changeMap(game, game->worldName, destMap, destRoom); 
 		}
 		else
 			game->currentMap->getRooms()[destRoom]->setDiscovered(true);
 	}
 	else
 	{
-		game->worldName = destWorld;
-		*(game->currentMapId) = -1;
-		game->currentMap = new Map(destWorld, *(game->player), *(game->renderer), game->currentMapId);
+		//Autre monde
+		changeMap(game, destWorld, -1, destRoom);
 	}
 
 	return false;

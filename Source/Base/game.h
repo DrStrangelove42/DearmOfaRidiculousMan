@@ -73,10 +73,11 @@ typedef struct
 /// 
 /// </summary>
 /// <param name="game"></param>
+/// <param name="mapIndex">-1 : auto mode</param>
 /// <param name="worldname"></param>
 /// <param name="startMap"></param>
 /// <param name="startRoom"></param>
-void changeMap(GAME* game, string worldname,int* startMap, int startRoom);
+void changeMap(GAME* game, string worldname, int mapIndex = -1, int startRoom = -1);
 
 /// <summary>
 /// 
@@ -88,5 +89,13 @@ void freeMaps();
 /// </summary>
 /// <param name="worldname"></param>
 /// <returns></returns>
-bool isLoaded(string worldname);
+bool isLoaded(string worldname, int mapIndex);
+
+struct PairHash
+{
+	size_t operator()(const pair<string, int>& o) const
+	{
+		return hash<string>()(o.first + to_string(o.second));
+	}
+};
 #endif

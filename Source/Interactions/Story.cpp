@@ -41,14 +41,14 @@ void Story::fromFile(string path, GAME* game)
 			{
 				int startMap = map_idx_toi;
 				foundMap = true;
-				changeMap(game, world_name, &startMap, room_idx_toi);
+				changeMap(game, world_name, startMap, room_idx_toi);
 			}
 			
 			parsingPart->scenario.push_back(new Step(
 				[world_name, map_idx_toi, room_idx_toi](GAME* game)
 				{
 					int startMap = map_idx_toi;
-					changeMap(game, world_name, &startMap, room_idx_toi);
+					changeMap(game, world_name, startMap, room_idx_toi);
 				}
 			));
 		}

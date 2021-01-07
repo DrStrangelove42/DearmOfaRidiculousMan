@@ -174,10 +174,14 @@ void Player::animateGameOver(int time, GAME* game)
 	{
 		t = 0;
 		lives++;
-		delete game->currentMap;
-		*(game->currentMapId) = 0;
-		game->worldName = "Game Over";
-		game->currentMap = new GameOverMenu(*this, game);
+		if (isLoaded("Game Over", 0))
+			changeMap(game, "Game Over", 0);
+		else
+		{
+			*(game->currentMapId) = 0;
+			game->worldName = "Game Over";
+			game->currentMap = new GameOverMenu(*this, game);
+		}
 	}
 }
 
