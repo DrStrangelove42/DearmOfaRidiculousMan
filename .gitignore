@@ -8,5 +8,5 @@ Windows/Win32
 Windows/x64
 Windows/.vs
 Data
-Doc/Doc
+Doc/html
 Test/test
