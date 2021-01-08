@@ -436,21 +436,19 @@ void Map::mapFromFiles(string worldName, Player& p, RenderContext& renderer, int
 	layout.close();
 	rooms[currentRoom]->setDiscovered(true);
 
-	intlGetObjectsFromFile(filename, data, renderer, p);
+	intlGetDataFromFile(filename, data, renderer, p);
 
 	data.close();
 }
 
-void Map::intlGetObjectsFromFile(string filename, ifstream& data, RenderContext& renderer, Player& p)
+void Map::intlGetDataFromFile(string filename, ifstream& data, RenderContext& renderer, Player& p)
 {
 	string line3;
 	int uniqueId = 0; // This integer is used to make sure that objects in chests have unique identifiers.
 
-	while (getline(data, line3)) //We now add the objects to the rooms
+	while (getline(data, line3))
 	{
-		/* For each object, we extract its position in the map, its identifier,
-		and the rest of the information needed to construct the object and add
-		it to the map. */
+		/* For each line, we extract its position in the map, and the rest of the information needed to construct the object and add it to the map thanks to another function. */
 		if (line3[line3.length() - 1] == '\r')
 		{
 			line3.erase(line3.length() - 1);
