@@ -1,5 +1,5 @@
 PART beginning
-MAP MainMap, -1,0
+MAP StoryEntry, -1,0
 NPC 10 10 mario,Mario,It's a me Mario ! What do you choose?,Fire,feu,Death,squeleton army, Flee , fuite, talk, talk
 PART feu
 MOB 5 5 F
