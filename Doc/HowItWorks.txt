@@ -118,7 +118,7 @@ Layout of first room of first map
 .
 #
 Dimensions of last room of first map
-Absolute location of ast room of first map
+Absolute location of last room of first map
 Information pertaining to objects and entities in last room of first map
 #
 Layout of last room of first map
@@ -159,7 +159,7 @@ A story script is a textfile located in Res/StoryMode containing command lines (
 in a very straightforward flavour : each line starts with a upper-case keyword like PART or NPC.. Comments 
 are written with the keyword REM. 
 
-The first actual command (different from REM) must be PART. Parts are the main compbound of the story.
+The first actual command (different from REM) must be PART. Parts are the main compound of the story.
 When the player makes choices through NPCs, the part changes. 
 
 The language is sequential : the first part to be declared will be the starting part, and then parts are

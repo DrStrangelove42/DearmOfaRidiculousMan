@@ -8,7 +8,7 @@
 !3 0 2 -1 19
 #
  !3 !3 !3 !3 !3    !3 !3          !3       !3             !3 !3 !3 !3 !3 !3 !3
-b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b     
+b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b   !1
 b  gp g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g   !1
 b  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g   !1
 b  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g   !1
@@ -42,7 +42,7 @@ b  b  g  g  g  g  b  b  b  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g   !1
 b  b  b  b  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g   !1
 b  b  b  b  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g   !1
 b  b  b  b  b  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g   !1
-b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b     
+b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b   !1  
 #
 26 36
 24 0
@@ -54,7 +54,7 @@ b1 HELP
 B1 BUTLERNAME BUTLERSPEECH
 #
  !3 !3 !3 !3 !3 !3 !3 !3 !3 !3 !3 !3             !3 !3 !3 !3 !3 !3 !3 !3 !3 !3
-   b  b  b  b  b  b  b  b  b  b  b  s  s  s  s  b  b  b  b  b  b  b  b  b  b  
+ !1b  b  b  b  b  b  b  b  b  b  b  s  s  s  s  b  b  b  b  b  b  b  b  b  b  
  !1g  g  g  g  g  g  g  g  g  g  g  b  b  b  b  b  g  g  g  g  g  g  g  g  b  
  !1g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  b  
  !1g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  t  t  b  
@@ -88,7 +88,7 @@ B1 BUTLERNAME BUTLERSPEECH
  !1g  b  b  b  g  g  g  g  g  w  w  w  w  w  w  w  w  w  f  f  w  w  w  w  s  
  !1g  b  b  b  g  g  g  g  g  s  g  g  g  g  g  g  g  g  g  g  g  g  g  g  s  
  !1g  b  b  b  b  g  g  g  g  s  g  g  g  g  g  g  t  g  g  t  g  g  g  g  s  
-   b  b  b  b  b  b  b  b  b  s  g  g  g  t  g  g  g  g  g  g  g  g  t  g  s  
+ !1b  b  b  b  b  b  b  b  b  s  g  g  g  t  g  g  g  g  g  g  g  g  t  g  s  
 #
 26 21
 0 -19
@@ -116,7 +116,7 @@ b  t  t  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g   !1
 b  t  t  g  g  g  g  g  g  g  g  g  g  t  t  g  g  g  g  g  g  g  g  g  g   !1
 b  g  g  g  g  g  g  g  g  g  g  g  t  t  t  g  g  g  g  g  g  g  g  g  g   !1
 b  b  b  b  b  t  b  b  t  t  t  b  t  t  b  t  t  t  t  b  b  b  b  b  b   !1
- !2 !2 !2 !2 !2 !2 !2 !2          !2       !2             !2 !2 !2 !2 !2      
+ !2 !2 !2 !2 !2 !2 !2 !2          !2       !2             !2 !2 !2 !2 !2 !2     
 #
 36 31
 14 -19
@@ -144,7 +144,7 @@ s  s  s  s  s  s  s  s  s  s  s  s  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g 
                             !1.  g  g  g  g  g  g  g  g  g  g  g  s  b  V  s  g  g  g  g  g  g  g  g  t  t  
                             !1.  g  g  g  g  g  g  g  g  g  g  g  s  V  V  s  b  g  g  g  g  g  g  b  t  t  
                             !1.  b  b  b  g  b  b  g  g  g  b  g  s  V  V  s  g  g  b  b  b  b  b  b  t  t  
-                               !2 !2 !2 !2 !2 !2 !2 !2 !2 !2 !2 !2s  V  V  s   !2 !2 !2 !2 !2 !2 !2           
+                               !2 !2 !2 !2 !2 !2 !2 !2 !2 !2 !2 !2s  V  V  s   !2 !2 !2 !2 !2 !2 !2 !2          
                                                                   s  *  *  s                              
                                                                   s  *  *  s                              
                                                                   s  *  *  s                              

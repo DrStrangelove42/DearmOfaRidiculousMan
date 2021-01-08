@@ -3,13 +3,13 @@
 
 
 /// <summary>
-/// 
+/// Maps that have already been loaded.
 /// </summary>
 unordered_map<pair<string, int>, Map*, PairHash> loadedMaps;
 
 void changeMap(GAME* game, string worldname, int mapIndex, int startRoom)
 {
-	//Sauvegarde
+	//Saving
 	int prev_mapIndex = *(game->currentMapId);
 	string prev_world = game->worldName;
 	if (!isLoaded(game->worldName, *(game->currentMapId)))//In case of manually loaded
@@ -21,7 +21,7 @@ void changeMap(GAME* game, string worldname, int mapIndex, int startRoom)
 		game->currentMap = loadedMaps[{worldname, mapIndex}];
 		game->currentMap->setCurrentRoom(startRoom);
 		*(game->currentMapId) = mapIndex;
-		if (mapIndex < 0)//Bricoling
+		if (mapIndex < 0)
 		{
 			//If we are on map -1, but it is already loaded, it means that the player is positionned automatically.
 			//As we do not create the map, the player is not teleported where it shoud be.

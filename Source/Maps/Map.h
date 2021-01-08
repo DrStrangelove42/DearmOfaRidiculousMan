@@ -76,17 +76,22 @@ protected:
 	int roomCount;
 
 	/// <summary>
+	/// Index of the room that is currently displayed (in which the player is)
+	/// </summary>
+	int currentRoom;
+
+	/// <summary>
 	/// The name of the current world.
 	/// </summary>
 	string worldName;
 
 	/// <summary>
-	/// 
+	/// Texture of the name of the map, to be used when necessary.
 	/// </summary>
 	Texture* titleTexture;
 
 	/// <summary>
-	/// This function takes a folder of files representing a world and returns the current map.
+	/// This function takes a folder of files representing a world and creates the current map.
 	/// destMap, destRoom, destX and destY correspond to the destination coordinates, i.e. where
 	///	the player starts. When they are different from -1, the player is warping from one map to
 	///	another, and when they are equal to -1 we must read them in the Start file.
@@ -99,16 +104,16 @@ protected:
 	void mapFromFiles(string worldName, Player& p, RenderContext& renderer, int* startMap, int startRoom);
 
 	/// <summary>
-	/// 
+	/// Extracts the data (objects and monsters) from the ifstream data and adds them to the map.
 	/// </summary>
 	/// <param name="worldName"></param>
 	/// <param name="data"></param>
 	/// <param name="renderer"></param>
 	/// <param name="p"></param>
-	void intlGetObjectsFromFile(string worldName, ifstream& data, RenderContext& renderer, Player& p);
+	void intlGetDataFromFile(string worldName, ifstream& data, RenderContext& renderer, Player& p);
 
 	/// <summary>
-	/// 
+	/// Here line encodes a monster or an object, and they should be treated differently, so we analyse the line to deduce the type of data and call the corresponding function to create it.
 	/// </summary>
 	/// <param name="line"></param>
 	/// <param name="filename"></param>
@@ -120,10 +125,8 @@ protected:
 	/// <param name="room"></param>
 	void parseObjectOrMonster(string& line, string& filename, RenderContext& renderer, int* uniqueId, int x, int y, Player& p, int room);
 
-	
-
 	/// <summary>
-	/// 
+	/// Creates the room thanks to the layout file, by creating a room of the correct shape and in the correct position, and then replacing each block with the correct one.
 	/// </summary>
 	/// <param name="filename"></param>
 	/// <param name="layout"></param>
@@ -133,7 +136,7 @@ protected:
 	Room* intlRoomFromFile(string filename, ifstream& layout, Player& p, RenderContext& renderer);
 
 	/// <summary>
-	/// 
+	/// Parses the map to create the layout and data files, as well as completing the start file if the player's starting position is in this map.
 	/// </summary>
 	/// <param name="newFile"></param>
 	/// <param name="map"></param>
@@ -143,7 +146,7 @@ protected:
 	static bool intlParseMap(string& newFile, int map, ifstream& World, ofstream& start);
 
 	/// <summary>
-	/// 
+	/// Parses the room to add to the layout and data files for that room, as wall as completing the start file if the player's starting position is in this room.
 	/// </summary>
 	/// <param name="newFile"></param>
 	/// <param name="World"></param>
@@ -156,7 +159,7 @@ protected:
 	static bool intlParseRoom(string& newFile, ifstream& World, int map, int room, ofstream& layout, ofstream& start, ofstream& data);
 
 	/// <summary>
-	/// 
+	/// Saves the player's progress in a folder, so that the game can be resumed at a later date.
 	/// </summary>
 	/// <param name="saveName"></param>
 	/// <param name="originalWorldName"></param>
@@ -164,14 +167,9 @@ protected:
 	/// <returns></returns>
 	void saveProgress(string saveName, string originalWorldName, int mapNumber, int roomNumber, Player& p);
 
-	/// <summary>
-	/// Index of the room that is currently displayed (in which the player is)
-	/// </summary>
-	int currentRoom;
-
 public:
 	/// <summary>
-	/// 
+	/// Parses the string line to create the corresponding object.
 	/// </summary>
 	/// <param name="line"></param>
 	/// <param name="renderer"></param>
@@ -182,7 +180,7 @@ public:
 	static Object* parseObject(string& line, RenderContext& renderer, int* uniqueId, int x, int y);
 
 	/// <summary>
-	/// 
+	/// Parses the string line to create the corresponding monster.
 	/// </summary>
 	/// <param name="line"></param>
 	/// <param name="renderer"></param>
@@ -190,6 +188,7 @@ public:
 	/// <param name="y"></param>
 	/// <returns></returns>
 	static Monster* parseMonster(string& line, RenderContext& renderer, int x, int y, Player& p, Room* r);
+	
 	/// <summary>
 	/// This function transforms a text file into a folder of texts files which are sufficient 
 	/// to describe the map completely and to be able to modify the maps to save progress.
@@ -220,7 +219,9 @@ public:
 	/// <param name="startRoom"></param>
 	Map(string filename, Player& p, RenderContext& renderer, int* startMap, int startRoom = -1);
 
-	/* Std destructor */
+	/// <summary>
+	/// Destructor. 
+	/// </summary>
 	virtual ~Map();
 
 	/// <summary>
@@ -232,25 +233,27 @@ public:
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0) const;
 
 	/// <summary>
-	/// Time management
+	/// Time management.
 	/// </summary>
 	/// <param name="time"></param>
 	/// <param name="game"></param>
 	virtual void tick(int time, GAME* game);
 
 	/// <summary>
-	/// Event system
+	/// Event system.
 	/// </summary>
 	/// <param name="game"></param>
 	virtual void onKeyDown(GAME* game);
 
 	/// <summary>
-	/// 
+	/// Mouse event.
 	/// </summary>
 	/// <param name="md"></param>
 	virtual void onMouseEvent(MOUSE_DATA* md);
 
-	/* Accessors */
+	/// <summary>
+	/// Accessors.
+	/// </summary>
 	void setCurrentRoom(int c);
 	int getRoomCount();
 	Room** getRooms();
@@ -269,6 +272,9 @@ public:
 	/// <param name="entity"></param>
 	void removeMouseHandler(DrawableEntity* entity);
 
+	/// <summary>
+	/// Teleports the player to the starting position.
+	/// </summary>
 	void teleportPlayerOnStart();
 
 	/// <summary>
