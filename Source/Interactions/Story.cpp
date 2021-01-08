@@ -1,5 +1,6 @@
 #include "Story.h"
 #include "../Maps/Map.h"
+#include "../Maps/Banner.h"
 
 void Story::fromFile(string path, GAME* game)
 {
@@ -36,7 +37,7 @@ void Story::fromFile(string path, GAME* game)
 			string room_idx = EatTokenEx(line, ',');
 			int map_idx_toi = stoi(map_idx);
 			int room_idx_toi = stoi(room_idx);
-		
+
 			if (!foundMap)//Trouvé une indication de map
 			{
 				int startMap = map_idx_toi;
@@ -52,6 +53,34 @@ void Story::fromFile(string path, GAME* game)
 					}
 				));
 			}
+		}
+		else if (type == "BANNER")
+		{
+			string text = EatTokenEx(line, ',');
+			string delay = EatTokenEx(line, ',');
+			int ddelay = stoi(delay);
+			string world_name = EatTokenEx(line, ',');
+			string map_idx = EatTokenEx(line, ',');
+			string room_idx = EatTokenEx(line, ',');
+			int map_idx_toi = stoi(map_idx);
+			int room_idx_toi = stoi(room_idx);
+
+
+			parsingPart->scenario.push_back(new Step(
+				[text, ddelay,world_name, map_idx_toi, room_idx_toi](GAME* game)
+				{
+					string id = "banners/" + text;
+					if (isLoaded(id, 0))
+						changeMap(game, id, 0, 0);
+					else
+					{
+						game->worldName = id;
+						*game->currentMapId = 0;
+						game->currentMap = new Banner(*(game->player),game,text, ddelay, world_name, map_idx_toi, room_idx_toi);
+					}
+				}
+			));
+
 		}
 		else
 		{

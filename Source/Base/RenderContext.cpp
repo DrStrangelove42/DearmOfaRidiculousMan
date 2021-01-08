@@ -156,6 +156,8 @@ Texture* RenderContext::LoadText(string text, int color, int backColor, int widt
 		SDL_Rect cur = { padding,padding,width,0 };
 		SDL_Surface* s;
 		int height = 2 * padding;
+		int seen_width = 0;
+		int cur_width = 0;
 		string word = "";
 		for (int i = 0; i < text.size(); i++)
 		{
@@ -173,24 +175,31 @@ Texture* RenderContext::LoadText(string text, int color, int backColor, int widt
 					s = TTF_RenderText_Solid(FONT, word.c_str(), c);
 					cur.h = s->h;
 					cur.w = s->w;
+					cur_width += cur.w;
+					
 					if (cur.x + cur.w + padding > width)
 					{
 						/*Line feed*/
 						cur.x = padding;
 						cur.y += cur.h;
 						height += cur.h;
+						seen_width = max(seen_width, cur_width);
+						cur_width = 0;
 					}
 					SDL_BlitSurface(s, NULL, textSurface, &cur);
 					SDL_FreeSurface(s);
 					cur.x += cur.w;
 					word = "";
 				}
+				
 				if (text[i] == '\r' || text[i] == '\n')
 				{
 					/*Line feed*/
 					cur.x = padding;
 					cur.y += cur.h;
-					height += cur.h;
+					height += cur.h; 
+					seen_width = max(seen_width, cur_width);
+					cur_width = 0;
 				}
 				break;
 			default:
@@ -198,17 +207,18 @@ Texture* RenderContext::LoadText(string text, int color, int backColor, int widt
 				break;
 			}
 		}
+		seen_width = max(seen_width, cur_width)+ 2 * padding;
 		height += cur.h;
 		cur.x = cur.y = 0;
 		cur.h = height;
 		cur.w = width;
 		/*Crop*/
-		SDL_Surface* croppedTextSurface = SDL_CreateRGBSurface(0, width, height, 32, 0, 0, 0, 0);
+		SDL_Surface* croppedTextSurface = SDL_CreateRGBSurface(0, seen_width, height, 32, 0, 0, 0, 0);
 		SDL_BlitSurface(textSurface, &cur, croppedTextSurface, &cur);
 		SDL_Texture* t = this->fromSurface(croppedTextSurface);
 		SDL_FreeSurface(croppedTextSurface);
 		SDL_FreeSurface(textSurface);
-		textures[id] = new Texture(t, width, height);
+		textures[id] = new Texture(t, seen_width, height);
 	}
 
 	return textures[id];

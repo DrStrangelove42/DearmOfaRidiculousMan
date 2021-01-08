@@ -1,6 +1,6 @@
 PART beginning
 MAP MainMap, -1,0
-NPC 10 10 mario,Mario,It's a me Mario ! What do you choose?,Fire,feu,Death,squeleton army, Flee , fuite
+NPC 10 10 mario,Mario,It's a me Mario ! What do you choose?,Fire,feu,Death,squeleton army, Flee , fuite, test,test
 PART feu
 MOB 5 5 F
 REM here we replace the mario by another NPC with the same ID, so it's still mario but he says something else.
@@ -21,3 +21,5 @@ MOB 5 6 s
 NPC 10 10 mario,Mario,Run !
 PART fuite
 MAP BigTestMap, -1, 0
+PART test
+BANNER Ceci est censé être au putain de centre grrrrr gnnnnnnnn,5000, FinalMap, -1, 0
