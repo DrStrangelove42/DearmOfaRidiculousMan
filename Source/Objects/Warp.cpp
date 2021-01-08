@@ -101,7 +101,6 @@ bool Warp::updateObject(GAME* game)
 		game->player->teleport(-1, game->player->getY() + offset);
 	} 
 		
-
 	if (destWorld.empty())
 	{
 		if (destMap == -1)
@@ -112,10 +111,12 @@ bool Warp::updateObject(GAME* game)
 		}
 		if (destMap != *(game->currentMapId))
 		{
+			game->currentMap->getCurrentRoomObject().stopScanningObjects();
 			changeMap(game, game->worldName, destMap, destRoom);
 		}
 		else
 		{
+			game->currentMap->getCurrentRoomObject().stopScanningObjects();
 			game->currentMap->sendMonstersToWarp(x, y, destRoom, destX, destY);
 			game->currentMap->setCurrentRoom(destRoom);
 			game->currentMap->getCurrentRoomObject().setDiscovered(true);

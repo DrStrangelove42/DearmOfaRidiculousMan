@@ -71,6 +71,8 @@ protected:
 
 	int lastCleaned = 0;
 	int cleanDelay = 10000;
+
+	bool breakObjectUpdateLoop;
 public:
 	/* Creates a new Room object */
 	Room(int width, int height, int absx, int absy, Player& p, RenderContext& renderer);
@@ -104,6 +106,11 @@ public:
 	/// </summary>
 	/// <param name="object"></param>
 	void addObject(Object* object);
+
+	/// <summary>
+	/// Tells the room that it must stop scanning through objects (e.g. when a warp changes the room).
+	/// </summary>
+	void stopScanningObjects();
 
 	/// <summary>
 	/// Asks to move the entity on the room

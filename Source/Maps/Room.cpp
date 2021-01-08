@@ -3,7 +3,8 @@
 #include "../Characters/Monsters/Ghost.h"
 #include "./Map.h"
 
-Room::Room(int width, int height, int absx, int absy, Player& p, RenderContext& renderer) : w(width), h(height), x(absx), y(absy), player(p), discovered(false), blocks(NULL)
+Room::Room(int width, int height, int absx, int absy, Player& p, RenderContext& renderer) : 
+	w(width), h(height), x(absx), y(absy), player(p), discovered(false), blocks(NULL), breakObjectUpdateLoop(false)
 {
 	if (w > 0 && h > 0)
 	{
@@ -132,6 +133,11 @@ void Room::addObject(Object* object)
 	}
 }
 
+void Room::stopScanningObjects()
+{
+	breakObjectUpdateLoop = true;
+}
+
 void Room::tick(int time, GAME* game)
 {
 	list<string>  toDel;
@@ -141,12 +147,16 @@ void Room::tick(int time, GAME* game)
 		{
 			toDel.push_back(entry.first);
 		}
+		if (breakObjectUpdateLoop)
+			break;
 	}
 
 	for (string d : toDel)
 	{
 		objects.erase(d);
 	}
+
+	breakObjectUpdateLoop = false;
 }
 
 void Room::updateAllMonsters(int time, GAME* game)
