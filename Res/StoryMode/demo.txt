@@ -4,7 +4,7 @@ NPC 6 3 drunk,DrunkMan,Move Away!
 NPC 27 4 mario,Mario, Help Me!
 NPC 29 5 mario,Mario, Are you tired ? ,yes,sleep
 PART sleep
-BANNER Chapter one ,5000, MainMap, 0, 0
+BANNER Chapter one ,5000, MainMap, -1, 0
 NPC 10 10 mario,Mario,It's a me Mario ! What do you choose?,Fire,feu,Death,squeleton army, Flee , fuite, talk, talk
 PART feu
 MOB 5 5 F
