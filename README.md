@@ -114,9 +114,11 @@ that first appeared on Vista.*
 Mosty the same as on UNIX-like systems.
 
 ## Optional installation
+ 
 
-###Linux
-
+### Linux
+ 
+ 
 Once compiled, you'll need sudo rights (if you have not these rights,
 don't worry, only the last part will fail, but the copying of resources to HOME will
 normally work), and the following command:\
@@ -125,12 +127,13 @@ Yes, no configure script for now.
 
 Then if you installed with sudo rights, you can type ```doarm``` in a console. If not,
 ```cd``` to the directory of the Makefile and type ```./doarm```.
+
 ### macOS
 
 *Work in progress*
 
 ### Windows
-
+ 
 *Work in progress*
 
 ## Generate the documentation
