@@ -5,7 +5,8 @@ NPC 25 3 mario,Mario, Help Me!
 ROOM 1
 NPC 20 2 mario,Mario, Are you tired ? ,yes,sleep
 PART sleep
-BANNER Chapter 1, 5000, MainMap, -1,0
+REM BANNER Chapter 1, 5000, MainMap, -1,0
+MAP MainMap, -1,0
 NPC 10 10 mario,Mario,It's a me Mario ! What do you choose?,Fire,feu,Death,squeleton army, Flee , fuite, talk, talk
 PART feu
 MOB 5 5 F
