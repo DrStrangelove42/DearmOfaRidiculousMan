@@ -10,7 +10,7 @@
 
 Player::Player(RenderContext& renderer, int lives, int attack, int defense, int startHealth, int startMoney, int startExp) :
 	LivingEntity(startHealth, startMoney, startExp, defense), MovingEntity(0, 0, renderer, "player"),
-	lives(lives), attack(attack), infosX(SZ_MAINWIDTH), infosY(0),
+	lives(lives), attack(attack), infosX(SZ_MAINWIDTH), infosY(0), startLives(lives),
 	attackDelay(500), lastAttackTime(0), story(NULL)
 {
 	heart = renderer.LoadTexture("heart");
@@ -92,10 +92,10 @@ void Player::kill()
 	}
 }
 
-void Player::reset(int lives)
+void Player::reset()
 {
 	health = maxHealth;
-	this->lives = lives;
+	this->lives = startLives;
 }
 
 Player::~Player()
@@ -184,7 +184,7 @@ void Player::animateGameOver(int time, GAME* game)
 		destroyMap(game->worldName, *(game->currentMapId));
 		if (isLoaded("Game Over", 0))
 		{
-			
+
 			changeMap(game, "Game Over", 0);
 		}
 		else
