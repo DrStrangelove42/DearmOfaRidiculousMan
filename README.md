@@ -8,7 +8,7 @@ https://m.youtube.com/watch?v=jIr7cs6eEAs
 
 ## Requirements
 
-Supported OSes : macOS & Linux & Windows
+Supported OS : macOS & Linux & Windows
 
 Required library : SDL2 (see below to install dependencies and build the game).
 
@@ -21,6 +21,8 @@ Required library : SDL2 (see below to install dependencies and build the game).
 - [x] Not-So-Intelligent Monster
 - [x] Entry menu
 
+### Glimpses of the future 
+#### About the story
 At the next stage, we'll generate more complex maps to meet the theme of the game:
 
 - In the scenes of Heaven, there'll be battling, and the minions might be attacking the boss by transfered by the player.
@@ -29,15 +31,20 @@ At the next stage, we'll generate more complex maps to meet the theme of the gam
 
 - The little girl will guild you to your dream and be your way out of it ! 
 
+#### More down-to-earth
+
 Also there'll be more features, such as:
 
 - Different texture packs to enrich the story.
 
 - Save file.
 
+- More objects, more map capacities, with a touch of sound effects.
+
 ## Build the Project
 
-### Install SDL 2
+### Prerequisite : SDL 2
+In this section you will read about ways to install the graphics library in order to run the game.
 #### On Linux Debian :
 
 `sudo apt install libsdl2-dev` \
@@ -95,9 +102,15 @@ the ```/D WIN6``` macro definition in Project properties > C/C++ > Command line 
 ```/D WIN```. This will prevent problems about high DPI awareness, which is a feature 
 that first appeared on Vista.*
 
-#### On Windows with MSBUILD (from MS Build Tools, not tested yet)
+<span style="color:grey">GRIS</span>
+<span style="color:bleu">BLEU</span>
+
+<div style="color:grey">
+
+#### On Windows with MSBUILD (from MS Build Tools, discontinued in the project)
 1) Go to the ```/Windows``` subfolder, and edit the ```make.bat``` file with your paths (follow the instructions there).
 2) Then you can launch the BAT script with a terminal or directly on double-clicking on it in the Windows Explorer.
+ </div>
 
 #### On Windows with MinGW
 
