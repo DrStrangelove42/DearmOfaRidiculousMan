@@ -223,33 +223,32 @@ public:
 	/* Std destructor */
 	virtual ~Map();
 
+	/// <summary>
+	/// Rendering method, enabling the renderer to take the offset (in blocks) into account. 
+	/// </summary>
+	/// <param name="renderer"></param>
+	/// <param name="offsetX"></param>
+	/// <param name="offsetY"></param>
+	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0) const;
 
-	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0) const;/* Rendering method, enabling the renderer to take the offset (in blocks) into account. */
+	/// <summary>
+	/// Time management
+	/// </summary>
+	/// <param name="time"></param>
+	/// <param name="game"></param>
+	virtual void tick(int time, GAME* game);
 
+	/// <summary>
+	/// Event system
+	/// </summary>
+	/// <param name="game"></param>
+	virtual void onKeyDown(GAME* game);
 
-	virtual void tick(int time, GAME* game);/* Time management */
-
-
-	virtual void onKeyDown(GAME* game);/* Event system */
-
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="md"></param>
 	virtual void onMouseEvent(MOUSE_DATA* md);
-
-	/* Copy-assignment operator */
-	/*Map& operator=(const Map& that)
-	{
-		if (this != &that)
-		{
-			rooms = new Room*[roomCount];
-			for (int i = 0; i < roomCount; i++)
-			{
-				rooms[i] = that.rooms[i];
-			}
-			roomCount = that.roomCount;
-			currentRoom = that.currentRoom;
-			player = that.player;
-		}
-		return *this;
-	}*/
 
 	/* Accessors */
 	void setCurrentRoom(int c);

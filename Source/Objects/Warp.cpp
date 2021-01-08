@@ -86,7 +86,22 @@ bool Warp::updateObject(GAME* game)
 
 	RenderContext& renderer = *(game->renderer);
 	game->player->teleport(destX, destY);
-	
+	if (destX == -1)
+	{
+		//Alignment X
+		Room* destR = game->currentMap->getRooms()[destRoom];
+		int offset = game->currentMap->getCurrentRoomObject().getX() - destR->getX();
+		game->player->teleport(game->player->getX() + offset, -1);
+	}
+    if (destY == -1)
+	{
+		//Alignment Y
+		Room* destR = game->currentMap->getRooms()[destRoom];
+		int offset = game->currentMap->getCurrentRoomObject().getY() - destR->getY();
+		game->player->teleport(-1, game->player->getY() + offset);
+	} 
+		
+
 	if (destWorld.empty())
 	{
 		if (destMap == -1)
@@ -96,14 +111,13 @@ bool Warp::updateObject(GAME* game)
 		}
 		if (destMap != *(game->currentMapId))
 		{
-			changeMap(game, game->worldName, destMap, destRoom); 
+			changeMap(game, game->worldName, destMap, destRoom);
 		}
 		else
 		{
-			game->currentMap->sendMonstersToWarp(x,y,destRoom,destX,destY);
+			game->currentMap->sendMonstersToWarp(x, y, destRoom, destX, destY);
 			game->currentMap->setCurrentRoom(destRoom);
 			game->currentMap->getCurrentRoomObject().setDiscovered(true);
-			
 		}
 	}
 	else

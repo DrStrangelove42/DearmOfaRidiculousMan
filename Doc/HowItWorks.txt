@@ -8,23 +8,23 @@
 I) Maps
 
 How to create a world using a text file:
-
-The name of the text file (without the extension) is the name of the world.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Name - The name of the text file (without the extension) is the name of the world.
 
 Each world is composed of a positive number of maps, which may correspond 
 to floors in a dungeon for example.
-
-The first line contains the number of maps in the world.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+First line - The first line contains the number of maps in the world.
 
 In the following lines, each map is described one by one.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+First line of each map - The first line of each map description must be ##.
 
-The first line of each map description must be ##.
-
-The second line in the description of a map is an integer containing the 
+Second line of each map - The second line in the description of a map is an integer containing the 
 positive number of rooms.
 
 After this, each room is described one by one.
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Each room is described as follows:
  - The first line contains #.
  - The second line contains two integers: the width and the height of the room.
@@ -181,6 +181,11 @@ Syntax of PART :
 
 A part is made of several other commands which are described below. The description section is list of
 comma-separated values.
+	MAP World name, start map index, start room index
+Tells the story parser to consider that the current part takes place in this map. If there is more than one
+MAP command in a part, the player will warp though all of them to the last, so it is useless, but *a priori* do
+not throw any error. The story script must contain at least one MAP command, if the first part does not have one,
+the start map will be the first MAP command encountered, even in a different part.
 
     NPC x y textureID,name,speech,choice1,partIndex1,...,choiceN,partIndexN
 Creates a NPC (non player character) which can interact with the player in order to change the course of events.
