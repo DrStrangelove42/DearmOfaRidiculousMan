@@ -35,7 +35,7 @@ protected:
 	unordered_map <string, Object*> objects;
 
 	list<Monster*> monsters;
-
+	list<Monster*> pendingToRemove;
 	int lastCleaned = 0;
 	int cleanDelay = 10000;
 public:
@@ -184,6 +184,8 @@ public:
 	/// Empties the intelligent monsters in the room of their <code>warpInfo</code>: this is for when the monsters are in the same room as the player and so they no longer need to go towards a warp. The information needs to be cleaned to prepare for the next time that the player warps.
 	/// </summary>
 	void cleanMonsterWarpInfo();
+
+	void addMonsterToRemove(Monster* m);
 };
 
 

@@ -158,6 +158,11 @@ void Room::updateAllMonsters(int time, GAME* game)
 		if (m->isAlive())
 			m->tick(time, game);
 	}
+	for (Monster* m : pendingToRemove)
+	{
+		monsters.remove(m);
+	}
+	pendingToRemove.clear();
 
 	if (time - lastCleaned >= cleanDelay)
 	{
@@ -249,4 +254,9 @@ void Room::cleanMonsterWarpInfo()
 		if (m->isAlive())
 			m->cleanMonsterWarpInfo();
 	}
+}
+
+void Room::addMonsterToRemove(Monster* m)
+{
+	pendingToRemove.push_back(m);
 }

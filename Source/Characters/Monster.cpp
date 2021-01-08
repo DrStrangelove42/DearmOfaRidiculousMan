@@ -19,7 +19,7 @@ Monster::Monster(RenderContext& renderer,
 	killed(false),
 	type("") //No type yet
 {
-	texture = renderer.LoadTexture(textureId);
+	 
 }
 
 void Monster::kill()
@@ -56,9 +56,13 @@ void Monster::setRoom(Room* r)
 
 void Monster::moveToRoom(Room* r)
 {
-	room->getMonsters().remove(this);
-	room = r;
-	room->addMonster(this);
+	room->addMonsterToRemove(this);
+	//Coordinates translation
+	int offx = room->getX() - r->getX();
+	int offy = room->getY() - r->getY();
+	teleport(x + offx, y + offy);
+	setRoom(r);
+	r->addMonster(this);
 }
 
 void Monster::attackRound()
@@ -80,10 +84,14 @@ void Monster::manageAlarm()
 void Monster::render(RenderContext& renderer, int offsetX, int offsetY)const
 {
 	if (!isAlive()) return;
-	int xx = (x + offsetX) * SZ_BLOCKSIZE;
-	int yy = (y + offsetY) * SZ_BLOCKSIZE;
-	texture->render(renderer, xx, yy, SZ_BLOCKSIZE, SZ_BLOCKSIZE);
-	drawHealthBar(renderer, xx, yy);
+	int xx = (x + offsetX);
+	int yy = (y + offsetY);
+	if (xx < BLOCKS_W && yy < BLOCKS_H)
+	{
+		xx *= SZ_BLOCKSIZE; yy *= SZ_BLOCKSIZE;
+		loadedTx->render(renderer, xx  , yy  , SZ_BLOCKSIZE, SZ_BLOCKSIZE);
+		drawHealthBar(renderer, xx, yy);
+	}	 
 }
 
 string Monster::monsterToString() const

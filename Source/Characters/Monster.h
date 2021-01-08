@@ -63,7 +63,7 @@ protected:
 	/// <summary>
 	/// Texture of the monster.
 	/// </summary>
-	Texture* texture;
+	//Texture* texture;
 	
 	/// <summary>
 	/// Pointer to the room since it may change.
