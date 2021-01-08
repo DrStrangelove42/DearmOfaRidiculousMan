@@ -186,8 +186,14 @@ Tells the story parser to consider that the current part takes place in this map
 MAP command in a part, the player will warp though all of them to the last, so it is useless, but *a priori* do
 not throw any error. The story script must contain at least one MAP command, if the first part does not have one,
 the start map will be the first MAP command encountered, even in a different part.
+
     BANNER text, delay, world name, map id, room id
 Shows a black screen with the text, before warping into the specified place.
+
+	ROOM room id
+Sets the current room to be the one with the specified index. The next object/monster creation commands will be
+on this particular room. By default, it is the start room given above in the MAP command.
+
     NPC x y textureID,name,speech,choice1,partIndex1,...,choiceN,partIndexN
 Creates a NPC (non player character) which can interact with the player in order to change the course of events.
 choiceI is the text of the choice (in a button below the NPC speech), and the associated partIndexI is the name of

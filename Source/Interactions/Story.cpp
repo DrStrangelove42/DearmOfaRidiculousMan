@@ -14,6 +14,8 @@ void Story::fromFile(string path, GAME* game)
 	bool foundMap = false;
 	string curPartName = "";
 	Part* parsingPart = new Part();
+	int curRoom = 0;
+
 	while (getline(file, line))
 	{
 		string type = EatTokenEx(line);
@@ -37,7 +39,9 @@ void Story::fromFile(string path, GAME* game)
 			string room_idx = EatTokenEx(line, ',');
 			int map_idx_toi = stoi(map_idx);
 			int room_idx_toi = stoi(room_idx);
-
+			
+			curRoom = room_idx_toi;
+			
 			if (!foundMap)//Trouvé une indication de map
 			{
 				int startMap = map_idx_toi;
@@ -53,6 +57,10 @@ void Story::fromFile(string path, GAME* game)
 					}
 				));
 			}
+		}
+		else if (type == "ROOM")
+		{
+			curRoom = stoi(line);
 		}
 		else if (type == "BANNER")
 		{
@@ -92,9 +100,9 @@ void Story::fromFile(string path, GAME* game)
 			{
 				Object* obj = Map::parseObject(line, r, &id, x, y);
 				parsingPart->scenario.push_back(new Step(
-					[obj](GAME* game)
+					[obj,curRoom](GAME* game)
 					{
-						game->currentMap->getCurrentRoomObject().addObject(obj);
+						game->currentMap->getRooms()[curRoom]->addObject(obj);
 					}
 				));
 			}
@@ -104,9 +112,9 @@ void Story::fromFile(string path, GAME* game)
 				//room obviously (see Room::addMonster).           vvvv
 				Monster* mob = Map::parseMonster(line, r, x, y, p, NULL);
 				parsingPart->scenario.push_back(new Step(
-					[mob](GAME* game)
+					[mob, curRoom](GAME* game)
 					{
-						game->currentMap->getCurrentRoomObject().addMonster(mob);
+						game->currentMap->getRooms()[curRoom]->addMonster(mob);
 					}
 				));
 			}
@@ -134,9 +142,9 @@ void Story::fromFile(string path, GAME* game)
 				}
 
 				parsingPart->scenario.push_back(new Step(
-					[npc](GAME* game)
+					[npc, curRoom](GAME* game)
 					{
-						game->currentMap->getCurrentRoomObject().addObject(npc);
+						game->currentMap->getRooms()[curRoom]->addObject(npc);
 					}
 				));
 			}
