@@ -80,7 +80,7 @@ https://wiki.libsdl.org/Installation
 ### Compilation
 #### On UNIX-like systems
 Go to the project root directory and type the following command in a terminal:\
-```make```
+```make release```
 
 #### On Windows with Visual Studio
 
@@ -101,20 +101,32 @@ along with its .dll files, so you can launch it from there as well.
 the ```/D WIN6``` macro definition in Project properties > C/C++ > Command line by
 ```/D WIN```. This will prevent problems about high DPI awareness, which is a feature 
 that first appeared on Vista.*
+ 
 
-<span style="color:grey">GRIS</span>
-<span style="color:bleu">BLEU</span>
-
-<div style="color:grey">
-
+ 
 #### On Windows with MSBUILD (from MS Build Tools, discontinued in the project)
 1) Go to the ```/Windows``` subfolder, and edit the ```make.bat``` file with your paths (follow the instructions there).
 2) Then you can launch the BAT script with a terminal or directly on double-clicking on it in the Windows Explorer.
- </div>
+ 
 
 #### On Windows with MinGW
 
 Mosty the same as on UNIX-like systems.
+
+## Optional installation
+###Linux
+Once compiled, you'll need sudo rights (if you have not these rights,
+don't worry, only the last part will fail, but the copying of resources to HOME will
+normally work), and the following command:\
+```make install```\
+Yes, no configure script for now. 
+
+Then if you installed with sudo rights, you can type ```doarm``` in a console. If not,
+```cd``` to the directory of the Makefile and type ```./doarm```.
+### macOS
+*Work in progress*
+### Windows
+*Work in progress*
 
 ## Generate the documentation
 
