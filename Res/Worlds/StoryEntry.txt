@@ -2,16 +2,25 @@
 ##
 2
 #
-30 8
+30 9
 0 0
-d1 1 w n
-d2 1 w s
+!1 0 1 1 1
 #
-w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  
-w  f  f  f  f  f  f  f  f  f  f  f  fG f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f 
-w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f
-w  fp f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  fd1
-w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  fd2
-w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f
-w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  fG f  f  f  f  f  f  f  f  f
-w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w
+                           w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w        
+                  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w     
+         w  w  w  w  w  w  f  f  f  fg f  w  w  w  w  w  w  w  f  f  f  f  f  w  w  w   
+w  w  w  w  f  f  f  f  f  f  f  f  f  f  f  w  w  w  w  f  f  f  f  f  f  f  f  f  w     
+w  fp f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f   !1  
+w  w  w  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f   !1  
+         w  w  w  w  w  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  w     
+                  w  w  w  w  w  w  w  w  f  f  f  f  f  f  f  f  f  f  f  f  f  w        
+                           w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w      
+#
+26 4
+28 3
+!1 0 0 27 2
+#
+   w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w
+!1 f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  w
+!1 f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  w
+   w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w

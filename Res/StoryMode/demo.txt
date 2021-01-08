@@ -1,10 +1,15 @@
 PART beginning
 MAP StoryEntry, -1,0
+NPC 6 3 drunk,DrunkMan,Move Away!
+NPC 27 4 mario,Mario, Help Me!
+NPC 29 5 mario,Mario, Are you tired ? ,yes,sleep
+PART sleep
+BANNER Chapter one ,5000, MainMap, 0, 0
 NPC 10 10 mario,Mario,It's a me Mario ! What do you choose?,Fire,feu,Death,squeleton army, Flee , fuite, talk, talk
 PART feu
 MOB 5 5 F
 REM here we replace the mario by another NPC with the same ID, so it's still mario but he says something else.
-NPC 10 10 mario,Mario,Asta la vista!
+NPC 10 6 mario,Mario,Asta la vista!
 PART squeleton army
 MOB 4 3 S
 MOB 3 4 s
@@ -18,8 +23,8 @@ MOB 4 5 S
 MOB 5 4 s
 MOB 6 5 S
 MOB 5 6 s
-NPC 10 10 mario,Mario,Run !
+NPC 10 6 mario,Mario,Run !
 PART fuite
 MAP BigTestMap, -1, 0
 PART talk
-BANNER Chapter one ,5000, FinalMap, -1, 0
+BANNER Chapter two ,5000, FinalMap, -1, 0
