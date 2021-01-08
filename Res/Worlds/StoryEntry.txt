@@ -1,5 +1,7 @@
 1
 ##
+<<<<<<< Updated upstream
+<<<<<<< HEAD
 2
 #
 30 9
@@ -24,3 +26,43 @@ w  w  w  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f 
 !1 f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  w
 !1 f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  w
    w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w
+=======
+1
+=======
+2
+>>>>>>> Stashed changes
+#
+30 9
+0 0
+!1 0 1 1 1
+#
+                           w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w        
+                  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w     
+         w  w  w  w  w  w  f  f  f  fg f  w  w  w  w  w  w  w  f  f  f  f  f  w  w  w   
+w  w  w  w  f  f  f  f  f  f  f  f  f  f  f  w  w  w  w  f  f  f  f  f  f  f  f  f  w     
+w  fp f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f   !1  
+w  w  w  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f   !1  
+         w  w  w  w  w  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  w     
+                  w  w  w  w  w  w  w  w  f  f  f  f  f  f  f  f  f  f  f  f  f  w        
+                           w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w      
+#
+26 4
+28 3
+!1 0 0 27 2
+#
+<<<<<<< Updated upstream
+w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  
+w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f 
+w
+w  f  f  fp f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  fd1
+w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  fd2
+w
+w
+w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w
+>>>>>>> main
+=======
+   w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w
+!1 f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  w
+!1 f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  w
+   w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w
+>>>>>>> Stashed changes
