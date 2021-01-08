@@ -19,6 +19,11 @@ Story mode
 Greetings Sir !
 
 Welcome back to the Mansion.
+#BUTLERSPEECH2
+
+Congratulations sir!
+
+You have escaped Mario's threat!
 #BUTLERNAME
 Mr. Fyodor
 #LostHouse

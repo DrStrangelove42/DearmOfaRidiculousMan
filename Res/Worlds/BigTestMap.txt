@@ -1,49 +1,51 @@
-1
+2
 ##
 5
 #
-11 11
-0 0
+13 13
+-1 -1
 
 !a 0 1 4 10
 !b 0 1 5 10
 !c 0 1 6 10
 
-!d 0 4 0 4
-!e 0 4 0 5
-!f 0 4 0 6
+!d 0 4 2 4
+!e 0 4 2 5
+!f 0 4 2 6
 
-!g 0 2 10 4
-!h 0 2 10 5
-!i 0 2 10 6
+!g 0 2 9 4
+!h 0 2 9 5
+!i 0 2 9 6
 
-!j 0 3 4 0
-!k 0 3 5 0
-!l 0 3 6 0
+!j 0 3 4 2
+!k 0 3 5 2
+!l 0 3 6 2
+#
+                !a !b !c
+   w  w  w  w  f  f  f  w  w  w  w  
+   w  f  f  f  f  f  f  f  f  f  w
+   w  f  f  f  f  f  f  f  f  f  w
+   w  f  f  f  f  f  f  f  f  f  w
+ !gf  f  f  f  f  f  f  f  f  f  f   !d
+ !hf  f  f  f  f  f  f  f  f  f  f   !e
+ !if  f  f  f  f  f  f  f  f  f  f   !f
+   w  f  f  f  f  f  f  f  f  f  w
+   w  f  f  f  f  f  f  f  f  f  w
+   w  f  f  f  f  fp f  f  f  f  w
+   w  w  w  w  f  f  f  w  w  w  w  
+                !j !k !l
+#
+11 13
+0 -11
+!m 0 0 5 2
+!n 0 0 6 2
+!o 0 0 7 2
 
 d1 1 s w
-d2 1 s n
-d3 1 s e
+!1 1 0 1 1
 #
-w  w  w  w  f!af!bf!cw  w  w  w  
-w  w  w  w  fd1fd2fd3w  w  w  w
-w  f  f  f  f  f  f  f  f  f  w
-w  f  f  f  f  f  f  f  f  f  w
-f!gf  f  f  f  f  f  f  f  f  f!d
-f!hf  f  f  f  f  f  f  f  f  f!e
-f!if  f  f  f  f  f  f  f  f  f!f
-w  f  f  f  f  f  f  f  f  f  w
-w  f  f  f  f  f  f  f  fk1f  w
-w  f  f  f  f  fp f  f  f  f  w
-w  w  w  w  f!jf!kf!lw  w  w  w  
-#
-11 11
-0 -10
-!m 0 0 4 0
-!n 0 0 5 0
-!o 0 0 6 0
-#
-w  w  w  w  w  w  w  w  w  w  w  
+                !1
+w  w  w  w  w  fd1w  w  w  w  w  
 w  f  f  f  f  f  f  f  f  f  w
 w  f  f  f  f  w  f  f  f  f  w
 w  f  f  f  w  w  w  f  f  f  w
@@ -53,33 +55,35 @@ w  f  f  w  w  w  w  w  f  f  w
 w  f  f  f  w  w  w  f  f  f  w
 w  f  f  f  f  w  f  f  f  f  w
 w  f  f  f  f  f  f  f  f  f  w
-w  w  w  w  f!mf!nf!ow  w  w  w  
+w  w  w  w  .  .  .  w  w  w  w  
+             !m !n !o
 #
-11 11
+12 11
 -10 0
-!p 0 0 0 4
-!q 0 0 0 5
-!r 0 0 0 6
+!p 0 0 2 5
+!q 0 0 2 6
+!r 0 0 2 7
 #
 w  w  w  w  w  w  w  w  w  w  w  
 w  f  f  f  f  f  f  f  f  f  w
 w  f  f  f  f  w  f  f  f  f  w
 w  f  f  f  w  w  w  f  f  f  w
-w  f  f  w  w  w  w  w  f  f  f!p
-w  f  w  w  w  w  w  w  w  f  f!q
-w  f  f  w  w  w  w  w  f  f  f!r
+w  f  f  w  w  w  w  w  f  f  .   !p
+w  f  w  w  w  w  w  w  w  f  .   !q
+w  f  f  w  w  w  w  w  f  f  .   !r
 w  f  f  f  w  w  w  f  f  f  w
 w  f  f  f  f  w  f  f  f  f  w
 w  f  f  f  f  f  f  f  f  f  w
 w  w  w  w  w  w  w  w  w  w  w  
 #
-11 11
-0 10
-!s 0 0 4 10
-!t 0 0 5 10
-!u 0 0 6 10
+11 12
+0 9
+!s 0 0 5 10
+!t 0 0 6 10
+!u 0 0 7 10
 #
-w  w  w  w  f!sf!tf!uw  w  w  w  
+             !s !t !u
+w  w  w  w  .  .  .  w  w  w  w  
 w  f  f  f  f  f  f  f  f  f  w
 w  f  f  f  f  w  f  f  f  f  w
 w  f  f  f  w  w  w  f  f  f  w
@@ -88,23 +92,36 @@ w  f  w  w  w  w  w  w  w  f  w
 w  f  f  w  w  w  w  w  f  f  w
 w  f  f  f  w  w  w  f  f  f  w
 w  f  f  f  f  w  f  f  f  f  w
-w  f  f  f  f  f  f  f  f  f  w
+w  f  f  f  f  fk1f  f  f  f  w
 w  w  w  w  w  w  w  w  w  w  w  
 #
-11 11
-10 0
-!v 0 0 10 4
-!w 0 0 10 5
-!x 0 0 10 6
+12 11
+9 0
+!v 0 0 10 5
+!w 0 0 10 6
+!x 0 0 10 7
 #
-w  w  w  w  w  w  w  w  w  w  w  
-w  f  f  f  f  f  f  f  f  f  w
-w  f  f  f  f  w  f  f  f  f  w
-w  f  f  f  w  w  w  f  f  f  w
-f!vf  f  w  w  w  w  w  f  f  w
-f!wf  w  w  w  w  w  w  w  f  w
-f!xf  f  w  w  w  w  w  f  f  w
-w  f  f  f  w  w  w  f  f  f  w
-w  f  f  f  f  w  f  f  f  f  w
-w  f  f  f  f  f  f  f  f  f  w
-w  w  w  w  w  w  w  w  w  w  w  
+   w  w  w  w  w  w  w  w  w  w  w  
+   w  f  f  f  f  f  f  f  f  f  w
+   w  f  f  f  f  w  f  f  f  f  w
+   w  f  f  f  w  w  w  f  f  f  w
+ !v.  f  f  w  w  w  w  w  f  f  w
+ !w.  f  w  w  w  w  w  w  w  f  w
+ !x.  f  f  w  w  w  w  w  f  f  w
+   w  f  f  f  w  w  w  f  f  f  w
+   w  f  f  f  f  w  f  f  f  f  w
+   w  f  f  f  f  f  f  f  f  f  w
+   w  w  w  w  w  w  w  w  w  w  w
+##
+1
+#
+5 5
+0 0
+B1 BUTLERNAME BUTLERSPEECH2
+!1 -1 0 0 0
+#
+w  w  w  w  w
+w  f  f  f  w
+w  f  fB1f  f!1
+w  f  f  f  w
+w  w  w  w  w
