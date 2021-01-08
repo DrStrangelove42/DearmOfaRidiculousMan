@@ -118,7 +118,7 @@ Layout of first room of first map
 .
 #
 Dimensions of last room of first map
-Absolute location of ast room of first map
+Absolute location of last room of first map
 Information pertaining to objects and entities in last room of first map
 #
 Layout of last room of first map
