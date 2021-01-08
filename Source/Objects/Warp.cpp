@@ -93,7 +93,7 @@ bool Warp::updateObject(GAME* game)
 		int offset = game->currentMap->getCurrentRoomObject().getX() - destR->getX();
 		game->player->teleport(game->player->getX() + offset, -1);
 	}
-    if (destY == -1)
+	if (destY == -1)
 	{
 		//Alignment Y
 		Room* destR = game->currentMap->getRooms()[destRoom];
@@ -107,6 +107,7 @@ bool Warp::updateObject(GAME* game)
 		if (destMap == -1)
 		{
 			changeMap(game, "Main menu", 0, 0); // Map already loaded
+			game->player->teleport(BLOCKS_W / 2, BLOCKS_H / 2);
 			return false;
 		}
 		if (destMap != *(game->currentMapId))
