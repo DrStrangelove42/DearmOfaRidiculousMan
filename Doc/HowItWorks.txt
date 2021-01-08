@@ -50,6 +50,8 @@ Each room is described as follows:
    - '*' : glass floor block (semi-transparent)
    - 'S' : sand floor block
    - 'W' : water block
+   - 'H' : stairs H
+   - 'V' : stairs V
  - The different characters that can encode objects/entities are:
    - ' ' : no object or entity.
    - 'p' : player starts on this block. Additional information about the player's
