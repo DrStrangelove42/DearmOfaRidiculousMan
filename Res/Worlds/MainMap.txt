@@ -92,7 +92,7 @@ B1 BUTLERNAME BUTLERSPEECH
 #
 26 21
 0 -19
-!1 0 3 10 -1
+!1 0 3 11 -1
 !2 0 0 -1 2
 b1 LostHouse
 #
@@ -120,7 +120,7 @@ b  b  b  b  b  t  b  b  t  t  t  b  t  t  b  t  t  t  t  b  b  b  b  b  b   !1
 #
 36 31
 14 -19
-!1 0 2 24 -1
+!1 0 2 23 -1
 !2 0 1 -1 2
 !3 0 1 -1 -1
 #
@@ -140,10 +140,10 @@ s  s  s  s  s  s  s  s  s  s  s  s  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g 
                                  s  g  g  g  g  b  g  g  g  g  g  g  g  g  g  s  g  g  g  g  g  g  g  t  
                                  s  g  g  g  g  g  g  g  g  g  g  g  g  g  g  s  g  g  g  g  g  g  g  t  
                                  s  b  g  s  s  g  g  s  s  s  s  s  g  g  s  s  g  g  g  g  g  g  g  t  
-                            !1   g  g  g  g  g  g  g  g  g  g  g  s  g  g  g  g  g  g  g  g  g  g  g  t  
-                            !1   g  g  g  g  g  g  g  g  g  g  g  s  b  V  s  g  g  g  g  g  g  g  g  t  
-                            !1   g  g  g  g  g  g  g  g  g  g  g  s  V  V  s  b  g  g  g  g  g  g  b  t  
-                            !1   b  b  b  g  b  b  g  g  g  b  g  s  V  V  s  g  g  b  b  b  b  b  b  t  
+                            !1.  g  g  g  g  g  g  g  g  g  g  g  s  g  g  g  g  g  g  g  g  g  g  g  t  
+                            !1.  g  g  g  g  g  g  g  g  g  g  g  s  b  V  s  g  g  g  g  g  g  g  g  t  
+                            !1.  g  g  g  g  g  g  g  g  g  g  g  s  V  V  s  b  g  g  g  g  g  g  b  t  
+                            !1.  b  b  b  g  b  b  g  g  g  b  g  s  V  V  s  g  g  b  b  b  b  b  b  t  
                                !2 !2 !2 !2 !2 !2 !2 !2 !2 !2 !2 !2s  V  V  s   !2 !2 !2 !2 !2 !2 !2 !2   
                                                                   s  *  *  s                              
                                                                   s  *  *  s                              
