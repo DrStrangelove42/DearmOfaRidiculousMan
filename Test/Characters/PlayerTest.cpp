@@ -44,13 +44,13 @@ void PlayerTest::coinTest()
 
 void PlayerTest::inventoryTest()
 {
-	Player p(*r);
+	/*Player p(*r);
 	Object o("iden", 0, 0, "Dummy", *r, false);
 	CPPUNIT_ASSERT(!p.hasObject("iden"));
 	CPPUNIT_ASSERT(!p.hasObject(o));
 	p.pickUpObject(&o);
 	CPPUNIT_ASSERT(p.hasObject("iden"));
-	CPPUNIT_ASSERT(p.hasObject(o));
+	CPPUNIT_ASSERT(p.hasObject(o));*/
 }
 
 void PlayerTest::setUp()

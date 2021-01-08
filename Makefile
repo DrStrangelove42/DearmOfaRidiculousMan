@@ -39,6 +39,7 @@ doc: clean
 test:
 	cd ./Test && make
 
+release: CXXFLAGS += -O3
 release: doarm
 
 install:
