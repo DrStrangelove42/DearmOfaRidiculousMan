@@ -1,5 +1,6 @@
 1
 ##
+<<<<<<< HEAD
 2
 #
 30 9
@@ -24,3 +25,20 @@ w  w  w  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f 
 !1 f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  w
 !1 f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  w
    w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w
+=======
+1
+#
+30 8
+0 0
+d1 1 w n
+d2 1 w s
+#
+w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  
+w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f 
+w
+w  f  f  fp f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  fd1
+w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  fd2
+w
+w
+w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w
+>>>>>>> main
