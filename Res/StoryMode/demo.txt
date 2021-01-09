@@ -1,13 +1,13 @@
 PART beginning
-BANNER Where am I ? ,5000, StoryEntry, -1,0
+MAP StoryEntry, -1,0
 NPC 6 3 drunk,DrunkMan,Move Away!
 NPC 25 3 mario,Mario, Help Me!
 REM MOB 4 3 P
 ROOM 1
 NPC 20 2 mario,Mario, Are you tired ? ,yes,sleep
 PART sleep
-BANNER Chapter 1,5000, MainMap, -1,0
-NPC 10 10 mario,Mario,It's a me Mario ! What do you choose?,Fire,feu,Death,squeleton army, Flee , fuite, talk, talk
+MAP MainMap, -1,0
+NPC 10 10 mario,Mario,It's a me Mario ! What do you choose?,Fire,feu,Death,squeleton army, Flee , fuite
 PART feu
 MOB 5 5 F
 REM here we replace the mario by another NPC with the same ID, so it's still mario but he says something else.
@@ -27,4 +27,4 @@ MOB 6 5 S
 MOB 5 6 s
 NPC 10 10 mario,Mario,Run !
 PART fuite
-BANNER The end of the end , 5000, FinalMap, -1, 0
+MAP FinalMap, -1, 0
