@@ -41,6 +41,7 @@
     <ClCompile Include="..\Source\Characters\Monsters\Fireball.cpp" />
     <ClCompile Include="..\Source\Characters\Monsters\Ghost.cpp" />
     <ClCompile Include="..\Source\Characters\Monsters\IntelligentGhost.cpp" />
+    <ClCompile Include="..\Source\Characters\Monsters\IntelligentPet.cpp" />
     <ClCompile Include="..\Source\Characters\Monsters\IntelligentSkeleton.cpp" />
     <ClCompile Include="..\Source\Characters\Monsters\Skeleton.cpp" />
     <ClCompile Include="..\Source\Characters\MovingEntity.cpp" />
@@ -90,6 +91,7 @@
     <ClInclude Include="..\Source\Characters\Monsters\Fireball.h" />
     <ClInclude Include="..\Source\Characters\Monsters\Ghost.h" />
     <ClInclude Include="..\Source\Characters\Monsters\IntelligentGhost.h" />
+    <ClInclude Include="..\Source\Characters\Monsters\IntelligentPet.h" />
     <ClInclude Include="..\Source\Characters\Monsters\IntelligentSkeleton.h" />
     <ClInclude Include="..\Source\Characters\Monsters\Skeleton.h" />
     <ClInclude Include="..\Source\Characters\MovingEntity.h" />
