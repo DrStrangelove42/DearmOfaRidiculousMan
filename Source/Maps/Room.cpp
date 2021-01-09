@@ -3,7 +3,7 @@
 #include "../Characters/Monsters/Ghost.h"
 #include "./Map.h"
 
-Room::Room(int width, int height, int absx, int absy, Player& p, RenderContext& renderer) : 
+Room::Room(int width, int height, int absx, int absy, Player& p, RenderContext& renderer) :
 	w(width), h(height), x(absx), y(absy), player(p), discovered(false), blocks(NULL), breakObjectUpdateLoop(false)
 {
 	if (w > 0 && h > 0)
@@ -124,10 +124,8 @@ void Room::addObject(Object* object)
 	if (objects.find(object->getId()) == objects.end())
 	{
 		objects[object->getId()] = object;
-		if (object->getX()<w 
-&& object->getY() <h)
-
-		blocks[object->getX()][object->getY()]->setTrav(true);//TODO
+		if (object->getX() < w && object->getY() < h)
+			blocks[object->getX()][object->getY()]->setTrav(true);
 	}
 	else
 	{
@@ -165,7 +163,7 @@ void Room::tick(int time, GAME* game)
 void Room::updateAllMonsters(int time, GAME* game)
 {
 	if (!discovered) return;
-	
+
 	for (Monster* m : monsters)
 	{
 		if (m->isAlive())
@@ -207,7 +205,7 @@ void Room::replaceBlock(Block* newBlock)
 	int i = newBlock->getX();
 	int j = newBlock->getY();
 
-	if (i < w && j < h && j>=0&&i>=0)
+	if (i < w && j < h && j >= 0 && i >= 0)
 	{
 		delete blocks[i][j];
 		blocks[i][j] = newBlock;

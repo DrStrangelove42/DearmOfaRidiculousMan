@@ -389,7 +389,7 @@ void Map::mapFromFiles(string worldName, Player& p, RenderContext& renderer, int
 		{
 			tokens.push_back("X");
 		}
-		p = Player(renderer); //We reinitialise the player, the default values are therefore correct (except potentially health as it depends on another value).
+		p.reset(3); //TODO We reinitialise the player, the default values are therefore correct (except potentially health as it depends on another value).
 		player.teleport(startX, startY);
 		startx = startX; starty = startY;
 		if (tokens[0] != "X")
