@@ -78,7 +78,7 @@ public:
 	Room(int width, int height, int absx, int absy, Player& p, RenderContext& renderer);
 
 	/// <summary>
-	/// 
+	/// Tells us whether a certain block is traversable or not.
 	/// </summary>
 	/// <param name=""></param>
 	/// <param name=""></param>
@@ -86,12 +86,12 @@ public:
 	bool isTraversable(int, int);
 	
 	/// <summary>
-	/// 
+	/// Adds a monster to the room.
 	/// </summary>
 	/// <param name="m"></param>
 	void addMonster(Monster* m);
 	/// <summary>
-	/// 
+	/// Removes the monster from the room.
 	/// </summary>
 	/// <param name="m"></param>
 	void removeMonster(Monster* m);
@@ -226,6 +226,11 @@ public:
 	void cleanMonsterWarpInfo();
 
 	void addMonsterToRemove(Monster* m);
+
+	/// <summary>
+	/// Returns the string that encodes the object having the given identifier.
+	/// </summary>
+	string getObjectString(string id);
 };
 
 

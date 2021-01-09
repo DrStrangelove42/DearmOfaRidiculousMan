@@ -475,7 +475,7 @@ void Map::intlGetDataFromFile(string filename, ifstream& data, RenderContext& re
 void Map::parseObjectOrMonster(string& line, string& filename, RenderContext& renderer, int* uniqueId, int x, int y, Player& p, int room)
 {
 	string monsters = "GgSsFP"; //add all Monster types
-	string objects = "!kdcBb"; //add all object types
+	string objects = "!kdcBbC"; //add all object types
 	if (monsters.find_first_of(line[0]) != monsters.npos)
 	{
 		rooms[room]->addMonster(parseMonster(line, renderer, x, y, p, rooms[room]));
@@ -515,6 +515,10 @@ Object* Map::parseObject(string& line, RenderContext& renderer, int* uniqueId, i
 	case 'b':
 	{
 		return new Signboard(line, x, y, renderer);
+	}
+	case 'C':
+	{
+		return new Checkpoint(line, x, y, renderer);
 	}
 	default:
 		return NULL;
@@ -699,16 +703,10 @@ void Map::saveProgress(string saveName, string originalWorldName, int mapNumber,
 		y = stoi(line, &a);
 		line.erase(0, a + 1);
 		id = line.substr(0, line.find(' '));
-		unordered_map <string, Object*> objects = rooms[room]->getObjects();
-		auto search = objects.find(id);
-		if (search != objects.end())
+		string toAdd = rooms[room]->getObjectString(id);
+		if (toAdd != "")
 		{
-			Object obj = *(search->second);
-			string toAdd = obj.objectToString();
-			if (toAdd != "")
-			{
-				SaveData << room << " " << x << " " << y << " " << toAdd << endl;
-			}
+			SaveData << room << " " << x << " " << y << " " << toAdd << endl;
 		}
 	}
 	OriginalData.close();
@@ -720,13 +718,13 @@ void Map::saveProgress(string saveName, string originalWorldName, int mapNumber,
 			string toAdd = m->monsterToString();
 			if (toAdd != "")
 			{
-				SaveData << room << " " << m->getX() << " " << m->getY() << " " << toAdd;
+				SaveData << room << " " << m->getX() << " " << m->getY() << " " << toAdd << endl;
 			}
 		}
 	}
 	SaveData.close();
 	ofstream PlayerData(SAVES_LOCATION + saveName + "/" + saveName + "Start" + EXT);
-	PlayerData << mapNumber << " " << roomNumber << p.getX() << p.getY() << endl;
+	PlayerData << mapNumber << " " << roomNumber << " " << p.getX() << " " << p.getY() << endl;
 	PlayerData << p.getHealth() << " " << p.getLives() << " " << p.getMoney() << " " << p.getExperience() << " " << p.getMaxHealth();
 	//TODO : Add inventory, probably objectToString() for each element in the inventory, between parentheses. Also add initial attack and defense of player without objects (default being 5 and 0 respectively)
 	PlayerData.close();

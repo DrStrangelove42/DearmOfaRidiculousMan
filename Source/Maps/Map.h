@@ -1,17 +1,24 @@
 #ifndef MAP_H
 #define MAP_H
 
-#include "../Base/config.h"
-#include <string>
 #include "Room.h"
+#include "../Base/config.h"
 #include "../Base/Entity.h"
 #include "../Base/game.h"
+#include "../Base/Texture.h"
 #include "../Base/utils.h"
+#include "../Characters/Butler.h" 
 #include "../Characters/Player.h"
+#include "../Characters/Monsters/Ghost.h"
+#include "../Characters/Monsters/Fireball.h"
+#include "../Characters/Monsters/Skeleton.h"
+#include "../Characters/Monsters/IntelligentGhost.h"
+#include "../Characters/Monsters/IntelligentSkeleton.h"
+#include "../Characters/Monsters/IntelligentPet.h"
 #include "../Objects/Object.h"
+#include "../Objects/Checkpoint.h"
 #include "../Objects/Chest.h"
 #include "../Objects/Door.h"
-#include "../Characters/Butler.h" 
 #include "../Objects/Key.h"
 #include "../Objects/Shield.h"
 #include "../Objects/Sword.h"
@@ -21,16 +28,10 @@
 #include "../Blocks/WallBlock.h"
 #include "../Blocks/FloorBlock.h"
 #include "../Blocks/StoneWallBlock.h"
-#include "../Characters/Monsters/Ghost.h"
-#include "../Characters/Monsters/IntelligentGhost.h"
-#include "../Characters/Monsters/Fireball.h"
-#include "../Characters/Monsters/Skeleton.h"
-#include "../Characters/Monsters/IntelligentSkeleton.h"
-#include "../Characters/Monsters/IntelligentPet.h"
 #include <iostream>
 #include <functional>
 #include <fstream>
-#include "../Base/Texture.h"
+#include <string>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unordered_map>
@@ -158,16 +159,7 @@ protected:
 	/// <param name="data"></param>
 	/// <returns></returns>
 	static bool intlParseRoom(string& newFile, ifstream& World, int map, int room, ofstream& layout, ofstream& start, ofstream& data);
-
-	/// <summary>
-	/// Saves the player's progress in a folder, so that the game can be resumed at a later date.
-	/// </summary>
-	/// <param name="saveName"></param>
-	/// <param name="originalWorldName"></param>
-	/// <param name="mapNumber"></param>
-	/// <returns></returns>
-	void saveProgress(string saveName, string originalWorldName, int mapNumber, int roomNumber, Player& p);
-
+	
 public:
 	/// <summary>
 	/// Parses the string line to create the corresponding object.
@@ -224,6 +216,16 @@ public:
 	/// Destructor. 
 	/// </summary>
 	virtual ~Map();
+
+	/// <summary>
+	/// Saves the player's progress in a folder, so that the game can be resumed at a later date.
+	/// </summary>
+	/// <param name="saveName"></param>
+	/// <param name="originalWorldName"></param>
+	/// <param name="mapNumber"></param>
+	/// <param name="roomNumber"></param>
+	/// <returns></returns>
+	void saveProgress(string saveName, string originalWorldName, int mapNumber, int roomNumber, Player& p);
 
 	/// <summary>
 	/// Rendering method, enabling the renderer to take the offset (in blocks) into account. 

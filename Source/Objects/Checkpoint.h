@@ -3,6 +3,8 @@
 
 #include "Object.h"
 
+class Map;
+
 class Checkpoint : public Object
 {
 public:
@@ -28,6 +30,11 @@ public:
 	/// <param name="game"></param>
 	/// <returns>True if the object needs to be removed</returns>
 	bool updateObject(GAME* game);
+
+	/// <summary>
+	/// We encode a checkpoint simply with its id.
+	/// </summary>
+	string objectToString();
 };
 
 #endif

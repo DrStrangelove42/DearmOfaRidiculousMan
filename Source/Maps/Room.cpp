@@ -274,3 +274,14 @@ void Room::addMonsterToRemove(Monster* m)
 {
 	pendingToRemove.push_back(m);
 }
+
+string Room::getObjectString(string id)
+{
+	string toAdd = "";
+	auto search = objects.find(id);
+	if (search != objects.end())
+	{
+		toAdd = search->second->objectToString();
+	}
+	return toAdd;
+}
