@@ -23,7 +23,10 @@ class Story
 	{
 	public:
 		bool done;
-
+		/// <summary>
+		/// If the step must block the story, once it's done (wait for a call to <code>continueStory()</code>)
+		/// </summary>
+		bool wait;
 		/// <summary>
 		/// The action function takes the main game as a parameter.
 		/// </summary>
@@ -33,7 +36,7 @@ class Story
 		/// Creates a new step in the story.
 		/// </summary>
 		/// <param name="action">Action performed when the part containing this step is launched.</param>
-		Step(function<void(GAME*)> action);
+		Step(function<void(GAME*)> action, bool wait=false);
 
 
 	};
@@ -69,6 +72,8 @@ protected:
 	/// </summary>
 	/// <param name="path"></param>
 	void fromFile(string path, GAME* game);
+
+	bool waiting;
 public:
 	/// <summary>
 	/// Name of the story to load from data files.
@@ -97,7 +102,16 @@ public:
 	/// <param name="index"></param>
 	virtual void branch(int index);
 
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="index"></param>
 	virtual void changePart(string index);
+
+	/// <summary>
+	/// 
+	/// </summary>
+	void continueStory();
 
 	Step* getCurrentStep();
 };

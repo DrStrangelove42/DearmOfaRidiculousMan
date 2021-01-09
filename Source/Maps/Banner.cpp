@@ -30,5 +30,10 @@ void Banner::tick(int time, GAME* game)
 	{
 		//warp
 		changeMap(game, worldName, mapIndex, roomIndex);
+		//tell the story we can go on
+		if (player.hasStory())
+		{
+			player.getStory().continueStory();
+		}
 	}
 }

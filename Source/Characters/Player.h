@@ -201,6 +201,8 @@ public:
 	/// </summary>
 	void clearStory();
 
+	bool hasStory();
+
 	/// <summary>
 	/// 
 	/// </summary>

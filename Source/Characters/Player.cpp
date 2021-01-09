@@ -332,6 +332,11 @@ void Player::clearStory()
 	story = NULL;
 }
 
+bool Player::hasStory()
+{
+	return (story != NULL);
+}
+
 Story& Player::getStory() const
 {
 	return *story;

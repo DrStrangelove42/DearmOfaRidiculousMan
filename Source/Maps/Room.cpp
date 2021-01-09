@@ -124,6 +124,9 @@ void Room::addObject(Object* object)
 	if (objects.find(object->getId()) == objects.end())
 	{
 		objects[object->getId()] = object;
+		if (object->getX()<w 
+&& object->getY() <h)
+
 		blocks[object->getX()][object->getY()]->setTrav(true);//TODO
 	}
 	else

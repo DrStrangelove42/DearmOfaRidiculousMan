@@ -39,9 +39,9 @@ void Story::fromFile(string path, GAME* game)
 			string room_idx = EatTokenEx(line, ',');
 			int map_idx_toi = stoi(map_idx);
 			int room_idx_toi = stoi(room_idx);
-			
+
 			curRoom = room_idx_toi;
-			
+
 			if (!foundMap)//No start map
 			{
 				int startMap = map_idx_toi;
@@ -73,9 +73,9 @@ void Story::fromFile(string path, GAME* game)
 			int map_idx_toi = stoi(map_idx);
 			int room_idx_toi = stoi(room_idx);
 
-
+			//It is a blocking step
 			parsingPart->scenario.push_back(new Step(
-				[text, ddelay,world_name, map_idx_toi, room_idx_toi](GAME* game)
+				[text, ddelay, world_name, map_idx_toi, room_idx_toi](GAME* game)
 				{
 					string id = "banners/" + text;
 					if (isLoaded(id, 0))
@@ -84,10 +84,10 @@ void Story::fromFile(string path, GAME* game)
 					{
 						game->worldName = id;
 						*game->currentMapId = 0;
-						game->currentMap = new Banner(*(game->player),game,text, ddelay, world_name, map_idx_toi, room_idx_toi);
+						game->currentMap = new Banner(*(game->player), game, text, ddelay, world_name, map_idx_toi, room_idx_toi);
 					}
 				}
-			));
+			, true)); //<-- wait
 
 		}
 		else
@@ -100,7 +100,7 @@ void Story::fromFile(string path, GAME* game)
 			{
 				Object* obj = Map::parseObject(line, r, &id, x, y);
 				parsingPart->scenario.push_back(new Step(
-					[obj,curRoom](GAME* game)
+					[obj, curRoom](GAME* game)
 					{
 						game->currentMap->getRooms()[curRoom]->addObject(obj);
 					}
@@ -166,7 +166,7 @@ void Story::fromFile(string path, GAME* game)
 
 
 
-Story::Story(string name, GAME* game)
+Story::Story(string name, GAME* game) : waiting(false)
 {
 	fromFile(STORYFILES_LOCATION + name + STORYFILES_EXT, game);
 }
@@ -182,7 +182,7 @@ Story::~Story()
 
 void Story::tick(int time, GAME* game)
 {
-	if (curPart->done) return;
+	if (curPart->done || waiting) return;
 
 	Step* step = getCurrentStep();
 
@@ -190,6 +190,7 @@ void Story::tick(int time, GAME* game)
 	{
 		step->action(game);
 		step->done = true; //we do not go backwards
+		waiting = step->wait;
 	}
 
 	curPart->nextStep();
@@ -209,6 +210,11 @@ void Story::changePart(string index)
 {
 	if (parts.find(index) != parts.end())
 		curPart = parts[index];
+}
+
+void Story::continueStory()
+{
+	waiting = false;
 }
 
 Story::Step* Story::getCurrentStep()
@@ -238,7 +244,7 @@ void Story::Part::nextStep()
 }
 
 
-Story::Step::Step(function<void(GAME*)> action) : action(action), done(false)
+Story::Step::Step(function<void(GAME*)> action, bool wait) : action(action), done(false), wait(wait)
 {
 
 }
