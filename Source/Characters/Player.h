@@ -20,25 +20,32 @@ class Object;
 class Player : public MovingEntity, public LivingEntity
 {
 private:
+	/// <summary>
+	/// Amount of time between attacks, in ticks.
+	/// </summary>
 	int lastAttackTime;
 protected:
 	/// <summary>
 	/// Number of lives until game over.
 	/// </summary>
 	int lives;
+	
 	/// <summary>
 	/// How much damage the player deals when attacking.
 	/// </summary>
 	int attack;
+	
 	/// <summary>
 	/// Player's items
 	/// int is how many of that type of item player has (eg might have several times the same potion)
 	/// </summary>
-	unordered_map<Object, int, ObjectHash> inventory;
+	unordered_map<const Object*, int> inventory;
+	
 	/// <summary>
 	/// Horizontal offset of the infos sub window
 	/// </summary>
 	int infosX;
+	
 	/// <summary>
 	/// Vertical ffset of the infos sub window
 	/// </summary>
@@ -59,10 +66,10 @@ protected:
 	/// </summary>
 	Story* story;
 public:
-
 	~Player();
+	
 	/// <summary>
-	/// Creates the player
+	/// Creates the player.
 	/// </summary>
 	/// <param name="renderer"></param>
 	/// <param name="lives"></param>
@@ -74,14 +81,9 @@ public:
 	Player(RenderContext& renderer, int lives = 3, int attack = 5, int defense = 0, int startHealth = 100, int startMoney = 0, int startExp = 0);
 
 	/// <summary>
-	/// Instant kill
+	/// Instant kill.
 	/// </summary>
 	virtual void kill();
-
-	/// <summary>
-	/// 
-	/// </summary>
-	virtual void reset(int lives);
 
 	/// <summary>
 	/// Rendering management
@@ -89,13 +91,13 @@ public:
 	/// <param name="renderer"></param>
 	/// <param name="offsetX"></param>
 	/// <param name="offsetY"></param>
-	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0)const;
+	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0) const;
 
 	/// <summary>
 	/// The player can have a health of zero and still have lives left.
 	/// </summary>
 	/// <returns></returns>
-	virtual bool isAlive()const;
+	virtual bool isAlive() const;
 
 	/// <summary>
 	/// Rendering management of the right panel
@@ -103,8 +105,7 @@ public:
 	/// <param name="renderer"></param>
 	/// <param name="xx"></param>
 	/// <param name="yy"></param>
-	void renderInventory(RenderContext& renderer, int xx, int yy)const;
-
+	void renderInventory(RenderContext& renderer, int xx, int yy) const;
 
 	/// <summary>
 	/// Time management
@@ -127,18 +128,18 @@ public:
 	virtual void onKeyDown(GAME* game);
 
 	/// <summary>
-	/// 
+	/// Attacks all the monsters in the room that are in attacking range of the player. 
 	/// </summary>
 	void attackMonsters(Room&);
 
 	/// <summary>
-	/// 
+	/// Gives experience to the player.
 	/// </summary>
 	/// <param name="exp"></param>
 	virtual void gainExperience(int exp);
 
 	/// <summary>
-	/// 
+	/// Gives coins to the player.
 	/// </summary>
 	/// <param name="n"></param>
 	virtual void gainCoins(int n);
@@ -150,6 +151,8 @@ public:
 	/// <param name="my"></param>
 	/// <returns></returns>
 	bool isInAttackRange(int mx, int my);
+
+	void reset(int lives);
 	
 	/// <summary>
 	/// Returns player's attack value.
@@ -183,6 +186,11 @@ public:
 	/// <param name="item"></param>
 	/// <returns></returns>
 	bool hasObject(Object obj);
+
+	/// <summary>
+	/// Encodes the player's inventory.
+	/// </summary>
+	string inventoryToString() const;
 
 	/// <summary>
 	/// Sets the number of lives of the player to l.

@@ -16,7 +16,7 @@ Player::Player(RenderContext& renderer, int lives, int attack, int defense, int 
 	heart = renderer.LoadTexture("heart");
 }
 
-void Player::render(RenderContext& renderer, int offsetX, int offsetY)const
+void Player::render(RenderContext& renderer, int offsetX, int offsetY) const
 {
 	int xx = (x + offsetX) * SZ_BLOCKSIZE;
 	int yy = (y + offsetY) * SZ_BLOCKSIZE;
@@ -31,7 +31,7 @@ bool Player::isAlive() const
 	return lives > 0 || LivingEntity::isAlive();
 }
 
-void Player::renderInventory(RenderContext& renderer, int xx, int yy)const
+void Player::renderInventory(RenderContext& renderer, int xx, int yy) const
 {
 	/*Infos*/
 	xx = infosX;
@@ -66,7 +66,7 @@ void Player::renderInventory(RenderContext& renderer, int xx, int yy)const
 	/*The inventory*/
 	for (auto& entry : inventory)
 	{
-		entry.first.sideRender(renderer, xx, yy);
+		entry.first->sideRender(renderer, xx, yy);
 		xx += SZ_BLOCKSIZE;
 		if (xx >= infosX + SZ_INFOSWIDTH)
 		{
@@ -287,21 +287,21 @@ int Player::getLives()
 
 void Player::pickUpObject(const Object* obj, int count)
 {
-	if (inventory.find(*obj) == inventory.end())
+	if (inventory.find(obj) == inventory.end())
 	{
-		inventory[*obj] = 0;
+		inventory[obj] = 0;
 		attack = max(obj->getAttack(), attack);
 		defense = max(obj->getDefense(), defense);
 	}
 
-	inventory[*obj] += count;
+	inventory[obj] += count;
 }
 
 bool Player::hasObject(string objId)
 {
 	for (auto& entry : inventory)
 	{
-		if (entry.first.getId() == objId && entry.second > 0)
+		if (entry.first->getId() == objId && entry.second > 0)
 			return true;
 	}
 	return false;
@@ -309,8 +309,20 @@ bool Player::hasObject(string objId)
 
 bool Player::hasObject(Object obj)
 {
-	auto search = inventory.find(obj);
+	auto search = inventory.find(&obj);
 	return (search != inventory.end() && search->second > 0);
+}
+
+string Player::inventoryToString() const
+{
+	string encoding = "";
+	for (auto& entry : inventory)
+	{
+		encoding += "(";
+		encoding += entry.first->objectToString();//todo include quantity of each object. 
+		encoding += ") ";
+	}
+	return encoding;
 }
 
 void Player::setLives(int l)

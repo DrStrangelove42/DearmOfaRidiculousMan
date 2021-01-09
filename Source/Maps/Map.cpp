@@ -725,8 +725,8 @@ void Map::saveProgress(string saveName, string originalWorldName, int mapNumber,
 	SaveData.close();
 	ofstream PlayerData(SAVES_LOCATION + saveName + "/" + saveName + "Start" + EXT);
 	PlayerData << mapNumber << " " << roomNumber << " " << p.getX() << " " << p.getY() << endl;
-	PlayerData << p.getHealth() << " " << p.getLives() << " " << p.getMoney() << " " << p.getExperience() << " " << p.getMaxHealth();
-	//TODO : Add inventory, probably objectToString() for each element in the inventory, between parentheses. Also add initial attack and defense of player without objects (default being 5 and 0 respectively)
+	PlayerData << p.getHealth() << " " << p.getLives() << " " << p.getMoney() << " " << p.getExperience() << " " << p.getMaxHealth() << " " << p.inventoryToString();
+	//TODO : Add initial attack and defense of player without objects (default being 5 and 0 respectively)
 	PlayerData.close();
 }
 
