@@ -57,7 +57,7 @@ public:
 	///  We encode a door with its id, the keyId, the closed orientation, the open orientation, and with the character indicating whether the door is open or not.
 	/// </summary>
 	/// <param name="game"></param>
-	string objectToString();
+	string objectToString() const;
 };
 
 #endif

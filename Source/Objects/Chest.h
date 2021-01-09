@@ -58,7 +58,7 @@ public:
 	/// <summary>
 	/// We encode a chest with its id followed by the encoding of each of the objects in its contents, in parentheses.
 	/// </summary>
-	string objectToString();
+	string objectToString() const;
 };
 
 #endif

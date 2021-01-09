@@ -22,7 +22,7 @@ bool Checkpoint::updateObject(GAME* game)
 	return true;
 }
 
-string Checkpoint::objectToString()
+string Checkpoint::objectToString() const
 {
 	return id;
 }

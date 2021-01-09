@@ -55,7 +55,7 @@ bool Door::updateObject(GAME* game)
 	return false;
 }
 
-string Door::objectToString()
+string Door::objectToString() const
 {
 	return id + " " + keyId + " " + closedOrientation + " " + openOrientation + (traversable ? "o" : "");
 }

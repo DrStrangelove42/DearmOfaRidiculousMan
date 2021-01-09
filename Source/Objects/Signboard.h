@@ -8,9 +8,11 @@
 class Signboard : public Object
 {
 protected:
+	string text;
+	
 	Texture* textContent;
 
-	void setTexture(string text, RenderContext& renderer);
+	void setTexture(RenderContext& renderer);
 public:
 	/*Destructor*/
 	virtual ~Signboard();
@@ -44,6 +46,11 @@ public:
 	/// <param name="game"></param>
 	/// <returns>True if the object needs to be removed</returns>
 	bool updateObject(GAME* game);
+
+	/// <summary>
+	/// We encode a sign with its identifier, and the word that encodes the text it contains.
+	/// </summary>
+	string objectToString() const;
 };
 
 #endif

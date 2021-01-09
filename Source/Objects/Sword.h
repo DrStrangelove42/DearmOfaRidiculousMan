@@ -24,7 +24,7 @@ public:
 	/// <summary>
 	/// We encode a sword with sw followed by the attack parameter.
 	/// </summary>
-	string objectToString();
+	string objectToString() const;
 };
 
 #endif

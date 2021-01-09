@@ -1,7 +1,7 @@
 #include "Signboard.h"
 #include "../Characters/Player.h"
 
-void Signboard::setTexture(string text, RenderContext& renderer)
+void Signboard::setTexture(RenderContext& renderer)
 {
 	textContent = renderer.LoadText(text, 0x724A0EFF, 0xF4C886FF, SZ_INFOSWIDTH - 10, 10);
 }
@@ -11,10 +11,10 @@ Signboard::~Signboard()
 }
 
 Signboard::Signboard(string identifier, int posx, int posy, RenderContext& renderer, string content) :
-	Object(identifier, posx, posy, "signboard", renderer, true), textContent(NULL)
+	Object(identifier, posx, posy, "signboard", renderer, true), textContent(NULL), text(content)
 {
-	if (!content.empty())
-		setTexture(content, renderer);
+	if (!text.empty())
+		setTexture(renderer);
 }
 
 
@@ -22,7 +22,8 @@ Signboard::Signboard(string identifier, int posx, int posy, RenderContext& rende
 Signboard::Signboard(string headerline, int posx, int posy, RenderContext& renderer) :
 	Signboard(EatToken(headerline), posx, posy, renderer, "")
 {
-	setTexture(GetText(headerline), renderer);
+	text = headerline;
+	setTexture(renderer);
 }
 
 bool Signboard::updateObject(GAME* game)
@@ -36,4 +37,7 @@ bool Signboard::updateObject(GAME* game)
 	return false;
 }
 
-
+string Signboard::objectToString() const
+{
+	return id + " " + text;
+}

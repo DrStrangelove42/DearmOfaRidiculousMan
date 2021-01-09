@@ -34,7 +34,7 @@ public:
 	/// <summary>
 	/// We encode a checkpoint simply with its id.
 	/// </summary>
-	string objectToString();
+	string objectToString() const;
 };
 
 #endif

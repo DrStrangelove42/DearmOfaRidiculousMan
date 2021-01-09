@@ -23,7 +23,7 @@ public:
 	/// <summary>
 	/// We encode a shield with sh followed by the defense parameter.
 	/// </summary>
-	string objectToString();
+	string objectToString() const;
 };
 
 #endif

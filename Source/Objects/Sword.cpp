@@ -5,7 +5,7 @@ Sword::Sword(string identifier, int posx, int posy, RenderContext& renderer, int
 
 }
 
-string Sword::objectToString()
+string Sword::objectToString() const
 {
 	return "sw " + to_string(attack);
 }

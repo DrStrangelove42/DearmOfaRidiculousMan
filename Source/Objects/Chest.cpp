@@ -1,5 +1,6 @@
 #include "Chest.h"
 #include "../Characters/Player.h"
+
 Chest::~Chest()
 {
 
@@ -95,7 +96,7 @@ bool Chest::updateObject(GAME* game)
 	return false;
 }
 
-string Chest::objectToString()
+string Chest::objectToString() const
 {
 	string encoding = id;
 	if (texture != "openchest")

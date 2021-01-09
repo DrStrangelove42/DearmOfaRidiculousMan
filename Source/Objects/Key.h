@@ -19,7 +19,7 @@ public:
 	/// <summary>
 	/// We encode a key with its id, but only if it is still visible on the map (and therefore usable)
 	/// </summary>
-	string objectToString();
+	string objectToString() const;
 };
 
 #endif

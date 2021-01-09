@@ -90,7 +90,7 @@ public:
 	/// <summary>
 	/// We encode a warp with the id, the destination map, room, x and y, followed by two optional parameters, the first being the delay and the second being the destination world.
 	/// </summary>
-	string objectToString();
+	string objectToString() const;
 	
 };
 

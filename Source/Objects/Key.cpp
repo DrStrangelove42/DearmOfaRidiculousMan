@@ -7,7 +7,7 @@ Key::Key(string identifier, int posx, int posy, RenderContext& renderer) :
 
 }
 
-string Key::objectToString()
+string Key::objectToString() const
 {
 	return (texture == "empty") ? "" : id;
 }
