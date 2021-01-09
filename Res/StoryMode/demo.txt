@@ -27,4 +27,4 @@ MOB 6 5 S
 MOB 5 6 s
 NPC 10 10 mario,Mario,Run !
 PART fuite
-MAP FinalMap, -1, 0
+BANNER The end of the end , 5000, FinalMap, -1, 0
