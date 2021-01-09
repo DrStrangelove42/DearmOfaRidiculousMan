@@ -42,7 +42,7 @@ void Story::fromFile(string path, GAME* game)
 			
 			curRoom = room_idx_toi;
 			
-			if (!foundMap)//Trouvé une indication de map
+			if (!foundMap)//No start map
 			{
 				int startMap = map_idx_toi;
 				foundMap = true;
@@ -189,7 +189,7 @@ void Story::tick(int time, GAME* game)
 	if (!step->done)
 	{
 		step->action(game);
-		step->done = true; //we do not go backward
+		step->done = true; //we do not go backwards
 	}
 
 	curPart->nextStep();

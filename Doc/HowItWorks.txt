@@ -52,7 +52,7 @@ Each room is described as follows:
    - 'W' : water block
    - 'H' : stairs H
    - 'V' : stairs V
- - The different characters that can encode objects/entities are:
+ - The different characters that can encode objects/entities are:(if want to add, don't forget to add the types in the declaration of string in parseObjectOrMonster)
    - ' ' : no object or entity.
    - 'p' : player starts on this block. Additional information about the player's
 	   starting situation can be described in the header, on a line starting
