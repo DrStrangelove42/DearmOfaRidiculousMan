@@ -72,7 +72,7 @@ void Story::fromFile(string path, GAME* game)
 			string room_idx = EatTokenEx(line, ',');
 			int map_idx_toi = stoi(map_idx);
 			int room_idx_toi = stoi(room_idx);
-
+			curRoom = room_idx_toi;
 			//It is a blocking step
 			parsingPart->scenario.push_back(new Step(
 				[text, ddelay, world_name, map_idx_toi, room_idx_toi](GAME* game)
