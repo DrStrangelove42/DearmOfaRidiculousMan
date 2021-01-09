@@ -12,7 +12,7 @@ private:
 	/// <summary>
 	/// An array of items contained in the chest. 
 	/// </summary>
-	unordered_map<Object, int, ObjectHash> contents;
+	unordered_map<Object*, int> contents;
 public:
 	/*Destructor*/
 	~Chest();
@@ -40,14 +40,14 @@ public:
 	/// Returns a reference to the array of objects that are in the chest.
 	/// </summary>
 	/// <returns></returns>
-	unordered_map<Object, int, ObjectHash>& getContents();
+	unordered_map<Object*, int>& getContents();
 
 	/// <summary>
 	/// Adds count times the object obj to the chest.
 	/// </summary>
 	/// <param name="obj"></param>
 	/// <param name="count"></param>
-	void addObject(Object obj, int count = 1);
+	void addObject(Object* obj, int count = 1);
 
 	/// <summary>
 	/// How does a chest interact with the player?

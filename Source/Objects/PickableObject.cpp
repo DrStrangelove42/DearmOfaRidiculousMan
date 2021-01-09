@@ -8,7 +8,7 @@ PickableObject::~PickableObject()
 }
 
 PickableObject::PickableObject(string identifier, int posx, int posy, string tx, RenderContext& renderer, bool trav, int attack, int defense):
-	Object(identifier, posx, posy, tx, renderer, trav, attack,defense)
+	Object(identifier, posx, posy, tx, renderer, trav, attack, defense)
 {
 }
 

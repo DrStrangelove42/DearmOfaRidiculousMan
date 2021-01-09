@@ -29,11 +29,11 @@ Chest::Chest(string headerline, int* uniqueId, int posx, int posy, RenderContext
 			try
 			{
 				int attack = stoi(currentObject);
-				addObject(Sword("sw" + to_string(*(uniqueId)++), -1, -1, renderer, attack));
+				addObject(new Sword("sw" + to_string(*(uniqueId)++), -1, -1, renderer, attack));
 			}
 			catch (...)
 			{
-				addObject(Sword("sw" + to_string(*(uniqueId)++), -1, -1, renderer));
+				addObject(new Sword("sw" + to_string(*(uniqueId)++), -1, -1, renderer));
 			}
 		}
 		else if (currentObject.substr(0, 2) == "sh")
@@ -42,22 +42,22 @@ Chest::Chest(string headerline, int* uniqueId, int posx, int posy, RenderContext
 			try
 			{
 				int defense = stoi(currentObject);
-				addObject(Shield("sh" + to_string(*(uniqueId)++), -1, -1, renderer, defense));
+				addObject(new Shield("sh" + to_string(*(uniqueId)++), -1, -1, renderer, defense));
 			}
 			catch (...)
 			{
-				addObject(Shield("sh" + to_string(*(uniqueId)++), -1, -1, renderer));
+				addObject(new Shield("sh" + to_string(*(uniqueId)++), -1, -1, renderer));
 			}
 		}
 	}
 }
 
-unordered_map<Object, int, ObjectHash>& Chest::getContents()
+unordered_map<Object*, int>& Chest::getContents()
 {
 	return contents;
 }
 
-void Chest::addObject(Object obj, int count)
+void Chest::addObject(Object* obj, int count)
 {
 	if (contents.find(obj) == contents.end())
 		contents[obj] = count;
@@ -76,11 +76,11 @@ bool Chest::updateObject(GAME* game)
 	updateTexture(renderer);
 	for (auto& entry : contents)
 	{
-		game->player->pickUpObject(&(entry.first), entry.second);
+		game->player->pickUpObject(entry.first, entry.second);
 		//The following part might need to be changed if the player skins become more complex, 
 		//but its purpose is to change the skin of the player if a shield or sword is found in a chest
 
-		string objid = entry.first.getId();
+		string objid = entry.first->getId();
 		string& refTexture = game->player->getTextureID();
 		if ((refTexture == "player" || refTexture == "playershield") && objid.length() >= 2 && objid.substr(0, 2) == "sw")
 		{
@@ -104,7 +104,7 @@ string Chest::objectToString() const
 		for (auto& entry : contents)
 		{
 			encoding += " (";
-			encoding += entry.first.objectToString();
+			encoding += entry.first->objectToString();
 			encoding += ")";
 		}
 	}
