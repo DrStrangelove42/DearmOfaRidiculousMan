@@ -3,7 +3,7 @@
 
 void Signboard::setTexture(RenderContext& renderer)
 {
-	textContent = renderer.LoadText(text, 0x724A0EFF, 0xF4C886FF, SZ_INFOSWIDTH - 10, 10);
+	textContent = renderer.LoadText(GetText(text), 0x724A0EFF, 0xF4C886FF, SZ_INFOSWIDTH - 10, 10);
 }
 
 Signboard::~Signboard()
