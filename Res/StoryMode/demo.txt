@@ -1,5 +1,5 @@
 PART beginning
-MAP StoryEntry, -1,0
+BANNER Where am I ? ,5000, StoryEntry, -1,0
 NPC 6 3 drunk,DrunkMan,Move Away!
 NPC 25 3 mario,Mario, Help Me!
 REM MOB 4 3 P
