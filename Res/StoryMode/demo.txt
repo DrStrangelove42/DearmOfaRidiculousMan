@@ -2,7 +2,7 @@ PART beginning
 MAP StoryEntry, -1,0
 NPC 6 3 drunk,DrunkMan,Move Away!
 NPC 25 3 mario,Mario, Help Me!
-MOB 4 3 P
+REM MOB 4 3 P
 ROOM 1
 NPC 20 2 mario,Mario, Are you tired ? ,yes,sleep
 PART sleep
