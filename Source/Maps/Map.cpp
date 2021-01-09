@@ -590,6 +590,19 @@ Monster* Map::parseMonster(string& line, RenderContext& renderer, int x, int y, 
 		}
 		return newFireball;
 	}
+	case 'P':
+	{
+		IntelligentPet* newIntelligentPet = new IntelligentPet(renderer, p, r);
+		newIntelligentPet->teleport(x, y);
+		try
+		{
+			newIntelligentPet->setHealth(stoi(line.substr(1)));
+		}
+		catch (...)/*Default health*/
+		{
+		}
+		return newIntelligentPet;
+	}
 	default:
 		return NULL;
 	}

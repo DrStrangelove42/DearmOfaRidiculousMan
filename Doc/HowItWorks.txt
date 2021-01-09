@@ -95,6 +95,7 @@ Each room is described as follows:
 	- 's' : a skeleton.
 	- 'S' : an intelligent skeleton (one that follows the player).
 	- 'F' : a fireball.
+	- 'P' : an intelligent pet.
    - 'B' : a butler (NPC), the header should contain 'B' followed by the
 	   identifier, a space, the butler's name, a space, and the butler's
 	   speech. The name and the speech mustn't contain spaces, and

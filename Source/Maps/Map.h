@@ -26,6 +26,7 @@
 #include "../Characters/Monsters/Fireball.h"
 #include "../Characters/Monsters/Skeleton.h"
 #include "../Characters/Monsters/IntelligentSkeleton.h"
+#include "../Characters/Monsters/IntelligentPet.h"
 #include <iostream>
 #include <functional>
 #include <fstream>
