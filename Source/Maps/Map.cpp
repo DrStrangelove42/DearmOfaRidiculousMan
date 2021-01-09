@@ -474,8 +474,8 @@ void Map::intlGetDataFromFile(string filename, ifstream& data, RenderContext& re
 
 void Map::parseObjectOrMonster(string& line, string& filename, RenderContext& renderer, int* uniqueId, int x, int y, Player& p, int room)
 {
-	string monsters = "GgSsF";
-	string objects = "!kdcBb";
+	string monsters = "GgSsFP"; //add all Monster types
+	string objects = "!kdcBb"; //add all object types
 	if (monsters.find_first_of(line[0]) != monsters.npos)
 	{
 		rooms[room]->addMonster(parseMonster(line, renderer, x, y, p, rooms[room]));
