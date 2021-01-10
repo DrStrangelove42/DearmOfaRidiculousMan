@@ -295,7 +295,8 @@ void Player::pickUpObject(const Object* obj, int count)
 		texture+="sword";
 
 	if (!hasShield && obj->getId()[0] == 'D')
-		texture+="shield";	
+		texture+="shield";
+	updateTexture(renderer);
 }
 
 bool Player::hasObject(string objId)
