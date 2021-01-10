@@ -32,3 +32,5 @@ Ruins of the ancient observation tower
 Access to the belvedere and secret room
 #ToTheCaveSign
 To the lower level
+#THANKS
+Thank you for playing our game !

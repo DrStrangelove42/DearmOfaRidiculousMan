@@ -18,6 +18,7 @@
 #include "Maps/MainMenu.h"
 #include "Characters/Player.h"
 
+#include "Maps/EndCredits.h"
 
 
 using namespace std;

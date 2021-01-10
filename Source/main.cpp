@@ -43,7 +43,7 @@ int playDoarm(GAME* game)
 	game->currentMap = new MainMenu(*me, game);
 	game->worldName = "Main menu";
 	addMapToCache(game->worldName, 0, game->currentMap);
-
+	addMapToCache("End credits", 0, new EndCredits(*me, game));
 	int currentTime;
 
 	while (!(game->quit))
