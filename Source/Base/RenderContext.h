@@ -75,14 +75,14 @@ public:
 	virtual SDL_Texture* fromSurface(SDL_Surface*);
 
 	/// <summary>
-	/// 
+	/// Does the actual rendering with low-level call to SDL.
 	/// </summary>
-	/// <param name="t"></param>
-	/// <param name="srcrect"></param>
-	/// <param name="dstrect"></param>
-	/// <param name="angle"></param>
-	/// <param name="center"></param>
-	/// <param name="flip"></param>
+	/// <param name="t">The SDL Texture structure</param>
+	/// <param name="srcrect">The SDL rect structure to crop from the image (NULL to take everything).</param>
+	/// <param name="dstrect">The SDL destination rectangle structure.</param>
+	/// <param name="angle">Rotating angle, in degrees</param>
+	/// <param name="center">Center of rotation.</param>
+	/// <param name="flip">If the image is flipped.</param>
 	virtual void doRender(SDL_Texture* t,
 		const SDL_Rect* srcrect,
 		const SDL_Rect* dstrect,
@@ -93,25 +93,25 @@ public:
 	/// <summary>
 	/// Draws a rectangle at the specified position, and with the specified dimensions, with the possibility to fill it or not.
 	/// </summary>
-	/// <param name="x"></param>
-	/// <param name="y"></param>
-	/// <param name="w"></param>
-	/// <param name="h"></param>
-	/// <param name="fill"></param>
+	/// <param name="x">X coordinate</param>
+	/// <param name="y">Y coordinate</param>
+	/// <param name="w">Width</param>
+	/// <param name="h">Height</param>
+	/// <param name="fill">If the rectangle is filled with colour.</param>
 	virtual void drawRectangle(int x, int y, int w, int h, bool fill = false);
 	/// <summary>
 	/// Draws a line from one point to another.
 	/// </summary>
-	/// <param name="x1"></param>
-	/// <param name="y1"></param>
-	/// <param name="x2"></param>
-	/// <param name="y2"></param>
+	/// <param name="x1">Start X coordinate</param>
+	/// <param name="y1">Start Y coordinate</param>
+	/// <param name="x2">End X coordinate</param>
+	/// <param name="y2">End Y coordinate</param>
 	virtual void drawLine(int x1, int y1, int x2, int y2);
 
 	/// <summary>
-	/// Sets the current color, in the format 0xRRGGBBAA. 
+	/// Sets the current colour, in the format 0xRRGGBBAA. 
 	/// </summary>
-	/// <param name="color"></param>
+	/// <param name="color">Colour code</param>
 	virtual void changeColor(int color);
 
 

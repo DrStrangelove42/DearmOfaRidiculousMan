@@ -147,4 +147,6 @@ run the generator.
 
 ## Tests
 
-With CPPUnit
+The tests are done in a UNIX environment only, with the CPPUnit : ```libcppunit-dev``` package.
+Once installed, type the following: \
+```make test```
