@@ -31,7 +31,7 @@ ROOM 2
 NPC 20 20 girl, girl, feeling dizzy ?, Yes, sleep
 PART sleep
 BANNER Where am I ? ,5000, MainMap, -1,0
-NPC 10 10 mario,Mario,It's a me Mario ! What do you choose?,Fire,feu,Death,squeleton army, Flee , fuite, talk, talk
+NPC 10 10 mario,Mario,It's a me Mario ! What do you choose?,Fire,feu,Death,squeleton army, Flee , fuite
 PART feu
 MOB 5 5 F
 REM here we replace the mario by another NPC with the same ID, so it's still mario but he says something else.
