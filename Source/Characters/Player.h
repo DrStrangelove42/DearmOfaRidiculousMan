@@ -21,7 +21,7 @@ class Player : public MovingEntity, public LivingEntity
 {
 private:
 	/// <summary>
-	/// Amount of time between attacks, in ticks.
+	/// Time of last attack, used for attack delay.
 	/// </summary>
 	int lastAttackTime;
 protected:
@@ -60,6 +60,16 @@ protected:
 	/// A Heart texture for player lives.
 	/// </summary>
 	Texture* heart;
+
+	/// <summary>
+	/// Tells us whether or not the player has picked up a sword, used for th texture.
+	/// </summary>
+	bool hasSword;
+
+	/// <summary>
+	/// Tells us whether or not the player has picked up a shield, used for th texture.
+	/// </summary>
+	bool hasShield;	  
 
 	/// <summary>
 	/// The story object (used in story mode).

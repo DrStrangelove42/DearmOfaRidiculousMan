@@ -11,7 +11,7 @@
 Player::Player(RenderContext& renderer, int lives, int attack, int defense, int startHealth, int startMoney, int startExp) :
 	LivingEntity(startHealth, startMoney, startExp, defense), MovingEntity(0, 0, renderer, "player"),
 	lives(lives), attack(attack), infosX(SZ_MAINWIDTH), infosY(0),
-	attackDelay(500), lastAttackTime(0), story(NULL)
+	attackDelay(500), lastAttackTime(0), story(NULL), hasSword(false), hasShield(false)
 {
 	heart = renderer.LoadTexture("heart");
 }
@@ -296,6 +296,12 @@ void Player::pickUpObject(const Object* obj, int count)
 	}
 
 	inventory[obj] += count;
+
+	if (!hasSword && obj->getId()[0] == 'A')
+		texture+="sword";
+
+	if (!hasShield && obj->getId()[0] == 'D')
+		texture+="shield";	
 }
 
 bool Player::hasObject(string objId)
@@ -380,7 +386,12 @@ void Player::initialise(string headerline, RenderContext& renderer)
 		maxHealth = stoi(tokens[4]);
 	if (tokens[0] == "X")
 		health = maxHealth;
+
+	//We clear the inventory and reset the texture, then add the objects one by one.
 	inventory.clear();
+	hasShield = false;
+	hasSword = false;
+	texture = "player";
 	while (inventoryContents.length() > 0 && inventoryContents[0] == '(')
 	{
 		size_t nextpar = inventoryContents.find(')');

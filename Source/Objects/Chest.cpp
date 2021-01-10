@@ -23,31 +23,17 @@ Chest::Chest(string headerline, int* uniqueId, int posx, int posy, RenderContext
 		size_t nextpar = headerline.find(')');
 		string currentObject = headerline.substr(1, nextpar - 1);
 		headerline.erase(0, nextpar + 2);
-		if (currentObject.substr(0, 2) == "sw")
+		Object* obj = Map::parseObject(currentObject, renderer, uniqueId, -1,-1);
+		try
 		{
-			currentObject.erase(0, 3);
-			try
-			{
-				int attack = stoi(currentObject);
-				addObject(new Sword("sw" + to_string(*(uniqueId)++), -1, -1, renderer, attack));
-			}
-			catch (...)
-			{
-				addObject(new Sword("sw" + to_string(*(uniqueId)++), -1, -1, renderer));
-			}
+			size_t a;
+			int count = stoi(headerline, &a);
+			headerline.erase(0,a+1);
+			addObject(obj,count);
 		}
-		else if (currentObject.substr(0, 2) == "sh")
+		catch (...)
 		{
-			currentObject.erase(0, 3);
-			try
-			{
-				int defense = stoi(currentObject);
-				addObject(new Shield("sh" + to_string(*(uniqueId)++), -1, -1, renderer, defense));
-			}
-			catch (...)
-			{
-				addObject(new Shield("sh" + to_string(*(uniqueId)++), -1, -1, renderer));
-			}
+			addObject(obj);
 		}
 	}
 }
