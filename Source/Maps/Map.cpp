@@ -63,9 +63,8 @@ Map::Map(string worldName, Player& p, RenderContext& renderer, int* startMap, in
 			worldFromFile(worldName);
 	}
 	mapFromFiles(worldName, p, renderer, startMap, startRoom);
-#ifdef DEBUG_MODE
+	if (DEBUG_MODE)
 		titleTexture = renderer.LoadString("CURRENT MAP : " + worldName);
-#endif
 }
 
 void Map::render(RenderContext& renderer, int offsetX, int offsetY) const
@@ -87,13 +86,12 @@ void Map::render(RenderContext& renderer, int offsetX, int offsetY) const
 	{
 		rooms[i]->render(renderer, offX, offY);
 	}
-#ifdef DEBUG_MODE
-	if (titleTexture != NULL)
+
+	if (DEBUG_MODE && titleTexture != NULL)
 	{
 		titleTexture->renderUnscaled(renderer, 0, 0);
 		renderer.LoadString("Room : " + to_string(currentRoom), 0x00FFffff)->renderUnscaled(renderer, 0, 16);
 	}
-#endif
 }
 
 void Map::tick(int time, GAME* game)
@@ -479,6 +477,8 @@ Object* Map::parseObject(string& line, RenderContext& renderer, int* uniqueId, i
 		return new Shield(line, x, y, renderer);
 	}
 	default:
+	{
+		cout << "Case " << line[0] << " not treated yet in " << filename << endl;
 		return NULL;
 	}
 }

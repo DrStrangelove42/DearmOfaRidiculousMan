@@ -63,20 +63,6 @@ bool Chest::updateObject(GAME* game)
 	for (auto& entry : contents)
 	{
 		game->player->pickUpObject(entry.first, entry.second);
-		//The following part might need to be changed if the player skins become more complex, 
-		//but its purpose is to change the skin of the player if a shield or sword is found in a chest
-
-		string objid = entry.first->getId();
-		string& refTexture = game->player->getTextureID();
-		if ((refTexture == "player" || refTexture == "playershield") && objid.length() >= 2 && objid.substr(0, 2) == "sw")
-		{
-			refTexture += "sword";
-		}
-		if ((refTexture == "player" || refTexture == "playersword") && objid.length() >= 2 && objid.substr(0, 2) == "sh")
-		{
-			refTexture += "shield";
-		}
-		game->player->updateTexture(renderer);
 	}
 
 	return false;
