@@ -94,7 +94,7 @@ protected:
 	Texture* titleTexture;
 
 	/// <summary>
-	/// This function takes a folder of files representing a world and creates the current Map.
+	/// This function takes a folder of files representing a World (according to the encoding described in HowItWorks.txt) and creates the current Map.
 	/// destMap, destRoom, destX and destY correspond to the destination coordinates, i.e. where
 	///	the Player starts. When they are different from -1, the Player is <see cref="Warp">warping</see> from one Map to
 	///	another, and when they are equal to -1 we must read them in the Start file.
@@ -107,7 +107,7 @@ protected:
 	void mapFromFiles(string worldName, Player& p, RenderContext& renderer, int* startMap, int startRoom);
 
 	/// <summary>
-	/// Extracts the data (objects and monsters) from the ifstream data and adds them to the Map.
+	/// Extracts the data (<see cref="Object">Objects</see> and <see cref="Monster">Monsters</see>) from the ifstream data and adds them to the Map.
 	/// </summary>
 	/// <param name="worldName"></param>
 	/// <param name="data"></param>
