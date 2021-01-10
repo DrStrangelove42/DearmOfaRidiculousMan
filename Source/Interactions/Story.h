@@ -14,6 +14,7 @@ using namespace std;
 
 class Story
 {
+protected:
 	class Step;
 
 	/// <summary>
@@ -61,7 +62,6 @@ class Story
 	 
 	};
 	
-protected:
 	/// <summary>
 	/// The different parts of the story to play.
 	/// </summary>
