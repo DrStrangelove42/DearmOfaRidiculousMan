@@ -12,7 +12,6 @@ GameOverMenu::GameOverMenu(Player& p, GAME* g) : Menu(p, g)
 
 void GameOverMenu::onRetryClick(int id)
 {
-	game->player->reset(3);
 	changeMap(game, "Main menu", 0, 0);//déjà chargée
 }
 

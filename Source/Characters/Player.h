@@ -161,8 +161,6 @@ public:
 	/// <param name="my"></param>
 	/// <returns></returns>
 	bool isInAttackRange(int mx, int my);
-
-	void reset(int lives);
 	
 	/// <summary>
 	/// Returns player's attack value.

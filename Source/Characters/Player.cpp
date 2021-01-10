@@ -92,12 +92,6 @@ void Player::kill()
 	}
 }
 
-void Player::reset(int lives)
-{
-	health = maxHealth;
-	this->lives = lives;
-}
-
 Player::~Player()
 {
 	inventory.clear();
