@@ -28,12 +28,30 @@ Preprocessor definitions for MS Windows only
 using namespace std;
 
 /*Size constants*/
-extern int SZ_BLOCKSIZE;	/* The size of a block, in pixels */
+/// <summary>
+/// The size of a block, in pixels.
+/// </summary>
+extern int SZ_BLOCKSIZE;
+
+/// <summary>
+/// Width of the main Window.
+/// </summary>
 extern int SZ_MAINWIDTH;
+
+/// <summary>
+/// Width of the window, in pixels.
+/// </summary>
+extern int SZ_SCREENWIDTH;
+
+/// <summary>
+/// Height of the Window, in pixels.
+/// </summary>
+extern int SZ_SCREENHEIGHT;
+
+/// <summary>
+/// Width of the player Window, in pixels.
+/// </summary>
 extern int SZ_INFOSWIDTH;
-extern int SZ_SCREENWIDTH;	/* Width of the window, in pixels */
-extern int SZ_SCREENHEIGHT;	/* Height of the window, in pixels */
-extern int SZ_INFOSWIDTH;	/* Width of the player window, in pixels */
 
 /// <summary>
 /// Delay, in ms, between each game loop.
@@ -41,24 +59,38 @@ extern int SZ_INFOSWIDTH;	/* Width of the player window, in pixels */
 extern int WAIT_TIME;
 
 /*Current viewport*/
-extern int BLOCKS_W;	/* Max width of blocks on the screen */
-extern int BLOCKS_H;	/* Max height of blocks on the screen */
+/// <summary>
+/// Max width of <see cref="Block">Blocks</see> on the screen.
+/// </summary>
+extern int BLOCKS_W;
 
-/*The two following variables are only used in low level
-fonctions located in the <utils> module.*/
+/// <summary>
+/// Max height of <see cref="Block">Blocks</see> on the screen.
+/// </summary>
+extern int BLOCKS_H;
+
+/// <summary>
+/// Variable only used in low level functions located in the utils module.
+/// </summary>
 extern int VIEW_OFFSET_X;
+
+/// <summary>
+/// Variable only used in low level functions located in the utils module.
+/// </summary>
 extern int VIEW_OFFSET_Y;
 
 /// <summary>
-/// Extensions for worlds and maps
+/// Extensions for Worlds and <see cref="Map">Maps</see>.
 /// </summary>
 extern string EXT;
+
 /// <summary>
 /// The extension used for text files describing stories in Story Mode.
 /// </summary>
 extern string STORYFILES_EXT;
+
 /// <summary>
-/// Location of files describing worlds.
+/// Location of files describing Worlds.
 /// </summary>
 extern string WORLDFILES_LOCATION;
 
@@ -68,7 +100,7 @@ extern string WORLDFILES_LOCATION;
 extern string STORYFILES_LOCATION;
 
 /// <summary>
-/// Location of files generated to describe worlds.
+/// Location of files generated to describe Worlds.
 /// </summary>
 extern string WORLDDATA_LOCATION;
 
