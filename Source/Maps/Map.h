@@ -46,7 +46,6 @@ class Map;
 /// <summary>
 /// A Map is a structure composed of <see cref="Room">Rooms</see>.
 /// </summary>
-*/
 class Map : public Entity
 {
 protected:
