@@ -5,7 +5,7 @@ Texture::Texture(RenderContext& context, string id)
 	texture = internalLoadTexture(context, id, w, h);
 }
 
-SDL_Texture* Texture::internalLoadTexture(RenderContext& context, string id, int& w, int& h)
+SDL_Texture* Texture::internalLoadTexture(RenderContext& context, string id, int& w, int& h, bool ignoreErrors)
 {
 	SDL_Texture* tx = NULL;
 	SDL_Surface* bmp = NULL;
@@ -14,7 +14,8 @@ SDL_Texture* Texture::internalLoadTexture(RenderContext& context, string id, int
 
 	if (NULL == bmp)
 	{
-		cout << "Unable to load texture #" + id + " : " + string(SDL_GetError()) << endl;
+		if (!ignoreErrors)
+			cout << "Unable to load texture #" + id + " : " + string(SDL_GetError()) << endl;
 		return NULL;
 	}
 

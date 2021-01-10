@@ -19,7 +19,7 @@ using namespace std;
 class Texture;
 
 /// <summary>
-/// A class encapsulating a rendering context, that is used as an interface
+/// RenderContext encapsulates a rendering context, that is used as an interface
 /// with the graphics library to render the game.
 /// </summary>
 class RenderContext

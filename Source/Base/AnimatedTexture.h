@@ -8,14 +8,14 @@
 
 using namespace std;
 
-/*
-A class encapsulating an animated image.
-*/
+/// <summary>
+/// An AnimatedTexture is a Texture that seems to be animated (by displaying several successive, slightly different <see cref="Texture">Textures</see>).
+/// </summary>
 class AnimatedTexture : public Texture
 {
 protected:
 	/// <summary>
-	/// The textures under the hood
+	/// The textures under the hood, courtesy of the SDL library.
 	/// </summary>
 	vector<SDL_Texture*> frames;
 
@@ -24,23 +24,36 @@ protected:
 	/// </summary>
 	int delay;
 
+	/// <summary>
+	/// The time at which the image displayed by the AnimatedTexture was last changed.
+	/// </summary>
 	int lastTime;
 
+	/// <summary>
+	/// The index of the frame in <see cref="AnimatedTexture::frames">frames</see>that is currently being displayed.
+	/// </summary>
 	int curFrame;
+
+	/// <summary>
+	/// The number of images in <see cref="AnimatedTexture::frames">frames</see>.
+	/// </summary>
 	int frameCount;
 public:
 	/// <summary>
-	/// Creates a new animated texture from files id0, ..., idN.
+	/// Constructor of a new AnimatedTexture from files id0, ..., idN, where N is deduced from the available files.
 	/// </summary>
 	/// <param name="context"></param>
 	/// <param name="id">Root of the names</param>
 	/// <param name="delay">Delay, in ms, between two frames.</param>
 	AnimatedTexture(RenderContext& context, string id, int delay = 500);
 
+	/// <summary>
+	/// Destructor.
+	/// </summary>
 	virtual ~AnimatedTexture();
 
 	/// <summary>
-	/// Renders texture at given point, without scaling
+	/// Renders the AnimatedTexture at any given point, without scaling.
 	/// </summary>
 	/// <param name="context"></param>
 	/// <param name="x"></param>
@@ -51,7 +64,7 @@ public:
 	virtual void renderUnscaled(RenderContext& context, int x, int y, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 	/// <summary>
-	/// Renders texture at given point
+	/// Renders the AnimatedTexture at any given point.
 	/// </summary>
 	/// <param name="context"></param>
 	/// <param name="x"></param>
@@ -64,7 +77,7 @@ public:
 	virtual void render(RenderContext& context, int x, int y, int width, int height, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 	/// <summary>
-	/// Sets the delay of the texture.
+	/// Sets the <see cref="AnimatedTexture::delay">delay</see> of the AnimatedTexture.
 	/// </summary>
 	/// <param name="d"></param>
 	void setDelay(int d);

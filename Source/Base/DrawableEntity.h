@@ -64,7 +64,7 @@ public:
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0) const;
 
 	/// <summary>
-	/// Absolute rendering of the drawable entity (useful to draw it somewhere else outside of a Map)
+	/// Absolute rendering of the DrawableEntity (useful to draw it somewhere else outside of a Map)
 	/// </summary>
 	/// <param name="renderer"></param>
 	/// <param name="xx"></param>

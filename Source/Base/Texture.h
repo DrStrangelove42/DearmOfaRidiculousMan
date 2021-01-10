@@ -9,34 +9,37 @@
 
 using namespace std;
 
-/*
-A class encapsulating a texture that can be rendered.
-*/
+/// <summary>
+/// A Texture is what gives the appearance to anything present in the Window.
+/// </summary>
 class Texture
 {
 protected:
 	/// <summary>
-	/// The texture under the hood
+	/// The texture under the hood, courtesy of the SDL library.
 	/// </summary>
 	SDL_Texture* texture;
 
 	/// <summary>
-	/// Width
+	/// Width of the AnimatedTexture.
 	/// </summary>
 	int w;
+	
 	/// <summary>
-	/// Height
+	/// Height of the AnimatedTexture.
 	/// </summary>
 	int h;
+	
 	/// <summary>
-	/// Low level helper function to open bitmap files.
+	/// Low level helper function to open bitmap files, we ignore the errors when we are looking for the last <see cref="AnimatedTexture::frames>frame</see> of an AnimatedTexture.
 	/// </summary>
 	/// <param name="context"></param>
 	/// <param name="id"></param>
 	/// <param name="w"></param>
 	/// <param name="h"></param>
+	/// <param name="ignoreErrors"></param>
 	/// <returns></returns>
-	SDL_Texture* internalLoadTexture(RenderContext& context, string id, int& w, int& h);
+	SDL_Texture* internalLoadTexture(RenderContext& context, string id, int& w, int& h, bool ignoreErrors = false);
 
 	/// <summary>
 	/// To avoid code duplication, this subfunction is called from render in the base class Texture but can
@@ -63,7 +66,7 @@ protected:
 
 	/// <summary>
 	/// To avoid code duplication, this subfunction is called from render in the base class Texture but can
-	/// also be called from derived classes.
+	/// also be called from derived classes. Also, it doesn't change the size of the Texture.
 	/// </summary>
 	/// <param name="texture"></param>
 	/// <param name="context"></param>
@@ -91,7 +94,7 @@ protected:
 
 public:
 	/// <summary>
-	/// Encapsulates an existing native texture
+	/// Encapsulates an existing native Texture.
 	/// </summary>
 	/// <param name="texture"></param>
 	/// <param name="w"></param>
@@ -99,26 +102,31 @@ public:
 	Texture(SDL_Texture* texture, int w, int h);
 
 	/// <summary>
-	/// Creates a new texture
+	/// Creates a new Texture.
 	/// </summary>
 	/// <param name="context"></param>
 	/// <param name="id"></param>
 	Texture(RenderContext& context, string id);
 
-
+	/// <summary>
+	/// Destructor.
+	/// </summary>
 	virtual ~Texture();
 
-	/*//Set color modulation
+	/*
+	For if we wish to use colours to modify textures (for example so that corresponding keys and doors are the same colour)
+	//Set color modulation
 	void setColor(Uint8 red, Uint8 green, Uint8 blue);
-
+	
 	//Set blending
 	void setBlendMode(SDL_BlendMode blending);
-
+	
 	//Set alpha modulation
-	void setAlpha(Uint8 alpha);*/
+	void setAlpha(Uint8 alpha);
+	*/
 
 	/// <summary>
-	/// Renders texture at given point, without scaling
+	/// Renders Texture at any given point, without scaling.
 	/// </summary>
 	/// <param name="context"></param>
 	/// <param name="x"></param>
@@ -129,7 +137,7 @@ public:
 	virtual void renderUnscaled(RenderContext& context, int x, int y, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 	/// <summary>
-	/// Renders texture at given point
+	/// Renders Texture at any given point.
 	/// </summary>
 	/// <param name="context"></param>
 	/// <param name="x"></param>
@@ -142,13 +150,13 @@ public:
 	virtual void render(RenderContext& context, int x, int y, int width, int height, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 	/// <summary>
-	/// Gets the width of this Texture.
+	/// Gets the <see cref="Texture::w">width</see> of this Texture.
 	/// </summary>
 	/// <returns></returns>
 	int getWidth();
 
 	/// <summary>
-	/// Gets the height of this Texture.
+	/// Gets the <see cref="Texture::h">height</see> of this Texture.
 	/// </summary>
 	/// <returns></returns>
 	int getHeight();

@@ -37,7 +37,7 @@ enum MOUSE_BUTTON
 };
 
 /// <summary>
-/// 
+/// MOUSE_DATA encapsulates the data received from the mouse.
 /// </summary>
 typedef struct
 {

@@ -8,7 +8,7 @@ AnimatedTexture::AnimatedTexture(RenderContext& context, string id, int delay) :
 	do
 	{
 		/*The last will determine the texture's size, hopefully they are all the same*/
-		cur = internalLoadTexture(context, id + to_string(num++), w, h);
+		cur = internalLoadTexture(context, id + to_string(num++), w, h, true);
 		if (cur != NULL)
 			frames.push_back(cur);
 		
