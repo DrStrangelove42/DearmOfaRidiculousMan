@@ -198,7 +198,7 @@ public:
 	/// </summary>
 	/// <param name="item"></param>
 	/// <returns></returns>
-	bool hasObject(Object obj);
+	bool hasObject(Object* obj);
 
 	/// <summary>
 	/// Encodes the player's inventory.

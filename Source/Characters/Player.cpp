@@ -315,9 +315,9 @@ bool Player::hasObject(string objId)
 	return false;
 }
 
-bool Player::hasObject(Object obj)
+bool Player::hasObject(Object* obj)
 {
-	auto search = inventory.find(&obj);
+	auto search = inventory.find(obj);
 	return (search != inventory.end() && search->second > 0);
 }
 
