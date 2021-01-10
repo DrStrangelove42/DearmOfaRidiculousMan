@@ -31,7 +31,6 @@
     <ClCompile Include="..\Source\Base\Window.cpp" />
     <ClCompile Include="..\Source\Blocks\Block.cpp" />
     <ClCompile Include="..\Source\Blocks\FloorBlock.cpp" />
-    <ClCompile Include="..\Source\Blocks\StoneWallBlock.cpp" />
     <ClCompile Include="..\Source\Blocks\WallBlock.cpp" />
     <ClCompile Include="..\Source\Characters\Butler.cpp" />
     <ClCompile Include="..\Source\Characters\IntelligentMonster.cpp" />
@@ -80,7 +79,6 @@
     <ClInclude Include="..\Source\Base\Window.h" />
     <ClInclude Include="..\Source\Blocks\Block.h" />
     <ClInclude Include="..\Source\Blocks\FloorBlock.h" />
-    <ClInclude Include="..\Source\Blocks\StoneWallBlock.h" />
     <ClInclude Include="..\Source\Blocks\WallBlock.h" />
     <ClInclude Include="..\Source\Characters\Butler.h" />
     <ClInclude Include="..\Source\Characters\IntelligentMonster.h" />

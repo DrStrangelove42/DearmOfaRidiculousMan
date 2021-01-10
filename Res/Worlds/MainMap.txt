@@ -1,4 +1,4 @@
-1
+2
 ##
 4
 #
@@ -50,7 +50,9 @@ b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b   !1
 !2 0 0 2 2 X FinalMap
 !3 0 3 -1 19
 !4 0 3 -1 -1
+!5 1 0 18 5
 b1 HELP
+b2 ToTheCaveSign
 B1 BUTLERNAME BUTLERSPEECH
 #
  !3 !3 !3 !3 !3 !3 !3 !3 !3 !3 !3 !3             !3 !3 !3 !3 !3 !3 !3 !3
@@ -61,11 +63,11 @@ B1 BUTLERNAME BUTLERSPEECH
  !1g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  t  t  b  
  !1g  g  g  g  g  g  g  g  g  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  s  
  !1g  g  g  g  g  g  t  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
- !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  s  s  w  w  w  f  f  f  f  s  
- !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  s     H  H!4f  f  f  f  f  s  
- !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  s     H  H!4f  f  f  f  f  s  
- !1g  g  g  g  g  g  t  g  g  w  f  f  f  f  f  s  s  w  w  w  f  f  f  f  s  
- !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
+ !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  s  s  w  w  w  f  f  f  fb2s  
+ !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  s     H  H!4f  f  f  f  f  s   
+ !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  s     H  H!4f  f  f  w  V  s  
+ !1g  g  g  g  g  g  t  g  g  w  f  f  f  f  f  s  s  w  w  w  f  f  w  V  s  
+ !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  w  .!5s  
  !1g  g  g  g  g  g  g  g  g  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  s  
  !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
  !1g  g  g  g  g  g  g  g  g  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s  
@@ -154,4 +156,41 @@ s  s  s  s  s  s  s  s  s  s  s  s  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g 
                                                                   s  *  *  s  s  s  w  w                   
                                                                   s  *  *  *  H  H  .  .   !3              
                                                                   s  *  *  *  H  H  .  .   !3              
-                                                                  s  s  s  s  s  s  w  w                   
+                                                                  s  s  s  s  s  s  w  w                     
+##
+2
+#
+20 16
+25 0
+!1 1 1 -1 -1
+#
+s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s    
+s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s   
+s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s   
+s  f  f  f  s  f  f  s  f  f  s  f  f  s  f  f  s  f  f  s   
+s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s   
+s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s   
+s  f  f  f  s  f  f  s  f  f  s  f  f  s  f  f  s  f  f  s   
+s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s   
+s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s   
+s  f  f  f  s  f  f  s  f  f  s  f  f  s  f  f  s  f  f  s   
+s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s   
+s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s   
+s  f  f  f  s  f  f  s  f  f  s  f  f  s  f  f  s  f  f  s   
+s  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s   
+s  s  f  f  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s    
+       !1 !1                                                
+#
+30 8
+0 13
+!1 1 0 -1 -1
+!2 0 0 7 13
+#
+                                                                                  !1 !1    
+s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  .  .  s  
+s  w  w  w  w  S  f  W  W  S  f  f  f  S  f  f  f  f  f  f  S  f  f  f  f  f  f  f  f  s   
+s  w!2W  S  S  S  f  f  S  S  f  S  f  S  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s   
+s  w!2W  S  S  S  S  f  S  f  f  f  f  f  f  f  f  S  f  f  S  f  f  f  f  f  f  f  f  s   
+s  w!2W  W  w  f  f  f  W  f  S  f  S  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s   
+s  w  w  w  w  f  f  f  W  f  S  f  S  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s   
+s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  

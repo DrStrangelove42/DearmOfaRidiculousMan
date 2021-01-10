@@ -45,9 +45,6 @@
     <ClCompile Include="..\Source\Blocks\FloorBlock.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Blocks\StoneWallBlock.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\Blocks\WallBlock.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -198,9 +195,6 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\Base\Texture.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\Blocks\StoneWallBlock.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\Characters\Monsters\Skeleton.h">
