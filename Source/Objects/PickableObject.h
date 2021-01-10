@@ -3,6 +3,9 @@
 
 #include "Object.h"
 
+/// <summary>
+/// A PickableObject is a type of Object that can be picked up by the Player when walked upon.
+/// </summary>
 class PickableObject : public Object
 {
 public:

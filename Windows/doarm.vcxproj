@@ -63,7 +63,7 @@
     <ClCompile Include="..\Source\Objects\Object.cpp" />
     <ClCompile Include="..\Source\Objects\PickableObject.cpp" />
     <ClCompile Include="..\Source\Objects\Shield.cpp" />
-    <ClCompile Include="..\Source\Objects\Signboard.cpp" />
+    <ClCompile Include="..\Source\Objects\Sign.cpp" />
     <ClCompile Include="..\Source\Objects\Sword.cpp" />
     <ClCompile Include="..\Source\Objects\Warp.cpp" />
   </ItemGroup>
@@ -112,7 +112,7 @@
     <ClInclude Include="..\Source\Objects\Object.h" />
     <ClInclude Include="..\Source\Objects\PickableObject.h" />
     <ClInclude Include="..\Source\Objects\Shield.h" />
-    <ClInclude Include="..\Source\Objects\Signboard.h" />
+    <ClInclude Include="..\Source\Objects\Sign.h" />
     <ClInclude Include="..\Source\Objects\Sword.h" />
     <ClInclude Include="..\Source\Objects\Warp.h" />
   </ItemGroup>

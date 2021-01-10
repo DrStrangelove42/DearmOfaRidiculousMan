@@ -5,6 +5,9 @@
 #include "../Base/utils.h"
 #include "../Base/game.h"
 
+/// <summary>
+/// An Object is an Entity that can be found in a Room, for the Player to interact with, in a Chest (which is an Object in and of itself), for the Player to collect, or in a Player's inventory, for the Player to use.
+/// </summary>
 class Object : public MovingEntity
 {
 protected:
@@ -83,17 +86,6 @@ public:
 	bool operator== (const Object& otherObj) const
 	{
 		return otherObj.id == id;
-	}
-};
-
-/// <summary>
-/// Map helpers
-/// </summary>
-struct ObjectHash
-{
-	size_t operator()(const Object& o) const
-	{
-		return hash<string>()(o.getId());
 	}
 };
 

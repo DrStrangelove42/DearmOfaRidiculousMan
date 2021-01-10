@@ -10,6 +10,9 @@
 
 using namespace std;
 
+/// <summary>
+/// A Button is a Label that can be clicked on by the user to perform a certain action.
+/// </summary>
 class Button : public Label
 {
 protected:

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Fichiers sources">
@@ -132,7 +132,7 @@
     <ClCompile Include="..\Source\Objects\Checkpoint.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Objects\Signboard.cpp">
+    <ClCompile Include="..\Source\Objects\Sign.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Interactions\Story.cpp">
@@ -278,7 +278,7 @@
     <ClInclude Include="..\Source\Objects\Checkpoint.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\Objects\Signboard.h">
+    <ClInclude Include="..\Source\Objects\Sign.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\Interactions\Story.h">

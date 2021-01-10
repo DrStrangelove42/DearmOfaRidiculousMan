@@ -4,7 +4,7 @@
 #include "../Monster.h"
 
 /// <summary>
-/// We create a type of monster : skeletons. These will always have the same characteristics.
+/// A Skeleton is a type of Monster. These will always have the same characteristics.
 /// </summary>
 class Skeleton : public Monster
 {

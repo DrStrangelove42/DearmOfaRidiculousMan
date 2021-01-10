@@ -4,7 +4,7 @@
 #include "../IntelligentMonster.h"
 
 /// <summary>
-/// We create a type of monster which are the same as ghosts, but are intelligent (they move towards the player).
+/// An IntelligentGhost is a type of Monster that is the same as a Ghost, except that it follows the Player.
 /// </summary>
 class IntelligentGhost : public IntelligentMonster
 {

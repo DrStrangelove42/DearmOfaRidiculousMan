@@ -10,6 +10,9 @@
 
 using namespace std;
 
+/// <summary>
+/// A Label is an Entity that displays text.
+/// </summary>
 class Label : public MovingEntity
 {
 public:

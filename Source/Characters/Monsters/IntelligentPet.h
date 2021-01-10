@@ -4,7 +4,7 @@
 #include "../IntelligentMonster.h"
 
 /// <summary>
-/// We create a type of monster : pet. These will always have the same characteristics.
+/// An IntelligentPet is a MovingEntity that follows the Player without dealing damage.
 /// </summary>
 class IntelligentPet : public IntelligentMonster
 {

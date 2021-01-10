@@ -5,11 +5,14 @@
 #include "../Maps/Map.h"
 #include <unordered_map>
 
+/// <summary>
+/// A Chest is an Object that can be used to store <see cref="Object">Object</see>s, and give them to the Player when they are close enough.
+/// </summary>
 class Chest : public Object
 {
 private:
 	/// <summary>
-	/// An array of items contained in the chest. 
+	/// An array of items contained in the chest.
 	/// </summary>
 	unordered_map<Object*, int> contents;
 public:

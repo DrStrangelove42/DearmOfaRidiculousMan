@@ -8,19 +8,30 @@
 using namespace std;
 
 /// <summary>
-/// The Menu class is an abstract class representing a generic menu view, with buttons and text.
+/// A Banner is a type of Menu that simply displays some text on the screen for a specified amount of time, useful when creating a Story (for example to display a chapter name).
 /// </summary>
 class Banner : public Menu
 { 
 protected:
+	/// <summary>
+	/// The amount of time the Banner is shown for.
+	/// </summary>
 	int delay;
+	
+	/// <summary>
+	/// The time at which the Banner is first displayed.
+	/// </summary>
 	int beginTime;
+
+	/// <summary>
+	/// 
+	/// </summary>
 	string worldName;
 	int mapIndex;
 	int roomIndex;
 public:
 	/// <summary>
-	/// 
+	/// Constructor.
 	/// </summary>
 	/// <param name="p"></param>
 	/// <param name="g"></param>

@@ -3,6 +3,9 @@
 
 #include "PickableObject.h"
 
+/// <summary>
+/// A Key is an Object that can be picked up and used to unlock one or several <see cref="Door">Door</see>s.
+/// </summary>
 class Key : public PickableObject
 {
 public: 

@@ -8,13 +8,13 @@
 #include "MovingEntity.h"
 #include "LivingEntity.h"
 #include <unordered_map>
-#include "../Objects/Signboard.h"
+#include "../Objects/Sign.h"
 
 class Room;
 class Map;
 class Object;
 /// <summary>
-/// The Player object is the representation of the person
+/// The Player is an Entity that represents the person
 /// playing the game.
 /// </summary>
 class Player : public MovingEntity, public LivingEntity
@@ -30,11 +30,6 @@ protected:
 	/// </summary>
 	int lives;
 	
-	/// <summary>
-	/// The number of heart slots of the player. When we call <code>reset()</code>, this will 
-	/// become his actual lives number.
-	/// </summary>
-	int startLives;
 	/// <summary>
 	/// How much damage the player deals when attacking.
 	/// </summary>
@@ -52,7 +47,7 @@ protected:
 	int infosX;
 	
 	/// <summary>
-	/// Vertical ffset of the infos sub window
+	/// Vertical offset of the infos sub window
 	/// </summary>
 	int infosY;
 

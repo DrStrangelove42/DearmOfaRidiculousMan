@@ -20,42 +20,46 @@
 using namespace std;
 
 /// <summary>
-/// The Menu class is an abstract class representing a generic menu view, with buttons and text.
+/// The Menu class is an abstract class representing a generic menu view, with <see cref="Button">Buttons</see> and text.
 /// </summary>
 class Menu : public Map
 {
 protected:
 	/// <summary>
-	/// 
+	/// The <see cref="Button">Buttons</see> in the Menu that the user can click on.
 	/// </summary>
 	list<Button*> buttons;
 	/// <summary>
-	/// 
+	/// The <see cref="Label">Labels</see> in the Menu that display text.
 	/// </summary>
 	list<Label*> labels;
  
 	/// <summary>
-	/// 
+	/// The current GAME.
 	/// </summary>
 	GAME* game;
 
 public:
 	/// <summary>
-	/// 
+	/// Constructor.
 	/// </summary>
 	/// <param name="p"></param>
 	/// <param name="g"></param>
-    Menu(Player& p, GAME* g);
+	Menu(Player& p, GAME* g);
 
+	/// <summary>
+	/// Destructor.
+	/// </summary>	
 	virtual ~Menu();
 	
 	/// <summary>
-	/// Event system from the keyboard
+	/// Event system when a <see cref="GAME::key">key</see> is pressed on the keyboard
 	/// </summary>
 	/// <param name="game"></param>
 	virtual void onKeyDown(GAME* game) = 0;
+	
 	/// <summary>
-	/// Rendering method, enabling the renderer to take the offset (in blocks) into account.
+	/// <see cref="RenderContext">Rendering</see> method, enabling the <see cref="RenderContext::renderer">renderer</see> to take the offset (in <see cref=Block">Blocks</see>) into account.
 	/// </summary>
 	/// <param name="renderer"></param>
 	/// <param name="offsetX"></param>
@@ -63,18 +67,20 @@ public:
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0)const;
 	
 	/// <summary>
-	/// Time management 
+	/// Time management. 
 	/// </summary>
 	/// <param name="time"></param>
 	/// <param name="game"></param>
 	virtual void tick(int time, GAME* game);
+	
 	/// <summary>
-	/// Adds a button in the menu view.
+	/// Adds a Button to the Menu.
 	/// </summary>
 	/// <param name="b"></param>
 	void addButton(Button* b);
+	
 	/// <summary>
-	/// Adds a label in the menu.
+	/// Adds a Label to the menu.
 	/// </summary>
 	/// <param name="l"></param>
 	void addLabel(Label* l);

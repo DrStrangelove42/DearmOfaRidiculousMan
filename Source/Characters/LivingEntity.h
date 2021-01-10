@@ -3,9 +3,10 @@
 
 #include "../Base/Entity.h"
 #include "../Base/config.h"
-/*
-Objects in the game that can be moved.
-*/
+
+/// <summary>
+/// A LivingEntity is an Entity that has <see cref="health">health points</see>, and carries money and experience.  
+/// </summary>
 class LivingEntity : public Entity
 {
 protected:

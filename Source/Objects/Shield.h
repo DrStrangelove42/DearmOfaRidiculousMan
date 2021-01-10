@@ -5,8 +5,9 @@
 
 using namespace std;
 
-//Identifier starts with D
-
+/// <summary>
+/// A Shield is an Object that can increase the Player's <see cref="Player::defense">defense</see> when picked up.
+/// </summary>
 class Shield : public PickableObject
 {
 public:
