@@ -52,8 +52,7 @@ EndCredits::EndCredits(Player& p, GAME* g) : Menu(p, g)
 		default:
 			break;
 		}
-		color = 0xFF | R << 8 | G << 16 | B << 24;
-		cout << R << ' ' << G << ' ' << B << endl;
+		color = 0xFF | R << 8 | G << 16 | B << 24; 
 		animationTextures[i] = r.LoadString("THANKS", color);
 	}
 	c = color = 255 | (127 + GetRandom(128)) << 8 | (127 + GetRandom(128)) << 16 | (127 + GetRandom(128)) << 24;
