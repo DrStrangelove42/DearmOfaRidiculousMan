@@ -7,12 +7,6 @@ Warp::~Warp()
 
 }
 
-Warp::Warp(int destMap, int destRoom, int destX, int destY, int posx, int posy, string identifier, RenderContext& renderer, int delay) :
-	Object(identifier, posx, posy, "empty", renderer, true), destMap(destMap), destRoom(destRoom), destX(destX), destY(destY), delay(delay), destWorld("")
-{
-
-}
-
 Warp::Warp(int destMap, int destRoom, int destX, int destY, int posx, int posy, string identifier, RenderContext& renderer, int delay, string destWorld) :
 	Object(identifier, posx, posy, "empty", renderer, true), destMap(destMap), destRoom(destRoom), destX(destX), destY(destY), delay(delay), destWorld(destWorld)
 {
