@@ -55,7 +55,10 @@ void Player::renderInventory(RenderContext& renderer, int xx, int yy) const
 	yy += tmp->getHeight();
 	tmp = renderer.LoadString(to_string(money) + " Gold", 0xDDDD00FF);
 	tmp->renderUnscaled(renderer, xx, yy);
-
+	tmp = renderer.LoadString("ATK " + to_string(attack), 0xFF9999FF);
+	tmp->renderUnscaled(renderer, xx, yy += tmp->getHeight());
+	tmp = renderer.LoadString("DEF " + to_string(defense), 0x99FF99FF);
+	tmp->renderUnscaled(renderer, xx, yy += tmp->getHeight());
 	yy += tmp->getHeight() + SZ_BLOCKSIZE;
 
 	tmp = renderer.LoadString("Collected stuff", 0xFFFFFFFF);
@@ -228,8 +231,8 @@ void Player::onKeyDown(GAME* game)
 		room.tryTeleportAt(*this, curX, curY);
 
 #ifdef DEBUG_MODE
-		if (game->keyLetter == 'F')
-			room.addMonster(new Fireball(*(game->renderer), *this, &room));
+	if (game->keyLetter == 'F')
+		room.addMonster(new Fireball(*(game->renderer), *this, &room));
 #endif
 
 	if (story != NULL)
@@ -402,12 +405,12 @@ void Player::initialise(string headerline, RenderContext& renderer)
 		Object* obj = Map::parseObject(currentObject, renderer, &uniqueId, -1, -1);
 		try
 		{
-			pickUpObject(obj,renderer, stoi(inventoryContents,&a));
-			inventoryContents.erase(0,a+1);
+			pickUpObject(obj, renderer, stoi(inventoryContents, &a));
+			inventoryContents.erase(0, a + 1);
 		}
 		catch (...)
 		{
-			pickUpObject(obj,renderer);
+			pickUpObject(obj, renderer);
 		}
 	}
 }
