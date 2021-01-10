@@ -1,4 +1,4 @@
-1
+2
 ##
 2
 #
@@ -6,23 +6,37 @@
 0 0
 !1 0 1 1 1
 !2 0 1 1 2
+!3 0 1 1 0
 #
-                           w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w        
-                  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w     
-         w  w  w  w  w  w  f  f  f  fg f  w  w  w  w  w  w  w  f  f  f  f  f  w  w  w   
-w  w  w  w  f  f  f  f  f  f  f  f  f  f  f  w  w  w  w  f  f  f  f  f  f  f  f  f  w     
-H  Hp H  H  f  f  f  f  f  fP f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f   !1  
+                           w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w      
+                  w  w  w  f  f  f  f  f  f  f  s        s  f  f  f  f  f  f  f  w     
+         w  w  w  w  f  f  f  f  f  f  f  f  f  s  s  s  s  f  f  f  f  f  f  f  f  w   
+w  w  w  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f   !3 
+H  Hp H  H  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f   !1  
 w  w  w  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f   !2  
-         w  w  w  w  w  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  w     
-                  w  w  w  w  w  w  w  w  f  f  f  f  f  f  f  f  f  f  f  f  f  w        
+         w  w  w  w  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  w     
+                  w  w  w  fP f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  w        
                            w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w      
 #
-26 4
-28 3
+26 5
+28 2
 !1 0 0 28 4
 !2 0 0 28 5
+!3 0 0 28 3
 #
    w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w
+ !3f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  w
  !1f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  w
  !2f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  w
+   w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w
+##
+1
+#
+26 5
+0 0
+#
+   w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w
+   f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  w
+   f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  w
+   f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  w
    w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w
