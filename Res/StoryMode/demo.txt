@@ -12,7 +12,7 @@ NPC 21 5 mario,Bartender2, You're cheating!
 ROOM 1
 MOB 11 1 P
 OBJ 2 2 b2 Don't hurt you pet ! It won't harm you !
-NPC 20 2 mario,Keeper, Ridiculous man another evening wondering around ? , yes,room
+NPC 20 2 mario,Keeper, Ridiculous man another evening wandering around ? , yes,room
 PART room
 BANNER yes just like every other day, 5000, StoryEntry, 1,0
 NPC 2 2 girl,girl, I lost my Mom Could you please help me ?, yes, help, no,no help
