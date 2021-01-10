@@ -319,8 +319,10 @@ string Player::inventoryToString() const
 	for (auto& entry : inventory)
 	{
 		encoding += "(";
-		encoding += entry.first->objectToString();//todo include quantity of each object. 
+		encoding += entry.first->objectToString();//todo include quantity of each object.
 		encoding += ") ";
+		encoding += to_string(entry.second);
+		encoding += " ";
 	}
 	return encoding;
 }
@@ -328,6 +330,73 @@ string Player::inventoryToString() const
 void Player::setLives(int l)
 {
 	lives = l;
+}
+
+void Player::initialise(string headerline, RenderContext& renderer)
+{
+	/* The player's initial information is composed of its initial characteristics followed by its inventory. */
+	size_t a = headerline.find('(');
+	if (a == -1)
+	{
+		a = headerline.length();
+	}
+	string characteristics = headerline.substr(0, a), inventoryContents = headerline.substr(a);
+	/*
+	The player's characteristics are, in order : health, number of lives, coins, experience, maximum health per life.
+	We need to keep in mind that they are not all necessarily present, and that some may be worth "X" in which case we need to set it to the default value.
+	*/
+	int maxChar = 5;
+	auto iss = istringstream{ characteristics };
+	string str = "";
+	vector<string> tokens;
+	while (iss >> str)
+	{
+		tokens.push_back(str);
+	}
+	int missing = maxChar - tokens.size();
+	for (int i = 0; i < missing; i++)
+	{
+		tokens.push_back("X");
+	}
+	Player otherp = Player(renderer); //We create another temporary player which will have the correct default values for each characteristic (except potentially health as it depends on another value).
+	if (tokens[0] != "X")
+		health = stoi(tokens[0]);
+	if (tokens[1] == "X")
+		lives = otherp.getLives();
+	else
+		lives = stoi(tokens[1]);
+	if (tokens[2] == "X")
+		money = otherp.getMoney();
+	else
+		money = stoi(tokens[2]);
+	if (tokens[3] == "X")
+		experience = otherp.getExperience();
+	else
+		experience = stoi(tokens[3]);
+	if (tokens[4] == "X")
+		maxHealth = otherp.getMaxHealth();
+	else
+		maxHealth = stoi(tokens[4]);
+	if (tokens[0] == "X")
+		health = maxHealth;
+	inventory.clear();
+	while (inventoryContents.length() > 0 && inventoryContents[0] == '(')
+	{
+		size_t nextpar = inventoryContents.find(')');
+		string currentObject = inventoryContents.substr(1, nextpar - 1);
+		inventoryContents.erase(0, nextpar + 2);
+		int uniqueId = 0;
+		Object* obj = Map::parseObject(currentObject, renderer, &uniqueId, -1, -1);
+		try
+		{
+			pickUpObject(obj, stoi(inventoryContents,&a));
+			inventoryContents.erase(0,a+1);
+		}
+		catch (...)
+		{
+			pickUpObject(obj);
+		}
+	}
 }
 
 void Player::setStory(Story* s)

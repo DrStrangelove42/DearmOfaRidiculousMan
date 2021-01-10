@@ -198,6 +198,8 @@ public:
 	/// <param name="l"></param>
 	void setLives(int l);
 
+	void initialise(string headerline, RenderContext& renderer);
+
 	/// <summary>
 	/// 
 	/// </summary>
