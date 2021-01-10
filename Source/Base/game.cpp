@@ -12,7 +12,7 @@ void changeMap(GAME* game, string worldname, int mapIndex, int startRoom)
 	//Saving
 	int prev_mapIndex = *(game->currentMapId);
 	string prev_world = game->worldName;
-	if (!isLoaded(game->worldName, *(game->currentMapId)))//In case of manually loaded
+	if (worldname!= "EndCredits" && !isLoaded(game->worldName, *(game->currentMapId)))//In case of manually loaded
 		loadedMaps[{game->worldName, * (game->currentMapId)}] = game->currentMap;
 
 	game->worldName = worldname;
@@ -35,7 +35,7 @@ void changeMap(GAME* game, string worldname, int mapIndex, int startRoom)
 	{
 		*(game->currentMapId) = mapIndex;
 		game->currentMap = new Map(worldname, *(game->player), *(game->renderer), game->currentMapId, startRoom);
-		if (mapIndex < 0)
+		if (worldname != "EndCredits" && mapIndex == -1)//TODO
 		{
 			//Same reasons as above
 			mapIndex = 0;

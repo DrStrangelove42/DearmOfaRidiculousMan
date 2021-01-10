@@ -98,7 +98,7 @@ s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s 
 #
 18 9
 0 0
-!a -1 0 0 0 200
+!a -1 0 0 0 200 X EndCredits
 #
 s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s
 s  f!af!af!af!af!af!af!af!af!af!af!af!af!af!af!as
