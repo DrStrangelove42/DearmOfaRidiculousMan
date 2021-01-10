@@ -1,8 +1,10 @@
 PART beginning
 BANNER who am I ? A drunk ? A gambler ? or just a simple man living a ridiculous life ... ,5000, StoryEntry, -1,0
 NPC 6 3 drunk,DrunkMan,Move Away!
-NPC 15 3 drunk,Gambler,Give back my money !
-NPC 15 4 mario,Bartender, He's cheating!
+NPC 15 3 drunk,Manager,Get your keys here !
+NPC 20 4 mario,Bartender, He's cheating!
+OBJ 21 4 c 
+NPC 21 5 mario,Bartender2, You're cheating!
 REM MOB 4 3 P
 ROOM 1
 NPC 20 2 mario,Keeper, Ridiculous man another evening wondering around ? , yes,room
