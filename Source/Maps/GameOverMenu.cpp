@@ -1,4 +1,4 @@
-#include "GameOverMenu.h"
+ï»¿#include "GameOverMenu.h"
 
 GameOverMenu::GameOverMenu(Player& p, GAME* g) : Menu(p, g)
 {
@@ -12,7 +12,7 @@ GameOverMenu::GameOverMenu(Player& p, GAME* g) : Menu(p, g)
 
 void GameOverMenu::onRetryClick(int id)
 {
-	changeMap(game, "Main menu", 0, 0);//déjà chargée
+	changeMap(game, "Main menu", 0, 0);//dï¿½jï¿½ chargï¿½e
 }
 
 void GameOverMenu::onQuitClick(int id)

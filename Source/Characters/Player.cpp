@@ -178,7 +178,7 @@ void Player::animateGameOver(int time, GAME* game)
 		destroyMap(game->worldName, *(game->currentMapId));
 		if (isLoaded("Game Over", 0))
 		{
-			
+
 			changeMap(game, "Game Over", 0);
 		}
 		else

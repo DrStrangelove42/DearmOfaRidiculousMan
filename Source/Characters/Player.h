@@ -31,6 +31,11 @@ protected:
 	int lives;
 	
 	/// <summary>
+	/// The number of heart slots of the player. When we call <code>reset()</code>, this will 
+	/// become his actual lives number.
+	/// </summary>
+	int startLives;
+	/// <summary>
 	/// How much damage the player deals when attacking.
 	/// </summary>
 	int attack;
