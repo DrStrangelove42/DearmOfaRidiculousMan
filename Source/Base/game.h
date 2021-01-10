@@ -70,7 +70,7 @@ typedef struct
 } GAME;
 
 /// <summary>
-/// 
+/// Change map function.
 /// </summary>
 /// <param name="game"></param>
 /// <param name="mapIndex">-1 : auto mode</param>
@@ -85,18 +85,26 @@ void changeMap(GAME* game, string worldname, int mapIndex = -1, int startRoom = 
 void freeMaps();
 
 /// <summary>
-/// 
+/// Returns true if the map is already loaded in the map cache.
 /// </summary>
 /// <param name="worldname"></param>
 /// <returns></returns>
 bool isLoaded(string worldname, int mapIndex);
 
 /// <summary>
-/// 
+/// Frees resources associated with the map.
 /// </summary>
 /// <param name="worldname"></param>
 /// <param name="mapIndex"></param>
 void destroyMap(string worldname, int mapIndex);
+
+/// <summary>
+/// Adds manually the map to the cache (in case of special map)
+/// </summary>
+/// <param name="worldName"></param>
+/// <param name="mapIndex"></param>
+/// <param name="map"></param>
+void addMapToCache(string worldName, int mapIndex, Map* map);
 
 struct PairHash
 {

@@ -75,6 +75,12 @@ void destroyMap(string worldname, int mapIndex)
 	}
 }
 
+void addMapToCache(string worldName, int mapIndex, Map* map)
+{
+	if (!isLoaded(worldName, mapIndex))
+		loadedMaps[{worldName, mapIndex}] = map;
+}
+
 void freeMaps()
 {
 	for (auto& entry : loadedMaps)
