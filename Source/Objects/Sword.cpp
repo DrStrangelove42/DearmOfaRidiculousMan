@@ -5,7 +5,18 @@ Sword::Sword(string identifier, int posx, int posy, RenderContext& renderer, int
 
 }
 
+Sword::Sword(string headerline, int posx, int posy, RenderContext& renderer) : Sword(EatToken(headerline), posx, posy, renderer, 10)
+{
+	try
+	{
+		attack = stoi(headerline);
+	}
+	catch (...)
+	{
+	}
+}
+
 string Sword::objectToString() const
 {
-	return "sw " + to_string(attack);
+	return id + " " + to_string(attack);
 }

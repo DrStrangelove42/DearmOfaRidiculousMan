@@ -57,7 +57,7 @@ In this section you will read about ways to install the graphics library in orde
 
 #### On Windows 
 1) Download SDL and SDL_ttf from here:\
-https://www.libsdl.org/download-2.0.php\
+https://www.libsdl.org/download-2.0.php \
 Go under *Development Libraries*\
 If you are using Visual Studio, download the two archives.\
 If you are only using MinGW, only download the *\*-mingw* one\
@@ -86,9 +86,10 @@ Go to the project root directory and type the following command in a terminal:\
 
 If you have Visual Studio installed (version 2019 tested, but the older vesions from 2015 should work),
 just open the solution or the project file located in the ```/Windows``` folder.
-1) Go to **Project > properties of doarm > Build events > Pre-build** and fill the textbox with the following command:\
-```set SDLPATH=<your SDL2-2.<version> root directory>```
-(Change the path with *SDL folder*).
+1) If not already done, add an environment variable named SDLPATH in your system (user variable): either 
+by going to windows settings, or from Windows Vista/Server 2008 you can type in CMD.EXE or
+in the Run dialog the next command : \
+```setx SDLPATH "<your SDL folder where lib and include are>"```
 
 2) Build the project (F6)
 
@@ -143,3 +144,7 @@ On UNIX-like system you can generate HTML documentation with Doxygen with the co
 
 Alternatively you can start Doxywizard and load the file located at ```Doc/Doxyfile```, then 
 run the generator.
+
+## Tests
+
+With CPPUnit

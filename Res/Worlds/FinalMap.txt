@@ -10,6 +10,7 @@
 !4 1 1 3 2
 d1 1 w n
 d2 1 w s
+p X 10 100 100 50
 #
 w  w  w  w  w  w  w  w  w  w  
 w  f  f  f  f  f  f  f  f  w
@@ -19,7 +20,7 @@ w  f  f  f  f  f  f  f  f  fd1 !3
 w  f  f  f  f  f  f  f  f  fd2 !4
 w  f  f  f  f  f  f  f  f  w
 w  f  f  f  f  f  f  f  f  w
-w  f  f  f  f  f  f  f  f  w
+w  f  f  f  f  f  f  f  fA w
 w  w  w  w  f  f  w  w  w  w
              !1 !2
 #
@@ -49,7 +50,7 @@ d2 2 w s
 
 !3 2 0 7 4
 
-c1 (sw)
+c1 (A 20)
 #
    s  s  s  s  s  s  s  s  s  s  
    s  f  f  f  f  f  f  f  f  s
@@ -83,7 +84,7 @@ c1 (sw)
 !1 1 1 2 2
 !2 1 1 2 3
 
-c2 (sh)
+c2 (D)
 #
 s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  
 s  fC f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  fc2s

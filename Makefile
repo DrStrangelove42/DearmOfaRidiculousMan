@@ -19,7 +19,7 @@ DEPS := $(OBJ:.o=.d)
 
 PREFIX = /usr/local
 
-all: CXXFLAGS += -g
+all: CXXFLAGS += -g -DDEBUG_MODE
 all: doarm
 
 doarm: $(OBJ)
@@ -32,17 +32,18 @@ clean:
 	rm -f $(OBJ)
 	rm -f doarm
 	cd Test && make clean
-	
+
 doc: clean
 	doxygen Doc/Doxyfile
 
 test:
 	cd ./Test && make
 
+release: clean
 release: doarm
 
 install:
-	mkdir ~/.doarm
+	mkdir -p ~/.doarm
 	cp -r Res/ ~/.doarm/
 	install -m 755 doarm $(DESTDIR)$(PREFIX)/bin
 

@@ -5,7 +5,7 @@
 
 using namespace std;
 
-//Identifier starts with sh
+//Identifier starts with D
 
 class Shield : public PickableObject
 {
@@ -18,10 +18,19 @@ public:
 	/// <param name="posy"></param>
 	/// <param name="renderer"></param>
 	/// <param name="defense"></param>
-	Shield(string identifier, int posx, int posy, RenderContext& renderer, int defense = 10);
+	Shield(string identifier, int posx, int posy, RenderContext& renderer, int defense);
 
 	/// <summary>
-	/// We encode a shield with sh followed by the defense parameter.
+	/// Constructor used to deduce the members from a string when creating maps.
+	/// </summary>
+	/// <param name="identifier"></param>
+	/// <param name="posx"></param>
+	/// <param name="posy"></param>
+	/// <param name="renderer"></param>
+	Shield(string headerline, int posx, int posy, RenderContext& renderer);
+
+	/// <summary>
+	/// We encode a shield with the identifier followed by the defense parameter.
 	/// </summary>
 	string objectToString() const;
 };

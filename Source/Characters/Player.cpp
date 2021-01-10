@@ -11,12 +11,12 @@
 Player::Player(RenderContext& renderer, int lives, int attack, int defense, int startHealth, int startMoney, int startExp) :
 	LivingEntity(startHealth, startMoney, startExp, defense), MovingEntity(0, 0, renderer, "player"),
 	lives(lives), attack(attack), infosX(SZ_MAINWIDTH), infosY(0),
-	attackDelay(500), lastAttackTime(0), story(NULL)
+	attackDelay(500), lastAttackTime(0), story(NULL), hasSword(false), hasShield(false)
 {
 	heart = renderer.LoadTexture("heart");
 }
 
-void Player::render(RenderContext& renderer, int offsetX, int offsetY)const
+void Player::render(RenderContext& renderer, int offsetX, int offsetY) const
 {
 	int xx = (x + offsetX) * SZ_BLOCKSIZE;
 	int yy = (y + offsetY) * SZ_BLOCKSIZE;
@@ -31,7 +31,7 @@ bool Player::isAlive() const
 	return lives > 0 || LivingEntity::isAlive();
 }
 
-void Player::renderInventory(RenderContext& renderer, int xx, int yy)const
+void Player::renderInventory(RenderContext& renderer, int xx, int yy) const
 {
 	/*Infos*/
 	xx = infosX;
@@ -66,7 +66,7 @@ void Player::renderInventory(RenderContext& renderer, int xx, int yy)const
 	/*The inventory*/
 	for (auto& entry : inventory)
 	{
-		entry.first.sideRender(renderer, xx, yy);
+		entry.first->sideRender(renderer, xx, yy);
 		xx += SZ_BLOCKSIZE;
 		if (xx >= infosX + SZ_INFOSWIDTH)
 		{
@@ -90,12 +90,6 @@ void Player::kill()
 		lives--;
 		health = maxHealth;
 	}
-}
-
-void Player::reset(int lives)
-{
-	health = maxHealth;
-	this->lives = lives;
 }
 
 Player::~Player()
@@ -184,7 +178,7 @@ void Player::animateGameOver(int time, GAME* game)
 		destroyMap(game->worldName, *(game->currentMapId));
 		if (isLoaded("Game Over", 0))
 		{
-			
+
 			changeMap(game, "Game Over", 0);
 		}
 		else
@@ -233,9 +227,10 @@ void Player::onKeyDown(GAME* game)
 	if (curX != x || curY != y)
 		room.tryTeleportAt(*this, curX, curY);
 
-	if (DEBUG_MODE)
+#ifdef DEBUG_MODE
 		if (game->keyLetter == 'F')
 			room.addMonster(new Fireball(*(game->renderer), *this, &room));
+#endif
 
 	if (story != NULL)
 	{
@@ -285,37 +280,136 @@ int Player::getLives()
 	return lives;
 }
 
-void Player::pickUpObject(const Object* obj, int count)
+void Player::pickUpObject(const Object* obj, RenderContext& r, int count)
 {
-	if (inventory.find(*obj) == inventory.end())
+	if (inventory.find(obj) == inventory.end())
 	{
-		inventory[*obj] = 0;
+		inventory[obj] = 0;
 		attack = max(obj->getAttack(), attack);
 		defense = max(obj->getDefense(), defense);
 	}
 
-	inventory[*obj] += count;
+	inventory[obj] += count;
+
+	if (!hasSword && obj->getId()[0] == 'A')
+	{
+		texture += "sword";
+		hasSword = true;
+	}
+
+	if (!hasShield && obj->getId()[0] == 'D')
+	{
+		texture += "shield";
+		hasShield = true;
+	}
+	updateTexture(r);
 }
 
 bool Player::hasObject(string objId)
 {
 	for (auto& entry : inventory)
 	{
-		if (entry.first.getId() == objId && entry.second > 0)
+		if (entry.first->getId() == objId && entry.second > 0)
 			return true;
 	}
 	return false;
 }
 
-bool Player::hasObject(Object obj)
+bool Player::hasObject(Object* obj)
 {
 	auto search = inventory.find(obj);
 	return (search != inventory.end() && search->second > 0);
 }
 
+string Player::inventoryToString() const
+{
+	string encoding = "";
+	for (auto& entry : inventory)
+	{
+		encoding += "(";
+		encoding += entry.first->objectToString();//todo include quantity of each object.
+		encoding += ") ";
+		encoding += to_string(entry.second);
+		encoding += " ";
+	}
+	return encoding;
+}
+
 void Player::setLives(int l)
 {
 	lives = l;
+}
+
+void Player::initialise(string headerline, RenderContext& renderer)
+{
+	/* The player's initial information is composed of its initial characteristics followed by its inventory. */
+	size_t a = headerline.find('(');
+	if (a == -1)
+	{
+		a = headerline.length();
+	}
+	string characteristics = headerline.substr(0, a), inventoryContents = headerline.substr(a);
+	/*
+	The player's characteristics are, in order : health, number of lives, coins, experience, maximum health per life.
+	We need to keep in mind that they are not all necessarily present, and that some may be worth "X" in which case we need to set it to the default value.
+	*/
+	int maxChar = 5;
+	auto iss = istringstream{ characteristics };
+	string str = "";
+	vector<string> tokens;
+	while (iss >> str)
+	{
+		tokens.push_back(str);
+	}
+	int missing = maxChar - tokens.size();
+	for (int i = 0; i < missing; i++)
+	{
+		tokens.push_back("X");
+	}
+	Player otherp = Player(renderer); //We create another temporary player which will have the correct default values for each characteristic (except potentially health as it depends on another value).
+	if (tokens[0] != "X")
+		health = stoi(tokens[0]);
+	if (tokens[1] == "X")
+		lives = otherp.getLives();
+	else
+		lives = stoi(tokens[1]);
+	if (tokens[2] == "X")
+		money = otherp.getMoney();
+	else
+		money = stoi(tokens[2]);
+	if (tokens[3] == "X")
+		experience = otherp.getExperience();
+	else
+		experience = stoi(tokens[3]);
+	if (tokens[4] == "X")
+		maxHealth = otherp.getMaxHealth();
+	else
+		maxHealth = stoi(tokens[4]);
+	if (tokens[0] == "X")
+		health = maxHealth;
+
+	//We clear the inventory and reset the texture, then add the objects one by one.
+	inventory.clear();
+	hasShield = false;
+	hasSword = false;
+	texture = "player";
+	while (inventoryContents.length() > 0 && inventoryContents[0] == '(')
+	{
+		size_t nextpar = inventoryContents.find(')');
+		string currentObject = inventoryContents.substr(1, nextpar - 1);
+		inventoryContents.erase(0, nextpar + 2);
+		int uniqueId = 0;
+		Object* obj = Map::parseObject(currentObject, renderer, &uniqueId, -1, -1);
+		try
+		{
+			pickUpObject(obj,renderer, stoi(inventoryContents,&a));
+			inventoryContents.erase(0,a+1);
+		}
+		catch (...)
+		{
+			pickUpObject(obj,renderer);
+		}
+	}
 }
 
 void Player::setStory(Story* s)

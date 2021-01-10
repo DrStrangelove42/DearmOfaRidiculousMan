@@ -23,41 +23,27 @@ Chest::Chest(string headerline, int* uniqueId, int posx, int posy, RenderContext
 		size_t nextpar = headerline.find(')');
 		string currentObject = headerline.substr(1, nextpar - 1);
 		headerline.erase(0, nextpar + 2);
-		if (currentObject.substr(0, 2) == "sw")
+		Object* obj = Map::parseObject(currentObject, renderer, uniqueId, -1,-1);
+		try
 		{
-			currentObject.erase(0, 3);
-			try
-			{
-				int attack = stoi(currentObject);
-				addObject(Sword("sw" + to_string(*(uniqueId)++), -1, -1, renderer, attack));
-			}
-			catch (...)
-			{
-				addObject(Sword("sw" + to_string(*(uniqueId)++), -1, -1, renderer));
-			}
+			size_t a;
+			int count = stoi(headerline, &a);
+			headerline.erase(0,a+1);
+			addObject(obj,count);
 		}
-		else if (currentObject.substr(0, 2) == "sh")
+		catch (...)
 		{
-			currentObject.erase(0, 3);
-			try
-			{
-				int defense = stoi(currentObject);
-				addObject(Shield("sh" + to_string(*(uniqueId)++), -1, -1, renderer, defense));
-			}
-			catch (...)
-			{
-				addObject(Shield("sh" + to_string(*(uniqueId)++), -1, -1, renderer));
-			}
+			addObject(obj);
 		}
 	}
 }
 
-unordered_map<Object, int, ObjectHash>& Chest::getContents()
+unordered_map<Object*, int>& Chest::getContents()
 {
 	return contents;
 }
 
-void Chest::addObject(Object obj, int count)
+void Chest::addObject(Object* obj, int count)
 {
 	if (contents.find(obj) == contents.end())
 		contents[obj] = count;
@@ -76,21 +62,7 @@ bool Chest::updateObject(GAME* game)
 	updateTexture(renderer);
 	for (auto& entry : contents)
 	{
-		game->player->pickUpObject(&(entry.first), entry.second);
-		//The following part might need to be changed if the player skins become more complex, 
-		//but its purpose is to change the skin of the player if a shield or sword is found in a chest
-
-		string objid = entry.first.getId();
-		string& refTexture = game->player->getTextureID();
-		if ((refTexture == "player" || refTexture == "playershield") && objid.length() >= 2 && objid.substr(0, 2) == "sw")
-		{
-			refTexture += "sword";
-		}
-		if ((refTexture == "player" || refTexture == "playersword") && objid.length() >= 2 && objid.substr(0, 2) == "sh")
-		{
-			refTexture += "shield";
-		}
-		game->player->updateTexture(renderer);
+		game->player->pickUpObject(entry.first, *(game->renderer), entry.second);
 	}
 
 	return false;
@@ -104,7 +76,7 @@ string Chest::objectToString() const
 		for (auto& entry : contents)
 		{
 			encoding += " (";
-			encoding += entry.first.objectToString();
+			encoding += entry.first->objectToString();
 			encoding += ")";
 		}
 	}

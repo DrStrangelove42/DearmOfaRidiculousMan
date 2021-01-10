@@ -150,8 +150,7 @@ void Story::fromFile(string path, GAME* game)
 			}
 			else
 			{
-				if (DEBUG_MODE)
-					cout << "Story parse error : unknown action type " << type << endl;
+				cout << "Story parse error : unknown action type " << type << endl;
 			}
 		}
 	}

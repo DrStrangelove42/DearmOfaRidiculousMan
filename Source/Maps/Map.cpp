@@ -63,8 +63,9 @@ Map::Map(string worldName, Player& p, RenderContext& renderer, int* startMap, in
 			worldFromFile(worldName);
 	}
 	mapFromFiles(worldName, p, renderer, startMap, startRoom);
-	if (DEBUG_MODE)
-		titleTexture = renderer.LoadString("CURRENT MAP : " + worldName);
+#ifdef DEBUG_MODE
+	titleTexture = renderer.LoadString("CURRENT MAP : " + worldName);
+#endif
 }
 
 void Map::render(RenderContext& renderer, int offsetX, int offsetY) const
@@ -87,11 +88,13 @@ void Map::render(RenderContext& renderer, int offsetX, int offsetY) const
 		rooms[i]->render(renderer, offX, offY);
 	}
 
-	if (DEBUG_MODE && titleTexture != NULL)
+#ifdef DEBUG_MODE
+	if (titleTexture != NULL)
 	{
 		titleTexture->renderUnscaled(renderer, 0, 0);
 		renderer.LoadString("Room : " + to_string(currentRoom), 0x00FFffff)->renderUnscaled(renderer, 0, 16);
 	}
+#endif
 }
 
 void Map::tick(int time, GAME* game)
@@ -337,7 +340,6 @@ void Map::mapFromFiles(string worldName, Player& p, RenderContext& renderer, int
 	ifstream start(filename + "Start" + EXT);
 	string line;
 	size_t a;
-	int startX, startY;
 
 	/*
 	If startMap contains the value -1, this means that this is the initial warp,
@@ -355,67 +357,16 @@ void Map::mapFromFiles(string worldName, Player& p, RenderContext& renderer, int
 		line.erase(0, a);
 		startRoom = stoi(line, &a);
 		line.erase(0, a);
-		startX = stoi(line, &a);
+		startx = stoi(line, &a);
 		line.erase(0, a);
-		startY = stoi(line);
+		starty = stoi(line);
+		player.teleport(startx, starty);
 
 		if (!getline(start, line))
 		{
 			line = "";
 		}
-
-		/* The player's initial information is composed of its initial characteristics followed by its inventory. */
-		a = line.find('(');
-		if (a == -1)
-		{
-			a = line.length();
-		}
-		string characteristics = line.substr(0, a), inventory = line.substr(a);
-		//TODO put all this in player.h
-		/*
-		The player's characteristics are, in order : health, number of lives, coins, experience, maximum health per life.
-		We need to keep in mind that they are not all necessarily present, and that some may be worth "X" in which case we need to set it to the default value.
-		*/
-		int maxChar = 5;
-		auto iss = istringstream{ characteristics };
-		string str = "";
-		vector<string> tokens;
-		while (iss >> str)
-		{
-			tokens.push_back(str);
-		}
-		int missing = maxChar - tokens.size();
-		for (int i = 0; i < missing; i++)
-		{
-			tokens.push_back("X");
-		}
-		p.reset(3); //TODO We reinitialise the player, the default values are therefore correct (except potentially health as it depends on another value).
-		player.teleport(startX, startY);
-		startx = startX; starty = startY;
-		if (tokens[0] != "X")
-		{
-			p.setHealth(stoi(tokens[0]));
-		}
-		if (tokens[1] != "X")
-		{
-			p.setLives(stoi(tokens[1]));
-		}
-		if (tokens[2] != "X")
-		{
-			p.setMoney(stoi(tokens[2]));
-		}
-		if (tokens[3] != "X")
-		{
-			p.setExperience(stoi(tokens[3]));
-		}
-		if (tokens[4] != "X")
-		{
-			p.setMaxHealth(stoi(tokens[4]));
-			if (tokens[0] == "X")
-			{
-				p.setHealth(stoi(tokens[4]));
-			}
-		}
+		p.initialise(line, renderer);
 
 		//TODO : inventory. The objects generated and given to the player will be encoded in the same way as ones in chests, we need to find a way to unify both and to make it easier to extend a chest's possibilities (xp, money, life). Some virtual function used here and in chest?
 
@@ -475,7 +426,7 @@ void Map::intlGetDataFromFile(string filename, ifstream& data, RenderContext& re
 void Map::parseObjectOrMonster(string& line, string& filename, RenderContext& renderer, int* uniqueId, int x, int y, Player& p, int room)
 {
 	string monsters = "GgSsFP"; //add all Monster types
-	string objects = "!kdcBbC"; //add all object types
+	string objects = "!kdcBbCAD"; //add all object types
 	if (monsters.find_first_of(line[0]) != monsters.npos)
 	{
 		rooms[room]->addMonster(parseMonster(line, renderer, x, y, p, rooms[room]));
@@ -520,8 +471,19 @@ Object* Map::parseObject(string& line, RenderContext& renderer, int* uniqueId, i
 	{
 		return new Checkpoint(line, x, y, renderer);
 	}
+	case 'A':
+	{
+		return new Sword(line, x, y, renderer);
+	}
+	case 'D':
+	{
+		return new Shield(line, x, y, renderer);
+	}
 	default:
+	{
+		cout << "Case " << line[0] << " not treated " << endl;
 		return NULL;
+	}
 	}
 }
 
@@ -725,8 +687,8 @@ void Map::saveProgress(string saveName, string originalWorldName, int mapNumber,
 	SaveData.close();
 	ofstream PlayerData(SAVES_LOCATION + saveName + "/" + saveName + "Start" + EXT);
 	PlayerData << mapNumber << " " << roomNumber << " " << p.getX() << " " << p.getY() << endl;
-	PlayerData << p.getHealth() << " " << p.getLives() << " " << p.getMoney() << " " << p.getExperience() << " " << p.getMaxHealth();
-	//TODO : Add inventory, probably objectToString() for each element in the inventory, between parentheses. Also add initial attack and defense of player without objects (default being 5 and 0 respectively)
+	PlayerData << p.getHealth() << " " << p.getLives() << " " << p.getMoney() << " " << p.getExperience() << " " << p.getMaxHealth() << " " << p.inventoryToString();
+	//TODO : Add initial attack and defense of player without objects (default being 5 and 0 respectively)
 	PlayerData.close();
 }
 

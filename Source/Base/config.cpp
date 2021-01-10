@@ -1,7 +1,5 @@
 #include "config.h"
 
-bool DEBUG_MODE = true;
-
 /*Size constants*/
 int SZ_BLOCKSIZE = 20;
 int SZ_INFOSWIDTH = 300;
@@ -25,8 +23,15 @@ int VIEW_OFFSET_Y = 0;
 /// </summary>
 string EXT = ".txt";
 
-
-string DATA_LOCATION = DEBUG_MODE ? "./" : "~/.doarm/";
+#ifdef DEBUG_MODE
+string DATA_LOCATION = "./";
+#else
+#ifdef WIN
+string DATA_LOCATION = string(getenv("APPDATA")) + "/Doarm/";
+#else
+string DATA_LOCATION = string(getenv("HOME") == NULL ? getpwuid(getuid())->pw_dir : getenv("HOME")) + "/.doarm/";
+#endif
+#endif
 
 string WORLDFILES_LOCATION = DATA_LOCATION + "Res/Worlds/";
 

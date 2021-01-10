@@ -103,6 +103,11 @@ Each room is described as follows:
    - 'b' : a signboard, the header should contain 'b', followed by the
 	   identifier, a space, and the sign's text content. Again, this doesn't
 	   contain spaces and corresponds to a text in Res/Text.
+   - 'A' : a sword (Attack), the header may contain 'A' followed by the
+	   identifier, a space, and the attack characteristic.
+   - 'D' : a shield (Defense), the header may contain 'D' followed by the
+	   identifier, a space, and the defense characteristic.
+
 The format can be summarised as follows:
 
 *Contents of NameOfWorld.txt (or other extension)*

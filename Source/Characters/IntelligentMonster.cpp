@@ -137,11 +137,11 @@ void IntelligentMonster::optimalPath(int*& path, bool** trav)
 	}
 	for (int i = 0; i < width; i++)
 	{
-		delete pred[i];
-		delete discovered[i];
+		delete[] pred[i];
+		delete[] discovered[i];
 	}
-	delete pred;
-	delete discovered;
+	delete[] pred;
+	delete[] discovered;
 }
 
 void IntelligentMonster::tick(int time, GAME* game)
@@ -182,9 +182,9 @@ void IntelligentMonster::tick(int time, GAME* game)
 			pathStep = 0;
 			for (int i = 0; i < width; i++)
 			{
-				delete trav[i];
+				delete[] trav[i];
 			}
-			delete trav;
+			delete[] trav;
 		}
 		if (pathStep < pathLength)
 		{

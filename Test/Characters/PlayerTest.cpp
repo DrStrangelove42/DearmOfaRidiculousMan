@@ -24,6 +24,37 @@ void PlayerTest::killTest()
 	CPPUNIT_ASSERT(!p.isAlive());
 }
 
+void PlayerTest::experienceTest()
+{
+	Player p(*r);
+	p.gainCoins(500);
+	CPPUNIT_ASSERT(p.getMoney() == 500);
+	p.gainCoins(-50);
+	CPPUNIT_ASSERT(p.getMoney() == 450);
+}
+
+void PlayerTest::coinTest()
+{
+	Player p(*r);
+	p.gainExperience(60);
+	CPPUNIT_ASSERT(p.getExperience() == 60);
+	p.gainExperience(456);
+	CPPUNIT_ASSERT(p.getExperience() == 60 + 456);
+}
+
+void PlayerTest::inventoryTest()
+{
+	Player p(*r);
+	Object* o = new Object("iden", 0, 0, "Dummy", *r, false);
+	CPPUNIT_ASSERT(!p.hasObject("iden"));
+	CPPUNIT_ASSERT(!p.hasObject(o));
+	p.pickUpObject(o,*r);
+	CPPUNIT_ASSERT(p.hasObject("iden"));
+	CPPUNIT_ASSERT(p.hasObject(o));
+
+	delete o;
+}
+
 void PlayerTest::setUp()
 {
 	m = new MockWindow();

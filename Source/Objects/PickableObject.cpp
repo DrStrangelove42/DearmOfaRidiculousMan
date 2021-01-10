@@ -8,7 +8,7 @@ PickableObject::~PickableObject()
 }
 
 PickableObject::PickableObject(string identifier, int posx, int posy, string tx, RenderContext& renderer, bool trav, int attack, int defense):
-	Object(identifier, posx, posy, tx, renderer, trav, attack,defense)
+	Object(identifier, posx, posy, tx, renderer, trav, attack, defense)
 {
 }
 
@@ -20,7 +20,7 @@ bool PickableObject::updateObject(GAME* game)
 	}
 
 	RenderContext& renderer = *(game->renderer);
-	game->player->pickUpObject(this);
+	game->player->pickUpObject(this, renderer);
 	/*Delete the pointer from the room*/
 	return true;
 }

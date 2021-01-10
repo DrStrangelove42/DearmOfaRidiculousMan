@@ -9,6 +9,9 @@
 class PlayerTest : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE(PlayerTest);
 	CPPUNIT_TEST(damageTest	);
+	CPPUNIT_TEST(coinTest);
+	CPPUNIT_TEST(experienceTest);
+	CPPUNIT_TEST(inventoryTest);
 	CPPUNIT_TEST(killTest);
 	CPPUNIT_TEST_SUITE_END();
 protected:
@@ -17,6 +20,9 @@ protected:
 public:
 	void damageTest();
 	void killTest();
+	void experienceTest();
+	void coinTest();
+	void inventoryTest();
 	void setUp();
 	void tearDown(); 
 };

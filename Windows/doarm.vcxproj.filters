@@ -54,9 +54,6 @@
     <ClCompile Include="..\Source\Characters\LivingEntity.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Characters\Minions.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\Characters\Monster.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -225,9 +222,6 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\Characters\Monster.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\Characters\Minions.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\Maps\Map.h">

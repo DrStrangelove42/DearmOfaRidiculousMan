@@ -10,6 +10,7 @@ in case WIN6 only is defined.
 #ifndef CONFIG_H
 #define CONFIG_H
 
+
 /*
 Preprocessor definitions for MS Windows only
 */
@@ -17,11 +18,14 @@ Preprocessor definitions for MS Windows only
 #define WIN 
 #endif
 
+#ifndef WIN
+#include <unistd.h>
+#include <sys/types.h>
+#include <pwd.h>
+#endif
 #include <string>
 
 using namespace std;
-
-extern bool DEBUG_MODE;
 
 /*Size constants*/
 extern int SZ_BLOCKSIZE;	/* The size of a block, in pixels */
@@ -92,4 +96,8 @@ extern string LANGFILES_EXT;
 /// Current language identifier in the game.
 /// </summary>
 extern string LANGUAGE;
+
+
 #endif
+
+
