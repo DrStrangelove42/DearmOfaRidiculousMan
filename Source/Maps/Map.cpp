@@ -28,7 +28,7 @@ Map::Map(string worldName, Player& p, RenderContext& renderer, int* startMap, in
 
 	if (stat((WORLDDATA_LOCATION).c_str(), &dataLocation) != 0)
 	{
-		string d = "./Data/";
+		string d = DATA_LOCATION +  "Data/";
 		if (mkdir(d.c_str(), 0777) != 0)
 		{
 			cout << "MKDIR DATA failed" << endl;
