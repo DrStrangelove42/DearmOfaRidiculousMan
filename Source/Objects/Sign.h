@@ -1,11 +1,13 @@
-#ifndef SIGNBOARD_H
-#define SIGNBOARD_H
+#ifndef SIGN_H
+#define SIGN_H
 
 #include "Object.h"
 #include "../Base/config.h"
  
-
-class Signboard : public Object
+/// <summary>
+/// A Sign is an Object that displays text to the Player when they are nearby.
+/// </summary>
+class Sign : public Object
 {
 protected:
 	string text;
@@ -15,10 +17,10 @@ protected:
 	void setTexture(RenderContext& renderer);
 public:
 	/*Destructor*/
-	virtual ~Signboard();
+	virtual ~Sign();
 
 	/// <summary>
-	/// Initialises a new Signboard with the specified informations.
+	/// Initialises a new Sign with the specified information.
 	/// </summary>
 	/// <param name="identifier"></param>
 	/// <param name="posx"></param>
@@ -28,17 +30,16 @@ public:
 	/// <param name="trav"></param>
 	/// <param name="attack"></param>
 	/// <param name="defense"></param>
-	Signboard(string identifier, int posx, int posy, RenderContext& renderer, string content);
+	Sign(string identifier, int posx, int posy, RenderContext& renderer, string content);
 
 	/// <summary>
-	/// Initialises a new Signboard from the header line in a map file.
+	/// Initialises a new Sign from the header line in a map file.
 	/// </summary>
 	/// <param name="headerline"></param>
 	/// <param name="posx"></param>
 	/// <param name="posy"></param>
 	/// <param name="renderer"></param>
-	Signboard(string headerline, int posx, int posy, RenderContext& renderer);
-
+	Sign(string headerline, int posx, int posy, RenderContext& renderer);
 
 	/// <summary>
 	/// Interaction with the game.

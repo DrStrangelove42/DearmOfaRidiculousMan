@@ -100,7 +100,7 @@ Each room is described as follows:
 	   identifier, a space, the butler's name, a space, and the butler's
 	   speech. The name and the speech mustn't contain spaces, and
    	   correspond to text found in Res/Text.
-   - 'b' : a signboard, the header should contain 'b', followed by the
+   - 'b' : a sign, the header should contain 'b', followed by the
 	   identifier, a space, and the sign's text content. Again, this doesn't
 	   contain spaces and corresponds to a text in Res/Text.
    - 'A' : a sword (Attack), the header may contain 'A' followed by the

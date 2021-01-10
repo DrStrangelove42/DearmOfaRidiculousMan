@@ -4,7 +4,7 @@
 #include "../IntelligentMonster.h"
 
 /// <summary>
-/// We create a type of monster : skeletons. These will always have the same characteristics.
+/// An IntelligentSkeleton is a type of Monster that is the same as a GhostSkeleton, except that it follows the Player.
 /// </summary>
 class IntelligentSkeleton : public IntelligentMonster
 {

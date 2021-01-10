@@ -4,6 +4,9 @@
 #include "Object.h"
 #include <sstream>
 
+/// <summary>
+/// A Door is an Object that can block access to other parts of the Map, or can simply be decorative. They can be opened by the Player if they have the correct Key.
+/// </summary>
 class Door : public Object
 {
 private:

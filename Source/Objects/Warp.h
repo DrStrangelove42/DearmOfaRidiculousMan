@@ -10,6 +10,9 @@ using namespace std;
 class Map;
 class MainMenu;
 
+/// <summary>
+/// A Warp is an Object that teleports the Player to a Block, that may be situated in a different Room, Map, or even World.
+/// </summary>
 class Warp : public Object
 {
 protected:

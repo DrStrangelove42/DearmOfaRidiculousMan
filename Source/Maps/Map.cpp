@@ -465,7 +465,7 @@ Object* Map::parseObject(string& line, RenderContext& renderer, int* uniqueId, i
 	}
 	case 'b':
 	{
-		return new Signboard(line, x, y, renderer);
+		return new Sign(line, x, y, renderer);
 	}
 	case 'C':
 	{

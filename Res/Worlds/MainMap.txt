@@ -53,7 +53,7 @@ b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b   !1
 b1 HELP
 B1 BUTLERNAME BUTLERSPEECH
 #
- !3 !3 !3 !3 !3 !3 !3 !3 !3 !3 !3 !3             !3 !3 !3 !3 !3 !3 !3 !3 !3 !3
+ !3 !3 !3 !3 !3 !3 !3 !3 !3 !3 !3 !3             !3 !3 !3 !3 !3 !3 !3 !3
  !1b  b  b  b  b  b  b  b  b  b  b  s  s  s  s  b  b  b  b  b  b  b  b  b  b  
  !1g  g  g  g  g  g  g  g  g  g  g  b  b  b  b  b  g  g  g  g  g  g  g  g  b  
  !1g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  b  

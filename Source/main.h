@@ -25,7 +25,7 @@ using namespace std;
 /// <summary>
 /// Go to the main rendering loop of the game
 /// </summary>
-/// <param name="game">The game structure given by <code>initGame</code></param>
+/// <param name="game">The game structure given by initGame</param>
 /// <returns></returns>
 int playDoarm(GAME* game);
 

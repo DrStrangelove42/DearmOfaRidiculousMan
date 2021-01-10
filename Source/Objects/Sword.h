@@ -5,8 +5,9 @@
 
 using namespace std;
 
-// The id of a sword starts with A. //
-
+/// <summary>
+/// A Sword is an Object that can increase the Player's <see cref="Player::attack">attack</see> when picked up.
+/// </summary>
 class Sword : public PickableObject
 {
 public: 

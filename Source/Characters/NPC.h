@@ -9,8 +9,8 @@
 class Map;
 
 /// <summary>
-/// Non-player character, who can talk to the player and offer him choices
-/// in the story.
+/// An NPC is a MovingEntity that is a Non-Player Character, who can talk to the Player and offer him choices
+/// in the Story. An NPC is considered as an Object due to its lack of movement, attacking, and health.
 /// </summary>
 class NPC : public Object
 {

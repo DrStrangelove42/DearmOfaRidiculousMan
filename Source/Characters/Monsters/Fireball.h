@@ -5,7 +5,7 @@
 #include "../../Base/AnimatedTexture.h"
 
 /// <summary>
-/// A fireball. These will always have the same characteristics.
+/// A Fireball is a type of Monster that follows the Player. These will always have the same characteristics.
 /// </summary>
 class Fireball : public IntelligentMonster
 {

@@ -17,7 +17,7 @@ using namespace std;
 class Room;
 
 /// <summary>
-/// 
+/// A Monster is an Entity that can be found in a Room, in which it can move, and it can also deal <see cref="Monster::damage">damage</see> to the Player.
 /// </summary>
 class Monster : public MovingEntity, public LivingEntity
 {
@@ -167,7 +167,7 @@ public:
 	string monsterToString() const;
 
 	/// <summary>
-	/// Adds the necessary information to <code>warpInfo</code> when the player warps, for intelligent monsters to follow the player.
+	/// Adds the necessary information to warpInfo when the player warps, for intelligent monsters to follow the player.
 	/// </summary>
 	/// <param name="x"></param>
 	/// <param name="y"></param>
@@ -178,7 +178,7 @@ public:
 	virtual void sendMonsterToWarp(int x, int y, int destRoom, int destX, int destY, bool playerJustLeft);
 
 	/// <summary>
-	/// Empties the queue <code>warpInfo</code> for intelligent monsters.
+	/// Empties the queue warpInfo for intelligent monsters.
 	/// </summary>
 	virtual void cleanMonsterWarpInfo();
 };

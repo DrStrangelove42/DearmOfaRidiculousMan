@@ -13,6 +13,9 @@ using namespace std;
 
 class Room; class Map;
 
+/// <summary>
+/// An IntelligentMonster is a type of Monster that will follow the Player around the Map once they are in the same Room.
+/// </summary>
 class IntelligentMonster : public Monster
 {
 protected:
@@ -30,6 +33,9 @@ protected:
 	/// <param name="pred"></param>	
 	void reconstructPath(int*& path, int** pred);
 
+	/// <summary>
+	/// The type of comparison between the arrays of length 3 used in the computation of the <see cref="IntelligentMonster::optimalPath">optimal path</see>.
+	/// </summary>
 	struct queueCompare
 	{
 		bool operator()(const int* args1, const int* args2)
@@ -46,12 +52,12 @@ protected:
 	bool diagMovement;
 
 	/// <summary>
-	/// The x coordinate of the current destination of the monster, updtaed to <code>newDestX</code> every moveDelay number of ticks. This helps us compute the optimal path only when the destination has changed since the last move.
+	/// The x coordinate of the current destination of the monster, updtaed to newDestX every moveDelay number of ticks. This helps us compute the optimal path only when the destination has changed since the last move.
 	/// </summary>
 	int destX;
 
 	/// <summary>
-	/// The y coordinate of the current destination of the monster, updtaed to <code>newDestY</code> every moveDelay number of ticks. This helps us compute the optimal path only when the destination has changed since the last move.
+	/// The y coordinate of the current destination of the monster, updtaed to newDestY every moveDelay number of ticks. This helps us compute the optimal path only when the destination has changed since the last move.
 	/// </summary>
 	int destY;
 
@@ -104,7 +110,7 @@ public:
 	virtual void tick(int time, GAME* game);
 
 	/// <summary>
-	/// Adds the necessary information to <code>warpInfo</code> when the player warps, taking into account whether or not the player just left the room the monster is in.
+	/// Adds the necessary information to warpInfo when the player warps, taking into account whether or not the player just left the room the monster is in.
 	/// </summary>
 	/// <param name="x"></param>
 	/// <param name="y"></param>
@@ -115,7 +121,7 @@ public:
 	void sendMonsterToWarp(int x, int y, int destRoom, int destX, int destY, bool playerJustLeft);
 
 	/// <summary>
-	/// Empties the queue <code>warpInfo</code>, this is for when the player and the monster are in the same room.
+	/// Empties the queue warpInfo, this is for when the player and the monster are in the same room.
 	/// </summary>
 	void cleanMonsterWarpInfo();
 };

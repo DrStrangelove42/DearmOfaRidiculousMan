@@ -5,6 +5,9 @@
 
 class Map;
 
+/// <summary>
+/// A Checkpoint is an Object that can save the Player's progress in a world when stepped on.
+/// </summary>
 class Checkpoint : public Object
 {
 public:

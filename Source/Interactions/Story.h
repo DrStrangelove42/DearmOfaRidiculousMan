@@ -24,7 +24,7 @@ class Story
 	public:
 		bool done;
 		/// <summary>
-		/// If the step must block the story, once it's done (wait for a call to <code>continueStory()</code>)
+		/// If the step must block the story, once it's done (wait for a call to continueStory())
 		/// </summary>
 		bool wait;
 		/// <summary>

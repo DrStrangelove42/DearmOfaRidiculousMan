@@ -4,7 +4,7 @@
 #include "../Base/DrawableEntity.h"
 
 /// <summary>
-/// Objects in the game that can be moved.
+/// A MovingEntity is an Entity that can be moved.
 /// </summary>
 class MovingEntity : public DrawableEntity
 {

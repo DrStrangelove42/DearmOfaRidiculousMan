@@ -4,7 +4,7 @@
 #include "NPC.h"
 
 /// <summary>
-/// A butler who welcomes the player in the main map.
+/// A Butler is an NPC who welcomes the Player in the main Map.
 /// </summary>
 class Butler : public NPC
 {
