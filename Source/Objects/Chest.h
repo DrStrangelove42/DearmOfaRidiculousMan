@@ -2,8 +2,7 @@
 #define CHEST_H
 
 #include "Object.h"
-#include "../Objects/Sword.h"
-#include "../Objects/Shield.h"
+#include "../Maps/Map.h"
 #include <unordered_map>
 
 class Chest : public Object
