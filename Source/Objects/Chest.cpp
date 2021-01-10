@@ -62,7 +62,7 @@ bool Chest::updateObject(GAME* game)
 	updateTexture(renderer);
 	for (auto& entry : contents)
 	{
-		game->player->pickUpObject(entry.first, entry.second);
+		game->player->pickUpObject(entry.first, *(game->renderer), entry.second);
 	}
 
 	return false;

@@ -478,8 +478,9 @@ Object* Map::parseObject(string& line, RenderContext& renderer, int* uniqueId, i
 	}
 	default:
 	{
-		cout << "Case " << line[0] << " not treated yet in " << filename << endl;
+		cout << "Case " << line[0] << " not treated " << endl;
 		return NULL;
+	}
 	}
 }
 

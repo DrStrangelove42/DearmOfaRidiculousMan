@@ -179,7 +179,7 @@ public:
 	/// </summary>
 	/// <param name="item"></param>
 	/// <param name="count"></param>
-	void pickUpObject(const  Object* obj, int count = 1);
+	void pickUpObject(const  Object* obj,RenderContext& r, int count = 1);
 
 	/// <summary>
 	/// Tells us whether the player has a particular item or not.

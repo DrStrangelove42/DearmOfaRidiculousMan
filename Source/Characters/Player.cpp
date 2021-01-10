@@ -280,7 +280,7 @@ int Player::getLives()
 	return lives;
 }
 
-void Player::pickUpObject(const Object* obj, int count)
+void Player::pickUpObject(const Object* obj, RenderContext& r, int count)
 {
 	if (inventory.find(obj) == inventory.end())
 	{
@@ -296,7 +296,8 @@ void Player::pickUpObject(const Object* obj, int count)
 
 	if (!hasShield && obj->getId()[0] == 'D')
 		texture+="shield";
-	updateTexture(renderer);
+
+	updateTexture(r);
 }
 
 bool Player::hasObject(string objId)
@@ -396,12 +397,12 @@ void Player::initialise(string headerline, RenderContext& renderer)
 		Object* obj = Map::parseObject(currentObject, renderer, &uniqueId, -1, -1);
 		try
 		{
-			pickUpObject(obj, stoi(inventoryContents,&a));
+			pickUpObject(obj,renderer, stoi(inventoryContents,&a));
 			inventoryContents.erase(0,a+1);
 		}
 		catch (...)
 		{
-			pickUpObject(obj);
+			pickUpObject(obj,renderer);
 		}
 	}
 }
