@@ -292,11 +292,16 @@ void Player::pickUpObject(const Object* obj, RenderContext& r, int count)
 	inventory[obj] += count;
 
 	if (!hasSword && obj->getId()[0] == 'A')
-		texture+="sword";
+	{
+		texture += "sword";
+		hasSword = true;
+	}
 
 	if (!hasShield && obj->getId()[0] == 'D')
-		texture+="shield";
-
+	{
+		texture += "shield";
+		hasShield = true;
+	}
 	updateTexture(r);
 }
 
