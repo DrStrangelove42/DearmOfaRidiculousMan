@@ -57,7 +57,7 @@ In this section you will read about ways to install the graphics library in orde
 
 #### On Windows 
 1) Download SDL and SDL_ttf from here:\
-https://www.libsdl.org/download-2.0.php\
+https://www.libsdl.org/download-2.0.php \
 Go under *Development Libraries*\
 If you are using Visual Studio, download the two archives.\
 If you are only using MinGW, only download the *\*-mingw* one\
