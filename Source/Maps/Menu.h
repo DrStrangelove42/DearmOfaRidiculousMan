@@ -53,13 +53,13 @@ public:
 	virtual ~Menu();
 	
 	/// <summary>
-	/// Event system when a <see cref="GAME::key">key</see> is pressed on the keyboard
+	/// Event system when a <see cref="GAME::key">key</see> is pressed on the keyboard.
 	/// </summary>
 	/// <param name="game"></param>
 	virtual void onKeyDown(GAME* game) = 0;
 	
 	/// <summary>
-	/// <see cref="RenderContext">Rendering</see> method, enabling the <see cref="RenderContext::renderer">renderer</see> to take the offset (in <see cref=Block">Blocks</see>) into account.
+	/// <see cref="RenderContext">Rendering</see> method, enabling the <see cref="RenderContext::renderer">renderer</see> to take the offset (in <see cref="Block">Blocks</see>) into account.
 	/// </summary>
 	/// <param name="renderer"></param>
 	/// <param name="offsetX"></param>

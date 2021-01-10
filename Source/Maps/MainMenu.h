@@ -21,56 +21,62 @@
 
 using namespace std;
 
-/*
-A map represents a set of rooms displayed one at a time (or one centered
-in the view and the others black or greyed).
-The initial room is always the first room in the (non empty) array 'rooms'.
-*/
+/// <summary>
+/// The MainMenu is a type of Menu used to greet the user when they start the game.
+/// </summary>
 class MainMenu : public Menu
 {
 protected:
 	 
 	/// <summary>
-	/// 
+	/// The current Label of the animation in MainMenu.
 	/// </summary>
 	Label* animation;
+	
 	/// <summary>
-	/// 
+	/// The <see cref="Texture">Textures</see> used in the animation.
 	/// </summary>
 	Texture** animationTextures;
  
 public:
 	/// <summary>
-	/// 
+	/// Constructor.
 	/// </summary>
 	/// <param name="p"></param>
 	/// <param name="g"></param>
 	MainMenu(Player& p, GAME* g);
-	virtual ~MainMenu();
+
 	/// <summary>
-	/// Called when the user clicks on the Play button.
+	/// Destructor.
+	/// </summary>
+	virtual ~MainMenu();
+	
+	/// <summary>
+	/// Called when the user clicks on the Play Button.
 	/// </summary>
 	/// <param name="id"></param>
 	void onPlayClick(int id);
 
 	/// <summary>
-	/// Called when the user clicks on the Story Mode button.
+	/// Called when the user clicks on the Story Mode Button.
 	/// </summary>
 	/// <param name="id"></param>
 	void onStoryModeClick(int id);
 
 	/// <summary>
-	/// Called when the user clicks on the quit button.
+	/// Called when the user clicks on the Quit Button.
 	/// </summary>
 	/// <param name="id"></param>
 	void onQuitClick(int id);
+	
 	/// <summary>
-	/// Event system from keyboard
+	/// Event system when a <see cref="GAME::key">key</see> is pressed on the keyboard.
 	/// </summary>
 	/// <param name="game"></param>
 	virtual void onKeyDown(GAME* game);
+	
 	/// <summary>
-	/// Rendering method, enabling the renderer to take the offset (in blocks) into account.
+	/// <see cref="RenderContext">Rendering</see> method, enabling the <see cref="RenderContext::renderer">renderer</see> to take the offset (in <see cref="Block">Blocks</see>) into account.
 	/// </summary>
 	/// <param name="renderer"></param>
 	/// <param name="offsetX"></param>

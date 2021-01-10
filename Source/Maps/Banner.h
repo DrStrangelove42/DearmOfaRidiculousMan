@@ -24,10 +24,18 @@ protected:
 	int beginTime;
 
 	/// <summary>
-	/// 
+	/// Name of the World to display after the Banner has been been displayed for the correct amount of time (<see cref="Banner::delay">delay</see>).
 	/// </summary>
 	string worldName;
+	
+	/// <summary>
+	/// <see cref="GAME::currentMapId">Index</see> of the Map in the Worldto display after the Banner has been been displayed for the correct amount of time (<see cref="Banner::delay">delay</see>).
+	/// </summary>
 	int mapIndex;
+	
+	/// <summary>
+	/// <see cref="Map::currentRoom">Index</see> of the Room in the Map to display after the Banner has been been displayed for the correct amount of time (<see cref="Banner::delay">delay</see>).
+	/// </summary>
 	int roomIndex;
 public:
 	/// <summary>
@@ -37,18 +45,24 @@ public:
 	/// <param name="g"></param>
 	Banner(Player& p, GAME* g, const  string text, const  int delay, const string worldName, const  int mapIndex, const  int roomIndex);
 
+	/// <summary>
+	/// Sets <see cref="Banner::beginTime">beginTime</see> to the current time.
+	/// </summary>
 	void reset();
 
+	/// <summary>
+	/// Destructor.
+	/// </summary>
 	virtual ~Banner();
 	
 	/// <summary>
-	/// Event system from the keyboard
+	/// Event system when a <see cref="GAME::key">key</see> is pressed on the keyboard.
 	/// </summary>
 	/// <param name="game"></param>
 	virtual void onKeyDown(GAME* game);
  
 	/// <summary>
-	/// Time management 
+	/// Time management.
 	/// </summary>
 	/// <param name="time"></param>
 	/// <param name="game"></param>

@@ -12,7 +12,7 @@ GameOverMenu::GameOverMenu(Player& p, GAME* g) : Menu(p, g)
 
 void GameOverMenu::onRetryClick(int id)
 {
-	changeMap(game, "Main menu", 0, 0);//d�j� charg�e
+	changeMap(game, "Main menu", 0, 0);//Already loaded.
 }
 
 void GameOverMenu::onQuitClick(int id)

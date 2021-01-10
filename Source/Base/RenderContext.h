@@ -19,7 +19,7 @@ using namespace std;
 class Texture;
 
 /// <summary>
-/// A class encapsulating a rendering context, that is an object used as an interface
+/// A class encapsulating a rendering context, that is used as an interface
 /// with the graphics library to render the game.
 /// </summary>
 class RenderContext
@@ -30,23 +30,35 @@ protected:
 	/// </summary>
 	SDL_Renderer* renderer;
 
-	static TTF_Font* FONT;
 	/// <summary>
-	/// The hashmap where textures are stored.
-	/// Textures beginning with 'text/' are reserved for text rendering.
+	/// The font used.
+	/// </summary>
+	static TTF_Font* FONT;
+	
+	/// <summary>
+	/// The hashmap where <see cref="Texture">Textures</see> are stored.
+	/// <see cref="Texture">Textures</see> beginning with 'text/' are reserved for text rendering.
 	/// </summary>
 	static unordered_map<string, Texture*> textures;
 public:
+	/// <summary>
+	/// The size of the font used.
+	/// </summary>
 	static int FONTSIZE;
+	
 	/// <summary>
 	/// Creates a new render context from the specified window.
 	/// </summary>
 	/// <param name="window"></param>
 	RenderContext(Window& window);
+
+	/// <summary>
+	/// Render context destructor.
+	/// </summary>
 	virtual ~RenderContext();
 
 	/// <summary>
-	/// Erases the entire canevas.
+	/// Erases the entire canvas.
 	/// </summary>
 	virtual void clear();
 
@@ -79,7 +91,7 @@ public:
 		const SDL_RendererFlip flip);
 
 	/// <summary>
-	/// 
+	/// Draws a rectangle at the specified position, and with the specified dimensions, with the possibility to fill it or not.
 	/// </summary>
 	/// <param name="x"></param>
 	/// <param name="y"></param>
@@ -88,7 +100,7 @@ public:
 	/// <param name="fill"></param>
 	virtual void drawRectangle(int x, int y, int w, int h, bool fill = false);
 	/// <summary>
-	/// 
+	/// Draws a line from one point to another.
 	/// </summary>
 	/// <param name="x1"></param>
 	/// <param name="y1"></param>
@@ -97,7 +109,7 @@ public:
 	virtual void drawLine(int x1, int y1, int x2, int y2);
 
 	/// <summary>
-	/// Sets the current color, in the format 0xRRGGBBAA 
+	/// Sets the current color, in the format 0xRRGGBBAA. 
 	/// </summary>
 	/// <param name="color"></param>
 	virtual void changeColor(int color);
@@ -110,7 +122,7 @@ public:
 	static void RenderSleep(unsigned int ms);
 
 	/// <summary>
-	/// Initialisation of the rendering module
+	/// Initialisation of the rendering module.
 	/// </summary>
 	/// <returns></returns>
 	static bool RenderInit();
@@ -122,20 +134,20 @@ public:
 	static string RenderErrorDetails();
 
 	/// <summary>
-	/// Exits rendering module
+	/// Exits rendering module.
 	/// </summary>
 	static void RenderQuit();
 
 	/// <summary>
-	/// Use this function to load a texture from a BMP file. If it succeeds,
-	/// the texture is saved in <textures> and will be loaded from memory next
-	/// time this function is called for the same texture ID.
-	/// To load an animated texture (from files id0, ..., idN), prefix id with '*'.
+	/// Use this function to load a Texture from a BMP file. If it succeeds,
+	/// the Texture is saved in <textures> and will be loaded from memory next
+	/// time this function is called for the same Texture ID.
+	/// To load an AnimatedTexture (from files id0, ..., idN), prefix id with '*'.
 	/// </summary>
 	virtual Texture* LoadTexture(string id);
 
 	/// <summary>
-	/// Builds a texture with the text inside.
+	/// Builds a Texture with the text inside.
 	/// </summary>
 	/// <param name="text"></param> 
 	/// <param name="color"></param>
@@ -143,7 +155,7 @@ public:
 	virtual Texture* LoadString(string text, int color = 0xffffffff);
 
 	/// <summary>
-	/// Loads a temporary texture used to draw ever-changing text on screen.
+	/// Loads a temporary Texture used to draw ever-changing text on screen.
 	/// This way, we do not fill the RAM with every string possible.
 	/// </summary>
 	/// <param name="text"></param> 
