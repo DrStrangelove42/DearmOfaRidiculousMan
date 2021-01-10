@@ -423,7 +423,7 @@ void Map::intlGetDataFromFile(string filename, ifstream& data, RenderContext& re
 void Map::parseObjectOrMonster(string& line, string& filename, RenderContext& renderer, int* uniqueId, int x, int y, Player& p, int room)
 {
 	string monsters = "GgSsFP"; //add all Monster types
-	string objects = "!kdcBbC"; //add all object types
+	string objects = "!kdcBbCAD"; //add all object types
 	if (monsters.find_first_of(line[0]) != monsters.npos)
 	{
 		rooms[room]->addMonster(parseMonster(line, renderer, x, y, p, rooms[room]));
@@ -467,6 +467,14 @@ Object* Map::parseObject(string& line, RenderContext& renderer, int* uniqueId, i
 	case 'C':
 	{
 		return new Checkpoint(line, x, y, renderer);
+	}
+	case 'A':
+	{
+		return new Sword(line, x, y, renderer);
+	}
+	case 'D':
+	{
+		return new Shield(line, x, y, renderer);
 	}
 	default:
 		return NULL;

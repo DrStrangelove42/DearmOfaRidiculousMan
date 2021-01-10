@@ -5,7 +5,7 @@
 
 using namespace std;
 
-// The id of a sword starts with sw. //
+// The id of a sword starts with A. //
 
 class Sword : public PickableObject
 {
@@ -19,7 +19,16 @@ public:
 	/// <param name="posy"></param>
 	/// <param name="renderer"></param>
 	/// <param name="attack"></param>
-	Sword(string identifier, int posx, int posy, RenderContext& renderer, int attack = 10);
+	Sword(string identifier, int posx, int posy, RenderContext& renderer, int attack);
+
+	/// <summary>
+	/// Constructor used to deduce the members from a string when creating maps.
+	/// </summary>
+	/// <param name="identifier"></param>
+	/// <param name="posx"></param>
+	/// <param name="posy"></param>
+	/// <param name="renderer"></param>
+	Sword(string headerline, int posx, int posy, RenderContext& renderer);
 
 	/// <summary>
 	/// We encode a sword with sw followed by the attack parameter.
