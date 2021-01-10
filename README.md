@@ -86,9 +86,10 @@ Go to the project root directory and type the following command in a terminal:\
 
 If you have Visual Studio installed (version 2019 tested, but the older vesions from 2015 should work),
 just open the solution or the project file located in the ```/Windows``` folder.
-1) Go to **Project > properties of doarm > Build events > Pre-build** and fill the textbox with the following command:\
-```set SDLPATH=<your SDL2-2.<version> root directory>```
-(Change the path with *SDL folder*).
+1) If not already done, add an environment variable named SDLPATH in your system (user variable): either 
+by going to windows settings, or from Windows Vista/Server 2008 you can type in CMD.EXE or
+in the Run dialog the next command : \
+```setx SDLPATH "<your SDL folder where lib and include are>"```
 
 2) Build the project (F6)
 

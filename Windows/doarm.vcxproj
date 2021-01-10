@@ -36,7 +36,6 @@
     <ClCompile Include="..\Source\Characters\Butler.cpp" />
     <ClCompile Include="..\Source\Characters\IntelligentMonster.cpp" />
     <ClCompile Include="..\Source\Characters\LivingEntity.cpp" />
-    <ClCompile Include="..\Source\Characters\Minions.cpp" />
     <ClCompile Include="..\Source\Characters\Monster.cpp" />
     <ClCompile Include="..\Source\Characters\Monsters\Fireball.cpp" />
     <ClCompile Include="..\Source\Characters\Monsters\Ghost.cpp" />
@@ -86,7 +85,6 @@
     <ClInclude Include="..\Source\Characters\Butler.h" />
     <ClInclude Include="..\Source\Characters\IntelligentMonster.h" />
     <ClInclude Include="..\Source\Characters\LivingEntity.h" />
-    <ClInclude Include="..\Source\Characters\Minions.h" />
     <ClInclude Include="..\Source\Characters\Monster.h" />
     <ClInclude Include="..\Source\Characters\Monsters\Fireball.h" />
     <ClInclude Include="..\Source\Characters\Monsters\Ghost.h" />
@@ -203,17 +201,22 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>%SDLPATH%\SDL2-2.0.12\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>"%SDLPATH%\lib\x86\SDL2.lib";"%SDLPATH%\lib\x86\SDL2main.lib";"%SDLPATH%\lib\x86\SDL2_ttf.lib";%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SDLPATH)\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(SDLPATH)\lib\x86\SDL2.lib;$(SDLPATH)\lib\x86\SDL2main.lib;$(SDLPATH)\lib\x86\SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>set SDLPATH=D:\Program Files\SDL2\SDL2-2.0.12</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>COPY /Y  "$(OutDir)$(TargetName)$(TargetExt)" ..\doarm.exe
 COPY /Y  "$(OutDir)SDL2.dll" ..\SDL2.dll
 COPY /Y  "$(OutDir)SDL2_ttf.dll" ..\SDL2_ttf.dll</Command>
     </PostBuildEvent>
+    <PreLinkEvent>
+      <Command>
+      </Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -231,17 +234,22 @@ COPY /Y  "$(OutDir)SDL2_ttf.dll" ..\SDL2_ttf.dll</Command>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>%SDLPATH%\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>"%SDLPATH%\lib\x86\SDL2.lib";"%SDLPATH%\lib\x86\SDL2main.lib";"%SDLPATH%\lib\x86\SDL2_ttf.lib";%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SDLPATH)\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(SDLPATH)\lib\x86\SDL2.lib;$(SDLPATH)\lib\x86\SDL2main.lib;$(SDLPATH)\lib\x86\SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>set SDLPATH=D:\Program Files\SDL2\SDL2-2.0.12</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>COPY /Y  "$(OutDir)$(TargetName)$(TargetExt)" ..\doarm.exe
 COPY /Y  "$(OutDir)SDL2.dll" ..\SDL2.dll
 COPY /Y  "$(OutDir)SDL2_ttf.dll" ..\SDL2_ttf.dll</Command>
     </PostBuildEvent>
+    <PreLinkEvent>
+      <Command>
+      </Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -255,17 +263,22 @@ COPY /Y  "$(OutDir)SDL2_ttf.dll" ..\SDL2_ttf.dll</Command>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>%SDLPATH%\lib\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>"%SDLPATH%\lib\x64\SDL2.lib";"%SDLPATH%\lib\x64\SDL2main.lib";"%SDLPATH%\lib\x64\SDL2_ttf.lib";%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SDLPATH)\lib\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(SDLPATH)\lib\x64\SDL2.lib;$(SDLPATH)\lib\x64\SDL2main.lib;$(SDLPATH)\lib\x64\SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>set SDLPATH=D:\Program Files\SDL2\SDL2-2.0.12</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>COPY /Y  "$(OutDir)$(TargetName)$(TargetExt)" ..\doarm.exe
 COPY /Y  "$(OutDir)SDL2.dll" ..\SDL2.dll
 COPY /Y  "$(OutDir)SDL2_ttf.dll" ..\SDL2_ttf.dll</Command>
     </PostBuildEvent>
+    <PreLinkEvent>
+      <Command>
+      </Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -283,17 +296,22 @@ COPY /Y  "$(OutDir)SDL2_ttf.dll" ..\SDL2_ttf.dll</Command>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>%SDLPATH%\lib\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>"%SDLPATH%\lib\x64\SDL2.lib";"%SDLPATH%\lib\x64\SDL2main.lib";"%SDLPATH%\lib\x64\SDL2_ttf.lib";%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SDLPATH)\lib\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(SDLPATH)\lib\x64\SDL2.lib;$(SDLPATH)\lib\x64\SDL2main.lib;$(SDLPATH)\lib\x64\SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>set SDLPATH=D:\Program Files\SDL2\SDL2-2.0.12</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>COPY /Y  "$(OutDir)$(TargetName)$(TargetExt)" ..\doarm.exe
 COPY /Y  "$(OutDir)SDL2.dll" ..\SDL2.dll
 COPY /Y  "$(OutDir)SDL2_ttf.dll" ..\SDL2_ttf.dll</Command>
     </PostBuildEvent>
+    <PreLinkEvent>
+      <Command>
+      </Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

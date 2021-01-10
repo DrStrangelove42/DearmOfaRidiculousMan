@@ -39,6 +39,7 @@ doc: clean
 test:
 	cd ./Test && make
 
+release: clean
 release: doarm
 
 install:
