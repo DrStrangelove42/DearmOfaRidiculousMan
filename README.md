@@ -144,3 +144,7 @@ On UNIX-like system you can generate HTML documentation with Doxygen with the co
 
 Alternatively you can start Doxywizard and load the file located at ```Doc/Doxyfile```, then 
 run the generator.
+
+## Tests
+
+With CPPUnit

@@ -26,7 +26,11 @@ string EXT = ".txt";
 #ifdef DEBUG_MODE
 string DATA_LOCATION = "./";
 #else
-string DATA_LOCATION = "~/.doarm/";
+#ifdef WIN
+string DATA_LOCATION = string(getenv("APPDATA")) + "/Doarm/";
+#else
+string DATA_LOCATION = string(getenv("HOME") == NULL ? getpwuid(getuid())->pw_dir : getenv("HOME")) + "/.doarm/";
+#endif
 #endif
 
 string WORLDFILES_LOCATION = DATA_LOCATION + "Res/Worlds/";

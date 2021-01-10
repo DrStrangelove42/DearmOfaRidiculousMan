@@ -1,5 +1,5 @@
 #include "utils.h"
-
+#include <string.h>
 using namespace std;
 
 /// <summary>
@@ -116,6 +116,7 @@ void LoadTextFromLanguage(string& langCode)
 	string fname = LANG_LOCATION + langCode + LANGFILES_EXT;
 	if (stat(fname.c_str(), &dummy) != 0)
 	{
+		 
 		cout << fname << " doesn't exist..." << endl;
 		return;
 	}
