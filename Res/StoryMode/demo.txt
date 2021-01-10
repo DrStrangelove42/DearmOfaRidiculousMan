@@ -2,14 +2,34 @@ PART beginning
 BANNER who am I ? A drunk ? A gambler ? or just a simple man living a ridiculous life ... ,5000, StoryEntry, -1,0
 NPC 6 3 drunk,DrunkMan,Move Away!
 NPC 15 3 drunk,Gambler,Give back my money !
-NPC 16 4 mario,Bartender, He's cheating!
+NPC 15 4 mario,Bartender, He's cheating!
 REM MOB 4 3 P
 ROOM 1
 NPC 20 2 mario,Keeper, Ridiculous man another evening wondering around ? , yes,room
 PART room
 BANNER yes just like every other day, 5000, StoryEntry, 1,0
-NPC 2 2 girl,girl,Fun !, yes, follow
-PART follow
+NPC 2 2 girl,girl, I lost my Mom Could you please help me ?, yes, help, no,no help
+PART no help
+NPC 2 2 girl,girl, See you next try !
+MOB 4 3 S
+MOB 3 2 s
+MOB 3 5 S
+MOB 1 3 F
+MOB 2 3 F
+MOB 6 3 F
+MOB 5 4 F
+MOB 4 2 s
+MOB 4 1 S
+MOB 5 4 s
+MOB 2 3 S
+MOB 2 1 s
+PART help
+NPC 2 2 girl,girl, Continue west ! 
+ROOM 1
+NPC 0 1 girl,girl, This way !
+ROOM 2
+NPC 20 20 girl, girl, feeling dizzy ?, Yes, sleep
+PART sleep
 BANNER Where am I ? ,5000, MainMap, -1,0
 NPC 10 10 mario,Mario,It's a me Mario ! What do you choose?,Fire,feu,Death,squeleton army, Flee , fuite, talk, talk
 PART feu
