@@ -27,7 +27,6 @@
 #include "../Blocks/Block.h"
 #include "../Blocks/WallBlock.h"
 #include "../Blocks/FloorBlock.h"
-#include "../Blocks/StoneWallBlock.h"
 #include <iostream>
 #include <functional>
 #include <fstream>
@@ -230,7 +229,7 @@ public:
 	void saveProgress(string saveName, string originalWorldName, int mapNumber, int roomNumber, Player& p);
 
 	/// <summary>
-	/// Rendering method, enabling the <see cref="RenderContext">renderer</see> to take the offset (in blocks) into account.
+	/// <see cref="RenderContext">Rendering</see> method, enabling the <see cref="RenderContext::renderer">renderer</see> to take the offset (in <see cref="Block">blocks</see>) into account.
 	/// </summary>
 	/// <param name="renderer"></param>
 	/// <param name="offsetX"></param>

@@ -6,21 +6,19 @@
 #include <iostream>
 using namespace std;
 
-/*
-Every visible object in the window is an Entity.
-*/
+/// <summary>
+/// An Entity is something that is visible and can be rendered in the Window.
+/// </summary>
 class Entity
 {
-protected:
- 
 public:
 	/// <summary>
-	/// Standard destructor.
+	/// Destructor.
 	/// </summary>
 	virtual ~Entity() { };
 	
 	/// <summary>
-	/// Rendering method, enabling the renderer to take the offset (in blocks) into account.
+	/// <see cref="RenderContext">Rendering</see> method, enabling the <see cref="RenderContext::renderer">renderer</see> to take the offset (in <see cref="Block">blocks</see>) into account.
 	/// </summary>
 	/// <param name="renderer">The rendering context on which to render elements.</param>
 	/// <param name="offsetX">X Offset, in blocks</param>
@@ -28,7 +26,7 @@ public:
 	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0) const = 0;
 
 	/// <summary>
-	/// 
+	/// Time management.
 	/// </summary>
 	/// <param name="time"></param>
 	/// <param name=""></param>

@@ -631,7 +631,7 @@ Room* Map::intlRoomFromFile(string filename, ifstream& layout, Player& p, Render
 				thisRoom->replaceBlock(new FloorBlock(j, i, renderer));
 				break;
 			case 's':
-				thisRoom->replaceBlock(new StoneWallBlock(j, i, renderer));
+				thisRoom->replaceBlock(new WallBlock(j, i, renderer, "stonewall"));
 				break;
 			default:
 				cout << "Case " << line2[j] << " not treated yet in " << filename << endl;

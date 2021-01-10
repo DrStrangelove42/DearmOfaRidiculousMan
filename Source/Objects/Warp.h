@@ -17,12 +17,12 @@ class Warp : public Object
 {
 protected:
 	/// <summary>
-	/// The map we are going to warp to. If destMap == -1, we return to the main menu map.
+	/// The Map we are going to warp to. If <see cref="Warp::destMap">destMap</see> is equal to -1, we return to the <see cref="MainMenu">main menu Map</see>.
 	/// </summary>
 	int destMap;
 	
 	/// <summary>
-	/// The room we are going to warp to.
+	/// The Room we are going to warp to.
 	/// </summary>
 	int destRoom;
 	
@@ -37,12 +37,12 @@ protected:
 	int destY;
 	
 	/// <summary>
-	/// The delay, in ticks, before the warp is active (if for example we want the player to warp back to the main menu map after a certain amount of time).
+	/// The delay, in ticks, before the Warp is active (if for example we want the Player to warp back to the <see cref="MainMenu">main menu Map</see> after a certain amount of time).
 	/// </summary>
 	int delay;
 	
 	/// <summary>
-	/// If not empty, the warp is to be done toward a different world.
+	/// If not empty, the Warp is to be done toward a different world.
 	/// </summary>
 	string destWorld;
 	
@@ -79,13 +79,13 @@ public:
 	Warp(string information, int posx, int posy,  RenderContext& renderer);
 	
 	/// <summary>
-	/// How does a warp interact with the Player?
+	/// How does a Warp interact with the Player?
 	/// </summary>
 	/// <param name="game"></param>
 	bool updateObject(GAME* game);
 
 	/// <summary>
-	/// We encode a warp with the id, the destination map, room, x and y, followed by two optional parameters, the first being the delay and the second being the destination world.
+	/// We encode a Warp with the <see cref="Warp::id">identifier</see>, the <see cref="Warp::destMap">destination Map</see>, <see cref="Warp::destRoom">destination Room</see>, <see cref="Warp::destX">destination x</see> and <see cref="Warp::destY">destination y</see>, followed by two optional parameters, the first being the <see cref="Warp::delay">delay</see> and the second being the <see cref="Warp::destWorld">destination World</see>.
 	/// </summary>
 	string objectToString() const;
 	
