@@ -32,7 +32,7 @@ clean:
 	rm -f $(OBJ)
 	rm -f doarm
 	cd Test && make clean
-	
+
 doc: clean
 	doxygen Doc/Doxyfile
 
@@ -43,7 +43,7 @@ release: clean
 release: doarm
 
 install:
-	mkdir ~/.doarm
+	mkdir -p ~/.doarm
 	cp -r Res/ ~/.doarm/
 	install -m 755 doarm $(DESTDIR)$(PREFIX)/bin
 
