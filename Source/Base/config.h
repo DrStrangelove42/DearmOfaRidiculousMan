@@ -21,8 +21,6 @@ Preprocessor definitions for MS Windows only
 
 using namespace std;
 
-extern bool DEBUG_MODE;
-
 /*Size constants*/
 extern int SZ_BLOCKSIZE;	/* The size of a block, in pixels */
 extern int SZ_MAINWIDTH;

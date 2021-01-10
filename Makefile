@@ -19,7 +19,7 @@ DEPS := $(OBJ:.o=.d)
 
 PREFIX = /usr/local
 
-all: CXXFLAGS += -g
+all: CXXFLAGS += -g -DDEBUG_MODE
 all: doarm
 
 doarm: $(OBJ)

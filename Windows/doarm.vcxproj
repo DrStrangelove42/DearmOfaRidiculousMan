@@ -195,7 +195,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalOptions>/D WIN6 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/D WIN6 /D DEBUG_MODE %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -257,7 +257,7 @@ COPY /Y  "$(OutDir)SDL2_ttf.dll" ..\SDL2_ttf.dll</Command>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalOptions>/D WIN6 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/D WIN6 /D DEBUG_MODE %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>

@@ -233,9 +233,10 @@ void Player::onKeyDown(GAME* game)
 	if (curX != x || curY != y)
 		room.tryTeleportAt(*this, curX, curY);
 
-	if (DEBUG_MODE)
+#ifdef DEBUG_MODE
 		if (game->keyLetter == 'F')
 			room.addMonster(new Fireball(*(game->renderer), *this, &room));
+#endif
 
 	if (story != NULL)
 	{
