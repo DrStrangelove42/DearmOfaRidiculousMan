@@ -33,7 +33,7 @@ clean:
 	rm -f doarm
 	cd Test && make clean
 
-doc: clean
+doc:
 	doxygen Doc/Doxyfile
 
 test:
