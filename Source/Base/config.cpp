@@ -27,7 +27,19 @@ string EXT = ".txt";
 string DATA_LOCATION = "./";
 #else
 #ifdef WIN
-string DATA_LOCATION = string(getenv("APPDATA")) + "/Doarm/";
+string _getenv()
+{
+	char* buf = nullptr;
+	size_t sz = 0;
+	string ret = "";
+	if (_dupenv_s(&buf, &sz, "APPDATA") == 0 && buf != nullptr)
+	{
+		ret = string(buf);
+		free(buf);
+	}
+	return ret;
+}
+string DATA_LOCATION = _getenv() + "/Doarm/";
 #else
 string DATA_LOCATION = string(getenv("HOME") == NULL ? getpwuid(getuid())->pw_dir : getenv("HOME")) + "/.doarm/";
 #endif
