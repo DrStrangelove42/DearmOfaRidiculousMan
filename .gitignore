@@ -5,6 +5,7 @@ doarm
 *.exe
 *.dll
 Windows/Debug
+Windows/Release
 Windows/x64
 Windows/.vs
 Data
