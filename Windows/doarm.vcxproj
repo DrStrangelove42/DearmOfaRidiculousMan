@@ -104,10 +104,8 @@
     </Link>
     <PostBuildEvent>
       <Command>COPY /Y  "$(OutDir)$(TargetName)$(TargetExt)" ..\doarm.exe
-COPY /Y "$(SDLPATH)\lib\x86\SDL2.dll" "$(OutDir)SDL2.dll"
-COPY /Y "$(SDLPATH)\lib\x86\SDL2_ttf.dll" "$(OutDir)SDL2_ttf.dll"
-COPY /Y  "$(OutDir)SDL2.dll" ..\SDL2.dll
-COPY /Y  "$(OutDir)SDL2_ttf.dll" ..\SDL2_ttf.dll</Command>
+COPY /Y "$(SDLPATH)\lib\x86\*.dll" "$(OutDir)"
+COPY /Y  "$(OutDir)*.dll" ..</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -131,10 +129,8 @@ COPY /Y  "$(OutDir)SDL2_ttf.dll" ..\SDL2_ttf.dll</Command>
     </Link>
     <PostBuildEvent>
       <Command>COPY /Y  "$(OutDir)$(TargetName)$(TargetExt)" ..\doarm.exe
-COPY /Y "$(SDLPATH)\lib\x86\SDL2.dll" "$(OutDir)SDL2.dll"
-COPY /Y "$(SDLPATH)\lib\x86\SDL2_ttf.dll" "$(OutDir)SDL2_ttf.dll"
-COPY /Y  "$(OutDir)SDL2.dll" ..\SDL2.dll
-COPY /Y  "$(OutDir)SDL2_ttf.dll" ..\SDL2_ttf.dll</Command>
+COPY /Y "$(SDLPATH)\lib\x86\*.dll" "$(OutDir)"
+COPY /Y  "$(OutDir)*.dll" ..</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -154,10 +150,8 @@ COPY /Y  "$(OutDir)SDL2_ttf.dll" ..\SDL2_ttf.dll</Command>
     </Link>
     <PostBuildEvent>
       <Command>COPY /Y  "$(OutDir)$(TargetName)$(TargetExt)" ..\doarm.exe
-COPY /Y "$(SDLPATH)\lib\x64\SDL2.dll" "$(OutDir)SDL2.dll"
-COPY /Y "$(SDLPATH)\lib\x64\SDL2_ttf.dll" "$(OutDir)SDL2_ttf.dll"
-COPY /Y  "$(OutDir)SDL2.dll" ..\SDL2.dll
-COPY /Y  "$(OutDir)SDL2_ttf.dll" ..\SDL2_ttf.dll</Command>
+COPY /Y "$(SDLPATH)\lib\x64\*.dll" "$(OutDir)"
+COPY /Y  "$(OutDir)*.dll" ..</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -181,10 +175,8 @@ COPY /Y  "$(OutDir)SDL2_ttf.dll" ..\SDL2_ttf.dll</Command>
     </Link>
     <PostBuildEvent>
       <Command>COPY /Y  "$(OutDir)$(TargetName)$(TargetExt)" ..\doarm.exe
-COPY /Y "$(SDLPATH)\lib\x64\SDL2.dll" "$(OutDir)SDL2.dll"
-COPY /Y "$(SDLPATH)\lib\x64\SDL2_ttf.dll" "$(OutDir)SDL2_ttf.dll"
-COPY /Y  "$(OutDir)SDL2.dll" ..\SDL2.dll
-COPY /Y  "$(OutDir)SDL2_ttf.dll" ..\SDL2_ttf.dll</Command>
+COPY /Y "$(SDLPATH)\lib\x64\*.dll" "$(OutDir)"
+COPY /Y  "$(OutDir)*.dll" ..</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
