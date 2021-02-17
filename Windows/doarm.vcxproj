@@ -226,7 +226,9 @@ COPY /Y  "$(OutDir)*.dll" ..</Command>
     <ClCompile Include="..\Source\Objects\Shield.cpp" />
     <ClCompile Include="..\Source\Objects\Sign.cpp" />
     <ClCompile Include="..\Source\Objects\Sword.cpp" />
+    <ClCompile Include="..\Source\Objects\VisibleWearable.cpp" />
     <ClCompile Include="..\Source\Objects\Warp.cpp" />
+    <ClCompile Include="..\Source\Objects\Wearable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\Base\AnimatedTexture.h" />
@@ -275,7 +277,9 @@ COPY /Y  "$(OutDir)*.dll" ..</Command>
     <ClInclude Include="..\Source\Objects\Shield.h" />
     <ClInclude Include="..\Source\Objects\Sign.h" />
     <ClInclude Include="..\Source\Objects\Sword.h" />
+    <ClInclude Include="..\Source\Objects\VisibleWearable.h" />
     <ClInclude Include="..\Source\Objects\Warp.h" />
+    <ClInclude Include="..\Source\Objects\Wearable.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

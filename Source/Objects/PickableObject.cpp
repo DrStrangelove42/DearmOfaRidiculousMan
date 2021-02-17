@@ -7,8 +7,8 @@ PickableObject::~PickableObject()
 
 }
 
-PickableObject::PickableObject(string identifier, int posx, int posy, string tx, RenderContext& renderer, bool trav, int attack, int defense):
-	Object(identifier, posx, posy, tx, renderer, trav, attack, defense)
+PickableObject::PickableObject(string identifier, int posx, int posy, string tx, RenderContext& renderer, bool trav):
+	Object(identifier, posx, posy, tx, renderer, trav)
 {
 }
 
@@ -24,3 +24,9 @@ bool PickableObject::updateObject(GAME* game)
 	/*Delete the pointer from the room*/
 	return true;
 }
+
+void PickableObject::onPickup(Player* p)
+{
+	/*Do nothing, but we do not want this class to be abstract*/
+}
+ 

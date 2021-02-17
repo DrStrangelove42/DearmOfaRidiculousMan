@@ -16,16 +16,6 @@ protected:
 	/// </summary>
 	string id;
 
-	/// <summary>
-	/// Attack characteristic, makes the player's attacks stronger when picked up.
-	/// </summary>
-	int attack;
-	
-	/// <summary>
-	/// Defense characteristic, makes the player's defense stronger when picked up.
-	/// </summary>
-	int defense;
-
 public:
 	virtual ~Object(); 
 	/// <summary>
@@ -39,7 +29,7 @@ public:
 	/// <param name="trav"></param>
 	/// <param name="attack"></param>
 	/// <param name="defense"></param>
-	Object(string identifier, int posx, int posy, string tx, RenderContext& renderer, bool trav, int attack = 0, int defense = 0);
+	Object(string identifier, int posx, int posy, string tx, RenderContext& renderer, bool trav);
 
 	/// <summary>
 	/// 
@@ -54,8 +44,7 @@ public:
 
 	string getId() const;
 	bool getTrav() const;
-	int getAttack() const;
-	int getDefense() const;
+
 
 	/// <summary>
 	/// Change the object position. 

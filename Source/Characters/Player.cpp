@@ -5,16 +5,41 @@
 #include "../Maps/Map.h"
 #include "../Objects/Object.h"
 #include "../Maps/GameOverMenu.h"
-
+#include "../Objects/Wearable.h"
 #include "Monsters/Fireball.h"
 
 Player::Player(RenderContext& renderer, int lives, int attack, int defense, int startHealth, int startMoney, int startExp) :
 	LivingEntity(startHealth, startMoney, startExp, defense), MovingEntity(0, 0, renderer, "player"),
 	lives(lives), attack(attack), infosX(SZ_MAINWIDTH), infosY(0),
-	attackDelay(500), lastAttackTime(0), story(NULL), hasSword(false), hasShield(false)
+	attackDelay(500), lastAttackTime(0), story(NULL)
 {
 	heart = renderer.LoadTexture("heart");
 }
+
+void Player::setTextureTag(string tag, bool enabled)
+{
+	textureTags[tag] = enabled;
+}
+
+void Player::updateTexture(RenderContext& renderer)
+{
+	resetTexture();
+	//first we cook the texture from texture tags
+	for (auto& entry : textureTags)
+	{
+		if (entry.second)
+		{
+			texture += entry.first;
+		}
+	}
+	DrawableEntity::updateTexture(renderer);
+}
+
+void Player::resetTexture()
+{
+	texture = "player";
+}
+
 
 void Player::render(RenderContext& renderer, int offsetX, int offsetY) const
 {
@@ -233,6 +258,8 @@ void Player::onKeyDown(GAME* game)
 #ifdef DEBUG_MODE
 	if (game->keyLetter == 'F')
 		room.addMonster(new Fireball(*(game->renderer), *this, &room));
+	else if (game->keyLetter == 'S')
+		room.addObject(new Sword("sw1", 5, 5, *(game->renderer), 23));
 #endif
 
 	if (story != NULL)
@@ -278,6 +305,12 @@ int Player::getAttack()
 	return attack;
 }
 
+void Player::addAttack(int toAdd)
+{
+	if (attack + toAdd >= 0)
+		attack += toAdd;
+}
+
 int Player::getLives()
 {
 	return lives;
@@ -288,25 +321,41 @@ void Player::pickUpObject(const Object* obj, RenderContext& r, int count)
 	if (inventory.find(obj) == inventory.end())
 	{
 		inventory[obj] = 0;
-		attack = max(obj->getAttack(), attack);
-		defense = max(obj->getDefense(), defense);
 	}
 
 	inventory[obj] += count;
 
-	if (!hasSword && obj->getId()[0] == 'A')
-	{
-		texture += "sword";
-		hasSword = true;
-	}
-
-	if (!hasShield && obj->getId()[0] == 'D')
-	{
-		texture += "shield";
-		hasShield = true;
-	}
-	updateTexture(r);
+	
 }
+
+void Player::wearObject(Wearable* wObj)
+{
+	wObj->equip(this);
+}
+
+bool Player::isWearingSomethingAt(string emplacement)
+{
+	return objectsInHand.find(emplacement) != objectsInHand.end();
+}
+
+void Player::addObjectToWear(string emplacement, Wearable* wObj)
+{
+	/*if something is already there, we call its remove method prior to replacing it.*/
+	if (objectsInHand.find(emplacement) != objectsInHand.end())
+		objectsInHand[emplacement]->remove(this);
+
+	objectsInHand[emplacement] = wObj;
+}
+
+void Player::deleteWornObject(string emplacement)
+{
+	if (objectsInHand.find(emplacement) != objectsInHand.end())
+	{
+		objectsInHand.erase(emplacement);
+	}
+}
+
+
 
 bool Player::hasObject(string objId)
 {
@@ -392,10 +441,9 @@ void Player::initialise(string headerline, RenderContext& renderer)
 		health = maxHealth;
 
 	//We clear the inventory and reset the texture, then add the objects one by one.
+	objectsInHand.clear();
 	inventory.clear();
-	hasShield = false;
-	hasSword = false;
-	texture = "player";
+	resetTexture();
 	while (inventoryContents.length() > 0 && inventoryContents[0] == '(')
 	{
 		size_t nextpar = inventoryContents.find(')');

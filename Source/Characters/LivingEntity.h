@@ -74,11 +74,19 @@ public:
 	/// </summary>
 	/// <param name="h"></param>
 	void setHealth(int h);
+
 	/// <summary>
 	/// Returns entity's defense value.
 	/// </summary>
 	/// <returns></returns>
 	int getDefense();
+
+	/// <summary>
+	/// Adds the specified amount to the defense value.
+	/// </summary>
+	/// <param name="toAdd"></param>
+	/// <returns></returns>
+	void addDefense(int toAdd); 
 
 	/// <summary>
 	/// Changes the entity's maxHealth to the desired amount.

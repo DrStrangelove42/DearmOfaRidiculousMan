@@ -22,6 +22,12 @@ int LivingEntity::getDefense()
 	return defense;
 }
 
+void  LivingEntity::addDefense(int toAdd)
+{
+	if (defense + toAdd >= 0)
+		defense += toAdd;
+} 
+
 bool LivingEntity::isAlive()const
 {
 	return health > 0;

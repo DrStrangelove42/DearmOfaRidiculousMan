@@ -13,6 +13,8 @@
 class Room;
 class Map;
 class Object;
+class Wearable; 
+
 /// <summary>
 /// The Player is an Entity that represents the person
 /// playing the game.
@@ -62,19 +64,20 @@ protected:
 	Texture* heart;
 
 	/// <summary>
-	/// Tells us whether or not the player has picked up a sword, used for th texture.
-	/// </summary>
-	bool hasSword;
-
-	/// <summary>
-	/// Tells us whether or not the player has picked up a shield, used for th texture.
-	/// </summary>
-	bool hasShield;	  
-
-	/// <summary>
 	/// The story object (used in story mode).
 	/// </summary>
 	Story* story;
+
+	/// <summary>
+	/// 
+	/// </summary>
+	unordered_map<string, Wearable*> objectsInHand;
+
+	/// <summary>
+	/// This one is ordered. In order to add different modifying tags to the texture, it must be
+	/// ordered (so that when you add 'toto', there is only one way it blends with e.g. 'sword' : swordtoto or shieldswordtoto but not totosword...)
+	/// </summary>
+	map<string, bool> textureTags;
 public:
 	~Player();
 	
@@ -90,10 +93,32 @@ public:
 	/// <param name="startExp"></param>
 	Player(RenderContext& renderer, int lives = 3, int attack = 5, int defense = 0, int startHealth = 100, int startMoney = 0, int startExp = 0);
 
+	 
+
 	/// <summary>
 	/// Instant kill.
 	/// </summary>
 	virtual void kill();
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="tag"></param>
+	/// <param name="enabled"></param>
+	void setTextureTag(string tag, bool enabled);
+
+	/// <summary>
+	/// Forces the object to reload the <see cref="Texture">Texture</see> corresponding to the current ID in <texture>.
+	/// Note that there is no function to change the <see cref="Texture">Texture</see> from outside of the object, because we
+	/// don't want to, for now.
+	/// </summary>
+	/// <param name="renderer"></param>
+	virtual void updateTexture(RenderContext& renderer);
+
+	/// <summary>
+	/// Sets the texture ID to the default one.
+	/// </summary>
+	virtual void resetTexture();
 
 	/// <summary>
 	/// Rendering management
@@ -169,6 +194,13 @@ public:
 	int getAttack();
 
 	/// <summary>
+	/// Adds the specified amount to the attack value.
+	/// </summary>
+	/// <param name="toAdd"></param>
+	/// <returns></returns>
+	void addAttack(int toAdd); 
+
+	/// <summary>
 	/// Returns player's number of lives.
 	/// </summary>
 	/// <returns></returns>
@@ -179,7 +211,33 @@ public:
 	/// </summary>
 	/// <param name="item"></param>
 	/// <param name="count"></param>
-	void pickUpObject(const  Object* obj,RenderContext& r, int count = 1);
+	void pickUpObject(const  Object* obj, RenderContext& r, int count = 1);
+
+	/// <summary>
+	/// Calls the equip method of the object.
+	/// </summary>
+	/// <param name="wObj"></param>
+	void wearObject(Wearable* wObj);
+
+	/// <summary>
+	/// Returns whether the emplacement is taken.
+	/// </summary>
+	/// <param name="emplacement"></param>
+	/// <returns></returns>
+	bool isWearingSomethingAt(string emplacement);
+
+	/// <summary>
+	/// Fill the emplacement (or switch) with the specified object.
+	/// </summary>
+	/// <param name="emplacement"></param>
+	/// <param name="wObj"></param>
+	void addObjectToWear(string emplacement, Wearable* wObj);
+
+	/// <summary>
+	/// Removes any object from the specified emplacement, if it is there.
+	/// </summary>
+	/// <param name="emplacement"></param>
+	void deleteWornObject(string emplacement);
 
 	/// <summary>
 	/// Tells us whether the player has a particular item or not.
