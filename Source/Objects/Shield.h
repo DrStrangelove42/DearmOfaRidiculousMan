@@ -9,7 +9,7 @@ using namespace std;
 /// <summary>
 /// A Shield is an Object that can increase the Player's <see cref="Player::defense">defense</see> when picked up.
 /// </summary>
-class Shield : public PickableObject, public VisibleWearable
+class Shield : public VisibleWearable
 {
 protected:
 	/// <summary>
@@ -48,13 +48,13 @@ public:
 	/// Called when the user chooses to wear the object. See the remove function to undo the equip action below.
 	/// </summary>
 	/// <param name="p"></param>
-	virtual void equip(Player* p);
+	virtual void equip(Player* p)const;
 
 	/// <summary>
 	/// Called when the player puts off the object.
 	/// </summary>
 	/// <param name="p"></param>
-	virtual void remove(Player* p);
+	virtual void remove(Player* p)const;
 };
 
 #endif

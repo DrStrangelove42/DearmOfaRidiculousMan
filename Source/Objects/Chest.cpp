@@ -23,7 +23,8 @@ Chest::Chest(string headerline, int* uniqueId, int posx, int posy, RenderContext
 		size_t nextpar = headerline.find(')');
 		string currentObject = headerline.substr(1, nextpar - 1);
 		headerline.erase(0, nextpar + 2);
-		Object* obj = Map::parseObject(currentObject, renderer, uniqueId, -1,-1);
+		
+		PickableObject* obj = (PickableObject*)Map::parseObject(currentObject, renderer, uniqueId, -1,-1);
 		try
 		{
 			size_t a;
@@ -38,12 +39,12 @@ Chest::Chest(string headerline, int* uniqueId, int posx, int posy, RenderContext
 	}
 }
 
-unordered_map<Object*, int>& Chest::getContents()
+unordered_map<PickableObject*, int>& Chest::getContents()
 {
 	return contents;
 }
 
-void Chest::addObject(Object* obj, int count)
+void Chest::addObject(PickableObject* obj, int count)
 {
 	if (contents.find(obj) == contents.end())
 		contents[obj] = count;

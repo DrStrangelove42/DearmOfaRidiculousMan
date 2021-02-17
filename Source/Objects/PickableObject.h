@@ -37,7 +37,7 @@ public:
 	/// <summary>
 	/// Called when the object is picked up.
 	/// </summary>
-	virtual void onPickup(Player* p);
+	virtual void onPickup(Player* p) const;
 };
 
 #endif

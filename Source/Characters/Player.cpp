@@ -3,7 +3,7 @@
 #include "../Base/Window.h"
 #include "../Maps/Room.h"
 #include "../Maps/Map.h"
-#include "../Objects/Object.h"
+#include "../Objects/PickableObject.h"
 #include "../Maps/GameOverMenu.h"
 #include "../Objects/Wearable.h"
 #include "Monsters/Fireball.h"
@@ -316,7 +316,7 @@ int Player::getLives()
 	return lives;
 }
 
-void Player::pickUpObject(const Object* obj, RenderContext& r, int count)
+void Player::pickUpObject(const PickableObject* obj, RenderContext& r, int count)
 {
 	if (inventory.find(obj) == inventory.end())
 	{
@@ -325,10 +325,10 @@ void Player::pickUpObject(const Object* obj, RenderContext& r, int count)
 
 	inventory[obj] += count;
 
-	
+	obj->onPickup(this);
 }
 
-void Player::wearObject(Wearable* wObj)
+void Player::wearObject(const Wearable* wObj)
 {
 	wObj->equip(this);
 }
@@ -338,7 +338,7 @@ bool Player::isWearingSomethingAt(string emplacement)
 	return objectsInHand.find(emplacement) != objectsInHand.end();
 }
 
-void Player::addObjectToWear(string emplacement, Wearable* wObj)
+void Player::addObjectToWear(string emplacement, const Wearable* wObj)
 {
 	/*if something is already there, we call its remove method prior to replacing it.*/
 	if (objectsInHand.find(emplacement) != objectsInHand.end())
@@ -453,12 +453,12 @@ void Player::initialise(string headerline, RenderContext& renderer)
 		Object* obj = Map::parseObject(currentObject, renderer, &uniqueId, -1, -1);
 		try
 		{
-			pickUpObject(obj, renderer, stoi(inventoryContents, &a));
+			pickUpObject((PickableObject*)obj, renderer, stoi(inventoryContents, &a));
 			inventoryContents.erase(0, a + 1);
 		}
 		catch (...)
 		{
-			pickUpObject(obj, renderer);
+			pickUpObject((PickableObject*)obj, renderer);
 		}
 	}
 }

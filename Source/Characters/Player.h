@@ -13,6 +13,7 @@
 class Room;
 class Map;
 class Object;
+class PickableObject;
 class Wearable; 
 
 /// <summary>
@@ -71,7 +72,7 @@ protected:
 	/// <summary>
 	/// 
 	/// </summary>
-	unordered_map<string, Wearable*> objectsInHand;
+	unordered_map<string, const Wearable*> objectsInHand;
 
 	/// <summary>
 	/// This one is ordered. In order to add different modifying tags to the texture, it must be
@@ -211,13 +212,13 @@ public:
 	/// </summary>
 	/// <param name="item"></param>
 	/// <param name="count"></param>
-	void pickUpObject(const  Object* obj, RenderContext& r, int count = 1);
+	void pickUpObject(const  PickableObject* obj, RenderContext& r, int count = 1);
 
 	/// <summary>
 	/// Calls the equip method of the object.
 	/// </summary>
 	/// <param name="wObj"></param>
-	void wearObject(Wearable* wObj);
+	void wearObject(const Wearable* wObj);
 
 	/// <summary>
 	/// Returns whether the emplacement is taken.
@@ -231,7 +232,7 @@ public:
 	/// </summary>
 	/// <param name="emplacement"></param>
 	/// <param name="wObj"></param>
-	void addObjectToWear(string emplacement, Wearable* wObj);
+	void addObjectToWear(string emplacement, const Wearable* wObj);
 
 	/// <summary>
 	/// Removes any object from the specified emplacement, if it is there.

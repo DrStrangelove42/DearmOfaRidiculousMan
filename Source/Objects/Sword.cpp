@@ -2,8 +2,7 @@
 #include "../Characters/Player.h"
 
 Sword::Sword(string identifier, int posx, int posy, RenderContext& renderer, int attack) :
-	PickableObject(identifier, posx, posy, "sword", renderer, true),
-	VisibleWearable(renderer, "sword"), attack(attack)
+	VisibleWearable(identifier, posx, posy, "sword", renderer), attack(attack)
 {
 
 }
@@ -30,13 +29,13 @@ string Sword::objectToString() const
 	return id + " " + to_string(attack);
 }
 
-void Sword::equip(Player* p)
+void Sword::equip(Player* p) const
 {
 	VisibleWearable::equip(p);
 	p->addAttack(attack);
 }
 
-void Sword::remove(Player* p)
+void Sword::remove(Player* p) const
 {
 	p->addAttack(-attack);
 	VisibleWearable::remove(p);

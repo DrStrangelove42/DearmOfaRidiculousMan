@@ -25,7 +25,7 @@ bool PickableObject::updateObject(GAME* game)
 	return true;
 }
 
-void PickableObject::onPickup(Player* p)
+void PickableObject::onPickup(Player* p) const
 {
 	/*Do nothing, but we do not want this class to be abstract*/
 }

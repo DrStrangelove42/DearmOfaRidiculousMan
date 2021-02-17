@@ -1,8 +1,7 @@
 #include "Shield.h"
 #include "../Characters/Player.h"
 Shield::Shield(string identifier, int posx, int posy, RenderContext& renderer, int defense) :
-	PickableObject(identifier, posx, posy, "shield", renderer, true),
-	VisibleWearable(renderer, "shield"), defense(defense)
+	VisibleWearable(identifier, posx, posy, "shield", renderer), defense(defense)
 {
 
 }
@@ -29,13 +28,13 @@ string Shield::objectToString() const
 	return id + " " + to_string(defense);
 }
 
-void Shield::equip(Player* p)
+void Shield::equip(Player* p) const
 {
 	VisibleWearable::equip(p);
 	p->addDefense(defense);
 }
 
-void Shield::remove(Player* p)
+void Shield::remove(Player* p) const
 {
 	p->addDefense(-defense);
 	VisibleWearable::remove(p);
