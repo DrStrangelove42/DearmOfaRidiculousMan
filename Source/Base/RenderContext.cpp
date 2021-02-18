@@ -5,6 +5,8 @@
 RenderContext::RenderContext(Window& window)
 {
 	renderer = window.getRenderer();
+	if (SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND) != 0)
+		cout << "Error blend mode" << endl;
 
 	if (NULL == renderer)
 	{

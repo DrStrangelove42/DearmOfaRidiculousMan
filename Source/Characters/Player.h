@@ -79,6 +79,11 @@ protected:
 	/// ordered (so that when you add 'toto', there is only one way it blends with e.g. 'sword' : swordtoto or shieldswordtoto but not totosword...)
 	/// </summary>
 	map<string, bool> textureTags;
+
+	/// <summary>
+	/// Current informations of the mouse.
+	/// </summary>
+	MOUSE_DATA currentMouseData;
 public:
 	~Player();
 	
@@ -157,6 +162,12 @@ public:
 	/// <param name="game"></param>
 	void animateGameOver(int time, GAME* game);
 
+	/// <summary>
+	/// <see cref="MOUSE_DATA">Mouse event</see>.
+	/// </summary>
+	/// <param name="md"></param>
+	virtual void onMouseEvent(MOUSE_DATA* md);
+	
 	/// <summary>
 	/// When a key is pushed on the keyboard.
 	/// </summary>

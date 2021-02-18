@@ -206,7 +206,6 @@ void Player::animateGameOver(int time, GAME* game)
 		destroyMap(game->worldName, *(game->currentMapId));
 		if (isLoaded("Game Over", 0))
 		{
-
 			changeMap(game, "Game Over", 0);
 		}
 		else
@@ -216,6 +215,11 @@ void Player::animateGameOver(int time, GAME* game)
 			game->currentMap = new GameOverMenu(*this, game);
 		}
 	}
+}
+
+void Player::onMouseEvent(MOUSE_DATA* md)
+{
+	currentMouseData = *md;
 }
 
 void Player::onKeyDown(GAME* game)

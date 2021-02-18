@@ -161,6 +161,7 @@ void Map::onMouseEvent(MOUSE_DATA* md)
 		if (deleting)
 			return;
 	}
+	player.onMouseEvent(md);
 }
 
 void Map::worldFromFile(string worldName)
