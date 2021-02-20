@@ -14,7 +14,7 @@
 #include "config.h"
 
 #include "RenderContext.h"
- 
+
 
 using namespace std;
 
@@ -46,6 +46,24 @@ typedef struct
 	MOUSE_STATE state;
 	MOUSE_BUTTON button;
 } MOUSE_DATA;
+
+typedef struct Rect_s
+{
+	int x, y, w, h;
+
+	bool operator== (const struct Rect_s& otherObj) const
+	{
+		return x == otherObj.x && y == otherObj.y;
+	}
+} Rect;
+
+struct RectHash
+{
+	size_t operator()(const Rect& o) const
+	{
+		return  o.x | o.y << sizeof(int); //homemade hash
+	}
+};
 
 /// <summary>
 /// Writes the error in the console output in a human-friendly way.
@@ -96,7 +114,7 @@ string EatToken(string& line, char sep = ' ');
 /// <param name="line"></param>
 /// <param name="sep"></param>
 /// <returns></returns>
-string EatTokenEx(string& line, char sep =' ');
+string EatTokenEx(string& line, char sep = ' ');
 
 /// <summary>
 /// Loads a string from the current language context.
@@ -110,4 +128,5 @@ string GetText(string id);
 /// </summary>
 /// <param name="langCode"></param>
 void LoadTextFromLanguage(string& langCode);
+bool RectContains(Rect* r, int x, int y);
 #endif

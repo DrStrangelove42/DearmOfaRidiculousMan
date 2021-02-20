@@ -142,17 +142,33 @@ Texture* RenderContext::LoadText(string text, int color, int backColor, int widt
 							   (unsigned char)(color >> 8),
 							   (unsigned char)(color) };
 
+		/* SDL interprets each pixel as a 32-bit number, so our masks must depend
+	   on the endianness (byte order) of the machine */
+		uint32_t rmask, gmask, bmask, amask;
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+		rmask = 0xff000000;
+		gmask = 0x00ff0000;
+		bmask = 0x0000ff00;
+		amask = 0x000000ff;
+#else
+		rmask = 0x000000ff;
+		gmask = 0x0000ff00;
+		bmask = 0x00ff0000;
+		amask = 0xff000000;
+#endif
 
 
-		SDL_Surface* textSurface = SDL_CreateRGBSurface(0, width, SZ_SCREENHEIGHT, 32, 0, 0, 0, 0);
+		SDL_Surface* textSurface = SDL_CreateRGBSurface(0, width, SZ_SCREENHEIGHT, 32, rmask, gmask, bmask, amask);
+		SDL_SetSurfaceBlendMode(textSurface, SDL_BLENDMODE_BLEND);
 
 		if (backColor != 0)
 		{
 			SDL_Color bc = { (unsigned char)(backColor >> 24),
-										   (unsigned char)(backColor >> 16),
-										   (unsigned char)(backColor >> 8),
-										   (unsigned char)(backColor) };
+										  (unsigned char)(backColor >> 16),
+										  (unsigned char)(backColor >> 8),
+										  (unsigned char)(backColor) };
 			SDL_FillRect(textSurface, NULL, SDL_MapRGBA(textSurface->format, bc.r, bc.g, bc.b, bc.a));
+		 
 		}
 
 		SDL_Rect cur = { padding,padding,width,0 };
@@ -174,11 +190,11 @@ Texture* RenderContext::LoadText(string text, int color, int backColor, int widt
 			case '\r':
 				if (!word.empty())
 				{
-					s = TTF_RenderText_Solid(FONT, word.c_str(), c);
+					s = TTF_RenderText_Blended(FONT, word.c_str(), c);
 					cur.h = s->h;
 					cur.w = s->w;
 					cur_width += cur.w;
-					
+
 					if (cur.x + cur.w + padding > width)
 					{
 						/*Line feed*/
@@ -187,19 +203,19 @@ Texture* RenderContext::LoadText(string text, int color, int backColor, int widt
 						height += cur.h;
 						seen_width = max(seen_width, cur_width);
 						cur_width = 0;
-					}
+					} 
 					SDL_BlitSurface(s, NULL, textSurface, &cur);
 					SDL_FreeSurface(s);
 					cur.x += cur.w;
 					word = "";
 				}
-				
+
 				if (text[i] == '\r' || text[i] == '\n')
 				{
 					/*Line feed*/
 					cur.x = padding;
 					cur.y += cur.h;
-					height += cur.h; 
+					height += cur.h;
 					seen_width = max(seen_width, cur_width);
 					cur_width = 0;
 				}
@@ -209,18 +225,19 @@ Texture* RenderContext::LoadText(string text, int color, int backColor, int widt
 				break;
 			}
 		}
-		seen_width = max(seen_width, cur_width)+ 2 * padding;
+		seen_width = max(seen_width, cur_width) + 2 * padding;
 		height += cur.h;
 		cur.x = cur.y = 0;
 		cur.h = height;
 		cur.w = width;
 		/*Crop*/
-		SDL_Surface* croppedTextSurface = SDL_CreateRGBSurface(0, seen_width, height, 32, 0, 0, 0, 0);
+		SDL_Surface* croppedTextSurface = SDL_CreateRGBSurface(0, min(width, seen_width), height, 32, rmask, gmask, bmask, amask);
+		SDL_SetSurfaceBlendMode(croppedTextSurface, SDL_BLENDMODE_BLEND);
 		SDL_BlitSurface(textSurface, &cur, croppedTextSurface, &cur);
 		SDL_Texture* t = this->fromSurface(croppedTextSurface);
 		SDL_FreeSurface(croppedTextSurface);
 		SDL_FreeSurface(textSurface);
-		textures[id] = new Texture(t, seen_width, height);
+		textures[id] = new Texture(t, min(width, seen_width), height);
 	}
 
 	return textures[id];
