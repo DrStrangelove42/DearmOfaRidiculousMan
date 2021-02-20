@@ -11,9 +11,10 @@
 Player::Player(RenderContext& renderer, int lives, int attack, int defense, int startHealth, int startMoney, int startExp) :
 	LivingEntity(startHealth, startMoney, startExp, defense), MovingEntity(0, 0, renderer, "player"),
 	lives(lives), attack(attack), infosX(SZ_MAINWIDTH), infosY(0),
-	attackDelay(500), lastAttackTime(0), story(NULL)
+	attackDelay(500), lastAttackTime(0), story(NULL), currentMouseData(MOUSE_DATA())
 {
 	heart = renderer.LoadTexture("heart");
+	inventoryCases = new unordered_map<Rect, const Object*, RectHash>;
 }
 
 void Player::setTextureTag(string tag, bool enabled)
@@ -91,10 +92,18 @@ void Player::renderInventory(RenderContext& renderer, int xx, int yy) const
 
 	xx = infosX;
 	yy += tmp->getHeight();
+	 
+	const Object* hoverObj = nullptr;
 	/*The inventory*/
 	for (auto& entry : inventory)
 	{
 		entry.first->sideRender(renderer, xx, yy);
+		Rect curR = { xx, yy, SZ_BLOCKSIZE, SZ_BLOCKSIZE };
+		(*inventoryCases)[curR] = entry.first;
+		if (RectContains(&curR, currentMouseData.x, currentMouseData.y))
+		{
+			hoverObj = entry.first;
+		}
 		xx += SZ_BLOCKSIZE;
 		if (xx >= infosX + SZ_INFOSWIDTH)
 		{
@@ -102,6 +111,13 @@ void Player::renderInventory(RenderContext& renderer, int xx, int yy) const
 			yy += SZ_BLOCKSIZE;
 		}
 	}
+	yy += SZ_BLOCKSIZE;
+	xx = infosX;
+
+	if (hoverObj != nullptr)
+		//Draw the info tip of the object
+		renderer.LoadText(hoverObj->getInfo(), 0x6B63FFFF, 0, SZ_INFOSWIDTH, 5)
+		->renderUnscaled(renderer, xx, yy);
 }
 
 /*
@@ -123,6 +139,7 @@ void Player::kill()
 Player::~Player()
 {
 	inventory.clear();
+	delete inventoryCases;
 }
 
 void Player::tick(int time, GAME* game)

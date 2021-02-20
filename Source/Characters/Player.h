@@ -14,7 +14,7 @@ class Room;
 class Map;
 class Object;
 class PickableObject;
-class Wearable; 
+class Wearable;
 
 /// <summary>
 /// The Player is an Entity that represents the person
@@ -32,23 +32,28 @@ protected:
 	/// Number of lives until game over.
 	/// </summary>
 	int lives;
-	
+
 	/// <summary>
 	/// How much damage the player deals when attacking.
 	/// </summary>
 	int attack;
-	
+
 	/// <summary>
 	/// Player's items
 	/// int is how many of that type of item player has (eg might have several times the same potion)
 	/// </summary>
 	unordered_map<const Object*, int> inventory;
-	
+
+	/// <summary>
+	/// The rendered inventory for display purposes.
+	/// </summary>
+	unordered_map<Rect, const Object*, RectHash>* inventoryCases;
+
 	/// <summary>
 	/// Horizontal offset of the infos sub window
 	/// </summary>
 	int infosX;
-	
+
 	/// <summary>
 	/// Vertical offset of the infos sub window
 	/// </summary>
@@ -58,7 +63,7 @@ protected:
 	/// Minimal amount of time between attacks, in ticks 
 	/// </summary>
 	int attackDelay;
-	
+
 	/// <summary>
 	/// A Heart texture for player lives.
 	/// </summary>
@@ -86,7 +91,7 @@ protected:
 	MOUSE_DATA currentMouseData;
 public:
 	~Player();
-	
+
 	/// <summary>
 	/// Creates the player.
 	/// </summary>
@@ -99,7 +104,7 @@ public:
 	/// <param name="startExp"></param>
 	Player(RenderContext& renderer, int lives = 3, int attack = 5, int defense = 0, int startHealth = 100, int startMoney = 0, int startExp = 0);
 
-	 
+
 
 	/// <summary>
 	/// Instant kill.
@@ -167,7 +172,7 @@ public:
 	/// </summary>
 	/// <param name="md"></param>
 	virtual void onMouseEvent(MOUSE_DATA* md);
-	
+
 	/// <summary>
 	/// When a key is pushed on the keyboard.
 	/// </summary>
@@ -198,7 +203,7 @@ public:
 	/// <param name="my"></param>
 	/// <returns></returns>
 	bool isInAttackRange(int mx, int my);
-	
+
 	/// <summary>
 	/// Returns player's attack value.
 	/// </summary>
@@ -210,7 +215,7 @@ public:
 	/// </summary>
 	/// <param name="toAdd"></param>
 	/// <returns></returns>
-	void addAttack(int toAdd); 
+	void addAttack(int toAdd);
 
 	/// <summary>
 	/// Returns player's number of lives.
@@ -257,7 +262,7 @@ public:
 	/// <param name="itemId"></param>
 	/// <returns></returns>
 	bool hasObject(string objId);
-	
+
 	/// <summary>
 	/// Tells us whether the player has a particular item or not.
 	/// </summary>
