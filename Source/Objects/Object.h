@@ -16,8 +16,12 @@ protected:
 	/// </summary>
 	string id;
 
+	/// <summary>
+	/// Infotip text of the object.
+	/// </summary>
+	string info;
 public:
-	virtual ~Object(); 
+	virtual ~Object();
 	/// <summary>
 	/// Initialises a new Object with the specified informations.
 	/// </summary>
@@ -29,7 +33,7 @@ public:
 	/// <param name="trav"></param>
 	/// <param name="attack"></param>
 	/// <param name="defense"></param>
-	Object(string identifier, int posx, int posy, string tx, RenderContext& renderer, bool trav);
+	Object(string identifier, int posx, int posy, string tx, RenderContext& renderer, bool trav, string info = "");
 
 	/// <summary>
 	/// 
@@ -76,6 +80,8 @@ public:
 	{
 		return otherObj.id == id;
 	}
+
+	virtual string getInfo() const;
 };
 
 #endif

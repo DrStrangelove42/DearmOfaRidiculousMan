@@ -56,7 +56,11 @@ public:
 	/// <param name="p"></param>
 	virtual void remove(Player* p)const;
 
-	
+	/// <summary>
+	/// Specific info for a sword
+	/// </summary>
+	/// <returns></returns>
+	virtual string getInfo() const;
 };
 
 #endif

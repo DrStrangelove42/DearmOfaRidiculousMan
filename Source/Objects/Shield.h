@@ -55,6 +55,12 @@ public:
 	/// </summary>
 	/// <param name="p"></param>
 	virtual void remove(Player* p)const;
+
+	/// <summary>
+	/// Specific info for a shield
+	/// </summary>
+	/// <returns></returns>
+	virtual string getInfo() const;
 };
 
 #endif

@@ -3,7 +3,7 @@
 Shield::Shield(string identifier, int posx, int posy, RenderContext& renderer, int defense) :
 	VisibleWearable(identifier, posx, posy, "shield", renderer), defense(defense)
 {
-
+	info = "A shield made of wood and iron, that will protect you from most enemies.";
 }
 
 
@@ -38,4 +38,9 @@ void Shield::remove(Player* p) const
 {
 	p->addDefense(-defense);
 	VisibleWearable::remove(p);
+}
+
+string Shield::getInfo() const
+{
+	return info + "\n\nDefense value " + to_string(defense);
 }

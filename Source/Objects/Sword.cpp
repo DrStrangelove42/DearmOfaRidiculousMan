@@ -4,7 +4,7 @@
 Sword::Sword(string identifier, int posx, int posy, RenderContext& renderer, int attack) :
 	VisibleWearable(identifier, posx, posy, "sword", renderer), attack(attack)
 {
-
+	info = "A very simple sword, yet efficient for a young adventurer.";
 }
 
 int Sword::getAttack() const
@@ -39,5 +39,10 @@ void Sword::remove(Player* p) const
 {
 	p->addAttack(-attack);
 	VisibleWearable::remove(p);
+}
+
+string Sword::getInfo() const
+{
+	return info + "\n\nAttack value " + to_string(attack);
 }
  

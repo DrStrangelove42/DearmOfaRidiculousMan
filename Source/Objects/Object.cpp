@@ -1,7 +1,7 @@
 #include "Object.h"
 
-Object::Object(string identifier, int posx, int posy, string tx, RenderContext& renderer, bool trav) :
-	MovingEntity(posx, posy, renderer, tx), id(identifier), traversable(trav)
+Object::Object(string identifier, int posx, int posy, string tx, RenderContext& renderer, bool trav, string info) :
+	MovingEntity(posx, posy, renderer, tx), id(identifier), traversable(trav), info(info)
 {
 
 }
@@ -25,7 +25,7 @@ void Object::move(int px, int py)
 Object::~Object()
 {
 
-} 
+}
 
 string Object::getId() const
 {
@@ -45,4 +45,9 @@ void Object::tick(int time, GAME* g)
 string Object::objectToString() const
 {
 	return "Basic object";
+}
+
+string Object::getInfo() const
+{
+	return info;
 }
