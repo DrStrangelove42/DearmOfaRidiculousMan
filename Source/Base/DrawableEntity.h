@@ -56,6 +56,12 @@ public:
 	void setTexture(Texture* texture);
 
 	/// <summary>
+	/// Returns the current texture.
+	/// </summary>
+	/// <returns></returns>
+	Texture* getTexture() const;
+
+	/// <summary>
 	/// <see cref="RenderContext">Rendering</see> method, enabling the <see cref="RenderContext::renderer">renderer</see> to take the offset (in <see cref="Block">blocks</see>) into account.
 	/// </summary>
 	/// <param name="renderer"></param>

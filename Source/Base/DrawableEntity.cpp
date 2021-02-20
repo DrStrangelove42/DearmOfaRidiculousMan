@@ -20,6 +20,11 @@ void DrawableEntity::setTexture(Texture* texture)
 	loadedTx = texture;
 }
 
+Texture* DrawableEntity::getTexture() const
+{
+	return loadedTx;
+}
+
 void DrawableEntity::render(RenderContext& renderer, int offsetX, int offsetY)  const
 {
 	int xx = (x + offsetX);
