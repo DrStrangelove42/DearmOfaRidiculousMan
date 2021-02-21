@@ -1,6 +1,7 @@
 #include "Map.h"
 
-Map::Map(Player& p, int roomCount) : player(p), roomCount(roomCount), currentRoom(0), titleTexture(NULL), deleting(false), startx(2), starty(2)
+Map::Map(Player& p, int roomCount, RenderContext& r) :
+	player(p), roomCount(roomCount), currentRoom(0), titleTexture(NULL), deleting(false), startx(2), starty(2), mapName("Manually generated map")
 {
 	rooms = new Room * [roomCount];
 }
@@ -19,7 +20,7 @@ Map::~Map()
 }
 
 Map::Map(string worldName, Player& p, RenderContext& renderer, int* startMap, int startRoom) :
-	player(p), worldName(worldName), currentRoom(0), roomCount(0), titleTexture(NULL), rooms(NULL), deleting(false), startx(2), starty(2)
+	player(p), worldName(worldName), currentRoom(0), roomCount(0), titleTexture(NULL), rooms(NULL), deleting(false), startx(2), starty(2), mapName("")
 {
 	// First we determine whether the files representing the world need to be generated, that is to say whether these files don't exist or whether they are older than the file representing the world.
 	struct stat dataLocation;
@@ -28,7 +29,7 @@ Map::Map(string worldName, Player& p, RenderContext& renderer, int* startMap, in
 
 	if (stat((WORLDDATA_LOCATION).c_str(), &dataLocation) != 0)
 	{
-		string d = DATA_LOCATION +  "Data/";
+		string d = DATA_LOCATION + "Data/";
 		if (mkdir(d.c_str(), 0777) != 0)
 		{
 			cout << "MKDIR DATA failed" << endl;
@@ -63,9 +64,11 @@ Map::Map(string worldName, Player& p, RenderContext& renderer, int* startMap, in
 			worldFromFile(worldName);
 	}
 	mapFromFiles(worldName, p, renderer, startMap, startRoom);
-#ifdef DEBUG_MODE
-	titleTexture = renderer.LoadString("CURRENT MAP : " + worldName);
-#endif
+	list<int> fg = CreateFade(0xFFFFFFFF, 0xFFFFFF00, 10, 40);
+	list<int> bg = CreateFade(0x000000FF, 0x00000000, 10, 40);
+	titleTexture = static_cast<AnimatedTexture*>(renderer.LoadAnimatedBoxedString(mapName, fg, bg, 100, false));
+	fg.clear();
+	bg.clear();
 }
 
 void Map::render(RenderContext& renderer, int offsetX, int offsetY) const
@@ -88,12 +91,14 @@ void Map::render(RenderContext& renderer, int offsetX, int offsetY) const
 		rooms[i]->render(renderer, offX, offY);
 	}
 
+
+	titleTexture->renderUnscaled(renderer, 3 * SZ_BLOCKSIZE, 3 * SZ_BLOCKSIZE);
+
 #ifdef DEBUG_MODE
-	if (titleTexture != NULL)
-	{
-		titleTexture->renderUnscaled(renderer, 0, 0);
-		renderer.LoadString("Room : " + to_string(currentRoom), 0x00FFffff)->renderUnscaled(renderer, 0, 16);
-	}
+
+	renderer.LoadString("CURRENT MAP : " + worldName)->renderUnscaled(renderer, 0, 0);
+	renderer.LoadString("Room : " + to_string(currentRoom), 0x00FFffff)->renderUnscaled(renderer, 0, 16);
+
 #endif
 }
 
@@ -200,8 +205,10 @@ bool Map::intlParseMap(string& newFile, int map, ifstream& World, ofstream& star
 		cout << "Expected ## before beginning of map " << map << " in " << newFile << endl;
 
 	getline(World, line);
-	int NumberOfRooms = stoi(line);
-	layout << to_string(NumberOfRooms) << endl;
+	//int NumberOfRooms = stoi(line); <-- same behaviour so the expanding of the map format 21/02/2021 is non breaking
+	int NumberOfRooms = stoi(EatTokenEx(line));
+	string mapName = line;
+	layout << to_string(NumberOfRooms) << ' ' << mapName << endl;
 
 	for (int room = 0; room < NumberOfRooms; room++)
 	{
@@ -377,8 +384,9 @@ void Map::mapFromFiles(string worldName, Player& p, RenderContext& renderer, int
 	ifstream data(filename + to_string(*startMap) + "Data" + EXT);
 
 	getline(layout, line);
-	roomCount = stoi(line);
-
+	//roomCount = stoi(line); <-- Non breaking changes (see also worldFromFile)
+	roomCount = stoi(EatTokenEx(line));
+	mapName = line;
 	rooms = new Room * [roomCount];
 	currentRoom = startRoom;
 
@@ -700,4 +708,10 @@ void Map::sendMonstersToWarp(int x, int y, int destRoom, int destX, int destY)
 		rooms[i]->sendMonstersToWarp(x, y, destRoom, destX, destY, currentRoom == i);
 	}
 	rooms[destRoom]->cleanMonsterWarpInfo();
+}
+
+void Map::onEnter()
+{
+	if (titleTexture != NULL)
+		titleTexture->reset();
 }

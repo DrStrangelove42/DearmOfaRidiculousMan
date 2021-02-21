@@ -1,7 +1,7 @@
 #include "AnimatedTexture.h"
 
 AnimatedTexture::AnimatedTexture(RenderContext& context, string id, int delay) :
-	Texture(NULL, 0, 0), delay(delay), curFrame(0), lastTime(0)
+	Texture(NULL, 0, 0), delay(delay), curFrame(0), lastTime(0), loop(true)
 {
 	int num = 0;
 	SDL_Texture* cur = NULL;
@@ -17,8 +17,8 @@ AnimatedTexture::AnimatedTexture(RenderContext& context, string id, int delay) :
 	frameCount = int(frames.size());
 }
 
-AnimatedTexture::AnimatedTexture(list<Texture*>& content, int delay) :
-	delay(delay), curFrame(0), lastTime(0),
+AnimatedTexture::AnimatedTexture(list<Texture*>& content, int delay, bool loop) :
+	delay(delay), curFrame(0), lastTime(0), loop(loop),
 	Texture(NULL, content.front()->getWidth(), content.front()->getHeight()), frameCount(content.size())
 {
 	for (Texture* t : content)
@@ -38,8 +38,11 @@ void AnimatedTexture::renderUnscaled(RenderContext& context, int x, int y, doubl
 	int time = GetTime();
 	if (time - lastTime >= delay)
 	{
-		curFrame = (curFrame + 1) % frameCount;
-		lastTime = time;
+		if (loop || curFrame < frameCount - 1)
+		{
+			curFrame = (curFrame + 1) % frameCount;
+			lastTime = time;
+		}
 	}
 
 	internalRenderUnscaled(frames[curFrame], context, x, y, angle, center, flip);
@@ -50,8 +53,11 @@ void AnimatedTexture::render(RenderContext& context, int x, int y, int width, in
 	int time = GetTime();
 	if (time - lastTime >= delay)
 	{
-		curFrame = (curFrame + 1) % frameCount;
-		lastTime = time;
+		if (loop || curFrame < frameCount - 1)
+		{
+			curFrame = (curFrame + 1) % frameCount;
+			lastTime = time;
+		}
 	}
 
 	internalRender(frames[curFrame], context, x, y, width, height, angle, center, flip);
@@ -60,4 +66,9 @@ void AnimatedTexture::render(RenderContext& context, int x, int y, int width, in
 void AnimatedTexture::setDelay(int d)
 {
 	delay = d;
+}
+
+void AnimatedTexture::reset()
+{
+	curFrame = 0;
 }

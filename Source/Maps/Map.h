@@ -84,14 +84,19 @@ protected:
 	int currentRoom;
 
 	/// <summary>
-	/// The name of the current world.
+	/// The name of the current world to which this map belongs.
 	/// </summary>
 	string worldName;
 
 	/// <summary>
+	/// The name (human readable) of this map.
+	/// </summary>
+	string mapName;
+
+	/// <summary>
 	/// Texture of the name of the Map, to be used when necessary.
 	/// </summary>
-	Texture* titleTexture;
+	AnimatedTexture* titleTexture;
 
 	/// <summary>
 	/// This function takes a folder of files representing a World (according to the encoding described in HowItWorks.txt) and creates the current Map.
@@ -199,7 +204,7 @@ public:
 	/// </summary>
 	/// <param name="p"></param>
 	/// <param name="roomCount"></param>
-	Map(Player& p, int roomCount);
+	Map(Player& p, int roomCount, RenderContext& r);
 
 	/// <summary>
 	/// Creates a Map object from a Map file. Either it is the initial creation of the Map, 
@@ -290,6 +295,11 @@ public:
 	/// <param name="destX"></param>
 	/// <param name="destY"></param>
 	void sendMonstersToWarp(int x, int y, int destRoom, int destX, int destY);
+
+	/// <summary>
+	/// Called when the map is loaded to the screen.
+	/// </summary>
+	virtual void onEnter();
 };
 
 #endif

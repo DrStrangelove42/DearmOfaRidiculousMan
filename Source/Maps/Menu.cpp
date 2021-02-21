@@ -1,6 +1,6 @@
 #include "Menu.h"
 
-Menu::Menu(Player& p, GAME* g) : Map(p, 0), game(g)
+Menu::Menu(Player& p, GAME* g) : Map(p, 0, (*g->renderer)), game(g)
 {
 
 }

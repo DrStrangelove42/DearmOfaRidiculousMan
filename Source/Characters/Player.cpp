@@ -92,7 +92,7 @@ void Player::renderInventory(RenderContext& renderer, int xx, int yy) const
 
 	xx = infosX;
 	yy += tmp->getHeight();
-	 
+
 	const Object* hoverObj = nullptr;
 	/*The inventory*/
 	for (auto& entry : inventory)
@@ -249,7 +249,6 @@ void Player::onKeyDown(GAME* game)
 
 	switch (game->key)
 	{
-
 	case Up:
 		curY--;
 		break;

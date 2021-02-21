@@ -2,6 +2,7 @@
 #include "Texture.h"
 #include "AnimatedTexture.h"
 
+
 RenderContext::RenderContext(Window& window)
 {
 	renderer = window.getRenderer();
@@ -18,6 +19,16 @@ RenderContext::~RenderContext()
 {
 	if (NULL != renderer)
 		SDL_DestroyRenderer(renderer);
+}
+
+SDL_Surface* RenderContext::createSurface(int w, int h, SDL_BlendMode blMode)
+{
+	uint32_t rmask, gmask, bmask, amask;
+	MakeRGBAMasks(&rmask, &gmask, &bmask, &amask);
+	SDL_Surface* ret = SDL_CreateRGBSurface(0, w, h, 32, rmask, gmask, bmask, amask);
+	SDL_SetSurfaceBlendMode(ret, blMode);
+
+	return ret;
 }
 
 void RenderContext::clear()
@@ -142,31 +153,15 @@ Texture* RenderContext::LoadText(string text, int color, int backColor, int widt
 							   (unsigned char)(color >> 8),
 							   (unsigned char)(color) };
 
-		/* SDL interprets each pixel as a 32-bit number, so our masks must depend
-	   on the endianness (byte order) of the machine */
-		uint32_t rmask, gmask, bmask, amask;
-#if SDL_BYTEORDER == SDL_BIG_ENDIAN
-		rmask = 0xff000000;
-		gmask = 0x00ff0000;
-		bmask = 0x0000ff00;
-		amask = 0x000000ff;
-#else
-		rmask = 0x000000ff;
-		gmask = 0x0000ff00;
-		bmask = 0x00ff0000;
-		amask = 0xff000000;
-#endif
 
+		SDL_Surface* textSurface = createSurface(width, SZ_SCREENHEIGHT, SDL_BLENDMODE_NONE);
 
-		SDL_Surface* textSurface = SDL_CreateRGBSurface(0, width, SZ_SCREENHEIGHT, 32, rmask, gmask, bmask, amask);
-		SDL_SetSurfaceBlendMode(textSurface, SDL_BLENDMODE_BLEND);
-
-		if (backColor != 0)
+		if ((backColor & 0xff) != 0)
 		{
 			SDL_Color bc = { (unsigned char)(backColor >> 24),
-										  (unsigned char)(backColor >> 16),
-										  (unsigned char)(backColor >> 8),
-										  (unsigned char)(backColor) };
+							  (unsigned char)(backColor >> 16),
+							  (unsigned char)(backColor >> 8),
+							  (unsigned char)(backColor) };
 			SDL_FillRect(textSurface, NULL, SDL_MapRGBA(textSurface->format, bc.r, bc.g, bc.b, bc.a));
 
 		}
@@ -190,7 +185,7 @@ Texture* RenderContext::LoadText(string text, int color, int backColor, int widt
 			case '\r':
 				if (!word.empty())
 				{
-					s = TTF_RenderText_Blended(FONT, word.c_str(), c);
+					s = TTF_RenderText_Solid(FONT, word.c_str(), c);
 					cur.h = s->h;
 					cur.w = s->w;
 					cur_width += cur.w;
@@ -231,8 +226,8 @@ Texture* RenderContext::LoadText(string text, int color, int backColor, int widt
 		cur.h = height;
 		cur.w = width;
 		/*Crop*/
-		SDL_Surface* croppedTextSurface = SDL_CreateRGBSurface(0, min(width, seen_width), height, 32, rmask, gmask, bmask, amask);
-		SDL_SetSurfaceBlendMode(croppedTextSurface, SDL_BLENDMODE_BLEND);
+		SDL_Surface* croppedTextSurface = createSurface(min(width, seen_width), height);
+		 
 		SDL_BlitSurface(textSurface, &cur, croppedTextSurface, &cur);
 		SDL_Texture* t = this->fromSurface(croppedTextSurface);
 		SDL_FreeSurface(croppedTextSurface);
@@ -248,7 +243,7 @@ Texture* RenderContext::LoadText(string text, int color, int width)
 	return LoadText(text, color, 0, width);
 }
 
-Texture* RenderContext::LoadAnimatedString(string text, list<int> colors, int interval)
+Texture* RenderContext::LoadAnimatedString(string text, list<int> colors, int interval, bool loop)
 {
 	string id = "atext." + to_string(colors.front()) + to_string(colors.back()) + "/" + text;
 
@@ -260,7 +255,28 @@ Texture* RenderContext::LoadAnimatedString(string text, list<int> colors, int in
 			listT.push_back(LoadString(text, c));
 		}
 
-		textures[id] = new AnimatedTexture(listT, interval);
+		textures[id] = new AnimatedTexture(listT, interval, loop);
+		listT.clear();
+	}
+
+	return textures[id];
+}
+
+Texture* RenderContext::LoadAnimatedBoxedString(string text, list<int> colors, list<int> bgcolors, int interval, bool loop)
+{
+	string id = "atext." + to_string(colors.front()) + to_string(bgcolors.back()) + "/" + text; //heuristical anti-collision (TODO?enough for now)
+
+	if (textures.find(id) == textures.end())
+	{
+		list<Texture*> listT;
+		auto iter = bgcolors.begin();
+		for (int c : colors)
+		{
+			listT.push_back(LoadVolatileString(text, c, *iter));
+			iter++;
+		}
+
+		textures[id] = new AnimatedTexture(listT, interval, loop);
 		listT.clear();
 	}
 
@@ -271,20 +287,47 @@ TTF_Font* RenderContext::FONT;
 int RenderContext::FONTSIZE;
 unordered_map<string, Texture*> RenderContext::textures;
 
-Texture* RenderContext::LoadVolatileString(string text, int color)
+Texture* RenderContext::LoadVolatileString(string text, int color, int backColor)
 {
 	SDL_Color c = { (unsigned char)(color >> 24),
 							(unsigned char)(color >> 16),
 							(unsigned char)(color >> 8),
 							(unsigned char)(color) };
 
-	SDL_Surface* s = TTF_RenderText_Solid(FONT, text.c_str(), c);
+	unsigned char ba = (unsigned char)(backColor);
+	SDL_Surface* back = NULL;
+	int w, h;
+	if (ba != 0) {
+		SDL_Color bc = { (unsigned char)(backColor >> 24),
+							(unsigned char)(backColor >> 16),
+							(unsigned char)(backColor >> 8),
+							(unsigned char)(backColor) };
+		if (TTF_SizeText(FONT, text.c_str(), &w, &h))
+		{
+			cout << TTF_GetError() << endl;
+			return NULL;
+		}
+		back = createSurface(w, h);
+		SDL_FillRect(back, NULL, SDL_MapRGBA(back->format, bc.r, bc.g, bc.b, bc.a));
+	}
 
-	SDL_Texture* t = this->fromSurface(s);
+	SDL_Surface* s = TTF_RenderText_Solid(FONT, text.c_str(), c);
+	if ((color & 0xff) == 0)//transparent, we have to clear it by ourselves since SDL doestn't understand alpha=0.
+		SDL_SetSurfaceAlphaMod(s, 0);
+	SDL_Texture* t;
+	if (ba != 0)
+	{
+		SDL_BlitSurface(s, NULL, back, NULL);
+
+		t = this->fromSurface(back);
+		SDL_FreeSurface(back);
+	}
+	else
+		t = this->fromSurface(s);
+
 	SDL_FreeSurface(s);
 
-	int w, h;
-	if (TTF_SizeText(FONT, text.c_str(), &w, &h))
+	if (ba == 0 && TTF_SizeText(FONT, text.c_str(), &w, &h))
 	{
 		cout << TTF_GetError() << endl;
 		return NULL;

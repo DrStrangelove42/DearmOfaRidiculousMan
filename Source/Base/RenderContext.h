@@ -5,6 +5,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <string>
+#include <list>
 #include "config.h"
 #ifdef WIN6
 #include <Windows.h>
@@ -34,18 +35,26 @@ protected:
 	/// The font used.
 	/// </summary>
 	static TTF_Font* FONT;
-	
+
 	/// <summary>
 	/// The hashmap where <see cref="Texture">Textures</see> are stored.
 	/// <see cref="Texture">Textures</see> beginning with 'text/' are reserved for text rendering.
 	/// </summary>
 	static unordered_map<string, Texture*> textures;
+
+	/// <summary>
+	/// Internal function to create an SDL Surface with the right parameters.
+	/// </summary>
+	/// <param name="w"></param>
+	/// <param name="h"></param>
+	/// <returns></returns>
+	virtual SDL_Surface* createSurface(int w, int h, SDL_BlendMode blMode = SDL_BLENDMODE_BLEND);
 public:
 	/// <summary>
 	/// The size of the font used.
 	/// </summary>
 	static int FONTSIZE;
-	
+
 	/// <summary>
 	/// Creates a new render context from the specified window.
 	/// </summary>
@@ -73,6 +82,8 @@ public:
 	/// <param name=""></param>
 	/// <returns></returns>
 	virtual SDL_Texture* fromSurface(SDL_Surface*);
+
+
 
 	/// <summary>
 	/// Does the actual rendering with low-level call to SDL.
@@ -161,7 +172,7 @@ public:
 	/// <param name="text"></param> 
 	/// <param name="color"></param>
 	/// <returns></returns>
-	virtual Texture* LoadVolatileString(string text, int color);
+	virtual Texture* LoadVolatileString(string text, int color, int backColor = 0);
 
 	/// <summary>
 	/// Loads a multiline text designed to fit in the specified width (in pixels).
@@ -171,11 +182,23 @@ public:
 	/// <summary>
 	/// Loads a single line of text
 	/// </summary>
-	/// <param name="text"></param>
-	/// <param name="colors"></param>
-	/// <param name="interval"></param>
+	/// <param name="text">The text to be displayed.</param>
+	/// <param name="colors">The list of colours defining the animation.</param>
+	/// <param name="interval">Time delay, in ms, between each colour.</param>
+	/// <param name="loop">Tells whether the animations keeps on going after the last color.</param>
 	/// <returns></returns>
-	virtual Texture* LoadAnimatedString(string text, list<int> colors, int interval);
+	virtual Texture* LoadAnimatedString(string text, list<int> colors, int interval, bool loop = true);
+
+	/// <summary>
+	/// Loads a single line of text with an animation on the background.
+	/// </summary>
+	/// <param name="text">The text to be displayed.</param>
+	/// <param name="colors">The list of colours defining the animation.</param>
+	/// <param name="bgcolors">The list of background colours of the animation. It must have the same size as the colors list.</param>
+	/// <param name="interval">Time delay, in ms, between each colour.</param>
+	/// <param name="loop">Tells whether the animations keeps on going after the last color.</param>
+	/// <returns></returns>
+	virtual Texture* LoadAnimatedBoxedString(string text, list<int> colors, list<int> bgcolors, int interval, bool loop = true);
 
 	/// <summary>
 	/// Loads a multiline text designed to fit in the specified width (in pixels).

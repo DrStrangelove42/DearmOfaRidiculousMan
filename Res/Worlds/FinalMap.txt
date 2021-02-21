@@ -1,6 +1,6 @@
 3
 ##
-2
+2 Entrance of the final map
 #
 11 11
 0 0
@@ -36,7 +36,7 @@ w  f  f  f  f  w
 w  f  f  f  fk1w
 w  w  w  w  w  w
 ##
-3
+3 Final corridors
 #
 12 10
 0 0
@@ -94,7 +94,7 @@ s  f  f  f  fS f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f 
 s  fk2f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  f  s
 s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s  s 
 ##
-1
+1 Well done !
 #
 18 9
 0 0

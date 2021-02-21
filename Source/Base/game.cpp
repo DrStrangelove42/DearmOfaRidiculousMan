@@ -53,6 +53,8 @@ void changeMap(GAME* game, string worldname, int mapIndex, int startRoom)
 			*(game->currentMapId) = mapIndex;
 		}
 	}
+
+	game->currentMap->onEnter();
 }
 
 bool isLoaded(string worldname, int mapIndex)

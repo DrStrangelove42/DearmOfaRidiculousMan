@@ -6,6 +6,7 @@
 #include <fstream>
 #include <chrono>
 #include <map>
+#include <list>
 #include <sys/types.h>
 #include <sys/stat.h>
 
@@ -128,5 +129,32 @@ string GetText(string id);
 /// </summary>
 /// <param name="langCode"></param>
 void LoadTextFromLanguage(string& langCode);
+
+/// <summary>
+/// returns a value whether r contains the given point.
+/// </summary>
+/// <param name="r"></param>
+/// <param name="x"></param>
+/// <param name="y"></param>
+/// <returns></returns>
 bool RectContains(Rect* r, int x, int y);
+
+/// <summary>
+/// Builds the four masks used to create drawing surfaces (in particular with SDL).
+/// </summary>
+/// <param name="rmask"></param>
+/// <param name="gmask"></param>
+/// <param name="bmask"></param>
+/// <param name="amask"></param>
+void MakeRGBAMasks(uint32_t* rmask, uint32_t* gmask, uint32_t* bmask, uint32_t* amask);
+
+/// <summary>
+/// Creates an array of colours going smoothly the start colour to the last.
+/// </summary>
+/// <param name="startColor"></param>
+/// <param name="lastColor"></param>
+/// <param name="frames"></param>
+/// <param name="fadeStart"></param>
+/// <returns></returns>
+list<int> CreateFade(int startColor, int lastColor, int frames, int fadeStart = 0);
 #endif

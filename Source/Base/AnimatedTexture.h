@@ -39,6 +39,11 @@ protected:
 	/// The number of images in <see cref="AnimatedTexture::frames">frames</see>.
 	/// </summary>
 	int frameCount;
+
+	/// <summary>
+	/// Whether the textures goes back to its first frame at the end of the animation or not.
+	/// </summary>
+	bool loop;
 public:
 	/// <summary>
 	/// Constructor of a new AnimatedTexture from files id0, ..., idN, where N is deduced from the available files.
@@ -54,7 +59,7 @@ public:
 	/// <param name="content"></param>
 	/// <param name="id"></param>
 	/// <param name="delay"></param>
-	AnimatedTexture(list<Texture*>& content, int delay = 500);
+	AnimatedTexture(list<Texture*>& content, int delay = 500, bool loop = true);
 
 	/// <summary>
 	/// Destructor.
@@ -90,6 +95,11 @@ public:
 	/// </summary>
 	/// <param name="d"></param>
 	void setDelay(int d);
+
+	/// <summary>
+	/// Resets the animation counter.
+	/// </summary>
+	void reset();
 };
 
 #endif

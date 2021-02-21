@@ -116,7 +116,7 @@ void LoadTextFromLanguage(string& langCode)
 	string fname = LANG_LOCATION + langCode + LANGFILES_EXT;
 	if (stat(fname.c_str(), &dummy) != 0)
 	{
-		 
+
 		cout << fname << " doesn't exist..." << endl;
 		return;
 	}
@@ -151,4 +151,42 @@ void LoadTextFromLanguage(string& langCode)
 bool RectContains(Rect* r, int x, int y)
 {
 	return r->x <= x && r->y <= y && x - r->x <= r->w && y - r->y <= r->h;
+}
+
+void MakeRGBAMasks(uint32_t* rmask, uint32_t* gmask, uint32_t* bmask, uint32_t* amask)
+{
+	/* SDL interprets each pixel as a 32-bit number, so our masks must depend
+	   on the endianness (byte order) of the machine */
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+	*rmask = 0xff000000;
+	*gmask = 0x00ff0000;
+	*bmask = 0x0000ff00;
+	*amask = 0x000000ff;
+#else
+	*rmask = 0x000000ff;
+	*gmask = 0x0000ff00;
+	*bmask = 0x00ff0000;
+	*amask = 0xff000000;
+#endif
+}
+
+list<int> CreateFade(int startColor, int lastColor, int frames, int fadeStart)
+{
+	list<int> ret;
+	int step = (lastColor - startColor) / frames;
+	for (int i = 0; i < fadeStart; i++)
+	{
+		ret.push_back(startColor);
+	}
+	int cur = 0;
+	int n = abs((startColor - lastColor) / step);
+	for (int i = startColor; ++cur <= n; i += step)
+	{
+		ret.push_back(i);
+	}
+
+	if (ret.back() != lastColor)
+		ret.push_back(lastColor);//ensure that the last colour is taken into account.
+
+	return ret;
 }
