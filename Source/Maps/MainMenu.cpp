@@ -29,18 +29,17 @@ MainMenu::MainMenu(Player& p, GAME* g) : Menu(p, g)
 
 
 	Texture* welcome = r.LoadString("Welcome", 0xAA00FFFF);
-	animationTextures = new Texture * [20];
-	int color;
+
+	list<int> clrs;
 	for (int i = 0; i < 20; i++)
 	{
-		color = 255 | GetRandom(255) << 8 | GetRandom(255) << 16 | GetRandom(255) << 24;
-		animationTextures[i] = r.LoadString("Dream of a Ridiculous Man !", color);
+		clrs.push_back(255 | GetRandom(255) << 8 | GetRandom(255) << 16 | GetRandom(255) << 24);
 	}
-
+	Texture* banner = r.LoadAnimatedString("Dream of a Ridiculous Man !", clrs, 100);
 	Texture* subtitle = r.LoadString("PROJECT", 0x007ACCFF);
 	Texture* info = r.LoadString("PRESSMAIN", 0xaaaaaaff);
-	addLabel(new Label(welcome, (SZ_SCREENWIDTH - welcome->getWidth() - animationTextures[0]->getWidth()) / 2, SZ_SCREENHEIGHT / 3));
-	animation = new Label(animationTextures[0], labels.front()->getX() + welcome->getWidth(), labels.front()->getY());
+	addLabel(new Label(welcome, (SZ_SCREENWIDTH - welcome->getWidth() - banner->getWidth()) / 2, SZ_SCREENHEIGHT / 3));
+	animation = new Label(banner, labels.front()->getX() + welcome->getWidth(), labels.front()->getY());
 	addLabel(new Label(subtitle, (SZ_SCREENWIDTH - subtitle->getWidth()) / 2, labels.front()->getY() + welcome->getHeight() + 10));
 	addLabel(new Label(info, (SZ_SCREENWIDTH - info->getWidth()) / 2, SZ_SCREENHEIGHT - 200));
 	addLabel(animation);
@@ -65,7 +64,7 @@ void MainMenu::onQuitClick(int id)
 
 MainMenu::~MainMenu()
 {
-	//Not delete[] animationTextures because these ones were created through LoadString.
+	 
 }
 
 void MainMenu::render(RenderContext& renderer, int offsetX, int offsetY) const
@@ -76,18 +75,8 @@ void MainMenu::render(RenderContext& renderer, int offsetX, int offsetY) const
 }
 
 void MainMenu::tick(int time, GAME* game)
-{
-	static int i = 0;
-	static int lastTime = 0;
+{ 
 	static int lastTimeMv = 0;
-
-	if (time - lastTime > 100)
-	{
-		animation->setTexture(animationTextures[i++]);
-		if (i == 20)
-			i = 0;
-		lastTime = time;
-	}
 
 	if (time - lastTimeMv > 500)
 	{

@@ -17,13 +17,13 @@ EndCredits::EndCredits(Player& p, GAME* g) : Menu(p, g)
 	RenderContext& r = *(g->renderer);
 
 	addButton(new Button("Close", r, SZ_SCREENWIDTH / 2 - 20, SZ_SCREENHEIGHT - 200, 0, [this](int id) {onPlayClick(id); }, 0x00ffaaff, 0xbbffbbff));
-
-	animationTextures = new Texture * [42];
-	int color, c;
+	 
+	int c;
 	int R, G, B;
 	R = 255;
 	G = 0;
 	B = 0;
+	list<int> clrs;
 	int step = 0;
 	for (int i = 0; i < 42; i++)
 	{
@@ -52,12 +52,13 @@ EndCredits::EndCredits(Player& p, GAME* g) : Menu(p, g)
 		default:
 			break;
 		}
-		color = 0xFF | R << 8 | G << 16 | B << 24; 
-		animationTextures[i] = r.LoadString("THANKS", color);
+		clrs.push_back(0xFF | R << 8 | G << 16 | B << 24);
+
 	}
-	c = color = 255 | (127 + GetRandom(128)) << 8 | (127 + GetRandom(128)) << 16 | (127 + GetRandom(128)) << 24;
+	c = 255 | (127 + GetRandom(128)) << 8 | (127 + GetRandom(128)) << 16 | (127 + GetRandom(128)) << 24;
 	Texture* namest = r.LoadString("Q@DrStrangelove42       A@ads5699        V@vbonczak", c);
-	animation = new Label(animationTextures[0], (SZ_SCREENWIDTH - animationTextures[0]->getWidth()) / 2, SZ_SCREENHEIGHT - 50);
+	Texture* at = r.LoadAnimatedString("THANKS", clrs, 50);
+	animation = new Label(at, (SZ_SCREENWIDTH - at->getWidth()) / 2, SZ_SCREENHEIGHT - 50);
 	addLabel(animation);
 	names = new Label(namest, (SZ_SCREENWIDTH - namest->getWidth()) / 2, SZ_SCREENHEIGHT);
 	addLabel(names);
@@ -70,21 +71,13 @@ void EndCredits::onPlayClick(int id)
 
 EndCredits::~EndCredits()
 {
-	//Not delete[] animationTextures because these ones were created through LoadString.
+ 
 }
 
 
 void EndCredits::tick(int time, GAME* game)
 {
-	static int i = 0;
-	static int lastTime = 0;
-	if (time - lastTime > 50)
-	{
-		animation->setTexture(animationTextures[i++]);
-		if (i == 40)
-			i = 0;
-		lastTime = time;
-	}
+	static int i = 0; 
 
 	if (names->getY() > 250)
 	{

@@ -28,17 +28,17 @@ class EndCredits : public Menu
 {
 protected:
 	 
+	/*Two labels whose pointers are saved here to move them in the tick() function.*/
+
 	/// <summary>
 	/// The current Label of the animation in EndCredits.
 	/// </summary>
 	Label* animation;
 
-	Label* names;
-	
 	/// <summary>
-	/// The <see cref="Texture">Textures</see> used in the animation.
+	/// Labels telling devs names.
 	/// </summary>
-	Texture** animationTextures;
+	Label* names;
  
 public:
 	/// <summary>

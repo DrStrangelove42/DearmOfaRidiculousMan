@@ -261,6 +261,7 @@ Texture* RenderContext::LoadAnimatedString(string text, list<int> colors, int in
 		}
 
 		textures[id] = new AnimatedTexture(listT, interval);
+		listT.clear();
 	}
 
 	return textures[id];

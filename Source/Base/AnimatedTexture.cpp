@@ -17,7 +17,9 @@ AnimatedTexture::AnimatedTexture(RenderContext& context, string id, int delay) :
 	frameCount = int(frames.size());
 }
 
-AnimatedTexture::AnimatedTexture(list<Texture*>& content, int delay) : delay(delay), curFrame(0), lastTime(0), Texture(NULL, 0, 0), frameCount(content.size())
+AnimatedTexture::AnimatedTexture(list<Texture*>& content, int delay) :
+	delay(delay), curFrame(0), lastTime(0),
+	Texture(NULL, content.front()->getWidth(), content.front()->getHeight()), frameCount(content.size())
 {
 	for (Texture* t : content)
 	{

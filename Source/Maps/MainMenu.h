@@ -32,11 +32,6 @@ protected:
 	/// The current Label of the animation in MainMenu.
 	/// </summary>
 	Label* animation;
-	
-	/// <summary>
-	/// The <see cref="Texture">Textures</see> used in the animation.
-	/// </summary>
-	Texture** animationTextures;
  
 public:
 	/// <summary>
