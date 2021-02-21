@@ -20,7 +20,7 @@ PART no help
 NPC 2 2 girl,girl, See you next try !
 MOB 4 3 S
 MOB 3 2 s
-MOB 3 5 S
+MOB 3 4 S
 MOB 1 3 F
 MOB 2 3 F
 MOB 6 3 F

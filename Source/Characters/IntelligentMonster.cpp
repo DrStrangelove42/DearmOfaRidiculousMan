@@ -135,11 +135,13 @@ void IntelligentMonster::optimalPath(int*& path, bool** trav)
 	{
 		pathLength = 0;
 	}
+
 	for (int i = 0; i < width; i++)
 	{
 		delete[] pred[i];
 		delete[] discovered[i];
 	}
+
 	delete[] pred;
 	delete[] discovered;
 }
