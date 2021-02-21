@@ -54,7 +54,7 @@ void IntelligentMonster::optimalPath(int*& path, bool** trav)
 {
 	int width = room->getW();
 	int height = room->getH();
-	int startX = x, startY = y;
+	int startX = min(width - 1, x), startY = min(height - 1, y);
 	int numberOfDirs = (diagMovement ? 8 : 4);
 	//The number of directions the monster can potentially  move in from any block (8 if we allow diagonal movement, 4 if we don't).
 
@@ -155,7 +155,7 @@ void IntelligentMonster::tick(int time, GAME* game)
 		newDestX = player.getX();
 		newDestY = player.getY();
 	}
-	
+
 	if (time - lastTimeAtk >= attackDelay)
 	{
 		lastTimeAtk = time;

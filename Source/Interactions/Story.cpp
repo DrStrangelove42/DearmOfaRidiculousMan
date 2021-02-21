@@ -79,7 +79,12 @@ void Story::fromFile(string path, GAME* game)
 				{
 					string id = "banners/" + text;
 					if (isLoaded(id, 0))
+					{
 						changeMap(game, id, 0, 0);
+						//We are sure here to make the right cast. Ordinary maps cannot have '/' in their name,
+						//so no possible map could be here instead of a Banner.
+						static_cast<Banner*>(game->currentMap)->reset();
+					}
 					else
 					{
 						game->worldName = id;
