@@ -4,7 +4,7 @@
 
 void NPC::setTexture(RenderContext& renderer)
 {
-	text = renderer.LoadText(GetText(name) + " :\n" + GetText(speech), 0xD6C3C2FF, SZ_INFOSWIDTH - 10);
+	text = renderer.LoadText(GetText(name) + " :\n" + GetText(speech), 0xD6C3C2FF, 0x000000FF, SZ_INFOSWIDTH - 10);
 }
 
 NPC::NPC(string id,string name, string speech, int posx, int posy, string tx, RenderContext& renderer, Map* map, bool trav) :
