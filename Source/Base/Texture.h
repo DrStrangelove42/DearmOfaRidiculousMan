@@ -9,11 +9,15 @@
 
 using namespace std;
 
+//In order to access easily to the protected members of a Texture via its derivated class.
+class AnimatedTexture;
+
 /// <summary>
 /// A Texture is what gives the appearance to anything present in the Window.
 /// </summary>
 class Texture
 {
+friend class AnimatedTexture; //see above.
 protected:
 	/// <summary>
 	/// The texture under the hood, courtesy of the SDL library.

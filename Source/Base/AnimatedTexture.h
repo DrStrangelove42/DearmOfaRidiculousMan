@@ -3,6 +3,7 @@
 
 #include "Texture.h"
 #include <vector>
+#include <list>
 #include "config.h"
 #include "utils.h"
 
@@ -46,6 +47,14 @@ public:
 	/// <param name="id">Root of the names</param>
 	/// <param name="delay">Delay, in ms, between two frames.</param>
 	AnimatedTexture(RenderContext& context, string id, int delay = 500);
+
+	/// <summary>
+	/// Native constructor of an animated image with specified compound images and delay.
+	/// </summary>
+	/// <param name="content"></param>
+	/// <param name="id"></param>
+	/// <param name="delay"></param>
+	AnimatedTexture(list<Texture*>& content, int delay = 500);
 
 	/// <summary>
 	/// Destructor.

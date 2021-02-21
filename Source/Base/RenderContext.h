@@ -147,7 +147,7 @@ public:
 	virtual Texture* LoadTexture(string id);
 
 	/// <summary>
-	/// Builds a Texture with the text inside.
+	/// Builds a Texture with the text inside (on a single line).
 	/// </summary>
 	/// <param name="text"></param> 
 	/// <param name="color"></param>
@@ -167,6 +167,15 @@ public:
 	/// Loads a multiline text designed to fit in the specified width (in pixels).
 	/// </summary>
 	virtual Texture* LoadText(string text, int color, int width);
+
+	/// <summary>
+	/// Loads a single line of text
+	/// </summary>
+	/// <param name="text"></param>
+	/// <param name="colors"></param>
+	/// <param name="interval"></param>
+	/// <returns></returns>
+	virtual Texture* LoadAnimatedString(string text, list<int> colors, int interval);
 
 	/// <summary>
 	/// Loads a multiline text designed to fit in the specified width (in pixels).

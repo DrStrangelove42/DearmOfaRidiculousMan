@@ -11,10 +11,18 @@ AnimatedTexture::AnimatedTexture(RenderContext& context, string id, int delay) :
 		cur = internalLoadTexture(context, id + to_string(num++), w, h, true);
 		if (cur != NULL)
 			frames.push_back(cur);
-		
+
 	} while (cur != NULL);
 
 	frameCount = int(frames.size());
+}
+
+AnimatedTexture::AnimatedTexture(list<Texture*>& content, int delay) : delay(delay), curFrame(0), lastTime(0), Texture(NULL, 0, 0), frameCount(content.size())
+{
+	for (Texture* t : content)
+	{
+		frames.push_back(t->texture);
+	}
 }
 
 AnimatedTexture::~AnimatedTexture()

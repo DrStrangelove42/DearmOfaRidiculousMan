@@ -168,7 +168,7 @@ Texture* RenderContext::LoadText(string text, int color, int backColor, int widt
 										  (unsigned char)(backColor >> 8),
 										  (unsigned char)(backColor) };
 			SDL_FillRect(textSurface, NULL, SDL_MapRGBA(textSurface->format, bc.r, bc.g, bc.b, bc.a));
-		 
+
 		}
 
 		SDL_Rect cur = { padding,padding,width,0 };
@@ -203,7 +203,7 @@ Texture* RenderContext::LoadText(string text, int color, int backColor, int widt
 						height += cur.h;
 						seen_width = max(seen_width, cur_width);
 						cur_width = 0;
-					} 
+					}
 					SDL_BlitSurface(s, NULL, textSurface, &cur);
 					SDL_FreeSurface(s);
 					cur.x += cur.w;
@@ -246,6 +246,24 @@ Texture* RenderContext::LoadText(string text, int color, int backColor, int widt
 Texture* RenderContext::LoadText(string text, int color, int width)
 {
 	return LoadText(text, color, 0, width);
+}
+
+Texture* RenderContext::LoadAnimatedString(string text, list<int> colors, int interval)
+{
+	string id = "atext." + to_string(colors.front()) + to_string(colors.back()) + "/" + text;
+
+	if (textures.find(id) == textures.end())
+	{
+		list<Texture*> listT;
+		for (int c : colors)
+		{
+			listT.push_back(LoadString(text, c));
+		}
+
+		textures[id] = new AnimatedTexture(listT, interval);
+	}
+
+	return textures[id];
 }
 
 TTF_Font* RenderContext::FONT;
