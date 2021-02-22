@@ -219,6 +219,7 @@ COPY /Y  "$(OutDir)*.dll" ..</Command>
     <ClCompile Include="..\Source\Maps\Room.cpp" />
     <ClCompile Include="..\Source\Objects\Checkpoint.cpp" />
     <ClCompile Include="..\Source\Objects\Chest.cpp" />
+    <ClCompile Include="..\Source\Objects\Coin.cpp" />
     <ClCompile Include="..\Source\Objects\Door.cpp" />
     <ClCompile Include="..\Source\Objects\Key.cpp" />
     <ClCompile Include="..\Source\Objects\Object.cpp" />
@@ -270,6 +271,7 @@ COPY /Y  "$(OutDir)*.dll" ..</Command>
     <ClInclude Include="..\Source\Maps\Room.h" />
     <ClInclude Include="..\Source\Objects\Checkpoint.h" />
     <ClInclude Include="..\Source\Objects\Chest.h" />
+    <ClInclude Include="..\Source\Objects\Coin.h" />
     <ClInclude Include="..\Source\Objects\Door.h" />
     <ClInclude Include="..\Source\Objects\Key.h" />
     <ClInclude Include="..\Source\Objects\Object.h" />

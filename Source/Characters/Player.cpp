@@ -280,6 +280,8 @@ void Player::onKeyDown(GAME* game)
 		room.addMonster(new Fireball(*(game->renderer), *this, &room));
 	else if (game->keyLetter == 'S')
 		room.addObject(new Sword("sw1", 5, 5, *(game->renderer), 23));
+	else if (game->keyLetter == 'M')
+		room.addObject(new Coin("$1", 5, 5, *(game->renderer), 500));
 #endif
 
 	if (story != NULL)

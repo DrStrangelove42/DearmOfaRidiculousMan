@@ -82,6 +82,11 @@ void LivingEntity::setMoney(int mon)
 	money = mon;
 }
 
+void LivingEntity::addMoney(int mon)
+{
+	money += mon;
+}
+
 void LivingEntity::setExperience(int exp)
 {
 	experience = exp;

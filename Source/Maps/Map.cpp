@@ -468,6 +468,10 @@ Object* Map::parseObject(string& line, RenderContext& renderer, int* uniqueId, i
 	{
 		return new Chest(line, uniqueId, x, y, renderer);
 	}
+	case '$':
+	{
+		return new Coin(line, x, y, renderer);
+	}
 	case 'B':
 	{
 		return new Butler(line, x, y, renderer);

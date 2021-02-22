@@ -101,6 +101,12 @@ public:
 	void setMoney(int mon);
 
 	/// <summary>
+	/// Adds the specified amount of money.
+	/// </summary>
+	/// <param name="mon"></param>
+	void addMoney(int mon);
+
+	/// <summary>
 	/// Changes the entity's experience to the desired amount.
 	/// </summary>
 	/// <param name="exp"></param>

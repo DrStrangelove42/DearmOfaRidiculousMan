@@ -9,6 +9,7 @@
 #include "LivingEntity.h"
 #include <unordered_map>
 #include "../Objects/Sign.h"
+#include "../Objects/Coin.h"
 
 class Room;
 class Map;
