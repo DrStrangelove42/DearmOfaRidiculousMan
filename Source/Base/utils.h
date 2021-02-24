@@ -137,7 +137,7 @@ void LoadTextFromLanguage(string& langCode);
 /// <param name="x"></param>
 /// <param name="y"></param>
 /// <returns></returns>
-bool RectContains(Rect* r, int x, int y);
+bool RectContains(const Rect* r, int x, int y);
 
 /// <summary>
 /// Builds the four masks used to create drawing surfaces (in particular with SDL).

@@ -148,7 +148,7 @@ void LoadTextFromLanguage(string& langCode)
 		loadedStrings[curID] = curValue;
 }
 
-bool RectContains(Rect* r, int x, int y)
+bool RectContains(const Rect* r, int x, int y)
 {
 	return r->x <= x && r->y <= y && x - r->x <= r->w && y - r->y <= r->h;
 }

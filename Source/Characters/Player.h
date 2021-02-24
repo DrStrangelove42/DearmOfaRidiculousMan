@@ -28,7 +28,13 @@ private:
 	/// Time of last attack, used for attack delay.
 	/// </summary>
 	int lastAttackTime;
+
 protected:
+	/// <summary>
+	/// Object under the mouse cursor, for rendering purposes
+	/// </summary>
+	Object* hoverObj;
+
 	/// <summary>
 	/// Number of lives until game over.
 	/// </summary>
@@ -87,11 +93,16 @@ protected:
 	map<string, bool> textureTags;
 
 	/// <summary>
+	/// The objects that the user wants to throw away.
+	/// </summary>
+	list<Object*> objectToRelease;
+
+	/// <summary>
 	/// Current informations of the mouse.
 	/// </summary>
 	MOUSE_DATA currentMouseData;
 public:
-	~Player();
+	virtual ~Player();
 
 	/// <summary>
 	/// Creates the player.
@@ -104,8 +115,6 @@ public:
 	/// <param name="startMoney"></param>
 	/// <param name="startExp"></param>
 	Player(RenderContext& renderer, int lives = 3, int attack = 5, int defense = 0, int startHealth = 100, int startMoney = 0, int startExp = 0);
-
-
 
 	/// <summary>
 	/// Instant kill.
@@ -232,6 +241,11 @@ public:
 	void pickUpObject(const  PickableObject* obj, RenderContext& r, int count = 1);
 
 	/// <summary>
+	/// releases the object on the map at the current position.
+	/// </summary>
+	void releaseObject(Object* obj, GAME* game);
+
+	/// <summary>
 	/// Calls the equip method of the object.
 	/// </summary>
 	/// <param name="wObj"></param>
@@ -242,7 +256,7 @@ public:
 	/// </summary>
 	/// <param name="emplacement"></param>
 	/// <returns></returns>
-	bool isWearingSomethingAt(string emplacement);
+	bool isWearingSomethingAt(string emplacement, const Wearable* wObj) const;
 
 	/// <summary>
 	/// Fill the emplacement (or switch) with the specified object.

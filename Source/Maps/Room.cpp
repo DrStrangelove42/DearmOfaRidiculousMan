@@ -134,6 +134,22 @@ void Room::addObject(Object* object)
 	}
 }
 
+void Room::addObject(Object* object, int x, int y)
+{
+	for (int i = -1; i <= 1; i++)
+	{
+		for (int j = -1; j <= 1; j++)
+		{
+			if ((j != 0 || i != 0) && blocks[x + i][y + j]->getTrav())
+			{
+				object->teleport(x + i, y + j);
+				j += 3; i += 3;//make sure to escape the loop
+			}
+		}
+	}
+	addObject(object);
+}
+
 void Room::stopScanningObjects()
 {
 	breakObjectUpdateLoop = true;

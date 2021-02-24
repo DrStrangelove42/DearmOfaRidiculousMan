@@ -10,7 +10,7 @@
 
 Player::Player(RenderContext& renderer, int lives, int attack, int defense, int startHealth, int startMoney, int startExp) :
 	LivingEntity(startHealth, startMoney, startExp, defense), MovingEntity(0, 0, renderer, "player"),
-	lives(lives), attack(attack), infosX(SZ_MAINWIDTH), infosY(0),
+	lives(lives), attack(attack), infosX(SZ_MAINWIDTH), infosY(0), hoverObj(nullptr),
 	attackDelay(500), lastAttackTime(0), story(NULL), currentMouseData(MOUSE_DATA())
 {
 	heart = renderer.LoadTexture("heart");
@@ -93,17 +93,14 @@ void Player::renderInventory(RenderContext& renderer, int xx, int yy) const
 	xx = infosX;
 	yy += tmp->getHeight();
 
-	const Object* hoverObj = nullptr;
+
 	/*The inventory*/
 	for (auto& entry : inventory)
 	{
 		entry.first->sideRender(renderer, xx, yy);
 		Rect curR = { xx, yy, SZ_BLOCKSIZE, SZ_BLOCKSIZE };
 		(*inventoryCases)[curR] = entry.first;
-		if (RectContains(&curR, currentMouseData.x, currentMouseData.y))
-		{
-			hoverObj = entry.first;
-		}
+
 		xx += SZ_BLOCKSIZE;
 		if (xx >= infosX + SZ_INFOSWIDTH)
 		{
@@ -138,8 +135,8 @@ void Player::kill()
 
 Player::~Player()
 {
-	inventory.clear();
 	delete inventoryCases;
+	inventory.clear();
 }
 
 void Player::tick(int time, GAME* game)
@@ -152,6 +149,16 @@ void Player::tick(int time, GAME* game)
 	if (story != NULL)
 	{
 		story->tick(time, game);
+	}
+
+	//Release the objects pending to be thrown away
+	if (objectToRelease.size() > 0)
+	{
+		for (Object* o : objectToRelease)
+		{
+			releaseObject(o, game);
+		}
+		objectToRelease.clear();
 	}
 }
 
@@ -237,6 +244,54 @@ void Player::animateGameOver(int time, GAME* game)
 void Player::onMouseEvent(MOUSE_DATA* md)
 {
 	currentMouseData = *md;
+
+	bool found = false;
+	if (!inventoryCases->empty() && currentMouseData.x > SZ_MAINWIDTH)
+	{
+		bool foundToDel = false;
+		Rect toDel;
+		for (auto& entry : *inventoryCases)
+		{
+			if (RectContains(&entry.first, currentMouseData.x, currentMouseData.y))
+			{
+				if (currentMouseData.button == MouseRight && currentMouseData.state == MouseStateReleased)
+				{
+					//we remove it from our inventory
+					toDel = entry.first;
+					foundToDel = true;
+					found = false;
+				}
+				else
+				{
+					//we show its infotip
+					hoverObj = const_cast<Object*>(entry.second);
+					/**
+					* Correct cast : proof.
+					* The reason why objects are const pointers in this map is because they are map::key
+					* in another map (inventory). To set the value hoverObj we *must*  bypass the compiler
+					* but we won't do anything to the object behind the pointer other than getting info from it
+					* (no modification / no deleting).
+					*/
+					found = true;
+				}
+
+				break;
+			}
+		}
+
+		if (foundToDel)
+		{
+			Object* toR = const_cast<Object*>((*inventoryCases)[toDel]); //This is a correct cast because we remove it from the map 3 lines later
+			if (toR != nullptr)
+			{
+				objectToRelease.push_back(toR);
+				(*inventoryCases)[toDel] = nullptr;
+			}
+		}
+	}
+
+	if (!found)
+		hoverObj = nullptr;//reset in case the mouse is not hovering any object.
 }
 
 void Player::onKeyDown(GAME* game)
@@ -274,6 +329,7 @@ void Player::onKeyDown(GAME* game)
 
 	if (curX != x || curY != y)
 		room.tryTeleportAt(*this, curX, curY);
+
 
 #ifdef DEBUG_MODE
 	if (game->keyLetter == 'F')
@@ -350,14 +406,35 @@ void Player::pickUpObject(const PickableObject* obj, RenderContext& r, int count
 	obj->onPickup(this);
 }
 
+void Player::releaseObject(Object* obj, GAME* game)
+{
+	game->currentMap->getCurrentRoomObject().addObject(obj, x, y);
+	Wearable* w = dynamic_cast<Wearable*>(obj);
+	if (w != nullptr)
+	{
+		//This is a wearable object, do we wear it now?
+		if (w->isWorn(this))
+			w->remove(this); //yes, so we remove it.
+	}
+	inventory.erase(obj);
+}
+
 void Player::wearObject(const Wearable* wObj)
 {
 	wObj->equip(this);
 }
 
-bool Player::isWearingSomethingAt(string emplacement)
+bool Player::isWearingSomethingAt(string emplacement, const Wearable* wObj) const
 {
-	return objectsInHand.find(emplacement) != objectsInHand.end();
+	auto w = objectsInHand.find(emplacement);
+	if (w != objectsInHand.end())
+	{ 
+		return wObj == w->second;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 void Player::addObjectToWear(string emplacement, const Wearable* wObj)

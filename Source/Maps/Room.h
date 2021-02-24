@@ -26,17 +26,17 @@ protected:
 	/// Width of the Room, in blocks<see cref="Block">Blocks</see>.
 	/// </summary>
 	int w;
-	
+
 	/// <summary>
 	/// Height of the Room, in blocks<see cref="Block">Blocks</see>.
 	/// </summary>
 	int h;
-	
+
 	/// <summary>
 	/// X coordinate of the absolute location of the first Block (top-left corner, blocks[0][0]) of this Room in the Map, in <see cref="Block">Blocks</see>.
 	/// </summary>
 	int x;
-	
+
 	/// <summary>
 	/// Y coordinate of the absolute location of the first Block (top-left corner, blocks[0][0]) of this Room in the Map, in <see cref="Block">Blocks</see>.
 	/// </summary>
@@ -56,7 +56,7 @@ protected:
 	/// A boolean indicating whether the Room has already been visited by the Player. We will only show on screen the <see cref="Room">Rooms</see> that have been discovered.
 	/// </summary>
 	bool discovered;
-	
+
 	/// <summary>
 	/// The unordered_map of <see cref="Object">Objects</see> in the Room.
 	/// </summary>
@@ -99,13 +99,13 @@ public:
 	/// <param name=""></param>
 	/// <returns></returns>
 	bool isTraversable(int, int);
-	
+
 	/// <summary>
 	/// Adds a Monster to the Room.
 	/// </summary>
 	/// <param name="m"></param>
 	void addMonster(Monster* m);
-	
+
 	/// <summary>
 	/// Removes the Monster from the Room.
 	/// </summary>
@@ -128,6 +128,12 @@ public:
 	/// </summary>
 	/// <param name="object"></param>
 	void addObject(Object* object);
+
+	/// <summary>
+	/// Adds an Object near the specified position in the Room, but not on this precise position.
+	/// </summary>
+	/// <param name="object"></param>
+	void addObject(Object* object, int x, int y);
 
 	/// <summary>
 	/// Tells the Room that it must stop updating its <see cref="Object">Objects</see>, notably when a Warp is used.

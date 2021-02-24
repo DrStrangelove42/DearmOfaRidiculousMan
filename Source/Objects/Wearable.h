@@ -24,6 +24,13 @@ public:
 	/// </summary>
 	/// <param name="p"></param>
 	virtual void remove(Player* p)const = 0;
+
+	/// <summary>
+	/// Returns a value indicating the status of the object.
+	/// </summary>
+	/// <param name="p"></param>
+	/// <returns></returns>
+	virtual bool isWorn(Player* p)const = 0;
 };
 
 #endif

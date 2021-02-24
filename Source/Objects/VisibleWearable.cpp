@@ -27,9 +27,14 @@ void VisibleWearable::remove(Player* p) const
 	p->updateTexture(renderer);
 }
 
+bool VisibleWearable::isWorn(Player* p) const
+{
+	return p->isWearingSomethingAt(tag + "hand", this);
+}
+
 void VisibleWearable::onPickup(Player* p) const
 {
-	if (!p->isWearingSomethingAt(tag + "hand"))
+	if (!isWorn(p))
 	{
 		//we do not wear anything, so we automatically wear the object now
 		p->wearObject(this);
