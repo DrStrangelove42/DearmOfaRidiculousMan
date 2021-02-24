@@ -254,23 +254,34 @@ void Player::onMouseEvent(MOUSE_DATA* md)
 		{
 			if (RectContains(&entry.first, currentMouseData.x, currentMouseData.y))
 			{
-				if (currentMouseData.button == MouseRight && currentMouseData.state == MouseStateReleased)
+
+				if (currentMouseData.state == MouseStateReleased && currentMouseData.button == MouseRight)
 				{
 					//we remove it from our inventory
 					toDel = entry.first;
 					foundToDel = true;
 					found = false;
 				}
-				else
+				else if (currentMouseData.state == MouseStateReleased && currentMouseData.button == MouseLeft)
+				{
+					//We wear it, only if it is a wearable of course
+					const Wearable* wObj = dynamic_cast<const Wearable*>(entry.second);
+					if (wObj != nullptr)
+						wObj->equip(this);
+				}
+				
+				if (!foundToDel)
 				{
 					//we show its infotip
 					hoverObj = const_cast<Object*>(entry.second);
 					/**
-					* Correct cast : proof.
+					* Correct cast : 
+					* Proof.
 					* The reason why objects are const pointers in this map is because they are map::key
 					* in another map (inventory). To set the value hoverObj we *must*  bypass the compiler
 					* but we won't do anything to the object behind the pointer other than getting info from it
 					* (no modification / no deleting).
+					* Qed.
 					*/
 					found = true;
 				}
@@ -428,7 +439,7 @@ bool Player::isWearingSomethingAt(string emplacement, const Wearable* wObj) cons
 {
 	auto w = objectsInHand.find(emplacement);
 	if (w != objectsInHand.end())
-	{ 
+	{
 		return wObj == w->second;
 	}
 	else
