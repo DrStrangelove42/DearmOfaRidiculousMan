@@ -136,7 +136,25 @@ void Player::kill()
 Player::~Player()
 {
 	delete inventoryCases;
+
+	list<Object*> toDel;
+	for (auto& entry : inventory)
+	{
+		/**
+		* const_cast soundness
+		* Proof.
+		* We clear the map at the end of this procedure, BEFORE
+		* actually deleting the underlying objects,
+		* thus the invariant on the const qualifier in map keys
+		* is valid during the map lifetime.
+		* Qed.
+		**/
+		toDel.push_back(const_cast<Object*>(entry.first));
+	}
 	inventory.clear();
+
+	for (Object* o : toDel)
+		delete o;
 }
 
 void Player::tick(int time, GAME* game)
@@ -269,13 +287,12 @@ void Player::onMouseEvent(MOUSE_DATA* md)
 					if (wObj != nullptr)
 						wObj->equip(this);
 				}
-				
+
 				if (!foundToDel)
 				{
 					//we show its infotip
-					hoverObj = const_cast<Object*>(entry.second);
 					/**
-					* Correct cast : 
+					* Correct cast :
 					* Proof.
 					* The reason why objects are const pointers in this map is because they are map::key
 					* in another map (inventory). To set the value hoverObj we *must*  bypass the compiler
@@ -283,6 +300,7 @@ void Player::onMouseEvent(MOUSE_DATA* md)
 					* (no modification / no deleting).
 					* Qed.
 					*/
+					hoverObj = const_cast<Object*>(entry.second);
 					found = true;
 				}
 

@@ -35,7 +35,9 @@ Room::~Room()
 	{
 		delete[] blocks;
 	}
-	//The objects in the map, which are deep copies of the objects we added, are deleted automatically.
+	//The objects in the map
+	for (auto& entry : objects)
+		delete entry.second;
 }
 
 void Room::render(RenderContext& renderer, int offsetX, int offsetY)const
