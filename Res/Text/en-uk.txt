@@ -1,5 +1,10 @@
 #HELP
 Use B to attack, zqsd or arrow keys to move.
+
+You can collect different objects you find in chests or on the ground. 
+Hover on the object with your mouse to see details about an object, and right-click on it to throw it away.
+
+If it is a wearable object, click on it to wear it.
 #Welcome
 Welcome to the 
 #PROJECT
