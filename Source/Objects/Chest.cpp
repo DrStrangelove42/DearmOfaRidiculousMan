@@ -3,7 +3,14 @@
 
 Chest::~Chest()
 {
-
+	list<const PickableObject*> toDel;
+	for (auto& e : contents)
+	{
+		toDel.push_back(e.first);
+	}
+	contents.clear();
+	for (const PickableObject* p : toDel)
+		delete p;
 }
 
 Chest::Chest(string identifier, int posx, int posy, RenderContext& renderer) :
@@ -65,6 +72,8 @@ bool Chest::updateObject(GAME* game)
 	{
 		game->player->pickUpObject(entry.first, *(game->renderer), entry.second);
 	}
+
+	contents.clear();
 
 	return false;
 }

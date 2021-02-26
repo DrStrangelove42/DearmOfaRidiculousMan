@@ -137,23 +137,14 @@ Player::~Player()
 {
 	delete inventoryCases;
 
-	list<Object*> toDel;
+	list<const Object*> toDel;
 	for (auto& entry : inventory)
 	{
-		/**
-		* const_cast soundness
-		* Proof.
-		* We clear the map at the end of this procedure, BEFORE
-		* actually deleting the underlying objects,
-		* thus the invariant on the const qualifier in map keys
-		* is valid during the map lifetime.
-		* Qed.
-		**/
-		toDel.push_back(const_cast<Object*>(entry.first));
+		toDel.push_back(entry.first);
 	}
 	inventory.clear();
 
-	for (Object* o : toDel)
+	for (const Object* o : toDel)
 		delete o;
 }
 
