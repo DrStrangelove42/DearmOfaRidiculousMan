@@ -225,6 +225,7 @@ COPY /Y  "$(OutDir)*.dll" ..</Command>
     <ClCompile Include="..\Source\Objects\Object.cpp" />
     <ClCompile Include="..\Source\Objects\PickableObject.cpp" />
     <ClCompile Include="..\Source\Objects\Shield.cpp" />
+    <ClCompile Include="..\Source\Objects\Shop.cpp" />
     <ClCompile Include="..\Source\Objects\Sign.cpp" />
     <ClCompile Include="..\Source\Objects\Sword.cpp" />
     <ClCompile Include="..\Source\Objects\VisibleWearable.cpp" />
@@ -277,6 +278,7 @@ COPY /Y  "$(OutDir)*.dll" ..</Command>
     <ClInclude Include="..\Source\Objects\Object.h" />
     <ClInclude Include="..\Source\Objects\PickableObject.h" />
     <ClInclude Include="..\Source\Objects\Shield.h" />
+    <ClInclude Include="..\Source\Objects\Shop.h" />
     <ClInclude Include="..\Source\Objects\Sign.h" />
     <ClInclude Include="..\Source\Objects\Sword.h" />
     <ClInclude Include="..\Source\Objects\VisibleWearable.h" />
