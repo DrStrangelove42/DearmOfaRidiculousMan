@@ -15,10 +15,16 @@ protected:
 public:
 	virtual ~VisibleWearable();
 
+	VisibleWearable(const VisibleWearable& other) : PickableObject(other), Wearable(other), renderer(other.renderer), tag(other.tag) {}
+
+	virtual VisibleWearable* clone() const {
+		return new VisibleWearable(*this);
+	}
+
 	VisibleWearable(string identifier, int posx, int posy, string tag, RenderContext& renderer);
 
 	virtual void equip(Player* p)const;
-	
+
 	virtual void remove(Player* p)const;
 
 	/// <summary>

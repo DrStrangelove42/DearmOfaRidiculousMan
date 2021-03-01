@@ -13,7 +13,13 @@ class PickableObject : public Object
 public:
 	/*Destructor*/
 	virtual ~PickableObject();
-	
+
+	PickableObject(const PickableObject& other);
+
+	virtual PickableObject* clone() const {
+		return new PickableObject(*this);
+	}
+
 	/// <summary>
 	/// Initialises a new Object with the specified informations.
 	/// </summary>
@@ -26,7 +32,7 @@ public:
 	/// <param name="attack"></param>
 	/// <param name="defense"></param>
 	PickableObject(string identifier, int posx, int posy, string tx, RenderContext& renderer, bool trav);
- 
+
 	/// <summary>
 	/// Interaction with the game.
 	/// </summary>

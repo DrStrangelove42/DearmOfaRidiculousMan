@@ -146,6 +146,7 @@ Player::~Player()
 
 	for (const Object* o : toDel)
 		delete o;
+
 }
 
 void Player::tick(int time, GAME* game)
