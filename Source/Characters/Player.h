@@ -29,6 +29,16 @@ private:
 	/// </summary>
 	int lastAttackTime;
 
+	/// <summary>
+	/// Number of inventory objets in one line, computed at the creation of the Player
+	/// Here we assume that the metrics (config.h) will not change during a game.
+	/// </summary>
+	int nbPerLine;
+
+	/// <summary>
+	/// Graphical y coordinate of the inventory.
+	/// </summary>
+	int * inventoryY;
 protected:
 	/// <summary>
 	/// Object under the mouse cursor, for rendering purposes
@@ -52,9 +62,9 @@ protected:
 	unordered_map<const Object*, int> inventory;
 
 	/// <summary>
-	/// The rendered inventory for display purposes.
+	/// The rendered inventory for display purposes : associates a position in the list to an object in the inventory.
 	/// </summary>
-	unordered_map<Rect, const Object*, RectHash>* inventoryCases;
+	unordered_map<int, const Object*> inventoryCases;
 
 	/// <summary>
 	/// Horizontal offset of the infos sub window
@@ -178,6 +188,11 @@ public:
 	void animateGameOver(int time, GAME* game);
 
 	/// <summary>
+	/// Deletes all the objects in the inventory.
+	/// </summary>
+	void clearInventory();
+
+	/// <summary>
 	/// <see cref="MOUSE_DATA">Mouse event</see>.
 	/// </summary>
 	/// <param name="md"></param>
@@ -246,6 +261,11 @@ public:
 	void releaseObject(Object* obj, GAME* game);
 
 	/// <summary>
+	/// Recomputes the list of cases from the current inventory.
+	/// </summary>
+	void rebuildInventoryCases();
+
+	/// <summary>
 	/// Calls the equip method of the object.
 	/// </summary>
 	/// <param name="wObj"></param>
@@ -296,6 +316,9 @@ public:
 	/// <param name="l"></param>
 	void setLives(int l);
 
+	/// <summary>
+	/// 
+	/// </summary>
 	void initialise(string headerline, RenderContext& renderer);
 
 	/// <summary>

@@ -14,7 +14,10 @@ Player::Player(RenderContext& renderer, int lives, int attack, int defense, int 
 	attackDelay(500), lastAttackTime(0), story(NULL), currentMouseData(MOUSE_DATA())
 {
 	heart = renderer.LoadTexture("heart");
-	inventoryCases = new unordered_map<Rect, const Object*, RectHash>;
+
+	inventoryY = new int(0);
+
+	nbPerLine = SZ_INFOSWIDTH / SZ_BLOCKSIZE;
 }
 
 void Player::setTextureTag(string tag, bool enabled)
@@ -93,22 +96,15 @@ void Player::renderInventory(RenderContext& renderer, int xx, int yy) const
 	xx = infosX;
 	yy += tmp->getHeight();
 
+	*inventoryY = yy;
 
 	/*The inventory*/
-	for (auto& entry : inventory)
+	for (auto& entry : inventoryCases)
 	{
-		entry.first->sideRender(renderer, xx, yy);
-		Rect curR = { xx, yy, SZ_BLOCKSIZE, SZ_BLOCKSIZE };
-		(*inventoryCases)[curR] = entry.first;
-
-		xx += SZ_BLOCKSIZE;
-		if (xx >= infosX + SZ_INFOSWIDTH)
-		{
-			xx = infosX;
-			yy += SZ_BLOCKSIZE;
-		}
+		entry.second->sideRender(renderer, xx + (entry.first % nbPerLine) * SZ_BLOCKSIZE, yy + (entry.first / nbPerLine) * SZ_BLOCKSIZE);
 	}
-	yy += SZ_BLOCKSIZE;
+
+	yy += SZ_BLOCKSIZE * (inventoryCases.size() / nbPerLine+1);
 	xx = infosX;
 
 	if (hoverObj != nullptr)
@@ -135,18 +131,7 @@ void Player::kill()
 
 Player::~Player()
 {
-	delete inventoryCases;
-
-	list<const Object*> toDel;
-	for (auto& entry : inventory)
-	{
-		toDel.push_back(entry.first);
-	}
-	inventory.clear();
-
-	for (const Object* o : toDel)
-		delete o;
-
+	clearInventory();
 }
 
 void Player::tick(int time, GAME* game)
@@ -251,62 +236,67 @@ void Player::animateGameOver(int time, GAME* game)
 	}
 }
 
+void Player::clearInventory()
+{
+	list<const Object*> toDel;
+	for (auto& entry : inventory)
+	{
+		toDel.push_back(entry.first);
+	}
+	inventory.clear();
+
+	for (const Object* o : toDel)
+		delete o;
+}
+
 void Player::onMouseEvent(MOUSE_DATA* md)
 {
 	currentMouseData = *md;
 
 	bool found = false;
-	if (!inventoryCases->empty() && currentMouseData.x > SZ_MAINWIDTH)
+	bool foundToDel = false;
+	if (!inventoryCases.empty() && currentMouseData.x > SZ_MAINWIDTH)
 	{
-		bool foundToDel = false;
-		Rect toDel;
-		for (auto& entry : *inventoryCases)
+		int pos = /*line*/ (currentMouseData.y - *inventoryY) / SZ_BLOCKSIZE * nbPerLine
+			+ (currentMouseData.x - infosX) / SZ_BLOCKSIZE;
+
+
+		if (inventoryCases.find(pos) != inventoryCases.end())
 		{
-			if (RectContains(&entry.first, currentMouseData.x, currentMouseData.y))
+
+			if (currentMouseData.state == MouseStateReleased && currentMouseData.button == MouseRight)
 			{
-
-				if (currentMouseData.state == MouseStateReleased && currentMouseData.button == MouseRight)
+				//we remove it from our inventory
+				Object* toR = const_cast<Object*>(inventoryCases[pos]); //This is a correct cast because we remove it from the map 3 lines later
+				if (toR != nullptr)
 				{
-					//we remove it from our inventory
-					toDel = entry.first;
-					foundToDel = true;
-					found = false;
+					objectToRelease.push_back(toR);
+					inventoryCases[pos] = nullptr;
 				}
-				else if (currentMouseData.state == MouseStateReleased && currentMouseData.button == MouseLeft)
-				{
-					//We wear it, only if it is a wearable of course
-					const Wearable* wObj = dynamic_cast<const Wearable*>(entry.second);
-					if (wObj != nullptr)
-						wObj->equip(this);
-				}
-
-				if (!foundToDel)
-				{
-					//we show its infotip
-					/**
-					* Correct cast :
-					* Proof.
-					* The reason why objects are const pointers in this map is because they are map::key
-					* in another map (inventory). To set the value hoverObj we *must*  bypass the compiler
-					* but we won't do anything to the object behind the pointer other than getting info from it
-					* (no modification / no deleting).
-					* Qed.
-					*/
-					hoverObj = const_cast<Object*>(entry.second);
-					found = true;
-				}
-
-				break;
+				foundToDel = true;
 			}
-		}
-
-		if (foundToDel)
-		{
-			Object* toR = const_cast<Object*>((*inventoryCases)[toDel]); //This is a correct cast because we remove it from the map 3 lines later
-			if (toR != nullptr)
+			else if (currentMouseData.state == MouseStateReleased && currentMouseData.button == MouseLeft)
 			{
-				objectToRelease.push_back(toR);
-				(*inventoryCases)[toDel] = nullptr;
+				//We wear it, only if it is a wearable of course
+				const Wearable* wObj = dynamic_cast<const Wearable*>(inventoryCases[pos]);
+				if (wObj != nullptr)
+					wObj->equip(this);
+			}
+
+			if (!foundToDel)
+			{
+				//we show its infotip
+				/**
+				* Correct cast :
+				* Proof.
+				* The reason why objects are const pointers in this map is because they are map::key
+				* in another map (inventory). To set the value hoverObj we *must*  bypass the compiler
+				* but we won't do anything to the object behind the pointer other than getting info from it
+				* (no modification / no deleting).
+				* Qed.
+				*/
+				hoverObj = const_cast<Object*>(inventoryCases[pos]);
+				found = true;
 			}
 		}
 	}
@@ -314,6 +304,8 @@ void Player::onMouseEvent(MOUSE_DATA* md)
 	if (!found)
 		hoverObj = nullptr;//reset in case the mouse is not hovering any object.
 }
+
+
 
 void Player::onKeyDown(GAME* game)
 {
@@ -356,7 +348,7 @@ void Player::onKeyDown(GAME* game)
 	if (game->keyLetter == 'F')
 		room.addMonster(new Fireball(*(game->renderer), *this, &room));
 	else if (game->keyLetter == 'S')
-		room.addObject(new Sword("sw1", 5, 5, *(game->renderer), 23));
+		room.addObject(new Sword("sw" + to_string(GetRandom(2598)), 5, 5, *(game->renderer), 23));
 	else if (game->keyLetter == 'M')
 		room.addObject(new Coin("$1", 5, 5, *(game->renderer), 500));
 #endif
@@ -423,13 +415,14 @@ void Player::pickUpObject(const PickableObject* obj, RenderContext& r, int count
 	}
 
 	inventory[obj] += count;
-
+	rebuildInventoryCases();
 	obj->onPickup(this);
 }
 
 void Player::releaseObject(Object* obj, GAME* game)
 {
 	game->currentMap->getCurrentRoomObject().addObject(obj, x, y);
+
 	Wearable* w = dynamic_cast<Wearable*>(obj);
 	if (w != nullptr)
 	{
@@ -438,6 +431,8 @@ void Player::releaseObject(Object* obj, GAME* game)
 			w->remove(this); //yes, so we remove it.
 	}
 	inventory.erase(obj);
+
+	rebuildInventoryCases();
 }
 
 void Player::wearObject(const Wearable* wObj)
@@ -455,6 +450,17 @@ bool Player::isWearingSomethingAt(string emplacement, const Wearable* wObj) cons
 	else
 	{
 		return false;
+	}
+}
+
+void Player::rebuildInventoryCases()
+{
+	inventoryCases.clear();
+	int i = 0;
+	for (auto& entry : inventory)
+	{
+		inventoryCases[i] = entry.first;
+		i++;
 	}
 }
 
@@ -562,7 +568,8 @@ void Player::initialise(string headerline, RenderContext& renderer)
 
 	//We clear the inventory and reset the texture, then add the objects one by one.
 	objectsInHand.clear();
-	inventory.clear();
+	textureTags.clear();
+	clearInventory();
 	resetTexture();
 	while (inventoryContents.length() > 0 && inventoryContents[0] == '(')
 	{
@@ -581,6 +588,8 @@ void Player::initialise(string headerline, RenderContext& renderer)
 			pickUpObject((PickableObject*)obj, renderer);
 		}
 	}
+
+	rebuildInventoryCases();
 }
 
 void Player::setStory(Story* s)

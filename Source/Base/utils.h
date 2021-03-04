@@ -58,6 +58,9 @@ typedef struct Rect_s
 	}
 } Rect;
 
+/// <summary>
+/// Store informations indexed by Rect 
+/// </summary>
 struct RectHash
 {
 	size_t operator()(const Rect& o) const
