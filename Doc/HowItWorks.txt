@@ -87,7 +87,7 @@ Each room is described as follows:
 	   and then the description of each of the objects in it between
 	   parentheses successively. The objects can be "sw" for a sword,
 	   followed by an optional integer for the attack value, the default
-	   being 10, or "sh" for a sword, followed by an optional integer for
+	   being 10, or "sh" for a shield, followed by an optional integer for
 	   the defense value, the default being 10.
    - a character representing a monster :
 	- 'g' : a ghost.
@@ -107,6 +107,7 @@ Each room is described as follows:
 	   identifier, a space, and the attack characteristic.
    - 'D' : a shield (Defense), the header may contain 'D' followed by the
 	   identifier, a space, and the defense characteristic.
+   - 'Z' : a shop, with the format [object string] count price [obj2] count2 price2 ...
 
 The format can be summarised as follows:
 
