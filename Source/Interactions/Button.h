@@ -42,6 +42,11 @@ protected:
 	/// Selection rectangle color
 	/// </summary>
 	int overClr;
+
+	/// <summary>
+	/// The margin used to draw a rectangle surrounding the contents of the button (all sides).
+	/// </summary>
+	int outerMargin;
 public:
 	/// <summary>
 	/// Creates a new button.
