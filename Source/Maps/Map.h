@@ -21,6 +21,7 @@
 #include "../Objects/Door.h"
 #include "../Objects/Key.h"
 #include "../Objects/Shield.h"
+#include "../Objects/Shop.h"
 #include "../Objects/Sword.h"
 #include "../Objects/Warp.h"
 #include "../Maps/Map.h"

@@ -22,22 +22,22 @@ Chest::Chest(string identifier, int posx, int posy, RenderContext& renderer) :
 Chest::Chest(string headerline, int* uniqueId, int posx, int posy, RenderContext& renderer) : Chest("", posx, posy, renderer)
 {
 	size_t pos = headerline.find(" ");
-	id = headerline.substr(0,pos);
-	headerline.erase(0,pos+1);
+	id = headerline.substr(0, pos);
+	headerline.erase(0, pos + 1);
 	// After the identifier, the items in the chest are described between parentheses, one after the other.
 	while (headerline.length() > 0 && headerline[0] == '(')
 	{
 		size_t nextpar = headerline.find(')');
 		string currentObject = headerline.substr(1, nextpar - 1);
 		headerline.erase(0, nextpar + 2);
-		
-		PickableObject* obj = (PickableObject*)Map::parseObject(currentObject, renderer, uniqueId, -1,-1);
+
+		PickableObject* obj = (PickableObject*)Map::parseObject(currentObject, renderer, uniqueId, -1, -1);
 		try
 		{
 			size_t a;
 			int count = stoi(headerline, &a);
-			headerline.erase(0,a+1);
-			addObject(obj,count);
+			headerline.erase(0, a + 1);
+			addObject(obj, count);
 		}
 		catch (...)
 		{
@@ -70,7 +70,7 @@ bool Chest::updateObject(GAME* game)
 	updateTexture(renderer);
 	for (auto& entry : contents)
 	{
-		game->player->pickUpObject(entry.first, *(game->renderer), entry.second);
+		game->player->pickUpObject(entry.first, entry.second);
 	}
 
 	contents.clear();
@@ -90,5 +90,5 @@ string Chest::objectToString() const
 			encoding += ")";
 		}
 	}
-	return encoding;	
+	return encoding;
 }

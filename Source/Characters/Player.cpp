@@ -407,7 +407,7 @@ int Player::getLives()
 	return lives;
 }
 
-void Player::pickUpObject(const PickableObject* obj, RenderContext& r, int count)
+void Player::pickUpObject(const PickableObject* obj, int count)
 {
 	if (inventory.find(obj) == inventory.end())
 	{
@@ -569,6 +569,7 @@ void Player::initialise(string headerline, RenderContext& renderer)
 	//We clear the inventory and reset the texture, then add the objects one by one.
 	objectsInHand.clear();
 	textureTags.clear();
+	updateTexture(renderer);
 	clearInventory();
 	resetTexture();
 	while (inventoryContents.length() > 0 && inventoryContents[0] == '(')
@@ -580,12 +581,12 @@ void Player::initialise(string headerline, RenderContext& renderer)
 		Object* obj = Map::parseObject(currentObject, renderer, &uniqueId, -1, -1);
 		try
 		{
-			pickUpObject((PickableObject*)obj, renderer, stoi(inventoryContents, &a));
+			pickUpObject((PickableObject*)obj, stoi(inventoryContents, &a));
 			inventoryContents.erase(0, a + 1);
 		}
 		catch (...)
 		{
-			pickUpObject((PickableObject*)obj, renderer);
+			pickUpObject((PickableObject*)obj);
 		}
 	}
 

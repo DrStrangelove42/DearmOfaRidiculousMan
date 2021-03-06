@@ -18,6 +18,20 @@ protected:
 	/// </summary>
 	int attack;
 public: 
+	Sword(const Sword& other) : VisibleWearable(other), attack(other.attack) {}
+
+	/// <summary>
+	/// In order to be deep-copied (for ex. in a shop),
+	/// PickableObjects and all of its derivatives should
+	/// implement a clone() function to keep the polymorphic
+	/// object in the correct type. To copy the derivated
+	/// instance, use* ->clone().
+	/// </summary>
+	/// <returns></returns>
+	virtual Sword* clone() const {
+		return new Sword(*this);
+	}
+
 	int getAttack() const;
 	/// <summary>
 	/// Initialises a new Sword with the specified informations.

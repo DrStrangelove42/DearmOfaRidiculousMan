@@ -31,6 +31,10 @@ Congratulations sir!
 You have escaped Mario's threat!
 #BUTLERNAME
 Mr. Fyodor
+#ArmoryName
+Ye Olde Armory
+#ArmoryLegend
+Attack and Defense since 1437
 #LostHouse
 Ruins of the ancient observation tower 
 

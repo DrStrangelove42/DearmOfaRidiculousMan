@@ -72,6 +72,12 @@ public:
 	/// <param name="r"></param>
 	/// <param name="callback"></param>
 	void addChoice(string text, RenderContext& r, function<void(int)> callback);
+
+	/// <summary>
+	/// Adds directly a button, at the right location.
+	/// </summary>
+	/// <param name="button"></param>
+	void addChoice(Button* button);
 	/// <summary>
 	/// We encode an NPC with its id, its name, and its speech.
 	/// </summary>

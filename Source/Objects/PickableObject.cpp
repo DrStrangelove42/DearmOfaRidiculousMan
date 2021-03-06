@@ -23,9 +23,8 @@ bool PickableObject::updateObject(GAME* game)
 	{
 		return false;
 	}
-
-	RenderContext& renderer = *(game->renderer);
-	game->player->pickUpObject(this, renderer);
+	 
+	game->player->pickUpObject(this);
 	/*Delete the pointer from the room*/
 	return true;
 }

@@ -2,18 +2,31 @@
 #define SHOP_H
 
 #include "PickableObject.h"
+#include "../Characters/NPC.h"
 #include <unordered_map>
+#include <vector>
+#include "../Maps/Map.h"
+
+ 
 
 /// <summary>
-/// An Shop is an Entity that can be found in a Room, for the Player to interact with, in a Chest (which is an Shop in and of itself), for the Player to collect, or in a Player's inventory, for the Player to use.
+/// An Shop is an Entity that can be found in a Room, for the player to buys other objects
+/// (deriving from PickableObject).
 /// </summary>
-class Shop : public Object
+class Shop : public NPC
 {
 protected:
 	/// <summary>
 	/// An array of items contained in the shop, and a pair (qty, price).
 	/// </summary>
-	unordered_map<PickableObject*, pair<int,int>> contents;
+	unordered_map<PickableObject*, pair<int, int>> contents;
+
+	/// <summary>
+	/// Array of objects in the order of the buttons.
+	/// </summary>
+	vector<PickableObject*> index;
+
+	Player* player;
 public:
 	virtual ~Shop();
 
@@ -25,7 +38,17 @@ public:
 	/// <param name="posy"></param>
 	/// <param name="tx"></param>
 	/// <param name="renderer"></param>
-	Shop(string identifier, int posx, int posy, string tx, RenderContext& renderer);
+	Shop(string id, string name, string speech, int posx, int posy, RenderContext& renderer, Map* map);
+
+	/// <summary>
+	/// Creates a shop based on a header line in a map file.
+	/// </summary>
+	/// <param name="headerline"></param>
+	/// <param name="uniqueId"></param>
+	/// <param name="posx"></param>
+	/// <param name="posy"></param>
+	/// <param name="renderer"></param>
+	Shop(string headerline, int* uniqueId, int posx, int posy, RenderContext& renderer);
 
 	/// <summary>
 	/// The following function describes how each type of object interacts with the player.
@@ -35,24 +58,22 @@ public:
 	virtual bool updateObject(GAME* game);
 
 	/// <summary>
-	/// Time management
-	/// </summary>
-	/// <param name="time"></param>
-	/// <param name="renderer"></param>
-	virtual void tick(int time, GAME* game);
-
-	/// <summary>
 	/// Encodes the object into a string in the correct format (the same one used when creating maps, without the position)
 	/// </summary>
 	virtual string objectToString() const;
 
 	/// <summary>
-	/// <see cref="RenderContext">Rendering</see> method, enabling the <see cref="RenderContext::renderer">renderer</see> to take the offset (in <see cref="Block">blocks</see>) into account.
+	/// Adds the buttons corresponding to the objects we can buy.
 	/// </summary>
-	/// <param name="renderer"></param>
-	/// <param name="offsetX">X Offset, in blocks.</param>
-	/// <param name="offsetY">Y Offset, in blocks.</param>
-	virtual void render(RenderContext& renderer, int offsetX = 0, int offsetY = 0) const;
+	void buildButtons(RenderContext& r);
+
+	/// <summary>
+	/// Adds an object in the choices. After you added all objects, call buildButtons to add the buttons in the window.
+	/// </summary>
+	/// <param name="pObj"></param>
+	/// <param name="count"></param>
+	/// <param name="price"></param>
+	void addObjectToSell(PickableObject* pObj, int count, int price);
 };
 
 #endif

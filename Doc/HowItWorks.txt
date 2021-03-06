@@ -107,7 +107,8 @@ Each room is described as follows:
 	   identifier, a space, and the attack characteristic.
    - 'D' : a shield (Defense), the header may contain 'D' followed by the
 	   identifier, a space, and the defense characteristic.
-   - 'Z' : a shop, with the format [object string] count price [obj2] count2 price2 ...
+   - 'Z' : followed by the shop name, and the text with it (like for the Butler) 
+	   and after that with the format [object string] count price [obj2] count2 price2 ...
 
 The format can be summarised as follows:
 

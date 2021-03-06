@@ -16,6 +16,14 @@ public:
 
 	PickableObject(const PickableObject& other);
 
+	/// <summary>
+	/// In order to be deep-copied (for ex. in a shop),
+	/// PickableObjects and all of its derivatives should
+	/// implement a clone() function to keep the polymorphic
+	/// object in the correct type. To copy the derivated
+	/// instance, use* ->clone().
+	/// </summary>
+	/// <returns></returns>
 	virtual PickableObject* clone() const {
 		return new PickableObject(*this);
 	}

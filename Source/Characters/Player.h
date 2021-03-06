@@ -253,7 +253,7 @@ public:
 	/// </summary>
 	/// <param name="item"></param>
 	/// <param name="count"></param>
-	void pickUpObject(const  PickableObject* obj, RenderContext& r, int count = 1);
+	void pickUpObject(const  PickableObject* obj, int count = 1);
 
 	/// <summary>
 	/// releases the object on the map at the current position.
