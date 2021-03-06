@@ -5,9 +5,8 @@ Texture::Texture(RenderContext& context, string id)
 	texture = internalLoadTexture(context, id, w, h);
 }
 
-SDL_Texture* Texture::internalLoadTexture(RenderContext& context, string id, int& w, int& h, bool ignoreErrors)
+inline SDL_Surface* Texture::internalLoadBitmapSurface(string id, bool ignoreErrors)
 {
-	SDL_Texture* tx = NULL;
 	SDL_Surface* bmp = NULL;
 
 	bmp = SDL_LoadBMP(("Res/" + id + ".bmp").c_str());
@@ -20,6 +19,14 @@ SDL_Texture* Texture::internalLoadTexture(RenderContext& context, string id, int
 	}
 
 	SDL_SetColorKey(bmp, SDL_TRUE, SDL_MapRGB(bmp->format, 0xff, 0, 0xff));
+	return bmp;
+}
+
+SDL_Texture* Texture::internalLoadTexture(RenderContext& context, string id, int& w, int& h, bool ignoreErrors)
+{
+	SDL_Texture* tx = NULL;
+
+	SDL_Surface* bmp = internalLoadBitmapSurface(id, ignoreErrors);
 
 	tx = context.fromSurface(bmp);
 	SDL_FreeSurface(bmp);

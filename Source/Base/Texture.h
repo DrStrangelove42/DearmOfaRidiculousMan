@@ -113,6 +113,15 @@ public:
 	Texture(RenderContext& context, string id);
 
 	/// <summary>
+	/// Bit of code used to load a bitmap file. Used in Texture as well as in other
+	/// parts of the program, which is why factorization is necessary here.
+	/// </summary>
+	/// <param name="id"></param>
+	/// <param name="ignoreErrors"></param>
+	/// <returns></returns>
+	static inline SDL_Surface* internalLoadBitmapSurface(string id, bool ignoreErrors);
+
+	/// <summary>
 	/// Destructor.
 	/// </summary>
 	virtual ~Texture();
