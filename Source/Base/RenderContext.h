@@ -211,6 +211,16 @@ public:
 	virtual Texture* LoadText(string text, int color, int backColor, int width, int padding = 0);
 
 	/// <summary>
+	/// Loads a string with an icon on the left.
+	/// </summary>
+	/// <param name="text"></param>
+	/// <param name="textureId"></param>
+	/// <param name="color"></param>
+	/// <param name="backColor"></param>
+	/// <returns></returns>
+	virtual Texture* LoadStringWithIcon(string text, string textureId, int color, int padding = 5, int backColor = 0);
+
+	/// <summary>
 	/// Frees memory.
 	/// </summary>
 	static void FreeTextures();

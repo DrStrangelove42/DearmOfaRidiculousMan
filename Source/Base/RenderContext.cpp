@@ -227,12 +227,71 @@ Texture* RenderContext::LoadText(string text, int color, int backColor, int widt
 		cur.w = width;
 		/*Crop*/
 		SDL_Surface* croppedTextSurface = createSurface(min(width, seen_width), height);
-		 
+
 		SDL_BlitSurface(textSurface, &cur, croppedTextSurface, &cur);
 		SDL_Texture* t = this->fromSurface(croppedTextSurface);
 		SDL_FreeSurface(croppedTextSurface);
 		SDL_FreeSurface(textSurface);
 		textures[id] = new Texture(t, min(width, seen_width), height);
+	}
+
+	return textures[id];
+}
+
+Texture* RenderContext::LoadStringWithIcon(string text, string textureId, int color, int padding, int backColor)
+{
+	string id = "texticon." + textureId + to_string(color) + "/" + text;
+	if (textures.find(id) == textures.end())
+	{
+		SDL_Surface* icon = Texture::internalLoadBitmapSurface(textureId, false);
+		SDL_Rect r;
+		SDL_GetClipRect(icon, &r); //Size of the image
+
+
+		SDL_Color c = { (unsigned char)(color >> 24),
+							(unsigned char)(color >> 16),
+							(unsigned char)(color >> 8),
+							(unsigned char)(color) };
+
+		unsigned char ba = (unsigned char)(backColor);
+
+		//Querying the size of the text
+		int w, h;
+		if (TTF_SizeText(FONT, text.c_str(), &w, &h))
+		{
+			cout << TTF_GetError() << endl;
+			return NULL;
+		}
+		int totalW = w + r.w + padding, totalH = max(h, r.h);
+		SDL_Surface* back = createSurface(totalW, totalH);
+
+		if (ba != 0) {
+			SDL_Color bc = { (unsigned char)(backColor >> 24),
+								(unsigned char)(backColor >> 16),
+								(unsigned char)(backColor >> 8),
+								(unsigned char)(backColor) };
+
+			SDL_FillRect(back, NULL, SDL_MapRGBA(back->format, bc.r, bc.g, bc.b, bc.a));
+		}
+
+		SDL_Surface* sText = TTF_RenderText_Solid(FONT, text.c_str(), c);
+		if ((color & 0xff) == 0)//transparent, we have to clear it by ourselves since SDL doesn't understand alpha=0.
+			SDL_SetSurfaceAlphaMod(sText, 0);
+
+		r.x = r.y = 0;
+		SDL_BlitSurface(icon, NULL, back, &r);
+		
+		//r is now the dest rect of the text
+		r.x = padding + r.w;
+		r.w = w;
+		r.h = h;
+		//r.y = TODO vertical centering?
+		SDL_BlitSurface(sText, NULL, back, &r);
+		
+		textures[id] = new Texture(this->fromSurface(back), totalW, totalH);
+		SDL_FreeSurface(back);
+		SDL_FreeSurface(icon);
+		SDL_FreeSurface(sText);
 	}
 
 	return textures[id];
