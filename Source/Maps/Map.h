@@ -32,6 +32,7 @@
 #include <functional>
 #include <fstream>
 #include <string>
+#include <list>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unordered_map>
@@ -53,7 +54,7 @@ protected:
 	/// Player's starting position in the Map.
 	/// </summary>
 	int startx, starty;
-	
+
 	/// <summary>
 	/// Mouse-Event handlers.
 	/// </summary>
@@ -98,6 +99,11 @@ protected:
 	/// Texture of the name of the Map, to be used when necessary.
 	/// </summary>
 	AnimatedTexture* titleTexture;
+
+	/// <summary>
+	/// The textures that must be drawn over everything else (like info tips).
+	/// </summary>
+	unordered_map<string, pair<Texture*, Point>> topMostTextures;
 
 	/// <summary>
 	/// This function takes a folder of files representing a World (according to the encoding described in HowItWorks.txt) and creates the current Map.
@@ -166,7 +172,7 @@ protected:
 	/// <param name="data"></param>
 	/// <returns></returns>
 	static bool intlParseRoom(string& newFile, ifstream& World, int map, int room, ofstream& layout, ofstream& start, ofstream& data);
-	
+
 public:
 	/// <summary>
 	/// Parses the string line to create the corresponding Object.
@@ -188,7 +194,7 @@ public:
 	/// <param name="y"></param>
 	/// <returns></returns>
 	static Monster* parseMonster(string& line, RenderContext& renderer, int x, int y, Player& p, Room* r);
-	
+
 	/// <summary>
 	/// This function transforms a text file into a folder of texts files which are sufficient 
 	/// to describe the Map completely and to be able to modify the <see cref="Map">Maps</see> to save progress.
@@ -301,6 +307,20 @@ public:
 	/// Called when the map is loaded to the screen.
 	/// </summary>
 	virtual void onEnter();
+
+	/// <summary>
+	/// Adds to the top most textures the specified texture.
+	/// </summary>
+	/// <param name="toReg"></param>
+	void registerTopMostTexture(string id, Texture* toReg, Point loc);
+
+	/// <summary>
+	/// Removes the texture from the list.
+	/// </summary>
+	/// <param name="id"></param>
+	/// <param name="toReg"></param>
+	/// <param name="loc"></param>
+	void unregisterTopMostTexture(string id);
 };
 
 #endif

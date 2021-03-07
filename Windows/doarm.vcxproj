@@ -207,6 +207,7 @@ COPY /Y  "$(OutDir)*.dll" ..</Command>
     <ClCompile Include="..\Source\Characters\NPC.cpp" />
     <ClCompile Include="..\Source\Characters\Player.cpp" />
     <ClCompile Include="..\Source\Interactions\Button.cpp" />
+    <ClCompile Include="..\Source\Interactions\InfoTipButton.cpp" />
     <ClCompile Include="..\Source\Interactions\Label.cpp" />
     <ClCompile Include="..\Source\Interactions\Story.cpp" />
     <ClCompile Include="..\Source\main.cpp" />
@@ -260,6 +261,7 @@ COPY /Y  "$(OutDir)*.dll" ..</Command>
     <ClInclude Include="..\Source\Characters\NPC.h" />
     <ClInclude Include="..\Source\Characters\Player.h" />
     <ClInclude Include="..\Source\Interactions\Button.h" />
+    <ClInclude Include="..\Source\Interactions\InfoTipButton.h" />
     <ClInclude Include="..\Source\Interactions\Label.h" />
     <ClInclude Include="..\Source\Interactions\Story.h" />
     <ClInclude Include="..\Source\main.h" />

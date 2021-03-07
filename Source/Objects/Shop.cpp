@@ -54,6 +54,12 @@ bool Shop::updateObject(GAME* g)
 {
 	if (player == NULL)
 		player = g->player;
+
+	if (!isPlayerNearby(g->player))
+	{
+		g->currentMap->unregisterTopMostTexture("ShopBtnInfoTip");
+	}
+
 	return NPC::updateObject(g);
 }
 
@@ -76,8 +82,9 @@ void Shop::buildButtons(RenderContext& r)
 	for (auto& entry : contents)
 	{
 		//todo image+text
-		Button* b = new Button(
+		Button* b = new InfoTipButton(
 			r.LoadStringWithIcon("x" + to_string(entry.second.first) + " : " + to_string(entry.second.second) + " gold", entry.first->getTextureID(), 0xD39206FF),
+			r,
 			-1, -1 /*x and y will be set with addChoice()*/,
 			id,
 			[this, entry](int i)
@@ -94,7 +101,8 @@ void Shop::buildButtons(RenderContext& r)
 						player->pickUpObject(p, entry.second.first);
 					}
 				}
-			}
+			},
+			entry.first->getInfo()
 		);
 		addChoice(b);
 		index.push_back(entry.first);

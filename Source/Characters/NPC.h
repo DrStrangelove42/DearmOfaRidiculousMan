@@ -5,6 +5,7 @@
 #include <functional>
 #include "../Interactions/Button.h"
 #include <list>
+#include "Player.h"
 
 class Map;
 
@@ -64,6 +65,16 @@ public:
 	/// </summary>
 	/// <param name="game"></param>
 	virtual bool updateObject(GAME* game);
+
+	/// <summary>
+	/// Indicates whether the player is in the action radius of the NPC
+	/// </summary>
+	/// <param name="p"></param>
+	/// <returns></returns>
+	inline bool isPlayerNearby(Player* p)
+	{
+		return abs(x - p->getX()) < 2 && abs(y - p->getY()) < 2;
+	}
 
 	/// <summary>
 	/// Adds a choice in the dialog (to branch on another part of the story, or anything else).

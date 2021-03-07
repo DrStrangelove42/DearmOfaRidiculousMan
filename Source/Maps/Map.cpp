@@ -91,8 +91,13 @@ void Map::render(RenderContext& renderer, int offsetX, int offsetY) const
 		rooms[i]->render(renderer, offX, offY);
 	}
 
-
 	titleTexture->renderUnscaled(renderer, 3 * SZ_BLOCKSIZE, 3 * SZ_BLOCKSIZE);
+
+	//Render top most textures
+	for (auto& entry : topMostTextures)
+	{
+		entry.second.first->renderUnscaled(renderer, entry.second.second.x, entry.second.second.y);
+	}
 
 #ifdef DEBUG_MODE
 
@@ -723,3 +728,14 @@ void Map::onEnter()
 	if (titleTexture != NULL)
 		titleTexture->reset();
 }
+
+void Map::registerTopMostTexture(string id, Texture* toReg, Point loc)
+{
+	topMostTextures[id] = { toReg, loc };
+}
+
+void Map::unregisterTopMostTexture(string id)
+{
+	topMostTextures.erase(id);
+}
+

@@ -5,28 +5,17 @@ Texture::Texture(RenderContext& context, string id)
 	texture = internalLoadTexture(context, id, w, h);
 }
 
-inline SDL_Surface* Texture::internalLoadBitmapSurface(string id, bool ignoreErrors)
-{
-	SDL_Surface* bmp = NULL;
-
-	bmp = SDL_LoadBMP(("Res/" + id + ".bmp").c_str());
-
-	if (NULL == bmp)
-	{
-		if (!ignoreErrors)
-			cout << "Unable to load texture #" + id + " : " + string(SDL_GetError()) << endl;
-		return NULL;
-	}
-
-	SDL_SetColorKey(bmp, SDL_TRUE, SDL_MapRGB(bmp->format, 0xff, 0, 0xff));
-	return bmp;
-}
-
 SDL_Texture* Texture::internalLoadTexture(RenderContext& context, string id, int& w, int& h, bool ignoreErrors)
 {
 	SDL_Texture* tx = NULL;
 
 	SDL_Surface* bmp = internalLoadBitmapSurface(id, ignoreErrors);
+
+	if (NULL == bmp && !ignoreErrors)
+	{
+		cout << "Unable to load surface from file #" + id + " : " + string(SDL_GetError()) << endl;
+		return NULL;
+	}
 
 	tx = context.fromSurface(bmp);
 	SDL_FreeSurface(bmp);

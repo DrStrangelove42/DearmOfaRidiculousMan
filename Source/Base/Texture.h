@@ -58,7 +58,7 @@ protected:
 	/// <param name="angle"></param>
 	/// <param name="center"></param>
 	/// <param name="flip"></param>
-	inline void internalRender(SDL_Texture* tx, RenderContext& context, int x, int y, int width, int height, double angle, SDL_Point* center, SDL_RendererFlip flip)
+	void internalRender(SDL_Texture* tx, RenderContext& context, int x, int y, int width, int height, double angle, SDL_Point* center, SDL_RendererFlip flip)
 	{
 		if (NULL != tx)
 		{
@@ -79,7 +79,7 @@ protected:
 	/// <param name="angle"></param>
 	/// <param name="center"></param>
 	/// <param name="flip"></param>
-	inline void internalRenderUnscaled(SDL_Texture* tx, RenderContext& context, int x, int y, double angle, SDL_Point* center, SDL_RendererFlip flip)
+	void internalRenderUnscaled(SDL_Texture* tx, RenderContext& context, int x, int y, double angle, SDL_Point* center, SDL_RendererFlip flip)
 	{
 		if (NULL != tx)
 		{
@@ -119,7 +119,22 @@ public:
 	/// <param name="id"></param>
 	/// <param name="ignoreErrors"></param>
 	/// <returns></returns>
-	static inline SDL_Surface* internalLoadBitmapSurface(string id, bool ignoreErrors);
+	static inline SDL_Surface* internalLoadBitmapSurface(string id, bool ignoreErrors)
+	{
+		SDL_Surface* bmp = NULL;
+
+		bmp = SDL_LoadBMP(("Res/" + id + ".bmp").c_str());
+
+		if (NULL == bmp)
+		{
+			if (!ignoreErrors)
+				cout << "Unable to load texture #" + id + " : " + string(SDL_GetError()) << endl;
+			return NULL;
+		}
+
+		SDL_SetColorKey(bmp, SDL_TRUE, SDL_MapRGB(bmp->format, 0xff, 0, 0xff));
+		return bmp;
+	}
 
 	/// <summary>
 	/// Destructor.

@@ -1,5 +1,5 @@
 #include "NPC.h"
-#include "Player.h"
+
 #include "../Maps/Map.h"
 
 void NPC::setTexture(RenderContext& renderer)
@@ -39,9 +39,7 @@ bool NPC::updateObject(GAME* game)
 		signedInForEvents = true;
 	}
 
-
-	if (abs(x - game->player->getX()) < 2 &&
-		abs(y - game->player->getY()) < 2)
+	if (isPlayerNearby(game->player))
 	{
 		RenderContext& r = *(game->renderer);
 		text->renderUnscaled(r, SZ_MAINWIDTH + 5, SZ_SCREENHEIGHT / 2);
@@ -55,12 +53,13 @@ bool NPC::updateObject(GAME* game)
 	return false;
 }
 
+ 
 void NPC::addChoice(string caption, RenderContext& r, function<void(int)> callback)
 {
 	choices.push_back(new Button(caption, r, SZ_MAINWIDTH + 2 * SZ_BLOCKSIZE, SZ_BLOCKSIZE + SZ_SCREENHEIGHT / 2 + text->getHeight() + int(choices.size()) * SZ_BLOCKSIZE * 3, int(choices.size()), callback, 0xD6C3C2FF, 0x8DBCE8FF));
 }
 
-void NPC::addChoice(Button * button)
+void NPC::addChoice(Button* button)
 {
 	button->teleport(SZ_MAINWIDTH + 2 * SZ_BLOCKSIZE, SZ_BLOCKSIZE + SZ_SCREENHEIGHT / 2 + text->getHeight() + int(choices.size()) * SZ_BLOCKSIZE * 3);
 	choices.push_back(button);
