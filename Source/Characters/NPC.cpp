@@ -26,34 +26,46 @@ NPC::~NPC()
 
 bool NPC::updateObject(GAME* game)
 {
-	if (!signedInForEvents)
-	{
-		container = game->currentMap;
-		for (Button* btn : choices)
-			game->currentMap->addMouseHandler(btn,
-				[btn](MOUSE_DATA* md)
-				{
-					btn->onMouseEvent(md);
-				}
-		);
-		signedInForEvents = true;
-	}
-
 	if (isPlayerNearby(game->player))
 	{
+		if (!signedInForEvents)
+		{
+			container = game->currentMap;
+			for (Button* btn : choices)
+				game->currentMap->addMouseHandler(btn,
+					[btn](MOUSE_DATA* md)
+					{
+						btn->onMouseEvent(md);
+					}
+			);
+			signedInForEvents = true;
+		}
+
+
+
 		RenderContext& r = *(game->renderer);
 		text->renderUnscaled(r, SZ_MAINWIDTH + 5, SZ_SCREENHEIGHT / 2);
 		for (Button* btn : choices)
 			btn->render(r);
+
+
+		for (Button* btn : choices)
+			btn->tick(0, game); //No need for time in a button
 	}
-
-	for (Button* btn : choices)
-		btn->tick(0, game); //No need for time in a button
-
+	else //player out of reach
+	{
+		if (signedInForEvents)
+		{
+			container = game->currentMap;
+			for (Button* btn : choices)
+				game->currentMap->removeMouseHandler(btn);
+			signedInForEvents = false;
+		}
+	}
 	return false;
 }
 
- 
+
 void NPC::addChoice(string caption, RenderContext& r, function<void(int)> callback)
 {
 	choices.push_back(new Button(caption, r, SZ_MAINWIDTH + 2 * SZ_BLOCKSIZE, SZ_BLOCKSIZE + SZ_SCREENHEIGHT / 2 + text->getHeight() + int(choices.size()) * SZ_BLOCKSIZE * 3, int(choices.size()), callback, 0xD6C3C2FF, 0x8DBCE8FF));
