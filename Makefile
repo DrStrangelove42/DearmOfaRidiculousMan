@@ -40,6 +40,7 @@ test:
 	cd ./Test && make
 
 release: clean
+release: CXXFLAGS += -O2
 release: doarm
 
 install:
