@@ -4,6 +4,7 @@
 #include <cppunit/TestFixture.h>
 #include <cppunit/extensions/HelperMacros.h>
 #include "../../Source/Characters/Player.h"
+#include "../../Source/Objects/PickableObject.h"
 #include "../Base/MockRenderContext.h"
 
 class PlayerTest : public CppUnit::TestFixture {

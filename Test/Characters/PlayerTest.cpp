@@ -45,14 +45,12 @@ void PlayerTest::coinTest()
 void PlayerTest::inventoryTest()
 {
 	Player p(*r);
-	Object* o = new Object("iden", 0, 0, "Dummy", *r, false);
+	Object* o = new PickableObject("iden", 0, 0, "Dummy", *r, false);
 	CPPUNIT_ASSERT(!p.hasObject("iden"));
 	CPPUNIT_ASSERT(!p.hasObject(o));
-	p.pickUpObject(o,*r);
+	p.pickUpObject(static_cast<PickableObject*>(o));
 	CPPUNIT_ASSERT(p.hasObject("iden"));
 	CPPUNIT_ASSERT(p.hasObject(o));
-
-	delete o;
 }
 
 void PlayerTest::setUp()
