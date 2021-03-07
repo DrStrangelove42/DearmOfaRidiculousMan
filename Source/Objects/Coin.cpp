@@ -8,9 +8,10 @@ Coin::Coin(string identifier, int posx, int posy, RenderContext& renderer, int m
 }
 
 Coin::Coin(string headerLine, int posx, int posy, RenderContext& renderer)
-	: Coin(headerLine, posx, posy, renderer, stoi(headerLine.substr(1)))
+	: Coin("", posx, posy, renderer, 0)
 {
-
+	id = EatToken(headerLine);
+	money = stoi(headerLine);
 }
 
 bool Coin::updateObject(GAME* game)
