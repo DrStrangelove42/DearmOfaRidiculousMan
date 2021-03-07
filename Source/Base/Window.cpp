@@ -1,8 +1,8 @@
 #include "Window.h"
 
-Window::Window() :w(0), h(0), window((SDL_Window*)(0xDEADBEEF))
+Window::Window() :w(0), h(0), window((SDL_Window*)(0xC07FEFEDEADBEEF))
 {
-
+	//Dummy ctor for tests
 }
 
 Window::Window(string title, int w, int h) : w(w), h(h)

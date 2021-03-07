@@ -40,6 +40,6 @@ void InfoTipButton::tick(int time, GAME* game)
 {
 	if (mouseOver)
 	{
-		game->currentMap->registerTopMostTexture("ShopBtnInfoTip", infoTipTx, { SZ_SCREENWIDTH - infoTipTx->getWidth() - SZ_INFOSWIDTH, y });
+		game->currentMap->registerTopMostTexture("ShopBtnInfoTip", infoTipTx,   SZ_SCREENWIDTH - infoTipTx->getWidth() - SZ_INFOSWIDTH, y );
 	}
 }

@@ -6,6 +6,7 @@
 RenderContext::RenderContext(Window& window)
 {
 	renderer = window.getRenderer();
+
 	if (SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND) != 0)
 		cout << "Error blend mode" << endl;
 
@@ -280,14 +281,14 @@ Texture* RenderContext::LoadStringWithIcon(string text, string textureId, int co
 
 		r.x = r.y = 0;
 		SDL_BlitSurface(icon, NULL, back, &r);
-		
+
 		//r is now the dest rect of the text
 		r.x = padding + r.w;
 		r.w = w;
 		r.h = h;
 		//r.y = TODO vertical centering?
 		SDL_BlitSurface(sText, NULL, back, &r);
-		
+
 		textures[id] = new Texture(this->fromSurface(back), totalW, totalH);
 		SDL_FreeSurface(back);
 		SDL_FreeSurface(icon);

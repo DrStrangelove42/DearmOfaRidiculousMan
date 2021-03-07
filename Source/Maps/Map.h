@@ -44,6 +44,12 @@
 
 class Map;
 
+typedef struct
+{
+	Texture* t;
+	int x, y;
+} TextureWrapper;
+
 /// <summary>
 /// A Map is a structure composed of <see cref="Room">Rooms</see>.
 /// </summary>
@@ -103,7 +109,7 @@ protected:
 	/// <summary>
 	/// The textures that must be drawn over everything else (like info tips).
 	/// </summary>
-	unordered_map<string, pair<Texture*, Point>> topMostTextures;
+	unordered_map<string, TextureWrapper> topMostTextures;
 
 	/// <summary>
 	/// This function takes a folder of files representing a World (according to the encoding described in HowItWorks.txt) and creates the current Map.
@@ -312,7 +318,7 @@ public:
 	/// Adds to the top most textures the specified texture.
 	/// </summary>
 	/// <param name="toReg"></param>
-	void registerTopMostTexture(string id, Texture* toReg, Point loc);
+	void registerTopMostTexture(string id, Texture* toReg, int x, int y);
 
 	/// <summary>
 	/// Removes the texture from the list.
@@ -322,5 +328,7 @@ public:
 	/// <param name="loc"></param>
 	void unregisterTopMostTexture(string id);
 };
+
+
 
 #endif

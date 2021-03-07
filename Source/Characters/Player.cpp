@@ -132,6 +132,8 @@ void Player::kill()
 Player::~Player()
 {
 	clearInventory();
+
+	delete inventoryY;
 }
 
 void Player::tick(int time, GAME* game)

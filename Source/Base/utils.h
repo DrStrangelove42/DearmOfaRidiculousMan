@@ -58,13 +58,6 @@ typedef struct Rect_s
 	}
 } Rect;
 
-typedef struct Point_s
-{
-	int x, y;  
-} Point;
-
- 
-
 /// <summary>
 /// Store informations indexed by Rect 
 /// </summary>

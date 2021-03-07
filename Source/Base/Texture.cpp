@@ -11,9 +11,10 @@ SDL_Texture* Texture::internalLoadTexture(RenderContext& context, string id, int
 
 	SDL_Surface* bmp = internalLoadBitmapSurface(id, ignoreErrors);
 
-	if (NULL == bmp && !ignoreErrors)
+	if (NULL == bmp)
 	{
-		cout << "Unable to load surface from file #" + id + " : " + string(SDL_GetError()) << endl;
+		if (!ignoreErrors)
+			cout << "Unable to load surface from file #" + id + " : " + string(SDL_GetError()) << endl;
 		return NULL;
 	}
 
@@ -22,7 +23,8 @@ SDL_Texture* Texture::internalLoadTexture(RenderContext& context, string id, int
 
 	if (NULL == tx)
 	{
-		cout << "Unable to create texture #" + id + " : " + string(SDL_GetError()) << endl;
+		if (!ignoreErrors)
+			cout << "Unable to create texture #" + id + " : " + string(SDL_GetError()) << endl;
 		return NULL;
 	}
 

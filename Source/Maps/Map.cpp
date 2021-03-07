@@ -16,6 +16,8 @@ Map::~Map()
 
 	mouseEventHandlers.clear();
 
+	topMostTextures.clear();
+
 	deleting = true;
 }
 
@@ -96,7 +98,7 @@ void Map::render(RenderContext& renderer, int offsetX, int offsetY) const
 	//Render top most textures
 	for (auto& entry : topMostTextures)
 	{
-		entry.second.first->renderUnscaled(renderer, entry.second.second.x, entry.second.second.y);
+		entry.second.t->renderUnscaled(renderer, entry.second.x, entry.second.y);
 	}
 
 #ifdef DEBUG_MODE
@@ -729,13 +731,14 @@ void Map::onEnter()
 		titleTexture->reset();
 }
 
-void Map::registerTopMostTexture(string id, Texture* toReg, Point loc)
+void Map::registerTopMostTexture(string id, Texture* toReg, int x, int y)
 {
-	topMostTextures[id] = { toReg, loc };
+	topMostTextures[id] = { toReg, x, y };
 }
 
 void Map::unregisterTopMostTexture(string id)
 {
-	topMostTextures.erase(id);
+	if (topMostTextures.find(id) != topMostTextures.end())
+		topMostTextures.erase(id);
 }
 
