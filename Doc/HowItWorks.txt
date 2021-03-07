@@ -5,6 +5,9 @@
     I) Maps                                                     l. 8
     II) Story mode scripts                                      l. 110
 
+    Unless specified, all files must comply with the LF (Unix) line separation.
+    Using CRLF for example may result in incorrect parsing on a Linux system.
+
 I) Maps
 
 How to create a world using a text file:
