@@ -3,6 +3,11 @@
 #include "AnimatedTexture.h"
 
 
+RenderContext::RenderContext()
+{
+	
+}
+
 RenderContext::RenderContext(Window& window)
 {
 	renderer = window.getRenderer();

@@ -56,6 +56,12 @@ public:
 	static int FONTSIZE;
 
 	/// <summary>
+	/// Dummy ctor (TODO : create a base class RenderContext and implement SDLRenderContext instead,
+	/// so we can make Mock classes properly)
+	/// </summary>
+	RenderContext();
+
+	/// <summary>
 	/// Creates a new render context from the specified window.
 	/// </summary>
 	/// <param name="window"></param>

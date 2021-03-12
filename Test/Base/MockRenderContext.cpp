@@ -1,6 +1,6 @@
 #include "MockRenderContext.h"
 
-MockRenderContext::MockRenderContext(Window& w) :RenderContext(w)
+MockRenderContext::MockRenderContext(Window& w) :RenderContext()
 {
 }
 
