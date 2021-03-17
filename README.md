@@ -59,18 +59,24 @@ In this section you will read about ways to install the graphics library in orde
 1) Download SDL and SDL_ttf from here:\
 https://www.libsdl.org/download-2.0.php \
 Go under *Development Libraries*\
-If you are using Visual Studio, download the two archives.\
+If you are using Visual Studio, download the VC archive.\
 If you are only using MinGW, only download the *\*-mingw* one\
 Extract in a folder on your choice. From now on, we will refer to it by *SDL folder* (```SDL2-<version>/```).
+To avoid the pain to have two norms of include directories in our sources, if you are using Visual Studio, 
+create a subfolder in the include directory named ```SDL2``` and copy all headers in it. In fact at all times the headers
+must be found under ```SDL folder/include/SDL2/```. Strangely enough, for Windows the header files were directly in ```include```, and
+in other systems they are in the ```SDL2``` subfolder : by democracy we decided to take the latter standard.
 
-2) Same work for SDL_ttf :
+2) Same work for SDL_ttf and SDL_Mixer :
 https://www.libsdl.org/projects/SDL_ttf/ \
-For this one, just take the ```SDL_ttf.h``` file
- from the include directory and move it to *SDL folder* under ```\x86_64-w64-mingw32\include\SDL2``` (yes even for VisualStudio).\
-This last path is our include directory, remember it. 
+https://www.libsdl.org/projects/SDL_mixer/ \
+For these ones, just take the ```SDL_ttf.h``` and ```SDL_Mixer.h``` files
+ from the respective includes directories and copy them to *SDL folder* under ```\include\SDL2``` as before. \
+ This way we gather everything in one place.
+ 
 3) If you plan on using VisualStudio or MSBuild (see next section), just merge
- the two archives together in the same *SDL folder*.
-4) Merge the lib folder of SDL_ttf with the one in ```\lib\x64``` (you will need all .lib for VS and .dll files).\
+ the two archives together in the same *SDL folder*. At the end you *must* have all headers under ```SDL_PATH/SDL2/```.
+4) Merge the lib folder of both SDL_ttf and SDL_Mixer with the one in ```\lib\x64``` (you will need all .lib for VS and .dll files).\
 Remark : with MinGW, the .lib files become the .a files.
 
 5) Now you are ready for compilation.
