@@ -17,6 +17,7 @@ jobs:
       run: |
         sudo apt install libsdl2-dev
         sudo apt install libsdl2-ttf-dev
+        sudo apt install libsdl2-mixer-dev
     #- name: configure
     #  run: ./configure
     - name: make

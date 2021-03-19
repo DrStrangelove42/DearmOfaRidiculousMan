@@ -1,6 +1,6 @@
 CXX     = g++
 
-LIBS 	= -lSDL2 -lSDL2_ttf -lcppunit
+LIBS 	= -lSDL2 -lSDL2_ttf -lSDL2_mixer -lcppunit
 
 CXXFLAGS  =  -std=c++14 `sdl2-config --cflags`
 CXXFLAGS += -g
