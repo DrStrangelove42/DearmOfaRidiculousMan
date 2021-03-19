@@ -7,7 +7,7 @@
 #include "../Maps/Map.h"
 #include "../Base/config.h"
 #include "../Base/game.h"
-
+#include "../Base/sound.h"
 using namespace std;
 
 /// <summary>

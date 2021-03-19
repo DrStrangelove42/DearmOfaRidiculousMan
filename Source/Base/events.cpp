@@ -137,5 +137,7 @@ void quitGame(GAME* game)
 	delete game->window;
 
 	delete game;
+
+	SoundQuit();
 }
 

@@ -5,7 +5,7 @@
 
 RenderContext::RenderContext()
 {
-	
+
 }
 
 RenderContext::RenderContext(Window& window)
@@ -104,7 +104,7 @@ bool RenderContext::RenderInit()
 #ifdef WIN6
 	SetProcessDPIAware();
 #endif
-	return SDL_Init(SDL_INIT_VIDEO) == 0;
+	return SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) == 0;
 }
 
 void RenderContext::RenderQuit()

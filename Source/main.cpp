@@ -1,9 +1,9 @@
 /* Entry point */
 
 #include "main.h"
- 
+
 using namespace std;
- 
+
 /// <summary>
 /// 
 /// Main entry point of DOARM.
@@ -29,7 +29,7 @@ int main(int argc, char** argv)
 	status = playDoarm(game);
 
 	quitGame(game);
-
+	
 	RenderContext::RenderQuit();
 	return status;
 }
@@ -56,7 +56,7 @@ int playDoarm(GAME* game)
 		game->currentMap->tick(currentTime, game);
 		game->player->tick(currentTime, game);
 
-		game->currentMap->render(renderer);		
+		game->currentMap->render(renderer);
 
 		game->renderer->update();
 
@@ -69,6 +69,8 @@ int playDoarm(GAME* game)
 GAME* initGame()
 {
 	InitUtils();
+	
+	SoundInit();
 
 	GAME* game = new GAME();
 
@@ -77,7 +79,7 @@ GAME* initGame()
 	game->key = KEY::Other;
 	game->currentMapId = new int(0);
 	game->keyLetter = '\0';
-	
+
 	if (NULL == game->window)
 	{
 		DumpError("Window error.");

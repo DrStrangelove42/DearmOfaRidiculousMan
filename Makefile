@@ -4,7 +4,7 @@
 
 CXX      = g++
 
-LIBS 	= `sdl2-config --libs` -lSDL2_ttf
+LIBS 	= `sdl2-config --libs` -lSDL2_ttf -lSDL2_mixer 
 
 CXXFLAGS  =  -std=c++14 `sdl2-config --cflags`
 

@@ -48,12 +48,14 @@ In this section you will read about ways to install the graphics library in orde
 #### On Linux Debian :
 
 `sudo apt install libsdl2-dev` \
-`sudo apt install libsdl2-ttf-dev`
+`sudo apt install libsdl2-ttf-dev`\
+`sudo apt install libsdl2-mixer-dev`
 
 #### On MacOS with brew :
 
 `brew install sdl2`\
-`brew install sdl2_ttf`
+`brew install sdl2_ttf`\ 
+`brew install sdl2_mixer`
 
 #### On Windows 
 1) Download SDL and SDL_ttf from here:\
@@ -99,7 +101,7 @@ in the Run dialog the next command : \
 
 2) Build the project (F6)
 
-3) Finally, copy-paste the SDL.dll and SDL_ttf.dll in the output folder (like ```/x64/Debug/```).
+3) Finally, copy-paste the SDL.dll and SDL_ttf.dll etc. in the output folder (like ```/x64/Debug/```), if it is not done automatically.
 
 You can now run the executable file (F5 in Visual Studio). The output file will be copied in the root folder of the repository,
 along with its .dll files, so you can launch it from there as well.
@@ -134,6 +136,8 @@ Yes, no configure script for now.
 
 Then if you installed with sudo rights, you can type ```doarm``` in a console. If not,
 ```cd``` to the directory of the Makefile and type ```./doarm```.
+
+Note : if you run Linux on WSL2, you must enable sounds (see https://discourse.ubuntu.com/t/getting-sound-to-work-on-wsl2/11869)
 
 ### macOS
 

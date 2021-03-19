@@ -35,6 +35,7 @@ Map::Map(string worldName, Player& p, RenderContext& renderer, int* startMap, in
 		if (mkdir(d.c_str(), 0777) != 0)
 		{
 			cout << "MKDIR DATA failed" << endl;
+			cout << " with " << WORLDDATA_LOCATION << endl;
 			return;
 		}
 		if (mkdir((WORLDDATA_LOCATION).c_str(), 0777) != 0)
