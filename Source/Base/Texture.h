@@ -123,7 +123,7 @@ public:
 	{
 		SDL_Surface* bmp = NULL;
 
-		bmp = SDL_LoadBMP(("Res/" + id + ".bmp").c_str());
+		bmp = SDL_LoadBMP((DATA_LOCATION + "Res/" + id + ".bmp").c_str());
 
 		if (NULL == bmp)
 		{
