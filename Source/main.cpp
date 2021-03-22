@@ -44,9 +44,8 @@ int playDoarm(GAME* game)
 	game->worldName = "Main menu";
 	addMapToCache(game->worldName, 0, game->currentMap);
 	addMapToCache("EndCredits", -1, new EndCredits(*me, game));
+	
 	int currentTime;
-
-	SoundPlay("test");
 
 	while (!(game->quit))
 	{
