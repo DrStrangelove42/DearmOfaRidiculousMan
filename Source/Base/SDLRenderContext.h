@@ -1,5 +1,5 @@
-#ifndef RENDERCTXT_H
-#define RENDERCTXT_H
+#ifndef SDLRENDERCTXT_H
+#define SDLRENDERCTXT_H
 
 #include "Window.h"
 #include <SDL2/SDL.h>
@@ -7,10 +7,15 @@
 #include <string>
 #include <list>
 #include "config.h"
- 
+#ifdef WIN6
+#include <Windows.h>
+#undef LoadString
+#endif
 #include <stdexcept>
 #include <iostream>
 #include <unordered_map>
+
+#include "RenderContext.h"
 
 using namespace std;
 
@@ -18,35 +23,72 @@ class Texture;
 
 /// <summary>
 /// RenderContext encapsulates a rendering context, that is used as an interface
-/// with the graphics library to render the game. This class is the abstract base class.
+/// with the graphics library to render the game.
 /// </summary>
-class RenderContext
+class SDLRenderContext : public RenderContext
 {
+protected:
+	/// <summary>
+	/// The native renderer.
+	/// </summary>
+	SDL_Renderer* renderer;
+
+	/// <summary>
+	/// The size of the font used.
+	/// </summary>
+	int FONTSIZE;
+
+	/// <summary>
+	/// The font used.
+	/// </summary>
+	TTF_Font* FONT;
+
+	/// <summary>
+	/// The hashmap where <see cref="Texture">Textures</see> are stored.
+	/// <see cref="Texture">Textures</see> beginning with 'text/' are reserved for text rendering.
+	/// </summary>
+	unordered_map<string, Texture*> textures;
+
+	/// <summary>
+	/// Internal function to create an SDL Surface with the right parameters.
+	/// </summary>
+	/// <param name="w"></param>
+	/// <param name="h"></param>
+	/// <returns></returns>
+	virtual SDL_Surface* createSurface(int w, int h, SDL_BlendMode blMode = SDL_BLENDMODE_BLEND);
 public:
+
+
+	/// <summary>
+	/// Creates a new render context from the specified window.
+	/// </summary>
+	/// <param name="window"></param>
+	SDLRenderContext(Window& window);
+
 	/// <summary>
 	/// Render context destructor.
 	/// </summary>
-	virtual ~RenderContext();
+	virtual ~SDLRenderContext();
 
 	/// <summary>
 	/// Erases the entire canvas.
 	/// </summary>
-	virtual void clear() = 0;
+	virtual void clear();
 
 	/// <summary>
 	/// Flushes the graphical modifications to appear on the screen.
 	/// </summary>
-	virtual void update() = 0;
+	virtual void update();
 
 	/// <summary>
 	/// Internal SDL-specific function.
 	/// </summary>
 	/// <param name=""></param>
 	/// <returns></returns>
-	virtual SDL_Texture* fromSurface(SDL_Surface*) = 0;
+	virtual SDL_Texture* fromSurface(SDL_Surface*);
 
 	/// <summary>
-	/// Does the actual rendering with low-level call to the graphics library (for now, SDL is here).
+	/// Does the actual rendering with low-level call to SDL.
 	/// </summary>
 	/// <param name="t">The SDL Texture structure</param>
 	/// <param name="srcrect">The SDL rect structure to crop from the image (NULL to take everything).</param>
@@ -59,7 +101,7 @@ public:
 		const SDL_Rect* dstrect,
 		const double angle,
 		const SDL_Point* center,
-		const SDL_RendererFlip flip) = 0;
+		const SDL_RendererFlip flip);
 
 	/// <summary>
 	/// Draws a rectangle at the specified position, and with the specified dimensions, with the possibility to fill it or not.
@@ -69,8 +111,7 @@ public:
 	/// <param name="w">Width</param>
 	/// <param name="h">Height</param>
 	/// <param name="fill">If the rectangle is filled with colour.</param>
-	virtual void drawRectangle(int x, int y, int w, int h, bool fill = false) = 0;
-
+	virtual void drawRectangle(int x, int y, int w, int h, bool fill = false);
 	/// <summary>
 	/// Draws a line from one point to another.
 	/// </summary>
@@ -78,20 +119,20 @@ public:
 	/// <param name="y1">Start Y coordinate</param>
 	/// <param name="x2">End X coordinate</param>
 	/// <param name="y2">End Y coordinate</param>
-	virtual void drawLine(int x1, int y1, int x2, int y2) = 0;
+	virtual void drawLine(int x1, int y1, int x2, int y2);
 
 	/// <summary>
 	/// Sets the current colour, in the format 0xRRGGBBAA. 
 	/// </summary>
 	/// <param name="color">Colour code</param>
-	virtual void changeColor(int color) = 0;
+	virtual void changeColor(int color);
 
 
 	/// <summary>
 	/// Stops during ms milliseconds.
 	/// </summary>
 	/// <param name="ms">The delay</param>
-	virtual void RenderSleep(unsigned int ms) = 0;
+	virtual void RenderSleep(unsigned int ms);
 
 	/// <summary>
 	/// Use this function to load a Texture from a BMP file. If it succeeds,
@@ -99,7 +140,7 @@ public:
 	/// time this function is called for the same Texture ID.
 	/// To load an AnimatedTexture (from files id0, ..., idN), prefix id with '*'.
 	/// </summary>
-	virtual Texture* LoadTexture(string id) = 0;
+	virtual Texture* LoadTexture(string id);
 
 	/// <summary>
 	/// Builds a Texture with the text inside (on a single line).
@@ -107,7 +148,7 @@ public:
 	/// <param name="text"></param> 
 	/// <param name="color"></param>
 	/// <returns></returns>
-	virtual Texture* LoadString(string text, int color = 0xffffffff) = 0;
+	virtual Texture* LoadString(string text, int color = 0xffffffff);
 
 	/// <summary>
 	/// Loads a temporary Texture used to draw ever-changing text on screen.
@@ -116,12 +157,12 @@ public:
 	/// <param name="text"></param> 
 	/// <param name="color"></param>
 	/// <returns></returns>
-	virtual Texture* LoadVolatileString(string text, int color, int backColor = 0) = 0;
+	virtual Texture* LoadVolatileString(string text, int color, int backColor = 0);
 
 	/// <summary>
 	/// Loads a multiline text designed to fit in the specified width (in pixels).
 	/// </summary>
-	virtual Texture* LoadText(string text, int color, int width) = 0;
+	virtual Texture* LoadText(string text, int color, int width);
 
 	/// <summary>
 	/// Loads a single line of text
@@ -131,7 +172,7 @@ public:
 	/// <param name="interval">Time delay, in ms, between each colour.</param>
 	/// <param name="loop">Tells whether the animations keeps on going after the last color.</param>
 	/// <returns></returns>
-	virtual Texture* LoadAnimatedString(string text, list<int> colors, int interval, bool loop = true) = 0;
+	virtual Texture* LoadAnimatedString(string text, list<int> colors, int interval, bool loop = true);
 
 	/// <summary>
 	/// Loads a single line of text with an animation on the background.
@@ -142,7 +183,7 @@ public:
 	/// <param name="interval">Time delay, in ms, between each colour.</param>
 	/// <param name="loop">Tells whether the animations keeps on going after the last color.</param>
 	/// <returns></returns>
-	virtual Texture* LoadAnimatedBoxedString(string text, list<int> colors, list<int> bgcolors, int interval, bool loop = true) = 0;
+	virtual Texture* LoadAnimatedBoxedString(string text, list<int> colors, list<int> bgcolors, int interval, bool loop = true);
 
 	/// <summary>
 	/// Loads a multiline text designed to fit in the specified width (in pixels).
@@ -152,7 +193,7 @@ public:
 	/// <param name="backColor"></param>
 	/// <param name="width"></param>
 	/// <returns></returns>
-	virtual Texture* LoadText(string text, int color, int backColor, int width, int padding = 0) = 0;
+	virtual Texture* LoadText(string text, int color, int backColor, int width, int padding = 0);
 
 	/// <summary>
 	/// Loads a string with an icon on the left.
@@ -162,7 +203,12 @@ public:
 	/// <param name="color"></param>
 	/// <param name="backColor"></param>
 	/// <returns></returns>
-	virtual Texture* LoadStringWithIcon(string text, string textureId, int color, int padding = 5, int backColor = 0) = 0;
+	virtual Texture* LoadStringWithIcon(string text, string textureId, int color, int padding = 5, int backColor = 0);
+
+	/// <summary>
+	/// Frees memory.
+	/// </summary>
+	void FreeTextures();
 };
 
 #endif

@@ -16,10 +16,11 @@
 #include "Maps/Room.h"
 #include "Maps/Map.h"
 #include "Maps/MainMenu.h"
+#include "Base/SDLRenderContext.h"
 #include "Characters/Player.h"
 #include "Base/sound.h"
 #include "Maps/EndCredits.h"
-
+#include "Base/SDLUtils.h"
 
 using namespace std;
 

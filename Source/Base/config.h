@@ -129,7 +129,6 @@ extern string LANGFILES_EXT;
 /// </summary>
 extern string LANGUAGE;
 
-
 #endif
 
 

@@ -18,7 +18,7 @@ int main(int argc, char** argv)
 {
 	int status = 0;
 
-	if (!RenderContext::RenderInit())
+	if (!RenderInit())
 		return DumpError("Init error.");
 
 	GAME* game = initGame();
@@ -30,7 +30,7 @@ int main(int argc, char** argv)
 
 	quitGame(game);
 	
-	RenderContext::RenderQuit();
+	RenderQuit();
 	return status;
 }
 
@@ -46,6 +46,8 @@ int playDoarm(GAME* game)
 	addMapToCache("EndCredits", -1, new EndCredits(*me, game));
 	int currentTime;
 
+	SoundPlay("test");
+
 	while (!(game->quit))
 	{
 		game->renderer->clear();
@@ -60,7 +62,7 @@ int playDoarm(GAME* game)
 
 		game->renderer->update();
 
-		RenderContext::RenderSleep(WAIT_TIME);
+		game->renderer->RenderSleep(WAIT_TIME);
 	}
 
 	return EXIT_SUCCESS;
@@ -70,8 +72,6 @@ GAME* initGame()
 {
 	InitUtils();
 	
-	SoundInit();
-
 	GAME* game = new GAME();
 
 	game->quit = false;
@@ -86,7 +86,9 @@ GAME* initGame()
 		return NULL;
 	}
 
-	game->renderer = new RenderContext(*(game->window));
+	game->renderer = new SDLRenderContext(*(game->window));
+	
+	SoundInit();
 
 	return game;
 }

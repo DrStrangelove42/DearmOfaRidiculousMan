@@ -15,7 +15,7 @@ class MockRenderContext : public RenderContext
 {
 
 public:
-	MockRenderContext(Window& w);
+
 	/// <summary>
 	/// Erases the entire canevas.
 	/// </summary>
@@ -73,7 +73,11 @@ public:
 	/// <param name="color"></param>
 	void changeColor(int color);
 
-	  
+	/// <summary>
+/// Stops during ms milliseconds.
+/// </summary>
+/// <param name="ms">The delay</param>
+	virtual void RenderSleep(unsigned int ms) ;
 	 
 	/// <summary>
 	/// Use this function to load a texture from a BMP file. If it succeeds,
@@ -98,7 +102,7 @@ public:
 	/// <param name="text"></param> 
 	/// <param name="color"></param>
 	/// <returns></returns>
-	Texture* LoadVolatileString(string text, int color);
+	virtual Texture* LoadVolatileString(string text, int color, int backColor = 0) ;
 
 	/// <summary>
 	/// Loads a multiline text designed to fit in the specified width (in pixels).
@@ -114,6 +118,38 @@ public:
 	/// <param name="width"></param>
 	/// <returns></returns>
 	Texture* LoadText(string text, int color, int backColor, int width, int padding = 0);
+
+	/// <summary>
+	/// Loads a single line of text
+	/// </summary>
+	/// <param name="text">The text to be displayed.</param>
+	/// <param name="colors">The list of colours defining the animation.</param>
+	/// <param name="interval">Time delay, in ms, between each colour.</param>
+	/// <param name="loop">Tells whether the animations keeps on going after the last color.</param>
+	/// <returns></returns>
+	virtual Texture* LoadAnimatedString(string text, list<int> colors, int interval, bool loop = true) ;
+
+	/// <summary>
+	/// Loads a single line of text with an animation on the background.
+	/// </summary>
+	/// <param name="text">The text to be displayed.</param>
+	/// <param name="colors">The list of colours defining the animation.</param>
+	/// <param name="bgcolors">The list of background colours of the animation. It must have the same size as the colors list.</param>
+	/// <param name="interval">Time delay, in ms, between each colour.</param>
+	/// <param name="loop">Tells whether the animations keeps on going after the last color.</param>
+	/// <returns></returns>
+	virtual Texture* LoadAnimatedBoxedString(string text, list<int> colors, list<int> bgcolors, int interval, bool loop = true)  ;
+
+	/// <summary>
+		/// Loads a string with an icon on the left.
+		/// </summary>
+		/// <param name="text"></param>
+		/// <param name="textureId"></param>
+		/// <param name="color"></param>
+		/// <param name="backColor"></param>
+		/// <returns></returns>
+	virtual Texture* LoadStringWithIcon(string text, string textureId, int color, int padding = 5, int backColor = 0)  ;
+
 };
 
 #endif

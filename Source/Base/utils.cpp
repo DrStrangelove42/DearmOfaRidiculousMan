@@ -1,4 +1,5 @@
 #include "utils.h"
+#include "SDLUtils.h"
 #include <string.h>
 using namespace std;
 
@@ -33,7 +34,7 @@ int GetRandom(int max)
 /// <returns></returns>
 int DumpError(string err)
 {
-	cout << "Error : " << err << "\nInternal error: " << RenderContext::RenderErrorDetails() << endl;
+	cout << "Error : " << err << "\nInternal error: " << RenderErrorDetails() << endl;
 	return EXIT_FAILURE;
 }
 

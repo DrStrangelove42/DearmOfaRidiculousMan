@@ -1,8 +1,5 @@
 #include "MockRenderContext.h"
-
-MockRenderContext::MockRenderContext(Window& w) :RenderContext()
-{
-}
+ 
 
 void MockRenderContext::clear()
 {
@@ -33,6 +30,10 @@ void MockRenderContext::changeColor(int color)
 {
 }
 
+void MockRenderContext::RenderSleep(unsigned int ms)
+{
+}
+
 Texture* MockRenderContext::LoadTexture(string id)
 {
 	return nullptr;
@@ -43,7 +44,7 @@ Texture* MockRenderContext::LoadString(string text, int color)
 	return nullptr;
 }
 
-Texture* MockRenderContext::LoadVolatileString(string text, int color)
+Texture* MockRenderContext::LoadVolatileString(string text, int color,int b)
 {
 	return nullptr;
 }
@@ -54,6 +55,21 @@ Texture* MockRenderContext::LoadText(string text, int color, int width)
 }
 
 Texture* MockRenderContext::LoadText(string text, int color, int backColor, int width, int padding)
+{
+	return nullptr;
+}
+
+Texture* MockRenderContext::LoadAnimatedString(string text, list<int> colors, int interval, bool loop)
+{
+	return nullptr;
+}
+
+Texture* MockRenderContext::LoadAnimatedBoxedString(string text, list<int> colors, list<int> bgcolors, int interval, bool loop)
+{
+	return nullptr;
+}
+
+Texture* MockRenderContext::LoadStringWithIcon(string text, string textureId, int color, int padding, int backColor)
 {
 	return nullptr;
 }

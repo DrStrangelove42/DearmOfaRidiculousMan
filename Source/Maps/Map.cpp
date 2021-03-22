@@ -105,8 +105,7 @@ void Map::render(RenderContext& renderer, int offsetX, int offsetY) const
 #ifdef DEBUG_MODE
 
 	renderer.LoadString("CURRENT MAP : " + worldName)->renderUnscaled(renderer, 0, 0);
-	renderer.LoadString("Room : " + to_string(currentRoom), 0x00FFffff)->renderUnscaled(renderer, 0, 16);
-
+	renderer.LoadString("Room : " + to_string(currentRoom), 0x00FFffff)->renderUnscaled(renderer, 0, 16); 
 #endif
 }
 

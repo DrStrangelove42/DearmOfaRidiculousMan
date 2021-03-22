@@ -187,6 +187,8 @@ COPY /Y  "$(OutDir)*.dll" ..</Command>
     <ClCompile Include="..\Source\Base\events.cpp" />
     <ClCompile Include="..\Source\Base\game.cpp" />
     <ClCompile Include="..\Source\Base\RenderContext.cpp" />
+    <ClCompile Include="..\Source\Base\SDLRenderContext.cpp" />
+    <ClCompile Include="..\Source\Base\SDLUtils.cpp" />
     <ClCompile Include="..\Source\Base\sound.cpp" />
     <ClCompile Include="..\Source\Base\Texture.cpp" />
     <ClCompile Include="..\Source\Base\utils.cpp" />
@@ -242,6 +244,8 @@ COPY /Y  "$(OutDir)*.dll" ..</Command>
     <ClInclude Include="..\Source\Base\events.h" />
     <ClInclude Include="..\Source\Base\game.h" />
     <ClInclude Include="..\Source\Base\RenderContext.h" />
+    <ClInclude Include="..\Source\Base\SDLRenderContext.h" />
+    <ClInclude Include="..\Source\Base\SDLUtils.h" />
     <ClInclude Include="..\Source\Base\sound.h" />
     <ClInclude Include="..\Source\Base\Texture.h" />
     <ClInclude Include="..\Source\Base\utils.h" />

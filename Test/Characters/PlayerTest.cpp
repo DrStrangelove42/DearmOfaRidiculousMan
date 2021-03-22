@@ -1,5 +1,4 @@
 #include "PlayerTest.h"
-#include "../Base/MockWindow.h"
 #include "../Base/MockRenderContext.h"
 
 CPPUNIT_TEST_SUITE_REGISTRATION(PlayerTest);
@@ -54,15 +53,11 @@ void PlayerTest::inventoryTest()
 }
 
 void PlayerTest::setUp()
-{
-	m = new MockWindow();
-	r = new MockRenderContext(*m);
+{ 
+	r = new MockRenderContext();
 }
 
 void PlayerTest::tearDown()
 {
-	//delete r;
-	//delete m; do NOT delete because the destructors of window and rendercontext will be called
-	// This is a design flaw, il could be fixed by introducing RenderContext as a base virtual class,
-	//and deriving both in parallel MockRenderContext and SDLRenderContext from it.
+	delete r; 
 }
