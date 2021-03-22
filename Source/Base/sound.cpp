@@ -11,8 +11,15 @@ void SoundInit()
 		cout << "Mix_Init failed with : " << Mix_GetError() << endl <<
 			"Audio is therefore disabled" << endl;
 		soundOk = false;
+#ifndef WIN
+		cout << "but it seems that you are not running on MS Windows : I chose not to trust the" << endl <<
+			"result of Mix_Init and therefore I still try to give you the music." << endl;
+		soundOk = true;
+#endif // !WIN
 	}
 	else
+		soundOk = true;
+	if (soundOk)
 	{
 		if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 512) == -1)
 		{
