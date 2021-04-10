@@ -148,7 +148,7 @@ public:
 	/// <param name="text"></param> 
 	/// <param name="color"></param>
 	/// <returns></returns>
-	virtual Texture* LoadString(string text, int color = 0xffffffff);
+	virtual Texture* LoadString(string text, int color = 0xffffffff, int backcolor = 0);
 
 	/// <summary>
 	/// Loads a temporary Texture used to draw ever-changing text on screen.
@@ -184,6 +184,54 @@ public:
 	/// <param name="loop">Tells whether the animations keeps on going after the last color.</param>
 	/// <returns></returns>
 	virtual Texture* LoadAnimatedBoxedString(string text, list<int> colors, list<int> bgcolors, int interval, bool loop = true);
+
+	/// <summary>
+	/// Creates Text surface for several higher level functions, like LoadText because it reuses
+	/// the same SDL_Color structure and so it can compute it once (inline function).
+	/// </summary>
+	/// <param name="text"></param>
+	/// <param name="c"></param>
+	/// <returns></returns>
+	SDL_Surface* InternalCreateTextSurface(string text, SDL_Color c)
+	{
+		int alpha = c.a;
+
+		c.a = 0;//0 to please Linux and Windows at the same time
+
+		/**
+		* Explanation for transparent text rendering
+		*
+		* I discovered that while on Windows the  solid mode render text function offers
+		* alpha 'built-in' the pixels it seems, the same function on my Linux didn't work
+		* like that. So instead of giving directly in c the alpha value, we call SDL_SetSurfaceAlphaMod
+		* below with the alpha value of c, which appears to work well on both systems.
+		*
+		* */
+
+		SDL_Surface* s = TTF_RenderText_Solid(FONT, text.c_str(), c);
+		if (alpha < 0xff) {
+			SDL_SetSurfaceAlphaMod(s, (unsigned char)(alpha));
+			SDL_SetSurfaceBlendMode(s, SDL_BLENDMODE_BLEND);
+		}
+		return s;
+	}
+
+	/// <summary>
+	/// Creates Text surface for several higher level functions, like LoadVolatileString.
+	/// </summary>
+	/// <param name="text"></param>
+	/// <param name="color"></param>
+	/// <returns></returns>
+	SDL_Surface* InternalCreateTextSurface(string text, int color)
+	{
+		SDL_Color c = { (unsigned char)(color >> 24),
+								(unsigned char)(color >> 16),
+								(unsigned char)(color >> 8),
+								(unsigned char)(color) };
+
+
+		return InternalCreateTextSurface(text, c);
+	}
 
 	/// <summary>
 	/// Loads a multiline text designed to fit in the specified width (in pixels).

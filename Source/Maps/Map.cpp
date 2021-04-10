@@ -69,6 +69,7 @@ Map::Map(string worldName, Player& p, RenderContext& renderer, int* startMap, in
 	mapFromFiles(worldName, p, renderer, startMap, startRoom);
 	list<int> fg = CreateFade(0xFFFFFFFF, 0xFFFFFF00, 10, 40);
 	list<int> bg = CreateFade(0x000000FF, 0x00000000, 10, 40);
+
 	titleTexture = static_cast<AnimatedTexture*>(renderer.LoadAnimatedBoxedString(mapName, fg, bg, 100, false));
 	fg.clear();
 	bg.clear();
@@ -104,8 +105,8 @@ void Map::render(RenderContext& renderer, int offsetX, int offsetY) const
 
 #ifdef DEBUG_MODE
 
-	renderer.LoadString("CURRENT MAP : " + worldName)->renderUnscaled(renderer, 0, 0);
-	renderer.LoadString("Room : " + to_string(currentRoom), 0x00FFffff)->renderUnscaled(renderer, 0, 16); 
+	renderer.LoadString("CURRENT MAP : " + worldName, 0xffffffAA)->renderUnscaled(renderer, 0, 0);
+	renderer.LoadString("Room : " + to_string(currentRoom), 0x00FFffAA)->renderUnscaled(renderer, 0, 16); 
 #endif
 }
 

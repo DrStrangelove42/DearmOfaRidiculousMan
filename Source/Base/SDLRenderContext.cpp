@@ -114,12 +114,12 @@ Texture* SDLRenderContext::LoadTexture(string id)
 	return textures[id];
 }
 
-Texture* SDLRenderContext::LoadString(string text, int color)
+Texture* SDLRenderContext::LoadString(string text, int color, int backcolor)
 {
 	string id = "text." + to_string(color) + "/" + text;
 	if (textures.find(id) == textures.end())
 	{
-		textures[id] = LoadVolatileString(GetText(text), color);
+		textures[id] = LoadVolatileString(GetText(text), color, backcolor);
 	}
 
 	return textures[id];
@@ -131,11 +131,11 @@ Texture* SDLRenderContext::LoadText(string text, int color, int backColor, int w
 	if (textures.find(id) == textures.end())
 	{
 		text += " ";
-		SDL_Color c = { (unsigned char)(color >> 24),
-							   (unsigned char)(color >> 16),
-							   (unsigned char)(color >> 8),
-							   (unsigned char)(color) };
 
+		SDL_Color c = { (unsigned char)(color >> 24),
+							(unsigned char)(color >> 16),
+							(unsigned char)(color >> 8),
+							(unsigned char)(color) };  
 
 		SDL_Surface* textSurface = createSurface(width, SZ_SCREENHEIGHT, SDL_BLENDMODE_NONE);
 
@@ -145,11 +145,11 @@ Texture* SDLRenderContext::LoadText(string text, int color, int backColor, int w
 							  (unsigned char)(backColor >> 16),
 							  (unsigned char)(backColor >> 8),
 							  (unsigned char)(backColor) };
-			SDL_FillRect(textSurface, NULL, SDL_MapRGBA(textSurface->format, bc.r, bc.g, bc.b, bc.a));
 
+			SDL_FillRect(textSurface, NULL, SDL_MapRGBA(textSurface->format, bc.r, bc.g, bc.b, bc.a));
 		}
 
-		SDL_Rect cur = { padding,padding,width,0 };
+		SDL_Rect cur = { padding, padding, width, 0 };
 		SDL_Surface* s;
 		int height = 2 * padding;
 		int seen_width = 0;
@@ -168,7 +168,7 @@ Texture* SDLRenderContext::LoadText(string text, int color, int backColor, int w
 			case '\r':
 				if (!word.empty())
 				{
-					s = TTF_RenderText_Solid(FONT, word.c_str(), c);
+					s = InternalCreateTextSurface(word, c);
 					cur.h = s->h;
 					cur.w = s->w;
 					cur_width += cur.w;
@@ -210,7 +210,7 @@ Texture* SDLRenderContext::LoadText(string text, int color, int backColor, int w
 		cur.w = width;
 		/*Crop*/
 		SDL_Surface* croppedTextSurface = createSurface(min(width, seen_width), height);
-
+		
 		SDL_BlitSurface(textSurface, &cur, croppedTextSurface, &cur);
 		SDL_Texture* t = this->fromSurface(croppedTextSurface);
 		SDL_FreeSurface(croppedTextSurface);
@@ -327,15 +327,10 @@ Texture* SDLRenderContext::LoadAnimatedBoxedString(string text, list<int> colors
 
 Texture* SDLRenderContext::LoadVolatileString(string text, int color, int backColor)
 {
-	SDL_Color c = { (unsigned char)(color >> 24),
-							(unsigned char)(color >> 16),
-							(unsigned char)(color >> 8),
-							(unsigned char)(color) };
-
 	unsigned char ba = (unsigned char)(backColor);
 	SDL_Surface* back = NULL;
 	int w, h;
-	if (ba != 0) {
+	if ((ba & 0xff) != 0) {
 		SDL_Color bc = { (unsigned char)(backColor >> 24),
 							(unsigned char)(backColor >> 16),
 							(unsigned char)(backColor >> 8),
@@ -349,14 +344,12 @@ Texture* SDLRenderContext::LoadVolatileString(string text, int color, int backCo
 		SDL_FillRect(back, NULL, SDL_MapRGBA(back->format, bc.r, bc.g, bc.b, bc.a));
 	}
 
-	SDL_Surface* s = TTF_RenderText_Solid(FONT, text.c_str(), c);
-	if ((color & 0xff) == 0)//transparent, we have to clear it by ourselves since SDL doestn't understand alpha=0.
-		SDL_SetSurfaceAlphaMod(s, 0);
+	SDL_Surface* s = InternalCreateTextSurface(text, color);
+
 	SDL_Texture* t;
 	if (ba != 0)
 	{
 		SDL_BlitSurface(s, NULL, back, NULL);
-
 		t = this->fromSurface(back);
 		SDL_FreeSurface(back);
 	}

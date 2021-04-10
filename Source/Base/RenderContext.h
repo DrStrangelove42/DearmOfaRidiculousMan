@@ -107,7 +107,7 @@ public:
 	/// <param name="text"></param> 
 	/// <param name="color"></param>
 	/// <returns></returns>
-	virtual Texture* LoadString(string text, int color = 0xffffffff) = 0;
+	virtual Texture* LoadString(string text, int color = 0xffffffff, int backcolor = 0) = 0;
 
 	/// <summary>
 	/// Loads a temporary Texture used to draw ever-changing text on screen.

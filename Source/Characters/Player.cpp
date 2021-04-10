@@ -104,7 +104,7 @@ void Player::renderInventory(RenderContext& renderer, int xx, int yy) const
 		entry.second->sideRender(renderer, xx + (entry.first % nbPerLine) * SZ_BLOCKSIZE, yy + (entry.first / nbPerLine) * SZ_BLOCKSIZE);
 	}
 
-	yy += SZ_BLOCKSIZE * (inventoryCases.size() / nbPerLine+1);
+	yy += SZ_BLOCKSIZE * (inventoryCases.size() / nbPerLine + 1);
 	xx = infosX;
 
 	if (hoverObj != nullptr)
