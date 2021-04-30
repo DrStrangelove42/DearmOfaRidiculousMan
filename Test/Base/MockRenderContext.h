@@ -93,7 +93,7 @@ public:
 	/// <param name="text"></param> 
 	/// <param name="color"></param>
 	/// <returns></returns>
-	Texture* LoadString(string text, int color = 0xffffffff);
+	Texture* LoadString(string text, int color = 0xffffffff, int backcolor = 0);
 
 	/// <summary>
 	/// Loads a temporary texture used to draw ever-changing text on screen.

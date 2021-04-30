@@ -39,7 +39,7 @@ Texture* MockRenderContext::LoadTexture(string id)
 	return nullptr;
 }
 
-Texture* MockRenderContext::LoadString(string text, int color)
+Texture* MockRenderContext::LoadString(string text, int color, int backcolor)
 {
 	return nullptr;
 }
