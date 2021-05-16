@@ -669,6 +669,27 @@ Room* Map::intlRoomFromFile(string filename, ifstream& layout, Player& p, Render
 
 void Map::saveProgress(string saveName, string originalWorldName, int mapNumber, int roomNumber, Player& p)
 {
+	struct stat l;
+	if (stat((SAVES_LOCATION + saveName).c_str(), &l) != 0)
+	{
+		if (stat((SAVES_LOCATION ).c_str(), &l) != 0)
+		{
+			if (mkdir(SAVES_LOCATION.c_str(), 0777) != 0)
+			{
+				cout << "MKDIR SAVES ROOT failed" << endl;
+				return;
+			}
+		}
+
+		string d = SAVES_LOCATION + saveName;
+		if (mkdir(d.c_str(), 0777) != 0)
+		{
+			cout << "MKDIR SAVES failed" << endl;
+			cout << " with " << d << endl;
+			return;
+		}
+	}
+
 	ofstream SaveData(SAVES_LOCATION + saveName + "/" + saveName + to_string(mapNumber) + "Data" + EXT);
 	ifstream OriginalData(WORLDDATA_LOCATION + originalWorldName + "/" + originalWorldName + to_string(mapNumber) + "Data" + EXT);
 	//We will use the original list of objects to construct the new one.

@@ -18,6 +18,7 @@ bool Checkpoint::updateObject(GAME* game)
 	{
 		return false;
 	}
+	//Enregistrer le contexte actuel
 	game->currentMap->saveProgress("testsave", game->worldName, *(game->currentMapId), game->currentMap->getCurrentRoom(), *(game->player));
 	return true;
 }
