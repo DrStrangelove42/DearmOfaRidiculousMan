@@ -38,7 +38,21 @@ private:
 	/// <summary>
 	/// Graphical y coordinate of the inventory.
 	/// </summary>
-	int * inventoryY;
+	int* inventoryY;
+
+	/// <summary>
+	/// The message queue containing the informations about the game to display on the screen.
+	/// The int is to make the old ones disappear after the correct amount of time.
+	/// </summary>
+	unordered_map<string, int> messages;
+	/// <summary>
+	/// The buffered textures
+	/// </summary>
+	unordered_map<string, AnimatedTexture*> * messagesBuffer;
+
+	//Visual effects for messages
+	list<int> fg;
+	list<int> bg;
 protected:
 	/// <summary>
 	/// Object under the mouse cursor, for rendering purposes
@@ -97,7 +111,8 @@ protected:
 	unordered_map<string, const Wearable*> objectsInHand;
 
 	/// <summary>
-	/// This one is ordered. In order to add different modifying tags to the texture, it must be
+	/// The additional textures used to display the player (for instance to show weapons, hats, ...).
+	/// In order to add different modifying tags to the texture, this map must be
 	/// ordered (so that when you add 'toto', there is only one way it blends with e.g. 'sword' : swordtoto or shieldswordtoto but not totosword...)
 	/// </summary>
 	map<string, bool> textureTags;
@@ -111,6 +126,20 @@ protected:
 	/// Current informations of the mouse.
 	/// </summary>
 	MOUSE_DATA currentMouseData;
+
+	/// <summary>
+	/// Rendering the log
+	/// </summary>
+	void renderMessages(RenderContext& renderer) const;
+
+
+	/// <summary>
+	/// Rendering management of the right panel
+	/// </summary>
+	/// <param name="renderer"></param>
+	/// <param name="xx"></param>
+	/// <param name="yy"></param>
+	void renderInventory(RenderContext& renderer, int xx, int yy) const;
 public:
 	virtual ~Player();
 
@@ -165,13 +194,6 @@ public:
 	/// <returns></returns>
 	virtual bool isAlive() const;
 
-	/// <summary>
-	/// Rendering management of the right panel
-	/// </summary>
-	/// <param name="renderer"></param>
-	/// <param name="xx"></param>
-	/// <param name="yy"></param>
-	void renderInventory(RenderContext& renderer, int xx, int yy) const;
 
 	/// <summary>
 	/// Time management
@@ -339,6 +361,15 @@ public:
 	/// </summary>
 	/// <returns></returns>
 	Story& getStory() const;
+
+	/// <summary>
+	/// Display a text message for a short period of time on the screen.
+	/// </summary>
+	/// <param name="message"></param>
+	/// <returns></returns>
+	void logMessage(string message);
+
+
 };
 
 #endif

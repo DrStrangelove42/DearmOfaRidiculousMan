@@ -18,6 +18,11 @@ Player::Player(RenderContext& renderer, int lives, int attack, int defense, int 
 	inventoryY = new int(0);
 
 	nbPerLine = SZ_INFOSWIDTH / SZ_BLOCKSIZE;
+
+	fg = CreateFade(0xFFFFFFFF, 0xFFFFFF00, 10, 40);
+	bg = CreateFade(0x000000FF, 0x00000000, 10, 40);
+
+	messagesBuffer = new unordered_map<string, AnimatedTexture*>();
 }
 
 void Player::setTextureTag(string tag, bool enabled)
@@ -53,6 +58,7 @@ void Player::render(RenderContext& renderer, int offsetX, int offsetY) const
 	//DrawableEntity::render(renderer, offsetX, offsetY);
 	drawHealthBar(renderer, xx, yy - 5);
 	renderInventory(renderer, xx, yy);
+	renderMessages(renderer);
 }
 
 bool Player::isAlive() const
@@ -134,6 +140,7 @@ Player::~Player()
 	clearInventory();
 
 	delete inventoryY;
+	delete messagesBuffer;
 }
 
 void Player::tick(int time, GAME* game)
@@ -156,6 +163,22 @@ void Player::tick(int time, GAME* game)
 			releaseObject(o, game);
 		}
 		objectToRelease.clear();
+	}
+
+	//Messages management
+	list<string> toDel;
+	for (auto& e : messages)
+	{
+		if (e.second == 0)
+			//set the delete time
+			messages[e.first] = time + 5000;
+		else if (e.second < time)
+			toDel.push_back(e.first);
+	}
+	for (string s : toDel)
+	{
+		messages.erase(s);
+		(*messagesBuffer)[s]->reset();
 	}
 }
 
@@ -617,4 +640,31 @@ bool Player::hasStory()
 Story& Player::getStory() const
 {
 	return *story;
+}
+
+void Player::logMessage(string message)
+{
+	if (messages.find(message) != messages.end())
+	{
+		//Already present, we try with a variant at the end.
+		logMessage(message + "(b)");
+	}
+	else
+	{
+		messages[message] = 0;//0 means just added (see Render function for the next actions).
+	}
+}
+
+void Player::renderMessages(RenderContext& renderer) const
+{
+	int y = 5 * SZ_BLOCKSIZE;//below the map title
+	for (auto& e : messages)
+	{ 
+		if (messagesBuffer->find(e.first) == messagesBuffer->end())
+			(*messagesBuffer)[e.first] = static_cast<AnimatedTexture*>(renderer.LoadAnimatedBoxedString(e.first, fg, bg, 100, false));
+		
+		AnimatedTexture* cur = (*messagesBuffer)[e.first];
+		cur->renderUnscaled(renderer, 3 * SZ_BLOCKSIZE, y);
+		y += cur->getHeight();
+	}
 }

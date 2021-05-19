@@ -672,11 +672,12 @@ void Map::saveProgress(string saveName, string originalWorldName, int mapNumber,
 	struct stat l;
 	if (stat((SAVES_LOCATION + saveName).c_str(), &l) != 0)
 	{
-		if (stat((SAVES_LOCATION ).c_str(), &l) != 0)
+		if (stat(SAVES_LOCATION.c_str(), &l) != 0)
 		{
 			if (mkdir(SAVES_LOCATION.c_str(), 0777) != 0)
 			{
 				cout << "MKDIR SAVES ROOT failed" << endl;
+				p.logMessage("Failed to save progress.");
 				return;
 			}
 		}
@@ -686,6 +687,7 @@ void Map::saveProgress(string saveName, string originalWorldName, int mapNumber,
 		{
 			cout << "MKDIR SAVES failed" << endl;
 			cout << " with " << d << endl;
+			p.logMessage("Failed to save progress.");
 			return;
 		}
 	}
@@ -736,6 +738,8 @@ void Map::saveProgress(string saveName, string originalWorldName, int mapNumber,
 	PlayerData << p.getHealth() << " " << p.getLives() << " " << p.getMoney() << " " << p.getExperience() << " " << p.getMaxHealth() << " " << p.inventoryToString();
 	//TODO : Add initial attack and defense of player without objects (default being 5 and 0 respectively)
 	PlayerData.close();
+
+	p.logMessage("Progess saved.");
 }
 
 void Map::sendMonstersToWarp(int x, int y, int destRoom, int destX, int destY)
