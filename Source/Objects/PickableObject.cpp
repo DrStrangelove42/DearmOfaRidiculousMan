@@ -13,7 +13,7 @@ PickableObject::PickableObject(const PickableObject& other) :Object(other)
 }
 
 PickableObject::PickableObject(string identifier, int posx, int posy, string tx, RenderContext& renderer, bool trav) :
-	Object(identifier, posx, posy, tx, renderer, trav)
+	Object(identifier, posx, posy, tx, renderer, trav, "", true)
 {
 }
 
@@ -23,7 +23,7 @@ bool PickableObject::updateObject(GAME* game)
 	{
 		return false;
 	}
-	 
+
 	game->player->pickUpObject(this);
 	/*Delete the pointer from the room*/
 	return true;

@@ -20,8 +20,14 @@ protected:
 	/// Infotip text of the object.
 	/// </summary>
 	string info;
+
+	/// <summary>
+	/// 
+	/// </summary>
+	bool ismutable;
 public:
 	virtual ~Object();
+
 	/// <summary>
 	/// Initialises a new Object with the specified informations.
 	/// </summary>
@@ -33,7 +39,7 @@ public:
 	/// <param name="trav"></param>
 	/// <param name="attack"></param>
 	/// <param name="defense"></param>
-	Object(string identifier, int posx, int posy, string tx, RenderContext& renderer, bool trav, string info = "");
+	Object(string identifier, int posx, int posy, string tx, RenderContext& renderer, bool trav, string info = "", bool save = false);
 
 	/// <summary>
 	/// 
@@ -82,6 +88,15 @@ public:
 	}
 
 	virtual string getInfo() const;
+
+	/// <summary>
+	/// Tells the map constructor if the object is to be considered as mutable in the player progress (thus to be saved
+	/// and loaded as a map opens) or not. 
+	/// The mutable objects will be taken exclusively from save files (if such files exist), whereas immutable ones will
+	/// always be read from world data. False by default.
+	/// </summary>
+	/// <returns></returns>
+	virtual bool isMutable() const;
 };
 
 #endif

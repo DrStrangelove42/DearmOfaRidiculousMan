@@ -1,7 +1,7 @@
 #include "Object.h"
 
-Object::Object(string identifier, int posx, int posy, string tx, RenderContext& renderer, bool trav, string info) :
-	MovingEntity(posx, posy, renderer, tx), id(identifier), traversable(trav), info(info)
+Object::Object(string identifier, int posx, int posy, string tx, RenderContext& renderer, bool trav, string info, bool save) :
+	MovingEntity(posx, posy, renderer, tx), id(identifier), traversable(trav), info(info), ismutable(save)
 {
 
 }
@@ -50,4 +50,9 @@ string Object::objectToString() const
 string Object::getInfo() const
 {
 	return info;
+}
+
+bool Object::isMutable() const
+{
+	return ismutable;
 }

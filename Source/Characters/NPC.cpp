@@ -54,7 +54,7 @@ bool NPC::updateObject(GAME* game)
 	}
 	else //player out of reach
 	{
-		if (signedInForEvents)
+		if (signedInForEvents)//remove buttons handlers
 		{
 			container = game->currentMap;
 			for (Button* btn : choices)

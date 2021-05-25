@@ -14,7 +14,7 @@ Chest::~Chest()
 }
 
 Chest::Chest(string identifier, int posx, int posy, RenderContext& renderer) :
-	Object(identifier, posx, posy, "closedchest", renderer, false)
+	Object(identifier, posx, posy, "closedchest", renderer, false, "", true)
 {
 
 }

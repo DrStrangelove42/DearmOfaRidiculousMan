@@ -29,7 +29,7 @@ Map::Map(string worldName, Player& p, RenderContext& renderer, int* startMap, in
 	struct stat world;
 	struct stat data;
 
-	if (stat((WORLDDATA_LOCATION).c_str(), &dataLocation) != 0)
+	if (stat(WORLDDATA_LOCATION.c_str(), &dataLocation) != 0)
 	{
 		string d = DATA_LOCATION + "Data/";
 		if (mkdir(d.c_str(), 0777) != 0)
@@ -38,7 +38,7 @@ Map::Map(string worldName, Player& p, RenderContext& renderer, int* startMap, in
 			cout << " with " << WORLDDATA_LOCATION << endl;
 			return;
 		}
-		if (mkdir((WORLDDATA_LOCATION).c_str(), 0777) != 0)
+		if (mkdir(WORLDDATA_LOCATION.c_str(), 0777) != 0)
 		{
 			cout << "MKDIR " << WORLDDATA_LOCATION << " failed" << endl;
 			return;
@@ -50,6 +50,7 @@ Map::Map(string worldName, Player& p, RenderContext& renderer, int* startMap, in
 		cout << WORLDFILES_LOCATION + worldName + EXT << " doesn't exist..." << endl;
 		return;
 	}
+
 	if (stat((WORLDDATA_LOCATION + worldName + "/" + worldName + "Start" + EXT).c_str(), &data) != 0)
 	{
 		if (mkdir((WORLDDATA_LOCATION + worldName + "/").c_str(), 0777) != 0)
@@ -63,16 +64,15 @@ Map::Map(string worldName, Player& p, RenderContext& renderer, int* startMap, in
 	{
 		auto worldTime = world.st_mtime;
 		auto dataTime = data.st_mtime;
-		if (dataTime < worldTime)
+		if (dataTime < worldTime)	//Update world file if the map file is newer
 			worldFromFile(worldName);
 	}
 	mapFromFiles(worldName, p, renderer, startMap, startRoom);
+
 	list<int> fg = CreateFade(0xFFFFFFFF, 0xFFFFFF00, 10, 40);
 	list<int> bg = CreateFade(0x000000FF, 0x00000000, 10, 40);
 
 	titleTexture = static_cast<AnimatedTexture*>(renderer.LoadAnimatedBoxedString(mapName, fg, bg, 100, false));
-	fg.clear();
-	bg.clear();
 }
 
 void Map::render(RenderContext& renderer, int offsetX, int offsetY) const
@@ -106,7 +106,7 @@ void Map::render(RenderContext& renderer, int offsetX, int offsetY) const
 #ifdef DEBUG_MODE
 
 	renderer.LoadString("CURRENT MAP : " + worldName, 0xffffffAA)->renderUnscaled(renderer, 0, 0);
-	renderer.LoadString("Room : " + to_string(currentRoom), 0x00FFffAA)->renderUnscaled(renderer, 0, 16); 
+	renderer.LoadString("Room : " + to_string(currentRoom), 0x00FFffAA)->renderUnscaled(renderer, 0, 16);
 #endif
 }
 
@@ -384,12 +384,15 @@ void Map::mapFromFiles(string worldName, Player& p, RenderContext& renderer, int
 		}
 		p.initialise(line, renderer);
 
-		//TODO : inventory. The objects generated and given to the player will be encoded in the same way as ones in chests, we need to find a way to unify both and to make it easier to extend a chest's possibilities (xp, money, life). Some virtual function used here and in chest?
+		/*TODO : inventory. The objects generated and given to the player will be encoded
+		in the same way as ones in chests, we need to find a way to unify both and to make
+		it easier to extend a chest's possibilities (xp, money, life). Some virtual function used here and in chest?*/
 
 	}
 	start.close();
 	ifstream layout(filename + to_string(*startMap) + EXT);
-	ifstream data(filename + to_string(*startMap) + "Data" + EXT);
+
+
 
 	getline(layout, line);
 	//roomCount = stoi(line); <-- Non breaking changes (see also worldFromFile)
@@ -404,53 +407,82 @@ void Map::mapFromFiles(string worldName, Player& p, RenderContext& renderer, int
 	layout.close();
 	rooms[currentRoom]->setDiscovered(true);
 
-	intlGetDataFromFile(filename, data, renderer, p);
+	intlGetDataFromFile(filename, *startMap, renderer, p);
+
+
+}
+
+void Map::intlGetDataFromFile(string filename, int mapIndex, RenderContext& renderer, Player& p)
+{
+	ifstream data(filename + to_string(mapIndex) + "Data" + EXT);
+
+	int uniqueId = 0; // This integer is used to make sure that objects in chests have unique identifiers.
+
+	/*Is there a saved progress?*/
+	string savePath = SAVES_LOCATION + "default/" + worldName + to_string(mapIndex) + "Data" + EXT;
+	struct stat l;
+	bool fromSave = false;
+	if (stat(savePath.c_str(), &l) == 0)
+	{
+		//Mutable objects are taken from the saved progress, and other objects from original data file.
+		fromSave = true;
+		ifstream save(savePath);
+
+		/*Note : if there was a non mutable object in this file, it will be loaded.
+		Thus there is still possibility to store all types of objects in the save file ; however
+		only mutable objects are saved through the saveProgress function.
+		*/
+		populateRoomFromDataFile(save, p, false, &uniqueId, renderer, filename);
+
+		save.close();
+	}
+
+	populateRoomFromDataFile(data, p, fromSave, &uniqueId, renderer, filename);
 
 	data.close();
 }
 
-void Map::intlGetDataFromFile(string filename, ifstream& data, RenderContext& renderer, Player& p)
+void Map::populateRoomFromDataFile(ifstream& data, Player& p, bool ignoreMutable, int* PuniqueId, RenderContext& renderer, string& fileNameForInfo)
 {
-	string line3;
-	int uniqueId = 0; // This integer is used to make sure that objects in chests have unique identifiers.
 
+	string line3;
 	while (getline(data, line3))
 	{
-		/* For each line, we extract its position in the map, and the rest of the information needed to construct the object and add it to the map thanks to another function. */
+		/* For each line, we extract its position in the map, and the rest of the information
+		needed to construct the object and add it to the map thanks to another function. */
 		if (line3[line3.length() - 1] == '\r')
-		{
 			line3.erase(line3.length() - 1);
-		}
+
 		int room, x, y;
-		size_t a;
-		room = stoi(line3, &a);
-		line3.erase(0, a);
-		x = stoi(line3, &a);
-		line3.erase(0, a);
-		y = stoi(line3, &a);
-		line3.erase(0, a + 1);
+		room = stoi(EatToken(line3));
+		x = stoi(EatToken(line3));
+		y = stoi(EatToken(line3));
+
 		try
 		{
-			parseObjectOrMonster(line3, filename, renderer, &uniqueId, x, y, p, room);
+			parseObjectOrMonster(line3, fileNameForInfo, renderer, PuniqueId, x, y, p, room, ignoreMutable);
 		}
 		catch (...)
 		{
-			cout << "Incomplete header in " << filename << endl;
+			cout << "Incomplete header in " << fileNameForInfo << endl;
 		}
 	}
 }
 
-void Map::parseObjectOrMonster(string& line, string& filename, RenderContext& renderer, int* uniqueId, int x, int y, Player& p, int room)
+void Map::parseObjectOrMonster(string& line, string& filename, RenderContext& renderer, int* uniqueId, int x, int y, Player& p, int room, bool ignoreMutable)
 {
 	string monsters = "GgSsFP"; //add all Monster types
 	string objects = "!kdcBbCADZ$"; //add all object types
 	if (monsters.find_first_of(line[0]) != monsters.npos)
 	{
-		rooms[room]->addMonster(parseMonster(line, renderer, x, y, p, rooms[room]));
+		if (!ignoreMutable)
+			rooms[room]->addMonster(parseMonster(line, renderer, x, y, p, rooms[room]));
 	}
 	else if (objects.find_first_of(line[0]) != objects.npos)
 	{
-		rooms[room]->addObject(parseObject(line, renderer, uniqueId, x, y));
+		Object* o = parseObject(line, renderer, uniqueId, x, y);
+		if (!ignoreMutable || !o->isMutable())
+			rooms[room]->addObject(o);
 	}
 	else
 		cout << "Case " << line[0] << " not treated yet in " << filename << endl;
@@ -692,36 +724,19 @@ void Map::saveProgress(string saveName, string originalWorldName, int mapNumber,
 		}
 	}
 
-	ofstream SaveData(SAVES_LOCATION + saveName + "/" + saveName + to_string(mapNumber) + "Data" + EXT);
-	ifstream OriginalData(WORLDDATA_LOCATION + originalWorldName + "/" + originalWorldName + to_string(mapNumber) + "Data" + EXT);
-	//We will use the original list of objects to construct the new one.
+	ofstream SaveData(SAVES_LOCATION + saveName + "/" + originalWorldName + to_string(mapNumber) + "Data" + EXT);
 
-	string line;
-	while (getline(OriginalData, line))
-	{
-		if (line[line.length() - 1] == '\r')
-		{
-			line.erase(line.length() - 1);
-		}
-		int room, x, y;
-		string id;
-		size_t a;
-		room = stoi(line, &a);
-		line.erase(0, a);
-		x = stoi(line, &a);
-		line.erase(0, a);
-		y = stoi(line, &a);
-		line.erase(0, a + 1);
-		id = line.substr(0, line.find(' '));
-		string toAdd = rooms[room]->getObjectString(id);
-		if (toAdd != "")
-		{
-			SaveData << room << " " << x << " " << y << " " << toAdd << endl;
-		}
-	}
-	OriginalData.close();
 	for (int room = 0; room < roomCount; room++)
 	{
+		//Objets
+		for (auto& entry : rooms[room]->getObjects())
+		{
+			Object* cur = entry.second;
+			if (cur->isMutable())//Save only mutable objects (doors, chests, any PickableObject)
+				SaveData << room << " " << cur->getX() << " " << cur->getY() << " " << cur->objectToString() << endl;
+		}
+
+		//Monsters
 		list<Monster*> monsters = rooms[room]->getMonsters();
 		for (Monster* m : monsters)
 		{
@@ -732,8 +747,11 @@ void Map::saveProgress(string saveName, string originalWorldName, int mapNumber,
 			}
 		}
 	}
+
 	SaveData.close();
-	ofstream PlayerData(SAVES_LOCATION + saveName + "/" + saveName + "Start" + EXT);
+
+	//Inventory and player info
+	ofstream PlayerData(SAVES_LOCATION + saveName + "/" + "Start" + EXT);
 	PlayerData << mapNumber << " " << roomNumber << " " << p.getX() << " " << p.getY() << endl;
 	PlayerData << p.getHealth() << " " << p.getLives() << " " << p.getMoney() << " " << p.getExperience() << " " << p.getMaxHealth() << " " << p.inventoryToString();
 	//TODO : Add initial attack and defense of player without objects (default being 5 and 0 respectively)

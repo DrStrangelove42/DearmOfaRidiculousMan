@@ -128,10 +128,21 @@ protected:
 	/// Extracts the data (<see cref="Object">Objects</see> and <see cref="Monster">Monsters</see>) from the ifstream data and adds them to the Map.
 	/// </summary>
 	/// <param name="worldName"></param>
-	/// <param name="data"></param>
+	/// <param name="mapIndex"></param>
 	/// <param name="renderer"></param>
 	/// <param name="p"></param>
-	void intlGetDataFromFile(string worldName, ifstream& data, RenderContext& renderer, Player& p);
+	void intlGetDataFromFile(string worldName, int mapIndex, RenderContext& renderer, Player& p);
+
+	/// <summary>
+	/// Takes a data file and fills the rooms of this map with the monsters and objects in it.
+	/// </summary>
+	/// <param name="data">The opened file from which read the data.</param>
+	/// <param name="ignoreMutable">The mutable objects will be skipped (in the case of a 
+	/// data file given that there exists a save file. See also <see cref="Object::isMutable">isMutable</see>.</param>
+	/// <param name="uniqueId"></param>
+	/// <param name="renderer"></param>
+	/// <param name="fileNameForInfo">The file name to display relevant error messages.</param>
+	void populateRoomFromDataFile(ifstream& data, Player& p, bool ignoreMutable, int* uniqueId, RenderContext& renderer, string& fileNameForInfo);
 
 	/// <summary>
 	/// Here line encodes a Monster or an Object, and they should be treated differently, so we analyse the line to deduce the type of data and call the corresponding function to create it.
@@ -144,7 +155,8 @@ protected:
 	/// <param name="y"></param>
 	/// <param name="p"></param>
 	/// <param name="room"></param>
-	void parseObjectOrMonster(string& line, string& filename, RenderContext& renderer, int* uniqueId, int x, int y, Player& p, int room);
+	/// <param name="ignoreMutable"></param>
+	void parseObjectOrMonster(string& line, string& filename, RenderContext& renderer, int* uniqueId, int x, int y, Player& p, int room, bool ignoreMutable = false);
 
 	/// <summary>
 	/// Creates the Room thanks to the layout file, by creating a Room of the correct shape and in the correct position, and then replacing each Block with the correct one.
@@ -238,6 +250,9 @@ public:
 
 	/// <summary>
 	/// Saves the Player's progress in a folder, so that the game can be resumed at a later date.
+	/// The progress consists of all pickable objets and monsters in a given map (in a per-map file named WorldName(map id)Data in the
+	/// Saves/- folder, using the same format as in Data files under Worlds folder).
+	/// The player's inventory is saved as well (in Saves/-/Start.txt) during each call to this function.
 	/// </summary>
 	/// <param name="saveName"></param>
 	/// <param name="originalWorldName"></param>

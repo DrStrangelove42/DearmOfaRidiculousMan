@@ -5,12 +5,14 @@ Door::~Door()
 
 }
 
-Door::Door(string keyId, string openOrientation, string closedOrientation, string identifier, int posx, int posy, RenderContext& renderer) : keyId(keyId), openOrientation(openOrientation), closedOrientation(closedOrientation), Object(identifier, posx, posy, "door" + closedOrientation, renderer, false)
+Door::Door(string keyId, string openOrientation, string closedOrientation, string identifier, int posx, int posy, RenderContext& renderer) : 
+	keyId(keyId), openOrientation(openOrientation), closedOrientation(closedOrientation), 
+	Object(identifier, posx, posy, "door" + closedOrientation, renderer, false, "", true)
 {
 
 }
 
-Door::Door(string headerline, int posx, int posy, RenderContext& renderer) : Object("", posx, posy, "empty", renderer, false)
+Door::Door(string headerline, int posx, int posy, RenderContext& renderer) : Object("", posx, posy, "empty", renderer, false, "", true)
 {
 	auto iss = istringstream{ headerline };
 	string str = "";

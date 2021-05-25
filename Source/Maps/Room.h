@@ -229,6 +229,7 @@ public:
 
 	/// <summary>
 	/// Returns the string that encodes the Object having the given identifier in the Room.
+	/// If the object is not in the room, returns an empty string ("").
 	/// </summary>
 	/// <param name="id"></param>
 	string getObjectString(string id);
