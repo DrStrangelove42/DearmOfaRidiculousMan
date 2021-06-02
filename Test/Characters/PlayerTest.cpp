@@ -5,7 +5,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION(PlayerTest);
 
 void PlayerTest::damageTest()
 {
-	Player p(*r, 0, 15, 10, 40);
+	Player p(*r, "", 0, 15, 10, 40);
 
 	p.damage(20);
 	CPPUNIT_ASSERT(p.getHealth() == 30);
@@ -17,7 +17,7 @@ void PlayerTest::damageTest()
 
 void PlayerTest::killTest()
 {
-	Player p(*r, 1, 15, 10, 40);
+	Player p(*r, "", 1, 15, 10, 40);
 	p.kill();
 	p.kill();
 	CPPUNIT_ASSERT(!p.isAlive());
@@ -25,7 +25,7 @@ void PlayerTest::killTest()
 
 void PlayerTest::experienceTest()
 {
-	Player p(*r);
+	Player p(*r, "");
 	p.gainCoins(500);
 	CPPUNIT_ASSERT(p.getMoney() == 500);
 	p.gainCoins(-50);
@@ -34,7 +34,7 @@ void PlayerTest::experienceTest()
 
 void PlayerTest::coinTest()
 {
-	Player p(*r);
+	Player p(*r, "");
 	p.gainExperience(60);
 	CPPUNIT_ASSERT(p.getExperience() == 60);
 	p.gainExperience(456);
@@ -43,8 +43,8 @@ void PlayerTest::coinTest()
 
 void PlayerTest::inventoryTest()
 {
-	Player p(*r);
-	Object* o = new PickableObject("iden", 0, 0, "Dummy", *r, false);
+	Player p(*r, "");
+	Object* o = new PickableObject("iden", 0, 0, "Dummy", *r);
 	CPPUNIT_ASSERT(!p.hasObject("iden"));
 	CPPUNIT_ASSERT(!p.hasObject(o));
 	p.pickUpObject(static_cast<PickableObject*>(o));
@@ -53,11 +53,11 @@ void PlayerTest::inventoryTest()
 }
 
 void PlayerTest::setUp()
-{ 
+{
 	r = new MockRenderContext();
 }
 
 void PlayerTest::tearDown()
 {
-	delete r; 
+	delete r;
 }

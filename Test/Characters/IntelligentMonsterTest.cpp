@@ -5,7 +5,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION(IntelligentMonsterTest);
 
 void IntelligentMonsterTest::movementTest()
 {
-	Player p(*r1, 0, 15, 10, 40);
+	Player p(*r1, "", 0, 15, 10, 40);
 	Room room1(5, 5, 0, 0, p, *r1);
 	for (int i = 0; i < 5; i++)
 	{
