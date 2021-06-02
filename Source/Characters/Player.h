@@ -106,7 +106,7 @@ protected:
 	Story* story;
 
 	/// <summary>
-	/// 
+	/// All the objects that the player is currently wearing.
 	/// </summary>
 	unordered_map<string, const Wearable*> objectsInHand;
 
@@ -141,6 +141,7 @@ protected:
 	/// <param name="yy"></param>
 	void renderInventory(RenderContext& renderer, int xx, int yy) const;
 public:
+
 	virtual ~Player();
 
 	/// <summary>
@@ -153,7 +154,7 @@ public:
 	/// <param name="startHealth"></param>
 	/// <param name="startMoney"></param>
 	/// <param name="startExp"></param>
-	Player(RenderContext& renderer, int lives = 3, int attack = 5, int defense = 0, int startHealth = 100, int startMoney = 0, int startExp = 0);
+	Player(RenderContext& renderer, string saveName, int lives = 3, int attack = 5, int defense = 0, int startHealth = 100, int startMoney = 0, int startExp = 0);
 
 	/// <summary>
 	/// Instant kill.
@@ -328,20 +329,20 @@ public:
 	bool hasObject(Object* obj);
 
 	/// <summary>
-	/// Encodes the player's inventory.
-	/// </summary>
-	string inventoryToString() const;
-
-	/// <summary>
 	/// Sets the number of lives of the player to l.
 	/// </summary>
 	/// <param name="l"></param>
 	void setLives(int l);
 
 	/// <summary>
-	/// 
+	/// Initialises the player with the information encoded in the headerline.
 	/// </summary>
-	void initialise(string headerline, RenderContext& renderer);
+	void initialise(ifstream& saveFile, RenderContext& renderer);
+
+	/// <summary>
+	/// Saves the player's info in the save file corresponding to saveName.
+	/// </summary>
+	void save(string& saveFile);
 
 	/// <summary>
 	/// 

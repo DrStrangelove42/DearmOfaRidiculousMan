@@ -8,7 +8,7 @@
 #include "../Objects/Wearable.h"
 #include "Monsters/Fireball.h"
 
-Player::Player(RenderContext& renderer, int lives, int attack, int defense, int startHealth, int startMoney, int startExp) :
+Player::Player(RenderContext& renderer, string saveName, int lives, int attack, int defense, int startHealth, int startMoney, int startExp) :
 	LivingEntity(startHealth, startMoney, startExp, defense), MovingEntity(0, 0, renderer, "player"),
 	lives(lives), attack(attack), infosX(SZ_MAINWIDTH), infosY(0), hoverObj(nullptr),
 	attackDelay(500), lastAttackTime(0), story(NULL), currentMouseData(MOUSE_DATA())
@@ -23,6 +23,19 @@ Player::Player(RenderContext& renderer, int lives, int attack, int defense, int 
 	bg = CreateFade(0x000000FF, 0x00000000, 10, 40);
 
 	messagesBuffer = new unordered_map<string, AnimatedTexture*>();
+
+	/* Loading player informations from a save file */
+	if (saveName != "") //No save name = default values
+	{
+		string savePlayerPath = SAVES_LOCATION + saveName + "/" + "Start" + EXT;
+		struct stat l;
+		if (stat(savePlayerPath.c_str(), &l) == 0)
+		{
+			ifstream infos(savePlayerPath);
+			initialise(infos, renderer);
+			infos.close();
+		}
+	}
 }
 
 void Player::setTextureTag(string tag, bool enabled)
@@ -524,27 +537,21 @@ bool Player::hasObject(Object* obj)
 	return (search != inventory.end() && search->second > 0);
 }
 
-string Player::inventoryToString() const
-{
-	string encoding = "";
-	for (auto& entry : inventory)
-	{
-		encoding += "(";
-		encoding += entry.first->objectToString();//todo include quantity of each object.
-		encoding += ") ";
-		encoding += to_string(entry.second);
-		encoding += " ";
-	}
-	return encoding;
-}
-
 void Player::setLives(int l)
 {
 	lives = l;
 }
 
-void Player::initialise(string headerline, RenderContext& renderer)
+void Player::initialise(ifstream& saveFile, RenderContext& renderer)
 {
+	if (!saveFile.is_open()) {
+		cerr << "Could not open the file to load player info." << endl;
+		return;
+	}
+
+	string headerline;
+	getline(saveFile, headerline);
+
 	/* The player's initial information is composed of its initial characteristics followed by its inventory. */
 	size_t a = headerline.find('(');
 	if (a == -1)
@@ -569,34 +576,43 @@ void Player::initialise(string headerline, RenderContext& renderer)
 	{
 		tokens.push_back("X");
 	}
-	Player otherp = Player(renderer); //We create another temporary player which will have the correct default values for each characteristic (except potentially health as it depends on another value).
+	Player otherp = Player(renderer, ""); //We create another temporary player which will have the correct default values for each characteristic (except potentially health as it depends on another value).
 	if (tokens[0] != "X")
 		health = stoi(tokens[0]);
+
 	if (tokens[1] == "X")
 		lives = otherp.getLives();
 	else
 		lives = stoi(tokens[1]);
+
 	if (tokens[2] == "X")
 		money = otherp.getMoney();
 	else
 		money = stoi(tokens[2]);
+
 	if (tokens[3] == "X")
 		experience = otherp.getExperience();
 	else
 		experience = stoi(tokens[3]);
+
 	if (tokens[4] == "X")
 		maxHealth = otherp.getMaxHealth();
 	else
 		maxHealth = stoi(tokens[4]);
+
 	if (tokens[0] == "X")
 		health = maxHealth;
 
 	//We clear the inventory and reset the texture, then add the objects one by one.
-	objectsInHand.clear();
+	objectsInHand.clear();//no need to call Wearable::remove, because the informations are resetted anyway.
 	textureTags.clear();
 	updateTexture(renderer);
 	clearInventory();
 	resetTexture();
+
+	map<int, Object*> revIdx;
+	int i = 0;
+
 	while (inventoryContents.length() > 0 && inventoryContents[0] == '(')
 	{
 		size_t nextpar = inventoryContents.find(')');
@@ -613,9 +629,65 @@ void Player::initialise(string headerline, RenderContext& renderer)
 		{
 			pickUpObject((PickableObject*)obj);
 		}
+		revIdx[i] = obj;
+		i++;
 	}
 
 	rebuildInventoryCases();
+	string curPlace;
+	int curI;
+
+	//Load the objects in hand, with the help of the reversed index above.
+	while (getline(saveFile, headerline))
+	{
+		curPlace = EatToken(headerline, ':');
+
+		curI = stoi(headerline);
+
+		//Objects that are saved as references in this section implement Wearable by definition.
+		static_cast<Wearable*>(revIdx[curI])->equip(this);
+	}
+}
+
+void Player::save(string& saveName)
+{
+	//Inventory and player info
+	ofstream PlayerData(SAVES_LOCATION + saveName + "/" + "Start" + EXT);
+	//PlayerData << mapNumber << " " << roomNumber << " " << p.getX() << " " << p.getY() << endl;  : no more position information.
+
+	//Object address -> its index in the list, to retrieve which is which when loading to fill hands.
+	unordered_map<const Object*, int> idx;
+
+	string inven = "";
+	int i = 0;
+
+	for (auto& entry : inventory)
+	{
+		inven += "(";
+		inven += entry.first->objectToString();//todo include quantity of each object.
+		inven += ") ";
+		inven += to_string(entry.second);
+		inven += " ";
+		idx[entry.first] = i;
+		i++;
+	}
+
+	PlayerData << getHealth() << " " <<
+		getLives() << " " <<
+		getMoney() << " " <<
+		getExperience() << " " <<
+		getMaxHealth() << " " <<
+		inven << endl;
+
+	//Saves the objects that are worn as references in the list above.
+	for (auto& entry : objectsInHand)
+	{
+		PlayerData << entry.first << ":" << idx[entry.second] << endl;
+	}
+
+	PlayerData.close();
+
+	logMessage("Progess saved.");
 }
 
 void Player::setStory(Story* s)
@@ -659,10 +731,10 @@ void Player::renderMessages(RenderContext& renderer) const
 {
 	int y = 5 * SZ_BLOCKSIZE;//below the map title
 	for (auto& e : messages)
-	{ 
+	{
 		if (messagesBuffer->find(e.first) == messagesBuffer->end())
 			(*messagesBuffer)[e.first] = static_cast<AnimatedTexture*>(renderer.LoadAnimatedBoxedString(e.first, fg, bg, 100, false));
-		
+
 		AnimatedTexture* cur = (*messagesBuffer)[e.first];
 		cur->renderUnscaled(renderer, 3 * SZ_BLOCKSIZE, y);
 		y += cur->getHeight();

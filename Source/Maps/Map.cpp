@@ -382,13 +382,8 @@ void Map::mapFromFiles(string worldName, Player& p, RenderContext& renderer, int
 		{
 			line = "";
 		}
-		p.initialise(line, renderer);
-
-		/*TODO : inventory. The objects generated and given to the player will be encoded
-		in the same way as ones in chests, we need to find a way to unify both and to make
-		it easier to extend a chest's possibilities (xp, money, life). Some virtual function used here and in chest?*/
-
 	}
+
 	start.close();
 	ifstream layout(filename + to_string(*startMap) + EXT);
 
@@ -408,8 +403,6 @@ void Map::mapFromFiles(string worldName, Player& p, RenderContext& renderer, int
 	rooms[currentRoom]->setDiscovered(true);
 
 	intlGetDataFromFile(filename, *startMap, renderer, p);
-
-
 }
 
 void Map::intlGetDataFromFile(string filename, int mapIndex, RenderContext& renderer, Player& p)
@@ -419,7 +412,7 @@ void Map::intlGetDataFromFile(string filename, int mapIndex, RenderContext& rend
 	int uniqueId = 0; // This integer is used to make sure that objects in chests have unique identifiers.
 
 	/*Is there a saved progress?*/
-	string savePath = SAVES_LOCATION + "default/" + worldName + to_string(mapIndex) + "Data" + EXT;
+	string savePath = SAVES_LOCATION + SAVES_CURRENT + "/" + worldName + to_string(mapIndex) + "Data" + EXT;
 	struct stat l;
 	bool fromSave = false;
 	if (stat(savePath.c_str(), &l) == 0)
@@ -750,14 +743,7 @@ void Map::saveProgress(string saveName, string originalWorldName, int mapNumber,
 
 	SaveData.close();
 
-	//Inventory and player info
-	ofstream PlayerData(SAVES_LOCATION + saveName + "/" + "Start" + EXT);
-	PlayerData << mapNumber << " " << roomNumber << " " << p.getX() << " " << p.getY() << endl;
-	PlayerData << p.getHealth() << " " << p.getLives() << " " << p.getMoney() << " " << p.getExperience() << " " << p.getMaxHealth() << " " << p.inventoryToString();
-	//TODO : Add initial attack and defense of player without objects (default being 5 and 0 respectively)
-	PlayerData.close();
-
-	p.logMessage("Progess saved.");
+	p.save(saveName);
 }
 
 void Map::sendMonstersToWarp(int x, int y, int destRoom, int destX, int destY)

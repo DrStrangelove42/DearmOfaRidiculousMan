@@ -2,12 +2,12 @@
 #define VWEARABLE_H
 
 #include "Wearable.h"
-#include "PickableObject.h"
+
 
 /// <summary>
 /// 
 /// </summary>
-class VisibleWearable : public Wearable, public PickableObject
+class VisibleWearable : public Wearable
 {
 protected:
 	RenderContext& renderer;
@@ -15,7 +15,7 @@ protected:
 public:
 	virtual ~VisibleWearable();
 
-	VisibleWearable(const VisibleWearable& other) : PickableObject(other), Wearable(other), renderer(other.renderer), tag(other.tag) {}
+	VisibleWearable(const VisibleWearable& other) : Wearable(other), renderer(other.renderer), tag(other.tag) {}
 
 	virtual VisibleWearable* clone() const {
 		return new VisibleWearable(*this);

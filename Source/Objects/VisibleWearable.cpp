@@ -6,7 +6,7 @@ VisibleWearable::~VisibleWearable()
 }
 
 VisibleWearable::VisibleWearable(string identifier, int posx, int posy, string tag, RenderContext& renderer) :
-	PickableObject(identifier, posx, posy, tag, renderer, true),
+	Wearable(identifier, posx, posy, tag, renderer),
 	renderer(renderer), tag(tag)
 {
 

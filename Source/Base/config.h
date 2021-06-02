@@ -110,6 +110,11 @@ extern string WORLDDATA_LOCATION;
 extern string SAVES_LOCATION;
 
 /// <summary>
+/// Current save name.
+/// </summary>
+extern string SAVES_CURRENT;
+
+/// <summary>
 /// Absolute path to the data folder. This must have a trailing slash.
 /// </summary>
 extern string DATA_LOCATION;

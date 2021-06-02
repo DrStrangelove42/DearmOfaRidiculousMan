@@ -55,6 +55,8 @@ string WORLDDATA_LOCATION = DATA_LOCATION + "Data/Worlds/";
 
 string SAVES_LOCATION = DATA_LOCATION + "Data/Saves/";
 
+string SAVES_CURRENT = "default";
+
 string LANGFILES_EXT = ".txt";
 string LANG_LOCATION = DATA_LOCATION + "Res/Text/";
 string LANGUAGE = "en-uk";
