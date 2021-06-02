@@ -39,7 +39,7 @@ public:
 	/// <param name="trav"></param>
 	/// <param name="attack"></param>
 	/// <param name="defense"></param>
-	PickableObject(string identifier, int posx, int posy, string tx, RenderContext& renderer, bool trav);
+	PickableObject(string identifier, int posx, int posy, string tx, RenderContext& renderer);
 
 	/// <summary>
 	/// Interaction with the game.

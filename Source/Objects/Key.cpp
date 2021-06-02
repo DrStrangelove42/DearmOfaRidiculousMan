@@ -2,7 +2,7 @@
 #include "../Characters/Player.h"
 
 Key::Key(string identifier, int posx, int posy, RenderContext& renderer) :
-	PickableObject(identifier, posx, posy, "key", renderer, true)
+	PickableObject(identifier, posx, posy, "key", renderer)
 {
 	info = "A key, maybe opening a door somewhere...";
 }

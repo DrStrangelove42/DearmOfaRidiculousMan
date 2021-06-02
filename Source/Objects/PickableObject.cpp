@@ -12,8 +12,8 @@ PickableObject::PickableObject(const PickableObject& other) :Object(other)
 
 }
 
-PickableObject::PickableObject(string identifier, int posx, int posy, string tx, RenderContext& renderer, bool trav) :
-	Object(identifier, posx, posy, tx, renderer, trav, "", true)
+PickableObject::PickableObject(string identifier, int posx, int posy, string tx, RenderContext& renderer) :
+	Object(identifier, posx, posy, tx, renderer, true, "", true)
 {
 }
 
