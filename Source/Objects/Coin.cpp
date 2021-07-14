@@ -2,7 +2,7 @@
 #include "../Characters/Player.h"
 
 Coin::Coin(string identifier, int posx, int posy, RenderContext& renderer, int money) :
-	Object(identifier, posx, posy, "*coin", renderer, true, to_string(money) + " gold"), money(money)
+	Object(identifier, posx, posy, money > 1000 ? "*mcoin" : "*coin", renderer, true, to_string(money) + " gold"), money(money)
 {
 	((AnimatedTexture*)loadedTx)->setDelay(100);
 }
@@ -12,6 +12,12 @@ Coin::Coin(string headerLine, int posx, int posy, RenderContext& renderer)
 {
 	id = EatToken(headerLine);
 	money = stoi(headerLine);
+	if (money > 1000)
+	{
+		texture = "*mcoin";
+		updateTexture(renderer);
+		((AnimatedTexture*)loadedTx)->setDelay(150);
+	}
 }
 
 bool Coin::updateObject(GAME* game)

@@ -9,6 +9,7 @@
 Z1 ArmoryName ArmoryLegend [A 10] 1 150 [D 20] 1 200 [D 50] 1 500
 $1 20
 $2 500
+$3 1500
 #
  !3 !3 !3 !3 !3    !3 !3          !3       !3             !3 !3 !3 !3 !3 !3 !3
 b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b  b   !1
@@ -37,7 +38,7 @@ b  g  b  t  t  t  t  t  t  t  t  t  t  t  b  b  g  g  g  g  g  g  g  g  g   !1
 b  g$1b  t  t  t  t  t  t  t  t  t  t  t  t  b  g  g  g  g  g  g  g  g  g   !1
 b  g$1b  t  t  t  t  t  t  t  t  t  t  t  t  b  g  g  g  g  g  g  g  g  g   !1
 b  g$2b  t  t  t  t  t  t  t  t  t  t  t  b  b  g  g  g  g  g  g  g  g  g   !1
-b  g  b  t  t  t  t  t  t  t  t  t  t  t  b  g  g  g  g  g  g  g  gZ1g  g   !1
+b  g$3b  t  t  t  t  t  t  t  t  t  t  t  b  g  g  g  g  g  g  g  gZ1g  g   !1
 b  g  b  t  t  t  t  t  t  t  t  t  t  b  g  g  g  g  g  g  g  g  g  g  g   !1
 b  g  g  b  b  b  t  t  t  t  t  b  b  g  g  g  g  g  g  g  g  g  g  g  g   !1
 b  b  g  g  g  b  t  t  t  b  b  g  g  g  g  g  g  g  g  g  g  g  g  g  g   !1

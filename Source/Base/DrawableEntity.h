@@ -42,7 +42,7 @@ public:
 	DrawableEntity(int x, int y, Texture* tx);
 	
 	/// <summary>
-	/// Forces the object to reload the <see cref="Texture">Texture</see> corresponding to the current ID in <texture>.
+	/// Forces the object to reload the <see cref="Texture">Texture</see> corresponding to the current ID in 'texture'.
 	/// Note that there is no function to change the <see cref="Texture">Texture</see> from outside of the object, because we
 	/// don't want to, for now.
 	/// </summary>

@@ -136,7 +136,7 @@ public:
 
 	/// <summary>
 	/// Use this function to load a Texture from a BMP file. If it succeeds,
-	/// the Texture is saved in <textures> and will be loaded from memory next
+	/// the Texture is saved in 'textures' and will be loaded from memory next
 	/// time this function is called for the same Texture ID.
 	/// To load an AnimatedTexture (from files id0, ..., idN), prefix id with '*'.
 	/// </summary>
